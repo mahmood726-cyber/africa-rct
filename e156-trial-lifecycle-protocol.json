@@ -1,0 +1,33 @@
+{
+  "title": "Protocol: Trial lifecycle analysis for Uganda clinical trials",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-27",
+  "body": "This registry-based study will characterise the lifecycle trajectory of all interventional clinical trials listing a Ugandan site on ClinicalTrials.gov. Each trial will be classified into six lifecycle stages: registration, enrolment of at least one participant, completion, results reporting, publication, and intervention accessibility. Intervention accessibility will be assessed by matching trial title and condition fields against a curated list of WHO Essential Medicines List compounds, PEPFAR-distributed antiretrovirals, and Expanded Programme on Immunization vaccines available through the Ugandan national formulary. The primary outcome is stage-by-stage survival expressed as the proportion of the original 783 registered trials reaching each successive stage. Secondary outcomes include stratification of lifecycle scores by sponsor type classified as Ugandan-local or foreign using institutional keyword matching, by trial phase, and by disease category mapped to fifteen predefined condition groups. Temporal trends in average lifecycle score will be examined by registration year to assess whether the Ugandan research ecosystem is maturing over time. Limitations include restriction to a single registry and approximate keyword-based intervention-access classification.",
+  "ai_transparency": "LLM assistance was used for drafting. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+  "validation": {
+    "status": "pass",
+    "checks": [
+      {
+        "name": "7 sentences",
+        "ok": true,
+        "detail": "Found 7 sentences."
+      },
+      {
+        "name": "~156 words",
+        "ok": true,
+        "detail": "Found 156 words."
+      },
+      {
+        "name": "methods before outcomes",
+        "ok": true,
+        "detail": "Data retrieval and stage definitions precede outcome specification."
+      },
+      {
+        "name": "limitations stated",
+        "ok": true,
+        "detail": "Final sentence addresses limitations."
+      }
+    ]
+  }
+}

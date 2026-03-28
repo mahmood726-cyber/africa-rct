@@ -1,0 +1,51 @@
+{
+    "title": "The Hujurat Diversity Audit: geographic and ethnic representation in clinical trial sites across Uganda, South Africa, and Nigeria",
+    "body": "Does clinical trial recruitment in Africa reflect the continent's extraordinary ethnic and geographic diversity, or does it concentrate in capital-city hospitals? We classified up to 500 interventional trials per country from ClinicalTrials.gov by geographic region, mapping each to ethnic populations and computing a Diversity Score (proportion with non-capital sites), an Ethnic Representation Proxy (trials in regions home to distinct ethnic groups), and a keyword analysis of explicit diversity mentions in trial protocols. Uganda's trials concentrated heavily in Kampala despite the nation's 56 ethnic groups spread across Northern (Acholi, Langi), Eastern (Bagisu, Iteso), Western (Banyankole, Bakiga), and remote regions (Karamojong pastoralists, West Nile refugees). Nigeria showed a pronounced North-South divide mirroring its development gap, with Hausa-Fulani northern regions hosting far fewer trials than Lagos and the south-west. South Africa demonstrated broader provincial spread but still underrepresented former Bantustan areas in Limpopo and Eastern Cape. Fewer than one in five trials across all three countries explicitly mentioned ethnic diversity, community engagement, or rural populations. The Quranic recognition that human diversity exists so that peoples may know one another demands that clinical research reach beyond capital bubbles to include the full spectrum of African populations, whose pharmacogenomic diversity is the greatest on Earth.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does clinical trial recruitment in Africa reflect the continent's ethnic and geographic diversity, or does it concentrate in capital-city teaching hospitals?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We classified up to 500 interventional trials per country from ClinicalTrials.gov by geographic region for Uganda, South Africa, and Nigeria, mapping each to ethnic populations and searching trial text for diversity-related keywords."
+        },
+        {
+            "role": "Uganda finding",
+            "text": "Uganda's trials concentrated heavily in Kampala despite 56 ethnic groups across Northern (Acholi), Eastern (Bagisu), Western (Banyankole), and remote regions including Karamojong pastoralists and West Nile refugee-hosting areas."
+        },
+        {
+            "role": "Nigeria finding",
+            "text": "Nigeria showed a pronounced North-South research divide mirroring its broader development gap, with Hausa-Fulani northern regions hosting far fewer trials than Lagos and the south-west."
+        },
+        {
+            "role": "South Africa finding",
+            "text": "South Africa demonstrated broader provincial spread but still underrepresented former Bantustan areas in Limpopo and Eastern Cape, where Venda, Tsonga, and rural Xhosa populations reside."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The Quranic recognition that human diversity exists so peoples may know one another demands that clinical research reach beyond capital bubbles to include all populations, whose pharmacogenomic diversity is the greatest on Earth."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include keyword-based location classification, restriction to one registry, approximate ethnic-region mapping, and inability to measure actual participant-level ethnic data from registry records."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Diversity Audit Dashboard v1.0",
+        "data": "ClinicalTrials.gov API v2, Uganda/SA/Nigeria trials, geographic and ethnic classification",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assisted with drafting and language editing. The author reviewed and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

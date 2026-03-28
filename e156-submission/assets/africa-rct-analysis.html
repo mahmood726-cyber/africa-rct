@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa RCT Analysis &mdash; 12 Dimensions of Inequity</title>
+<style>
+:root {
+    --bg: #0a0e17; --card: #131825; --border: #1e2a3a; --text: #c8d6e5;
+    --heading: #f5f6fa; --accent: #e17055; --accent2: #00b894; --accent3: #6c5ce7;
+    --accent4: #fdcb6e; --red: #ff6b6b; --green: #00b894; --blue: #74b9ff;
+    --orange: #e17055; --purple: #a29bfe; --yellow: #ffeaa7;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+.header { text-align:center; padding:40px 20px 30px; border-bottom:1px solid var(--border); margin-bottom:30px; }
+.header h1 { font-size:2.4em; color:var(--heading); font-weight:700; }
+.header .subtitle { color:var(--accent); font-size:1.1em; margin-top:8px; font-weight:600; }
+.header .meta { color:#7f8c8d; font-size:0.9em; margin-top:12px; }
+.summary-banner { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-bottom:30px; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+.stat-card .number { font-size:2em; font-weight:700; color:var(--heading); }
+.stat-card .label { font-size:0.85em; color:#7f8c8d; margin-top:4px; }
+.stat-card.alert .number { color:var(--red); }
+.stat-card.warn .number { color:var(--yellow); }
+.stat-card.good .number { color:var(--green); }
+.dimension { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; margin-bottom:24px; }
+.dim-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.dim-number { background:var(--accent); color:#fff; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; }
+.dim-title { font-size:1.3em; color:var(--heading); font-weight:600; }
+.severity { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.75em; font-weight:600; margin-left:12px; }
+.severity.critical { background:rgba(255,107,107,0.2); color:var(--red); }
+.severity.high { background:rgba(225,112,85,0.2); color:var(--orange); }
+.severity.moderate { background:rgba(253,203,110,0.2); color:var(--yellow); }
+.dim-body { color:var(--text); font-size:0.95em; }
+.dim-body p { margin-bottom:12px; }
+.dim-body strong { color:var(--heading); }
+.chart-container { background:rgba(0,0,0,0.2); border-radius:8px; padding:20px; margin:16px 0; }
+.bar-chart { display:flex; flex-direction:column; gap:8px; }
+.bar-row { display:flex; align-items:center; gap:10px; }
+.bar-label { width:180px; text-align:right; font-size:0.85em; color:#aaa; flex-shrink:0; }
+.bar-track { flex:1; height:28px; background:rgba(255,255,255,0.05); border-radius:4px; position:relative; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px; font-size:0.8em; font-weight:600; color:#fff; min-width:fit-content; }
+.comp-table { width:100%; border-collapse:collapse; margin:16px 0; }
+.comp-table th { text-align:left; padding:10px 12px; background:rgba(0,0,0,0.3); color:var(--heading); font-size:0.85em; border-bottom:1px solid var(--border); }
+.comp-table td { padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.9em; }
+.highlight-red { color:var(--red); font-weight:600; }
+.highlight-green { color:var(--green); font-weight:600; }
+.highlight-yellow { color:var(--yellow); font-weight:600; }
+.verdict { background:linear-gradient(135deg, rgba(225,112,85,0.15), rgba(108,92,231,0.15)); border:1px solid var(--accent); border-radius:12px; padding:30px; margin-top:30px; text-align:center; }
+.verdict h2 { color:var(--heading); font-size:1.5em; margin-bottom:12px; }
+.verdict p { max-width:800px; margin:0 auto; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media(max-width:768px) { .grid-2 { grid-template-columns:1fr; } }
+.footer { text-align:center; padding:30px; color:#555; font-size:0.8em; border-top:1px solid var(--border); margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+    <h1>Africa RCT Landscape Analysis</h1>
+    <div class="subtitle">12 Dimensions of Inequity in Randomized Controlled Trials</div>
+    <div class="meta">Data: ClinicalTrials.gov API v2 &bull; Generated: 28 March 2026 &bull; All interventional studies</div>
+</div>
+
+<div class="summary-banner">
+    <div class="stat-card alert"><div class="number">20,799</div><div class="label">Africa RCTs (sum of countries)</div></div>
+    <div class="stat-card"><div class="number">159,196</div><div class="label">United States RCTs</div></div>
+    <div class="stat-card warn"><div class="number">13.1%</div><div class="label">Africa share vs US</div></div>
+    <div class="stat-card alert"><div class="number">10.1%</div><div class="label">Termination / Withdrawal</div></div>
+    <div class="stat-card warn"><div class="number">264</div><div class="label">Phase 1 trials (capacity)</div></div>
+    <div class="stat-card good"><div class="number">2,528</div><div class="label">Completed trials</div></div>
+</div>
+
+<!-- DIM 1: Volume Gap -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">1</div><div class="dim-title">Massive Volume Gap <span class="severity critical">CRITICAL</span></div></div>
+    <div class="dim-body">
+        <p>Africa carries ~24% of the global disease burden but hosts only <strong>13.1%</strong> of US trial volume (20,799 vs 159,196).</p>
+        <div class="chart-container"><div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">United States</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--blue);">159,196</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">China</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:24.5%;background:var(--accent4);">38,933</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">United Kingdom</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:13.9%;background:var(--accent3);">22,049</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Brazil</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:6.2%;background:var(--green);">9,890</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">India</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:3.4%;background:var(--orange);">5,388</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Africa (all countries)</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:13.1%;background:var(--red);">20,799</div></div>
+                </div></div></div>
+    </div>
+</div>
+
+<!-- DIM 2: Country Concentration -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">2</div><div class="dim-title">Extreme Country Concentration <span class="severity critical">CRITICAL</span></div></div>
+    <div class="dim-body">
+        <p>The top 2-3 countries account for the vast majority of African trials. The remaining 50+ nations share a tiny fraction.</p>
+        <div class="chart-container"><div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">Egypt</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--accent4);">12,395</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">South Africa</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:28.0%;background:var(--green);">3,473</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Uganda</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:6.3%;background:var(--blue);">783</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Kenya</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:5.8%;background:var(--blue);">720</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Tunisia</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:3.8%;background:var(--accent3);">474</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Tanzania</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:3.5%;background:var(--red);">431</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Nigeria</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:2.9%;background:var(--purple);">354</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Malawi</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:2.3%;background:var(--accent);">288</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Zambia</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:2.0%;background:#7f8c8d;">245</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Ethiopia</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:1.9%;background:#7f8c8d;">240</div></div>
+                </div></div></div>
+    </div>
+</div>
+
+<!-- DIM 3: Disease Mismatch -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">3</div><div class="dim-title">Disease Burden Mismatch <span class="severity critical">CRITICAL</span></div></div>
+    <div class="dim-body">
+        <p>NCDs now cause more deaths in Africa than infectious diseases, but the trial portfolio hasn't caught up.</p>
+        <div class="chart-container"><div class="bar-chart">
+                    <div class="bar-row">
+                        <div class="bar-label">Hiv</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--red);">612</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Cancer</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:91.0%;background:var(--orange);">557</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Cardiovascular</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:53.9%;background:var(--accent4);">330</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Diabetes</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:40.5%;background:var(--accent3);">248</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Tuberculosis</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:38.9%;background:var(--blue);">238</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Neonatal</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:31.5%;background:var(--green);">193</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Hypertension</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:11.6%;background:var(--green);">71</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Maternal</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:8.8%;background:var(--blue);">54</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Stroke</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:7.2%;background:#7f8c8d;">44</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Mental Health</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:5.9%;background:var(--accent);">36</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Sickle Cell</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:1.5%;background:var(--accent4);">9</div></div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Malaria</div>
+                        <div class="bar-track"><div class="bar-fill" style="width:1.3%;background:var(--purple);">8</div></div>
+                    </div></div></div>
+    </div>
+</div>
+
+<!-- DIM 4: Phase Imbalance -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">4</div><div class="dim-title">Phase Imbalance &mdash; Outsourced Testing <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body">
+        <p>Phase 3 (1,886) far exceeds Phase 1 (264). Drugs are <em>tested</em> in Africa but not <em>developed</em> there.</p>
+        <div class="chart-container"><div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">Early Phase1</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:0.4%;background:var(--green);">8 (0.2%)</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Phase1</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:13.6%;background:var(--blue);">256 (7.9%)</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Phase2</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:48.1%;background:var(--accent3);">907 (27.9%)</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Phase3</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--accent);">1,886 (58.0%)</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Phase4</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:10.4%;background:var(--accent4);">196 (6.0%)</div></div>
+                </div></div></div>
+    </div>
+</div>
+
+<!-- DIM 5: Foreign Sponsors -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">5</div><div class="dim-title">Foreign Sponsor Dominance <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body">
+        <p>From a sample of 50 trials: <strong>98.0% foreign-sponsored</strong>, only 2.0% African-led.</p>
+        <div class="chart-container">
+            <div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">Foreign sponsors</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:98.0%;background:var(--red);">49 (98.0%)</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">African-led</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:2.0%;background:var(--green);">1 (2.0%)</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DIM 6: Termination -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">6</div><div class="dim-title">High Termination &amp; Withdrawal Rate <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body">
+        <p>355 trials terminated/withdrawn out of 3,506 (10.1%).</p>
+        <div class="chart-container"><div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label">Completed</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--green);">2,528</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Terminated / Withdrawn</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:14.0%;background:var(--red);">355</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Recruiting</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:10.5%;background:var(--blue);">266</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Active</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:9.8%;background:var(--accent3);">248</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Unknown</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:4.2%;background:#555;">105</div></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Suspended</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:0.2%;background:var(--orange);">4</div></div>
+                </div></div></div>
+    </div>
+</div>
+
+<!-- DIM 7-12: Text-based analysis -->
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">7</div><div class="dim-title">Multi-Site Dilution &mdash; Africa as Token Site <span class="severity moderate">MODERATE</span></div></div>
+    <div class="dim-body"><p>Many "African" trials are global mega-trials with 100-400+ sites. Africa contributes 1-3 sites among hundreds, with no statistical power for African subgroup analysis.</p></div>
+</div>
+
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">8</div><div class="dim-title">Egypt Anomaly &mdash; Quantity vs Quality <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body"><p>Egypt has 12,395 trials &mdash; overwhelmingly small single-center university studies (n=30-100). Many have "UNKNOWN" status, suggesting thesis projects registered but never followed through. This inflates Africa's numbers without adding rigorous evidence.</p></div>
+</div>
+
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">9</div><div class="dim-title">Infectious Disease Tunnel Vision <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body"><p>HIV (612), TB (238), and malaria (8) dominate due to global health funding, while the NCD burden (CVD: 330, diabetes: 248, hypertension: 71) is severely under-researched.</p></div>
+</div>
+
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">10</div><div class="dim-title">Pediatric Testing Ground <span class="severity moderate">MODERATE</span></div></div>
+    <div class="dim-body"><p>Disproportionate pediatric and neonatal trials (193 neonatal, 54 maternal) by foreign sponsors. While medically necessary, the pattern raises questions about equitable access to the products tested.</p></div>
+</div>
+
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">11</div><div class="dim-title">Poor Results Reporting <span class="severity high">HIGH</span></div></div>
+    <div class="dim-body"><p>105 trials have "UNKNOWN" status &mdash; no updates in years. Negative results lost, participants' contributions wasted, evidence base incomplete.</p></div>
+</div>
+
+<div class="dimension">
+    <div class="dim-header"><div class="dim-number">12</div><div class="dim-title">Research Capacity Gap <span class="severity critical">CRITICAL</span></div></div>
+    <div class="dim-body"><p>Only 2.0% of sampled trials are African-led. Phase 1 capacity exists in only 2-3 countries. The current model extracts data without building local research ecosystems. Without investment in African-led research, dependency is perpetuated.</p></div>
+</div>
+
+<!-- Verdict -->
+<div class="verdict">
+    <h2>Summary: 12 Systemic Issues</h2>
+    <p>Africa's RCT landscape reveals structural inequities across every dimension. The continent carries ~24% of the global disease burden but hosts ~13.1% of US trial volume. Trials are concentrated in 2 countries, focused on infectious diseases despite an NCD transition, and dominated by foreign sponsors using Africa as Phase 3 enrollment sites.</p>
+</div>
+
+<div class="footer">
+    <p>Africa RCT Analysis &bull; Data: ClinicalTrials.gov API v2 &bull; Generated 28 March 2026</p>
+    <p>Reproducible with: python fetch_africa_rcts.py</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+    "title": "Protocol: sensitivity analysis of Clinical Complexity Indices and per-capita trial metrics across Africa",
+    "body": "Do clinical trial equity metrics for Africa remain stable when measurement assumptions change, or does methodological fragility undermine published conclusions? We will query ClinicalTrials.gov API v2 for 10 disease conditions using two independent Africa trial counting methods: a single keyword query for Africa and the sum of individual queries for 10 high-volume countries (100 total API calls). For each condition we will compute a Clinical Complexity Index as the ratio of Africa's trial share to its WHO burden share. We will then vary the WHO burden estimate by plus and minus 20 percent, producing six CCI values per condition. Each condition will be classified as robust (CCI direction stable across all variants with range below 0.2), uncertain (direction stable but range 0.2 or above), or fragile (CCI crosses the parity threshold of 1.0). We will also audit per-capita trial density for 10 countries using three population sources: UN World Population Prospects 2024, World Bank WDI 2024, and CIA World Factbook 2024, flagging countries whose per-capita range exceeds 10 percent. The primary outcome is a robustness scorecard identifying which equity findings are publishable as point estimates versus which require reported ranges or caveats. Limitations include restriction to one registry and dependence on WHO burden estimates that themselves carry measurement uncertainty.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Do clinical trial equity metrics for Africa remain stable when measurement assumptions change, or does methodological fragility undermine published conclusions?"
+        },
+        {
+            "role": "Counting methods",
+            "text": "We will query ClinicalTrials.gov API v2 for 10 disease conditions using two independent Africa trial counting methods: a single keyword query and the sum of individual queries for 10 high-volume countries, producing 100 total API calls for the country-sum approach."
+        },
+        {
+            "role": "CCI computation",
+            "text": "For each condition we will compute a Clinical Complexity Index as the ratio of Africa's trial share to its WHO burden share, then vary the burden estimate by plus and minus 20 percent, producing six CCI values per condition."
+        },
+        {
+            "role": "Classification",
+            "text": "Each condition will be classified as robust (stable direction, range below 0.2), uncertain (stable direction, range 0.2 or above), or fragile (crosses the parity threshold), following a pre-specified decision rule."
+        },
+        {
+            "role": "Per-capita audit",
+            "text": "Per-capita trial density will be computed for 10 countries using three population sources (UN 2024, World Bank 2024, CIA Factbook 2024), flagging countries whose range exceeds 10 percent as unreliable for point-estimate reporting."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is a robustness scorecard identifying which equity findings are publishable as point estimates versus which require sensitivity ranges or explicit caveats in manuscripts."
+        },
+        {
+            "role": "Limitations",
+            "text": "Limitations include restriction to ClinicalTrials.gov, dependence on WHO burden estimates that carry their own uncertainty, and population data that may lag behind rapid demographic changes in some countries."
+        }
+    ],
+    "wordCount": 158,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Precision Audit Dashboard v1.0",
+        "data": "ClinicalTrials.gov API v2 (planned), WHO GBD 2024, UN/WB/CIA population estimates",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Protocol pre-registration"
+    },
+    "ai_transparency": "LLM assisted with drafting and language editing. The author reviewed and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

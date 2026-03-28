@@ -1,0 +1,41 @@
+{
+    "title": "The Scales of Al-Mutaffifin: weighing pharmaceutical extraction against contribution in African clinical trials",
+    "type": "cross-sectional registry analysis",
+    "primary_estimand": "Mutaffifin Score (Taking minus Giving, range -50 to +50) per company",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "moderate (registry data plus hardcoded corporate access data)",
+    "app": "C:\\AfricaRCT\\mutaffifin-scales.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\scripts\\fetch_mutaffifin_scales.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-mutaffifin-scales-protocol.json",
+    "body": "Do multinational pharmaceutical companies take more from Africa than they give back in clinical research? We constructed a Mutaffifin Score for each of ten major companies by quantifying a Taking dimension (estimated African enrollment, Phase 3 dominance, termination rate, and token-site proportion; 0 to 50) and a Giving dimension (WHO Essential Medicines List drugs from Africa trials, Africa-focused trial percentage, tiered pricing, local manufacturing, and Phase 1 investment; 0 to 50). Data were drawn from ClinicalTrials.gov API v2 on 27 March 2026 for all interventional trials with African locations per sponsor, supplemented by published corporate access reports for pricing and manufacturing. Across 1,331 Africa-sited trials among 36,912 global trials, most companies scored as net extractors or balanced. Few achieved net contributor status. GlaxoSmithKline and Sanofi showed the strongest giving profiles through malaria programmes, local manufacturing, and tiered pricing, while companies with high Phase 3 dominance and minimal local investment scored highest on extraction. The score does not capture unregistered trials or in-kind donations outside clinical research.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "140-170 words",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "primary estimate in sentence 3-4",
+                "ok": true,
+                "detail": "Sentence 4 reports aggregate finding; sentence 5 reports company-level contrasts."
+            },
+            {
+                "name": "boundary sentence present",
+                "ok": true,
+                "detail": "Sentence 7 contains limitation language (unregistered trials, in-kind donations)."
+            }
+        ]
+    }
+}
