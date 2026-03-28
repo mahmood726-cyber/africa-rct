@@ -1,0 +1,65 @@
+{
+    "title": "Protocol: Collaboration network structure and institutional centrality in Uganda's clinical trial ecosystem",
+    "body": "This cross-sectional network analysis will map collaboration structure among institutions sponsoring clinical trials in Uganda. We will extract all interventional studies listing Ugandan sites from ClinicalTrials.gov API v2, recording lead sponsor, conditions, phase, and start date. Institutions will be classified into seven categories: Uganda-local, US Academic, US Government, Pharma, UK, Europe-Other, and Other. A bipartite condition-institution graph will be projected into an institution-institution co-occurrence network connecting sponsors sharing normalised disease categories. Primary outcomes are degree centrality, betweenness centrality via sampled BFS, clustering coefficients, density, and a degree Gini quantifying hub-and-spoke structure. Secondary analyses include Simpson diversity per condition, geographic reach of top institutions, and temporal evolution across five-year windows. Makerere University will receive dedicated analysis to assess bridge versus bottleneck function. Limitations include single-registry reliance, inability to distinguish deep from coincidental collaboration, and potential under-registration of locally funded studies.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This network analysis will map the collaboration structure among institutions sponsoring clinical trials in Uganda."
+        },
+        {
+            "role": "Eligibility",
+            "text": "All interventional studies listing Ugandan sites will be extracted from ClinicalTrials.gov API v2 with lead sponsor, conditions, phase, and start date."
+        },
+        {
+            "role": "Search",
+            "text": "Institutions will be classified into seven categories and connected via condition co-occurrence bipartite projection."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Primary metrics are degree centrality, betweenness centrality, clustering coefficient, density, and a degree Gini index for hub-and-spoke structure."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Secondary analyses include Simpson diversity per condition, geographic reach, temporal five-year-window evolution, and dedicated Makerere hub analysis."
+        },
+        {
+            "role": "Dissemination",
+            "text": "All analyses use publicly registered trials; no patient-level data are involved."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include single-registry reliance, inability to separate deep from coincidental collaboration, and potential under-registration of local studies."
+        }
+    ],
+    "wordCount": 139,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Collaboration Network v1.0",
+        "data": "ClinicalTrials.gov API v2, Uganda interventional trials",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "20711585",
+            "note": "Uthman & Uthman 2010, African health research collaboration"
+        },
+        {
+            "pmid": "23768812",
+            "note": "Rottingen et al 2013, global health R&D mapping"
+        }
+    ]
+}

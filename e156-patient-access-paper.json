@@ -1,0 +1,51 @@
+{
+    "title": "Can you find a trial? Quantifying clinical trial accessibility from the patient perspective across ten African countries",
+    "body": "If a patient in Africa is diagnosed with a major disease, can they find a recruiting clinical trial? We queried ClinicalTrials.gov API v2 for currently recruiting interventional trials across ten African countries and the United States, computing per-capita recruiting rates, condition-specific access, and capital city concentration. Africa's recruiting trial rate per million population was dramatically lower than the US rate. We computed a Patient Desert Score for each country, counting how many of five major conditions (HIV, cancer, diabetes, hypertension, malaria) had zero recruiting trials. Several countries scored three or higher out of five, indicating near-complete patient deserts. Even where recruiting trials existed, capital city concentration exceeded fifty percent in most countries, effectively excluding rural populations who constitute the majority. The condition-country heatmap revealed systematic gaps: many country-condition pairs had zero active trials. This patient-centered analysis reframes trial inequity not as a research infrastructure problem but as a healthcare access crisis affecting individual diagnostic journeys.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "If a patient in Africa receives a diagnosis of a major disease, what are their realistic chances of finding a recruiting clinical trial in their country and within reach of where they live?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for currently recruiting interventional trials across ten African countries and the United States, filtering by five high-burden conditions and computing per-capita rates."
+        },
+        {
+            "role": "Primary result",
+            "text": "The recruiting trial rate per million population in Africa was dramatically lower than in the United States, with several countries having zero recruiting trials for multiple conditions as measured by the Patient Desert Score."
+        },
+        {
+            "role": "Capital concentration",
+            "text": "Capital city concentration of recruiting trials exceeded fifty percent in most African countries, meaning rural patients who constitute the majority of the population are effectively excluded from trial access."
+        },
+        {
+            "role": "Heatmap finding",
+            "text": "The condition-country heatmap revealed that many country-condition pairs had zero active trials, creating systematic diagnostic dead ends for patients searching for evidence-based options."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Reframing trial inequity from the patient perspective reveals it is not merely a research infrastructure deficit but a healthcare access crisis affecting individual patients at the moment of diagnosis."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single registry, capital city proxy using location name matching, and population estimates that may not reflect current demographics precisely."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Patient Access Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US comparator, 5 conditions, recruiting status filter",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

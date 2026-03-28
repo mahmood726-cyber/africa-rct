@@ -1,0 +1,75 @@
+{
+    "title": "Protocol: Quasi-experimental analysis of PEPFAR effects on non-HIV clinical trial activity in Africa",
+    "body": "This quasi-experimental study will estimate the causal effect of PEPFAR on non-HIV trial starts in recipient African countries using three methods. We will query ClinicalTrials.gov for annual interventional trial counts from 2000 to 2025 across ten PEPFAR-focus countries and five non-PEPFAR comparators. The primary analysis is an interrupted time series with segmented regression estimating level change and slope change at the 2004 PEPFAR implementation point. Secondary analyses include difference-in-differences comparing annual trial growth between treatment and control groups across pre-defined windows, and synthetic control constructing a counterfactual Uganda from weighted non-PEPFAR donors. Sensitivity analyses will vary the post-period window. All query logic, country classifications, and models will be prespecified and version-controlled. No patient-level data will be used. Limitations include ecological design, registration bias around the 2005 ICMJE mandate, a short pre-period, and inability to separate PEPFAR effects from concurrent Global Fund and bilateral aid programs.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This study will estimate the causal effect of PEPFAR on non-HIV clinical trial starts in recipient African countries using three quasi-experimental methods."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for annual interventional trial counts from 2000 to 2025 across ten PEPFAR-focus and five non-PEPFAR African comparator countries."
+        },
+        {
+            "role": "Search",
+            "text": "The primary analysis uses interrupted time series with segmented regression at the 2004 PEPFAR implementation point."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Secondary analyses include difference-in-differences across pre-defined time windows and a synthetic control method for Uganda using non-PEPFAR donor weights."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Sensitivity analyses will vary the post-period window definition and trial category classification."
+        },
+        {
+            "role": "Dissemination",
+            "text": "All query logic, country classifications, and statistical models will be prespecified and version-controlled with no patient-level data used."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include ecological design, registration bias around the 2005 ICMJE mandate, short pre-period, and inability to separate PEPFAR from concurrent aid programs."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "PEPFAR Causal Inference v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 PEPFAR-focus + 5 non-PEPFAR countries, 2000-2025",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for code generation and protocol drafting. The author specified all methodological choices, reviewed the protocol, and takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "id": "bendavid2009",
+            "doi": "10.1001/jama.2009.1385",
+            "desc": "Bendavid & Bhatt (2009). Does PEPFAR crowd out other health aid?"
+        },
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "id": "abadie2010",
+            "doi": "10.1198/jasa.2009.ap08746",
+            "desc": "Abadie, Diamond & Hainmueller (2010). Synthetic Control Methods."
+        },
+        {
+            "id": "bernal2017",
+            "doi": "10.1093/ije/dyw098",
+            "desc": "Bernal, Cummins & Gasparrini (2017). ITS design for policy evaluation."
+        }
+    ]
+}

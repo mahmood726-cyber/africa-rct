@@ -1,0 +1,8 @@
+{
+  "title": "Rct Equity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "﻿# E156: Global RCT Equity Analysis (Africa vs Europe) In global health research, does the geographic location of interventional trials compared across Africa and Europe influence the volume and diversity of clinical evidence? This cross-sectional audit sampled over 110,000 trials from Europe and 17,000 from Africa using the ClinicalTrials.gov API v2 dataset through March 2026. Researchers performed a comparative metadata analysis using a fixed-effect volume model and reported the inter-continental research ratio as the lead estimand. The primary result was a 6.4-fold higher trial volume in the top five European nations compared to the top five African nations. Geographic concentration was significantly higher in Africa where three countries host eighty percent of trials, while European research showed a decentralized and mature infrastructure grid. These findings suggest a profound structural inequity where the African continent remains a validation ground rather than a discovery hub for new medicines. Interpretation is limited by the reliance on public registrations which",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

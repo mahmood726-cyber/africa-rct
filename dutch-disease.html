@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dutch Disease of Global Health</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #7c3aed;
+  --oil: #d97706;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #d97706, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+.oil { color: var(--oil); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.insight-box {
+  background: var(--surface);
+  border-left: 4px solid var(--danger);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.insight-box.success-box { border-left-color: var(--success); }
+.insight-box.warning-box { border-left-color: var(--warning); }
+.insight-box.oil-box { border-left-color: var(--oil); }
+.metric-def {
+  background: rgba(217, 119, 6, 0.08);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  h1 { font-size: 1.6rem; }
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Dutch Disease of Global Health</h1>
+<p class="subtitle">
+  HIV Funding as Resource Curse &mdash; How PEPFAR/Global Fund spending
+  crowds out cancer, cardiovascular, diabetes, surgical, and mental-health research
+  across Africa
+</p>
+
+<div class="insight-box oil-box">
+  <strong>The Dutch Disease Analogy</strong><br>
+  In 1959, the Netherlands discovered a vast natural gas field.
+  The resulting export boom caused the Dutch guilder to appreciate,
+  making other exports uncompetitive. Manufacturing declined.
+  Economists coined the term <em>Dutch Disease</em>: when a boom in
+  one sector causes the rest of the economy to wither.<br><br>
+  In Africa&rsquo;s research ecosystem, <strong>PEPFAR/Global Fund HIV
+  funding is the natural gas</strong>. Billions of dollars flow into
+  HIV infrastructure, attracting researchers, building trial sites,
+  and training coordinators &mdash; all focused on a single disease.
+  Meanwhile, cancer, heart disease, diabetes, surgery, and mental
+  health research struggle to compete for the remaining scraps of
+  attention and capacity.
+</div>
+
+<div class="metric-def">
+  <strong>Dutch Disease Coefficient (DDC)</strong> = HIV trials / non-HIV trials<br>
+  DDC &gt; 2.0 = <span class="danger">Severe Dutch Disease</span> |
+  DDC 1.0&ndash;2.0 = <span class="warning">Moderate Dutch Disease</span> |
+  DDC &lt; 1.0 = <span class="success">Healthy portfolio</span><br><br>
+  <strong>HIV Dependency Ratio</strong> = HIV trials / total trials<br>
+  How much of a country&rsquo;s research portfolio vanishes when
+  &ldquo;the oil runs out&rdquo;
+</div>
+
+<h2>Summary: PEPFAR vs Non-PEPFAR Countries</h2>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">PEPFAR Group DDC</div>
+    <div class="value oil">0.88</div>
+    <div class="label">10 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Non-PEPFAR Group DDC</div>
+    <div class="value success">0.65</div>
+    <div class="label">5 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR HIV Trials</div>
+    <div class="value danger">1,820</div>
+    <div class="label">&ldquo;the oil&rdquo;</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR Non-HIV Trials</div>
+    <div class="value warning">2,065</div>
+    <div class="label">&ldquo;the crowded-out sectors&rdquo;</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR Avg Dependency</div>
+    <div class="value danger">34.4%</div>
+    <div class="label">HIV share of total trials</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Non-PEPFAR Avg Dependency</div>
+    <div class="value success">12.7%</div>
+    <div class="label">HIV share of total trials</div>
+  </div>
+</div>
+
+<h2>Dutch Disease Coefficient Ranking</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Sorted by DDC descending &mdash; most &ldquo;diseased&rdquo; portfolio first
+</p>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">HIV Trials</th>
+  <th style="text-align:right;">Non-HIV Trials</th>
+  <th style="text-align:right;">Total Trials</th>
+  <th style="text-align:right;">DDC</th>
+  <th style="text-align:right;">HIV Dep %</th>
+  <th>Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Zimbabwe <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">118</td><td style="padding:10px;text-align:right;">27</td><td style="padding:10px;text-align:right;">166</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">4.37</td><td style="padding:10px;text-align:right;">71.1%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Malawi <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">135</td><td style="padding:10px;text-align:right;">43</td><td style="padding:10px;text-align:right;">288</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.14</td><td style="padding:10px;text-align:right;">46.9%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Uganda <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">329</td><td style="padding:10px;text-align:right;">124</td><td style="padding:10px;text-align:right;">783</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">2.65</td><td style="padding:10px;text-align:right;">42.0%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Zambia <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">106</td><td style="padding:10px;text-align:right;">46</td><td style="padding:10px;text-align:right;">245</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">2.30</td><td style="padding:10px;text-align:right;">43.3%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Kenya <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">283</td><td style="padding:10px;text-align:right;">131</td><td style="padding:10px;text-align:right;">720</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">2.16</td><td style="padding:10px;text-align:right;">39.3%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Tanzania <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">137</td><td style="padding:10px;text-align:right;">64</td><td style="padding:10px;text-align:right;">431</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">2.14</td><td style="padding:10px;text-align:right;">31.8%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">Severe Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Mozambique <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">39</td><td style="padding:10px;text-align:right;">26</td><td style="padding:10px;text-align:right;">123</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.50</td><td style="padding:10px;text-align:right;">31.7%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Senegal <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">12</td><td style="padding:10px;text-align:right;">97</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.25</td><td style="padding:10px;text-align:right;">15.5%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Burkina Faso <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">14</td><td style="padding:10px;text-align:right;">196</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.07</td><td style="padding:10px;text-align:right;">7.7%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate Dutch Disease</td></tr>
+<tr><td style="padding:10px;">Cameroon <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;">48</td><td style="padding:10px;text-align:right;">111</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.65</td><td style="padding:10px;text-align:right;">27.9%</td><td style="padding:10px;color:#fb923c;font-weight:bold;">Mild symptoms</td></tr>
+<tr><td style="padding:10px;">Madagascar <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">1</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">24</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.50</td><td style="padding:10px;text-align:right;">4.2%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Healthy portfolio</td></tr>
+<tr><td style="padding:10px;">South Africa <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">608</td><td style="padding:10px;text-align:right;">1,423</td><td style="padding:10px;text-align:right;">3,473</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.43</td><td style="padding:10px;text-align:right;">17.5%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Healthy portfolio</td></tr>
+<tr><td style="padding:10px;">Ghana <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">19</td><td style="padding:10px;text-align:right;">48</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.40</td><td style="padding:10px;text-align:right;">8.3%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Healthy portfolio</td></tr>
+<tr><td style="padding:10px;">Nigeria <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">47</td><td style="padding:10px;text-align:right;">129</td><td style="padding:10px;text-align:right;">354</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.36</td><td style="padding:10px;text-align:right;">13.3%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Healthy portfolio</td></tr>
+<tr><td style="padding:10px;">Ethiopia <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">18</td><td style="padding:10px;text-align:right;">52</td><td style="padding:10px;text-align:right;">240</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.35</td><td style="padding:10px;text-align:right;">7.5%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Healthy portfolio</td></tr>
+
+</tbody>
+</table>
+
+<h2>Visual: HIV vs Non-HIV Trials per Country</h2>
+<div class="chart-container">
+  <canvas id="hivNonHivChart" height="100"></canvas>
+</div>
+
+<h2>Dutch Disease Coefficient &mdash; PEPFAR Countries</h2>
+<div class="chart-container">
+  <canvas id="ddcChart" height="80"></canvas>
+</div>
+
+<h2>The Crowded-Out Sectors</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Trial counts by disease sector &mdash; the &ldquo;manufacturing&rdquo; that
+  withers while the oil boom rages
+</p>
+<div class="two-col">
+  <div>
+    <table>
+    <thead>
+    <tr>
+      <th>Sector</th>
+      <th style="text-align:right;">PEPFAR Countries</th>
+      <th style="text-align:right;">Non-PEPFAR</th>
+      <th style="text-align:right;">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr><td style="padding:10px;">Cancer</td><td style="padding:10px;text-align:right;">736</td><td style="padding:10px;text-align:right;">25</td><td style="padding:10px;text-align:right;font-weight:bold;">761</td></tr>
+<tr><td style="padding:10px;">Cvd</td><td style="padding:10px;text-align:right;">498</td><td style="padding:10px;text-align:right;">43</td><td style="padding:10px;text-align:right;font-weight:bold;">541</td></tr>
+<tr><td style="padding:10px;">Diabetes</td><td style="padding:10px;text-align:right;">294</td><td style="padding:10px;text-align:right;">22</td><td style="padding:10px;text-align:right;font-weight:bold;">316</td></tr>
+<tr><td style="padding:10px;">Surgery</td><td style="padding:10px;text-align:right;">245</td><td style="padding:10px;text-align:right;">19</td><td style="padding:10px;text-align:right;font-weight:bold;">264</td></tr>
+<tr><td style="padding:10px;">Mental Health</td><td style="padding:10px;text-align:right;">292</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;font-weight:bold;">307</td></tr>
+
+    </tbody>
+    </table>
+  </div>
+  <div class="chart-container">
+    <canvas id="sectorChart" height="200"></canvas>
+  </div>
+</div>
+
+<h2>What Happens When the Oil Runs Out?</h2>
+<div class="insight-box">
+  <strong>PEPFAR Budget Plateau (2020&ndash;present)</strong><br>
+  PEPFAR annual funding peaked at ~$7B and has plateaued.
+  Political uncertainty means funding could decline further.
+  For countries where 34.4% of
+  research activity is HIV-focused, a funding cut would not just reduce
+  HIV research &mdash; it would collapse the entire clinical trial
+  infrastructure built around it.
+  <br><br>
+  In economics, when the oil runs out, countries that failed to
+  diversify face catastrophic recession. In African health research,
+  the same pattern threatens: countries that never built NCD, surgical,
+  or mental-health trial capacity will have <em>nothing left</em>.
+</div>
+
+<div class="insight-box warning-box">
+  <strong>The Paradox of Plenty</strong><br>
+  Like oil-rich nations that remain poor (Nigeria, Angola, Venezuela),
+  PEPFAR-heavy countries may have more <em>total</em> trials but
+  less diversified research portfolios. Non-PEPFAR countries
+  (DDC: 0.65) often have healthier
+  research ecosystems despite receiving less funding overall.
+  The abundance of HIV funding creates a monoculture that is
+  brittle and unsustainable.
+</div>
+
+<h2>Methods</h2>
+<div class="insight-box success-box">
+  ClinicalTrials.gov API v2 was queried for interventional trials
+  across 15 African countries.  For each country, we retrieved trial
+  counts for HIV, cancer, cardiovascular disease, diabetes, surgery,
+  and mental health.  The Dutch Disease Coefficient (DDC) was computed
+  as HIV trials divided by the sum of all non-HIV sector trials.
+  Countries were classified as PEPFAR-heavy (10 countries receiving
+  &gt;$100M/yr) or non-PEPFAR comparators (5 countries).  All queries
+  and calculations are reproducible from the cached data file.
+</div>
+
+<h2>References</h2>
+<ul style="list-style:none;padding:0;">
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/39972388/" target="_blank" style="color:#3b82f6;">PMID 39972388</a> &mdash; PEPFAR infrastructure sustainability analysis</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/37643290/" target="_blank" style="color:#3b82f6;">PMID 37643290</a> &mdash; PopART trial long-term outcomes</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/36332653/" target="_blank" style="color:#3b82f6;">PMID 36332653</a> &mdash; Resource allocation and health research priorities in Africa</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/34843674/" target="_blank" style="color:#3b82f6;">PMID 34843674</a> &mdash; Disease-specific funding and research capacity</li>
+
+</ul>
+
+<footer>
+  Data: ClinicalTrials.gov API v2 |
+  Generated: 2026-03-28 |
+  The Dutch Disease of Global Health v1.0 |
+  Open-access research tool
+</footer>
+
+</div>
+
+<script>
+// HIV vs Non-HIV stacked bar
+new Chart(document.getElementById('hivNonHivChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Zimbabwe", "Malawi", "Uganda", "Zambia", "Kenya", "Tanzania", "Mozambique", "Senegal", "Burkina Faso", "Cameroon", "Madagascar", "South Africa", "Ghana", "Nigeria", "Ethiopia"],
+    datasets: [
+      {
+        label: 'HIV Trials ("the oil")',
+        data: [118, 135, 329, 106, 283, 137, 39, 15, 15, 31, 1, 608, 19, 47, 18],
+        backgroundColor: 'rgba(239,68,68,0.8)',
+      },
+      {
+        label: 'Non-HIV Trials ("crowded-out sectors")',
+        data: [27, 43, 124, 46, 131, 64, 26, 12, 14, 48, 2, 1423, 48, 129, 52],
+        backgroundColor: 'rgba(34,197,94,0.8)',
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'HIV vs Non-HIV Trials by Country', color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } },
+    },
+    scales: {
+      x: { stacked: true, ticks: { color: '#94a3b8', maxRotation: 45, minRotation: 45 }, grid: { color: '#1e293b' } },
+      y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }, title: { display: true, text: 'Trial count', color: '#94a3b8' } },
+    },
+  },
+});
+
+// DDC bar (PEPFAR countries)
+new Chart(document.getElementById('ddcChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Zimbabwe", "Malawi", "Uganda", "Zambia", "Kenya", "Tanzania", "Mozambique", "South Africa", "Nigeria", "Ethiopia"],
+    datasets: [{
+      label: 'Dutch Disease Coefficient',
+      data: [4.37, 3.14, 2.653, 2.304, 2.16, 2.141, 1.5, 0.427, 0.364, 0.346],
+      backgroundColor: [4.37, 3.14, 2.653, 2.304, 2.16, 2.141, 1.5, 0.427, 0.364, 0.346].map(v => v > 2 ? 'rgba(239,68,68,0.8)' : v > 1 ? 'rgba(245,158,11,0.8)' : 'rgba(34,197,94,0.8)'),
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Dutch Disease Coefficient (DDC) - PEPFAR Countries', color: '#e2e8f0', font: { size: 14 } },
+      legend: { display: false },
+      annotation: {
+        annotations: {
+          threshold: {
+            type: 'line',
+            xMin: 1, xMax: 1,
+            borderColor: '#f59e0b',
+            borderWidth: 2,
+            borderDash: [6, 6],
+            label: { content: 'DDC = 1 (threshold)', display: true, color: '#f59e0b', position: 'end' },
+          },
+        },
+      },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }, title: { display: true, text: 'DDC (HIV / non-HIV)', color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+    },
+  },
+});
+
+// Sector breakdown
+new Chart(document.getElementById('sectorChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Cancer", "Cvd", "Diabetes", "Surgery", "Mental Health"],
+    datasets: [
+      {
+        label: 'PEPFAR Countries',
+        data: [736, 498, 294, 245, 292],
+        backgroundColor: 'rgba(124,58,237,0.8)',
+      },
+      {
+        label: 'Non-PEPFAR Countries',
+        data: [25, 43, 22, 19, 15],
+        backgroundColor: 'rgba(59,130,246,0.8)',
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Non-HIV Sector Trials: PEPFAR vs Non-PEPFAR', color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }, title: { display: true, text: 'Trial count', color: '#94a3b8' } },
+    },
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of digital health trial activity in Africa versus global comparators",
+    "body": "This cross-sectional registry study will quantify Africa digital health trial activity relative to mobile phone penetration and compare it with the United States and India. We will query ClinicalTrials.gov API v2 for all interventional studies matching mHealth, mobile health, telemedicine, digital health, or SMS intervention across six African countries, the United States, and India. The primary outcome is the ratio of US to African digital health trial counts, contextualized against mobile phone penetration rates from ITU and GSMA estimates. Secondary analyses will examine technology subtype distribution across SMS reminders, mHealth apps, telemedicine, electronic health records, wearables, and AI diagnostics, plus disease focus concentration across HIV and NCDs. All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility. No patient-level data will be accessed. Limitations include restriction to one English-language registry, inability to capture trials on PACTR or national platforms, and rapidly evolving digital health terminology.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify Africa's digital health trial activity relative to mobile phone penetration and compare findings with the United States and India."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for all interventional studies matching mHealth, mobile health, telemedicine, digital health, or SMS intervention across six African countries, the United States, and India."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the ratio of US to African digital health trial counts, contextualized against mobile phone penetration rates from ITU and GSMA 2024 estimates."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses will examine technology subtype distribution across SMS reminders, mHealth apps, telemedicine, electronic health records, wearables, and AI diagnostics, plus disease focus concentration across HIV and NCDs."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Ethics",
+            "text": "No patient-level data will be accessed and no ethics approval is required for aggregate registry queries."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single English-language registry, inability to capture trials registered on PACTR or national platforms, and rapidly evolving digital health terminology that may cause undercounting."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Digital Health Bright Spot Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 6 African countries, US + India comparators",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

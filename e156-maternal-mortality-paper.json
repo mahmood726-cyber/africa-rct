@@ -1,0 +1,13 @@
+{
+  "title": "The maternal mortality trial scandal: 9 trials for 66 percent of global maternal deaths",
+  "type": "cross-sectional registry analysis",
+  "primary_estimand": "Condition Colonialism Index for maternal mortality trials in Africa",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "app": "C:\\AfricaRCT\\maternal-mortality.html",
+  "data": "ClinicalTrials.gov API v2",
+  "code": "C:\\AfricaRCT\fetch_maternal_mortality.py",
+  "protocol": "C:\\AfricaRCT\\e156-maternal-mortality-protocol.json",
+  "body": "In global health, does the distribution of maternal mortality trials reflect the geographic burden of obstetric death? This registry audit queried ClinicalTrials.gov API v2 for interventional trials addressing maternal mortality, postpartum hemorrhage, preeclampsia, and eclampsia across Africa and comparators through March 2026. Investigators applied the Condition Colonialism Index and reported the burden-to-trial ratio as the primary estimand. Africa carries sixty-six percent of global maternal deaths yet hosts only nine trials versus seven hundred and thirty-eight in the United States, yielding a CCI of eighty-two. Sub-Saharan Africa has a maternal mortality ratio of five hundred and forty-two per hundred thousand against the SDG 3.1 target of seventy, with no trial infrastructure to close this gap. Postpartum hemorrhage and peripartum cardiomyopathy, both concentrated in Africa, have virtually no trial activity. These findings identify arguably the most extreme clinical trial disparity in global health. Interpretation is limited by reliance on registered trials which may undercount locally funded obstetric research.",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

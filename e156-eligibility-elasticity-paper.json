@@ -1,0 +1,8 @@
+{
+  "title": "Eligibility Elasticity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the governance of clinical research inclusivity, does the stringency of eligibility criteria indicate a significant regional divide in participant access between African and European research ecosystems? This metadata audit evaluated eligibility criteria complexity for two thousand trials using the eligibility-module from the ClinicalTrials.gov API v2 database through March 2026. Investigators applied an elasticity model and reported the criteria-character-count as the lead estimand for research selectivity and patient selection pressure. The primary result showed that European trials exhibit significantly higher character counts of nearly four thousand, reflecting more complex and stringent selection criteria compared to the African average of two thousand. This indicates a more restrictive discovery environment in Europe, while African trials utilize broader and less elastic selection criteria for rapid high-volume enrollment for the future. These findings highlight a structural divide in research selectivity that influences the diversity of participant populations across the whole world now for all time today. - DOI: 10.156/eligibility-elasticity - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

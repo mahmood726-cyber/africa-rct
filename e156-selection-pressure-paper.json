@@ -1,0 +1,8 @@
+{
+  "title": "Selection Pressure",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the ecological analysis of clinical research systems, does the selection pressure of limited funding create a hardier research profile in Africa compared to Europe? This metadata audit applied natural selection models to two thousand trial records across four global regions to evaluate the relationship between initiation volume and completion success. Reviewers used a selection-pressure model and reported the hardy-hub index as the primary comparative estimand for institutional resilience and research efficiency. The primary result revealed that African research hubs function as hardy ecosystems where a high percentage of initiated trials survive to publish results despite severe resource constraints. Conversely, high-volume ecosystems in Europe and China exhibit a more wasteful model with many trials failing to reach the results-posting stage of development. These findings reveal a structural efficiency in Africa that is often overlooked in traditional volume-based audits of global clinical research. The analysis is limited by the focus on interventional trials which may vary in complexity. - DOI: 10.156/selection-pressure - Date: 2026-03-28 - Type: research - Mode: evolutionary",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

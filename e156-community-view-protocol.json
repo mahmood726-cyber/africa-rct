@@ -1,0 +1,41 @@
+{
+    "title": "Protocol: community engagement deficit in African clinical trials",
+    "type": "protocol",
+    "primary_estimand": "Community Voice Score per country",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\community-view.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_community_view.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry study will quantify community engagement in African clinical trials using ClinicalTrials.gov data. We will retrieve all interventional trials for Uganda, South Africa, Nigeria, and Kenya via API v2, classifying each as community-engaged, extractive, or ambiguous using a prespecified algorithm based on title keywords for community participation, intervention type distinguishing behavioral from drug trials, and phase assignment to identify implementation versus efficacy research. The primary outcome is the Community Voice Score, defined as the proportion of trials classified as community-engaged per country. Secondary analyses will examine engagement rates by disease condition, cluster trial consent patterns, and temporal trends in community-based participatory research. Community-engaged signals include participatory language, Phase NA designation, and behavioral or implementation intervention types, while extractive signals include late-phase drug testing, pharmacokinetic studies, and foreign sponsorship with no local co-PI. Limitations include algorithmic classification from structured registry fields only and inability to verify actual community involvement from title data alone.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 158 words."
+            },
+            {
+                "name": "methods described",
+                "ok": true,
+                "detail": "Protocol describes API query strategy, classification algorithm, primary and secondary outcomes."
+            },
+            {
+                "name": "outcomes specified",
+                "ok": true,
+                "detail": "Primary (Community Voice Score) and secondary (condition-specific, cluster consent, temporal) outcomes specified."
+            }
+        ]
+    }
+}

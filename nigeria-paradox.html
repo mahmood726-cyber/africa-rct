@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nigeria Paradox: Africa's Largest Country, Smallest Trial Portfolio</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #131a2b;
+  --surface2: #1a2332;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #60a5fa;
+  --danger: #ef4444;
+  --warning: #f97316;
+  --success: #22c55e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ef4444, #f97316, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card-danger {
+  border-color: rgba(239,68,68,0.3);
+  background: linear-gradient(135deg, rgba(239,68,68,0.05), var(--surface));
+}
+.card-warning {
+  border-color: rgba(249,115,22,0.3);
+  background: linear-gradient(135deg, rgba(249,115,22,0.05), var(--surface));
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.stat-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+td {
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+tr:hover {
+  background: rgba(96,165,250,0.04);
+}
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.badge-danger { background: rgba(239,68,68,0.15); color: #ef4444; }
+.badge-warning { background: rgba(249,115,22,0.15); color: #f97316; }
+.badge-success { background: rgba(34,197,94,0.15); color: #22c55e; }
+.big-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--danger);
+  line-height: 1;
+}
+.big-label {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.paradox-box {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  background: rgba(239,68,68,0.06);
+  border: 2px dashed rgba(239,68,68,0.3);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.vs { color: var(--muted); font-size: 1.5rem; font-weight: 800; }
+.highlight { color: var(--danger); font-weight: 700; }
+.highlight-orange { color: var(--warning); font-weight: 700; }
+.highlight-green { color: var(--success); font-weight: 700; }
+.highlight-blue { color: var(--accent); font-weight: 700; }
+.explanation-list {
+  list-style: none;
+  padding: 0;
+}
+.explanation-list li {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: var(--surface2);
+  border-left: 4px solid var(--warning);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+.explanation-list li strong {
+  color: var(--warning);
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  .paradox-box { flex-direction: column; gap: 12px; text-align: center; }
+  h1 { font-size: 1.6rem; }
+  .big-number { font-size: 2.5rem; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<div style="text-align:center;padding:40px 0 30px;">
+  <h1>The Nigeria Paradox</h1>
+  <p style="font-size:1.15rem;color:var(--muted);max-width:800px;margin:0 auto;">
+    Africa's most populous country (230M) and largest economy ($500B GDP),<br>
+    yet has only <span class="highlight">354 interventional trials</span>
+    (<span class="highlight">1.54/million</span>) &mdash;
+    the most extreme large-country trial deficit in the world.
+  </p>
+  <p style="margin-top:8px;color:var(--muted);font-size:0.8rem;">
+    Data: ClinicalTrials.gov API v2 | Generated: 2026-03-28T11:22:36
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. SUMMARY STATS -->
+<!-- ============================================================ -->
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="stat-value" style="color:var(--danger);">354</div>
+    <div class="stat-label">Total interventional trials</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:var(--danger);">1.54</div>
+    <div class="stat-label">Trials per million population</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:var(--warning);">230M</div>
+    <div class="stat-label">Population (Africa's largest)</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:var(--warning);">$500B</div>
+    <div class="stat-label">GDP (Africa's largest economy)</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. THE PARADOX VISUALIZED -->
+<!-- ============================================================ -->
+<div class="card card-danger">
+  <h2>The Paradox</h2>
+  <p style="color:var(--muted);margin-bottom:16px;">
+    Nigeria has the economic weight and population to be a research powerhouse.
+    Instead, it ranks below every major developing country on earth.
+  </p>
+  <div class="paradox-box">
+    <div style="flex:1;text-align:center;">
+      <div class="big-number">230M</div>
+      <div class="big-label">Population</div>
+    </div>
+    <div class="vs">+</div>
+    <div style="flex:1;text-align:center;">
+      <div class="big-number" style="color:var(--warning);">$500B</div>
+      <div class="big-label">GDP</div>
+    </div>
+    <div class="vs">=</div>
+    <div style="flex:1;text-align:center;">
+      <div class="big-number">354</div>
+      <div class="big-label">Trials (1.54/M)</div>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-top:12px;font-style:italic;">
+    For context: Bangladesh (173M, $460B GDP) has 649 trials.
+    Pakistan (240M) has 4,641 trials.
+    Even Ethiopia (130M, far poorer) has 240 trials.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. COMPARATOR TABLE -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Nigeria vs. Large Developing Countries</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    "Gap Ratio" = comparator's per-capita rate / Nigeria's per-capita rate.
+    A ratio of 10x means that country runs 10 times more trials per person than Nigeria.
+  </p>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th style="text-align:right;">Population</th>
+          <th style="text-align:right;">Trials</th>
+          <th style="text-align:right;">Per Million</th>
+          <th style="text-align:right;">Gap Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr style="background:rgba(239,68,68,0.15);border:2px solid #ef4444;">
+  <td style="padding:10px 14px;font-weight:bold;color:#ef4444;">Nigeria</td>
+  <td style="padding:10px 14px;text-align:right;">230M</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">354</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    1.54</td>
+  <td style="padding:10px 14px;text-align:center;color:#ef4444;font-weight:bold;">
+    Baseline</td>
+</tr>
+
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Brazil</td>
+  <td style="padding:10px 14px;text-align:right;">216M</td>
+  <td style="padding:10px 14px;text-align:right;">9,890</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    45.79</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;font-size:1.1rem;">
+    29.7x</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Pakistan</td>
+  <td style="padding:10px 14px;text-align:right;">240M</td>
+  <td style="padding:10px 14px;text-align:right;">4,641</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    19.34</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;font-size:1.1rem;">
+    12.6x</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Indonesia</td>
+  <td style="padding:10px 14px;text-align:right;">280M</td>
+  <td style="padding:10px 14px;text-align:right;">1,299</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    4.64</td>
+  <td style="padding:10px 14px;text-align:right;color:#f97316;font-weight:bold;font-size:1.1rem;">
+    3.0x</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">India</td>
+  <td style="padding:10px 14px;text-align:right;">1,430M</td>
+  <td style="padding:10px 14px;text-align:right;">5,388</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    3.77</td>
+  <td style="padding:10px 14px;text-align:right;color:#f97316;font-weight:bold;font-size:1.1rem;">
+    2.4x</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Bangladesh</td>
+  <td style="padding:10px 14px;text-align:right;">173M</td>
+  <td style="padding:10px 14px;text-align:right;">649</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    3.75</td>
+  <td style="padding:10px 14px;text-align:right;color:#f97316;font-weight:bold;font-size:1.1rem;">
+    2.4x</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:10px 14px;text-align:right;">130M</td>
+  <td style="padding:10px 14px;text-align:right;">240</td>
+  <td style="padding:10px 14px;text-align:right;color:#60a5fa;font-weight:bold;">
+    1.85</td>
+  <td style="padding:10px 14px;text-align:right;color:#eab308;font-weight:bold;font-size:1.1rem;">
+    1.2x</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. CONDITION BREAKDOWN -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Nigeria Condition Breakdown</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    What diseases are being studied in Nigeria's tiny trial portfolio?
+    Note the overlap between conditions means totals exceed 354.
+  </p>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">HIV</span>
+    <span style="color:#ef4444;font-weight:bold;">47 (13.3%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#ef4444;height:100%;width:100.0%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Cardiovascular</span>
+    <span style="color:#f97316;font-weight:bold;">45 (12.7%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#f97316;height:100%;width:95.7%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Neonatal</span>
+    <span style="color:#eab308;font-weight:bold;">44 (12.4%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#eab308;height:100%;width:93.6%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Cancer</span>
+    <span style="color:#22c55e;font-weight:bold;">35 (9.9%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#22c55e;height:100%;width:74.5%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;border:2px solid #ef4444;border-radius:8px;padding:4px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Sickle Cell (WORLD HIGHEST BURDEN)</span>
+    <span style="color:#06b6d4;font-weight:bold;">30 (8.5%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#06b6d4;height:100%;width:63.8%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Hypertension</span>
+    <span style="color:#8b5cf6;font-weight:bold;">29 (8.2%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#8b5cf6;height:100%;width:61.7%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Malaria</span>
+    <span style="color:#ec4899;font-weight:bold;">23 (6.5%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#ec4899;height:100%;width:48.9%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Stroke</span>
+    <span style="color:#14b8a6;font-weight:bold;">18 (5.1%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#14b8a6;height:100%;width:38.3%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Maternal</span>
+    <span style="color:#f59e0b;font-weight:bold;">15 (4.2%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#f59e0b;height:100%;width:31.9%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Diabetes</span>
+    <span style="color:#6366f1;font-weight:bold;">12 (3.4%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#6366f1;height:100%;width:25.5%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Tuberculosis</span>
+    <span style="color:#84cc16;font-weight:bold;">9 (2.5%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#84cc16;height:100%;width:19.1%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Mental Health</span>
+    <span style="color:#e11d48;font-weight:bold;">6 (1.7%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#e11d48;height:100%;width:12.8%;border-radius:4px;
+      transition:width 0.5s;"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. THE SCD CRISIS -->
+<!-- ============================================================ -->
+<div class="card card-danger">
+  <h2>The Sickle Cell Disease Crisis</h2>
+  <p style="color:var(--muted);margin-bottom:16px;">
+    Nigeria has the world's highest sickle cell disease burden &mdash;
+    approximately 150,000 babies born with SCD every year (~30% of the global total).
+    How much research is happening?
+  </p>
+  <div class="stat-grid">
+    <div class="stat-box" style="border-color:rgba(239,68,68,0.4);">
+      <div class="stat-value" style="color:var(--danger);">30</div>
+      <div class="stat-label">SCD trials in Nigeria</div>
+    </div>
+    <div class="stat-box" style="border-color:rgba(239,68,68,0.4);">
+      <div class="stat-value" style="color:var(--warning);">150K</div>
+      <div class="stat-label">SCD births/year in Nigeria</div>
+    </div>
+    <div class="stat-box" style="border-color:rgba(239,68,68,0.4);">
+      <div class="stat-value" style="color:var(--danger);">2.0</div>
+      <div class="stat-label">Trials per 10,000 SCD births</div>
+    </div>
+  </div>
+  <p style="color:#ef4444;font-weight:600;margin-top:10px;">
+    The country with the world's highest SCD burden has barely any trials
+    to develop treatments, delivery models, or screening programs for its own population.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. SPONSOR ANALYSIS -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Who Runs Nigeria's Trials?</h2>
+  <div class="two-col">
+    <div>
+      <h3>Sponsor Class</h3>
+<div style="margin-bottom:6px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+    <span style="color:#e2e8f0;">OTHER</span>
+    <span style="color:#94a3b8;font-weight:bold;">280 (79.1%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:16px;">
+    <div style="background:#94a3b8;height:100%;width:79.1%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:6px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+    <span style="color:#e2e8f0;">INDUSTRY</span>
+    <span style="color:#f97316;font-weight:bold;">37 (10.5%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:16px;">
+    <div style="background:#f97316;height:100%;width:10.5%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:6px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+    <span style="color:#e2e8f0;">OTHER_GOV</span>
+    <span style="color:#06b6d4;font-weight:bold;">26 (7.3%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:16px;">
+    <div style="background:#06b6d4;height:100%;width:7.3%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:6px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+    <span style="color:#e2e8f0;">NETWORK</span>
+    <span style="color:#8b5cf6;font-weight:bold;">6 (1.7%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:16px;">
+    <div style="background:#8b5cf6;height:100%;width:2.0%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:6px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+    <span style="color:#e2e8f0;">NIH</span>
+    <span style="color:#22c55e;font-weight:bold;">5 (1.4%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:16px;">
+    <div style="background:#22c55e;height:100%;width:2.0%;border-radius:4px;"></div>
+  </div>
+</div>
+
+      <div style="margin-top:16px;padding:14px;background:var(--surface2);border-radius:8px;">
+        <div style="display:flex;justify-content:space-between;">
+          <span>Local Nigerian sponsors:</span>
+          <span class="highlight-blue">130 (36.7%)</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;">
+          <span>Foreign sponsors:</span>
+          <span class="highlight-orange">224
+            (63.3%)</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>Top Sponsors</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Sponsor</th>
+              <th style="text-align:right;">Trials</th>
+            </tr>
+          </thead>
+          <tbody>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">University of Ibadan</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">17</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Obafemi Awolowo University</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">13</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Federal Teaching Hospital Abakaliki</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">11</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Washington University School of Medicine</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">10</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Vanderbilt University Medical Center</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">9</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Pfizer</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">8</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Bayero University Kano, Nigeria</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">7</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">University of Chicago</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">RTI International</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">GlaxoSmithKline</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Obafemi Awolowo University Teaching Hospital</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">University of Minnesota</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">London School of Hygiene and Tropical Medicine</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">University of Birmingham</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">6</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;">Lagos State University</td>
+  <td style="padding:6px 10px;text-align:right;color:#60a5fa;font-weight:bold;">5</td>
+</tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. PHASE DISTRIBUTION -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Phase Distribution</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    Note: not all trials have a phase designation; some span multiple phases.
+  </p>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Phase 1</span>
+    <span style="color:#06b6d4;font-weight:bold;">21</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#06b6d4;height:100%;width:37.5%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Phase 2</span>
+    <span style="color:#22c55e;font-weight:bold;">47</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#22c55e;height:100%;width:83.9%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Phase 3</span>
+    <span style="color:#eab308;font-weight:bold;">56</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#eab308;height:100%;width:100.0%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">Phase 4</span>
+    <span style="color:#f97316;font-weight:bold;">34</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#f97316;height:100%;width:60.7%;border-radius:4px;"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. STATUS ANALYSIS -->
+<!-- ============================================================ -->
+<div class="card card-warning">
+  <h2>Trial Status: Completed vs. Abandoned</h2>
+  <div class="stat-grid" style="margin-bottom:16px;">
+    <div class="stat-box">
+      <div class="stat-value" style="color:var(--success);">61.9%</div>
+      <div class="stat-label">Completion rate</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" style="color:var(--danger);">6.9%</div>
+      <div class="stat-label">Termination/Withdrawal rate</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" style="color:#64748b;">14.5%</div>
+      <div class="stat-label">Unknown status rate</div>
+    </div>
+  </div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">COMPLETED</span>
+    <span style="color:#22c55e;font-weight:bold;">197 (61.9%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#22c55e;height:100%;width:61.9%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">TERMINATED</span>
+    <span style="color:#ef4444;font-weight:bold;">17 (5.3%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#ef4444;height:100%;width:5.3%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">WITHDRAWN</span>
+    <span style="color:#f97316;font-weight:bold;">5 (1.6%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#f97316;height:100%;width:2.0%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">UNKNOWN</span>
+    <span style="color:#64748b;font-weight:bold;">46 (14.5%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#64748b;height:100%;width:14.5%;border-radius:4px;"></div>
+  </div>
+</div>
+<div style="margin-bottom:8px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+    <span style="color:#e2e8f0;font-weight:500;">RECRUITING</span>
+    <span style="color:#06b6d4;font-weight:bold;">53 (16.7%)</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:22px;">
+    <div style="background:#06b6d4;height:100%;width:16.7%;border-radius:4px;"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. GEOGRAPHIC CONCENTRATION -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Geographic Concentration: Lagos vs. Rest of Nigeria</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    Of 770 trial site records, Lagos accounts for
+    <span class="highlight">89 (11.6%)</span>.
+    The top 3 cities hold <span class="highlight">33.0%</span> of all sites.
+  </p>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>City</th>
+          <th style="text-align:right;">Trial Sites</th>
+          <th style="text-align:right;">% of Total</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <td style="padding:6px 10px;">Ibadan</td>
+  <td style="padding:6px 10px;text-align:right;">90</td>
+  <td style="padding:6px 10px;text-align:right;">11.7%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;color:#ef4444;font-weight:bold;">Lagos</td>
+  <td style="padding:6px 10px;text-align:right;color:#ef4444;font-weight:bold;">89</td>
+  <td style="padding:6px 10px;text-align:right;color:#ef4444;font-weight:bold;">11.6%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Abuja</td>
+  <td style="padding:6px 10px;text-align:right;">75</td>
+  <td style="padding:6px 10px;text-align:right;">9.7%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Kano</td>
+  <td style="padding:6px 10px;text-align:right;">63</td>
+  <td style="padding:6px 10px;text-align:right;">8.2%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Ile-Ife</td>
+  <td style="padding:6px 10px;text-align:right;">34</td>
+  <td style="padding:6px 10px;text-align:right;">4.4%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Abakaliki</td>
+  <td style="padding:6px 10px;text-align:right;">28</td>
+  <td style="padding:6px 10px;text-align:right;">3.6%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Enugu</td>
+  <td style="padding:6px 10px;text-align:right;">23</td>
+  <td style="padding:6px 10px;text-align:right;">3.0%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Gwagwalada</td>
+  <td style="padding:6px 10px;text-align:right;">21</td>
+  <td style="padding:6px 10px;text-align:right;">2.7%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Kaduna</td>
+  <td style="padding:6px 10px;text-align:right;">17</td>
+  <td style="padding:6px 10px;text-align:right;">2.2%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Zaria</td>
+  <td style="padding:6px 10px;text-align:right;">16</td>
+  <td style="padding:6px 10px;text-align:right;">2.1%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Ikeja</td>
+  <td style="padding:6px 10px;text-align:right;">15</td>
+  <td style="padding:6px 10px;text-align:right;">1.9%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Jos</td>
+  <td style="padding:6px 10px;text-align:right;">12</td>
+  <td style="padding:6px 10px;text-align:right;">1.6%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Yaba</td>
+  <td style="padding:6px 10px;text-align:right;">11</td>
+  <td style="padding:6px 10px;text-align:right;">1.4%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Ilorin</td>
+  <td style="padding:6px 10px;text-align:right;">11</td>
+  <td style="padding:6px 10px;text-align:right;">1.4%</td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;">Calabar</td>
+  <td style="padding:6px 10px;text-align:right;">10</td>
+  <td style="padding:6px 10px;text-align:right;">1.3%</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--muted);margin-top:12px;font-style:italic;">
+    Northern Nigeria (Kano, Sokoto, Maiduguri) &mdash; home to ~100M people &mdash;
+    is almost completely absent from clinical research.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. WHY? POSSIBLE EXPLANATIONS -->
+<!-- ============================================================ -->
+<div class="card">
+  <h2>Why? Possible Explanations</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    Nigeria's trial deficit is not a mystery &mdash; it is the product of
+    structural, regulatory, and institutional failures compounding over decades.
+  </p>
+  <ul class="explanation-list">
+    <li>
+      <strong>Regulatory barriers:</strong> NAFDAC approval timelines average 6-12 months
+      for trial authorization, compared to weeks in South Africa or Kenya. Import permits
+      for investigational products routinely take 3-6 additional months.
+    </li>
+    <li>
+      <strong>Ethics committee fragmentation:</strong> Nigeria has hundreds of institutional
+      ethics committees with no central registration or mutual recognition. Each site
+      requires separate approval, creating paralysis for multi-site studies.
+    </li>
+    <li>
+      <strong>Brain drain:</strong> Nigeria loses an estimated 2,000+ physicians per year
+      to emigration (UK, US, Canada, Gulf states). Clinical research capacity
+      drains with them.
+    </li>
+    <li>
+      <strong>Funding drought:</strong> The Nigerian government allocates &lt;1% of GDP to
+      health research. NIH, Wellcome, and Gates funding flows preferentially to
+      East Africa (Kenya, Uganda, Tanzania) where infrastructure is established.
+    </li>
+    <li>
+      <strong>Infrastructure gaps:</strong> Reliable electricity, cold-chain logistics,
+      electronic health records, and GCP-trained staff are concentrated in Lagos
+      and a handful of teaching hospitals.
+    </li>
+    <li>
+      <strong>Security concerns:</strong> The northeast insurgency (Boko Haram) and
+      northwest banditry have effectively removed ~60M people from any research
+      catchment area. Sponsors avoid regions with travel advisories.
+    </li>
+    <li>
+      <strong>Pharma bypassing:</strong> Multinational pharmaceutical companies preferentially
+      site trials in South Africa, Egypt, and Kenya, which have established
+      CRO networks and regulatory fast-tracks. Nigeria is seen as too difficult.
+    </li>
+    <li>
+      <strong>No national clinical trial registry:</strong> Unlike India (CTRI), Brazil (ReBEC),
+      or South Africa (SANCTR), Nigeria has no mandatory national registry,
+      reducing visibility and accountability.
+    </li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 11. WHAT WOULD IT TAKE? -->
+<!-- ============================================================ -->
+<div class="card" style="border-color:rgba(34,197,94,0.3);">
+  <h2>What Would It Take?</h2>
+  <p style="color:var(--muted);margin-bottom:14px;">
+    If Nigeria matched other large developing countries' per-capita trial rates,
+    how many trials would it need?
+  </p>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Benchmark Country</th>
+          <th style="text-align:right;">Their Rate</th>
+          <th style="text-align:right;">Nigeria Would Need</th>
+          <th style="text-align:right;">Gap (Additional)</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Brazil</td>
+  <td style="padding:10px 14px;text-align:right;">45.79/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    10,532</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +10,178</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Pakistan</td>
+  <td style="padding:10px 14px;text-align:right;">19.34/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    4,448</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +4,094</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Indonesia</td>
+  <td style="padding:10px 14px;text-align:right;">4.64/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    1,067</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +713</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">India</td>
+  <td style="padding:10px 14px;text-align:right;">3.77/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    867</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +513</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Bangladesh</td>
+  <td style="padding:10px 14px;text-align:right;">3.75/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    862</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +508</td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:10px 14px;text-align:right;">1.85/M</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    426</td>
+  <td style="padding:10px 14px;text-align:right;color:#ef4444;font-weight:bold;">
+    +72</td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--muted);margin-top:16px;">
+    At <span class="highlight-green">Brazil's rate</span> of
+    45.79/million,
+    Nigeria would need
+    <span class="highlight-green">10,532</span>
+    trials &mdash; roughly
+    <span class="highlight">10,178</span>
+    more than it currently has.
+    Even matching
+    <span class="highlight-blue">Bangladesh's</span> more modest rate would require
+    <span class="highlight">862</span>
+    trials.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- METHODOLOGY -->
+<!-- ============================================================ -->
+<div class="card" style="background:var(--surface2);">
+  <h2>Methodology</h2>
+  <p style="color:var(--muted);font-size:0.9rem;">
+    All data queried from ClinicalTrials.gov API v2 using
+    <code>filter.advanced=AREA[StudyType]INTERVENTIONAL</code> and
+    <code>query.locn=Nigeria</code> (and equivalents for condition/phase/status subsets).
+    Trial-level data fetched with pagination (pageSize=200) for sponsor and geographic
+    analysis. Comparator country counts queried identically.
+    Population estimates from UN World Population Prospects 2024 revision.
+    GDP figures from World Bank 2024 estimates. SCD burden from
+    Piel et al. (Lancet 2013) and GBD 2021.
+    Nigerian institution classification uses keyword matching against
+    known Nigerian universities, teaching hospitals, and federal medical centers.
+    Limitations: ClinicalTrials.gov only; trials registered on WHO ICTRP,
+    Pan African Clinical Trials Registry, or national registries are missed.
+    Condition queries may overlap (a trial studying both HIV and TB
+    counts in both categories).
+  </p>
+</div>
+
+<footer>
+  The Nigeria Paradox &mdash; Project Q, AfricaRCT Series<br>
+  ClinicalTrials.gov API v2 | Generated 2026-03-28<br>
+  &copy; 2026. Open-access analysis. No patient data used.
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa RCT Research Programme — 60 Projects</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --card: #131825;
+  --border: #1e2a3a;
+  --text: #c8d6e5;
+  --heading: #f5f6fa;
+  --accent: #e17055;
+  --red: #e74c3c;
+  --orange: #e67e22;
+  --yellow: #f1c40f;
+  --purple: #9b59b6;
+  --blue: #3498db;
+  --green: #27ae60;
+  --glow-red: rgba(231,76,60,0.25);
+  --glow-orange: rgba(230,126,34,0.25);
+  --glow-yellow: rgba(241,196,15,0.20);
+  --glow-purple: rgba(155,89,182,0.25);
+  --glow-blue: rgba(52,152,219,0.25);
+  --glow-green: rgba(39,174,96,0.25);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  line-height:1.6;
+  min-height:100vh;
+}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:#fab1a0}
+
+/* ── Header ── */
+.hero{
+  text-align:center;
+  padding:3.5rem 1.5rem 2.5rem;
+  background:linear-gradient(180deg,#0f1520 0%,var(--bg) 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero h1{
+  font-size:clamp(1.6rem,3.5vw,2.6rem);
+  color:var(--heading);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  margin-bottom:0.5rem;
+}
+.hero h1 span{color:var(--accent)}
+.hero .subtitle{
+  font-size:clamp(0.95rem,1.8vw,1.15rem);
+  color:#8395a7;
+  max-width:52rem;
+  margin:0 auto 1rem;
+}
+.hero .meta{
+  font-size:0.82rem;
+  color:#576574;
+  font-family:'Cascadia Code','Fira Code',monospace;
+  letter-spacing:0.03em;
+}
+
+/* ── Stats Banner ── */
+.stats-banner{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:1rem;
+  max-width:82rem;
+  margin:0 auto;
+  padding:2rem 1.5rem;
+}
+.stat-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2rem 1rem;
+  text-align:center;
+  transition:transform .2s,box-shadow .2s;
+}
+.stat-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(225,112,85,0.12);
+}
+.stat-card .num{
+  font-size:1.65rem;
+  font-weight:800;
+  color:var(--accent);
+  display:block;
+  line-height:1.2;
+}
+.stat-card .label{
+  font-size:0.78rem;
+  color:#8395a7;
+  margin-top:0.3rem;
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+}
+
+/* ── Layer Sections ── */
+.layer{
+  max-width:82rem;
+  margin:0 auto;
+  padding:1rem 1.5rem 2rem;
+}
+.layer-header{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  margin-bottom:1.25rem;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border);
+}
+.layer-header .layer-badge{
+  font-size:0.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  padding:0.25rem 0.7rem;
+  border-radius:6px;
+  white-space:nowrap;
+}
+.layer-header h2{
+  font-size:1.3rem;
+  color:var(--heading);
+  font-weight:700;
+}
+.layer-header .layer-count{
+  font-size:0.8rem;
+  color:#576574;
+  margin-left:auto;
+}
+
+/* Layer color themes */
+.layer-1 .layer-badge{background:rgba(231,76,60,0.15);color:var(--red)}
+.layer-2 .layer-badge{background:rgba(230,126,34,0.15);color:var(--orange)}
+.layer-3 .layer-badge{background:rgba(241,196,15,0.12);color:var(--yellow)}
+.layer-4 .layer-badge{background:rgba(155,89,182,0.15);color:var(--purple)}
+.layer-5 .layer-badge{background:rgba(52,152,219,0.15);color:var(--blue)}
+.layer-6 .layer-badge{background:rgba(39,174,96,0.15);color:var(--green)}
+
+/* ── Card Grid ── */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+@media(max-width:960px){.card-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.card-grid{grid-template-columns:1fr}}
+
+.project-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.15rem 1.15rem 1.15rem 1.35rem;
+  border-left:4px solid transparent;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  position:relative;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+}
+.project-card:hover{
+  transform:translateY(-4px);
+}
+/* Color-specific borders & hover glows */
+.layer-1 .project-card{border-left-color:var(--red)}
+.layer-1 .project-card:hover{box-shadow:0 8px 28px var(--glow-red)}
+.layer-2 .project-card{border-left-color:var(--orange)}
+.layer-2 .project-card:hover{box-shadow:0 8px 28px var(--glow-orange)}
+.layer-3 .project-card{border-left-color:var(--yellow)}
+.layer-3 .project-card:hover{box-shadow:0 8px 28px var(--glow-yellow)}
+.layer-4 .project-card{border-left-color:var(--purple)}
+.layer-4 .project-card:hover{box-shadow:0 8px 28px var(--glow-purple)}
+.layer-5 .project-card{border-left-color:var(--blue)}
+.layer-5 .project-card:hover{box-shadow:0 8px 28px var(--glow-blue)}
+.layer-6 .project-card{border-left-color:var(--green)}
+.layer-6 .project-card:hover{box-shadow:0 8px 28px var(--glow-green)}
+
+.project-card .card-top{
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+}
+.project-card .badge{
+  font-size:0.7rem;
+  font-weight:800;
+  min-width:1.7rem;
+  height:1.7rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  flex-shrink:0;
+  color:#fff;
+}
+.layer-1 .badge{background:var(--red)}
+.layer-2 .badge{background:var(--orange)}
+.layer-3 .badge{background:var(--yellow);color:#1a1a2e}
+.layer-4 .badge{background:var(--purple)}
+.layer-5 .badge{background:var(--blue)}
+.layer-6 .badge{background:var(--green)}
+
+.project-card .card-title{
+  font-size:0.92rem;
+  font-weight:700;
+  color:var(--heading);
+  line-height:1.25;
+}
+.project-card .card-finding{
+  font-size:0.8rem;
+  color:#8395a7;
+  line-height:1.4;
+}
+.project-card .card-link{
+  font-size:0.75rem;
+  color:var(--accent);
+  margin-top:auto;
+  padding-top:0.3rem;
+  opacity:0.8;
+  transition:opacity .2s;
+}
+.project-card:hover .card-link{opacity:1}
+.project-card .card-link::after{content:' \2192'}
+
+/* ── Findings Table ── */
+.findings-section{
+  max-width:82rem;
+  margin:2rem auto;
+  padding:0 1.5rem;
+}
+.findings-section h2{
+  font-size:1.4rem;
+  color:var(--heading);
+  margin-bottom:1rem;
+  padding-bottom:0.6rem;
+  border-bottom:1px solid var(--border);
+}
+.findings-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.85rem;
+}
+.findings-table thead{
+  background:#0f1520;
+  position:sticky;
+  top:0;
+}
+.findings-table th{
+  text-align:left;
+  padding:0.75rem 1rem;
+  color:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:0.72rem;
+  letter-spacing:0.06em;
+  border-bottom:2px solid var(--border);
+}
+.findings-table td{
+  padding:0.65rem 1rem;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+.findings-table tr:hover td{background:rgba(225,112,85,0.04)}
+.findings-table .finding-num{
+  color:var(--accent);
+  font-weight:700;
+  white-space:nowrap;
+}
+.findings-table .finding-metric{
+  font-family:'Cascadia Code','Fira Code',monospace;
+  color:var(--heading);
+  font-weight:600;
+}
+@media(max-width:700px){
+  .findings-table{display:block;overflow-x:auto}
+}
+
+/* ── Methods / Reproduce / Footer ── */
+.text-section{
+  max-width:82rem;
+  margin:2rem auto;
+  padding:0 1.5rem;
+}
+.text-section h2{
+  font-size:1.3rem;
+  color:var(--heading);
+  margin-bottom:0.75rem;
+  padding-bottom:0.5rem;
+  border-bottom:1px solid var(--border);
+}
+.text-section p,.text-section li{
+  font-size:0.88rem;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:0.5rem;
+}
+.text-section ul{padding-left:1.5rem}
+.text-section code{
+  font-family:'Cascadia Code','Fira Code',monospace;
+  background:#0f1520;
+  padding:0.15rem 0.4rem;
+  border-radius:4px;
+  font-size:0.8rem;
+  color:var(--accent);
+}
+.reproduce-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
+  gap:0.5rem;
+  margin-top:1rem;
+}
+.reproduce-grid .cmd{
+  font-family:'Cascadia Code','Fira Code',monospace;
+  font-size:0.72rem;
+  background:#0f1520;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:0.4rem 0.7rem;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.reproduce-grid .cmd span{color:var(--accent);font-weight:600}
+
+footer{
+  text-align:center;
+  padding:2.5rem 1.5rem;
+  border-top:1px solid var(--border);
+  margin-top:3rem;
+}
+footer .ai-statement{
+  max-width:48rem;
+  margin:0 auto 1.5rem;
+  font-size:0.8rem;
+  color:#576574;
+  line-height:1.6;
+  padding:1rem;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--card);
+}
+footer .ai-statement strong{color:#8395a7}
+footer .footer-meta{
+  font-size:0.75rem;
+  color:#576574;
+}
+footer .footer-meta span{color:var(--accent)}
+
+/* ── Navigation ── */
+.nav-strip{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(10,14,23,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:center;
+  gap:0.25rem;
+  padding:0.5rem 1rem;
+  flex-wrap:wrap;
+}
+.nav-strip a{
+  font-size:0.72rem;
+  padding:0.3rem 0.65rem;
+  border-radius:6px;
+  color:#8395a7;
+  transition:background .2s,color .2s;
+  white-space:nowrap;
+}
+.nav-strip a:hover{background:rgba(225,112,85,0.1);color:var(--accent)}
+.nav-strip a.nav-l1{border-bottom:2px solid var(--red)}
+.nav-strip a.nav-l2{border-bottom:2px solid var(--orange)}
+.nav-strip a.nav-l3{border-bottom:2px solid var(--yellow)}
+.nav-strip a.nav-l4{border-bottom:2px solid var(--purple)}
+.nav-strip a.nav-l5{border-bottom:2px solid var(--blue)}
+.nav-strip a.nav-l6{border-bottom:2px solid var(--green)}
+.nav-strip a.nav-findings{border-bottom:2px solid var(--accent)}
+.nav-strip a.nav-methods{border-bottom:2px solid #576574}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hero">
+  <h1>Africa RCT Research Programme &mdash; <span>60 Projects</span> Exposing Clinical Trial Inequity</h1>
+  <p class="subtitle">The most comprehensive registry-based analysis of Africa's clinical trial landscape ever conducted</p>
+  <p class="meta">ClinicalTrials.gov API v2 &nbsp;|&nbsp; 20,799+ trials &nbsp;|&nbsp; 30+ countries &nbsp;|&nbsp; 60 projects &nbsp;|&nbsp; 28 March 2026 16:13</p>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="nav-strip">
+  <a href="#layer1" class="nav-l1">L1 Foundation</a>
+  <a href="#layer2" class="nav-l2">L2 Comparisons</a>
+  <a href="#layer3" class="nav-l3">L3 Disease Dives</a>
+  <a href="#layer4" class="nav-l4">L4 Frameworks</a>
+  <a href="#layer5" class="nav-l5">L5 Statistics</a>
+  <a href="#layer6" class="nav-l6">L6 Stakeholders</a>
+  <a href="#findings" class="nav-findings">Top Findings</a>
+  <a href="#methods" class="nav-methods">Methods</a>
+  <a href="#reproduce" class="nav-methods">Reproduce</a>
+</nav>
+
+<!-- KEY NUMBERS -->
+<section class="stats-banner">
+  <div class="stat-card"><span class="num">60</span><span class="label">Projects</span></div>
+  <div class="stat-card"><span class="num">20,799</span><span class="label">Africa Trials</span></div>
+  <div class="stat-card"><span class="num">159,196</span><span class="label">US Trials</span></div>
+  <div class="stat-card"><span class="num">48.6x</span><span class="label">Worst CCI (SCD)</span></div>
+  <div class="stat-card"><span class="num">0.8%</span><span class="label">J&amp;J Africa Ratio</span></div>
+  <div class="stat-card"><span class="num">5.5x</span><span class="label">Francophone Penalty</span></div>
+  <div class="stat-card"><span class="num">553x</span><span class="label">Childhood Cancer CCI</span></div>
+  <div class="stat-card"><span class="num">ZERO</span><span class="label">Genomics Trials</span></div>
+</section>
+
+<!-- LAYER 1 — Foundation & Landscape (1-14) -->
+<section class="layer layer-1" id="layer1">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 1</span>
+    <h2>Foundation &amp; Landscape</h2>
+    <span class="layer-count">Projects 1&ndash;14</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="africa-rct-analysis.html" class="project-card">
+      <div class="card-top"><span class="badge">1</span><span class="card-title">Africa Continent</span></div>
+      <p class="card-finding">20,799 trials: 13.1% of US volume for 1.4 billion people</p>
+      <span class="card-link">africa-rct-analysis.html</span>
+    </a>
+
+    <a href="uganda-rct-analysis.html" class="project-card">
+      <div class="card-top"><span class="badge">2</span><span class="card-title">Uganda Deep-Dive</span></div>
+      <p class="card-finding">783 trials, only 3 diabetes trials for 48 million people</p>
+      <span class="card-link">uganda-rct-analysis.html</span>
+    </a>
+
+    <a href="novel-analysis-extraction-index.html" class="project-card">
+      <div class="card-top"><span class="badge">3</span><span class="card-title">Extraction Index</span></div>
+      <p class="card-finding">6 novel metrics introduced; SCD CCI 48.6x</p>
+      <span class="card-link">novel-analysis-extraction-index.html</span>
+    </a>
+
+    <a href="scd-africa-analysis.html" class="project-card">
+      <div class="card-top"><span class="badge">4</span><span class="card-title">SCD Africa</span></div>
+      <p class="card-finding">Worst Clinical Contrast Index in global health</p>
+      <span class="card-link">scd-africa-analysis.html</span>
+    </a>
+
+    <a href="ghost-enrollment-audit.html" class="project-card">
+      <div class="card-top"><span class="badge">5</span><span class="card-title">Ghost Enrollment</span></div>
+      <p class="card-finding">Uganda = 0.59% of mega-trial enrollment</p>
+      <span class="card-link">ghost-enrollment-audit.html</span>
+    </a>
+
+    <a href="ncd-gap-analysis.html" class="project-card">
+      <div class="card-top"><span class="badge">6</span><span class="card-title">NCD Trial Gap</span></div>
+      <p class="card-finding">Country x condition CCI heatmap reveals systematic voids</p>
+      <span class="card-link">ncd-gap-analysis.html</span>
+    </a>
+
+    <a href="pharma-extraction-map.html" class="project-card">
+      <div class="card-top"><span class="badge">7</span><span class="card-title">Pharma Extraction</span></div>
+      <p class="card-finding">J&amp;J 0.8%, Novo Nordisk 7.3% Africa trial ratios</p>
+      <span class="card-link">pharma-extraction-map.html</span>
+    </a>
+
+    <a href="termination-cascade.html" class="project-card">
+      <div class="card-top"><span class="badge">8</span><span class="card-title">Termination Cascade</span></div>
+      <p class="card-finding">~280 trials killed by global HQ decisions</p>
+      <span class="card-link">termination-cascade.html</span>
+    </a>
+
+    <a href="covid-impact-africa.html" class="project-card">
+      <div class="card-top"><span class="badge">9</span><span class="card-title">COVID Impact</span></div>
+      <p class="card-finding">Post-2021 stagnation despite pandemic momentum</p>
+      <span class="card-link">covid-impact-africa.html</span>
+    </a>
+
+    <a href="francophone-gap.html" class="project-card">
+      <div class="card-top"><span class="badge">10</span><span class="card-title">Francophone Gap</span></div>
+      <p class="card-finding">5.5x per-capita gap vs Anglophone Africa</p>
+      <span class="card-link">francophone-gap.html</span>
+    </a>
+
+    <a href="conflict-zone-exclusion.html" class="project-card">
+      <div class="card-top"><span class="badge">11</span><span class="card-title">Conflict Zones</span></div>
+      <p class="card-finding">1 trial per 1.6 million people in Somalia</p>
+      <span class="card-link">conflict-zone-exclusion.html</span>
+    </a>
+
+    <a href="vaccine-colony.html" class="project-card">
+      <div class="card-top"><span class="badge">12</span><span class="card-title">Vaccine Colony</span></div>
+      <p class="card-finding">South Africa holds 99.4% monopoly on vaccine trials</p>
+      <span class="card-link">vaccine-colony.html</span>
+    </a>
+
+    <a href="research-desert-map.html" class="project-card">
+      <div class="card-top"><span class="badge">13</span><span class="card-title">Desert Map</span></div>
+      <p class="card-finding">20 x 12 zero-cell map of countries without any trials</p>
+      <span class="card-link">research-desert-map.html</span>
+    </a>
+
+    <a href="percapita-league.html" class="project-card">
+      <div class="card-top"><span class="badge">14</span><span class="card-title">Per-Capita League</span></div>
+      <p class="card-finding">30 countries ranked by trials per million population</p>
+      <span class="card-link">percapita-league.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- LAYER 2 — Literature & Global Comparisons (15-24) -->
+<section class="layer layer-2" id="layer2">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 2</span>
+    <h2>Literature &amp; Global Comparisons</h2>
+    <span class="layer-count">Projects 15&ndash;24</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="pepfar-dependency.html" class="project-card">
+      <div class="card-top"><span class="badge">15</span><span class="card-title">PEPFAR Trap</span></div>
+      <p class="card-finding">Spillover coefficient 0.11&ndash;1.80 across countries</p>
+      <span class="card-link">pepfar-dependency.html</span>
+    </a>
+
+    <a href="decolonization-scorecard.html" class="project-card">
+      <div class="card-top"><span class="badge">16</span><span class="card-title">Decolonization Score</span></div>
+      <p class="card-finding">0&ndash;100 scorecard measuring research sovereignty</p>
+      <span class="card-link">decolonization-scorecard.html</span>
+    </a>
+
+    <a href="rwanda-model.html" class="project-card">
+      <div class="card-top"><span class="badge">17</span><span class="card-title">Rwanda Model</span></div>
+      <p class="card-finding">8.6x more trials per capita than neighboring Burundi</p>
+      <span class="card-link">rwanda-model.html</span>
+    </a>
+
+    <a href="nigeria-paradox.html" class="project-card">
+      <div class="card-top"><span class="badge">18</span><span class="card-title">Nigeria Paradox</span></div>
+      <p class="card-finding">1.5 trials/million &mdash; worst large country rate</p>
+      <span class="card-link">nigeria-paradox.html</span>
+    </a>
+
+    <a href="global-south-comparison.html" class="project-card">
+      <div class="card-top"><span class="badge">19</span><span class="card-title">Global South</span></div>
+      <p class="card-finding">25-country league table exposes structural hierarchy</p>
+      <span class="card-link">global-south-comparison.html</span>
+    </a>
+
+    <a href="latam-mirror.html" class="project-card">
+      <div class="card-top"><span class="badge">20</span><span class="card-title">LatAm Mirror</span></div>
+      <p class="card-finding">31x gap between Africa and Brazil alone</p>
+      <span class="card-link">latam-mirror.html</span>
+    </a>
+
+    <a href="surgical-desert.html" class="project-card">
+      <div class="card-top"><span class="badge">21</span><span class="card-title">Surgical Desert</span></div>
+      <p class="card-finding">CCI 27.3x &mdash; surgery barely studied in Africa</p>
+      <span class="card-link">surgical-desert.html</span>
+    </a>
+
+    <a href="traditional-medicine.html" class="project-card">
+      <div class="card-top"><span class="badge">22</span><span class="card-title">Traditional Medicine</span></div>
+      <p class="card-finding">2 registered trials vs China's 334</p>
+      <span class="card-link">traditional-medicine.html</span>
+    </a>
+
+    <a href="trauma-gap.html" class="project-card">
+      <div class="card-top"><span class="badge">23</span><span class="card-title">Trauma Gap</span></div>
+      <p class="card-finding">CCI 29.4x &mdash; highest injury burden, near-zero trials</p>
+      <span class="card-link">trauma-gap.html</span>
+    </a>
+
+    <a href="china-leapfrog.html" class="project-card">
+      <div class="card-top"><span class="badge">24</span><span class="card-title">China Leapfrog</span></div>
+      <p class="card-finding">38,933 vs 20,799 &mdash; China doubled Africa in a decade</p>
+      <span class="card-link">china-leapfrog.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- LAYER 3 — Disease Deep-Dives (25-35) -->
+<section class="layer layer-3" id="layer3">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 3</span>
+    <h2>Disease Deep-Dives</h2>
+    <span class="layer-count">Projects 25&ndash;35</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="forgotten-diseases.html" class="project-card">
+      <div class="card-top"><span class="badge">25</span><span class="card-title">Forgotten Diseases</span></div>
+      <p class="card-finding">15 diseases at near-zero trial counts despite massive burden</p>
+      <span class="card-link">forgotten-diseases.html</span>
+    </a>
+
+    <a href="cervical-cancer.html" class="project-card">
+      <div class="card-top"><span class="badge">26</span><span class="card-title">Cervical Cancer</span></div>
+      <p class="card-finding">#1 cancer killer of African women, CCI 17.9x</p>
+      <span class="card-link">cervical-cancer.html</span>
+    </a>
+
+    <a href="palliative-desert.html" class="project-card">
+      <div class="card-top"><span class="badge">27</span><span class="card-title">Palliative Desert</span></div>
+      <p class="card-finding">57 vs 1,286 trials &mdash; dying in pain without evidence</p>
+      <span class="card-link">palliative-desert.html</span>
+    </a>
+
+    <a href="amr-crisis.html" class="project-card">
+      <div class="card-top"><span class="badge">28</span><span class="card-title">AMR Crisis</span></div>
+      <p class="card-finding">56 trials for the next pandemic threat</p>
+      <span class="card-link">amr-crisis.html</span>
+    </a>
+
+    <a href="maternal-mortality.html" class="project-card">
+      <div class="card-top"><span class="badge">29</span><span class="card-title">Maternal Mortality</span></div>
+      <p class="card-finding">9 trials for 66% of global maternal deaths, CCI ~82x</p>
+      <span class="card-link">maternal-mortality.html</span>
+    </a>
+
+    <a href="childhood-cancer.html" class="project-card">
+      <div class="card-top"><span class="badge">30</span><span class="card-title">Childhood Cancer</span></div>
+      <p class="card-finding">3 trials; 20% vs 80% survival gap, CCI 553x</p>
+      <span class="card-link">childhood-cancer.html</span>
+    </a>
+
+    <a href="genomics-zero.html" class="project-card">
+      <div class="card-top"><span class="badge">31</span><span class="card-title">Genomics Zero</span></div>
+      <p class="card-finding">ZERO precision medicine trials on the most genetically diverse continent</p>
+      <span class="card-link">genomics-zero.html</span>
+    </a>
+
+    <a href="heart-failure-africa.html" class="project-card">
+      <div class="card-top"><span class="badge">32</span><span class="card-title">Heart Failure</span></div>
+      <p class="card-finding">Different phenotype, no evidence &mdash; treating blind</p>
+      <span class="card-link">heart-failure-africa.html</span>
+    </a>
+
+    <a href="digital-health.html" class="project-card">
+      <div class="card-top"><span class="badge">33</span><span class="card-title">Digital Health</span></div>
+      <p class="card-finding">Africa's one bright spot in the research landscape</p>
+      <span class="card-link">digital-health.html</span>
+    </a>
+
+    <a href="rhd-tragedy.html" class="project-card">
+      <div class="card-top"><span class="badge">34</span><span class="card-title">RHD Tragedy</span></div>
+      <p class="card-finding">$0.02 penicillin could prevent 240,000 deaths/year</p>
+      <span class="card-link">rhd-tragedy.html</span>
+    </a>
+
+    <a href="air-pollution.html" class="project-card">
+      <div class="card-top"><span class="badge">35</span><span class="card-title">Air Pollution</span></div>
+      <p class="card-finding">ZERO intervention trials for 600,000 deaths/year</p>
+      <span class="card-link">air-pollution.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- LAYER 4 — Cross-Disciplinary Frameworks (36-42) -->
+<section class="layer layer-4" id="layer4">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 4</span>
+    <h2>Cross-Disciplinary Frameworks</h2>
+    <span class="layer-count">Projects 36&ndash;42</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="mizan-index.html" class="project-card">
+      <div class="card-top"><span class="badge">36</span><span class="card-title">Mizan Index</span></div>
+      <p class="card-finding">Quranic justice framework: 7-dimension equity scorecard</p>
+      <span class="card-link">mizan-index.html</span>
+    </a>
+
+    <a href="dutch-disease.html" class="project-card">
+      <div class="card-top"><span class="badge">37</span><span class="card-title">Dutch Disease</span></div>
+      <p class="card-finding">HIV funding as resource curse crowding out NCD research</p>
+      <span class="card-link">dutch-disease.html</span>
+    </a>
+
+    <a href="terms-of-trade.html" class="project-card">
+      <div class="card-top"><span class="badge">38</span><span class="card-title">Terms of Trade</span></div>
+      <p class="card-finding">Raw data exported out, drugs sold back at 100x markup</p>
+      <span class="card-link">terms-of-trade.html</span>
+    </a>
+
+    <a href="power-law.html" class="project-card">
+      <div class="card-top"><span class="badge">39</span><span class="card-title">Power Law</span></div>
+      <p class="card-finding">Gini 0.537 &mdash; Matthew Effect in trial distribution</p>
+      <span class="card-link">power-law.html</span>
+    </a>
+
+    <a href="phase-transition.html" class="project-card">
+      <div class="card-top"><span class="badge">40</span><span class="card-title">Phase Transition</span></div>
+      <p class="card-finding">Critical threshold for self-sustaining research ecosystems</p>
+      <span class="card-link">phase-transition.html</span>
+    </a>
+
+    <a href="principal-agent.html" class="project-card">
+      <div class="card-top"><span class="badge">41</span><span class="card-title">Principal-Agent</span></div>
+      <p class="card-finding">Whose agenda? Funder-researcher misalignment quantified</p>
+      <span class="card-link">principal-agent.html</span>
+    </a>
+
+    <a href="free-rider-genome.html" class="project-card">
+      <div class="card-top"><span class="badge">42</span><span class="card-title">Free Rider Genome</span></div>
+      <p class="card-finding">Everyone sequences African genomes, nobody runs treatment trials</p>
+      <span class="card-link">free-rider-genome.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- LAYER 5 — Advanced Statistics (43-48) -->
+<section class="layer layer-5" id="layer5">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 5</span>
+    <h2>Advanced Statistics</h2>
+    <span class="layer-count">Projects 43&ndash;48</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="placebo-ethics.html" class="project-card">
+      <div class="card-top"><span class="badge">43</span><span class="card-title">Placebo Ethics</span></div>
+      <p class="card-finding">Africa 32% vs US 11% placebo-controlled trial rate</p>
+      <span class="card-link">placebo-ethics.html</span>
+    </a>
+
+    <a href="design-quality.html" class="project-card">
+      <div class="card-top"><span class="badge">44</span><span class="card-title">Design Quality</span></div>
+      <p class="card-finding">Does Africa get adaptive trials? Examining design equity</p>
+      <span class="card-link">design-quality.html</span>
+    </a>
+
+    <a href="advanced-stats.html" class="project-card">
+      <div class="card-top"><span class="badge">45</span><span class="card-title">Advanced Stats</span></div>
+      <p class="card-finding">Bayesian, Bootstrap, Kaplan-Meier, Monte Carlo analyses</p>
+      <span class="card-link">advanced-stats.html</span>
+    </a>
+
+    <a href="regression-model.html" class="project-card">
+      <div class="card-top"><span class="badge">46</span><span class="card-title">Regression Model</span></div>
+      <p class="card-finding">GDP explains 50% of variance; Nigeria residual -1.78</p>
+      <span class="card-link">regression-model.html</span>
+    </a>
+
+    <a href="network-analysis.html" class="project-card">
+      <div class="card-top"><span class="badge">47</span><span class="card-title">Network Analysis</span></div>
+      <p class="card-finding">Makerere University centrality 0.96 in collaboration network</p>
+      <span class="card-link">network-analysis.html</span>
+    </a>
+
+    <a href="pepfar-causal.html" class="project-card">
+      <div class="card-top"><span class="badge">48</span><span class="card-title">PEPFAR Causal</span></div>
+      <p class="card-finding">ITS + DiD + Synthetic Control for causal attribution</p>
+      <span class="card-link">pepfar-causal.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- LAYER 6 — Stakeholder Voices (49-60) -->
+<section class="layer layer-6" id="layer6">
+  <div class="layer-header">
+    <span class="layer-badge">Layer 6</span>
+    <h2>Stakeholder Voices</h2>
+    <span class="layer-count">Projects 49&ndash;60</span>
+  </div>
+  <div class="card-grid">
+
+    <a href="patient-access.html" class="project-card">
+      <div class="card-top"><span class="badge">49</span><span class="card-title">Patient</span></div>
+      <p class="card-finding">Can I find a trial? Access barriers quantified</p>
+      <span class="card-link">patient-access.html</span>
+    </a>
+
+    <a href="child-view.html" class="project-card">
+      <div class="card-top"><span class="badge">50</span><span class="card-title">Child</span></div>
+      <p class="card-finding">Growing up without age-appropriate evidence</p>
+      <span class="card-link">child-view.html</span>
+    </a>
+
+    <a href="mother-view.html" class="project-card">
+      <div class="card-top"><span class="badge">51</span><span class="card-title">Mother</span></div>
+      <p class="card-finding">Pregnancy without evidence &mdash; maternal trial desert</p>
+      <span class="card-link">mother-view.html</span>
+    </a>
+
+    <a href="elderly-view.html" class="project-card">
+      <div class="card-top"><span class="badge">52</span><span class="card-title">Elder</span></div>
+      <p class="card-finding">Aging without a research agenda in Africa</p>
+      <span class="card-link">elderly-view.html</span>
+    </a>
+
+    <a href="doctor-view.html" class="project-card">
+      <div class="card-top"><span class="badge">53</span><span class="card-title">Doctor</span></div>
+      <p class="card-finding">Treating in the dark without locally-generated evidence</p>
+      <span class="card-link">doctor-view.html</span>
+    </a>
+
+    <a href="admin-view.html" class="project-card">
+      <div class="card-top"><span class="badge">54</span><span class="card-title">Administrator</span></div>
+      <p class="card-finding">Managing health systems without trial data</p>
+      <span class="card-link">admin-view.html</span>
+    </a>
+
+    <a href="government-view.html" class="project-card">
+      <div class="card-top"><span class="badge">55</span><span class="card-title">Government</span></div>
+      <p class="card-finding">Governing without evidence for policy decisions</p>
+      <span class="card-link">government-view.html</span>
+    </a>
+
+    <a href="nurse-view.html" class="project-card">
+      <div class="card-top"><span class="badge">56</span><span class="card-title">Nurse</span></div>
+      <p class="card-finding">80% of care delivery, near-parity in evidence gaps</p>
+      <span class="card-link">nurse-view.html</span>
+    </a>
+
+    <a href="community-view.html" class="project-card">
+      <div class="card-top"><span class="badge">57</span><span class="card-title">Community</span></div>
+      <p class="card-finding">Research done TO communities, not WITH them</p>
+      <span class="card-link">community-view.html</span>
+    </a>
+
+    <a href="funder-view.html" class="project-card">
+      <div class="card-top"><span class="badge">58</span><span class="card-title">Funder</span></div>
+      <p class="card-finding">Following the money &mdash; who funds what, and why</p>
+      <span class="card-link">funder-view.html</span>
+    </a>
+
+    <a href="researcher-view.html" class="project-card">
+      <div class="card-top"><span class="badge">59</span><span class="card-title">Researcher</span></div>
+      <p class="card-finding">The impossible choice between local relevance and global publication</p>
+      <span class="card-link">researcher-view.html</span>
+    </a>
+
+    <a href="future-view.html" class="project-card">
+      <div class="card-top"><span class="badge">60</span><span class="card-title">Future</span></div>
+      <p class="card-finding">Three futures for Africa in 2035: stagnation, incremental, or leap</p>
+      <span class="card-link">future-view.html</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- TOP 15 NOVEL FINDINGS -->
+<section class="findings-section" id="findings">
+  <h2>Top 15 Novel Findings</h2>
+  <table class="findings-table">
+    <thead>
+      <tr><th>#</th><th>Finding</th><th>Key Metric</th><th>Source Project</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="finding-num">1</td>
+        <td>Africa runs 13.1% of US trial volume for 4.3x the population</td>
+        <td class="finding-metric">20,799 vs 159,196</td>
+        <td>P1 &mdash; Africa Continent</td>
+      </tr>
+      <tr>
+        <td class="finding-num">2</td>
+        <td>Sickle Cell Disease has the worst Clinical Contrast Index in global health</td>
+        <td class="finding-metric">CCI 48.6x</td>
+        <td>P4 &mdash; SCD Africa</td>
+      </tr>
+      <tr>
+        <td class="finding-num">3</td>
+        <td>Childhood cancer survival gap maps directly to trial absence</td>
+        <td class="finding-metric">CCI 553x</td>
+        <td>P30 &mdash; Childhood Cancer</td>
+      </tr>
+      <tr>
+        <td class="finding-num">4</td>
+        <td>Maternal mortality: Africa bears 66% of deaths, receives &lt;1% of trials</td>
+        <td class="finding-metric">CCI ~82x</td>
+        <td>P29 &mdash; Maternal Mortality</td>
+      </tr>
+      <tr>
+        <td class="finding-num">5</td>
+        <td>ZERO genomics / precision medicine trials on Earth's most genetically diverse continent</td>
+        <td class="finding-metric">0 trials</td>
+        <td>P31 &mdash; Genomics Zero</td>
+      </tr>
+      <tr>
+        <td class="finding-num">6</td>
+        <td>Johnson &amp; Johnson conducts 0.8% of its global trials in Africa</td>
+        <td class="finding-metric">0.8% ratio</td>
+        <td>P7 &mdash; Pharma Extraction</td>
+      </tr>
+      <tr>
+        <td class="finding-num">7</td>
+        <td>Francophone Africa penalized 5.5x vs Anglophone per capita</td>
+        <td class="finding-metric">5.5x gap</td>
+        <td>P10 &mdash; Francophone Gap</td>
+      </tr>
+      <tr>
+        <td class="finding-num">8</td>
+        <td>South Africa monopolizes 99.4% of continental vaccine trial capacity</td>
+        <td class="finding-metric">99.4%</td>
+        <td>P12 &mdash; Vaccine Colony</td>
+      </tr>
+      <tr>
+        <td class="finding-num">9</td>
+        <td>Africa given placebo-controlled designs 3x more often than the US</td>
+        <td class="finding-metric">32% vs 11%</td>
+        <td>P43 &mdash; Placebo Ethics</td>
+      </tr>
+      <tr>
+        <td class="finding-num">10</td>
+        <td>Rheumatic heart disease: $0.02 penicillin could prevent 240K annual deaths</td>
+        <td class="finding-metric">240,000 deaths</td>
+        <td>P34 &mdash; RHD Tragedy</td>
+      </tr>
+      <tr>
+        <td class="finding-num">11</td>
+        <td>Air pollution kills 600,000 Africans/year with zero intervention trials</td>
+        <td class="finding-metric">0 trials</td>
+        <td>P35 &mdash; Air Pollution</td>
+      </tr>
+      <tr>
+        <td class="finding-num">12</td>
+        <td>Nigeria: largest African economy, worst per-capita trial rate among large nations</td>
+        <td class="finding-metric">1.5/million</td>
+        <td>P18 &mdash; Nigeria Paradox</td>
+      </tr>
+      <tr>
+        <td class="finding-num">13</td>
+        <td>Trial distribution follows power law with Gini 0.537 (extreme concentration)</td>
+        <td class="finding-metric">Gini 0.537</td>
+        <td>P39 &mdash; Power Law</td>
+      </tr>
+      <tr>
+        <td class="finding-num">14</td>
+        <td>China leapfrogged all of Africa combined in a single decade</td>
+        <td class="finding-metric">38,933 vs 20,799</td>
+        <td>P24 &mdash; China Leapfrog</td>
+      </tr>
+      <tr>
+        <td class="finding-num">15</td>
+        <td>GDP explains only 50% of trial variance; governance and institutional factors dominate</td>
+        <td class="finding-metric">R&sup2; = 0.50</td>
+        <td>P46 &mdash; Regression Model</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- METHODS -->
+<section class="text-section" id="methods">
+  <h2>Methods</h2>
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (queried March 2026). All studies with at least one site in an African country were included. Comparator datasets: US trials (159,196), China (38,933), Brazil, India, and 25 Global South nations.</p>
+  <p><strong>Novel metrics:</strong> The Clinical Contrast Index (CCI) measures the ratio of disease burden share to trial share, normalized per capita. A CCI of 1.0 indicates proportional representation; values above 1.0 indicate under-research relative to burden. The Extraction Index and Decolonization Score are composites described in their respective project dashboards.</p>
+  <p><strong>Statistical methods:</strong> Descriptive statistics, chi-squared tests, negative binomial regression, Kaplan-Meier time-to-completion, bootstrap confidence intervals (10,000 replicates), Monte Carlo simulation, interrupted time series (ITS), difference-in-differences (DiD), synthetic control, and network centrality analysis. All code is Python 3.11+ with standard scientific stack (pandas, scipy, statsmodels, networkx).</p>
+  <p><strong>Limitations:</strong> ClinicalTrials.gov under-represents trials registered on regional platforms (PACTR, WHO ICTRP). Burden data from GBD 2021. Population estimates from UN World Population Prospects 2024 revision. CCI calculations use disease-specific burden denominators which may not capture comorbidity overlap.</p>
+</section>
+
+<!-- HOW TO REPRODUCE -->
+<section class="text-section" id="reproduce">
+  <h2>How to Reproduce (All 60 Projects)</h2>
+  <p>Each project has a standalone Python script that queries the ClinicalTrials.gov API v2 and produces an interactive HTML dashboard. Run from the <code>C:\AfricaRCT</code> directory:</p>
+  <div class="reproduce-grid">
+    <div class="cmd"><span>01</span> python africa_rct_analysis.py</div>
+    <div class="cmd"><span>02</span> python uganda_rct_analysis.py</div>
+    <div class="cmd"><span>03</span> python novel_analysis_extraction_index.py</div>
+    <div class="cmd"><span>04</span> python scd_africa_analysis.py</div>
+    <div class="cmd"><span>05</span> python ghost_enrollment_audit.py</div>
+    <div class="cmd"><span>06</span> python ncd_gap_analysis.py</div>
+    <div class="cmd"><span>07</span> python pharma_extraction_map.py</div>
+    <div class="cmd"><span>08</span> python termination_cascade.py</div>
+    <div class="cmd"><span>09</span> python covid_impact_africa.py</div>
+    <div class="cmd"><span>10</span> python francophone_gap.py</div>
+    <div class="cmd"><span>11</span> python conflict_zone_exclusion.py</div>
+    <div class="cmd"><span>12</span> python vaccine_colony.py</div>
+    <div class="cmd"><span>13</span> python research_desert_map.py</div>
+    <div class="cmd"><span>14</span> python percapita_league.py</div>
+    <div class="cmd"><span>15</span> python pepfar_dependency.py</div>
+    <div class="cmd"><span>16</span> python decolonization_scorecard.py</div>
+    <div class="cmd"><span>17</span> python rwanda_model.py</div>
+    <div class="cmd"><span>18</span> python nigeria_paradox.py</div>
+    <div class="cmd"><span>19</span> python global_south_comparison.py</div>
+    <div class="cmd"><span>20</span> python latam_mirror.py</div>
+    <div class="cmd"><span>21</span> python surgical_desert.py</div>
+    <div class="cmd"><span>22</span> python traditional_medicine.py</div>
+    <div class="cmd"><span>23</span> python trauma_gap.py</div>
+    <div class="cmd"><span>24</span> python china_leapfrog.py</div>
+    <div class="cmd"><span>25</span> python forgotten_diseases.py</div>
+    <div class="cmd"><span>26</span> python cervical_cancer.py</div>
+    <div class="cmd"><span>27</span> python palliative_desert.py</div>
+    <div class="cmd"><span>28</span> python amr_crisis.py</div>
+    <div class="cmd"><span>29</span> python maternal_mortality.py</div>
+    <div class="cmd"><span>30</span> python childhood_cancer.py</div>
+    <div class="cmd"><span>31</span> python genomics_zero.py</div>
+    <div class="cmd"><span>32</span> python heart_failure_africa.py</div>
+    <div class="cmd"><span>33</span> python digital_health.py</div>
+    <div class="cmd"><span>34</span> python rhd_tragedy.py</div>
+    <div class="cmd"><span>35</span> python air_pollution.py</div>
+    <div class="cmd"><span>36</span> python mizan_index.py</div>
+    <div class="cmd"><span>37</span> python dutch_disease.py</div>
+    <div class="cmd"><span>38</span> python terms_of_trade.py</div>
+    <div class="cmd"><span>39</span> python power_law.py</div>
+    <div class="cmd"><span>40</span> python phase_transition.py</div>
+    <div class="cmd"><span>41</span> python principal_agent.py</div>
+    <div class="cmd"><span>42</span> python free_rider_genome.py</div>
+    <div class="cmd"><span>43</span> python placebo_ethics.py</div>
+    <div class="cmd"><span>44</span> python design_quality.py</div>
+    <div class="cmd"><span>45</span> python advanced_stats_analysis.py</div>
+    <div class="cmd"><span>46</span> python regression_model.py</div>
+    <div class="cmd"><span>47</span> python network_analysis.py</div>
+    <div class="cmd"><span>48</span> python pepfar_causal.py</div>
+    <div class="cmd"><span>49</span> python patient_access.py</div>
+    <div class="cmd"><span>50</span> python child_view.py</div>
+    <div class="cmd"><span>51</span> python mother_view.py</div>
+    <div class="cmd"><span>52</span> python elderly_view.py</div>
+    <div class="cmd"><span>53</span> python doctor_view.py</div>
+    <div class="cmd"><span>54</span> python admin_view.py</div>
+    <div class="cmd"><span>55</span> python government_view.py</div>
+    <div class="cmd"><span>56</span> python nurse_view.py</div>
+    <div class="cmd"><span>57</span> python community_view.py</div>
+    <div class="cmd"><span>58</span> python funder_view.py</div>
+    <div class="cmd"><span>59</span> python researcher_view.py</div>
+    <div class="cmd"><span>60</span> python future_view.py</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ai-statement">
+    <strong>AI Transparency Statement:</strong> LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.
+  </div>
+  <p class="footer-meta">
+    Africa RCT Research Programme &nbsp;|&nbsp; <span>60 projects</span> &nbsp;|&nbsp; 91 scripts &nbsp;|&nbsp; 152 E156 &nbsp;|&nbsp; 60+ dashboards
+    <br>
+    ClinicalTrials.gov API v2 &nbsp;|&nbsp; Last updated March 2026
+  </p>
+</footer>
+
+</body>
+</html>

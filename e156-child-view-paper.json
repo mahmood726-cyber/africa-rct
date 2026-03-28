@@ -1,0 +1,51 @@
+{
+    "title": "Born into an evidence desert: quantifying the childhood clinical trial gap across ten African conditions and ten countries",
+    "body": "A child born in Africa today faces diseases for which almost no pediatric clinical trial evidence has been generated on their continent. We queried ClinicalTrials.gov API v2 for pediatric-relevant interventional trials across ten African countries and the United States, examining ten childhood conditions including pneumonia, diarrheal disease, malnutrition, neonatal sepsis, childhood HIV, malaria, tuberculosis, cancer, epilepsy, and sickle cell disease. The Childhood Evidence Gap ratio between the US and Africa was large for every condition examined, with several conditions showing effectively zero trials across all ten African countries. The neonatal gap was particularly stark: Africa has the world's highest neonatal mortality yet a fraction of neonatal trials compared to the US. Africa's pediatric trials were disproportionately vaccination-focused, with far fewer treatment trials for sick children. The condition-country heatmap revealed systematic voids where entire countries had zero trials for conditions that dominate their pediatric mortality. These children receive treatments tested on different populations with different genetics, nutrition, and co-infection profiles.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "For a child born in Africa today, how much pediatric clinical trial evidence exists on their continent for the diseases they are most likely to face?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for pediatric-relevant interventional trials across ten African countries and the United States, covering ten childhood conditions reflecting Africa's pediatric disease burden."
+        },
+        {
+            "role": "Primary result",
+            "text": "The Childhood Evidence Gap ratio between the US and Africa was large for every condition examined, with several conditions showing effectively zero trials across all ten African countries combined."
+        },
+        {
+            "role": "Neonatal gap",
+            "text": "The neonatal gap was particularly stark: Africa has the world's highest neonatal mortality rate yet only a fraction of the neonatal trials compared with the United States."
+        },
+        {
+            "role": "Vaccine imbalance",
+            "text": "Africa's pediatric trials were disproportionately vaccination-focused, with far fewer treatment trials for children who are already sick, suggesting a prevention-only investment pattern."
+        },
+        {
+            "role": "Interpretation",
+            "text": "These children receive treatments tested on populations with different genetics, nutrition, and co-infection profiles, making the consent ethics dimension stark: they cannot consent to being treated without evidence."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single registry, pediatric terminology variation, and the inability to filter precisely by age eligibility through text-based queries alone."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Child View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US comparator, 10 childhood conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

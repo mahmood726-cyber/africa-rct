@@ -1,0 +1,13 @@
+{
+  "title": "Heart failure in Africa: a different disease with no local evidence base",
+  "type": "cross-sectional registry analysis",
+  "primary_estimand": "Heart failure trial density and phenotype representation in Africa versus the United States",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "app": "C:\\AfricaRCT\\heart-failure-africa.html",
+  "data": "ClinicalTrials.gov API v2",
+  "code": "C:\\AfricaRCT\fetch_heart_failure_africa.py",
+  "protocol": "C:\\AfricaRCT\\e156-heart-failure-africa-protocol.json",
+  "body": "Does the clinical trial portfolio for heart failure in Africa reflect the distinct phenotype and burden seen on the continent? We queried ClinicalTrials.gov for all interventional heart failure trials in African countries and the United States, then classified African trials by heart failure subtype, intervention class, and sponsor origin. Africa had 41 heart failure trials compared with 1,855 in the United States, yielding a Condition Colonialism Index of approximately 11 when adjusted for the estimated 20 percent African share of global heart failure burden. African heart failure patients are younger, more often female, and more commonly affected by peripartum cardiomyopathy, rheumatic heart disease, and endomyocardial fibrosis than their counterparts in high-income countries. Rheumatic heart disease had only 2 registered trials despite causing an estimated 240,000 African deaths annually and being preventable with benzathine penicillin. Landmark trials such as DAPA-HF and PARADIGM-HF enrolled minimal African participants, leaving the applicability of their findings to African phenotypes uncertain. The analysis is limited to ClinicalTrials.gov and cannot capture trials registered on other platforms or unregistered clinical audits.",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

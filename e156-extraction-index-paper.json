@@ -1,0 +1,42 @@
+{
+    "title":  "Research Extraction Index: six registry-derived metrics of clinical trial asymmetry in Africa",
+    "type":  "novel methods / cross-sectional registry analysis",
+    "primary_estimand":  "Condition Colonialism Index (CCI) and five derivative extraction metrics",
+    "study_count":  20799,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "certainty":  "moderate (registry-derived with WHO GBD cross-reference)",
+    "app":  "C:\\AfricaRCT\\novel-analysis-extraction-index.html",
+    "data":  "ClinicalTrials.gov API v2 + WHO GBD 2024",
+    "code":  "C:\\AfricaRCT\\fetch_africa_rcts.py + fetch_uganda_rcts.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-extraction-index-protocol.json",
+    "body":  "Can structural extraction from African clinical research be quantified using registry-derived metrics rather than narrative description alone? We developed six metrics from ClinicalTrials.gov data covering 20 African countries and 783 Uganda trial-level records, cross-referenced with WHO Global Burden of Disease burden estimates. The metrics were the Condition Colonialism Index, ghost enrollment score, phase sovereignty gap, condition-level research ownership, temporal stagnation index, and institutional fragility score. Sickle cell disease had the highest Condition Colonialism Index at 48.6, reflecting 75 percent of the global burden but only 1.5 percent of Africa-plus-United-States trials. Hypertension scored 16.9 and mental health 15.0, while phase one local sovereignty was 2.0 percent and one institution accounted for 68 percent of locally led output. Together the six measures describe a consistent pattern in which Africa contributes participants and risk while retaining limited research sovereignty or agenda ownership. Burden estimates are regional, the denominator uses Africa-plus-United-States trials as a proxy for global share, and values may shift with alternative registries.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports SCD CCI 47.7."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 contains limitation language."
+                                      }
+                                  ]
+                   }
+}

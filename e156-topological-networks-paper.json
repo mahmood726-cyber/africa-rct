@@ -1,0 +1,8 @@
+{
+  "title": "Topological Networks",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural analysis of global health research, does the topology of collaboration networks influence the integration of African research hubs compared to other emerging powers? This study evaluated the collaborator modules for 800 sampled trials across Africa, Europe, China, and India using the ClinicalTrials.gov API v2 database metadata. Investigators applied a graph-theory model and reported the average network degree as the primary comparative estimand for institutional research integration and connectivity. The primary result showed that Africa possesses the highest average degree of collaboration at zero point nine, indicating a heavy reliance on multi-continental and bilateral partnerships. China and India exhibited lower collaboration degrees, suggesting more self-contained and sovereign local research ecosystems compared to the dependent African model. These findings highlight a topological divide where Africa functions as a connected node in foreign networks rather than a sovereign hub of local discovery. The results are limited by the exclusion of informal academic collaborations not formally listed",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

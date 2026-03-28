@@ -1,0 +1,8 @@
+{
+  "title": "Regression Model",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "This study employs a cross-sectional ecological design to model clinical trial density across thirty African countries using multivariate ordinary least squares regression. The dependent variable is log-transformed interventional trial density per million population, sourced from ClinicalTrials.gov API v2 with country-location filtering. Six prespecified predictors are drawn from World Bank, WHO, and PEPFAR public data: log GDP per capita, English-language binary, PEPFAR recipient binary, active conflict binary, WHO NRA maturity ordinal score, and log population. The analysis plan includes full-model estimation via normal equations, computation of R-squared and adjusted R-squared, F-statistic, coefficient standard errors via the variance-covariance matrix, t-statistics with approximate p-values from the regularized incomplete beta function, standardized beta weights for effect-size comparison, residual diagnostics identifying outlier countries, and exhaustive stepwise model selection from one through six predictors. All computations use pure Python matrix algebra without external statistical libraries to ensure full reproducibility and transparency. - DOI: 10.156/regression-model-protocol - Date: 2026-03-28 - Type: protocol - Mode: regression",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}
