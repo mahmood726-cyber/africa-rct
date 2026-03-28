@@ -171,28 +171,27 @@ def collect_cci_data():
         },
         "africa_by_condition": {},
         "us_by_condition": {},
+        "global_by_condition": {},
     }
 
-    total_queries = len(CONDITIONS) * 2
+    total_queries = len(CONDITIONS) * 3
     query_num = 0
 
     # Africa counts per condition
     # NOTE: location="Africa" only matches trials with "Africa" in the location
     # field. Many trials list specific countries (e.g., "Kenya") without "Africa".
-    # These counts are therefore LOWER BOUNDS. For conditions like malaria where
-    # most trials are in specific countries, the true count is much higher.
-    # The CCI values computed from these counts are upper-bound estimates.
-    print("\n[1/2] Querying Africa trial counts per condition (lower bounds)...")
+    # These counts are therefore LOWER BOUNDS.
+    print("\n[1/3] Querying Africa trial counts per condition (lower bounds)...")
     for cond in CONDITIONS:
         query_num += 1
         r = search_trials(location="Africa", condition=cond)
         count = get_total(r)
         results["africa_by_condition"][cond] = count
-        print(f"  [{query_num}/{total_queries}] Africa + {cond}: {count:,} (lower bound)")
+        print(f"  [{query_num}/{total_queries}] Africa + {cond}: {count:,}")
         time.sleep(RATE_LIMIT_DELAY)
 
     # US counts per condition
-    print("\n[2/2] Querying US trial counts per condition...")
+    print("\n[2/3] Querying US trial counts per condition...")
     for cond in CONDITIONS:
         query_num += 1
         r = search_trials(location="United States", condition=cond)
@@ -201,25 +200,38 @@ def collect_cci_data():
         print(f"  [{query_num}/{total_queries}] US + {cond}: {count:,}")
         time.sleep(RATE_LIMIT_DELAY)
 
+    # GLOBAL counts per condition (no location filter — true denominator)
+    print("\n[3/3] Querying GLOBAL trial counts per condition (true denominator)...")
+    for cond in CONDITIONS:
+        query_num += 1
+        r = search_trials(location=None, condition=cond)
+        count = get_total(r)
+        results["global_by_condition"][cond] = count
+        print(f"  [{query_num}/{total_queries}] GLOBAL + {cond}: {count:,}")
+        time.sleep(RATE_LIMIT_DELAY)
+
     return results
 
 
 # ── Metric computation ───────────────────────────────────────────────
-def compute_cci(africa_counts, us_counts):
+def compute_cci(africa_counts, us_counts, global_counts=None):
     """Compute Condition Colonialism Index for each condition.
 
     CCI = Africa_burden_pct / Africa_trial_share_pct
-    where Africa_trial_share = Africa_trials / (Africa_trials + US_trials) * 100
+    where Africa_trial_share = Africa_trials / Global_trials * 100
+    (uses true global denominator, not Africa+US proxy)
     """
     cci_table = []
     for cond in CONDITIONS:
         africa_n = africa_counts.get(cond, 0)
         us_n = us_counts.get(cond, 0)
-        total = africa_n + us_n
-        if total == 0:
+        global_n = (global_counts or {}).get(cond, 0)
+        # Use global denominator if available, else fall back to Africa+US
+        denominator = global_n if global_n > 0 else (africa_n + us_n)
+        if denominator == 0:
             trial_share = 0.0
         else:
-            trial_share = africa_n / total * 100
+            trial_share = africa_n / denominator * 100
         burden = WHO_BURDEN_PCT.get(cond, 0)
         if trial_share > 0:
             cci = burden / trial_share
@@ -761,9 +773,9 @@ table.data tr:hover td{{background:rgba(255,255,255,.02)}}
 
     <h3>Results</h3>
     <table class="data">
-        <tr><th>Condition</th><th>Africa Burden (% of global deaths)</th><th>Africa Trials</th><th>US Trials</th><th>Africa's Trial Share (%)*</th><th>CCI</th><th>Rating</th></tr>
+        <tr><th>Condition</th><th>Africa Burden (% of global deaths)</th><th>Africa Trials</th><th>Global Trials</th><th>Africa's Trial Share (%)</th><th>CCI</th><th>Rating</th></tr>
 {cci_rows}    </table>
-    <p style="font-size:.82em;color:#7f8c8d;">* Africa trial share = Africa trials / (Africa + US trials), as proxy for global share.</p>
+    <p style="font-size:.82em;color:#7f8c8d;">Africa trial share = Africa trials / Global trials (true global denominator). Burden estimates from WHO GBD.</p>
 
     <div class="callout novel">
         {worst_callout}
@@ -975,6 +987,7 @@ def main():
     cci_table = compute_cci(
         api_data["africa_by_condition"],
         api_data["us_by_condition"],
+        api_data.get("global_by_condition"),
     )
     print(f"  Metric 1 (CCI): {len(cci_table)} conditions analyzed")
     for row in cci_table[:3]:
