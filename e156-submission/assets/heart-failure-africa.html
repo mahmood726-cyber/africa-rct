@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Failure in Africa — Different Disease, No Evidence</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #3b82f6;
+    --red: #ef4444; --green: #22c55e; --yellow: #eab308;
+    --orange: #f97316;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+       line-height: 1.6; padding: 20px; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { font-size: 2.2rem; margin-bottom: 8px; color: #fff;
+     background: linear-gradient(135deg, #dc2626, #f97316);
+     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+     background-clip: text; }
+h2 { font-size: 1.5rem; margin: 32px 0 16px; color: #f8fafc;
+     border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+h3 { font-size: 1.15rem; margin: 20px 0 10px; color: #cbd5e1; }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 24px; }
+.grid { display: grid; gap: 16px; margin: 16px 0; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card { background: var(--surface); border-radius: 12px; padding: 20px;
+         border: 1px solid var(--surface2); }
+.stat-card { text-align: center; }
+.stat-value { font-size: 2.5rem; font-weight: 800; }
+.stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+.stat-red { color: var(--red); }
+.stat-green { color: var(--green); }
+.stat-yellow { color: var(--yellow); }
+.stat-orange { color: var(--orange); }
+.stat-accent { color: var(--accent); }
+.thesus-box { background: linear-gradient(135deg, #1e3a5f, #1e293b);
+               border: 2px solid var(--accent); border-radius: 12px;
+               padding: 24px; margin: 16px 0; }
+.thesus-box h3 { color: #60a5fa; margin-top: 0; }
+.phenotype-box { background: linear-gradient(135deg, #3f0f0f, #1e293b);
+                  border: 2px solid var(--red); border-radius: 12px;
+                  padding: 24px; margin: 16px 0; }
+.phenotype-box h3 { color: #fca5a5; margin-top: 0; }
+.rhd-box { background: linear-gradient(135deg, #422006, #1e293b);
+            border: 2px solid var(--orange); border-radius: 12px;
+            padding: 24px; margin: 16px 0; }
+.rhd-box h3 { color: #fdba74; margin-top: 0; }
+.quote { font-style: italic; color: #94a3b8; border-left: 3px solid var(--accent);
+          padding-left: 16px; margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { background: var(--surface2); padding: 10px 8px; text-align: left;
+     color: #94a3b8; font-weight: 600; position: sticky; top: 0; }
+td { padding: 8px; border-bottom: 1px solid #1e293b; }
+tr:hover { background: rgba(59,130,246,0.08); }
+.table-scroll { max-height: 500px; overflow-y: auto; border-radius: 8px;
+                 border: 1px solid var(--surface2); }
+.chart-container { position: relative; height: 320px; }
+.severity-box { margin: 16px 0; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px;
+        font-size: 0.75rem; font-weight: 600; }
+.tag-red { background: #7f1d1d; color: #fca5a5; }
+.tag-green { background: #14532d; color: #86efac; }
+.tag-yellow { background: #78350f; color: #fde68a; }
+.footer { margin-top: 40px; padding: 20px; background: var(--surface);
+           border-radius: 12px; color: var(--muted); font-size: 0.8rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Heart Failure in Africa: Different Disease, No Evidence</h1>
+<p class="subtitle">
+    ClinicalTrials.gov API v2 equity audit | Fetched: 2026-03-28 |
+    42 Africa trials vs 1,855 US trials
+</p>
+
+<!-- SEVERITY ASSESSMENT -->
+<div class="severity-box">
+<div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>The US has 1,855 HF trials vs 41 in ALL of Africa — a 45:1 ratio</span>
+        </div>
+<div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>Condition Colonialism Index = 6.5 (Africa carries ~10% of HF burden but only 1.5% of trials)</span>
+        </div>
+<div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Only 2 device/CRT/ICD trial(s) — near-zero device therapy evidence for Africa</span>
+        </div>
+<div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>Only 2 RHD trial(s) in Africa despite 240,000 annual deaths — preventable with $0.02 penicillin</span>
+        </div>
+<div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Only 0 peripartum cardiomyopathy trial(s) — Nigeria has world's highest rate</span>
+        </div>
+
+</div>
+
+<!-- SUMMARY STATS -->
+<h2>Summary: The Evidence Desert</h2>
+<div class="grid grid-4">
+    <div class="card stat-card">
+        <div class="stat-value stat-red">41</div>
+        <div class="stat-label">HF Trials in ALL of Africa</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-accent">1,855</div>
+        <div class="stat-label">HF Trials in the United States</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-orange">6.5</div>
+        <div class="stat-label">Condition Colonialism Index</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-yellow">4.8%</div>
+        <div class="stat-label">African-led Trials</div>
+    </div>
+</div>
+
+<div class="grid grid-4">
+    <div class="card stat-card">
+        <div class="stat-value stat-green">25</div>
+        <div class="stat-label">Completed</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-yellow">8</div>
+        <div class="stat-label">Recruiting</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-red">6</div>
+        <div class="stat-label">Terminated/Withdrawn</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-red">14.3%</div>
+        <div class="stat-label">Termination Rate</div>
+    </div>
+</div>
+
+<!-- DIFFERENT DISEASE -->
+<h2>A Different Disease: Africa's Unique HF Phenotype</h2>
+<div class="phenotype-box">
+    <h3>Heart Failure in Africa Is NOT the Same Disease as in High-Income Countries</h3>
+    <div class="grid grid-2" style="margin-top:12px">
+        <div>
+            <h3>Africa HF Profile</h3>
+            <ul style="padding-left:20px;color:#e2e8f0">
+                <li><strong>Mean age: ~52 years</strong> (vs 75 in Europe/US)</li>
+                <li><strong>More women</strong> (~40-50% vs 25-30% in HIC trials)</li>
+                <li><strong>Peripartum cardiomyopathy</strong> — leading cause in young women</li>
+                <li><strong>Endomyocardial fibrosis</strong> — virtually unknown in HIC</li>
+                <li><strong>Rheumatic heart disease</strong> — 240,000 deaths/year</li>
+                <li><strong>Hypertensive heart disease</strong> — dominant etiology</li>
+                <li><strong>Less ischemic disease</strong> (vs HIC where CAD dominates)</li>
+                <li><strong>HIV-associated cardiomyopathy</strong></li>
+            </ul>
+        </div>
+        <div>
+            <h3>HIC (US/Europe) HF Profile</h3>
+            <ul style="padding-left:20px;color:#94a3b8">
+                <li>Mean age: ~75 years</li>
+                <li>Predominantly male (70-75%)</li>
+                <li>Ischemic heart disease dominates (~60%)</li>
+                <li>Post-MI cardiomyopathy</li>
+                <li>HFpEF increasingly common</li>
+                <li>RHD essentially eliminated</li>
+                <li>Peripartum CM rare</li>
+                <li>Robust device therapy (ICD/CRT) infrastructure</li>
+            </ul>
+        </div>
+    </div>
+    <p class="quote" style="margin-top:16px">
+        "The evidence base for HF treatment was built in 75-year-old white men with
+        ischemic cardiomyopathy. Can we assume it applies to 35-year-old Nigerian
+        women with peripartum cardiomyopathy?"
+    </p>
+</div>
+
+<!-- THESUS-HF -->
+<h2>THESUS-HF: The ONLY Landmark African HF Trial</h2>
+<div class="thesus-box">
+    <h3>Treatment of Heart Failure with Standard versus Uptitrated Doses of Sacubitril/Valsartan —
+        No. The Sub-Saharan Africa Survey of Heart Failure (THESUS-HF)</h3>
+    <p style="margin-top:8px">
+        <strong>THESUS-HF</strong> (Damasceno et al., <em>Eur Heart J</em> 2012) was the first and
+        remains essentially the <strong>only large-scale prospective heart failure registry</strong>
+        from sub-Saharan Africa. It enrolled 1,006 patients across 12 centers in 9 African countries.
+    </p>
+    <div class="grid grid-3" style="margin-top:12px">
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#60a5fa">1,006</div>
+            <div style="color:#94a3b8;font-size:0.85rem">Patients enrolled</div>
+        </div>
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#f97316">52.3 yrs</div>
+            <div style="color:#94a3b8;font-size:0.85rem">Mean age (vs 75 in PARADIGM-HF)</div>
+        </div>
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#ef4444">17.8%</div>
+            <div style="color:#94a3b8;font-size:0.85rem">6-month mortality (vs 8% in HIC registries)</div>
+        </div>
+    </div>
+    <h3 style="margin-top:16px">What THESUS-HF Taught Us</h3>
+    <ul style="padding-left:20px;margin-top:8px">
+        <li><strong>Different phenotype = different treatment needs.</strong> Only 8% had CAD;
+            hypertension (45%), RHD (14%), and peripartum CM (12%) dominated.</li>
+        <li><strong>Younger patients, higher mortality.</strong> Despite being 23 years younger on
+            average, 6-month mortality was double that of European registries.</li>
+        <li><strong>Medication access crisis.</strong> Only 40% were on ACE inhibitors at discharge;
+            beta-blocker use was &lt;50%.</li>
+        <li><strong>No evidence to guide treatment.</strong> The drugs prescribed were
+            extrapolated from trials in elderly white patients with ischemic disease.</li>
+    </ul>
+    <p class="quote" style="margin-top:12px">
+        "After THESUS-HF, we know the disease is different. But we still have no trials
+        testing whether the treatments work for THIS population."
+    </p>
+</div>
+
+<!-- CCI -->
+<h2>Condition Colonialism Index (CCI)</h2>
+<div class="card">
+    <p>The CCI measures the mismatch between disease burden and research investment.
+       For heart failure in Africa:</p>
+    <div class="grid grid-3" style="margin-top:12px">
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">~10%</div>
+            <div class="stat-label">Africa's share of global HF burden</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">1.5%</div>
+            <div class="stat-label">Africa's share of global HF trials</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-orange">6.5</div>
+            <div class="stat-label">CCI (burden/trial ratio; >1 = under-researched)</div>
+        </div>
+    </div>
+</div>
+
+<!-- GEOGRAPHIC COMPARISON -->
+<h2>Geographic Comparison: HF Trials by Country/Region</h2>
+<div class="grid grid-2">
+    <div class="card">
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>Location</th><th style="text-align:right">HF Trials</th>
+                <th>Relative Scale</th></tr></thead>
+                <tbody><tr style="background:#1e3a5f">
+<td style="font-weight:600">Africa</td>
+<td style="text-align:right">41</td>
+<td><div style="background:#3b82f6;height:18px;width:2.2%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">United States</td>
+<td style="text-align:right">1,855</td>
+<td><div style="background:#3b82f6;height:18px;width:100.0%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">South Africa</td>
+<td style="text-align:right">41</td>
+<td><div style="background:#3b82f6;height:18px;width:2.2%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Kenya</td>
+<td style="text-align:right">5</td>
+<td><div style="background:#3b82f6;height:18px;width:0.3%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Uganda</td>
+<td style="text-align:right">5</td>
+<td><div style="background:#3b82f6;height:18px;width:0.3%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Nigeria</td>
+<td style="text-align:right">6</td>
+<td><div style="background:#3b82f6;height:18px;width:0.3%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Egypt</td>
+<td style="text-align:right">52</td>
+<td><div style="background:#3b82f6;height:18px;width:2.8%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Tanzania</td>
+<td style="text-align:right">1</td>
+<td><div style="background:#3b82f6;height:18px;width:0.1%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Mozambique</td>
+<td style="text-align:right">5</td>
+<td><div style="background:#3b82f6;height:18px;width:0.3%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">India</td>
+<td style="text-align:right">80</td>
+<td><div style="background:#3b82f6;height:18px;width:4.3%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr>
+<tr>
+<td style="font-weight:600">Brazil</td>
+<td style="text-align:right">205</td>
+<td><div style="background:#3b82f6;height:18px;width:11.1%;border-radius:3px;
+    min-width:2px"></div></td>
+</tr></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="geoChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- AFRICA HF TYPE -->
+<h2>Africa's HF Phenotype Distribution</h2>
+<div class="grid grid-2">
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="hfTypeChart"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Condition-Specific Trials in Africa</h3>
+        <table>
+            <thead><tr><th>Condition</th><th style="text-align:right">Trials</th></tr></thead>
+            <tbody><tr>
+<td>Peripartum cardiomyopathy</td>
+<td style="text-align:right;font-weight:700">0</td>
+</tr>
+<tr>
+<td>Rheumatic heart disease</td>
+<td style="text-align:right;font-weight:700">2</td>
+</tr>
+<tr>
+<td>Endomyocardial fibrosis</td>
+<td style="text-align:right;font-weight:700">0</td>
+</tr>
+<tr>
+<td>Cardiomyopathy (all)</td>
+<td style="text-align:right;font-weight:700">3</td>
+</tr></tbody>
+        </table>
+        <p style="margin-top:12px;color:#94a3b8;font-size:0.85rem">
+            These conditions are characteristic of Africa's unique HF epidemiology
+            yet have near-zero dedicated trial activity.
+        </p>
+    </div>
+</div>
+
+<!-- INTERVENTION GAP -->
+<h2>Treatment Evidence Gaps</h2>
+<div class="grid grid-2">
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="interventionChart"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Key Questions Without Answers</h3>
+        <ul style="padding-left:20px;margin-top:8px">
+            <li><strong>SGLT2 inhibitors:</strong> DAPA-HF enrolled 5% Black patients;
+                EMPEROR-Reduced had &lt;7% from Africa. Are results generalizable to
+                non-ischemic, younger, female-predominant African HF?</li>
+            <li><strong>ARNI (Sacubitril/Valsartan):</strong> PARADIGM-HF had minimal
+                African representation. Mean age 64 vs 52 in Africa.</li>
+            <li><strong>Devices (ICD/CRT):</strong> Virtually no implantation infrastructure.
+                Even if trials showed benefit, implementation is impossible.</li>
+            <li><strong>Hydralazine/Nitrate:</strong> A-HeFT enrolled African Americans,
+                not Africans. Different genetic and etiological context.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SGLT2i GAP -->
+<h2>SGLT2 Inhibitor Gap: Are DAPA-HF/EMPEROR Results Generalizable?</h2>
+<div class="card">
+    <div class="grid grid-3">
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">8</div>
+            <div class="stat-label">SGLT2i trials in Africa</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-yellow">~5%</div>
+            <div class="stat-label">Black patients in DAPA-HF</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-orange">66 yrs</div>
+            <div class="stat-label">Mean age in DAPA-HF (vs 52 in Africa)</div>
+        </div>
+    </div>
+    <h3 style="margin-top:16px">SGLT2i Trials in Africa</h3>
+    <div class="table-scroll" style="max-height:300px">
+        <table>
+            <thead><tr><th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Status</th></tr></thead>
+            <tbody><tr>
+<td><a href="https://clinicaltrials.gov/study/NCT06307652" target="_blank"
+    style="color:#60a5fa">NCT06307652</a></td>
+<td>A Phase III, Randomised, Double-blind Study to Evaluate the Effect of ...</td>
+<td>AstraZeneca</td>
+<td style="color:#f1c40f">RECRUITING</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT03877237" target="_blank"
+    style="color:#60a5fa">NCT03877237</a></td>
+<td>International, Multicentre, Parallel-group, Randomised, Double-blind, ...</td>
+<td>AstraZeneca</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT03315143" target="_blank"
+    style="color:#60a5fa">NCT03315143</a></td>
+<td>A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multic...</td>
+<td>Lexicon Pharmaceuticals</td>
+<td style="color:#e74c3c">TERMINATED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT03057951" target="_blank"
+    style="color:#60a5fa">NCT03057951</a></td>
+<td>A Phase III Randomised, Double-blind Trial to Evaluate Efficacy and Sa...</td>
+<td>Boehringer Ingelheim</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT03152552" target="_blank"
+    style="color:#60a5fa">NCT03152552</a></td>
+<td>A Multi-center, Randomized, Double-blind, Parallel-group Dose-finding ...</td>
+<td>Novartis Pharmaceuticals</td>
+<td style="color:#e74c3c">TERMINATED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT06424288" target="_blank"
+    style="color:#60a5fa">NCT06424288</a></td>
+<td>EASi-HF Preserved - A Phase III Double-blind, Randomised, Parallel-gro...</td>
+<td>Boehringer Ingelheim</td>
+<td style="color:#f1c40f">RECRUITING</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT03877224" target="_blank"
+    style="color:#60a5fa">NCT03877224</a></td>
+<td>International, Multicentre, Parallel-group, Randomised, Double-blind, ...</td>
+<td>AstraZeneca</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT06677060" target="_blank"
+    style="color:#60a5fa">NCT06677060</a></td>
+<td>A Phase III, Randomised, Placebo-controlled, Event-driven Study to Eva...</td>
+<td>AstraZeneca</td>
+<td style="color:#f1c40f">RECRUITING</td>
+</tr></tbody>
+        </table>
+    </div>
+    <p class="quote" style="margin-top:12px">
+        DAPA-HF and EMPEROR-Reduced revolutionized HF treatment globally. But their populations
+        were ~66 years old, predominantly ischemic, and predominantly white/Asian. Extrapolating
+        to 35-year-old women with peripartum cardiomyopathy requires an act of faith, not evidence.
+    </p>
+</div>
+
+<!-- DEVICE GAP -->
+<h2>Device Therapy Gap: ICD/CRT Near-Zero in Africa</h2>
+<div class="card">
+    <div class="grid grid-3">
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">2</div>
+            <div class="stat-label">Device/CRT/ICD trials in Africa</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-accent">~1,200</div>
+            <div class="stat-label">ICD implants per million (US)</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">&lt;1</div>
+            <div class="stat-label">ICD implants per million (most of Africa)</div>
+        </div>
+    </div>
+    <h3 style="margin-top:16px">Device Trials in Africa</h3>
+    <div class="table-scroll" style="max-height:300px">
+        <table>
+            <thead><tr><th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Status</th></tr></thead>
+            <tbody><tr>
+<td><a href="https://clinicaltrials.gov/study/NCT01751022" target="_blank"
+    style="color:#60a5fa">NCT01751022</a></td>
+<td>Attain Performa(TM) Quadripolar Lead Study</td>
+<td>Medtronic Cardiac Rhythm and Heart Failure</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT00982397" target="_blank"
+    style="color:#60a5fa">NCT00982397</a></td>
+<td>The PainFree SST Clinical Study: Clinical Study to Evaluate System Saf...</td>
+<td>Medtronic Cardiac Rhythm and Heart Failure</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- RHD SPOTLIGHT -->
+<h2>RHD Spotlight: $0.02 Penicillin, 240,000 Deaths</h2>
+<div class="rhd-box">
+    <h3>Rheumatic Heart Disease — The Most Cost-Effective Prevention in Medicine, Ignored</h3>
+    <div class="grid grid-3" style="margin-top:12px">
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#ef4444">240,000</div>
+            <div style="color:#94a3b8;font-size:0.85rem">Annual RHD deaths (mostly Africa + South Asia)</div>
+        </div>
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#22c55e">$0.02</div>
+            <div style="color:#94a3b8;font-size:0.85rem">Cost of penicillin prophylaxis (per dose)</div>
+        </div>
+        <div class="card" style="background:#0f172a">
+            <div style="font-size:1.8rem;font-weight:800;color:#ef4444">2</div>
+            <div style="color:#94a3b8;font-size:0.85rem">RHD trials in Africa</div>
+        </div>
+    </div>
+    <h3 style="margin-top:16px">RHD Trials in Africa</h3>
+    <div class="table-scroll" style="max-height:250px">
+        <table>
+            <thead><tr><th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Countries</th><th>Status</th></tr></thead>
+            <tbody><tr>
+<td><a href="https://clinicaltrials.gov/study/NCT02111564" target="_blank"
+    style="color:#60a5fa">NCT02111564</a></td>
+<td>Medically Ill Patient Assessment of Rivaroxaban Versus Placebo in Redu...</td>
+<td>Janssen Research &amp; Development, LLC</td>
+<td>Germany, Peru, Georgia</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr>
+<tr>
+<td><a href="https://clinicaltrials.gov/study/NCT02832544" target="_blank"
+    style="color:#60a5fa">NCT02832544</a></td>
+<td>INVestIgation of rheumatiC AF Treatment Using Vitamin K Antagonists, R...</td>
+<td>Population Health Research Institute</td>
+<td>Egypt, Philippines, Botswana</td>
+<td style="color:#2ecc71">COMPLETED</td>
+</tr></tbody>
+        </table>
+    </div>
+    <p class="quote" style="margin-top:12px">
+        RHD is essentially eliminated in high-income countries through secondary penicillin
+        prophylaxis costing pennies per dose. In Africa, it remains a leading cause of heart
+        failure in the young — and has virtually no dedicated clinical trial activity.
+    </p>
+</div>
+
+<!-- PERIPARTUM CARDIOMYOPATHY -->
+<h2>Peripartum Cardiomyopathy: Nigeria Has the World's Highest Rate</h2>
+<div class="card">
+    <div class="grid grid-3">
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-red">0</div>
+            <div class="stat-label">PPCM trials in Africa</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-orange">1 in 100</div>
+            <div class="stat-label">PPCM incidence in Northern Nigeria</div>
+        </div>
+        <div class="card stat-card" style="background:#0f172a">
+            <div class="stat-value stat-yellow">1 in 3,000</div>
+            <div class="stat-label">PPCM incidence in the US</div>
+        </div>
+    </div>
+    <h3 style="margin-top:16px">Peripartum Cardiomyopathy Trials in Africa</h3>
+    <div class="table-scroll" style="max-height:300px">
+        <table>
+            <thead><tr><th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Countries</th><th>Status</th></tr></thead>
+            <tbody><tr><td colspan="5" style="text-align:center;color:#fbbf24">No peripartum-specific trials identified</td></tr></tbody>
+        </table>
+    </div>
+    <p style="margin-top:12px;color:#94a3b8">
+        Northern Nigeria has the world's highest incidence of peripartum cardiomyopathy, possibly
+        linked to cultural postpartum practices (hot baths, high salt intake). The condition affects
+        young women at their most productive age. Despite this, Africa-specific treatment trials
+        are vanishingly rare.
+    </p>
+</div>
+
+<!-- SPONSOR ANALYSIS -->
+<h2>Sponsor Analysis: Who Runs Africa's HF Trials?</h2>
+<div class="grid grid-2">
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="sponsorChart"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Sponsor Breakdown</h3>
+        <table>
+            <thead><tr><th>Category</th><th style="text-align:right">Count</th><th style="text-align:right">%</th></tr></thead>
+            <tbody>
+<tr><td style="color:#e74c3c">Pharma</td>
+<td style="text-align:right">28</td>
+<td style="text-align:right">66.7%</td></tr>
+<tr><td style="color:#94a3b8">Other</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">26.2%</td></tr>
+<tr><td style="color:#2ecc71">African-local</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4.8%</td></tr>
+<tr><td style="color:#94a3b8">US Academic</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2.4%</td></tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- COUNTRY DISTRIBUTION WITHIN AFRICA -->
+<h2>Country Distribution Within Africa</h2>
+<div class="grid grid-2">
+    <div class="card">
+        <div class="chart-container">
+            <canvas id="countryChart"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h3>African Country Trial Counts</h3>
+        <div class="table-scroll" style="max-height:350px">
+            <table>
+                <thead><tr><th>Country</th><th style="text-align:right">HF Trials</th></tr></thead>
+                <tbody>
+<tr><td>South Africa</td><td style="text-align:right;font-weight:700">42</td></tr>
+<tr><td>Mozambique</td><td style="text-align:right;font-weight:700">3</td></tr>
+<tr><td>Kenya</td><td style="text-align:right;font-weight:700">2</td></tr>
+<tr><td>Uganda</td><td style="text-align:right;font-weight:700">2</td></tr>
+<tr><td>Nigeria</td><td style="text-align:right;font-weight:700">2</td></tr>
+<tr><td>Senegal</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Egypt</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Botswana</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Malawi</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Ethiopia</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Tanzania</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Rwanda</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Cameroon</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Zimbabwe</td><td style="text-align:right;font-weight:700">1</td></tr>
+<tr><td>Zambia</td><td style="text-align:right;font-weight:700">1</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- US/INDIA/BRAZIL COMPARISON -->
+<h2>Global Comparators: US, India, Brazil</h2>
+<div class="grid grid-3">
+    <div class="card stat-card">
+        <div class="stat-value stat-accent">1,855</div>
+        <div class="stat-label">US HF Trials</div>
+        <p style="font-size:0.8rem;color:#94a3b8;margin-top:8px">
+            Mature trial infrastructure, industry-funded, aging population
+        </p>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-yellow">80</div>
+        <div class="stat-label">India HF Trials</div>
+        <p style="font-size:0.8rem;color:#94a3b8;margin-top:8px">
+            Growing rapidly, younger population like Africa, more RHD
+        </p>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-value stat-green">205</div>
+        <div class="stat-label">Brazil HF Trials</div>
+        <p style="font-size:0.8rem;color:#94a3b8;margin-top:8px">
+            Middle-income comparator, Chagas cardiomyopathy unique etiology
+        </p>
+    </div>
+</div>
+
+<!-- FULL TRIAL TABLE -->
+<h2>Complete Trial Registry: Africa Heart Failure</h2>
+<div class="card">
+    <div class="table-scroll" style="max-height:600px">
+        <table>
+            <thead><tr>
+                <th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Class</th>
+                <th>HF Type</th><th>Drug Class</th><th>Countries</th>
+                <th>Phase</th><th>Status</th><th>N</th>
+            </tr></thead>
+            <tbody><tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT04813159" target="_blank"
+    style="color:#60a5fa">NCT04813159</a></td>
+<td title="Remote Ischaemic Conditioning in STEMI Patients in AFRICA: The RIC-AFRICA Trial">Remote Ischaemic Conditioning in STEMI Patients in AFRICA: The RIC-AFRICA Trial</td>
+<td>University of Cape Town</td>
+<td>African-local</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Senegal, South Africa, Kenya +3</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,400</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05636176" target="_blank"
+    style="color:#60a5fa">NCT05636176</a></td>
+<td title="Effects of Ziltivekimab Versus Placebo on Morbidity and Mortality in Patients With Heart Failure With Mildly Reduced or Preserved Ejection Fraction and Systemic Inflammation">Effects of Ziltivekimab Versus Placebo on Morbidity and Mortality in Patients Wi...</td>
+<td>Novo Nordisk A/S</td>
+<td>Pharma</td>
+<td>HFpEF</td>
+<td>Other</td>
+<td>Germany, Italy, Czechia +43</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">5,600</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05714085" target="_blank"
+    style="color:#60a5fa">NCT05714085</a></td>
+<td title="A Phase 2/3 Randomized, Placebo-Controlled, Double-blind, Clinical Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Vericiguat in Pediatric Participants With Heart Failure Due to Systemic Left Ventricular Systolic Dysfunction (VALOR)">A Phase 2/3 Randomized, Placebo-Controlled, Double-blind, Clinical Study to Eval...</td>
+<td>Merck Sharp &amp; Dohme LLC</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, Italy, Peru +26</td>
+<td>PHASE2, PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">342</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06307652" target="_blank"
+    style="color:#60a5fa">NCT06307652</a></td>
+<td title="A Phase III, Randomised, Double-blind Study to Evaluate the Effect of Balcinrenone/Dapagliflozin, Compared With Dapagliflozin, on the Risk of Heart Failure Events and Cardiovascular Death in Patients With Heart Failure and Impaired Kidney Function">A Phase III, Randomised, Double-blind Study to Evaluate the Effect of Balcinreno...</td>
+<td>AstraZeneca</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Peru +36</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">4,800</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06424288" target="_blank"
+    style="color:#60a5fa">NCT06424288</a></td>
+<td title="EASi-HF Preserved - A Phase III Double-blind, Randomised, Parallel-group Superiority Trial to Evaluate Efficacy and Safety of the Combined Use of Oral Vicadrostat (BI 690517) and Empagliflozin Compared With Placebo and Empagliflozin in Participants With Symptomatic Heart Failure (HF: NYHA II-IV) and Left Ventricular Ejection Fraction (LVEF) ≥40%">EASi-HF Preserved - A Phase III Double-blind, Randomised, Parallel-group Superio...</td>
+<td>Boehringer Ingelheim</td>
+<td>Pharma</td>
+<td>Ischemic/CAD</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Czechia +27</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">6,000</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06597006" target="_blank"
+    style="color:#60a5fa">NCT06597006</a></td>
+<td title="Two Part (Double-blind Inclisiran Versus Placebo [Year 1] Followed by Open-label Inclisiran [Year 2]) Randomized Multicenter Study to Evaluate Safety, Tolerability, and Efficacy of Inclisiran in Children (2 to Less Than 12 Years) With Homozygous Familial Hypercholesterolemia and Elevated LDL-cholesterol">Two Part (Double-blind Inclisiran Versus Placebo [Year 1] Followed by Open-label...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, South Africa, United States +8</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">9</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06597019" target="_blank"
+    style="color:#60a5fa">NCT06597019</a></td>
+<td title="Two Part (Double-blind Inclisiran Versus Placebo [Year 1] Followed by Open-label Inclisiran [Year 2]) Randomized Multicenter Study to Evaluate Safety, Tolerability and Efficacy of Inclisiran in Children (6 to Less Than 12 Years) With Heterozygous Familial Hypercholesterolemia and Elevated LDL- Cholesterol">Two Part (Double-blind Inclisiran Versus Placebo [Year 1] Followed by Open-label...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, Italy, Czechia +20</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">51</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06677060" target="_blank"
+    style="color:#60a5fa">NCT06677060</a></td>
+<td title="A Phase III, Randomised, Placebo-controlled, Event-driven Study to Evaluate the Effect of Baxdrostat in Combination With Dapagliflozin Compared With Dapagliflozin Alone on the Risk of Incident Heart Failure and Cardiovascular Death">A Phase III, Randomised, Placebo-controlled, Event-driven Study to Evaluate the ...</td>
+<td>AstraZeneca</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Peru +32</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">11,300</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00095238" target="_blank"
+    style="color:#60a5fa">NCT00095238</a></td>
+<td title="Irbesartan in Heart Failure With Preserved Systolic Function (I-Preserve)">Irbesartan in Heart Failure With Preserved Systolic Function (I-Preserve)</td>
+<td>Bristol-Myers Squibb</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Czechia +22</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">4,128</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00206310" target="_blank"
+    style="color:#60a5fa">NCT00206310</a></td>
+<td title="Controlled Rosuvastatin Multinational Study in Heart Failure CORONA A Randomized, Double-Blind, Placebo Controlled Phase III Study With Rosuvastatin in Subjects With Chronic Symptomatic Systolic Heart Failure">Controlled Rosuvastatin Multinational Study in Heart Failure CORONA A Randomized...</td>
+<td>AstraZeneca</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>Other</td>
+<td>Germany, Czechia, Switzerland +18</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,013</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00232180" target="_blank"
+    style="color:#60a5fa">NCT00232180</a></td>
+<td title="The Effect Of Eplerenone Versus Placebo On Cardiovascular Mortality And Heart Failure Hospitalization In Subjects With NYHA Class II Chronic Systolic Heart Failure">The Effect Of Eplerenone Versus Placebo On Cardiovascular Mortality And Heart Fa...</td>
+<td>Pfizer&#39;s Upjohn has merged with Mylan to form Viatris Inc.</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>MRA</td>
+<td>Germany, Italy, United Arab Emirates +26</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">2,743</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00274326" target="_blank"
+    style="color:#60a5fa">NCT00274326</a></td>
+<td title="A Multicenter, Randomized, Placebo-Controlled, Double-Blind Trial Evaluating the Effect of a Vasopressin V2 Receptor Antagonist (SR121463B) on Serum Sodium in Patients With Dilutional Hyponatremia">A Multicenter, Randomized, Placebo-Controlled, Double-Blind Trial Evaluating the...</td>
+<td>Sanofi</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>South Africa, Denmark, Canada +12</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">150</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00358215" target="_blank"
+    style="color:#60a5fa">NCT00358215</a></td>
+<td title="A Double-blind, Randomized, Placebo-controlled, Multicenter Study to Assess the Efficacy and Safety of Darbepoetin Alfa Treatment on Mortality and Morbidity in Heart Failure (HF) Subjects With Symptomatic Left Ventricular Systolic Dysfunction and Anemia">A Double-blind, Randomized, Placebo-controlled, Multicenter Study to Assess the ...</td>
+<td>Amgen</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, Italy, Czechia +33</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">2,278</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00853658" target="_blank"
+    style="color:#60a5fa">NCT00853658</a></td>
+<td title="A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study to Evaluate the Efficacy and Safety of Both Aliskiren Monotherapy and Aliskiren/Enalapril Combination Therapy Compared to Enalapril Monotherapy, on Morbidity and Mortality in Patients With Chronic Heart Failure (NYHA Class II - IV). The Study is Also Known as Aliskiren Trial of Minimizing OutcomeS in Patients With HEart Failure (ATMOSPHERE).">A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Peru +41</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">7,064</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00982397" target="_blank"
+    style="color:#60a5fa">NCT00982397</a></td>
+<td title="The PainFree SST Clinical Study: Clinical Study to Evaluate System Safety and Clinical Performance of the Protecta ICD + CRT-D and to Assess the Capacity of the Protecta Features to Reduce Inappropriate Shocks.">The PainFree SST Clinical Study: Clinical Study to Evaluate System Safety and Cl...</td>
+<td>Medtronic Cardiac Rhythm and Heart Failure</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>Device/CRT</td>
+<td>Germany, Italy, United Arab Emirates +18</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">2,770</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01112579" target="_blank"
+    style="color:#60a5fa">NCT01112579</a></td>
+<td title="Determining the Feasibility of Spinal Cord Neuromodulation for the Treatment of Chronic Heart Failure">Determining the Feasibility of Spinal Cord Neuromodulation for the Treatment of ...</td>
+<td>Medtronic Cardiac Rhythm and Heart Failure</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, South Africa, Italy +5</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">81</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01751022" target="_blank"
+    style="color:#60a5fa">NCT01751022</a></td>
+<td title="Attain Performa(TM) Quadripolar Lead Study">Attain Performa(TM) Quadripolar Lead Study</td>
+<td>Medtronic Cardiac Rhythm and Heart Failure</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>Device/CRT</td>
+<td>Germany, Italy, Slovenia +24</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,202</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01807221" target="_blank"
+    style="color:#60a5fa">NCT01807221</a></td>
+<td title="A Randomized, Double-blind, Double-dummy, Multi-center Study to Assess Safety and Efficacy of Different Oral Doses of BAY94-8862 in Subjects With Emergency Presentation at the Hospital Because of Worsening Chronic Heart Failure With Left Ventricular Systolic Dysfunction and Either Type 2 Diabetes Mellitus With or Without Chronic Kidney Disease or Chronic Kidney Disease Alone Versus Eplerenone">A Randomized, Double-blind, Double-dummy, Multi-center Study to Assess Safety an...</td>
+<td>Bayer</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>MRA</td>
+<td>Germany, Italy, Czechia +22</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,066</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01870778" target="_blank"
+    style="color:#60a5fa">NCT01870778</a></td>
+<td title="A Multicenter, Randomized, Double-blind, Placebo-controlled Phase III Study to Evaluate the Efficacy, Safety and Tolerability of Serelaxin When Added to Standard Therapy in Acute Heart Failure Patients">A Multicenter, Randomized, Double-blind, Placebo-controlled Phase III Study to E...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, Italy, Peru +32</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">6,600</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01877915" target="_blank"
+    style="color:#60a5fa">NCT01877915</a></td>
+<td title="A Randomized, Double-blind, Event-driven, Multicenter Study Comparing the Efficacy and Safety of Rivaroxaban With Placebo for Reducing the Risk of Death, Myocardial Infarction or Stroke in Subjects With Heart Failure and Significant Coronary Artery Disease Following an Episode of Decompensated Heart Failure">A Randomized, Double-blind, Event-driven, Multicenter Study Comparing the Effica...</td>
+<td>Janssen Research &amp; Development, LLC</td>
+<td>Other</td>
+<td>Ischemic/CAD</td>
+<td>Other</td>
+<td>Germany, Czechia, Turkey (Türkiye) +29</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,081</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01920711" target="_blank"
+    style="color:#60a5fa">NCT01920711</a></td>
+<td title="A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study to Evaluate the Efficacy and Safety of LCZ696 Compared to Valsartan, on Morbidity and Mortality in Heart Failure Patients (NYHA Class II-IV) With Preserved Ejection Fraction (PARAGON-HF)">A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>HFpEF</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Peru +40</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">4,822</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02111564" target="_blank"
+    style="color:#60a5fa">NCT02111564</a></td>
+<td title="Medically Ill Patient Assessment of Rivaroxaban Versus Placebo in Reducing Post-Discharge Venous Thrombo-Embolism Risk">Medically Ill Patient Assessment of Rivaroxaban Versus Placebo in Reducing Post-...</td>
+<td>Janssen Research &amp; Development, LLC</td>
+<td>Other</td>
+<td>RHD-related</td>
+<td>Other</td>
+<td>Germany, Peru, Georgia +34</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">12,024</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02226120" target="_blank"
+    style="color:#60a5fa">NCT02226120</a></td>
+<td title="A Multicenter Study to Evaluate Safety and Tolerability in Patients With Chronic Heart Failure and Reduced Ejection Fraction From PARADIGM-HF Receiving Open Label LCZ696">A Multicenter Study to Evaluate Safety and Tolerability in Patients With Chronic...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>Other</td>
+<td>Germany, Italy, Peru +38</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,980</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02832544" target="_blank"
+    style="color:#60a5fa">NCT02832544</a></td>
+<td title="INVestIgation of rheumatiC AF Treatment Using Vitamin K Antagonists, Rivaroxaban or Aspirin Studies">INVestIgation of rheumatiC AF Treatment Using Vitamin K Antagonists, Rivaroxaban...</td>
+<td>Population Health Research Institute</td>
+<td>US Academic</td>
+<td>RHD-related</td>
+<td>Other</td>
+<td>Egypt, Philippines, Botswana +22</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">4,565</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02924727" target="_blank"
+    style="color:#60a5fa">NCT02924727</a></td>
+<td title="A Multi-center, Randomized, Double-blind, Active-controlled, Parallel-group Phase 3 Study to Evaluate the Efficacy and Safety of LCZ696 Compared to Ramipril on Morbidity and Mortality in High Risk Patients Following an Acute Myocardial Infarction (AMI)">A Multi-center, Randomized, Double-blind, Active-controlled, Parallel-group Phas...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Ischemic/CAD</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Peru +38</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,669</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02929329" target="_blank"
+    style="color:#60a5fa">NCT02929329</a></td>
+<td title="A Double-blind, Randomized, Placebo-controlled, Multicenter Study to Assess the Efficacy and Safety of Omecamtiv Mecarbil on Mortality and Morbidity in Subjects With Chronic Heart Failure With Reduced Ejection Fraction (GALACTIC-HF)">A Double-blind, Randomized, Placebo-controlled, Multicenter Study to Assess the ...</td>
+<td>Cytokinetics</td>
+<td>Other</td>
+<td>HFrEF</td>
+<td>Other</td>
+<td>Germany, Italy, New Zealand +33</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">8,256</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03057951" target="_blank"
+    style="color:#60a5fa">NCT03057951</a></td>
+<td title="A Phase III Randomised, Double-blind Trial to Evaluate Efficacy and Safety of Once Daily Empagliflozin 10 mg Compared to Placebo, in Patients With Chronic Heart Failure With Preserved Ejection Fraction (HFpEF)">A Phase III Randomised, Double-blind Trial to Evaluate Efficacy and Safety of On...</td>
+<td>Boehringer Ingelheim</td>
+<td>Pharma</td>
+<td>HFpEF</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Czechia +20</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,988</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03473223" target="_blank"
+    style="color:#60a5fa">NCT03473223</a></td>
+<td title="A Phase 3, Multicenter, Double-blind, Randomized, Placebo-controlled, Parallel-group Study to Investigate the Efficacy and Safety of CSL112 in Subjects With Acute Coronary Syndrome">A Phase 3, Multicenter, Double-blind, Randomized, Placebo-controlled, Parallel-g...</td>
+<td>CSL Behring</td>
+<td>Other</td>
+<td>Ischemic/CAD</td>
+<td>Other</td>
+<td>Germany, Italy, Peru +46</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">18,226</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03547583" target="_blank"
+    style="color:#60a5fa">NCT03547583</a></td>
+<td title="A Randomized Parallel-group, Placebo-controlled, Double-blind, Multi-center Trial to Evaluate the Efficacy and Safety of the Oral sGC stImulator Vericiguat to Improve Physical Functioning in Activities of Daily Living in Patients With Heart Failure and Preserved Ejection Fraction (VITALITY-HFpEF)">A Randomized Parallel-group, Placebo-controlled, Double-blind, Multi-center Tria...</td>
+<td>Bayer</td>
+<td>Pharma</td>
+<td>HFpEF</td>
+<td>Other</td>
+<td>Germany, Italy, Taiwan +18</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">789</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03785405" target="_blank"
+    style="color:#60a5fa">NCT03785405</a></td>
+<td title="A Multicenter Study to Evaluate Long-term Safety and Tolerability of Open Label Sacubitril/Valsartan in Pediatric Patients With Heart Failure Due to Systemic Left Ventricle Systolic Dysfunction Who Have Completed Study CLCZ696B2319">A Multicenter Study to Evaluate Long-term Safety and Tolerability of Open Label ...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Czechia +24</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">216</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03877224" target="_blank"
+    style="color:#60a5fa">NCT03877224</a></td>
+<td title="International, Multicentre, Parallel-group, Randomised, Double-blind, Placebo-controlled, Phase III Study Evaluating the Effect of Dapagliflozin on Exercise Capacity in Heart Failure Patients With Preserved Ejection Fraction">International, Multicentre, Parallel-group, Randomised, Double-blind, Placebo-co...</td>
+<td>AstraZeneca</td>
+<td>Pharma</td>
+<td>HFpEF</td>
+<td>SGLT2i</td>
+<td>South Korea, South Africa, Denmark +9</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">504</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03877237" target="_blank"
+    style="color:#60a5fa">NCT03877237</a></td>
+<td title="International, Multicentre, Parallel-group, Randomised, Double-blind, Placebo-controlled, Phase III Study Evaluating the Effect of Dapagliflozin on Exercise Capacity in Heart Failure Patients With Reduced Ejection Fraction">International, Multicentre, Parallel-group, Randomised, Double-blind, Placebo-co...</td>
+<td>AstraZeneca</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>SGLT2i</td>
+<td>South Korea, South Africa, Denmark +6</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">313</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05093933" target="_blank"
+    style="color:#60a5fa">NCT05093933</a></td>
+<td title="A Pivotal Phase 3 Randomized, Placebo-controlled Clinical Study to Evaluate the Efficacy and Safety of the sGC Stimulator Vericiguat/MK-1242 in Adults With Chronic Heart Failure With Reduced Ejection Fraction">A Pivotal Phase 3 Randomized, Placebo-controlled Clinical Study to Evaluate the ...</td>
+<td>Merck Sharp &amp; Dohme LLC</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>Other</td>
+<td>Germany, Italy, Peru +33</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">6,106</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT01035255" target="_blank"
+    style="color:#60a5fa">NCT01035255</a></td>
+<td title="A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study to Evaluate the Efficacy and Safety of LCZ696 Compared to Enalapril on Morbidity and Mortality in Patients With Chronic Heart Failure and Reduced Ejection Fraction">A Multicenter, Randomized, Double-blind, Parallel Group, Active-controlled Study...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>HFrEF</td>
+<td>ACEi/ARB</td>
+<td>Germany, Italy, Peru +44</td>
+<td>PHASE3</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">8,442</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT01064037" target="_blank"
+    style="color:#60a5fa">NCT01064037</a></td>
+<td title="A Placebo Controlled, Randomized, Double-Blind, Fixed-dose, Multicenter, Phase IIb Study to Investigate the Efficacy and Tolerability of BAY 58-2667 (50 µg/h, 100 µg/h, 150 µg/h) Given Intravenously to Subjects With Acute Decompensated Chronic Congestive Heart Failure (ADHF) Within 12 Hours After Hospital Admission (Pulmonary Artery Catheter eg, Swan-Ganz Not Required)">A Placebo Controlled, Randomized, Double-Blind, Fixed-dose, Multicenter, Phase I...</td>
+<td>Bayer</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Germany, South Korea, South Africa +13</td>
+<td>PHASE2</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">62</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT01259297" target="_blank"
+    style="color:#60a5fa">NCT01259297</a></td>
+<td title="A Randomized Controlled Trial of Aliskiren in the Prevention of Major Cardiovascular Events in Elderly People">A Randomized Controlled Trial of Aliskiren in the Prevention of Major Cardiovasc...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>Diuretic</td>
+<td>Germany, Spain, South Africa +15</td>
+<td>PHASE3</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">2,336</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT03152552" target="_blank"
+    style="color:#60a5fa">NCT03152552</a></td>
+<td title="A Multi-center, Randomized, Double-blind, Parallel-group Dose-finding Study to Assess the Effect of 3 Doses of LIK066 Compared to Placebo or Empagliflozin in Type 2 Diabetes Mellitus Patients With Heart Failure">A Multi-center, Randomized, Double-blind, Parallel-group Dose-finding Study to A...</td>
+<td>Novartis Pharmaceuticals</td>
+<td>Pharma</td>
+<td>Unspecified HF</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Czechia +21</td>
+<td>PHASE2</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">125</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT03315143" target="_blank"
+    style="color:#60a5fa">NCT03315143</a></td>
+<td title="A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Study to Demonstrate the Effects of Sotagliflozin on Cardiovascular and Renal Events in Patients With Type 2 Diabetes, Cardiovascular Risk Factors and Moderately Impaired Renal Function">A Randomized, Double-blind, Placebo-controlled, Parallel-group, Multicenter Stud...</td>
+<td>Lexicon Pharmaceuticals</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>SGLT2i</td>
+<td>Germany, Italy, Peru +42</td>
+<td>PHASE3</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">10,584</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT06237309" target="_blank"
+    style="color:#60a5fa">NCT06237309</a></td>
+<td title="A Phase 2, Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Safety, Pharmacokinetics and Pharmacodynamics of a Single Dose of REGN5381, an NPR1 Monoclonal Antibody Agonist, in Patients With Chronic Heart Failure With Reduced Ejection Fraction">A Phase 2, Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Sa...</td>
+<td>Regeneron Pharmaceuticals</td>
+<td>Other</td>
+<td>HFrEF</td>
+<td>Other</td>
+<td>Spain, South Korea, South Africa +9</td>
+<td>PHASE2</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">89</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT01822808" target="_blank"
+    style="color:#60a5fa">NCT01822808</a></td>
+<td title="A Prospective, Placebo-controlled, Double-blind, Randomized Study to Compare Hydralazine-isosorbide-dinitrate(HYIS) Versus Placebo on Top of Std Care in African Patients With Acute Heart Failure (AHF) and Left Ventricular Dysfunction">A Prospective, Placebo-controlled, Double-blind, Randomized Study to Compare Hyd...</td>
+<td>University of Cape Town</td>
+<td>African-local</td>
+<td>Unspecified HF</td>
+<td>Hydralazine/Nitrate</td>
+<td>South Africa</td>
+<td>PHASE3</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">500</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT03087084" target="_blank"
+    style="color:#60a5fa">NCT03087084</a></td>
+<td title="RESpiration deTection From Implanted Cardiac Devices in Subjects With Heart Failure (REST-HF)">RESpiration deTection From Implanted Cardiac Devices in Subjects With Heart Fail...</td>
+<td>Medtronic BRC</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>South Africa, Belgium</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">25</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT03412201" target="_blank"
+    style="color:#60a5fa">NCT03412201</a></td>
+<td title="Safety, Tolerability and Efficacy of Rapid Optimization, Helped by NT-proBNP testinG, of Heart Failure Therapies">Safety, Tolerability and Efficacy of Rapid Optimization, Helped by NT-proBNP tes...</td>
+<td>Heart Initiative</td>
+<td>Other</td>
+<td>Unspecified HF</td>
+<td>Other</td>
+<td>Russia, South Africa, Colombia +9</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">1,800</td>
+</tr></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- METHODOLOGY -->
+<h2>Methodology</h2>
+<div class="card">
+    <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (public, no patient-level data)</p>
+    <p><strong>Query:</strong> Interventional trials with condition "heart failure" + location-specific
+       queries for each country/region. Supplementary queries for peripartum cardiomyopathy,
+       rheumatic heart disease, endomyocardial fibrosis, and cardiomyopathy in Africa.</p>
+    <p><strong>Classification:</strong> Automated keyword-based classification of sponsor type,
+       HF etiology, intervention class, and geographic scope. Manual verification of key findings.</p>
+    <p><strong>CCI calculation:</strong> Burden share (~10% for Africa) / Trial share (1.5%) = 6.5</p>
+    <p><strong>Limitations:</strong> Single registry (ClinicalTrials.gov); may undercount locally
+       registered trials. Keyword classification is imperfect. Burden share is approximate.
+       THESUS-HF was an observational registry, not an RCT, highlighting the even deeper gap
+       in interventional evidence.</p>
+    <p style="margin-top:12px;color:#94a3b8;font-size:0.8rem">
+        <strong>AI transparency:</strong> LLM assistance was used for code generation and
+        language editing. The author reviewed all outputs, verified API queries, and takes
+        full responsibility for the final content and interpretation.
+    </p>
+</div>
+
+<div class="footer">
+    <p><strong>Heart Failure in Africa — Different Disease, No Evidence</strong></p>
+    <p>Project 32 of the AfricaRCT Equity Series | Generated 2026-03-28</p>
+    <p>Source code: fetch_heart_failure_africa.py | Data: ClinicalTrials.gov API v2</p>
+</div>
+
+</div>
+
+<script>
+// Geographic comparison chart
+new Chart(document.getElementById('geoChart'), {
+    type: 'bar',
+    data: {
+        labels: ["Africa", "United States", "South Africa", "Kenya", "Uganda", "Nigeria", "Egypt", "Tanzania", "Mozambique", "India", "Brazil"],
+        datasets: [{
+            label: 'HF Trials',
+            data: [41, 1855, 41, 5, 5, 6, 52, 1, 5, 80, 205],
+            backgroundColor: ["Africa", "United States", "South Africa", "Kenya", "Uganda", "Nigeria", "Egypt", "Tanzania", "Mozambique", "India", "Brazil"].map((l,i) =>
+                l === 'Africa' ? '#ef4444' :
+                l === 'United States' ? '#3b82f6' : '#64748b'),
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#e2e8f0' } }
+        }
+    }
+});
+
+// HF type chart
+new Chart(document.getElementById('hfTypeChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["Unspecified HF", "HFpEF", "HFrEF", "Ischemic/CAD", "RHD-related"],
+        datasets: [{
+            data: [23, 5, 8, 4, 2],
+            backgroundColor: ['#ef4444','#f97316','#eab308','#22c55e','#3b82f6',
+                             '#8b5cf6','#ec4899','#06b6d4','#84cc16']
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 11 } } }
+        }
+    }
+});
+
+// Intervention chart
+new Chart(document.getElementById('interventionChart'), {
+    type: 'bar',
+    data: {
+        labels: ["Other", "SGLT2i", "ACEi/ARB", "Diuretic", "MRA", "Device/CRT", "Hydralazine/Nitrate"],
+        datasets: [{
+            label: 'Trials',
+            data: [22, 8, 6, 1, 2, 2, 1],
+            backgroundColor: '#3b82f6',
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 10 } } }
+        }
+    }
+});
+
+// Sponsor chart
+new Chart(document.getElementById('sponsorChart'), {
+    type: 'pie',
+    data: {
+        labels: ["Pharma", "Other", "African-local", "US Academic"],
+        datasets: [{
+            data: [28, 11, 2, 1],
+            backgroundColor: ["#e74c3c", "#95a5a6", "#2ecc71", "#3498db"]
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 11 } } }
+        }
+    }
+});
+
+// Country chart
+new Chart(document.getElementById('countryChart'), {
+    type: 'bar',
+    data: {
+        labels: ["South Africa", "Senegal", "Kenya", "Uganda", "Mozambique", "Nigeria", "Egypt", "Botswana", "Malawi", "Ethiopia", "Tanzania", "Rwanda", "Cameroon", "Zimbabwe", "Zambia"],
+        datasets: [{
+            label: 'Trials',
+            data: [42, 1, 2, 2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            backgroundColor: '#f97316',
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 10 },
+                 maxRotation: 45 } },
+            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+        }
+    }
+});
+</script>
+</body>
+</html>

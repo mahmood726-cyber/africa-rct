@@ -1,0 +1,51 @@
+{
+    "title": "Protocol: geographic and ethnic diversity audit of clinical trial sites in Uganda, South Africa, and Nigeria",
+    "body": "Do clinical trials in Africa recruit from the full geographic and ethnic diversity of each country, or do they cluster in capital-city hospitals? We will retrieve up to 500 interventional trials per country from ClinicalTrials.gov API v2 for Uganda, South Africa, and Nigeria. Each trial will be classified by region using keyword matching against pre-defined lists: seven Uganda regions mapped to ethnic populations (Kampala-Baganda, Northern-Acholi, Eastern-Bagisu, Western-Banyankole, Karamoja-Karamojong, West Nile-Lugbara), six South Africa provinces, and four Nigeria macro-regions. We will compute a Diversity Score (proportion with non-capital sites), an Ethnic Representation Proxy (proportion in ethnically-distinct regions), and a multi-site rate. Trial text will be searched for diversity and community engagement keywords. Cross-country comparison will identify which system achieves broadest geographic reach. The primary outcome is a geographic concentration index per country with ethnic representation estimates. Limitations include keyword-based classification, restriction to one registry, and approximate region-to-ethnicity mapping.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Do clinical trials in Africa recruit from the full geographic and ethnic diversity of each country, or do they cluster in capital-city teaching hospitals?"
+        },
+        {
+            "role": "Data source",
+            "text": "We will retrieve up to 500 interventional trials per country from ClinicalTrials.gov API v2 for Uganda, South Africa, and Nigeria, extracting location details and full-text fields."
+        },
+        {
+            "role": "Classification method",
+            "text": "Each trial will be classified by geographic region using keyword matching against pre-defined region lists: seven Uganda regions mapped to ethnic populations, six South Africa provinces, and four Nigeria macro-regions reflecting the North-South divide."
+        },
+        {
+            "role": "Metrics",
+            "text": "We will compute a Diversity Score (proportion with non-capital sites), an Ethnic Representation Proxy (proportion in ethnically-distinct regions), a multi-site rate, and a keyword analysis of diversity and community engagement mentions."
+        },
+        {
+            "role": "Comparison",
+            "text": "Cross-country comparison will identify which research system achieves the broadest geographic reach, contrasting Uganda's Kampala concentration with South Africa's provincial model and Nigeria's North-South divide."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is a geographic concentration index per country with ethnic representation proxy estimates and explicit diversity mention rates across trial protocols."
+        },
+        {
+            "role": "Limitations",
+            "text": "Limitations include keyword-based location classification that may miss or misclassify sites, restriction to one registry, approximate region-to-ethnicity mapping, and inability to capture actual participant-level ethnic enrollment data."
+        }
+    ],
+    "wordCount": 158,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Diversity Audit Dashboard v1.0",
+        "data": "ClinicalTrials.gov API v2 (planned), Uganda/SA/Nigeria, geographic/ethnic classification",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Protocol pre-registration"
+    },
+    "ai_transparency": "LLM assisted with drafting and language editing. The author reviewed and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Conflict Zone Exclusion</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.callout {
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.callout-danger {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 4px solid var(--danger);
+}
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 4px solid var(--warning);
+}
+.callout-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+}
+.callout-success {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 4px solid var(--success);
+}
+.big-stat {
+  font-size: 3rem;
+  font-weight: 900;
+  display: block;
+  margin: 0.5rem 0;
+}
+.scroll-x { overflow-x: auto; }
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.badge-conflict {
+  background: #dc2626;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+.badge-stable {
+  background: #16a34a;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Conflict Zone Exclusion</h1>
+<p class="subtitle">Clinical trial access in African conflict and fragile states
+vs stable comparators &mdash; mapping the invisible 226 million</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Conflict Zone Trials</div>
+    <div class="value danger">207</div>
+    <div class="label">226M people, 9 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Stable Comparator Trials</div>
+    <div class="value success">598</div>
+    <div class="label">69M people, 5 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Conflict per-capita rate</div>
+    <div class="value danger">0.92</div>
+    <div class="label">Trials per million population</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Stable per-capita rate</div>
+    <div class="value success">8.69</div>
+    <div class="label">Trials per million population</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Conflict Exclusion Score</div>
+    <div class="value warning">9.4x</div>
+    <div class="label">Stable rate / conflict rate</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Mental health trials in conflict zones</div>
+    <div class="value danger">19</div>
+    <div class="label">PTSD / trauma / depression</div>
+  </div>
+</div>
+
+<div class="callout callout-info">
+<strong>Conflict Exclusion Score</strong> = (stable comparator per-capita trial rate) /
+(conflict zone per-capita trial rate). A score of 1.0 would mean equal access.
+Higher values indicate the degree to which conflict populations are excluded from
+clinical research relative to stable African nations.
+</div>
+
+<!-- 2. Country Map Table -->
+<h2>2. Country Comparison Table</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+All countries sorted by conflict status. Per-capita rate colour:
+<span style="color:#ef4444;">below 0.5 (critical)</span>,
+<span style="color:#f59e0b;">0.5-2 (low)</span>,
+<span style="color:#eab308;">2-5 (moderate)</span>,
+<span style="color:#22c55e;">5+ (adequate)</span>.
+</p>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials</th>
+<th style="text-align:right;">Per Million</th>
+<th style="text-align:center;">Status</th>
+<th>Trial Density</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Eritrea</td><td style="padding:10px;text-align:right;">3.5M</td><td style="padding:10px;text-align:right;">1</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.29</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 3.5M people</td></tr>
+<tr><td style="padding:10px;">Somalia</td><td style="padding:10px;text-align:right;">18M</td><td style="padding:10px;text-align:right;">8</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.44</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 2.2M people</td></tr>
+<tr><td style="padding:10px;">South Sudan</td><td style="padding:10px;text-align:right;">11M</td><td style="padding:10px;text-align:right;">6</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.55</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 1.8M people</td></tr>
+<tr><td style="padding:10px;">Libya</td><td style="padding:10px;text-align:right;">7M</td><td style="padding:10px;text-align:right;">5</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.71</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 1.4M people</td></tr>
+<tr><td style="padding:10px;">Chad</td><td style="padding:10px;text-align:right;">18M</td><td style="padding:10px;text-align:right;">14</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.78</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 1.3M people</td></tr>
+<tr><td style="padding:10px;">Central African Republic</td><td style="padding:10px;text-align:right;">5.5M</td><td style="padding:10px;text-align:right;">5</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.91</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 1.1M people</td></tr>
+<tr><td style="padding:10px;">Burundi</td><td style="padding:10px;text-align:right;">13M</td><td style="padding:10px;text-align:right;">13</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.0</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 1.0M people</td></tr>
+<tr><td style="padding:10px;">DRC</td><td style="padding:10px;text-align:right;">102M</td><td style="padding:10px;text-align:right;">105</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.03</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 971K people</td></tr>
+<tr><td style="padding:10px;">Sudan</td><td style="padding:10px;text-align:right;">48M</td><td style="padding:10px;text-align:right;">50</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.04</td><td style="padding:10px;text-align:center;"><span style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">CONFLICT</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 960K people</td></tr>
+<tr><td style="padding:10px;">Botswana</td><td style="padding:10px;text-align:right;">2.5M</td><td style="padding:10px;text-align:right;">107</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">42.8</td><td style="padding:10px;text-align:center;"><span style="background:#16a34a;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">STABLE</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 23K people</td></tr>
+<tr><td style="padding:10px;">Mauritius</td><td style="padding:10px;text-align:right;">1.3M</td><td style="padding:10px;text-align:right;">43</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">33.08</td><td style="padding:10px;text-align:center;"><span style="background:#16a34a;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">STABLE</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 30K people</td></tr>
+<tr><td style="padding:10px;">Rwanda</td><td style="padding:10px;text-align:right;">14M</td><td style="padding:10px;text-align:right;">121</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">8.64</td><td style="padding:10px;text-align:center;"><span style="background:#16a34a;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">STABLE</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 116K people</td></tr>
+<tr><td style="padding:10px;">Ghana</td><td style="padding:10px;text-align:right;">34M</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">6.76</td><td style="padding:10px;text-align:center;"><span style="background:#16a34a;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">STABLE</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 148K people</td></tr>
+<tr><td style="padding:10px;">Senegal</td><td style="padding:10px;text-align:right;">17M</td><td style="padding:10px;text-align:right;">97</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">5.71</td><td style="padding:10px;text-align:center;"><span style="background:#16a34a;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem;">STABLE</span></td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">1 per 175K people</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 3. Bar Chart -->
+<h2>3. Trials per Million: Conflict vs Stable</h2>
+<div class="chart-container">
+<canvas id="barChart" height="350"></canvas>
+</div>
+
+<!-- 4. The Invisible 226 Million -->
+<h2>4. The Invisible 226 Million</h2>
+<div class="callout callout-danger">
+<span class="big-stat danger">226 million people</span>
+<p>live in nine African conflict and fragile states where clinical trial access
+is near zero. These populations face the highest disease burden &mdash; infectious
+disease, malnutrition, maternal mortality, and trauma &mdash; yet they are
+systematically excluded from the evidence base that guides treatment.</p>
+<p style="margin-top:0.75rem;">At a combined rate of <strong>0.92
+trials per million</strong>, versus <strong>8.69 per million</strong>
+in stable comparators, conflict zone populations are <strong>9.4x
+less likely</strong> to be included in a clinical trial.</p>
+</div>
+
+<!-- 5. Somalia Spotlight -->
+<h2>5. Somalia Spotlight</h2>
+<div class="callout callout-danger">
+<span class="big-stat danger">8 trials</span>
+<p>for <strong>18 million people</strong>. That is approximately
+<strong>1 trial per 2.25
+million people</strong>.</p>
+<p style="margin-top:0.75rem;">Somalia has been in continuous conflict for over
+three decades. Its population faces among the highest maternal mortality, malnutrition,
+and infectious disease burden on the continent, yet the clinical trial infrastructure
+is virtually non-existent. These 18 million people are generating
+almost no evidence to guide their own care.</p>
+</div>
+
+<!-- 6. The DRC Paradox -->
+<h2>6. The DRC Paradox</h2>
+<div class="callout callout-warning">
+<span class="big-stat warning">105 trials for 102M people</span>
+<p>The DRC appears to have reasonable trial activity (1.03 per million),
+but this masks a critical geographic concentration. The vast majority of trials
+are located in <strong>Kinshasa and other stable urban centres</strong>, not in the
+conflict-affected eastern provinces (North Kivu, South Kivu, Ituri) where an
+estimated 25-30 million people live under active armed conflict.</p>
+<p style="margin-top:0.75rem;">If eastern DRC were counted separately, its per-capita
+trial rate would likely rival Somalia's. The national average conceals one of
+the world's largest populations with functionally zero clinical trial access.</p>
+</div>
+
+<!-- 7. Condition Heatmap for Conflict Zones -->
+<h2>7. Disease-Specific Trials in Conflict Zones</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Condition-specific interventional trial counts across conflict/fragile states.
+Cell colour: <span style="color:#ef4444;">0 = black/red</span>,
+<span style="color:#f59e0b;">1-3 = amber</span>,
+<span style="color:#22c55e;">10+ = green</span>.
+</p>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">HIV</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Malaria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">TB</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Maternal</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nutrition</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Mental health</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;font-weight:bold;">Somalia</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">South Sudan</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Central African Republic</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Chad</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">DRC</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgba(34,197,94,0.2);color:#22c55e;text-align:center;padding:8px;font-weight:bold;">28</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgba(34,197,94,0.2);color:#22c55e;text-align:center;padding:8px;font-weight:bold;">21</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">6</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Sudan</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Eritrea</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Libya</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Burundi</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#ef4444;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgba(239,68,68,0.2);color:#ef4444;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgba(245,158,11,0.2);color:#f59e0b;text-align:center;padding:8px;font-weight:bold;">9</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-danger">
+<h3 style="color:var(--danger);margin-top:0;">The Mental Health Gap</h3>
+<p>Across all nine conflict/fragile states, there are a total of
+<strong>19</strong> interventional trials for mental health,
+PTSD, trauma, or depression. These are populations living through active warfare,
+displacement, and mass violence &mdash; conditions that produce epidemic-level
+psychological trauma. The near-absence of mental health research in conflict zones
+represents one of the most extreme evidence deserts in global health.</p>
+</div>
+
+<!-- 8. Rwanda Bright Spot -->
+<h2>8. Rwanda: The Bright Spot</h2>
+<div class="callout callout-success">
+<span class="big-stat success">121 trials for 14M people</span>
+<p><strong>8.64 trials per million population.</strong></p>
+<p style="margin-top:0.75rem;">Rwanda's post-genocide investment in research
+infrastructure, health system strengthening, and international partnerships has made
+it one of Africa's most trial-dense nations. Rwanda demonstrates that a nation's
+conflict history need not permanently exclude it from clinical research &mdash;
+but it requires sustained political commitment, institutional capacity building,
+and deliberate investment in regulatory frameworks.</p>
+<p style="margin-top:0.75rem;">Rwanda's success is the proof that the exclusion
+of other conflict-affected states is not inevitable but rather a choice &mdash; a
+structural failure of global research investment.</p>
+</div>
+
+<!-- 9. Ethical Dimension -->
+<h2>9. The Ethical Dimension</h2>
+<div class="callout callout-info">
+<h3 style="color:var(--accent);margin-top:0;">Populations Most in Need, Systematically Excluded</h3>
+<p>Clinical trials serve two purposes: they generate evidence that guides treatment,
+and they provide participants with access to novel therapies. Both purposes are
+systematically denied to conflict zone populations.</p>
+<p style="margin-top:0.75rem;">The consequence is a compounding injustice:
+conflict-affected populations bear the highest disease burden, receive the least
+research investment, and are then treated using evidence generated in populations
+with fundamentally different disease ecology, nutritional status, comorbidity
+profiles, and healthcare access. Evidence-based medicine, in these settings,
+is based on <em>someone else's evidence</em>.</p>
+<p style="margin-top:0.75rem;">The Conflict Exclusion Score of
+<strong>9.4x</strong> quantifies this structural gap.
+Closing it requires dedicated conflict-zone research funding, adaptive trial
+designs suited to unstable settings, and partnerships with humanitarian
+organisations already operating in these regions.</p>
+</div>
+
+<footer>
+<p>Data source: ClinicalTrials.gov API v2 | Population estimates: UN World Population
+Prospects 2025 | Generated 2026-03-28 11:17</p>
+<p>Conflict Exclusion Score = stable per-capita rate / conflict per-capita rate</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  var barCtx = document.getElementById('barChart');
+  if (barCtx) {
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ["Eritrea", "Somalia", "South Sudan", "Libya", "Chad", "Central African Republic", "Burundi", "DRC", "Sudan", "Senegal", "Ghana", "Rwanda", "Mauritius", "Botswana"],
+        datasets: [{
+          label: 'Trials per million population',
+          data: [0.29, 0.44, 0.55, 0.71, 0.78, 0.91, 1.0, 1.03, 1.04, 5.71, 6.76, 8.64, 33.08, 42.8],
+          backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Trials per Million: Red = Conflict, Green = Stable',
+            color: '#e2e8f0',
+            font: { size: 14 }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trials per million', color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          }
+        }
+      }
+    });
+  }
+
+});
+</script>
+
+</body>
+</html>

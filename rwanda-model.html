@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rwanda Model: From Genocide to Research Hub</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #22c55e;
+    --accent2: #60a5fa;
+    --accent3: #f97316;
+    --danger: #ef4444;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #22c55e, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--accent2);
+    margin: 24px 0 12px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    background: rgba(255,255,255,0.04);
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:hover {
+    background: rgba(255,255,255,0.03);
+  }
+  .highlight {
+    background: rgba(34,197,94,0.08);
+    border-left: 4px solid #22c55e;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .analysis-box {
+    background: rgba(96,165,250,0.06);
+    border-left: 4px solid #60a5fa;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .warning-box {
+    background: rgba(249,115,22,0.06);
+    border-left: 4px solid #f97316;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .policy-box {
+    background: rgba(168,85,247,0.06);
+    border-left: 4px solid #a78bfa;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  ul { margin: 8px 0 8px 24px; }
+  li { margin: 6px 0; color: var(--text); }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .ref {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 8px 0;
+  }
+  @media (max-width: 768px) {
+    h1 { font-size: 1.5rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.8rem; }
+    .container { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- HEADER                                                        -->
+<!-- ============================================================ -->
+<h1>The Rwanda Model: From Genocide to Research Hub</h1>
+<p class="subtitle">
+  Project O &mdash; Quantifying what makes Rwanda an outlier in clinical trial
+  capacity among low-income nations, and whether the model is replicable.
+  Extends Hedt-Gauthier et al. (PMID 39972388, BMC Global Public Health, 2025).
+</p>
+
+<!-- ============================================================ -->
+<!-- 1. SUMMARY                                                    -->
+<!-- ============================================================ -->
+<h2>1. Summary: Rwanda's Outlier Status</h2>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="stat-value" style="color:#22c55e;">121</div>
+    <div class="stat-label">Total Interventional Trials</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#22c55e;">8.64</div>
+    <div class="stat-label">Trials per Million Population</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#60a5fa;">6</div>
+    <div class="stat-label">Rank Among All 13 Countries</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#f97316;">2.0x</div>
+    <div class="stat-label">vs Peer Average (4.22/M)</div>
+  </div>
+</div>
+
+<div class="highlight">
+  <strong>Key finding:</strong> Rwanda, a low-income nation of 14 million that
+  experienced genocide in 1994, has built a clinical trial infrastructure that
+  produces <strong>8.64 interventional trials per million population</strong>
+  &mdash; approximately <strong>2.0x</strong> the
+  average of its peer group (similar size/income countries at 4.22/M).
+  This places Rwanda among the top research-active nations in sub-Saharan Africa.
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. PEER COMPARISON TABLE                                      -->
+<!-- ============================================================ -->
+<h2>2. Peer Comparison Table</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  All countries ranked by trials per million population. Rwanda Ratio =
+  Rwanda per-capita / country per-capita.
+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align:center;">Rank</th>
+        <th>Country</th>
+        <th style="text-align:center;">Category</th>
+        <th style="text-align:right;">Pop</th>
+        <th style="text-align:right;">Trials</th>
+        <th style="text-align:right;">Per M</th>
+        <th style="text-align:right;">Rwanda Ratio</th>
+        <th>Density</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#a78bfa;">1</td>
+  <td style="padding:10px;">United States</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#a78bfa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Reference</span></td>
+  <td style="padding:10px;text-align:right;">335M</td>
+  <td style="padding:10px;text-align:right;">159,196</td>
+  <td style="padding:10px;text-align:right;color:#a78bfa;font-weight:bold;">475.21</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0.0x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#a78bfa;height:100%;width:100.0%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#60a5fa;">2</td>
+  <td style="padding:10px;">South Africa</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#60a5fa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Benchmark</span></td>
+  <td style="padding:10px;text-align:right;">62M</td>
+  <td style="padding:10px;text-align:right;">3,473</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">56.02</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0.2x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#60a5fa;height:100%;width:11.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#60a5fa;">3</td>
+  <td style="padding:10px;">Uganda</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#60a5fa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Benchmark</span></td>
+  <td style="padding:10px;text-align:right;">48M</td>
+  <td style="padding:10px;text-align:right;">783</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">16.31</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0.5x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#60a5fa;height:100%;width:3.4%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">4</td>
+  <td style="padding:10px;">Malawi</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">21M</td>
+  <td style="padding:10px;text-align:right;">288</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">13.71</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0.6x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:2.9%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">5</td>
+  <td style="padding:10px;">Guinea</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">14M</td>
+  <td style="padding:10px;text-align:right;">133</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">9.5</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0.9x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:2.0%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">6</td>
+  <td style="padding:10px;font-weight:bold;">Rwanda</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">14M</td>
+  <td style="padding:10px;text-align:right;">121</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">8.64</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">--</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:1.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">7</td>
+  <td style="padding:10px;">Sierra Leone</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">8.5M</td>
+  <td style="padding:10px;text-align:right;">43</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">5.06</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">1.7x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:1.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">8</td>
+  <td style="padding:10px;">Liberia</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">5.4M</td>
+  <td style="padding:10px;text-align:right;">27</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">5.0</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">1.7x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:1.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">9</td>
+  <td style="padding:10px;">Niger</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">27M</td>
+  <td style="padding:10px;text-align:right;">37</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">1.37</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">6.3x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.3%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">10</td>
+  <td style="padding:10px;">Burundi</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">13M</td>
+  <td style="padding:10px;text-align:right;">13</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">1.0</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">8.6x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">11</td>
+  <td style="padding:10px;">Madagascar</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">30M</td>
+  <td style="padding:10px;text-align:right;">24</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">0.8</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">10.8x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">12</td>
+  <td style="padding:10px;">Chad</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">18M</td>
+  <td style="padding:10px;text-align:right;">14</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">0.78</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">11.1x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">13</td>
+  <td style="padding:10px;">Togo</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Peer</span></td>
+  <td style="padding:10px;text-align:right;">9M</td>
+  <td style="padding:10px;text-align:right;">7</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">0.78</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">11.1x</td>
+  <td style="padding:10px;width:20%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. THE RWANDA RATIO                                           -->
+<!-- ============================================================ -->
+<h2>3. The Rwanda Ratio</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  How many times more trials per capita does Rwanda have compared to each
+  peer/benchmark country? Higher = bigger gap Rwanda has opened.
+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Their Per M</th>
+        <th style="text-align:right;">Rwanda Ratio</th>
+        <th>Gap Visualisation</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Chad</td>
+  <td style="padding:10px;text-align:right;">0.78</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">11.1x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:100.0%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">11.1x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Togo</td>
+  <td style="padding:10px;text-align:right;">0.78</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">11.1x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:100.0%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">11.1x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Madagascar</td>
+  <td style="padding:10px;text-align:right;">0.8</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">10.8x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:97.3%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">10.8x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Burundi</td>
+  <td style="padding:10px;text-align:right;">1.0</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">8.6x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:77.5%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">8.6x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Niger</td>
+  <td style="padding:10px;text-align:right;">1.37</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">6.3x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:56.8%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">6.3x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Sierra Leone</td>
+  <td style="padding:10px;text-align:right;">5.06</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.7x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:15.3%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">1.7x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Liberia</td>
+  <td style="padding:10px;text-align:right;">5.0</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.7x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:15.3%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">1.7x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Guinea</td>
+  <td style="padding:10px;text-align:right;">9.5</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.9x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:8.1%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">0.9x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Malawi</td>
+  <td style="padding:10px;text-align:right;">13.71</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.6x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:5.4%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">0.6x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Uganda</td>
+  <td style="padding:10px;text-align:right;">16.31</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.5x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:4.5%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">0.5x</span>
+      </div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">South Africa</td>
+  <td style="padding:10px;text-align:right;">56.02</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.2x</td>
+  <td style="padding:10px;width:40%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:22px;
+      width:100%;position:relative;">
+      <div style="background:linear-gradient(90deg,#22c55e,#16a34a);height:100%;width:1.8%;
+        border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;">
+        <span style="color:#000;font-size:0.75rem;font-weight:bold;">0.2x</span>
+      </div>
+    </div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. BAR CHART RANKING                                          -->
+<!-- ============================================================ -->
+<h2>4. Per-Capita Trial Density Ranking</h2>
+<div class="card">
+  <div style="font-size:0.8rem;color:var(--muted);margin-bottom:12px;">
+    <span style="color:#22c55e;">&#9632;</span> Rwanda &nbsp;
+    <span style="color:#f97316;">&#9632;</span> Peer &nbsp;
+    <span style="color:#60a5fa;">&#9632;</span> Benchmark &nbsp;
+    <span style="color:#a78bfa;">&#9632;</span> Reference (US)
+  </div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    United States</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#a78bfa;height:100%;width:100.0%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        475.21/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    South Africa</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#60a5fa;height:100%;width:11.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        56.02/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Uganda</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#60a5fa;height:100%;width:3.4%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        16.31/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Malawi</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:2.9%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        13.71/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Guinea</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:2.0%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        9.5/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;color:#22c55e;font-weight:bold;font-size:0.85rem;">
+    Rwanda</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#22c55e;height:100%;width:1.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        8.64/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Sierra Leone</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:1.1%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        5.06/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Liberia</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:1.1%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        5.0/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Niger</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.3%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        1.37/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Burundi</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.2%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        1.0/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Madagascar</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.2%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        0.8/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Chad</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.2%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        0.78/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Togo</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.2%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        0.78/M</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. WHAT MADE RWANDA DIFFERENT                                 -->
+<!-- ============================================================ -->
+<h2>5. What Made Rwanda Different?</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  Analysis drawing on Hedt-Gauthier et al. (2025) and the Einstein-Rwanda
+  partnership model (PMID 39972388).
+</p>
+
+<div class="analysis-box">
+  <h3>5a. Government Investment in Research Infrastructure</h3>
+  <p>Rwanda's post-genocide reconstruction included deliberate investment in
+  health research as a national priority. The Rwanda Biomedical Centre and
+  national health research agenda created institutional scaffolding that most
+  peer countries lack. Health spending as a share of GDP has been consistently
+  higher than income-group peers.</p>
+</div>
+
+<div class="analysis-box">
+  <h3>5b. The Partnership Model (Einstein-Rwanda)</h3>
+  <p>The Albert Einstein College of Medicine partnership, documented in
+  PMID 39972388, demonstrates a sustainable North-South research collaboration
+  model. Unlike extractive "parachute research," this partnership built local
+  capacity through:</p>
+  <ul>
+    <li>Joint PhD programmes training Rwandan investigators</li>
+    <li>Shared governance of research priorities</li>
+    <li>Local ethics review integration</li>
+    <li>Progressive handover of principal investigator roles to Rwandan researchers</li>
+  </ul>
+</div>
+
+<div class="analysis-box">
+  <h3>5c. Post-Genocide Institutional Rebuilding</h3>
+  <p>The 1994 genocide destroyed existing institutions but paradoxically created
+  a clean-slate opportunity. Rwanda rebuilt with modern governance structures,
+  reduced bureaucratic fragmentation, and strong accountability mechanisms.
+  Peer countries with longer-standing but unreformed institutions (Burundi,
+  Chad, Niger) have not achieved comparable research output.</p>
+</div>
+
+<div class="analysis-box">
+  <h3>5d. Single National Ethics Committee</h3>
+  <p>Rwanda's centralised National Ethics Committee streamlines trial approval.
+  Many peer countries have fragmented or non-functional ethics review processes,
+  creating bottlenecks that deter investigators. A single, efficient committee
+  reduces approval timelines from months to weeks.</p>
+</div>
+
+<div class="analysis-box">
+  <h3>5e. Small Size = Easier to Coordinate</h3>
+  <p>At 14 million people in 26,338 km&sup2;, Rwanda's compact geography enables
+  national-scale implementation of research infrastructure. Larger peers like
+  Madagascar (587,041 km&sup2;) or Niger (1.27M km&sup2;) face vastly greater
+  logistical challenges in building connected research networks.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. COULD BURUNDI BE NEXT?                                     -->
+<!-- ============================================================ -->
+<h2>6. Could Burundi Be Next?</h2>
+
+<div class="warning-box">
+  <p><strong>The natural experiment:</strong> Burundi and Rwanda share a border,
+  similar population size (13M vs 14M), similar ethnic composition, colonial
+  history, and both experienced devastating conflict. Yet their research
+  trajectories have diverged dramatically.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="stat-value" style="color:#22c55e;">121</div>
+    <div class="stat-label">Rwanda Trials</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#ef4444;">13</div>
+    <div class="stat-label">Burundi Trials</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#22c55e;">8.64/M</div>
+    <div class="stat-label">Rwanda Per Capita</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#ef4444;">1.0/M</div>
+    <div class="stat-label">Burundi Per Capita</div>
+  </div>
+</div>
+
+<div class="analysis-box">
+  <h3>What Burundi would need</h3>
+  <ul>
+    <li><strong>Functional national ethics committee</strong> &mdash; streamlined, transparent,
+      with predictable timelines</li>
+    <li><strong>Research partnership anchor</strong> &mdash; a sustained North-South collaboration
+      (like Einstein-Rwanda) providing mentorship, co-funding, and capacity building</li>
+    <li><strong>Government research agenda</strong> &mdash; explicit national health research
+      priorities with dedicated budget line</li>
+    <li><strong>Post-conflict trust rebuilding</strong> &mdash; stable governance enabling
+      multi-year research commitments</li>
+    <li><strong>Regional integration</strong> &mdash; leveraging proximity to Rwanda's existing
+      research infrastructure for spillover effects</li>
+  </ul>
+  <p style="margin-top:12px;color:var(--muted);">
+    If Burundi achieved even half of Rwanda's per-capita rate, it would move from
+    research void to moderate capacity &mdash; transforming trial access for 13 million people.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. CONDITION DIVERSITY                                        -->
+<!-- ============================================================ -->
+<h2>7. Condition Diversity</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  Which peers have the most balanced research portfolios across HIV, Cancer,
+  Malaria, and Maternal health? A diversity index of 4/4 means trials exist
+  in all four condition categories.
+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">HIV</th>
+        <th style="text-align:right;">Cancer</th>
+        <th style="text-align:right;">Malaria</th>
+        <th style="text-align:right;">Maternal</th>
+        <th style="text-align:center;">Diversity</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Malawi</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">135</td><td style="padding:8px;text-align:right;color:#22c55e;">14</td><td style="padding:8px;text-align:right;color:#22c55e;">40</td><td style="padding:8px;text-align:right;color:#22c55e;">51</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    4/4</td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">31</td><td style="padding:8px;text-align:right;color:#22c55e;">5</td><td style="padding:8px;text-align:right;color:#22c55e;">15</td><td style="padding:8px;text-align:right;color:#22c55e;">14</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    4/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Sierra Leone</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">2</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    4/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Liberia</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    4/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Madagascar</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">2</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td><td style="padding:8px;text-align:right;color:#22c55e;">5</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    4/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Guinea</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">6</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#22c55e;">32</td><td style="padding:8px;text-align:right;color:#22c55e;">13</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    3/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Niger</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">2</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#22c55e;">8</td><td style="padding:8px;text-align:right;color:#22c55e;">4</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    3/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Togo</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">2</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    3/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Burundi</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    2/4</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Chad</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#ef4444;">0</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td><td style="padding:8px;text-align:right;color:#22c55e;">1</td>
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#60a5fa;">
+    2/4</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. GROWTH TRAJECTORY                                          -->
+<!-- ============================================================ -->
+<h2>8. Growth Trajectory: Pre-2015 vs 2015-2025</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  Which countries have accelerated their research output in the past decade?
+  Growth ratio = post-2015 trials / pre-2015 trials.
+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Pre-2015</th>
+        <th style="text-align:right;">2015-2025</th>
+        <th style="text-align:right;">Growth Ratio</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Sierra Leone</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;">33</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">4.12x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Liberia</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">18</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">2.57x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Togo</td>
+  <td style="padding:8px;text-align:right;">2</td>
+  <td style="padding:8px;text-align:right;">5</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">2.5x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Madagascar</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">16</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">2.29x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Uganda</td>
+  <td style="padding:8px;text-align:right;">243</td>
+  <td style="padding:8px;text-align:right;">507</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">2.09x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Niger</td>
+  <td style="padding:8px;text-align:right;">12</td>
+  <td style="padding:8px;text-align:right;">24</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">2.0x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Malawi</td>
+  <td style="padding:8px;text-align:right;">106</td>
+  <td style="padding:8px;text-align:right;">174</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1.64x</td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:8px;text-align:right;">44</td>
+  <td style="padding:8px;text-align:right;">72</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1.64x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Chad</td>
+  <td style="padding:8px;text-align:right;">6</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1.33x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">United States</td>
+  <td style="padding:8px;text-align:right;">67,071</td>
+  <td style="padding:8px;text-align:right;">86,984</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1.3x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Guinea</td>
+  <td style="padding:8px;text-align:right;">57</td>
+  <td style="padding:8px;text-align:right;">70</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1.23x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">Burundi</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">6</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.86x</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;">South Africa</td>
+  <td style="padding:8px;text-align:right;">1,895</td>
+  <td style="padding:8px;text-align:right;">1,555</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.82x</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. POLICY LESSONS                                             -->
+<!-- ============================================================ -->
+<h2>9. Policy Lessons: What Rwanda Did That Others Could Replicate</h2>
+
+<div class="policy-box">
+  <h3>Lesson 1: Centralise Ethics Review</h3>
+  <p>A single, well-staffed national ethics committee with published timelines
+  and electronic submission reduces the #1 barrier to trial initiation.
+  Countries with fragmented institutional review boards (IRBs) should consider
+  a national coordinating mechanism.</p>
+</div>
+
+<div class="policy-box">
+  <h3>Lesson 2: Anchor Partnerships, Not Projects</h3>
+  <p>The Einstein-Rwanda model shows that sustained institutional partnerships
+  (10+ years) outperform project-based funding. Partners should commit to
+  capacity transfer milestones: co-PI roles, local PhD completion, progressive
+  autonomy over research design.</p>
+</div>
+
+<div class="policy-box">
+  <h3>Lesson 3: National Research Agenda with Budget</h3>
+  <p>Rwanda's national health research agenda ensures that research activity
+  aligns with disease burden. Peer countries should publish explicit research
+  priorities and allocate even 0.5% of health budgets to research coordination.</p>
+</div>
+
+<div class="policy-box">
+  <h3>Lesson 4: Use Small Size as an Advantage</h3>
+  <p>Small countries (< 20M population) can achieve national coverage faster.
+  Rwanda's compact geography allowed rapid rollout of community health workers,
+  electronic medical records, and trial site networks. Other small nations
+  (Burundi, Togo, Liberia, Sierra Leone) could replicate this approach.</p>
+</div>
+
+<div class="policy-box">
+  <h3>Lesson 5: Post-Conflict = Opportunity for Institutional Design</h3>
+  <p>Countries emerging from conflict (Sierra Leone, Liberia) should view
+  reconstruction as an opportunity to build modern research governance from
+  scratch, rather than restoring pre-conflict structures that were often
+  dysfunctional.</p>
+</div>
+
+<div class="policy-box">
+  <h3>Lesson 6: Regional Research Corridors</h3>
+  <p>Rwanda could serve as a research hub for the Great Lakes region, with
+  Burundi, eastern DRC, and western Tanzania benefiting from proximity.
+  Regional ethics harmonisation (e.g., EAC framework) would reduce duplicated
+  regulatory work.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- REFERENCES                                                    -->
+<!-- ============================================================ -->
+<h2>References</h2>
+<div class="card">
+  <div class="ref">
+    1. Hedt-Gauthier BL, et al. "Building research capacity through a
+    hospital-based research partnership: the experience of Einstein and
+    Rwanda." <em>BMC Global and Public Health</em>. 2025;3:12.
+    PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/39972388/"
+    style="color:var(--accent2);">39972388</a>.
+    DOI: 10.1186/s44263-025-00138-8.
+  </div>
+  <div class="ref">
+    2. ClinicalTrials.gov API v2.
+    <a href="https://clinicaltrials.gov/data-api/api"
+    style="color:var(--accent2);">https://clinicaltrials.gov/data-api/api</a>.
+    Accessed 28 March 2026.
+  </div>
+  <div class="ref">
+    3. World Bank. World Development Indicators: GDP per capita, income
+    classifications (2024). <a href="https://data.worldbank.org/"
+    style="color:var(--accent2);">https://data.worldbank.org/</a>.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- METHODOLOGY                                                   -->
+<!-- ============================================================ -->
+<h2>Methodology</h2>
+<div class="card" style="color:var(--muted);font-size:0.85rem;">
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (public registry).</p>
+  <p><strong>Inclusion:</strong> Interventional studies only
+  (filter.advanced: AREA[StudyType]INTERVENTIONAL).</p>
+  <p><strong>Countries:</strong> 10 Rwanda peer-group nations (similar
+  population/income), 2 African benchmarks (South Africa, Uganda), 1 global
+  reference (United States).</p>
+  <p><strong>Conditions:</strong> HIV, Cancer (including neoplasm/oncology),
+  Malaria, Maternal (pregnancy/obstetric/postpartum).</p>
+  <p><strong>Growth trajectory:</strong> Pre-2015 (all trials before 2015) vs
+  2015-2025 (inclusive).</p>
+  <p><strong>Rwanda Ratio:</strong> Rwanda trials/M divided by comparator
+  trials/M.</p>
+  <p><strong>Limitations:</strong> Single registry (ClinicalTrials.gov);
+  population estimates approximate; does not capture trials registered only
+  in WHO ICTRP or national registries.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<div class="footer">
+  <p>Project O: The Rwanda Model &mdash; AfricaRCT Research Series</p>
+  <p>Data: ClinicalTrials.gov API v2 | Generated: 2026-03-28 10:13</p>
+  <p style="margin-top:4px;">Extending PMID 39972388 (Hedt-Gauthier et al., BMC Global Public Health, 2025)</p>
+</div>
+
+</div>
+</body>
+</html>

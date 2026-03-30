@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Administrator's View: Running a Health System Without Data</title>
+<style>
+  :root { --bg: #0a0e17; --surface: #111827; --border: #1e293b; --text: #e2e8f0;
+           --muted: #94a3b8; --accent: #3b82f6; --danger: #ef4444; --success: #22c55e;
+           --warn: #f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter','Segoe UI',system-ui,sans-serif;
+          line-height:1.6; }
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px; }
+  h1 { font-size:1.8em; margin-bottom:4px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  h2 { font-size:1.3em; margin:32px 0 16px 0; color:#f1f5f9;
+        border-bottom:2px solid var(--border); padding-bottom:8px; }
+  h3 { font-size:1.1em; color:#f1f5f9; margin:16px 0 8px 0; }
+  .subtitle { color:var(--muted); font-size:0.95em; margin-bottom:24px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+               gap:12px; margin:20px 0; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+          padding:16px; text-align:center; }
+  .kpi-value { font-size:1.8em; font-weight:800; }
+  .kpi-label { font-size:0.82em; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88em; }
+  th { background:#1e293b; color:#cbd5e1; padding:10px 12px; text-align:left;
+        font-weight:600; position:sticky; top:0; }
+  td { padding:8px 12px; border-bottom:1px solid #1e293b; }
+  tr:hover { background:rgba(59,130,246,0.05); }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border);
+                 margin:12px 0; }
+  .chart-container { background:var(--surface); border-radius:12px; padding:20px;
+                      border:1px solid var(--border); margin:12px 0; }
+  .callout { border-radius:12px; padding:24px; margin:20px 0; }
+  .callout-danger { background:#1a0000; border:2px solid #7f1d1d; }
+  .callout-warn { background:#1a1200; border:2px solid #78350f; }
+  .callout-info { background:#001a33; border:2px solid #1e3a5f; }
+  .callout-success { background:#001a00; border:2px solid #14532d; }
+  .method { background:var(--surface); border-radius:12px; padding:20px;
+             border:1px solid var(--border); margin:16px 0; font-size:0.9em;
+             color:var(--muted); line-height:1.8; }
+  .method strong { color:var(--text); }
+  .narrative { background:var(--surface); border-left:4px solid var(--accent);
+                padding:20px 24px; margin:16px 0; border-radius:0 12px 12px 0;
+                font-size:0.95em; line-height:1.8; }
+  canvas { max-width:100%; }
+  @media(max-width:768px) {
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    h1 { font-size:1.4em; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<h1>The Administrator's View: Managing Without Evidence</h1>
+<p class="subtitle">Health system administrators need evidence to allocate resources. Where is it?
+  | 9,267 admin-useful trials in Africa
+  vs 11,540 pharma/drug trials | Data: ClinicalTrials.gov API v2 | 2026-03-28</p>
+
+<!-- ====== SECTION: Summary KPIs ====== -->
+<h2>The Resource Allocation Paradox</h2>
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">1.2x</div>
+    <div class="kpi-label">Pharma:Admin Trial Ratio</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">44.5%</div>
+    <div class="kpi-label">Admin-Useful Share of Africa Trials</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--accent)">908</div>
+    <div class="kpi-label">Cost-Effectiveness Trials (Africa)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">110</div>
+    <div class="kpi-label">Task-Shifting Trials (Africa)</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <h3>The Administrator's Bind</h3>
+  <p style="margin-top:8px">A district health manager in rural Kenya must decide: should she invest
+  limited budget in community health workers, a digital health system, or additional drug supplies?
+  Of the 9,267 trials that might help her decide, almost none provide local
+  cost-effectiveness data. Meanwhile, 11,540 drug/pharma trials have been
+  conducted in Africa -- 1.2x more than administrator-useful trials. The
+  research enterprise generates evidence for pharmaceutical companies, not for the people who
+  actually run African health systems.</p>
+</div>
+
+<!-- ====== SECTION: Category Breakdown ====== -->
+<h2>Health System Evidence Categories</h2>
+<p style="color:var(--muted);margin-bottom:12px">Trial counts for evidence categories relevant
+  to health system administrators, compared with pharma/drug trials (highlighted in red).</p>
+
+<div class="chart-container">
+  <canvas id="catChart" height="100"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Category</th><th style="text-align:center">Africa</th>
+  <th style="text-align:center">US</th><th style="text-align:center">US:Africa</th>
+  <th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Health System / Services / QI</td>
+<td style="text-align:center;font-weight:700">3,755</td>
+<td style="text-align:center">45,971</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">12.2x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials testing health system strengthening, service delivery models, quality improvement, task-shift</td>
+</tr>
+<tr>
+<td style="font-weight:600">Cost-Effectiveness / Economic Evaluation</td>
+<td style="text-align:center;font-weight:700">908</td>
+<td style="text-align:center">4,780</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">5.3x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials with embedded economic evaluations that provide local cost-effectiveness data for resource al</td>
+</tr>
+<tr>
+<td style="font-weight:600">Supply Chain / Drug Supply / Essential Medicines</td>
+<td style="text-align:center;font-weight:700">1,569</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials addressing medicine supply chains, stockouts, and essential medicine access.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Human Resources / Workforce / Training</td>
+<td style="text-align:center;font-weight:700">1,790</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials on health workforce development, training programmes, and human resource interventions.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Task-Shifting (Africa's Innovation)</td>
+<td style="text-align:center;font-weight:700">110</td>
+<td style="text-align:center">1,153</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">10.5x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials evaluating shifting clinical tasks from doctors to nurses, clinical officers, or community he</td>
+</tr>
+<tr>
+<td style="font-weight:600">Community Health Workers</td>
+<td style="text-align:center;font-weight:700">347</td>
+<td style="text-align:center">1,056</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">3.0x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials testing community health worker-delivered interventions.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Digital Health / mHealth for Systems</td>
+<td style="text-align:center;font-weight:700">788</td>
+<td style="text-align:center">10,124</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">12.8x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials testing digital health tools for health system management.</td>
+</tr>
+<tr style="background:#1a0000">
+<td style="font-weight:600"><span style="color:#ef4444">* </span>Drug / Pharma Trials (for comparison)</td>
+<td style="text-align:center;font-weight:700">11,540</td>
+<td style="text-align:center">108,322</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">9.4x</td>
+<td style="font-size:0.82em;color:#94a3b8">Drug and pharmaceutical trials (included for contrast: how many trials help administrators vs how ma</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="narrative">
+  <strong>Reading the table:</strong> Each row represents a category of evidence useful to health
+  system administrators. The contrast with pharma/drug trials (red row) reveals the structural
+  imbalance: the global research enterprise invests overwhelmingly in testing molecules, not in
+  testing the systems that deliver them.
+</div>
+
+<!-- ====== SECTION: Cost-Effectiveness Gap ====== -->
+<h2>The Cost-Effectiveness Gap</h2>
+
+<div class="callout callout-warn">
+  <h3>No Local CEA Data for Most Interventions</h3>
+  <p style="margin-top:8px">Africa has 908 cost-effectiveness trials registered,
+  compared to 4,780 in the US. Without local economic evaluation data, administrators
+  are forced to extrapolate from Western cost-effectiveness models -- where labour costs, drug
+  prices, infrastructure, and epidemiology are fundamentally different. A treatment that is
+  cost-effective at US$50,000/QALY is meaningless when the national health budget is US$30 per
+  capita. The WHO-CHOICE thresholds (1-3x GDP per capita) provide some framework, but without
+  local trial-based CEA data, even these are educated guesses.</p>
+</div>
+
+<!-- ====== SECTION: Task-Shifting ====== -->
+<h2>Task-Shifting: Africa's Innovation Area</h2>
+
+<div class="callout callout-success">
+  <h3>Where Africa Leads</h3>
+  <p style="margin-top:8px">Task-shifting -- moving clinical tasks from doctors to nurses, clinical
+  officers, or community health workers -- is one of the few areas where Africa has generated its
+  own evidence base. With 110 registered trials, African researchers have
+  built a growing body of evidence for this critical health system innovation. The global South is
+  not just a site for drug testing; it is a laboratory for health system solutions.</p>
+</div>
+
+<!-- ====== SECTION: CHW Trials ====== -->
+<h2>Community Health Worker Trials</h2>
+<div class="narrative">
+  <strong>The backbone of African healthcare:</strong> Community health workers deliver essential
+  services in settings where no other healthcare provider exists. Africa has 347
+  registered CHW trials. These trials test pragmatic, affordable interventions: CHW-delivered HIV
+  testing, community-based management of childhood illness, hypertension screening by lay workers.
+  Yet this evidence rarely influences global guidelines, which assume a Western staffing model.
+</div>
+
+<!-- ====== SECTION: Supply Chain ====== -->
+<h2>Supply Chain Evidence</h2>
+<div class="callout callout-info">
+  <h3>The Missing Link</h3>
+  <p style="margin-top:8px">The best drug in the world does nothing if it does not reach the
+  patient. Supply chain trials in Africa (1,569
+  registered) are vanishingly rare, yet stockouts of essential medicines affect 30-70% of
+  health facilities in many African countries. Administrators need evidence on cold chain
+  management, last-mile delivery, inventory systems, and procurement strategies -- but the
+  research community has barely addressed these questions.</p>
+</div>
+
+<!-- ====== SECTION: Workforce ====== -->
+<h2>Workforce Planning Evidence</h2>
+<div class="narrative">
+  <strong>Building the workforce:</strong> Africa has approximately 2.3 health workers per 1,000
+  population (WHO threshold: 4.45). Workforce trials
+  (1,790 in Africa) test training programmes,
+  retention strategies, and competency-based approaches. But the evidence base remains thin:
+  should administrators invest in more doctors, more nurses, or more community health workers?
+  The answer differs by context, and the evidence to guide that choice is scarce.
+</div>
+
+<!-- ====== SECTION: Country Breakdown ====== -->
+<h2>Health System Trials by Country</h2>
+<p style="color:var(--muted);margin-bottom:12px">Where in Africa is health system research
+  happening? Top 15 countries by trial count.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Country</th><th style="text-align:center">Trials</th><th>Distribution</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">South Africa</td>
+<td style="text-align:center;font-weight:700">1386</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Egypt</td>
+<td style="text-align:center;font-weight:700">991</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:72%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Uganda</td>
+<td style="text-align:center;font-weight:700">337</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:24%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Kenya</td>
+<td style="text-align:center;font-weight:700">332</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:24%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tanzania</td>
+<td style="text-align:center;font-weight:700">157</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:11%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malawi</td>
+<td style="text-align:center;font-weight:700">129</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:9%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Nigeria</td>
+<td style="text-align:center;font-weight:700">125</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:9%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zambia</td>
+<td style="text-align:center;font-weight:700">116</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:8%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Ethiopia</td>
+<td style="text-align:center;font-weight:700">97</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zimbabwe</td>
+<td style="text-align:center;font-weight:700">90</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Ghana</td>
+<td style="text-align:center;font-weight:700">84</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Mozambique</td>
+<td style="text-align:center;font-weight:700">53</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Rwanda</td>
+<td style="text-align:center;font-weight:700">45</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Cameroon</td>
+<td style="text-align:center;font-weight:700">30</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Senegal</td>
+<td style="text-align:center;font-weight:700">27</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: Method ====== -->
+<h2>Method</h2>
+<div class="method">
+  <strong>Data source:</strong> ClinicalTrials.gov API v2, queried 2026-03-28.<br>
+  <strong>Categories:</strong> Eight evidence categories relevant to health system administrators,
+  including health system/QI, cost-effectiveness, supply chain, workforce, task-shifting, CHW,
+  digital health, and pharma/drug trials (for comparison).<br>
+  <strong>Geography:</strong> Africa (20 countries queried) vs United States (where applicable).<br>
+  <strong>Metrics:</strong> Admin-useful trial count, pharma:admin ratio, cost-effectiveness gap,
+  country-level distribution.<br>
+  <strong>Limitations:</strong> ClinicalTrials.gov is one registry. Keyword-based classification
+  may over- or under-count. Some health system trials may be registered as observational studies
+  (excluded here). Trials registered on WHO ICTRP or PACTR not captured.
+</div>
+
+<p style="color:var(--muted);font-size:0.82em;margin-top:24px;text-align:center">
+  The Administrator's View v1.0 | Data: ClinicalTrials.gov API v2 | Generated 2026-03-28<br>
+  AI transparency: LLM assistance was used for code generation and analysis design.
+  The author reviewed and edited all outputs and takes responsibility for the final content.
+</p>
+
+</div><!-- /.container -->
+
+<script>
+// -- Category comparison chart --------------------------------------------
+new Chart(document.getElementById('catChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Health System / Services / QI", "Cost-Effectiveness / Economic ", "Supply Chain / Drug Supply / E", "Human Resources / Workforce / ", "Task-Shifting (Africa's Innova", "Community Health Workers", "Digital Health / mHealth for S"],
+    datasets: [{
+      label: 'Africa',
+      data: [3755, 908, 1569, 1790, 110, 347, 788],
+      backgroundColor: '#3b82f6',
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Health System Evidence in Africa: Trial Count by Category',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: 'Interventional trial count', color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>

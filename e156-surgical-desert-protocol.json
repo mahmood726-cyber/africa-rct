@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Condition Colonialism Index for the surgical trial desert across Africa",
+    "body": "This cross-sectional registry study will quantify the gap between surgical disease burden and interventional trial activity across Africa using ClinicalTrials.gov. Eligible records are all interventional studies matching surgery or surgical with at least one site in any African country, with subspecialty queries for caesarean, orthopedic, cardiac surgery, neurosurgery, ophthalmic, and anaesthesia trials. The primary metric is the Condition Colonialism Index, computed as Africa's estimated surgical burden share from the Lancet Commission on Global Surgery divided by its proportional share of registered trials versus the United States. Secondary analyses will examine country-level per-capita trial density across seven African nations, subspecialty trial distribution, phase composition, sponsor origin classified as local or foreign, and temporal registration trends. Global comparators include the United States, India, Brazil, China, and the United Kingdom for benchmarking. Results will be generated from version-controlled code and presented as an interactive dashboard with full query logic for replication. Limitations include incomplete registry coverage, reliance on aggregate burden estimates, and possible misclassification of surgical interventions by condition query.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This protocol describes a cross-sectional registry analysis quantifying the gap between surgical disease burden and interventional trial investment across Africa."
+        },
+        {
+            "role": "Eligibility",
+            "text": "Eligible records include all interventional studies on ClinicalTrials.gov matching surgery or surgical with at least one African site, plus subspecialty queries for caesarean, orthopedic, cardiac, neurosurgery, ophthalmic, and anaesthesia trials."
+        },
+        {
+            "role": "Search",
+            "text": "The search uses the ClinicalTrials.gov API version two, filtering by study type, location, and condition, with the United States, India, Brazil, China, and the United Kingdom as comparators."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "The primary metric, the Condition Colonialism Index, equals Africa's Lancet Commission surgical burden share divided by its proportional share of registered trials versus the United States."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Country-level heterogeneity will be assessed via per-capita trial density, subspecialty distribution, phase composition, and sponsor classification to distinguish locally driven from externally imposed research."
+        },
+        {
+            "role": "Dissemination",
+            "text": "Results will be reported as an interactive HTML dashboard with analysis code archived for independent replication."
+        },
+        {
+            "role": "Limitation",
+            "text": "Anticipated limitations include incomplete registry coverage of African surgical trials, reliance on aggregate burden estimates, and possible misclassification of surgical interventions by keyword-based condition queries."
+        }
+    ],
+    "wordCount": 161,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Africa Surgical Desert v1.0",
+        "data": "ClinicalTrials.gov API v2, 7 African countries + continent-wide, 6 subspecialties, 5 global comparators",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "DRAFT"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

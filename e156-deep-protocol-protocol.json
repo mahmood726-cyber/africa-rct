@@ -1,0 +1,8 @@
+{
+  "title": "Deep Protocol",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the clinical trial pipeline, does the regional focus on Phase 1 versus Phase 3 trials affect the participant enrollment density in Africa compared to Europe? The analysis sampled 600 detailed protocols from Egypt, South Africa, Kenya, France, the UK, and Germany via the ClinicalTrials.gov v2 API field extracts. Investigators used an enrollment density model and reported the average participants per trial as the primary comparative estimand for research intensity. African trials showed a 3.5-fold higher participant density, with an average of 1,432 participants per trial compared to 412 in European counterparts. Phase 3 trials dominated African research portfolios at seventy percent, while European trials showed a balanced distribution across all innovation phases including discovery. These results indicate that Africa functions primarily as a high-volume validation ground for drugs developed and first tested in high-income European ecosystems. The findings are limited by the small sample size of six countries which may not represent the entire continental research landscape. - DOI: 10.156/deep-protocol - Date: 2026-03-28 - Type: research - Code: deep_protocol_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

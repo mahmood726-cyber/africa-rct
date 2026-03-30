@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cervical Cancer in Africa &mdash; Africa's #1 Cancer Killer of Women</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+:root {
+    --bg: #0a0e17;
+    --bg2: #111827;
+    --bg3: #1f2937;
+    --text: #e5e7eb;
+    --text2: #9ca3af;
+    --accent: #60a5fa;
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --yellow: #f1c40f;
+    --orange: #e67e22;
+    --grey: #95a5a6;
+    --purple: #9b59b6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+.container { max-width:1400px; margin:0 auto; padding:24px; }
+h1 { font-size:2rem; margin-bottom:8px; color:white; }
+h2 { font-size:1.4rem; margin:32px 0 16px; color:var(--accent); border-bottom:1px solid var(--bg3); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:16px 0 8px; color:var(--text); }
+.subtitle { color:var(--text2); margin-bottom:24px; }
+.lead { font-size:1.05rem; color:var(--text); margin:16px 0; line-height:1.7; }
+
+/* Banner */
+.banner {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;
+    margin:24px 0;
+}
+.stat-card {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    border:1px solid var(--bg3);
+}
+.stat-card .value {
+    font-size:2rem;
+    font-weight:700;
+    color:white;
+}
+.stat-card .label {
+    font-size:0.85rem;
+    color:var(--text2);
+    margin-top:4px;
+}
+
+/* CCI callout */
+.cci-box {
+    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    border-radius:16px;
+    padding:32px;
+    text-align:center;
+    margin:24px 0;
+    border:2px solid #dc2626;
+}
+.cci-value {
+    font-size:3.5rem;
+    font-weight:800;
+    color:#fbbf24;
+    text-shadow:0 0 20px rgba(251,191,36,0.3);
+}
+.cci-label {
+    font-size:1.1rem;
+    color:#fca5a5;
+    margin-top:8px;
+}
+.cci-detail {
+    font-size:0.9rem;
+    color:#d1d5db;
+    margin-top:12px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Charts */
+.charts-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+    gap:24px;
+    margin:24px 0;
+}
+.chart-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+}
+
+/* Tables */
+table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+    margin:16px 0;
+}
+th {
+    background:var(--bg3);
+    padding:10px 8px;
+    text-align:left;
+    font-weight:600;
+    position:sticky;
+    top:0;
+    z-index:1;
+}
+td {
+    padding:8px;
+    border-bottom:1px solid var(--bg3);
+}
+tr:hover {
+    background:rgba(96,165,250,0.05);
+}
+.table-container {
+    max-height:600px;
+    overflow-y:auto;
+    border-radius:12px;
+    border:1px solid var(--bg3);
+    background:var(--bg2);
+}
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Severity */
+.severity-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+    margin:16px 0;
+}
+
+/* Info box */
+.info-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+    margin:16px 0;
+}
+.info-box p {
+    margin:8px 0;
+    color:var(--text);
+}
+
+/* Crisis box */
+.crisis-box {
+    background: linear-gradient(135deg, #78350f 0%, #451a03 100%);
+    border-radius:12px;
+    padding:24px;
+    border:1px solid #d97706;
+    margin:16px 0;
+}
+
+/* Footer */
+.footer {
+    margin-top:48px;
+    padding:24px 0;
+    border-top:1px solid var(--bg3);
+    color:var(--text2);
+    font-size:0.8rem;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Cervical Cancer in Africa</h1>
+<p class="subtitle">Africa's #1 Cancer Killer of Women &mdash; Clinical Trial Equity Analysis &mdash;
+ClinicalTrials.gov Registry &mdash; Generated 28 March 2026</p>
+
+<!-- ===== Summary Banner ===== -->
+<div class="banner">
+    <div class="stat-card">
+        <div class="value">107</div>
+        <div class="label">Africa Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--accent)">3,451</div>
+        <div class="label">US Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--red)">17.9x</div>
+        <div class="label">CCI (burden/trial gap)</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--green)">37</div>
+        <div class="label">Screening Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--accent)">10</div>
+        <div class="label">Vaccination Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--orange)">31</div>
+        <div class="label">Treatment Trials</div>
+    </div>
+</div>
+
+<!-- ===== CCI Box ===== -->
+<div class="cci-box">
+    <div class="cci-value">17.9x</div>
+    <div class="cci-label">Condition Colonialism Index</div>
+    <div class="cci-detail">
+        Africa carries <strong>25.0%</strong> of the global cervical cancer burden
+        but hosts only <strong>~107</strong> registered interventional trials, compared to
+        <strong>3,451</strong> in the United States (which bears ~1.4% of the burden).
+        CCI = 25.0 / 1.4 = <strong>17.9x</strong>.
+    </div>
+</div>
+
+<!-- ===== The Leading Killer ===== -->
+<h2>The Leading Killer</h2>
+<div class="info-box">
+    <p><strong>Cervical cancer kills more African women than any other cancer.</strong></p>
+    <p>An estimated 120,000 African women are diagnosed annually, and roughly 80,000 die --
+    more than from breast cancer, more than from any other malignancy. The disease is
+    almost entirely preventable through HPV vaccination and screening, yet Sub-Saharan
+    Africa has the lowest screening coverage and HPV vaccination rates globally.</p>
+    <p>High-burden countries like Mozambique, Malawi, and Zimbabwe have age-standardised
+    incidence rates above 38 per 100,000 -- roughly <strong>6x the US rate</strong> of 6.2/100k.
+    Despite this, they collectively host fewer than a handful of interventional trials.</p>
+</div>
+
+<!-- ===== Severity Summary ===== -->
+<h2>Severity Summary</h2>
+<div class="severity-box">
+    <div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>CCI = 17.9x -- Africa carries 25.0% of global cervical cancer burden but has only ~107 trials vs 3,451 in the US</span>
+        </div><div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>Cervical cancer is the #1 cancer killer of women in Africa, yet most high-burden countries have fewer than 5 trials</span>
+        </div><div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Only 6.5% of Africa-based cervical cancer trials are led by African institutions</span>
+        </div>
+</div>
+
+<!-- ===== Country Breakdown ===== -->
+<h2>Country Breakdown: Africa</h2>
+<p class="lead" style="color:var(--text2)">Trial counts by country, sorted alongside WHO incidence data
+(age-standardised rate per 100,000 women).</p>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Trials per African Country</h3>
+        <canvas id="countryChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>Incidence vs Trial Count</h3>
+        <canvas id="scatterChart"></canvas>
+    </div>
+</div>
+
+<!-- ===== Screening vs Vaccination vs Treatment ===== -->
+<h2>Screening vs Vaccination vs Treatment</h2>
+<p class="lead" style="color:var(--text2)">Classification of Africa's cervical cancer trials by
+intervention type. Screening includes VIA, HPV testing, Pap smear, colposcopy.
+Vaccination includes HPV vaccine studies. Treatment includes surgery, radiation, and
+chemotherapy/immunotherapy.</p>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Intervention Type Distribution</h3>
+        <canvas id="interventionChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>Sponsor Breakdown</h3>
+        <canvas id="sponsorChart"></canvas>
+    </div>
+</div>
+
+<!-- ===== HPV Vaccination Gap ===== -->
+<h2>The HPV Vaccination Gap</h2>
+<div class="info-box">
+    <p><strong>HPV vaccines exist and are highly effective, yet trial access in Africa
+    remains separate from vaccination rollout.</strong></p>
+    <p>We identified <strong>9</strong> HPV vaccine-related trial(s) with
+    African sites on ClinicalTrials.gov. The gap between vaccine availability and clinical
+    trial activity is stark: while GAVI has supported HPV vaccine introduction in multiple
+    African countries, research on dose schedules, long-term efficacy in African populations,
+    and integration with screening programmes remains critically underfunded.</p>
+    <p>Screening-related trials (VIA, HPV testing, Pap smear): <strong>29</strong>
+    found in Africa.</p>
+</div>
+
+<!-- ===== Crisis Countries ===== -->
+<h2>The Mozambique/Zimbabwe/Malawi Crisis</h2>
+<div class="crisis-box">
+    <p style="color:#fde68a;font-weight:700;font-size:1.1rem;margin-bottom:12px">
+        Highest incidence, fewest trials</p>
+    <p style="color:#e5e7eb;margin-bottom:16px">
+        Mozambique, Zimbabwe, and Malawi have among the highest cervical cancer
+        incidence rates on the planet -- yet they are clinical trial deserts.
+        Women in these countries face the highest risk but have virtually no
+        access to investigational screening, vaccination, or treatment protocols.</p>
+    <table style="max-width:400px">
+        <thead>
+            <tr><th>Country</th><th style="text-align:right">Incidence (ASR/100k)</th>
+                <th style="text-align:right">Trials</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+<td style="font-weight:700">Mozambique</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">39.9</td>
+<td style="text-align:right;color:#f1c40f;font-weight:700">4</td>
+</tr><tr>
+<td style="font-weight:700">Zimbabwe</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">38.5</td>
+<td style="text-align:right;color:#f1c40f;font-weight:700">5</td>
+</tr><tr>
+<td style="font-weight:700">Malawi</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">39.8</td>
+<td style="text-align:right;color:#f1c40f;font-weight:700">5</td>
+</tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ===== Global Comparison ===== -->
+<h2>Comparison: Africa vs US, India, Brazil</h2>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Trial Counts</h3>
+        <canvas id="globalChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>Phase Distribution</h3>
+        <canvas id="phaseChart"></canvas>
+    </div>
+</div>
+<div class="info-box">
+    <p><strong>Africa (107 trials) vs United States (3,451 trials):</strong>
+    The US has roughly 32x more cervical cancer trials
+    despite bearing only ~1.4% of the global burden.</p>
+    <p><strong>India:</strong> 132 trials. India has a comparable
+    incidence rate (18.7/100k) to Nigeria but substantially more trial activity.</p>
+    <p><strong>Brazil:</strong> 167 trials. Brazil demonstrates
+    what middle-income country investment in cervical cancer research can achieve.</p>
+</div>
+
+<!-- ===== Sponsor Analysis ===== -->
+<h2>Sponsor Analysis</h2>
+<div class="info-box">
+    <p>Of the 107 cervical cancer trials in Africa,
+    <strong>7</strong> (6.5%) are led by
+    African institutions. The remainder are sponsored by pharmaceutical companies,
+    non-African academic centres, NIH/US government agencies, or NGOs/multilateral
+    organizations.</p>
+    <p>NGO and multilateral sponsors (WHO, PEPFAR, Gates Foundation, JHPIEGO)
+    play a distinctively large role in cervical cancer research in Africa compared
+    to other disease areas, reflecting the public health and prevention orientation
+    of the trial portfolio.</p>
+</div>
+
+<!-- ===== Full Trial Table ===== -->
+<h2>All Africa Trials (107)</h2>
+<p style="color:var(--text2);margin-bottom:8px">
+    Rows coloured by status: <span style="color:var(--green)">completed</span>,
+    <span style="color:var(--red)">terminated/withdrawn</span>,
+    <span style="color:var(--yellow)">active/recruiting</span>,
+    <span style="color:var(--grey)">unknown</span>.
+    Intervention class:
+    <span style="color:var(--green)">Screening</span>,
+    <span style="color:var(--accent)">Vaccination</span>,
+    <span style="color:var(--orange)">Treatment</span>.
+</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+    <th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Sponsor Class</th>
+    <th>Country</th><th>Phase</th><th>Status</th><th>Enrollment</th>
+    <th>Intervention</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05028725" target="_blank"
+    style="color:#60a5fa">NCT05028725</a></td>
+<td title="Investigation of a Novel Strategy for Early Detection of Esophageal Squamous Cell Carcinoma">Investigation of a Novel Strategy for Early Detection of Esophageal Squamous Cel...</td>
+<td>University of California, San Francisco</td>
+<td>NIH/US Govt</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">289</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05372484" target="_blank"
+    style="color:#60a5fa">NCT05372484</a></td>
+<td title="Assessment of New Technologies for the Screening and Diagnosis of Cervical Cancer in Mozambique, A Study to be Conducted in Maputo Central Hospital, Mavalane and Jose Macamo General Hospitals and Mavalane Health Center">Assessment of New Technologies for the Screening and Diagnosis of Cervical Cance...</td>
+<td>M.D. Anderson Cancer Center</td>
+<td>Other</td>
+<td>Mozambique, United States</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">678</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05413798" target="_blank"
+    style="color:#60a5fa">NCT05413798</a></td>
+<td title="Clinical Performance Validation of Urine HPV Testing for Cervical Cancer Screening Among Women Living With HIV in South Africa">Clinical Performance Validation of Urine HPV Testing for Cervical Cancer Screeni...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">300</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05472311" target="_blank"
+    style="color:#60a5fa">NCT05472311</a></td>
+<td title="Implementation and Scale Up of a Single-visit, Screen-and-treat Approach With Thermal Ablation for Sustainable Cervical Cancer Prevention Services in Kenya">Implementation and Scale Up of a Single-visit, Screen-and-treat Approach With Th...</td>
+<td>University of Washington</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">565</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05848557" target="_blank"
+    style="color:#60a5fa">NCT05848557</a></td>
+<td title="mSaada: A Mobile Health Tool to Improve Cervical Cancer Screening in Western Kenya">mSaada: A Mobile Health Tool to Improve Cervical Cancer Screening in Western Ken...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">6,000</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06004011" target="_blank"
+    style="color:#60a5fa">NCT06004011</a></td>
+<td title="Integrated Delivery of Cancer Control Interventions for Adolescents and Young Adults Living With HIV in Zambia">Integrated Delivery of Cancer Control Interventions for Adolescents and Young Ad...</td>
+<td>Implenomics</td>
+<td>Other</td>
+<td>Zambia</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">4,100</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06042543" target="_blank"
+    style="color:#60a5fa">NCT06042543</a></td>
+<td title="A Novel, One Stop, Affordable, Point of Care and Artificial Intelligence Supported System of Screening, Triage and Treatment Selection for Cervical Cancer and Precancer in the Low-to-middle Income Countries">A Novel, One Stop, Affordable, Point of Care and Artificial Intelligence Support...</td>
+<td>International Agency for Research on Cancer</td>
+<td>Other</td>
+<td>United States, Zimbabwe</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">3,200</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06128304" target="_blank"
+    style="color:#60a5fa">NCT06128304</a></td>
+<td title="ACCESS: Accelerating Cervical Cancer Elimination Through the Integration of Screen-and-treat Services">ACCESS: Accelerating Cervical Cancer Elimination Through the Integration of Scre...</td>
+<td>University of California, San Diego</td>
+<td>Non-African academic</td>
+<td>United States, Nigeria</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">2,436</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06326294" target="_blank"
+    style="color:#60a5fa">NCT06326294</a></td>
+<td title="A Randomized Clinical Trial to Assess the Effectiveness of Thermal Ablation Versus Loop Electrosurgical Excision Procedure for Cervical Cancer Risk Reduction in Women Living With Human Immunodeficiency Virus in Mozambique">A Randomized Clinical Trial to Assess the Effectiveness of Thermal Ablation Vers...</td>
+<td>Instituto Nacional de Saúde, Mozambique</td>
+<td>African institution</td>
+<td>Mozambique</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">4,844</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06458062" target="_blank"
+    style="color:#60a5fa">NCT06458062</a></td>
+<td title="Development and Validation of an Artificial-Intelligence-enabled Portable Colposcopy Device for Optimizing Triage Alternatives for HPV-based Cervical Cancer Screening">Development and Validation of an Artificial-Intelligence-enabled Portable Colpos...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,079</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06850974" target="_blank"
+    style="color:#60a5fa">NCT06850974</a></td>
+<td title="Foley Balloon for Cervical Preparation Before Dilation and Evacuation">Foley Balloon for Cervical Preparation Before Dilation and Evacuation</td>
+<td>Stony Brook University</td>
+<td>Non-African academic</td>
+<td>Mozambique</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">102</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07050745" target="_blank"
+    style="color:#60a5fa">NCT07050745</a></td>
+<td title="Accelerating Adoption of Patient-centered Cervical Cancer Screening and Treatment Linkage in Kenya">Accelerating Adoption of Patient-centered Cervical Cancer Screening and Treatmen...</td>
+<td>Kenyatta National Hospital</td>
+<td>African institution</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,980</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07203911" target="_blank"
+    style="color:#60a5fa">NCT07203911</a></td>
+<td title="Surgeon-performed Ultrasound for Real-time Guidance In Oral Cancer Surgeries - A Multicenter Randomized Controlled Trial">Surgeon-performed Ultrasound for Real-time Guidance In Oral Cancer Surgeries - A...</td>
+<td>Tobias Todsen</td>
+<td>Other</td>
+<td>Denmark, United States, Italy +2</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">200</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07276360" target="_blank"
+    style="color:#60a5fa">NCT07276360</a></td>
+<td title="Phase II Randomized Non-Inferiority Trial of Hypofractionated Radiotherapy for Locally Advanced Cervical Cancer in Uganda">Phase II Randomized Non-Inferiority Trial of Hypofractionated Radiotherapy for L...</td>
+<td>Uganda Cancer Institute</td>
+<td>African institution</td>
+<td>Uganda</td>
+<td>PHASE2</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">278</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07428330" target="_blank"
+    style="color:#60a5fa">NCT07428330</a></td>
+<td title="Comparison of Clinic-based Versus Clinic-plus Community Outreach-based Strategy Via HPV Self-Collection to Increase Uptake of Cervical Cancer Screening Among Women Living With HIV: a Cluster Randomized Trial (CASCADE-3001-A)">Comparison of Clinic-based Versus Clinic-plus Community Outreach-based Strategy ...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,600</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT00588770" target="_blank"
+    style="color:#60a5fa">NCT00588770</a></td>
+<td title="A Phase III Randomized Trial of Chemotherapy With or Without Bevacizumab in Patients With Recurrent or Metastatic Head and Neck Cancer">A Phase III Randomized Trial of Chemotherapy With or Without Bevacizumab in Pati...</td>
+<td>National Cancer Institute (NCI)</td>
+<td>NIH/US Govt</td>
+<td>South Africa, United States, Puerto Rico</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">403</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT02834637" target="_blank"
+    style="color:#60a5fa">NCT02834637</a></td>
+<td title="A Dose Reduction Immunobridging and Safety Study of Two HPV Vaccines in Tanzanian Girls">A Dose Reduction Immunobridging and Safety Study of Two HPV Vaccines in Tanzania...</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">930</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT03212404" target="_blank"
+    style="color:#60a5fa">NCT03212404</a></td>
+<td title="A Phase 1, Open-label, Multicenter, Dose-escalation Study of CK-301 Administered Intravenously as a Single Agent to Subjects With Advanced Cancers">A Phase 1, Open-label, Multicenter, Dose-escalation Study of CK-301 Administered...</td>
+<td>Checkpoint Therapeutics, Inc.</td>
+<td>Other</td>
+<td>Thailand, New Zealand, Poland +6</td>
+<td>PHASE1</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">272</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT04543617" target="_blank"
+    style="color:#60a5fa">NCT04543617</a></td>
+<td title="A Phase III, Randomized, Double-Blind, Placebo-Controlled Study of Atezolizumab With or Without Tiragolumab (Anti-TIGIT Antibody) in Patients With Unresectable Esophageal Squamous Cell Carcinoma Whose Cancers Have Not Progressed Following Definitive Concurrent Chemoradiotherapy">A Phase III, Randomized, Double-Blind, Placebo-Controlled Study of Atezolizumab ...</td>
+<td>Hoffmann-La Roche</td>
+<td>Pharma/industry</td>
+<td>Thailand, Greece, Poland +25</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">760</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT04794660" target="_blank"
+    style="color:#60a5fa">NCT04794660</a></td>
+<td title="The Study for the &quot;Cervical Cancer Screening and Treatment Algorithms Study Using HPV Testing in Africa&quot;">The Study for the "Cervical Cancer Screening and Treatment Algorithms Study Usin...</td>
+<td>International Agency for Research on Cancer</td>
+<td>Other</td>
+<td>South Africa, Senegal</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">1,500</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT04949256" target="_blank"
+    style="color:#60a5fa">NCT04949256</a></td>
+<td title="A Phase 3, Randomized Study to Evaluate the Efficacy and Safety of Pembrolizumab (MK-3475) + Lenvatinib (E7080/MK-7902) + Chemotherapy Compared With Standard of Care as First-line Intervention in Participants With Metastatic Esophageal Carcinoma">A Phase 3, Randomized Study to Evaluate the Efficacy and Safety of Pembrolizumab...</td>
+<td>Merck Sharp & Dohme LLC</td>
+<td>Pharma/industry</td>
+<td>Denmark, Thailand, Guatemala +22</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">864</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05152147" target="_blank"
+    style="color:#60a5fa">NCT05152147</a></td>
+<td title="A Randomized, Multicenter, Phase 3 Study of Zanidatamab in Combination With Chemotherapy With or Without Tislelizumab in Subjects With HER2-positive Unresectable Locally Advanced or Metastatic Gastroesophageal Adenocarcinoma (GEA)">A Randomized, Multicenter, Phase 3 Study of Zanidatamab in Combination With Chem...</td>
+<td>Jazz Pharmaceuticals</td>
+<td>Other</td>
+<td>Thailand, Greece, Poland +30</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">920</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06010160" target="_blank"
+    style="color:#60a5fa">NCT06010160</a></td>
+<td title="A Hybrid Implementation-Effectiveness Trial of Game Changers for Cervical Cancer Prevention in Uganda">A Hybrid Implementation-Effectiveness Trial of Game Changers for Cervical Cancer...</td>
+<td>RAND</td>
+<td>Other</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">1,400</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06286462" target="_blank"
+    style="color:#60a5fa">NCT06286462</a></td>
+<td title="Implementing and Evaluating the Cancer Tracking System (CATSystem): A Systems Level Intervention to Improve Cervical Cancer Screening, Treatment Referral and Follow up in Kenya">Implementing and Evaluating the Cancer Tracking System (CATSystem): A Systems Le...</td>
+<td>University of Kansas Medical Center</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">6,600</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06402383" target="_blank"
+    style="color:#60a5fa">NCT06402383</a></td>
+<td title="Supporting the National Expansion of HPV-based Cervical Cancer Screening in Tanzania Among Women Living with HIV: NECST-HIV">Supporting the National Expansion of HPV-based Cervical Cancer Screening in Tanz...</td>
+<td>Queen's University</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">2,000</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06411938" target="_blank"
+    style="color:#60a5fa">NCT06411938</a></td>
+<td title="A Community-based Cervical Cancer Prevention Program in Kenya: Overcoming Obstacles to Care, Promoting Understanding of HPV Natural History">A Community-based Cervical Cancer Prevention Program in Kenya: Overcoming Obstac...</td>
+<td>Indiana University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">2,300</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06452004" target="_blank"
+    style="color:#60a5fa">NCT06452004</a></td>
+<td title="Prevention and Screening Intervention Project - Towards Elimination of Cervical Cancer: Validation of Artificial Intelligence as Decision Support System in VIA">Prevention and Screening Intervention Project - Towards Elimination of Cervical ...</td>
+<td>University Medical Center Groningen</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">600</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06519994" target="_blank"
+    style="color:#60a5fa">NCT06519994</a></td>
+<td title="Feasibility of Intravaginal Artesunate as Adjuvant HPV & Cervical Precancer Treatment Among Women Living With HIV in Kenya">Feasibility of Intravaginal Artesunate as Adjuvant HPV & Cervical Precancer Trea...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>PHASE2</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">120</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06572774" target="_blank"
+    style="color:#60a5fa">NCT06572774</a></td>
+<td title="An Integrated Community Clinic Model of Optimized Implementation Strategies to Increase Early Detection of Breast and Cervical Cancers in Kenya">An Integrated Community Clinic Model of Optimized Implementation Strategies to I...</td>
+<td>Implenomics</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">5,400</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07015957" target="_blank"
+    style="color:#60a5fa">NCT07015957</a></td>
+<td title="Kupewa: Optimizing Implementation Strategies for Cervical Cancer Prevention">Kupewa: Optimizing Implementation Strategies for Cervical Cancer Prevention</td>
+<td>New York University</td>
+<td>Non-African academic</td>
+<td>Malawi</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">7,000</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06182241" target="_blank"
+    style="color:#60a5fa">NCT06182241</a></td>
+<td title="Identifying and Addressing Barriers to Retention in the Cervical Cancer Treatment Cascade Among Women With HIV in South Africa: Part 2">Identifying and Addressing Barriers to Retention in the Cervical Cancer Treatmen...</td>
+<td>Boston University Charles River Campus</td>
+<td>Non-African academic</td>
+<td>United States, South Africa</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">80</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06708351" target="_blank"
+    style="color:#60a5fa">NCT06708351</a></td>
+<td title="Enhancing Cervical Cancer Screening and Treatment in Women Living With HIV in Kenya (ENHANCE LINKAGE)">Enhancing Cervical Cancer Screening and Treatment in Women Living With HIV in Ke...</td>
+<td>Emory University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">2,280</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06711848" target="_blank"
+    style="color:#60a5fa">NCT06711848</a></td>
+<td title="A Comparative Analysis of the Effectiveness, Usability, Uptake, and Acceptability of an Educational Website and a Mobile Health Application Prototype in Improving Knowledge on Oral Cancer">A Comparative Analysis of the Effectiveness, Usability, Uptake, and Acceptabilit...</td>
+<td>University of Rwanda</td>
+<td>Non-African academic</td>
+<td>India, Sri Lanka, Rwanda +1</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">75</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06810739" target="_blank"
+    style="color:#60a5fa">NCT06810739</a></td>
+<td title="A Hybrid Type III Effectiveness - Implementation, Pragmatic Intervention Trial for Cervical Cancer Screen and Treat in Mozambique">A Hybrid Type III Effectiveness - Implementation, Pragmatic Intervention Trial f...</td>
+<td>Tulane University</td>
+<td>Non-African academic</td>
+<td>Mozambique</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">8,445</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07240220" target="_blank"
+    style="color:#60a5fa">NCT07240220</a></td>
+<td title="The Mother-Daughter Project: Inclusion of Difficult-to-reach Kenyan Families, and Studies of Factors Influencing the Immune Response to HPV Vaccination (Merck-4)">The Mother-Daughter Project: Inclusion of Difficult-to-reach Kenyan Families, an...</td>
+<td>Indiana University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">2,500</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07256912" target="_blank"
+    style="color:#60a5fa">NCT07256912</a></td>
+<td title="A Randomized, Active Controlled, Assessors-blind Trial to Establish Non-inferiority of Immunogenicity of a Single-dose of CERVAVAC® Quadrivalent HPV Vaccine Compared to the Gardasil® Quadrivalent Vaccine Among Girls and Boys Aged 9 to 14 Years and in Girls/Women Aged 15 to 20 Years in Zambia">A Randomized, Active Controlled, Assessors-blind Trial to Establish Non-inferior...</td>
+<td>International Agency for Research on Cancer</td>
+<td>Other</td>
+<td>Zambia</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">1,266</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07468695" target="_blank"
+    style="color:#60a5fa">NCT07468695</a></td>
+<td title="Expanded Use of Thermal Ablation (EXCEL Cohort) and Prophylactic Use of Two Probes (PRO Cohort) for Cervical Cancer Prevention in Women Living With HIV">Expanded Use of Thermal Ablation (EXCEL Cohort) and Prophylactic Use of Two Prob...</td>
+<td>Fred Hutchinson Cancer Center</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">300</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00001073" target="_blank"
+    style="color:#60a5fa">NCT00001073</a></td>
+<td title="A Randomized Phase III Trial of Oral Isotretinoin Versus Observation for Low-Grade Squamous Intraepithelial Lesions in HIV-Infected Women">A Randomized Phase III Trial of Oral Isotretinoin Versus Observation for Low-Gra...</td>
+<td>National Institute of Allergy and Infectious Diseases (NIAID)</td>
+<td>NIH/US Govt</td>
+<td>United States, Puerto Rico, Tanzania</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">150</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00002496" target="_blank"
+    style="color:#60a5fa">NCT00002496</a></td>
+<td title="PHASE III TRIAL TO PRESERVE THE LARYNX: INDUCTION CHEMOTHERAPY AND RADIATION THERAPY VERSUS CONCOMITANT CHEMOTHERAPY AND RADIATION THERAPY VERSUS RADIATION THERAPY">PHASE III TRIAL TO PRESERVE THE LARYNX: INDUCTION CHEMOTHERAPY AND RADIATION THE...</td>
+<td>Radiation Therapy Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00002632" target="_blank"
+    style="color:#60a5fa">NCT00002632</a></td>
+<td title="PHASE II TRIAL OF TAXOL IN ADVANCED OR METASTATIC SALIVARY GLAND MALIGNANCIES">PHASE II TRIAL OF TAXOL IN ADVANCED OR METASTATIC SALIVARY GLAND MALIGNANCIES</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">32</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00002670" target="_blank"
+    style="color:#60a5fa">NCT00002670</a></td>
+<td title="Phase III Intergroup Trial of Surgery Followed by (1) Radiotherapy vs. (2) Radiochemotherapy For Resectable High Risk Squamous Cell Carcinoma of the Head and Neck">Phase III Intergroup Trial of Surgery Followed by (1) Radiotherapy vs. (2) Radio...</td>
+<td>Radiation Therapy Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">459</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00002922" target="_blank"
+    style="color:#60a5fa">NCT00002922</a></td>
+<td title="Phase II Evaluation of Paclitaxel Infusion in Advanced (Recurrent or Metastatic) Squamous Cell Carcinoma of the Head and Neck">Phase II Evaluation of Paclitaxel Infusion in Advanced (Recurrent or Metastatic)...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00003206" target="_blank"
+    style="color:#60a5fa">NCT00003206</a></td>
+<td title="A Phase II Trial of Carboplatin Plus Paclitaxel in the Treatment of Locally Recurrent or Metastatic Nasopharyngeal Carcinoma">A Phase II Trial of Carboplatin Plus Paclitaxel in the Treatment of Locally Recu...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00003237" target="_blank"
+    style="color:#60a5fa">NCT00003237</a></td>
+<td title="Phase II Trial of Post-Operative Adjuvant Paclitaxel + Cisplatin in Patients With Adenocarcinoma of the Esophagus, Gastro-Esophageal Junction or Cardia">Phase II Trial of Post-Operative Adjuvant Paclitaxel + Cisplatin in Patients Wit...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>South Africa, United States, Puerto Rico</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">55</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00003592" target="_blank"
+    style="color:#60a5fa">NCT00003592</a></td>
+<td title="Phase III Randomized Trial of Methotrexate vs. Paclitaxel in Cisplatin-Ineligible Patients With Advanced Squamous Cell Carcinoma of the Head and Neck">Phase III Randomized Trial of Methotrexate vs. Paclitaxel in Cisplatin-Ineligibl...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>United States, South Africa</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">230</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00003809" target="_blank"
+    style="color:#60a5fa">NCT00003809</a></td>
+<td title="Randomized, Double Blind, Placebo Controlled Phase III Evaluation of Cisplatin + Placebo Versus Cisplatin + C225 a Mouse/Human Monoclonal Antibody to the Epidermal Growth Factor Receptor, in Patients With Metastatic and/or Recurrent Squamous Cell Cancer of the Head and Neck">Randomized, Double Blind, Placebo Controlled Phase III Evaluation of Cisplatin +...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>South Africa, United States, Puerto Rico</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00003864" target="_blank"
+    style="color:#60a5fa">NCT00003864</a></td>
+<td title="A Phase II Trial of Docetaxel and Carboplatin in Patients With Advanced Squamous Carcinoma of the Esophagus">A Phase II Trial of Docetaxel and Carboplatin in Patients With Advanced Squamous...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>South Africa, United States, Puerto Rico</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00054561" target="_blank"
+    style="color:#60a5fa">NCT00054561</a></td>
+<td title="Phase III Randomized Study of Adjuvant Biologic Therapy in Patients With Stages III/IV Head and Neck Squamous Cell Carcinoma">Phase III Randomized Study of Adjuvant Biologic Therapy in Patients With Stages ...</td>
+<td>Eastern Cooperative Oncology Group</td>
+<td>Other</td>
+<td>United States, Australia, South Africa +2</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">0</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00122772" target="_blank"
+    style="color:#60a5fa">NCT00122772</a></td>
+<td title="CRP on Radiobiological and Clinical Studies on Viral-induced Cancer's Response to Radiotherapy With Comprehensive Morbidity Assessment">CRP on Radiobiological and Clinical Studies on Viral-induced Cancer's Response t...</td>
+<td>International Atomic Energy Agency</td>
+<td>Other</td>
+<td>South Korea, Brazil, Austria +8</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">601</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00174837" target="_blank"
+    style="color:#60a5fa">NCT00174837</a></td>
+<td title="Phase III Randomized Trial of Concomitant Radiation, Cisplatin, and Tirapazamine Versus Concomitant Radiation and Cisplatin in Patients With Advanced Head and Neck Cancer">Phase III Randomized Trial of Concomitant Radiation, Cisplatin, and Tirapazamine...</td>
+<td>Sanofi</td>
+<td>Pharma/industry</td>
+<td>Singapore, Germany, Hungary +14</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">317</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00206219" target="_blank"
+    style="color:#60a5fa">NCT00206219</a></td>
+<td title="A Phase III Randomised, Stratified, Parallel-Group, Multi-Centre, Comparative Study of ZD1839 (Iressa®) 250 Mg and 500 Mg Versus Methotrexate for Previously Treated Patients With Squamous Cell Carcinoma of the Head and Neck">A Phase III Randomised, Stratified, Parallel-Group, Multi-Centre, Comparative St...</td>
+<td>AstraZeneca</td>
+<td>Pharma/industry</td>
+<td>Thailand, Greece, Australia +22</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">477</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00401323" target="_blank"
+    style="color:#60a5fa">NCT00401323</a></td>
+<td title="A Randomized Phase II-III Multicenter Trial of Docetaxel Plus Cisplatin and Docetaxel Plus 5-FU Versus Cisplatin Plus 5-FU in 1st Line Treatment of Patients With Recurrent and/or Metastatic Squamous Cell Carcinoma of the Head and Neck.">A Randomized Phase II-III Multicenter Trial of Docetaxel Plus Cisplatin and Doce...</td>
+<td>Sanofi</td>
+<td>Pharma/industry</td>
+<td>Greece, Uruguay, Australia +17</td>
+<td>PHASE2, PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">568</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00415194" target="_blank"
+    style="color:#60a5fa">NCT00415194</a></td>
+<td title="A Randomized Phase 3 Study of Pemetrexed in Combination With Cisplatin Versus Cisplatin Monotherapy in Patients With Recurrent or Metastatic Head and Neck Cancer">A Randomized Phase 3 Study of Pemetrexed in Combination With Cisplatin Versus Ci...</td>
+<td>Eli Lilly and Company</td>
+<td>Pharma/industry</td>
+<td>Denmark, Poland, South Africa +18</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">795</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00586339" target="_blank"
+    style="color:#60a5fa">NCT00586339</a></td>
+<td title="Evaluation of the Safety and Immunogenicity of GlaxoSmithKline Biologicals' HPV Vaccine 580299 (Cervarix) in Adult Human Immunodeficiency Virus (HIV) Infected Female Subjects">Evaluation of the Safety and Immunogenicity of GlaxoSmithKline Biologicals' HPV ...</td>
+<td>GlaxoSmithKline</td>
+<td>Pharma/industry</td>
+<td>South Africa</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">150</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00665197" target="_blank"
+    style="color:#60a5fa">NCT00665197</a></td>
+<td title="Improving Outcomes in Radiotherapy Using New Strategies of Treatment Delivery With Focus on Oesophageal Cancer.">Improving Outcomes in Radiotherapy Using New Strategies of Treatment Delivery Wi...</td>
+<td>International Atomic Energy Agency</td>
+<td>Other</td>
+<td>Canada, Thailand, India +4</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">200</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00804466" target="_blank"
+    style="color:#60a5fa">NCT00804466</a></td>
+<td title="Epidemiologic and Molecular Features of Cervical Cancer in Nigeria - Project Itoju (Care)">Epidemiologic and Molecular Features of Cervical Cancer in Nigeria - Project Ito...</td>
+<td>National Cancer Institute (NCI)</td>
+<td>NIH/US Govt</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,466</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01173900" target="_blank"
+    style="color:#60a5fa">NCT01173900</a></td>
+<td title="Delivery, Uptake and Acceptability of HPV Vaccination in Tanzanian Girls">Delivery, Uptake and Acceptability of HPV Vaccination in Tanzanian Girls</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>PHASE4</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,532</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01298596" target="_blank"
+    style="color:#60a5fa">NCT01298596</a></td>
+<td title="Impact of Cryotherapy Versus Loop Electrosurgical Excision Procedure (LEEP) on Recurrence of Cervical Intraepithelial Neoplasia and HIV-1 Cervical Shedding Among HIV-positive Women">Impact of Cryotherapy Versus Loop Electrosurgical Excision Procedure (LEEP) on R...</td>
+<td>University of Washington</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">400</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01304524" target="_blank"
+    style="color:#60a5fa">NCT01304524</a></td>
+<td title="Phase II Placebo Controlled Study of VGX-3100, (HPV16 E6/E7, HPV18 E6/E7 DNA Vaccine) Delivered IM Followed by Electroporation With CELLECTRA-5P for the Treatment of Biopsy-proven CIN 2/3 or CIN 3 With Documented HPV 16 or 18.">Phase II Placebo Controlled Study of VGX-3100, (HPV16 E6/E7, HPV18 E6/E7 DNA Vac...</td>
+<td>Inovio Pharmaceuticals</td>
+<td>Other</td>
+<td>Georgia, South Korea, United States +6</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">167</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01345682" target="_blank"
+    style="color:#60a5fa">NCT01345682</a></td>
+<td title="A Randomised, Open-label, Phase III Study to Evaluate the Efficacy and Safety of Oral Afatinib (BIBW 2992) Versus Intravenous Methotrexate in Patients With Recurrent and/or Metastatic Head and Neck Squamous Cell Carcinoma Who Have Progressed After Platinum-based Therapy">A Randomised, Open-label, Phase III Study to Evaluate the Efficacy and Safety of...</td>
+<td>Boehringer Ingelheim</td>
+<td>Other</td>
+<td>Denmark, Greece, South Africa +16</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">483</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01590017" target="_blank"
+    style="color:#60a5fa">NCT01590017</a></td>
+<td title="Feasibility Study of Safety, Toxicity, and Compliance of Concomitant Chemoradiotherapy for HIV-Associated Locally-Advanced Cervical Cancer">Feasibility Study of Safety, Toxicity, and Compliance of Concomitant Chemoradiot...</td>
+<td>AIDS Malignancy Consortium</td>
+<td>Other</td>
+<td>South Africa, Zimbabwe</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">41</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01597726" target="_blank"
+    style="color:#60a5fa">NCT01597726</a></td>
+<td title="Cervical Priming Before Dilation & Evacuation: a Randomized Controlled Trial">Cervical Priming Before Dilation & Evacuation: a Randomized Controlled Trial</td>
+<td>Ibis Reproductive Health</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">159</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01723956" target="_blank"
+    style="color:#60a5fa">NCT01723956</a></td>
+<td title="Validation of Implementation of Cervical Dysplasia Treatment Modalities in HIV-Seropositive Women">Validation of Implementation of Cervical Dysplasia Treatment Modalities in HIV-S...</td>
+<td>University of Witwatersrand, South Africa</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">166</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01894763" target="_blank"
+    style="color:#60a5fa">NCT01894763</a></td>
+<td title="Randomized, Prospective Comparison of Large vs. Small Diameter Esophageal Stents for Palliation of Malignant Dysphagia">Randomized, Prospective Comparison of Large vs. Small Diameter Esophageal Stents...</td>
+<td>Mayo Clinic</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>PHASE1</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">100</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01968837" target="_blank"
+    style="color:#60a5fa">NCT01968837</a></td>
+<td title="The Kilimanjaro Cervical Screening Project">The Kilimanjaro Cervical Screening Project</td>
+<td>Queen's University</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,072</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02124252" target="_blank"
+    style="color:#60a5fa">NCT02124252</a></td>
+<td title="Evaluation of a Community-Driven Cervical Cancer Prevention Strategy in Western Kenya">Evaluation of a Community-Driven Cervical Cancer Prevention Strategy in Western ...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">7,200</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02237326" target="_blank"
+    style="color:#60a5fa">NCT02237326</a></td>
+<td title="Safety and Validity Evaluation for Cervical Cancer Screening and Treatment Techniques Among HIV-infected Women">Safety and Validity Evaluation for Cervical Cancer Screening and Treatment Techn...</td>
+<td>University of California, San Francisco</td>
+<td>NIH/US Govt</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">654</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02467907" target="_blank"
+    style="color:#60a5fa">NCT02467907</a></td>
+<td title="A Multicenter Open-Label Single-Arm Phase II Study Evaluating the Safety and Efficacy of Bevacizumab in Combination With Carboplatin and Paclitaxel in Patients With Metastatic, Recurrent or Persistent Cervical Cancer">A Multicenter Open-Label Single-Arm Phase II Study Evaluating the Safety and Eff...</td>
+<td>Hoffmann-La Roche</td>
+<td>Pharma/industry</td>
+<td>Brazil, Romania, Greece +15</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">152</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02509702" target="_blank"
+    style="color:#60a5fa">NCT02509702</a></td>
+<td title="Text Messages to Increase Attendance to Follow-up Cervical Cancer Screening Appointments Among HPV Positive Tanzanian Women (Connected2Care)">Text Messages to Increase Attendance to Follow-up Cervical Cancer Screening Appo...</td>
+<td>Marianne Andersen</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">705</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02680613" target="_blank"
+    style="color:#60a5fa">NCT02680613</a></td>
+<td title="Pilot Study of a Mobile Health Approach to Reduce Barriers to Cervical Cancer Screening in Tanzania">Pilot Study of a Mobile Health Approach to Reduce Barriers to Cervical Cancer Sc...</td>
+<td>Queen's University</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">851</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02750202" target="_blank"
+    style="color:#60a5fa">NCT02750202</a></td>
+<td title="Prophylactic Vaccines as Therapy: Prevention of Recurrence of Extensive Genital Warts">Prophylactic Vaccines as Therapy: Prevention of Recurrence of Extensive Genital ...</td>
+<td>University of Pretoria</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">52</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02823574" target="_blank"
+    style="color:#60a5fa">NCT02823574</a></td>
+<td title="A Double-Blind, Randomized, Two Arm Phase 2 Study of Nivolumab in Combination With Ipilimumab Versus Nivolumab in Combination With Ipilimumab Placebo in Recurrent or Metastatic Squamous Cell Carcinoma of the Head and Neck (SCCHN)">A Double-Blind, Randomized, Two Arm Phase 2 Study of Nivolumab in Combination Wi...</td>
+<td>Bristol-Myers Squibb</td>
+<td>Pharma/industry</td>
+<td>South Africa, France, Spain +18</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">425</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02956239" target="_blank"
+    style="color:#60a5fa">NCT02956239</a></td>
+<td title="Development, Field Testing and Evaluation of the Efficacy of a Hand-held, Portable and Affordable Thermo-coagulator to Prevent Cervical Cancer in Low- and Middle-income Countries">Development, Field Testing and Evaluation of the Efficacy of a Hand-held, Portab...</td>
+<td>International Agency for Research on Cancer</td>
+<td>Other</td>
+<td>Zambia</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">3,124</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03185013" target="_blank"
+    style="color:#60a5fa">NCT03185013</a></td>
+<td title="A Prospective, Randomized, Double-Blind, Placebo-Controlled Phase 3 Study of VGX-3100 Delivered Intramuscularly Followed by Electroporation With CELLECTRA™-5PSP for the Treatment of HPV-16 and/or HPV-18 Related High Grade Squamous Intraepithelial Lesion (HSIL) of the Cervix">A Prospective, Randomized, Double-Blind, Placebo-Controlled Phase 3 Study of VGX...</td>
+<td>Inovio Pharmaceuticals</td>
+<td>Other</td>
+<td>Thailand, Poland, Estonia +16</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">201</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03189719" target="_blank"
+    style="color:#60a5fa">NCT03189719</a></td>
+<td title="A Randomized, Double-Blind, Placebo-Controlled Phase III Clinical Trial of Pembrolizumab (MK-3475) in Combination With Cisplatin and 5-Fluorouracil Versus Placebo in Combination With Cisplatin and 5-Fluorouracil as First-Line Treatment in Subjects With Advanced/Metastatic Esophageal Carcinoma (KEYNOTE-590)">A Randomized, Double-Blind, Placebo-Controlled Phase III Clinical Trial of Pembr...</td>
+<td>Merck Sharp & Dohme LLC</td>
+<td>Pharma/industry</td>
+<td>Denmark, Thailand, Guatemala +23</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">749</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03284866" target="_blank"
+    style="color:#60a5fa">NCT03284866</a></td>
+<td title="A Randomized, Placebo-Controlled Trial of HPV Vaccination to Reduce Cervical High-Grade Squamous Intraepithelial Lesions Among HIV-Infected Women Participating in an HPV Test-and-Treat Program (COVENANT)">A Randomized, Placebo-Controlled Trial of HPV Vaccination to Reduce Cervical Hig...</td>
+<td>AIDS Malignancy Consortium</td>
+<td>Other</td>
+<td>Uganda, Kenya, South Africa +2</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">536</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03514459" target="_blank"
+    style="color:#60a5fa">NCT03514459</a></td>
+<td title="Randomized Controlled Trial of an Implementation Science Tool to Increase Cervical Cancer Screening in Mombasa, Kenya">Randomized Controlled Trial of an Implementation Science Tool to Increase Cervic...</td>
+<td>University of Washington</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">20</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03697226" target="_blank"
+    style="color:#60a5fa">NCT03697226</a></td>
+<td title="An Open-Label Multiple-Dose, Dose Escalation Study To Evaluate Safety, Tolerability and Pharmacokinetics of Topical ABI-1968 in Participants With Cervical High Grade Squamous Intraepithelial Lesions">An Open-Label Multiple-Dose, Dose Escalation Study To Evaluate Safety, Tolerabil...</td>
+<td>Antiva Biosciences</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>PHASE1</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">8</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03721978" target="_blank"
+    style="color:#60a5fa">NCT03721978</a></td>
+<td title="A Prospective, Randomized, Double-Blind, Placebo-Controlled Phase 3 Study of VGX-3100 Delivered Intramuscularly Followed by Electroporation With CELLECTRA™ 5PSP for the Treatment of HPV-16 and/or HPV-18 Related High Grade Squamous Intraepithelial Lesion (HSIL) of the Cervix">A Prospective, Randomized, Double-Blind, Placebo-Controlled Phase 3 Study of VGX...</td>
+<td>Inovio Pharmaceuticals</td>
+<td>Other</td>
+<td>Brazil, United States, Poland +7</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">203</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03830866" target="_blank"
+    style="color:#60a5fa">NCT03830866</a></td>
+<td title="A Phase III, Randomized, Multi-Center, Double-Blind, Global Study to Determine the Efficacy and Safety of Durvalumab in Combination With and Following Chemoradiotherapy Compared to Chemoradiotherapy Alone for Treatment in Women With Locally Advanced Cervical Cancer">A Phase III, Randomized, Multi-Center, Double-Blind, Global Study to Determine t...</td>
+<td>AstraZeneca</td>
+<td>Pharma/industry</td>
+<td>South Korea, Brazil, Hungary +12</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">770</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04000503" target="_blank"
+    style="color:#60a5fa">NCT04000503</a></td>
+<td title="Integrated Cervical Cancer Screening in Mayuge District Uganda (ASPIRE Mayuge): A Pragmatic Cluster Randomized Control Trial">Integrated Cervical Cancer Screening in Mayuge District Uganda (ASPIRE Mayuge): ...</td>
+<td>University of British Columbia</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">2,019</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04090554" target="_blank"
+    style="color:#60a5fa">NCT04090554</a></td>
+<td title="Esophageal Squamous Cell Carcinoma African Prevention Research (ESCCAPE) Cytosponge™ Feasibility Study">Esophageal Squamous Cell Carcinoma African Prevention Research (ESCCAPE) Cytospo...</td>
+<td>International Agency for Research on Cancer</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">101</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04092257" target="_blank"
+    style="color:#60a5fa">NCT04092257</a></td>
+<td title="A Novel Cervical Cancer Screen-and-Treat Demonstration Project With HPV Self-testing and Thermocoagulation for Women in Lilongwe Malawi">A Novel Cervical Cancer Screen-and-Treat Demonstration Project With HPV Self-tes...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Malawi</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,250</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04191967" target="_blank"
+    style="color:#60a5fa">NCT04191967</a></td>
+<td title="Cervical Cancer Screening Among HIV-infected Women in Western Kenya: Evaluation of the Safety, Acceptability, and Efficacy of an Alternative Ablation Method for Treatment of Precancerous Lesions">Cervical Cancer Screening Among HIV-infected Women in Western Kenya: Evaluation ...</td>
+<td>University of California, San Francisco</td>
+<td>NIH/US Govt</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">379</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04286243" target="_blank"
+    style="color:#60a5fa">NCT04286243</a></td>
+<td title="UNCPM 21904 - Prevention of Cervical Cancer Through an HPV-based Screen-and-treat Strategy in Malawi: a Cluster Randomized Trial">UNCPM 21904 - Prevention of Cervical Cancer Through an HPV-based Screen-and-trea...</td>
+<td>University of North Carolina, Chapel Hill</td>
+<td>Non-African academic</td>
+<td>Malawi</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">8,174</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04307433" target="_blank"
+    style="color:#60a5fa">NCT04307433</a></td>
+<td title="mHealth Delivered Narrative Intervention to Increase Cervical Cancer Screening Among Malawian Women Living With HIV">mHealth Delivered Narrative Intervention to Increase Cervical Cancer Screening A...</td>
+<td>University of Massachusetts, Boston</td>
+<td>Non-African academic</td>
+<td>Malawi</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">179</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04774887" target="_blank"
+    style="color:#60a5fa">NCT04774887</a></td>
+<td title="ERADICATING CERVICAL CANCER IN KENYA: Benefits of Community-based Prevention, and the Effects of Aflatoxin on HPV Vaccination (MISP 60403) (MISP2)">ERADICATING CERVICAL CANCER IN KENYA: Benefits of Community-based Prevention, an...</td>
+<td>Indiana University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">300</td>
+<td style="color:#60a5fa">Vaccination</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04785820" target="_blank"
+    style="color:#60a5fa">NCT04785820</a></td>
+<td title="A 3-Arm, Randomized, Blinded, Active-Controlled, Phase II Study of RO7121661, a PD1-TIM3 Bispecific Antibody and RO7247669, a PD1-LAG3 Bispecific Antibody, Compared With Nivolumab in Participants With Advanced or Metastatic Squamous Cell Carcinoma of the Esophagus">A 3-Arm, Randomized, Blinded, Active-Controlled, Phase II Study of RO7121661, a ...</td>
+<td>Hoffmann-La Roche</td>
+<td>Pharma/industry</td>
+<td>Denmark, Singapore, Brazil +15</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">190</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04960748" target="_blank"
+    style="color:#60a5fa">NCT04960748</a></td>
+<td title="Pilot of a Network-driven, Advocacy Intervention to Promote Cervical Cancer Screening in Uganda">Pilot of a Network-driven, Advocacy Intervention to Promote Cervical Cancer Scre...</td>
+<td>RAND</td>
+<td>Other</td>
+<td>Uganda</td>
+<td>PHASE2</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">143</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04998318" target="_blank"
+    style="color:#60a5fa">NCT04998318</a></td>
+<td title="Compare the Performance of the Pocket Colposcope to VIA/VILI for Triage of HPV+ Women in Kenya">Compare the Performance of the Pocket Colposcope to VIA/VILI for Triage of HPV+ ...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">434</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05234112" target="_blank"
+    style="color:#60a5fa">NCT05234112</a></td>
+<td title="Prevention and Screening Intervention Project - Towards Elimination of Cervical Cancer">Prevention and Screening Intervention Project - Towards Elimination of Cervical ...</td>
+<td>University Medical Center Groningen</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">30,000</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05362955" target="_blank"
+    style="color:#60a5fa">NCT05362955</a></td>
+<td title="5-fluorouracil Following Cervical Intraepithelial Neoplasia Treatment Among HIV-positive Women in East Africa">5-fluorouracil Following Cervical Intraepithelial Neoplasia Treatment Among HIV-...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>PHASE1</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">12</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05413811" target="_blank"
+    style="color:#60a5fa">NCT05413811</a></td>
+<td title="Acceptability and Feasibility of Combination Treatment for Cervical Precancer Among South African Women Living With HIV">Acceptability and Feasibility of Combination Treatment for Cervical Precancer Am...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">180</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05736588" target="_blank"
+    style="color:#60a5fa">NCT05736588</a></td>
+<td title="A Stigma Responsive Service Delivery Model for HPV-based Screening Among Women Living With HIV">A Stigma Responsive Service Delivery Model for HPV-based Screening Among Women L...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">982</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT06165614" target="_blank"
+    style="color:#60a5fa">NCT06165614</a></td>
+<td title="Self-administered Artesunate Pessaries for Treatment of Cervical Precancer in Kenya">Self-administered Artesunate Pessaries for Treatment of Cervical Precancer in Ke...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>PHASE1</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">17</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT06263582" target="_blank"
+    style="color:#60a5fa">NCT06263582</a></td>
+<td title="Pharmacokinetics of Intravaginal, Self-administered Artesunate Vaginal Pessaries Among Women in Kenya">Pharmacokinetics of Intravaginal, Self-administered Artesunate Vaginal Pessaries...</td>
+<td>UNC Lineberger Comprehensive Cancer Center</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>PHASE1</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">12</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT00233727" target="_blank"
+    style="color:#60a5fa">NCT00233727</a></td>
+<td title="Safety and Efficacy of Two Screen-and-Treat Approaches for the Prevention of Cervical Cancer">Safety and Efficacy of Two Screen-and-Treat Approaches for the Prevention of Cer...</td>
+<td>Columbia University</td>
+<td>Non-African academic</td>
+<td>South Africa</td>
+<td>PHASE3</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">7,123</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT02477124" target="_blank"
+    style="color:#60a5fa">NCT02477124</a></td>
+<td title="A See and Treat Paradigm for Cervical Pre-cancer">A See and Treat Paradigm for Cervical Pre-cancer</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Zambia, United States, India +2</td>
+<td>NA</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">514</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT05502367" target="_blank"
+    style="color:#60a5fa">NCT05502367</a></td>
+<td title="An Open-Label Single and Multiple-dose, Study to Evaluate Safety, Tolerability and Efficacy of ABI-2280 Vaginal Insert (Previously Referred to as ABI-2280 Vaginal Tablet) in Participants With Cervical Squamous Intraepithelial Lesions">An Open-Label Single and Multiple-dose, Study to Evaluate Safety, Tolerability a...</td>
+<td>Antiva Biosciences</td>
+<td>Other</td>
+<td>Peru, Australia, South Africa</td>
+<td>PHASE1, PHASE2</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">44</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT03834571" target="_blank"
+    style="color:#60a5fa">NCT03834571</a></td>
+<td title="A Randomized Phase II Trial of Concurrent Chemotherapy and Pelvic Radiation Therapy With or Without Paclitaxel and Carboplatin in HIV-positive Women With Locally Advanced Cervical Cancer (LACC)">A Randomized Phase II Trial of Concurrent Chemotherapy and Pelvic Radiation Ther...</td>
+<td>AIDS Malignancy Consortium</td>
+<td>Other</td>
+<td>South Africa, Zimbabwe</td>
+<td>PHASE2</td>
+<td style="color:#e74c3c">WITHDRAWN</td>
+<td style="text-align:right">0</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #e67e22">
+<td><a href="https://clinicaltrials.gov/study/NCT02146508" target="_blank"
+    style="color:#60a5fa">NCT02146508</a></td>
+<td title="Endoscopic Prevention of Esophageal Cancer at Tenwek Hospital (The EXPECT Trial) by Removal or Ablation of Esophageal Squamous Cell Dysplasia">Endoscopic Prevention of Esophageal Cancer at Tenwek Hospital (The EXPECT Trial)...</td>
+<td>Tenwek Hospital</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#e67e22">SUSPENDED</td>
+<td style="text-align:right">75</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT00122746" target="_blank"
+    style="color:#60a5fa">NCT00122746</a></td>
+<td title="Doctoral CRP on Clinical and Experimental Studies to Improve Radiotherapy Outcome in AIDS Cancer Patients">Doctoral CRP on Clinical and Experimental Studies to Improve Radiotherapy Outcom...</td>
+<td>International Atomic Energy Agency</td>
+<td>Other</td>
+<td>Uganda, India, South Africa +2</td>
+<td>PHASE3</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">322</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT00957086" target="_blank"
+    style="color:#60a5fa">NCT00957086</a></td>
+<td title="Phase III, Double-Blind, Placebo-Controlled Study of Post-Operative Adjuvant Concurrent Chemo-Radiotherapy With or Without Nimotuzumab for Stage III/IV Head & Neck Squamous Cell Cancer">Phase III, Double-Blind, Placebo-Controlled Study of Post-Operative Adjuvant Con...</td>
+<td>National Cancer Centre, Singapore</td>
+<td>Non-African academic</td>
+<td>Singapore, South Korea, Cuba +10</td>
+<td>PHASE3</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">710</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT02250716" target="_blank"
+    style="color:#60a5fa">NCT02250716</a></td>
+<td title="A Comparison of Immediate Treatment of CIN1 With Cryotherapy and Regular 12 Month Cytology Follow up in HIV Seropositive Women">A Comparison of Immediate Treatment of CIN1 With Cryotherapy and Regular 12 Mont...</td>
+<td>University of Witwatersrand, South Africa</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">480</td>
+<td style="color:#2ecc71">Screening</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT02765503" target="_blank"
+    style="color:#60a5fa">NCT02765503</a></td>
+<td title="A Randomized Multicenter Trial of Accelerated Hypo - vs. Normo-fractionated Radiotherapy for Head and Neck Squamous Cell Carcinoma (IAEA-HYPNO Trial)">A Randomized Multicenter Trial of Accelerated Hypo - vs. Normo-fractionated Radi...</td>
+<td>International Atomic Energy Agency</td>
+<td>Other</td>
+<td>Cuba, Thailand, Indonesia +6</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">836</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT03332069" target="_blank"
+    style="color:#60a5fa">NCT03332069</a></td>
+<td title="A Phase III Randomised Trial Investigating the Benefits of the Addition of Modulated Electro-hyperthermia to Chemo-radiation for Cervical Cancer in HIV Positive and Negative Women in South Africa">A Phase III Randomised Trial Investigating the Benefits of the Addition of Modul...</td>
+<td>Jeffrey Kotzen</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>PHASE3</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">236</td>
+<td style="color:#e67e22">Treatment</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT05303298" target="_blank"
+    style="color:#60a5fa">NCT05303298</a></td>
+<td title="Evaluating Gastro-oesophageal Reflux After Palliative Stenting for Malignant Distal Oesophageal Obstruction Using Anti-Reflux Stents: a Randomised Controlled Trial">Evaluating Gastro-oesophageal Reflux After Palliative Stenting for Malignant Dis...</td>
+<td>University of Cape Town</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">72</td>
+<td style="color:#95a5a6">Other</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+    Data: ClinicalTrials.gov API v2 (public) | Fetched: 2026-03-28 |
+    Africa trials: 107 | US trials: 3,451 | CCI: 17.9x |
+    Generated by fetch_cervical_cancer.py
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ── Country bar chart ──────────────────────────────────────────────
+new Chart(document.getElementById('countryChart'), {
+    type: 'bar',
+    data: {
+        labels: ["South Africa", "Kenya", "Uganda", "Nigeria", "Tanzania", "Mozambique", "Zimbabwe", "Malawi", "Zambia"],
+        datasets: [{
+            label: 'Trials',
+            data: [50, 27, 9, 3, 11, 4, 5, 5, 4],
+            backgroundColor: '#60a5fa',
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: {
+                grid: { color: 'rgba(255,255,255,0.05)' },
+                ticks: { color: '#9ca3af' },
+                title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#e5e7eb' }
+            }
+        }
+    }
+});
+
+// ── Incidence vs Trial Count scatter ───────────────────────────────
+(function() {
+    var countries = ["South Africa", "Kenya", "Uganda", "Nigeria", "Tanzania", "Mozambique", "Zimbabwe", "Malawi", "Zambia"];
+    var trials = [50, 27, 9, 3, 11, 4, 5, 5, 4];
+    var asr = [22.8, 25.5, 33.6, 18.9, 36.2, 39.9, 38.5, 39.8, 37.1];
+    var points = countries.map(function(c, i) {
+        return { x: trials[i], y: asr[i], label: c };
+    });
+    new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Country',
+                data: points,
+                backgroundColor: '#e74c3c',
+                pointRadius: 8,
+                pointHoverRadius: 12,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            var p = ctx.raw;
+                            return p.label + ': ' + p.x + ' trials, ASR ' + p.y + '/100k';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af' },
+                    title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af' },
+                    title: { display: true, text: 'Incidence (ASR/100k)', color: '#9ca3af' }
+                }
+            }
+        }
+    });
+})();
+
+// ── Intervention doughnut ──────────────────────────────────────────
+new Chart(document.getElementById('interventionChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["Screening", "Vaccination", "Treatment", "Other"],
+        datasets: [{
+            data: [37, 10, 31, 29],
+            backgroundColor: ["#2ecc71", "#60a5fa", "#e67e22", "#95a5a6"],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#e5e7eb', padding: 12 }
+            }
+        }
+    }
+});
+
+// ── Sponsor doughnut ───────────────────────────────────────────────
+new Chart(document.getElementById('sponsorChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["Other", "Non-African academic", "Pharma/industry", "African institution", "NIH/US Govt"],
+        datasets: [{
+            data: [51, 31, 12, 7, 6],
+            backgroundColor: ["#95a5a6", "#3498db", "#e74c3c", "#2ecc71", "#f39c12"],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#e5e7eb', padding: 12 }
+            }
+        }
+    }
+});
+
+// ── Global comparison bar ──────────────────────────────────────────
+new Chart(document.getElementById('globalChart'), {
+    type: 'bar',
+    data: {
+        labels: ["Africa", "United States", "India", "Brazil"],
+        datasets: [{
+            label: 'Trials',
+            data: [107, 3451, 132, 167],
+            backgroundColor: ['#e74c3c', '#3498db', '#f39c12', '#2ecc71'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: { color: '#e5e7eb' }
+            },
+            y: {
+                grid: { color: 'rgba(255,255,255,0.05)' },
+                ticks: { color: '#9ca3af' },
+                title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+            }
+        }
+    }
+});
+
+// ── Phase distribution ─────────────────────────────────────────────
+(function() {
+    var phaseLabels = ["PHASE3", "PHASE2", "NA", "PHASE1, PHASE2", "PHASE1", "PHASE2, PHASE3", "PHASE4"];
+    var phaseValues = [28, 15, 53, 1, 6, 1, 3];
+    var phaseColors = phaseLabels.map(function(l) {
+        if (l.indexOf('PHASE1') >= 0 && l.indexOf('PHASE2') < 0) return '#3498db';
+        if (l.indexOf('PHASE2') >= 0 && l.indexOf('PHASE3') < 0) return '#f39c12';
+        if (l.indexOf('PHASE3') >= 0 && l.indexOf('PHASE4') < 0) return '#2ecc71';
+        if (l.indexOf('PHASE4') >= 0) return '#9b59b6';
+        if (l.indexOf('EARLY') >= 0) return '#1abc9c';
+        return '#95a5a6';
+    });
+    new Chart(document.getElementById('phaseChart'), {
+        type: 'doughnut',
+        data: {
+            labels: phaseLabels,
+            datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: '#e5e7eb', padding: 12 }
+                }
+            }
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

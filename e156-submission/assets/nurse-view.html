@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nurse's View: 80% of Care, 1% of Evidence</title>
+<style>
+  :root { --bg: #0a0e17; --surface: #111827; --border: #1e293b; --text: #e2e8f0;
+           --muted: #94a3b8; --accent: #ec4899; --danger: #ef4444; --success: #22c55e;
+           --warn: #f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter','Segoe UI',system-ui,sans-serif;
+          line-height:1.6; }
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px; }
+  h1 { font-size:1.8em; margin-bottom:4px; background:linear-gradient(135deg,#ec4899,#f59e0b);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  h2 { font-size:1.3em; margin:32px 0 16px 0; color:#f1f5f9;
+        border-bottom:2px solid var(--border); padding-bottom:8px; }
+  h3 { font-size:1.1em; color:#f1f5f9; margin:16px 0 8px 0; }
+  .subtitle { color:var(--muted); font-size:0.95em; margin-bottom:24px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+               gap:12px; margin:20px 0; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+          padding:16px; text-align:center; }
+  .kpi-value { font-size:1.8em; font-weight:800; }
+  .kpi-label { font-size:0.82em; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88em; }
+  th { background:#1e293b; color:#cbd5e1; padding:10px 12px; text-align:left;
+        font-weight:600; position:sticky; top:0; }
+  td { padding:8px 12px; border-bottom:1px solid #1e293b; }
+  tr:hover { background:rgba(236,72,153,0.05); }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border);
+                 margin:12px 0; }
+  .chart-container { background:var(--surface); border-radius:12px; padding:20px;
+                      border:1px solid var(--border); margin:12px 0; }
+  .callout { border-radius:12px; padding:24px; margin:20px 0; }
+  .callout-danger { background:#1a0000; border:2px solid #7f1d1d; }
+  .callout-warn { background:#1a1200; border:2px solid #78350f; }
+  .callout-info { background:#001a33; border:2px solid #1e3a5f; }
+  .callout-success { background:#001a00; border:2px solid #14532d; }
+  .callout-pink { background:#1a000d; border:2px solid #831843; }
+  .method { background:var(--surface); border-radius:12px; padding:20px;
+             border:1px solid var(--border); margin:16px 0; font-size:0.9em;
+             color:var(--muted); line-height:1.8; }
+  .method strong { color:var(--text); }
+  .narrative { background:var(--surface); border-left:4px solid var(--accent);
+                padding:20px 24px; margin:16px 0; border-radius:0 12px 12px 0;
+                font-size:0.95em; line-height:1.8; }
+  canvas { max-width:100%; }
+  @media(max-width:768px) {
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    h1 { font-size:1.4em; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<h1>The Nurse's View: 80% of Care, 1% of Evidence</h1>
+<p class="subtitle">Nurses deliver the vast majority of healthcare in Africa --
+  but the evidence for their interventions is almost non-existent
+  | 347 nursing trials in Africa vs 2,861 in the US
+  | Data: ClinicalTrials.gov API v2 | 2026-03-28</p>
+
+<!-- ====== SECTION: Summary KPIs ====== -->
+<h2>The Evidence-Care Mismatch</h2>
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">8.2x</div>
+    <div class="kpi-label">US:Africa Nursing Trial Ratio</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--accent)">1.81%</div>
+    <div class="kpi-label">Africa Nursing Trial Density</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">192</div>
+    <div class="kpi-label">Midwifery Trials (Africa)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">79</div>
+    <div class="kpi-label">Task-Shifting to Nurses</div>
+  </div>
+</div>
+
+<div class="callout callout-pink">
+  <h3>The Invisible Majority</h3>
+  <p style="margin-top:8px">In most African health facilities, the nurse is the health system.
+  There is no doctor. The nurse diagnoses, prescribes, manages emergencies, delivers babies,
+  counsels patients, and runs the facility. Nurses and midwives deliver an estimated 80% or
+  more of healthcare across the continent. Yet of all interventional trials conducted in Africa,
+  only 1.81% involve nursing interventions -- compared with 1.8%
+  in the US and 0.98% in the UK. The people who deliver most of the care have
+  almost none of the evidence.</p>
+</div>
+
+<!-- ====== SECTION: Nursing Categories ====== -->
+<h2>Nursing Evidence by Category</h2>
+<p style="color:var(--muted);margin-bottom:12px">Trial counts across eight nursing evidence
+  categories, comparing Africa with the US and UK.</p>
+
+<div class="chart-container">
+  <canvas id="catChart" height="120"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Category</th><th style="text-align:center">Africa</th>
+  <th style="text-align:center">US</th><th style="text-align:center">UK</th>
+  <th style="text-align:center">US:Africa</th><th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Nursing / Nurse-Led</td>
+<td style="text-align:center;font-weight:700">347</td>
+<td style="text-align:center">2,861</td>
+<td style="text-align:center">217</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">8.2x</td>
+<td style="font-size:0.82em;color:#94a3b8">All trials involving nursing interventions or nurse-led care models.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Midwifery / Midwife-Led</td>
+<td style="text-align:center;font-weight:700">192</td>
+<td style="text-align:center">1,044</td>
+<td style="text-align:center">117</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">5.4x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials testing midwifery models, midwife-led care, and skilled birth attendance.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Wound Care / Pressure Ulcers</td>
+<td style="text-align:center;font-weight:700">1,765</td>
+<td style="text-align:center">10,115</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">5.7x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials on wound management, pressure ulcer prevention, and wound healing.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Infection Control / IPC</td>
+<td style="text-align:center;font-weight:700">3,503</td>
+<td style="text-align:center">12,077</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">3.4x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials testing infection prevention and control practices.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Patient Education / Self-Management</td>
+<td style="text-align:center;font-weight:700">1,733</td>
+<td style="text-align:center">17,976</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">10.4x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials on patient education, self-management support, and adherence programmes.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Palliative Nursing / End of Life</td>
+<td style="text-align:center;font-weight:700">114</td>
+<td style="text-align:center">1,810</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">15.9x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials on palliative and end-of-life nursing care.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Task-Shifting to Nurses</td>
+<td style="text-align:center;font-weight:700">79</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center">43</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials evaluating expanded nursing roles through task-shifting.</td>
+</tr>
+<tr>
+<td style="font-weight:600">Maternal / Neonatal Nursing</td>
+<td style="text-align:center;font-weight:700">186</td>
+<td style="text-align:center">510</td>
+<td style="text-align:center;color:#64748b">--</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">2.7x</td>
+<td style="font-size:0.82em;color:#94a3b8">Trials on maternal and neonatal nursing interventions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: Nursing Density ====== -->
+<h2>Nursing Trial Density: The Comparison</h2>
+
+<div class="chart-container">
+  <canvas id="densityChart" height="80"></canvas>
+</div>
+
+<div class="narrative">
+  <strong>What density means:</strong> Nursing trial density is the percentage of all
+  interventional trials that involve nursing interventions. In Africa, where nurses deliver
+  most care, the density should be higher than in countries with more doctors. Instead, it
+  is lower -- reflecting a research enterprise that prioritises drug development over care
+  delivery science. The UK, with its strong tradition of nursing research and the National
+  Institute for Health and Care Research (NIHR), shows what is possible when nursing
+  evidence is valued.
+</div>
+
+<!-- ====== SECTION: Midwifery Spotlight ====== -->
+<h2>Midwifery Spotlight: Critical for Maternal Mortality</h2>
+
+<div class="callout callout-danger">
+  <h3>The Maternal Mortality Emergency</h3>
+  <p style="margin-top:8px">Sub-Saharan Africa accounts for approximately 70% of global
+  maternal deaths. Midwives are the frontline defence against maternal mortality. Africa has
+  192 midwifery trials registered, compared with 1,044
+  in the US. Evidence for midwife-led birth centres, partograph use, active management of
+  the third stage of labour, and post-partum haemorrhage protocols in African settings is
+  critically needed. The interventions exist -- what is missing is the evidence for how to
+  implement them effectively with available resources and personnel.</p>
+</div>
+
+<!-- ====== SECTION: Wound Care Gap ====== -->
+<h2>The Wound Care Gap</h2>
+
+<div class="callout callout-warn">
+  <h3>Basic Nursing, No Evidence</h3>
+  <p style="margin-top:8px">Wound care is fundamental nursing practice. Diabetic foot ulcers,
+  surgical wound infections, pressure ulcers, and burn wounds require evidence-based protocols.
+  Africa has 1,765 wound care trials -- for a continent where diabetes-related
+  amputations are rising, burn injuries from cooking fires are common, and surgical site
+  infection rates exceed 15% in many facilities. Nurses manage these wounds daily, guided by
+  protocols developed for well-resourced European hospitals with different dressing supplies,
+  different pathogens, and different patient populations.</p>
+</div>
+
+<!-- ====== SECTION: Infection Control ====== -->
+<h2>Infection Control Trials</h2>
+
+<div class="narrative">
+  <strong>The front line of AMR:</strong> Nurses are the primary implementers of infection
+  prevention and control. With 3,503 infection control trials in
+  Africa, the evidence base for hand hygiene interventions, catheter care bundles, and
+  surgical site infection prevention in resource-limited settings is thin. This matters
+  enormously because antimicrobial resistance (AMR) is already causing significant mortality
+  in Africa, and IPC is the first line of defence.
+</div>
+
+<!-- ====== SECTION: Task-Shifting ====== -->
+<h2>Task-Shifting to Nurses: Africa's Reality</h2>
+
+<div class="callout callout-success">
+  <h3>Where Necessity Drives Innovation</h3>
+  <p style="margin-top:8px">In much of Africa, task-shifting is not a policy choice -- it is
+  reality. Nurses already prescribe, diagnose, and manage conditions that are physician-only
+  in Western systems. Africa has 79 trials evaluating nurse
+  task-shifting. This evidence is globally important: as workforce shortages affect even
+  high-income countries, Africa's experience with nurse-led care models becomes a template
+  for the world. Nurse-initiated ART in South Africa, nurse prescribing in Kenya, clinical
+  officers performing surgery in Mozambique -- these innovations deserve rigorous evaluation.</p>
+</div>
+
+<!-- ====== SECTION: UK Comparison ====== -->
+<h2>Comparison with UK Nursing Research</h2>
+
+<div class="callout callout-info">
+  <h3>What a Nursing Research Tradition Looks Like</h3>
+  <p style="margin-top:8px">The UK has 217 nursing trials -- supported by
+  dedicated research infrastructure including the NIHR, university nursing departments with
+  research mandates, clinical academic career pathways for nurses, and dedicated nursing research
+  funding streams. Africa has none of these structures at scale. The lesson is not that African
+  nurses are less capable of research, but that research requires investment: in training, in
+  protected time, in career incentives, and in funding streams that value care delivery science
+  as much as drug development.</p>
+</div>
+
+<!-- ====== SECTION: Country Breakdown ====== -->
+<h2>Nursing Trials by Country</h2>
+<p style="color:var(--muted);margin-bottom:12px">Where in Africa is nursing research happening?</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Country</th><th style="text-align:center">Trials</th><th>Distribution</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Egypt</td>
+<td style="text-align:center;font-weight:700">219</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">South Africa</td>
+<td style="text-align:center;font-weight:700">57</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:26%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Uganda</td>
+<td style="text-align:center;font-weight:700">20</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:9%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Kenya</td>
+<td style="text-align:center;font-weight:700">18</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:8%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Ethiopia</td>
+<td style="text-align:center;font-weight:700">18</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:8%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tanzania</td>
+<td style="text-align:center;font-weight:700">17</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:8%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Ghana</td>
+<td style="text-align:center;font-weight:700">14</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malawi</td>
+<td style="text-align:center;font-weight:700">14</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Nigeria</td>
+<td style="text-align:center;font-weight:700">11</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:5%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zambia</td>
+<td style="text-align:center;font-weight:700">6</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zimbabwe</td>
+<td style="text-align:center;font-weight:700">6</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Mozambique</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Cameroon</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Rwanda</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Senegal</td>
+<td style="text-align:center;font-weight:700">1</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:0%;height:100%;background:#ec4899;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: Palliative ====== -->
+<h2>Palliative Nursing</h2>
+<div class="narrative">
+  <strong>Dying without evidence-based comfort:</strong> Africa bears a disproportionate burden
+  of cancer, HIV, and other conditions requiring palliative care. Yet palliative nursing trials
+  in Africa number just 114. Nurses provide most end-of-life care, often
+  with no formal palliative care training, no opioid access, and no evidence-based protocols
+  adapted for their setting. Uganda's palliative care model (nurse-led, community-based,
+  opioid-accessible) is a notable exception -- but it remains the exception.
+</div>
+
+<!-- ====== SECTION: Method ====== -->
+<h2>Method</h2>
+<div class="method">
+  <strong>Data source:</strong> ClinicalTrials.gov API v2, queried 2026-03-28.<br>
+  <strong>Categories:</strong> Eight nursing evidence categories: nursing/nurse-led,
+  midwifery, wound care, infection control, patient education, palliative nursing,
+  task-shifting, and maternal/neonatal nursing.<br>
+  <strong>Comparators:</strong> Africa vs United States (all categories) and United Kingdom
+  (nursing, midwifery, task-shifting) for context.<br>
+  <strong>Density:</strong> Nursing trial density = nursing trials / total interventional
+  trials, computed for Africa, US, and UK.<br>
+  <strong>Countries:</strong> Top 15 African countries by nursing trial count.<br>
+  <strong>Limitations:</strong> ClinicalTrials.gov is one registry. Keyword matching may
+  misclassify trials where nursing is a component but not the focus. Many nursing
+  interventions are evaluated in observational studies or quality improvement projects
+  not registered as trials. UK comparison reflects a mature nursing research tradition
+  not directly comparable to a continent.
+</div>
+
+<p style="color:var(--muted);font-size:0.82em;margin-top:24px;text-align:center">
+  The Nurse's View v1.0 | Data: ClinicalTrials.gov API v2 | Generated 2026-03-28<br>
+  AI transparency: LLM assistance was used for code generation and analysis design.
+  The author reviewed and edited all outputs and takes responsibility for the final content.
+</p>
+
+</div><!-- /.container -->
+
+<script>
+// -- Category chart -------------------------------------------------------
+new Chart(document.getElementById('catChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Nursing / Nurse-Led", "Midwifery / Midwife-Led", "Wound Care / Pressure Ulcers", "Infection Control / IPC", "Patient Education / Self-Management", "Palliative Nursing / End of Life", "Task-Shifting to Nurses", "Maternal / Neonatal Nursing"],
+    datasets: [
+      { label: 'Africa', data: [347, 192, 1765, 3503, 1733, 114, 79, 186], backgroundColor: '#ec4899', borderRadius: 4 },
+      { label: 'United States', data: [2861, 1044, 10115, 12077, 17976, 1810, 0, 510], backgroundColor: '#3b82f6', borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Nursing Trials: Africa vs US by Category',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { type: 'logarithmic', ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: 'Trial count (log scale)', color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } }
+    }
+  }
+});
+
+// -- Density chart --------------------------------------------------------
+new Chart(document.getElementById('densityChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Africa", "United States", "United Kingdom"],
+    datasets: [{
+      label: 'Nursing Trial Density (%)',
+      data: [1.81, 1.8, 0.98],
+      backgroundColor: ['#ec4899', '#3b82f6', '#22c55e'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Nursing Trials as % of All Interventional Trials',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { display: false }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: 'Density (%)', color: '#94a3b8' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

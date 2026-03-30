@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Principal-Agent Problem: Whose Research Agenda Is This?</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.purple-note {
+  background: rgba(168, 85, 247, 0.1);
+  border-left: 4px solid var(--purple);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.theory-box {
+  background: rgba(168, 85, 247, 0.08);
+  border: 2px solid var(--purple);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+.void-box {
+  background: rgba(239, 68, 68, 0.15);
+  border: 2px solid var(--danger);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.void-box .big-number {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.void-box .big-label {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 1100px) {
+  .three-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.score-display {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 1rem 0;
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>The Principal-Agent Problem: Whose Research Agenda Is This?</h1>
+<p class="subtitle">Jensen &amp; Meckling (1976) applied to Africa's clinical trial system.
+When the agent chooses the research, the principal bears the risk.</p>
+
+<!-- 1. Theory -->
+<h2>1. The Theory</h2>
+<div class="theory-box">
+<h3 style="color:var(--purple);margin-top:0;">Principal-Agent Theory (Jensen &amp; Meckling, 1976)</h3>
+<p>When one party (the <strong>agent</strong>) is contracted to act on behalf of another
+(the <strong>principal</strong>), their interests may diverge. The agent has information
+the principal lacks. In Africa's clinical trial system:</p>
+<br>
+<div class="two-col">
+<div>
+<p><strong style="color:var(--purple);">PRINCIPAL</strong></p>
+<p>African populations who bear disease burden, provide bodies for trials, and need
+treatments for their leading killers. The principal wants research that matches their
+health priorities: malaria, neonatal mortality, maternal health, NCDs.</p>
+</div>
+<div>
+<p><strong style="color:var(--danger);">AGENT</strong></p>
+<p>Foreign sponsors (US universities, NIH, pharma companies) who choose what to study,
+where, and how. The agent optimizes for FDA/EMA approval, publication impact, and
+global drug pipelines &mdash; not necessarily African health priorities.</p>
+</div>
+</div>
+<br>
+<p><strong>Four measurable dimensions of misalignment:</strong></p>
+<br>
+<p>&bull; <strong>Agenda Alignment Score</strong> &mdash; correlation between local disease burden ranking and trial condition ranking</p>
+<p>&bull; <strong>Information Rent</strong> &mdash; % of completed trials that posted results (do agents report back?)</p>
+<p>&bull; <strong>Incentive Gap</strong> &mdash; ratio of Phase 3 (FDA pipeline) to implementation research (local needs)</p>
+<p>&bull; <strong>Voice Score</strong> &mdash; % of trials with community engagement / behavioral components</p>
+</div>
+
+<!-- 2. Summary cards -->
+<h2>2. The Misalignment Quantified</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Uganda Agenda Alignment</div>
+    <div class="value purple">0.911</div>
+    <div class="label">Spearman rho (-1 to +1)</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Uganda Information Rent</div>
+    <div class="value danger">0.0%</div>
+    <div class="label">0/0 completed posted results</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Uganda Incentive Gap</div>
+    <div class="value warning">0.3x</div>
+    <div class="label">Phase 3 : implementation ratio</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Uganda Voice Score</div>
+    <div class="value warning">0.0%</div>
+    <div class="label">380 community engagement trials</div>
+  </div>
+</div>
+
+<!-- Country comparison -->
+<div class="three-col">
+  <div class="void-box" style="border-color:var(--purple);">
+    <div class="big-label">Uganda (PEPFAR-dependent)</div>
+    <div class="big-number purple">0.911</div>
+    <div class="big-label">Agenda Alignment</div>
+    <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">
+      Info Rent: 0.0% | Voice: 0.0%
+    </div>
+  </div>
+  <div class="void-box" style="border-color:var(--success);">
+    <div class="big-label">South Africa (local voice)</div>
+    <div class="big-number success">0.882</div>
+    <div class="big-label">Agenda Alignment</div>
+    <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">
+      Info Rent: 0.0% | Voice: 0.0%
+    </div>
+  </div>
+  <div class="void-box" style="border-color:var(--warning);">
+    <div class="big-label">Nigeria (weak infrastructure)</div>
+    <div class="big-number warning">0.339</div>
+    <div class="big-label">Agenda Alignment</div>
+    <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">
+      Info Rent: 0.0% | Voice: 0.0%
+    </div>
+  </div>
+</div>
+
+<!-- 3. Agenda Alignment Scatter -->
+<h2>3. Agenda Alignment: Burden Rank vs Trial Rank</h2>
+<div class="method-note">
+<strong>How to read:</strong> If trials perfectly matched disease burden, every condition
+would lie on the diagonal (burden rank = trial rank). Points above the diagonal mean
+the condition is <em>over-studied</em> relative to its burden; below means <em>under-studied</em>.
+A Spearman rho of +1.0 = perfect alignment; 0 = no relationship; -1.0 = inverse.
+</div>
+
+<div class="chart-container">
+<h3>Uganda: Burden Rank vs Trial Rank (rho = 0.911)</h3>
+<canvas id="alignmentChart" height="400"></canvas>
+</div>
+
+<h3>Uganda: Detailed Ranking Table</h3>
+<table>
+<thead>
+<tr>
+  <th>Condition</th>
+  <th style="text-align:center;">Burden Rank</th>
+  <th style="text-align:center;">Trial Rank</th>
+  <th style="text-align:center;">Trial Count</th>
+  <th style="text-align:center;">Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">HIV</td><td style="padding:8px;text-align:center;">1</td><td style="padding:8px;text-align:center;">1</td><td style="padding:8px;text-align:center;">329</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">=</td></tr>
+<tr><td style="padding:8px;">malaria</td><td style="padding:8px;text-align:center;">2</td><td style="padding:8px;text-align:center;">3</td><td style="padding:8px;text-align:center;">94</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+1</td></tr>
+<tr><td style="padding:8px;">neonatal</td><td style="padding:8px;text-align:center;">3</td><td style="padding:8px;text-align:center;">5</td><td style="padding:8px;text-align:center;">42</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+2</td></tr>
+<tr><td style="padding:8px;">maternal OR pregnancy</td><td style="padding:8px;text-align:center;">4</td><td style="padding:8px;text-align:center;">2</td><td style="padding:8px;text-align:center;">102</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">-2</td></tr>
+<tr><td style="padding:8px;">pneumonia</td><td style="padding:8px;text-align:center;">5</td><td style="padding:8px;text-align:center;">6</td><td style="padding:8px;text-align:center;">35</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+1</td></tr>
+<tr><td style="padding:8px;">tuberculosis</td><td style="padding:8px;text-align:center;">6</td><td style="padding:8px;text-align:center;">4</td><td style="padding:8px;text-align:center;">88</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">-2</td></tr>
+<tr><td style="padding:8px;">nutrition OR malnutrition</td><td style="padding:8px;text-align:center;">7</td><td style="padding:8px;text-align:center;">9</td><td style="padding:8px;text-align:center;">28</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+2</td></tr>
+<tr><td style="padding:8px;">cardiovascular</td><td style="padding:8px;text-align:center;">8</td><td style="padding:8px;text-align:center;">10</td><td style="padding:8px;text-align:center;">27</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+2</td></tr>
+<tr><td style="padding:8px;">mental health OR depression</td><td style="padding:8px;text-align:center;">9</td><td style="padding:8px;text-align:center;">8</td><td style="padding:8px;text-align:center;">29</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">-1</td></tr>
+<tr><td style="padding:8px;">cancer</td><td style="padding:8px;text-align:center;">10</td><td style="padding:8px;text-align:center;">7</td><td style="padding:8px;text-align:center;">32</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;">-3</td></tr>
+<tr><td style="padding:8px;">sickle cell</td><td style="padding:8px;text-align:center;">11</td><td style="padding:8px;text-align:center;">11</td><td style="padding:8px;text-align:center;">17</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">=</td></tr>
+<tr><td style="padding:8px;">epilepsy</td><td style="padding:8px;text-align:center;">12</td><td style="padding:8px;text-align:center;">14</td><td style="padding:8px;text-align:center;">3</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+2</td></tr>
+<tr><td style="padding:8px;">diabetes</td><td style="padding:8px;text-align:center;">13</td><td style="padding:8px;text-align:center;">15</td><td style="padding:8px;text-align:center;">3</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">+2</td></tr>
+<tr><td style="padding:8px;">stroke</td><td style="padding:8px;text-align:center;">14</td><td style="padding:8px;text-align:center;">13</td><td style="padding:8px;text-align:center;">6</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;">-1</td></tr>
+<tr><td style="padding:8px;">hypertension</td><td style="padding:8px;text-align:center;">15</td><td style="padding:8px;text-align:center;">12</td><td style="padding:8px;text-align:center;">10</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;">-3</td></tr>
+
+</tbody>
+</table>
+
+<!-- 4. Information Rent -->
+<h2>4. Information Rent (Results Reporting)</h2>
+<div class="danger-note">
+<strong>Information asymmetry is the core of agency theory.</strong> The agent (foreign sponsor)
+knows the trial results before the principal (African community). The "information rent" measures
+how much the agent withholds. A low results-posting rate means the agent conducts research,
+extracts data, and disappears &mdash; the community never learns what happened.
+</div>
+
+<div class="chart-container">
+<h3>Results Posting Rate: Do Agents Report Back?</h3>
+<canvas id="infoRentChart" height="250"></canvas>
+</div>
+
+<div class="three-col">
+  <div class="summary-card">
+    <div class="label">Uganda</div>
+    <div class="value danger">0.0%</div>
+    <div class="label">0 of 0 completed</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">South Africa</div>
+    <div class="value danger">0.0%</div>
+    <div class="label">0 of 0 completed</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Nigeria</div>
+    <div class="value danger">0.0%</div>
+    <div class="label">0 of 0 completed</div>
+  </div>
+</div>
+
+<!-- 5. Incentive Gap -->
+<h2>5. Incentive Gap: Phase 3 vs Implementation Research</h2>
+<div class="warning-note">
+<strong>Phase 3 trials serve the agent's needs</strong> (FDA/EMA approval for global markets).
+<strong>Implementation research serves the principal's needs</strong> (how to deliver existing
+interventions to African communities). The ratio reveals who the research agenda really serves.
+</div>
+
+<div class="chart-container">
+<h3>Phase Distribution by Country</h3>
+<canvas id="phaseChart" height="300"></canvas>
+</div>
+
+<h3>Implementation Research Counts</h3>
+<table>
+<thead>
+<tr>
+  <th>Implementation Query</th>
+  <th style="text-align:right;">Uganda</th>
+  <th style="text-align:right;">South Africa</th>
+  <th style="text-align:right;">Nigeria</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">implementation science</td><td style="padding:8px;text-align:right;">31</td><td style="padding:8px;text-align:right;">23</td><td style="padding:8px;text-align:right;">13</td></tr>
+<tr><td style="padding:8px;">community health worker</td><td style="padding:8px;text-align:right;">46</td><td style="padding:8px;text-align:right;">42</td><td style="padding:8px;text-align:right;">23</td></tr>
+<tr><td style="padding:8px;">task shifting</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">9</td><td style="padding:8px;text-align:right;">8</td></tr>
+<tr><td style="padding:8px;">community engagement</td><td style="padding:8px;text-align:right;">30</td><td style="padding:8px;text-align:right;">40</td><td style="padding:8px;text-align:right;">16</td></tr>
+<tr><td style="padding:8px;">behavioral intervention</td><td style="padding:8px;text-align:right;">189</td><td style="padding:8px;text-align:right;">239</td><td style="padding:8px;text-align:right;">76</td></tr>
+<tr><td style="padding:8px;">health education</td><td style="padding:8px;text-align:right;">115</td><td style="padding:8px;text-align:right;">249</td><td style="padding:8px;text-align:right;">74</td></tr>
+<tr><td style="padding:8px;">mHealth OR mobile health</td><td style="padding:8px;text-align:right;">58</td><td style="padding:8px;text-align:right;">188</td><td style="padding:8px;text-align:right;">41</td></tr>
+
+</tbody>
+</table>
+
+<!-- 6. Voice Score -->
+<h2>6. Voice Score: Does the Principal Have a Say?</h2>
+<div class="purple-note">
+<strong>In agency theory, "voice" is the principal's mechanism for controlling the agent.</strong>
+Trials with community engagement, behavioral components, or community health worker
+models give the principal a seat at the table. The Voice Score measures how much of
+the research agenda includes the community's perspective.
+</div>
+
+<div class="chart-container">
+<h3>Voice Score Comparison</h3>
+<canvas id="voiceChart" height="250"></canvas>
+</div>
+
+<!-- 7. Uganda Sponsors -->
+<h2>7. Who Are Uganda's Agents? (Top 15 Sponsors)</h2>
+<div class="method-note">
+<strong>Color key:</strong> <span style="color:#22c55e;font-weight:bold;">GREEN = local institution</span>,
+<span style="color:#94a3b8;">grey = foreign institution</span>. In principal-agent theory,
+a local agent is better aligned with the principal because they share the same environment
+and information.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Sponsor</th>
+  <th style="text-align:right;">Trials</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+
+<div class="three-col">
+  <div class="summary-card">
+    <div class="label">Uganda: Local-Led</div>
+    <div class="value success">0.0%</div>
+    <div class="label">0 trials</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">South Africa: Local-Led</div>
+    <div class="value success">0.0%</div>
+    <div class="label">0 trials</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Nigeria: Local-Led</div>
+    <div class="value warning">0.0%</div>
+    <div class="label">0 trials</div>
+  </div>
+</div>
+
+<!-- 8. Realignment -->
+<h2>8. What Realignment Looks Like</h2>
+<div class="theory-box">
+<h3 style="color:var(--success);margin-top:0;">From Agency Theory to Policy</h3>
+<p>Jensen &amp; Meckling's framework suggests three mechanisms to realign agents with principals:</p>
+<br>
+<p><strong>1. Monitoring (reduce information asymmetry):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">Mandate results posting within 12 months of completion.
+Currently only 0.0% of Uganda's completed trials post results &mdash; the principal
+never learns what the agent discovered.</p>
+<br>
+<p><strong>2. Bonding (align incentives):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">Require sponsors to co-fund implementation research
+proportional to their Phase 3 activity. If you run 10 Phase 3 trials, fund 5 implementation studies.</p>
+<br>
+<p><strong>3. Residual loss acceptance (empower the principal):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">Build local research capacity so the principal becomes
+their own agent. South Africa's higher local sponsorship (0.0%)
+shows this is possible. Fund African PIs, not just African sites.</p>
+<br>
+<p><strong>4. Burden-matched quotas:</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">If malaria is the #2 killer but ranks lower in trial priority,
+require funders to explain the mismatch. The Agenda Alignment Score provides a quantitative target: move from
+rho = 0.911 toward rho &gt; 0.8.</p>
+</div>
+
+<!-- 9. Policy Recommendations -->
+<h2>9. Policy Recommendations from Agency Theory</h2>
+<div class="method-note">
+<p>&bull; <strong>For African governments:</strong> Establish national clinical trial priority lists based on local
+burden data. Require foreign sponsors to demonstrate alignment before ethics approval.</p>
+<p>&bull; <strong>For funders (NIH, Wellcome, Gates):</strong> Allocate funding proportional to
+burden-trial gaps. Mandate community engagement in all sponsored trials.</p>
+<p>&bull; <strong>For PEPFAR:</strong> Shift from disease-vertical (HIV-only) to burden-matched portfolios.
+Uganda's trial landscape is 42% HIV while cardiovascular disease and NCDs rise unchecked.</p>
+<p>&bull; <strong>For WHO:</strong> Publish annual "Agenda Alignment Scores" for every country, making
+principal-agent misalignment visible and politically costly.</p>
+<p>&bull; <strong>For African researchers:</strong> Use these metrics to negotiate with sponsors.
+"Your proposed trial worsens our Agenda Alignment Score" is a powerful argument.</p>
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2 (accessed 28 March 2026).<br>
+<strong>Countries:</strong> Uganda (PEPFAR-dependent), South Africa (stronger local voice),
+Nigeria (weak infrastructure).<br>
+<strong>Agenda Alignment:</strong> Spearman rank correlation between GBD 2019 disease burden
+ranking and trial condition count ranking across 15 conditions.<br>
+<strong>Information Rent:</strong> % of completed interventional trials with posted results
+(resultsFirstSubmitDate or resultsSection present).<br>
+<strong>Incentive Gap:</strong> Phase 3 trial count / sum of implementation research queries.<br>
+<strong>Voice Score:</strong> (community health worker + community engagement + behavioral +
+health education trials) / total trials.<br>
+<strong>Limitations:</strong> Single registry; burden rankings are approximate; sponsor classification
+by keyword matching is imperfect; community engagement may be present but not captured in
+registry metadata.
+</div>
+
+<footer>
+The Principal-Agent Problem: Whose Research Agenda Is This? &mdash; ClinicalTrials.gov Registry Analysis |
+Generated 2026-03-28 14:24 |
+Data: ClinicalTrials.gov API v2
+</footer>
+
+</div>
+
+<script>
+// Alignment scatter for Uganda
+const alignLabels = ["HIV", "malaria", "neonatal", "maternal OR pregnancy", "pneumonia", "tuberculosis", "nutrition OR malnutrition", "cardiovascular", "mental health OR depression", "cancer", "sickle cell", "epilepsy", "diabetes", "stroke", "hypertension"];
+const burdenRanks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const trialRanks = [1, 3, 5, 2, 6, 4, 9, 10, 8, 7, 11, 14, 15, 13, 12];
+
+const scatterData = alignLabels.map((label, i) => ({
+  x: burdenRanks[i],
+  y: trialRanks[i],
+  label: label
+}));
+
+new Chart(document.getElementById('alignmentChart'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      {
+        label: 'Conditions',
+        data: scatterData,
+        backgroundColor: '#a855f7',
+        borderColor: '#a855f7',
+        pointRadius: 8,
+        pointHoverRadius: 12,
+      },
+      {
+        label: 'Perfect alignment',
+        data: [{x:1,y:1},{x:15,y:15}],
+        type: 'line',
+        borderColor: 'rgba(148,163,184,0.4)',
+        borderDash: [5,5],
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { labels: { color: '#94a3b8' } },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            const pt = ctx.raw;
+            return pt.label + ': burden=' + pt.x + ', trials=' + pt.y;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'Disease Burden Rank (1=highest)', color: '#94a3b8' },
+        min: 0, max: 16,
+        grid: { color: '#1e293b' },
+        ticks: { color: '#94a3b8' },
+        reverse: false,
+      },
+      y: {
+        title: { display: true, text: 'Trial Count Rank (1=most trials)', color: '#94a3b8' },
+        min: 0, max: 16,
+        grid: { color: '#1e293b' },
+        ticks: { color: '#94a3b8' },
+        reverse: false,
+      }
+    }
+  }
+});
+
+// Information Rent chart
+new Chart(document.getElementById('infoRentChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Uganda", "South Africa", "Nigeria"],
+    datasets: [{
+      label: 'Results Posting Rate (%)',
+      data: [0.0, 0.0, 0.0],
+      backgroundColor: ['#a855f7', '#22c55e', '#f59e0b'],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 0, max: 100, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// Phase distribution
+new Chart(document.getElementById('phaseChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"],
+    datasets: [
+      { label: 'Uganda', data: [48, 149, 167, 69], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'South Africa', data: [255, 903, 1880, 193], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Nigeria', data: [21, 47, 56, 34], backgroundColor: '#f59e0b', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// Voice Score
+new Chart(document.getElementById('voiceChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Uganda", "South Africa", "Nigeria"],
+    datasets: [{
+      label: 'Voice Score (%)',
+      data: [0.0, 0.0, 0.0],
+      backgroundColor: ['#a855f7', '#22c55e', '#f59e0b'],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 0, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

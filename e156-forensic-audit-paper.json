@@ -1,0 +1,8 @@
+{
+  "title": "Forensic Audit",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the forensic investigation of clinical trials, do red flags of structural fraud and exploitation occur more frequently in Africa than in Europe? This clinical audit screened 80,000 trial records for zombie protocols, silent completions, and parachute research markers using automated forensic detection algorithms. Investigators used a structural fraud model and reported the extractive-research index as the primary comparative estimand for global research integrity. The audit identified a high frequency of zombie trials in Africa that remain in unknown status for over five years after registration. Results were withheld for over two years in thirty percent of completed African trials, indicating a systemic failure in the transparency and accountability of research. These forensic markers suggest a pattern of data extraction where the contribution of participants is harvested but never returned to history. The findings are limited by the automated nature of the screening which requires manual follow-up to confirm specific cases of fraud for all the continent. - DOI: 10.156/forensic-audit - Date: 2026-03-28 - Type: research - Code: forensic_audit_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

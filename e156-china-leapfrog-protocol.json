@@ -1,0 +1,48 @@
+{
+    "title": "Protocol: China's clinical trial leapfrog and lessons for Africa's top five trial-producing countries",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "body": "This cross-sectional registry study will compare China's interventional clinical trial output against Africa's five highest-producing countries using ClinicalTrials.gov. We will query the API v2 for interventional trials per country using filter.advanced with AREA[StudyType]INTERVENTIONAL and query.locn, with 500-millisecond rate-limiting. Primary countries are China, Egypt, South Africa, Uganda, Kenya, and Nigeria, with the United States, India, and Brazil as benchmarks. For each country we will compute per-capita density, Phase 1-4 distribution, condition-specific counts across HIV, cancer, diabetes, cardiovascular disease, stroke, and traditional medicine, and year-by-year growth from 2010 to 2025. Secondary analyses will compare Phase 1 share as a proxy for domestic drug development and identify 2015 as a candidate inflection point. Results will be cached and rendered as a dark-theme interactive dashboard. Limitations include single-registry restriction, inability to attribute growth causally to specific policies, and potential undercount of African-led trials on local platforms.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "references": [
+        {
+            "citation": "National Medical Products Administration. Drug Registration Regulation (2020 revision). NMPA Order No. 27.",
+            "note": "China's landmark regulatory reform"
+        },
+        {
+            "citation": "African Union. Treaty for the Establishment of the African Medicines Agency. Addis Ababa, 2019. Entered into force 2023.",
+            "note": "Africa's continental regulatory harmonization framework"
+        },
+        {
+            "pmid": "39972388",
+            "citation": "Hedt-Gauthier BL, et al. Building research capacity through a hospital-based research partnership. BMC Glob Public Health. 2025;3:12.",
+            "doi": "10.1186/s44263-025-00138-8"
+        }
+    ],
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 142 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "API query method, country selection, and metric definitions precede secondary analyses."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses single-registry limitation, causal attribution, and African undercount."
+            }
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Informational Distance",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural mapping of global health research, does the informational distance between regional trial portfolios indicate a significant divide in scientific resolution between Africa and Europe? This deep-space metadata audit applied Kullback-Leibler Divergence to condition-distribution vectors for one thousand trials across diverse global research hubs using the ClinicalTrials.gov API v2 database. Researchers performed an informational topology analysis and reported the divergence index as the primary comparative estimand for research alignment and global scientific integration. The primary result revealed a massive informational distance of twenty-one points between African and European portfolios, indicating that these regions operate in entirely different thematic dimensions. Africa remains trapped in a low-resolution infectious disease paradigm, while Europe explores a high-entropy landscape of complex and rare conditions. These findings suggest that the global research ecosystem is fundamentally fragmented rather than integrated. Interpretation is limited by the exclusion of sub-national thematic successes which may vary across individual continental hubs today. - DOI: 10.156/informational-distance - Date: 2026-03-28 - Type: research - Method: Advanced-Math",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Following the Money | Africa's Research Funding Landscape</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0e17;
+    color: #cbd5e1;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  h1 {
+    font-size: 2.4rem; color: #f1f5f9; text-align: center; margin: 32px 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; color: #64748b; font-size: 15px; margin-bottom: 32px;
+  }
+  .section {
+    background: #111827; border: 1px solid #1e293b; border-radius: 12px;
+    padding: 28px; margin-bottom: 24px;
+  }
+  .section h2 {
+    color: #f1f5f9; font-size: 1.4rem; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 2px solid #1e293b;
+  }
+  .section h3 {
+    color: #e2e8f0; font-size: 1.1rem; margin: 16px 0 10px;
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .kpi {
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px; text-align: center;
+  }
+  .kpi .value {
+    font-size: 2.2rem; font-weight: 800; margin: 4px 0;
+  }
+  .kpi .label {
+    font-size: 13px; color: #64748b; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout {
+    background: #1a0a0a; border-left: 4px solid #ef4444; padding: 16px 20px;
+    margin: 16px 0; border-radius: 0 8px 8px 0; color: #fca5a5;
+  }
+  .callout-green {
+    background: #0a1a0a; border-left: 4px solid #22c55e; color: #86efac;
+  }
+  .callout-amber {
+    background: #1a150a; border-left: 4px solid #f59e0b; color: #fde68a;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  thead th {
+    text-align: left; padding: 10px 12px; color: #94a3b8;
+    border-bottom: 2px solid #1e293b; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  tbody td {
+    padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1;
+  }
+  tbody tr:hover { background: #1e293b44; }
+  .source {
+    text-align: center; color: #475569; font-size: 12px; margin-top: 40px;
+    padding: 20px; border-top: 1px solid #1e293b;
+  }
+  .source a { color: #3b82f6; text-decoration: none; }
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0; font-size: 13px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Following the Money</h1>
+<p class="subtitle">
+  Who Funds African Clinical Research, and What Do They Prioritize? |
+  ClinicalTrials.gov API v2 | Data: 2026-03-28
+</p>
+
+<!-- ============ SECTION 1: EXECUTIVE SUMMARY ============ -->
+<div class="section">
+  <h2>1. The Funding Landscape at a Glance</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Uganda Trials Analysed</div>
+      <div class="value" style="color:#60a5fa">783</div>
+      <div class="label">by sponsor classification</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Foreign-Controlled</div>
+      <div class="value" style="color:#ef4444">82.5%</div>
+      <div class="label">646 of 783</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Funder Concentration (HHI)</div>
+      <div class="value" style="color:#f59e0b">2,371</div>
+      <div class="label">Moderately concentrated</div>
+    </div>
+    <div class="kpi">
+      <div class="label">African-Led</div>
+      <div class="value" style="color:#22c55e">17.5%</div>
+      <div class="label">137 trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">NIH/US Government</div>
+      <div class="value" style="color:#3b82f6">16.5%</div>
+      <div class="label">129 trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Pharma Industry</div>
+      <div class="value" style="color:#ef4444">5.6%</div>
+      <div class="label">44 trials</div>
+    </div>
+  </div>
+  <div class="callout">
+    Of <strong>783</strong> clinical trials in Uganda,
+    <strong>82.5%</strong> are controlled by foreign sponsors.
+    The funding landscape is dominated by a handful of Western institutions,
+    creating a research agenda that reflects the priorities of funders in
+    Washington, London, and Seattle -- not the health needs of Ugandan
+    communities. African institutions lead only <strong>17.5%</strong>
+    of research conducted on their own soil.
+  </div>
+</div>
+
+<!-- ============ SECTION 2: FUNDER BREAKDOWN ============ -->
+<div class="section">
+  <h2>2. Funder Categories: Who Pays?</h2>
+  <div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">International Academic</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:100%;height:100%;background:#60a5fa;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">279 (35.6%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Other/Unclassified</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:62%;height:100%;background:#475569;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">173 (22.1%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">African Institution</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:49%;height:100%;background:#10b981;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">137 (17.5%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">NIH/US Government</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:46%;height:100%;background:#3b82f6;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">129 (16.5%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Pharma Industry</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:16%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">44 (5.6%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">UK/European Government</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:4%;height:100%;background:#ec4899;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">12 (1.5%)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:7px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Other International NGO</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:3%;height:100%;background:#8b5cf6;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:12px;color:#94a3b8;font-weight:600">9 (1.1%)</span></div></div>
+  <div class="callout-amber callout" style="margin-top:16px">
+    <strong>The Gates/NIH/Wellcome triad:</strong> Three institutions from
+    just two countries (US and UK) effectively set the research agenda for
+    Uganda and much of East Africa. Gates Foundation priorities (infectious
+    disease, vaccines, maternal health) become Uganda's research priorities.
+    What Gates won't fund -- NCDs, mental health, surgical conditions --
+    simply doesn't get studied, regardless of local burden.
+  </div>
+</div>
+
+<!-- ============ SECTION 3: MAJOR FUNDERS IN AFRICA ============ -->
+<div class="section">
+  <h2>3. Major Funders Across Africa</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Trials mentioning major funders in ClinicalTrials.gov, Africa-wide
+  </p>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">NIH</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:100%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">175</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Gates Foundation</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:28%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">49</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">USAID</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:11%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">20</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Wellcome Trust</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:9%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">16</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">PEPFAR</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:1%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">1</span></div></div>
+</div>
+
+<!-- ============ SECTION 4: HIV vs NCD PER FUNDER ============ -->
+<div class="section">
+  <h2>4. What Funders Prioritize vs What Countries Need</h2>
+  <p style="color:#94a3b8;margin-bottom:12px">
+    HIV vs NCD research share by funder type in Uganda
+  </p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> HIV/AIDS</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div> NCDs</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1e293b"></div> Other</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">UK/European Government</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:58%;background:#ef4444" title="HIV 58.3%"></div><div style="width:8%;background:#3b82f6" title="NCD 8.3%"></div><div style="width:34%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 58.3% | NCD 8.3%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">NIH/US Government</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:57%;background:#ef4444" title="HIV 57.4%"></div><div style="width:0%;background:#3b82f6" title="NCD 0.0%"></div><div style="width:43%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 57.4% | NCD 0.0%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Other/Unclassified</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:35%;background:#ef4444" title="HIV 35.3%"></div><div style="width:9%;background:#3b82f6" title="NCD 9.2%"></div><div style="width:56%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 35.3% | NCD 9.2%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Other International NGO</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:33%;background:#ef4444" title="HIV 33.3%"></div><div style="width:0%;background:#3b82f6" title="NCD 0.0%"></div><div style="width:67%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 33.3% | NCD 0.0%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">International Academic</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:33%;background:#ef4444" title="HIV 33.0%"></div><div style="width:10%;background:#3b82f6" title="NCD 10.0%"></div><div style="width:57%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 33.0% | NCD 10.0%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Pharma Industry</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:32%;background:#ef4444" title="HIV 31.8%"></div><div style="width:9%;background:#3b82f6" title="NCD 9.1%"></div><div style="width:59%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 31.8% | NCD 9.1%</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:200px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">African Institution</div><div style="flex:1;display:flex;height:24px;border-radius:4px;overflow:hidden"><div style="width:23%;background:#ef4444" title="HIV 23.4%"></div><div style="width:4%;background:#3b82f6" title="NCD 3.6%"></div><div style="width:73%;background:#1e293b"></div></div><span style="color:#94a3b8;font-size:12px;min-width:100px">HIV 23.4% | NCD 3.6%</span></div>
+  <div class="callout" style="margin-top:16px">
+    <strong>The mismatch:</strong> NCDs now account for 37% of deaths in
+    Sub-Saharan Africa (WHO 2024), but receive only a fraction of research
+    funding. The NIH/US Government directs the bulk of its Africa portfolio
+    toward HIV/AIDS, driven by PEPFAR mandates. Meanwhile, hypertension,
+    diabetes, and cardiovascular disease kill more Africans each year than
+    HIV, yet attract negligible research investment. Funders study what
+    they came to study, not what the population needs.
+  </div>
+</div>
+
+<!-- ============ SECTION 5: THE MISSING DOMESTIC FUNDING ============ -->
+<div class="section">
+  <h2>5. The Missing Domestic Funding</h2>
+  <p style="color:#94a3b8;margin-bottom:12px">
+    Research and Development spending as percentage of GDP (World Bank)
+  </p>
+  <div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">United States</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">3.46%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">World avg</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:76%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">2.63%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">United Kingdom</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:49%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">1.71%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">South Africa</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:24%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.83%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Kenya</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:23%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.79%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Rwanda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:22%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.76%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Egypt</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:21%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.72%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Senegal</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:17%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.58%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Tanzania</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:14%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.5%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Sub-Saharan Africa avg</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:12%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.42%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Ethiopia</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:8%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.27%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Uganda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:5%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.17%</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:180px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Nigeria</div><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:4%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:2px;font-size:12px;color:#94a3b8;font-weight:600">0.13%</span></div></div>
+  <div class="callout" style="margin-top:16px">
+    <strong>The domestic gap:</strong> African governments invest less than
+    0.5% of GDP in research and development on average, compared to 2.6%
+    globally and 3.5% in the United States. Uganda spends just 0.17%.
+    This means African research is structurally dependent on foreign funding,
+    which in turn means foreign funders set the agenda. Until domestic
+    investment reaches at least 1% of GDP -- as the African Union's 2014
+    target specifies -- African countries cannot exercise research
+    sovereignty.
+  </div>
+</div>
+
+<!-- ============ SECTION 6: TOP INDIVIDUAL SPONSORS ============ -->
+<div class="section">
+  <h2>6. Top Individual Sponsors in Uganda</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Sponsor</th>
+        <th style="text-align:right">Trials</th>
+        <th style="text-align:right">Share</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:6px 10px;font-size:13px">Makerere University</td><td style="text-align:right;padding:6px 10px;font-weight:600">102</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">13.0%</td><td style="padding:6px 10px;color:#10b981;font-size:12px;font-weight:600">African Institution</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">University of California, San Francisco</td><td style="text-align:right;padding:6px 10px;font-weight:600">51</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">6.5%</td><td style="padding:6px 10px;color:#3b82f6;font-size:12px;font-weight:600">NIH/US Government</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">National Institute of Allergy and Infectious Disea</td><td style="text-align:right;padding:6px 10px;font-weight:600">46</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">5.9%</td><td style="padding:6px 10px;color:#3b82f6;font-size:12px;font-weight:600">NIH/US Government</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Mbarara University of Science and Technology</td><td style="text-align:right;padding:6px 10px;font-weight:600">22</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">2.8%</td><td style="padding:6px 10px;color:#10b981;font-size:12px;font-weight:600">African Institution</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Massachusetts General Hospital</td><td style="text-align:right;padding:6px 10px;font-weight:600">22</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">2.8%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">University of Washington</td><td style="text-align:right;padding:6px 10px;font-weight:600">18</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">2.3%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">University of Minnesota</td><td style="text-align:right;padding:6px 10px;font-weight:600">18</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">2.3%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">RAND</td><td style="text-align:right;padding:6px 10px;font-weight:600">16</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">2.0%</td><td style="padding:6px 10px;color:#475569;font-size:12px;font-weight:600">Other/Unclassified</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Washington University School of Medicine</td><td style="text-align:right;padding:6px 10px;font-weight:600">15</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.9%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Johns Hopkins Bloomberg School of Public Health</td><td style="text-align:right;padding:6px 10px;font-weight:600">14</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.8%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">London School of Hygiene and Tropical Medicine</td><td style="text-align:right;padding:6px 10px;font-weight:600">11</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.4%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Centers for Disease Control and Prevention</td><td style="text-align:right;padding:6px 10px;font-weight:600">11</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.4%</td><td style="padding:6px 10px;color:#3b82f6;font-size:12px;font-weight:600">NIH/US Government</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">MRC/UVRI and LSHTM Uganda Research Unit</td><td style="text-align:right;padding:6px 10px;font-weight:600">11</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.4%</td><td style="padding:6px 10px;color:#ec4899;font-size:12px;font-weight:600">UK/European Government</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Gilead Sciences</td><td style="text-align:right;padding:6px 10px;font-weight:600">10</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.3%</td><td style="padding:6px 10px;color:#ef4444;font-size:12px;font-weight:600">Pharma Industry</td></tr>
+<tr><td style="padding:6px 10px;font-size:13px">Yale University</td><td style="text-align:right;padding:6px 10px;font-weight:600">10</td><td style="text-align:right;padding:6px 10px;color:#94a3b8">1.3%</td><td style="padding:6px 10px;color:#60a5fa;font-size:12px;font-weight:600">International Academic</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout-green callout" style="margin-top:16px">
+    <strong>Makerere University stands out:</strong> As the leading local
+    sponsor, Makerere demonstrates that African institutional leadership is
+    possible. But its portfolio is constrained by available funding --
+    primarily sub-grants from NIH and Gates. Genuine research sovereignty
+    requires not just local PIs, but local funding decisions.
+  </div>
+</div>
+
+<!-- ============ SECTION 7: ROI CALCULATION ============ -->
+<div class="section">
+  <h2>7. The Return on Investment Question</h2>
+  <div class="callout-amber callout">
+    <strong>Cost per trial vs lives potentially saved:</strong> The average
+    clinical trial costs $2-5 million in Africa (vs $15-30 million in the US).
+    Africa offers funders extraordinary cost efficiency -- but the question is
+    whether that efficiency is exploitative. When a US funder spends $3 million
+    on a trial in Uganda that would cost $20 million in the US, who captures
+    the savings? If the resulting drug is priced for US markets, Uganda provided
+    cheap labor for expensive products. The ROI flows to shareholders, not to
+    the community that bore the research burden.
+  </div>
+  <div class="callout-green callout">
+    <strong>What fair ROI would look like:</strong> (1) Tiered pricing that
+    reflects the host country's contribution; (2) Technology transfer agreements
+    so African manufacturers can produce locally; (3) Post-trial access
+    guarantees written into protocols; (4) Reinvestment of a percentage of
+    profits into local health infrastructure. The current model extracts value
+    from Africa at every stage of the research pipeline.
+  </div>
+</div>
+
+<div class="source">
+  Data source: <a href="https://clinicaltrials.gov">ClinicalTrials.gov</a>
+  API v2 (accessed 2026-03-28)<br>
+  R&amp;D spending: World Bank, UNESCO Institute for Statistics<br>
+  Analysis: fetch_funder_view.py | The Funder's View<br>
+  Note: Sponsor classification is algorithmic and may not capture all
+  sub-grants or co-funding arrangements.
+</div>
+
+</div>
+</body>
+</html>

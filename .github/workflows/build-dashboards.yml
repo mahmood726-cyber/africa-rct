@@ -1,0 +1,116 @@
+name: Build & Deploy Living Dashboards
+
+on:
+  # Run weekly on Monday at 06:00 UTC
+  schedule:
+    - cron: '0 6 * * 1'
+  # Run on push to main
+  push:
+    branches: [main]
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Create data directory
+        run: mkdir -p data
+
+      - name: Run Layer 1 — Foundation (projects 1-14)
+        run: |
+          for script in fetch_africa_rcts.py fetch_uganda_rcts.py fetch_extraction_index.py fetch_scd_africa.py ghost_enrollment_audit.py fetch_ncd_gap.py fetch_pharma_extraction.py termination_cascade.py fetch_covid_impact.py fetch_francophone_gap.py fetch_conflict_zones.py fetch_vaccine_colony.py fetch_desert_map.py fetch_percapita_league.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Run Layer 2 — Comparisons (projects 15-24)
+        run: |
+          for script in fetch_pepfar_trap.py fetch_decolonization_score.py fetch_rwanda_model.py fetch_nigeria_paradox.py fetch_global_south.py fetch_latam_mirror.py fetch_surgical_desert.py fetch_traditional_medicine.py fetch_trauma_gap.py fetch_china_leapfrog.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Run Layer 3 — Disease Deep-Dives (projects 25-35)
+        run: |
+          for script in fetch_forgotten_diseases.py fetch_cervical_cancer.py fetch_palliative_desert.py fetch_amr_crisis.py fetch_maternal_mortality.py fetch_childhood_cancer.py fetch_genomics_zero.py fetch_heart_failure_africa.py fetch_digital_health.py fetch_rhd_tragedy.py fetch_air_pollution.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Run Layer 4 — Frameworks (projects 36-42)
+        run: |
+          for script in fetch_mizan_index.py fetch_dutch_disease.py fetch_terms_of_trade.py fetch_power_law.py fetch_phase_transition.py fetch_principal_agent.py fetch_free_rider_genome.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Run Layer 5 — Advanced Stats (projects 43-48)
+        run: |
+          for script in fetch_placebo_ethics.py fetch_design_quality.py fetch_advanced_stats.py fetch_regression_model.py fetch_network_analysis.py fetch_pepfar_causal.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Run Layer 6 — Stakeholder Voices (projects 49-60)
+        run: |
+          for script in fetch_patient_access.py fetch_child_view.py fetch_mother_view.py fetch_elderly_view.py fetch_doctor_view.py fetch_admin_view.py fetch_government_view.py fetch_nurse_view.py fetch_community_view.py fetch_funder_view.py fetch_researcher_view.py fetch_future_view.py; do
+            echo "=== Running $script ==="
+            timeout 300 python "$script" || echo "WARN: $script failed, continuing"
+          done
+
+      - name: Update index timestamp
+        run: |
+          python -c "
+          import re
+          from datetime import datetime
+          with open('index.html','r') as f: h=f.read()
+          now=datetime.utcnow().strftime('%d %B %Y %H:%M UTC')
+          h=re.sub(r'March 2026[^<]*',now,h,count=1)
+          with open('index.html','w') as f: f.write(h)
+          print(f'Updated timestamp: {now}')
+          "
+
+      - name: Verify dashboards
+        run: |
+          python -c "
+          import glob, os
+          htmls = sorted(glob.glob('*.html'))
+          print(f'{len(htmls)} HTML dashboards generated')
+          total = sum(os.path.getsize(h) for h in htmls)
+          print(f'Total size: {total//1024}KB')
+          missing = [h for h in ['index.html','africa-rct-analysis.html','uganda-rct-analysis.html'] if not os.path.exists(h)]
+          if missing: print(f'CRITICAL MISSING: {missing}')
+          "
+
+      - name: Deploy to gh-pages branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan gh-pages-new
+          git add -A
+          git commit -m "Deploy living dashboards $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git branch -D gh-pages || true
+          git branch -m gh-pages
+          git push origin gh-pages --force

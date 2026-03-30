@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Palliative Care Desert: Dying in Pain Without Evidence</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: #a855f7; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.purple-note {
+  background: rgba(168, 85, 247, 0.1);
+  border-left: 4px solid #a855f7;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.success-note {
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 4px solid var(--success);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+.big-number {
+  font-size: 4rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 1rem 0;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Palliative Care Desert</h1>
+<p class="subtitle">Millions of Africans die in pain from cancer, HIV, and other conditions
+without evidence-based symptom management. Only 1278 palliative/hospice/end-of-life
+trials in Africa vs 5,160 in the United States. The Lancet Commission on Palliative Care
+(2018) estimated that 83% of people needing palliative care in low-income countries receive none.</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Palliative Trials</div>
+    <div class="value danger">1278</div>
+    <div class="label">Interventional, ClinicalTrials.gov</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Palliative Trials</div>
+    <div class="value" style="color:#3b82f6;">5,160</div>
+    <div class="label">4.0x more than Africa</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Condition Colonialism Index</div>
+    <div class="value danger">1.5</div>
+    <div class="label">1.0 = fair; &gt;5 = severe gap</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Opioid/Morphine Trials (Africa)</div>
+    <div class="value purple">184</div>
+    <div class="label">Access crisis: most countries restrict opioids</div>
+  </div>
+</div>
+
+<!-- 2. Dying in Pain -->
+<h2>2. Dying in Pain</h2>
+<div class="danger-note">
+<strong>The Lancet Commission on Palliative Care (Knaul et al., 2018)</strong> reported that
+an estimated <strong>61 million people</strong> experience serious health-related suffering
+globally each year, with the vast majority in low- and middle-income countries.
+<strong>83%</strong> of those needing palliative care in low-income countries receive none.<br><br>
+In sub-Saharan Africa, fewer than <strong>5%</strong> of people who need palliative care
+receive it. Cancer patients routinely die in agony because morphine is unavailable.
+HIV patients endure chronic pain without evidence-based symptom management.
+Children with life-limiting conditions have almost no access to pediatric palliative care.<br><br>
+<strong>The research response?</strong> Just 1278 interventional trials
+across a continent of 1.5 billion people &mdash; while the US has 5,160.
+</div>
+
+<div class="big-number danger">1.5x</div>
+<p style="text-align:center;color:var(--muted);margin-bottom:2rem;">
+Palliative Care CCI: Africa's burden-to-research ratio</p>
+
+<!-- 3. CCI Calculation -->
+<h2>3. Condition Colonialism Index: The Calculation</h2>
+<div class="method-note">
+<strong>CCI = Burden Share / Trial Share</strong><br><br>
+The Lancet Commission on Palliative Care (Knaul et al., 2018) estimated that
+Africa accounts for approximately <strong>30%</strong> of
+global serious health-related suffering requiring palliative care, driven by
+the HIV/AIDS epidemic, rising cancer burden, and lack of health system capacity.<br><br>
+<strong>Africa's trial share</strong> = 1278 / (1278 + 5,160)
+= <strong>19.85%</strong><br>
+<strong>CCI</strong> = 30% / 19.85%
+= <strong style="color:#ef4444;">1.5</strong><br><br>
+A CCI of 1.5 means Africa carries 1.5x more palliative care need
+than its share of palliative research warrants.
+</div>
+
+<!-- 4. Country Breakdown -->
+<h2>4. Country Breakdown: Palliative Trials in Africa</h2>
+<div class="two-col">
+<div>
+<table>
+<thead>
+<tr><th>Country</th><th style="text-align:right;">Palliative Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials/Million</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">78</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;">1.26</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">22</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;">0.39</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">29</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;">0.6</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">22</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;">0.1</td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="countryBarChart" height="250"></canvas>
+</div>
+</div>
+
+<!-- 5. HIV vs Cancer vs Pediatric Palliative Trials -->
+<h2>5. HIV vs Cancer vs Pediatric Palliative Trials</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+How does Africa's palliative trial portfolio break down by the conditions
+driving the greatest suffering?
+</p>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Condition Subtype</th><th style="text-align:right;">Africa Trials</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Pediatric palliative</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">73</td></tr>
+<tr><td style="padding:8px;">Cancer palliative</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">70</td></tr>
+<tr><td style="padding:8px;">HIV palliative</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">17</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="subBarChart" height="250"></canvas>
+</div>
+</div>
+<div class="warning-note">
+<strong>Context:</strong> Sub-Saharan Africa carries 67% of the global HIV burden and
+has the fastest-rising cancer incidence of any world region. Yet palliative care
+research for both conditions combined barely registers in the trial registry.
+Pediatric palliative care &mdash; for children with HIV, cancer, sickle cell disease,
+and other life-limiting conditions &mdash; has only 73 registered
+interventional trials across the entire continent.
+</div>
+
+<!-- 6. The Opioid Access Crisis -->
+<h2>6. The Opioid Access Crisis</h2>
+<div class="purple-note">
+<strong>Pain relief is a human right, yet most African countries severely restrict
+opioid access.</strong><br><br>
+The International Narcotics Control Board reports that Africa accounts for less than
+<strong>1%</strong> of global medical opioid consumption, despite carrying a huge burden
+of serious health-related suffering. In many African countries, morphine is simply
+unavailable: regulatory barriers, fear of addiction, lack of trained prescribers,
+and broken supply chains combine to ensure that millions die in untreated pain.<br><br>
+Only <strong>184</strong> interventional trials for opioids or morphine
+are registered across all of Africa. Without research into context-appropriate pain
+management strategies, the evidence gap perpetuates the suffering.
+</div>
+<div class="summary-card" style="max-width:400px;margin:1rem auto;">
+  <div class="label">Opioid/Morphine Trials in Africa</div>
+  <div class="value purple">184</div>
+  <div class="label">Interventional, ClinicalTrials.gov</div>
+</div>
+
+<!-- 7. Pediatric Palliative Gap -->
+<h2>7. The Pediatric Palliative Gap</h2>
+<div class="danger-note">
+<strong>Children are the invisible victims.</strong><br><br>
+Africa has the world's youngest population &mdash; nearly half of its 1.5 billion people
+are under 18. Children with cancer, HIV, sickle cell disease, and congenital conditions
+face life-limiting illness without any palliative care infrastructure in most countries.<br><br>
+Only <strong>73</strong> interventional pediatric palliative trials are
+registered across the entire continent. The global pediatric palliative care community
+has called this an ethical emergency, yet the research pipeline remains virtually empty.<br><br>
+Most evidence for pediatric symptom management comes from high-income settings where
+drug availability, monitoring, and family support systems bear no resemblance to the
+African context.
+</div>
+
+<!-- 8. Sponsor Analysis -->
+<h2>8. Sponsor Analysis</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Who funds palliative care research in Africa? The sponsor profile reveals whether
+research is locally driven or externally imposed.
+</p>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">91</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">INDUSTRY</td><td style="padding:8px;text-align:right;">4</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top 10 Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Ain Shams University</td><td style="padding:8px;text-align:right;">16</td></tr>
+<tr><td style="padding:8px;">Assiut University</td><td style="padding:8px;text-align:right;">12</td></tr>
+<tr><td style="padding:8px;">Cairo University</td><td style="padding:8px;text-align:right;">7</td></tr>
+<tr><td style="padding:8px;">Zagazig University</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">Tanta University</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">National Cancer Institute, Egypt</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Alexandria University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Mansoura University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Menoufia University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Beni-Suef University</td><td style="padding:8px;text-align:right;">3</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 9. Uganda Bright Spot -->
+<h2>9. Uganda: The Bright Spot</h2>
+<div class="success-note">
+<strong>Uganda is one of the few African countries with a national palliative care policy.</strong><br><br>
+Uganda integrated palliative care into its national health plan, trained clinical officers
+to prescribe morphine, and established Hospice Africa Uganda as a model for the continent.
+The African Palliative Care Association (APCA) is headquartered in Kampala.<br><br>
+Uganda hosts <strong>29</strong> palliative/hospice/end-of-life interventional
+trials, making it a relative leader on the continent. While this is still a tiny number
+by global standards, Uganda demonstrates that policy commitment can translate into
+research activity even in low-resource settings.
+</div>
+
+<!-- 10. Intervention Types -->
+<h2>10. Intervention Types in Africa's Palliative Trials</h2>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Intervention Category</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Other</td><td style="padding:8px;text-align:right;">85</td></tr>
+<tr><td style="padding:8px;">Opioid/analgesic</td><td style="padding:8px;text-align:right;">13</td></tr>
+<tr><td style="padding:8px;">Rehabilitation/exercise</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Nutrition support</td><td style="padding:8px;text-align:right;">1</td></tr>
+</tbody>
+</table>
+</div>
+<div class="method-note" style="align-self:start;">
+<strong>Note:</strong> Categorization is based on keyword matching in trial titles and
+intervention descriptions. A single trial may address multiple categories. The
+dominance of non-pharmacological interventions partly reflects the opioid access
+crisis: researchers cannot easily study opioids they cannot obtain.
+</div>
+</div>
+
+<!-- 11. Comparison with the UK: Hospice Movement Origin -->
+<h2>11. Comparison with the UK: Where the Hospice Movement Began</h2>
+<div class="method-note">
+<strong>The modern hospice movement was born in the United Kingdom</strong> &mdash;
+Dame Cicely Saunders founded St Christopher's Hospice in London in 1967,
+establishing the principles of holistic end-of-life care that now define
+palliative medicine worldwide.<br><br>
+The UK has <strong>578</strong> registered palliative/hospice/end-of-life
+interventional trials for a population of 68 million. Africa, with
+<strong>1.5 billion people and vastly greater suffering</strong>, has just
+1278.<br><br>
+The UK has approximately <strong>8.5</strong> palliative
+trials per million people. Africa has <strong>0.852</strong>.
+That is a <strong>10.0x</strong>
+per-capita gap between the birthplace of hospice care and the continent that needs
+it most.
+</div>
+
+<!-- 12. Global Comparison -->
+<h2>12. Global Comparison</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr><th>Country/Region</th><th style="text-align:right;">Palliative Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials/Million</th>
+<th style="text-align:right;">Ratio vs Africa</th></tr>
+</thead>
+<tbody>
+<tr style="background:#1a1a2e;"><td style="padding:8px;font-weight:bold;">Africa (total)</td><td style="padding:8px;text-align:right;">1,278</td><td style="padding:8px;text-align:right;">1,500M</td><td style="padding:8px;text-align:right;">0.85</td><td style="padding:8px;text-align:right;">1.0x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United States</td><td style="padding:8px;text-align:right;">5,160</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;">15.4</td><td style="padding:8px;text-align:right;">4.0x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">India</td><td style="padding:8px;text-align:right;">155</td><td style="padding:8px;text-align:right;">1,440M</td><td style="padding:8px;text-align:right;">0.11</td><td style="padding:8px;text-align:right;">0.1x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Brazil</td><td style="padding:8px;text-align:right;">297</td><td style="padding:8px;text-align:right;">217M</td><td style="padding:8px;text-align:right;">1.37</td><td style="padding:8px;text-align:right;">0.2x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United Kingdom</td><td style="padding:8px;text-align:right;">578</td><td style="padding:8px;text-align:right;">68M</td><td style="padding:8px;text-align:right;">8.5</td><td style="padding:8px;text-align:right;">0.5x</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 13. Per-Capita Density -->
+<h2>13. Per-Capita Palliative Trial Density</h2>
+<table>
+<thead>
+<tr><th>Country/Region</th><th style="text-align:right;">Palliative Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials / Million</th></tr>
+</thead>
+<tbody>
+<tr style=""><td style="padding:8px;font-weight:normal;">United States</td><td style="padding:8px;text-align:right;">5,160</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;font-weight:bold;">15.4</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United Kingdom</td><td style="padding:8px;text-align:right;">578</td><td style="padding:8px;text-align:right;">68M</td><td style="padding:8px;text-align:right;font-weight:bold;">8.5</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Brazil</td><td style="padding:8px;text-align:right;">297</td><td style="padding:8px;text-align:right;">217M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.37</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">South Africa</td><td style="padding:8px;text-align:right;">78</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.26</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;font-weight:bold;">Africa (total)</td><td style="padding:8px;text-align:right;">1,278</td><td style="padding:8px;text-align:right;">1,500M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.85</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Uganda</td><td style="padding:8px;text-align:right;">29</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.6</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Kenya</td><td style="padding:8px;text-align:right;">22</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.39</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">India</td><td style="padding:8px;text-align:right;">155</td><td style="padding:8px;text-align:right;">1,440M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.11</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Nigeria</td><td style="padding:8px;text-align:right;">22</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.1</td></tr>
+
+</tbody>
+</table>
+
+<!-- 14. Phase Distribution -->
+<h2>14. Phase Distribution</h2>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Phase</th><th style="text-align:right;">Count</th>
+<th style="text-align:right;">%</th></tr></thead>
+<tbody><tr><td style="padding:8px;">EARLY_PHASE1</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">3.0%</td></tr>
+<tr><td style="padding:8px;">NA</td><td style="padding:8px;text-align:right;">66</td><td style="padding:8px;text-align:right;">66.0%</td></tr>
+<tr><td style="padding:8px;">PHASE1</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">2.0%</td></tr>
+<tr><td style="padding:8px;">PHASE2</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;">4.0%</td></tr>
+<tr><td style="padding:8px;">PHASE2, PHASE3</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">3.0%</td></tr>
+<tr><td style="padding:8px;">PHASE3</td><td style="padding:8px;text-align:right;">10</td><td style="padding:8px;text-align:right;">10.0%</td></tr>
+<tr><td style="padding:8px;">PHASE4</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">12.0%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="phaseChart" height="250"></canvas>
+</div>
+</div>
+
+<!-- 15. Temporal Trend -->
+<h2>15. Temporal Trend</h2>
+<div class="chart-container">
+<canvas id="trendChart" height="250"></canvas>
+</div>
+
+<footer>
+<p>Data source: ClinicalTrials.gov API v2 | Lancet Commission on Palliative Care (Knaul et al., 2018) |
+Generated 2026-03-28 12:16</p>
+<p>Palliative Care CCI methodology: Africa burden share (30%) /
+Africa trial share (19.85%) = 1.5</p>
+<p style="margin-top:0.5rem;">Project 27 of the Africa RCT Landscape Series</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Country bar chart
+  var countryCtx = document.getElementById('countryBarChart');
+  if (countryCtx) {
+    new Chart(countryCtx, {
+      type: 'bar',
+      data: {
+        labels: ["South Africa", "Kenya", "Uganda", "Nigeria"],
+        datasets: [{
+          label: 'Palliative Trials',
+          data: [78, 22, 29, 22],
+          backgroundColor: '#a855f7',
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Palliative Trials by African Country',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          }
+        }
+      }
+    });
+  }
+
+  // Condition subtype bar chart
+  var subCtx = document.getElementById('subBarChart');
+  if (subCtx) {
+    new Chart(subCtx, {
+      type: 'bar',
+      data: {
+        labels: ["HIV palliative", "Cancer palliative", "Pediatric palliative"],
+        datasets: [{
+          label: 'Trials in Africa',
+          data: [17, 70, 73],
+          backgroundColor: ["#3b82f6", "#3b82f6", "#3b82f6"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Palliative Trials by Condition (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0', font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+
+  // Phase doughnut chart
+  var phaseCtx = document.getElementById('phaseChart');
+  if (phaseCtx) {
+    var phaseData = {"NA": 66, "PHASE2, PHASE3": 3, "PHASE2": 4, "PHASE3": 10, "PHASE4": 12, "PHASE1": 2, "EARLY_PHASE1": 3};
+    var phaseLabels = Object.keys(phaseData);
+    var phaseValues = Object.values(phaseData);
+    var phaseColors = phaseLabels.map(function(l) {
+      if (l.toUpperCase().indexOf('PHASE3') >= 0 || l === 'PHASE3')
+        return '#ef4444';
+      if (l.toUpperCase().indexOf('PHASE2') >= 0) return '#f59e0b';
+      if (l.toUpperCase().indexOf('PHASE1') >= 0) return '#3b82f6';
+      if (l.toUpperCase().indexOf('PHASE4') >= 0) return '#22c55e';
+      return '#6b7280';
+    });
+    new Chart(phaseCtx, {
+      type: 'doughnut',
+      data: {
+        labels: phaseLabels,
+        datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Phase Distribution (Africa Palliative)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        }
+      }
+    });
+  }
+
+  // Temporal trend line chart
+  var trendCtx = document.getElementById('trendChart');
+  if (trendCtx) {
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: [2002, 2005, 2007, 2011, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        datasets: [{
+          label: 'Palliative Trials Started (Africa)',
+          data: [1, 1, 2, 1, 1, 5, 2, 5, 8, 15, 12, 13, 11, 14, 8, 1],
+          borderColor: '#a855f7',
+          backgroundColor: 'rgba(168,85,247,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#a855f7',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Palliative Trial Starts by Year (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+</body>
+</html>

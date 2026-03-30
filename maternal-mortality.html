@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Maternal Mortality Scandal &mdash; Africa's Most Extreme Trial Gap</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+:root {
+    --bg: #0a0e17;
+    --bg2: #111827;
+    --bg3: #1f2937;
+    --text: #e5e7eb;
+    --text2: #9ca3af;
+    --accent: #60a5fa;
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --yellow: #f1c40f;
+    --orange: #e67e22;
+    --grey: #95a5a6;
+    --purple: #9b59b6;
+    --pink: #e91e63;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+.container { max-width:1400px; margin:0 auto; padding:24px; }
+h1 { font-size:2rem; margin-bottom:8px; color:white; }
+h2 { font-size:1.4rem; margin:32px 0 16px; color:var(--accent); border-bottom:1px solid var(--bg3); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:16px 0 8px; color:var(--text); }
+.subtitle { color:var(--text2); margin-bottom:24px; }
+.lead { font-size:1.05rem; color:var(--text); margin:16px 0; line-height:1.7; }
+
+/* Banner */
+.banner {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;
+    margin:24px 0;
+}
+.stat-card {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    border:1px solid var(--bg3);
+}
+.stat-card .value {
+    font-size:2rem;
+    font-weight:700;
+    color:white;
+}
+.stat-card .label {
+    font-size:0.85rem;
+    color:var(--text2);
+    margin-top:4px;
+}
+
+/* CCI callout */
+.cci-box {
+    background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+    border-radius:16px;
+    padding:32px;
+    text-align:center;
+    margin:24px 0;
+    border:2px solid #dc2626;
+}
+.cci-value {
+    font-size:3.5rem;
+    font-weight:800;
+    color:#fbbf24;
+    text-shadow:0 0 20px rgba(251,191,36,0.3);
+}
+.cci-label {
+    font-size:1.1rem;
+    color:#fca5a5;
+    margin-top:8px;
+}
+.cci-detail {
+    font-size:0.9rem;
+    color:#d1d5db;
+    margin-top:12px;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Charts */
+.charts-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+    gap:24px;
+    margin:24px 0;
+}
+.chart-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+}
+
+/* Tables */
+table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+    margin:16px 0;
+}
+th {
+    background:var(--bg3);
+    padding:10px 8px;
+    text-align:left;
+    font-weight:600;
+    position:sticky;
+    top:0;
+    z-index:1;
+}
+td {
+    padding:8px;
+    border-bottom:1px solid var(--bg3);
+}
+tr:hover {
+    background:rgba(96,165,250,0.05);
+}
+.table-container {
+    max-height:600px;
+    overflow-y:auto;
+    border-radius:12px;
+    border:1px solid var(--bg3);
+    background:var(--bg2);
+}
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Severity */
+.severity-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+    margin:16px 0;
+}
+
+/* Info box */
+.info-box {
+    background:var(--bg2);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--bg3);
+    margin:16px 0;
+}
+.info-box p {
+    margin:8px 0;
+    color:var(--text);
+}
+
+/* Crisis box */
+.crisis-box {
+    background: linear-gradient(135deg, #78350f 0%, #451a03 100%);
+    border-radius:12px;
+    padding:24px;
+    border:1px solid #d97706;
+    margin:16px 0;
+}
+
+/* SDG box */
+.sdg-box {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+    border-radius:16px;
+    padding:28px;
+    border:2px solid #3b82f6;
+    margin:24px 0;
+    text-align:center;
+}
+.sdg-value {
+    font-size:2.5rem;
+    font-weight:800;
+    color:#ef4444;
+}
+.sdg-target {
+    font-size:1.5rem;
+    font-weight:700;
+    color:#22c55e;
+}
+
+/* Footer */
+.footer {
+    margin-top:48px;
+    padding:24px 0;
+    border-top:1px solid var(--bg3);
+    color:var(--text2);
+    font-size:0.8rem;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Maternal Mortality Scandal</h1>
+<p class="subtitle">Africa has 66% of all global maternal deaths but almost no clinical trials &mdash;
+the most extreme trial gap in global health &mdash;
+ClinicalTrials.gov Registry &mdash; Generated 28 March 2026</p>
+
+<!-- ===== Summary Banner ===== -->
+<div class="banner">
+    <div class="stat-card">
+        <div class="value" style="color:var(--red)">13</div>
+        <div class="label">Africa Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--accent)">885</div>
+        <div class="label">US Trials</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--yellow)">5616.3x</div>
+        <div class="label">CCI (direct)</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--red)">66%</div>
+        <div class="label">Africa's share of maternal deaths</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--orange)">542</div>
+        <div class="label">SSA MMR (/100K)</div>
+    </div>
+    <div class="stat-card">
+        <div class="value" style="color:var(--green)">70</div>
+        <div class="label">SDG 3.1 target (/100K)</div>
+    </div>
+</div>
+
+<!-- ===== CCI Box ===== -->
+<div class="cci-box">
+    <div class="cci-value">45.5x &ndash; 5616.3x</div>
+    <div class="cci-label">Condition Colonialism Index</div>
+    <div class="cci-detail">
+        Africa carries <strong>66%</strong> of all global maternal deaths
+        but hosts only <strong>~13</strong> registered interventional trials
+        (query: maternal mortality / obstetric / PPH / preeclampsia / eclampsia),
+        compared to <strong>885</strong> in the United States.
+        <br><br>
+        <strong>Conservative CCI:</strong> 66% burden / 1.45% trial share = <strong>45.5x</strong><br>
+        <strong>Direct CCI (vs US):</strong> (66%/0.8%) / (13/885) = <strong>5616.3x</strong>
+    </div>
+</div>
+
+<!-- ===== SDG 3.1 Failure ===== -->
+<h2>The SDG 3.1 Failure</h2>
+<div class="sdg-box">
+    <p style="color:#93c5fd;font-size:1.1rem;margin-bottom:16px">
+        Sustainable Development Goal 3.1: Reduce global maternal mortality ratio to
+        less than 70 per 100,000 live births by 2030</p>
+    <div style="display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap">
+        <div>
+            <div class="sdg-value">542</div>
+            <div style="color:#fca5a5">Sub-Saharan Africa MMR</div>
+        </div>
+        <div style="font-size:2rem;color:var(--text2)">vs</div>
+        <div>
+            <div class="sdg-target">70</div>
+            <div style="color:#86efac">SDG 3.1 Target</div>
+        </div>
+    </div>
+    <p style="color:#d1d5db;margin-top:16px;max-width:700px;margin-left:auto;margin-right:auto">
+        Sub-Saharan Africa's MMR is <strong>7.7x</strong>
+        above the SDG 3.1 target. Nigeria alone has an MMR of <strong>1,047/100K</strong> --
+        almost <strong>15x</strong> the target. With fewer than 13 interventional trials across
+        the continent, there is no clinical research infrastructure to close this gap by 2030.
+        The SDG 3.1 deadline is a mathematical impossibility for most of Africa.</p>
+</div>
+<div class="info-box">
+    <h3>MMR by Country (WHO/UNICEF 2020)</h3>
+    <table style="max-width:700px">
+        <thead>
+            <tr><th>Country</th><th style="text-align:right">MMR (/100K)</th>
+                <th style="text-align:right">Trials</th><th style="width:30%">Burden</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+<td style="font-weight:700">Nigeria</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">1,047</td>
+<td style="text-align:right;color:#f1c40f">17</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:87.25%"></div></td>
+</tr><tr>
+<td style="font-weight:700">DRC</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">547</td>
+<td style="text-align:right;color:#f1c40f">2</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:45.583333333333336%"></div></td>
+</tr><tr>
+<td style="font-weight:700">Kenya</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">342</td>
+<td style="text-align:right;color:#f1c40f">16</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:28.5%"></div></td>
+</tr><tr>
+<td style="font-weight:700">Mozambique</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">289</td>
+<td style="text-align:right;color:#f1c40f">2</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:24.083333333333332%"></div></td>
+</tr><tr>
+<td style="font-weight:700">Uganda</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">284</td>
+<td style="text-align:right;color:#f1c40f">15</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:23.666666666666668%"></div></td>
+</tr><tr>
+<td style="font-weight:700">Ethiopia</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">267</td>
+<td style="text-align:right;color:#f1c40f">7</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:22.25%"></div></td>
+</tr><tr>
+<td style="font-weight:700">Tanzania</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">238</td>
+<td style="text-align:right;color:#f1c40f">12</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:19.833333333333332%"></div></td>
+</tr><tr>
+<td style="font-weight:700">South Africa</td>
+<td style="text-align:right;color:#e74c3c;font-weight:700">127</td>
+<td style="text-align:right;color:#f1c40f">11</td>
+<td><div style="background:#e74c3c;height:12px;border-radius:4px;width:10.583333333333334%"></div></td>
+</tr>
+            <tr style="border-top:2px solid var(--accent)">
+                <td style="color:var(--accent);font-weight:700">United States</td>
+                <td style="text-align:right;color:var(--accent);font-weight:700">21</td>
+                <td style="text-align:right;color:var(--accent);font-weight:700">885</td>
+                <td><div style="background:var(--accent);height:12px;border-radius:4px;width:1.75%"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ===== Severity Summary ===== -->
+<h2>Severity Summary</h2>
+<div class="severity-box">
+    <div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>CCI = 45.5x (conservative) to 5616.3x (direct) -- Africa carries 66% of global maternal deaths but has only ~13 trials vs 885 in the US</span>
+        </div><div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>SDG 3.1 target: reduce MMR to <70/100K by 2030. Sub-Saharan Africa is at 542/100K -- 7.7x above target with no trial infrastructure to close the gap</span>
+        </div><div style="background:#7f1d1d;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+            <span>Nigeria has the world's highest absolute maternal deaths (MMR 1047/100K) yet hosts only 17 maternal/obstetric trial(s)</span>
+        </div><div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Only 16.4% of Africa-based maternal trials are led by African institutions</span>
+        </div><div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Postpartum hemorrhage is the #1 cause of maternal death globally, yet only 4 trial(s) in Africa</span>
+        </div><div style="background:#78350f;padding:12px 16px;
+            border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+            <span>Peripartum cardiomyopathy: highest incidence in Africa (1:100-1:1000 pregnancies in Nigeria) yet only 0 trial(s)</span>
+        </div>
+</div>
+
+<!-- ===== Country Breakdown ===== -->
+<h2>Country Breakdown: Africa</h2>
+<p class="lead" style="color:var(--text2)">Trial counts by African country, alongside WHO maternal
+mortality ratio data (deaths per 100,000 live births).</p>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Trials per African Country</h3>
+        <canvas id="countryChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>MMR vs Trial Count</h3>
+        <canvas id="scatterChart"></canvas>
+    </div>
+</div>
+
+<!-- ===== Obstetric Hemorrhage Spotlight ===== -->
+<h2>Obstetric Hemorrhage Spotlight</h2>
+<div class="crisis-box">
+    <p style="color:#fde68a;font-weight:700;font-size:1.1rem;margin-bottom:12px">
+        The #1 cause of maternal death worldwide</p>
+    <p style="color:#e5e7eb;margin-bottom:16px">
+        Postpartum hemorrhage (PPH) causes approximately 27% of all maternal deaths
+        globally and an even higher proportion in Sub-Saharan Africa where access to
+        uterotonics, blood products, and surgical intervention is severely limited.
+        Despite this, we identified only <strong>4</strong>
+        PPH-related interventional trial(s) with African sites. The interventions that
+        save lives (misoprostol, tranexamic acid, uterine balloon tamponade) are
+        well-established but remain woefully under-trialled in the populations that
+        need them most.</p>
+    <p style="color:#fde68a;font-size:0.9rem">
+        Compare: the United States alone has hundreds of obstetric hemorrhage trials
+        despite a maternal death rate 25x lower than Sub-Saharan Africa.</p>
+</div>
+
+<!-- ===== Sub-condition Trials in Africa ===== -->
+<h2>Sub-condition Trials in Africa</h2>
+<div class="info-box">
+    <p>Breakdown of interventional trial counts in Africa by specific obstetric condition.</p>
+    <table style="max-width:500px">
+        <thead>
+            <tr><th>Condition</th><th style="text-align:right">Trials in Africa</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+<td style="font-weight:600">Postpartum hemorrhage</td>
+<td style="text-align:right;color:#fbbf24;font-weight:700">4</td>
+</tr><tr>
+<td style="font-weight:600">Preeclampsia/Eclampsia</td>
+<td style="text-align:right;color:#fbbf24;font-weight:700">4</td>
+</tr><tr>
+<td style="font-weight:600">Caesarean section</td>
+<td style="text-align:right;color:#fbbf24;font-weight:700">6</td>
+</tr><tr>
+<td style="font-weight:600">Maternal sepsis</td>
+<td style="text-align:right;color:#fbbf24;font-weight:700">1</td>
+</tr><tr>
+<td style="font-weight:600">Peripartum cardiomyopathy</td>
+<td style="text-align:right;color:#fbbf24;font-weight:700">0</td>
+</tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ===== Peripartum Cardiomyopathy ===== -->
+<h2>Peripartum Cardiomyopathy: The Cardiologist's Link</h2>
+<div class="info-box">
+    <p><strong>Peripartum cardiomyopathy (PPCM) has its highest incidence in Africa</strong>,
+    particularly Nigeria (Kano region: 1 in 100 pregnancies), yet it remains one of the
+    most under-researched conditions in cardiovascular medicine.</p>
+    <p>We identified only <strong>0</strong>
+    PPCM trial(s) with African sites on ClinicalTrials.gov. This condition kills young
+    mothers of childbearing age and has a unique pathophysiology linked to the 16 kDa
+    prolactin fragment. Bromocriptine has shown promise in small African studies, but
+    definitive multicentre RCTs are absent.</p>
+    <p style="color:var(--pink);font-weight:600">PPCM sits at the intersection of
+    cardiology and obstetrics -- two fields that rarely converge in African clinical
+    research. This is a missed opportunity for Africa-led investigation into a
+    condition that disproportionately affects African women.</p>
+</div>
+
+<!-- ===== Preeclampsia ===== -->
+<h2>Preeclampsia / Eclampsia Trials</h2>
+<div class="info-box">
+    <p>Preeclampsia/eclampsia is the second leading cause of maternal death in Africa.
+    Magnesium sulfate, the gold-standard treatment, was ironically validated in
+    the landmark Magpie Trial which included African sites -- yet two decades later,
+    follow-up research remains sparse.</p>
+    <p>We identified <strong>4</strong> preeclampsia/eclampsia
+    trial(s) in Africa. Key gaps include: aspirin prophylaxis dosing in African populations,
+    antihypertensive optimization, and screening biomarkers validated for low-resource settings.</p>
+</div>
+
+<!-- ===== Caesarean Section ===== -->
+<h2>Caesarean Section Trials</h2>
+<div class="info-box">
+    <p>In many parts of Sub-Saharan Africa, access to safe caesarean section is the
+    difference between life and death. The WHO estimates that 5-15% of births require
+    surgical delivery, yet caesarean section rates in parts of rural Africa fall below 1%.</p>
+    <p>We identified <strong>6</strong> caesarean-related
+    trial(s) with African sites. Research gaps include: anaesthesia safety in
+    low-resource theatres, surgical technique optimization, and infection prevention
+    in settings without reliable water supply.</p>
+</div>
+
+<!-- ===== Obstetric Category Breakdown ===== -->
+<h2>Obstetric Category Breakdown</h2>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Trial Categories</h3>
+        <canvas id="categoryChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>Sponsor Breakdown</h3>
+        <canvas id="sponsorChart"></canvas>
+    </div>
+</div>
+
+<!-- ===== Comparison: India & Bangladesh ===== -->
+<h2>Comparison: India &amp; Bangladesh</h2>
+<div class="info-box">
+    <p><strong>India:</strong> 49 maternal/obstetric trials.
+    India's MMR (103/100K) has fallen dramatically from 556 in 1990 to 103 in 2020 --
+    a success story driven partly by trial infrastructure. India's Janani Suraksha Yojana
+    programme was evaluated through multiple RCTs. Africa has no equivalent research pipeline.</p>
+    <p><strong>Bangladesh:</strong> 12 trials.
+    Bangladesh (MMR 123/100K) has achieved remarkable progress
+    through community health worker models that were validated by randomised trials.
+    Africa's MMR remains 4-5x higher than both India and Bangladesh.</p>
+    <p style="color:var(--yellow)">The lesson: maternal mortality reduction requires
+    trial infrastructure. Countries that invested in obstetric research saw their MMR
+    fall. Africa -- which carries 66% of the burden -- has been left behind.</p>
+</div>
+<div class="charts-grid">
+    <div class="chart-box">
+        <h3>Global Comparison: Trial Counts</h3>
+        <canvas id="globalChart"></canvas>
+    </div>
+    <div class="chart-box">
+        <h3>Phase Distribution (Africa Trials)</h3>
+        <canvas id="phaseChart"></canvas>
+    </div>
+</div>
+
+<!-- ===== Sponsor Analysis ===== -->
+<h2>Sponsor Analysis</h2>
+<div class="info-box">
+    <p>Of the 73 unique maternal/obstetric trials in Africa,
+    <strong>12</strong> (16.4%) are led by
+    African institutions. The remainder are sponsored by NGOs/multilateral
+    organizations, non-African academic centres, NIH/US government agencies,
+    or pharmaceutical companies.</p>
+    <p>Unlike oncology or cardiovascular disease, maternal health trials in Africa
+    are overwhelmingly NGO/multilateral-sponsored. This reflects the "aid dependency"
+    model where African maternal health research is driven by external
+    priorities rather than local scientific leadership.</p>
+</div>
+
+<!-- ===== Full Trial Table ===== -->
+<h2>All Africa Trials (73)</h2>
+<p style="color:var(--text2);margin-bottom:8px">
+    Rows coloured by status: <span style="color:var(--green)">completed</span>,
+    <span style="color:var(--red)">terminated/withdrawn</span>,
+    <span style="color:var(--yellow)">active/recruiting</span>,
+    <span style="color:var(--grey)">unknown</span>.
+    Category:
+    <span style="color:#e74c3c">Hemorrhage</span>,
+    <span style="color:#f39c12">Preeclampsia</span>,
+    <span style="color:#3498db">Caesarean</span>,
+    <span style="color:#9b59b6">Sepsis</span>,
+    <span style="color:var(--pink)">PPCM</span>.
+</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+    <th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Sponsor Class</th>
+    <th>Country</th><th>Phase</th><th>Status</th><th>Enrollment</th>
+    <th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05444504" target="_blank"
+    style="color:#60a5fa">NCT05444504</a></td>
+<td title="Effectiveness and Acceptability of Two Insertable Device Models for Non-surgical Management of Obstetric Fistula: a Randomized Crossover Trial">Effectiveness and Acceptability of Two Insertable Device Models for Non-surgical...</td>
+<td>University of California, San Francisco</td>
+<td>Non-African academic</td>
+<td>Ghana, Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">100</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05562609" target="_blank"
+    style="color:#60a5fa">NCT05562609</a></td>
+<td title="Tranexamic Acid by the Intramuscular or Intravenous Route for the Prevention of Postpartum Haemorrhage in Women At Increased Risk: a Randomised, Double-blind, Placebo-controlled Trial">Tranexamic Acid by the Intramuscular or Intravenous Route for the Prevention of ...</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">30,000</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05678062" target="_blank"
+    style="color:#60a5fa">NCT05678062</a></td>
+<td title="Point-of-care Ultrasound Abnormalities in Eclampsia - Prevalence and Association Between Pulmonary Interstitial Syndrome and Cardiac Dysfunction, Brain Natriuretic Peptide, and Serum Albumin">Point-of-care Ultrasound Abnormalities in Eclampsia - Prevalence and Association...</td>
+<td>University of Cape Town</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">70</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05757167" target="_blank"
+    style="color:#60a5fa">NCT05757167</a></td>
+<td title="Improving Neonatal Health Through Rapid Malaria Testing in Early Pregnancy With High-Sensitivity">Improving Neonatal Health Through Rapid Malaria Testing in Early Pregnancy With ...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Kenya, Democratic Republic of the Congo</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">2,500</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05934318" target="_blank"
+    style="color:#60a5fa">NCT05934318</a></td>
+<td title="Oral Antenatal L-citrulline Supplementation to Reduce Adverse Pregnancy Outcomes: a Two-arm, Randomized, Placebo-controlled Multi-site Trial in Kenya">Oral Antenatal L-citrulline Supplementation to Reduce Adverse Pregnancy Outcomes...</td>
+<td>Liverpool School of Tropical Medicine</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">2,960</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06125860" target="_blank"
+    style="color:#60a5fa">NCT06125860</a></td>
+<td title="Targeting Strategies of Antenatal Balanced Energy and Protein Supplementation in Addis Ababa, Ethiopia">Targeting Strategies of Antenatal Balanced Energy and Protein Supplementation in...</td>
+<td>Harvard School of Public Health (HSPH)</td>
+<td>Other</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">6,750</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06273007" target="_blank"
+    style="color:#60a5fa">NCT06273007</a></td>
+<td title="Introducing PartoMa Approach to Ethiopia for Improving Intrapartum Care and Maternal Survival: The Case of the Ethiopian Obstetric Surveillance System (PartoMa-Ethiopia)">Introducing PartoMa Approach to Ethiopia for Improving Intrapartum Care and Mate...</td>
+<td>Haramaya Unversity</td>
+<td>Other</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">500</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06554522" target="_blank"
+    style="color:#60a5fa">NCT06554522</a></td>
+<td title="Pragmatic Evaluation of Therapies to Enhance Respiratory Management in Preterm Infants in Africa">Pragmatic Evaluation of Therapies to Enhance Respiratory Management in Preterm I...</td>
+<td>Indiana University</td>
+<td>Non-African academic</td>
+<td>Ghana, Nigeria, Central African Republic +1</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,512</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06579690" target="_blank"
+    style="color:#60a5fa">NCT06579690</a></td>
+<td title="Effectiveness and Safety Dosing of Sodium Bicarbonate in Women With Obstructed Labor in Eastern Uganda: A Phase III Randomized Placebo-controlled Trial">Effectiveness and Safety Dosing of Sodium Bicarbonate in Women With Obstructed L...</td>
+<td>Busitema University</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">472</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06723392" target="_blank"
+    style="color:#60a5fa">NCT06723392</a></td>
+<td title="Asymptomatic Bacteriuria in Pregnancy in Low- and Middle-IncomE Countries: A Randomized Controlled Trial of the Global Network for Women's and Children's Health Research">Asymptomatic Bacteriuria in Pregnancy in Low- and Middle-IncomE Countries: A Ran...</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Guatemala, Democratic Republic of the Congo, Bangladesh +3</td>
+<td>PHASE3</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,134</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06773299" target="_blank"
+    style="color:#60a5fa">NCT06773299</a></td>
+<td title="ENhancing Intergenerational HeAlth in Nigeria: Peripartum as Critical Life StagE for CardioVascular Health">ENhancing Intergenerational HeAlth in Nigeria: Peripartum as Critical Life StagE...</td>
+<td>Washington University School of Medicine</td>
+<td>Non-African academic</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,000</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06859359" target="_blank"
+    style="color:#60a5fa">NCT06859359</a></td>
+<td title="Improving Maternal Cardiovascular Outcomes Through the Implementation of a Hypertensive Disorders of Pregnancy Bundle in Nigeria">Improving Maternal Cardiovascular Outcomes Through the Implementation of a Hyper...</td>
+<td>Washington University School of Medicine</td>
+<td>Non-African academic</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#f1c40f">RECRUITING</td>
+<td style="text-align:right">1,200</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT04060667" target="_blank"
+    style="color:#60a5fa">NCT04060667</a></td>
+<td title="Wireless Physiologic Monitoring in Postpartum Women">Wireless Physiologic Monitoring in Postpartum Women</td>
+<td>Massachusetts General Hospital</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">3,191</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT05598502" target="_blank"
+    style="color:#60a5fa">NCT05598502</a></td>
+<td title="A Phase III, Open-label, Randomized Clinical Trial to Evaluate Efficacy and Safety of Resuscitative Endovascular Balloon Occlusion of the Aorta (REBOA) in Life-threatening Postpartum Hemorrhage in Reducing Adverse Maternal Outcome in Uganda">A Phase III, Open-label, Randomized Clinical Trial to Evaluate Efficacy and Safe...</td>
+<td>Centre For International Health</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#f1c40f">ACTIVE_NOT_RECRUITING</td>
+<td style="text-align:right">95</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06325319" target="_blank"
+    style="color:#60a5fa">NCT06325319</a></td>
+<td title="Effectiveness of Community Engagement Using M-Mama Champions in Improving Literacy of Obstetric Danger Signs, Birth Preparedness and Complication Readiness Among Pregnant Women in Bahi, Dodoma">Effectiveness of Community Engagement Using M-Mama Champions in Improving Litera...</td>
+<td>University of Dodoma</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">120</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06635733" target="_blank"
+    style="color:#60a5fa">NCT06635733</a></td>
+<td title="A Cluster Randomized Controlled Trial of the Pediatric Acute Care Education (PACE) Program Combining Adaptive E-Learning with In-Person Skills Practice in Tanzania">A Cluster Randomized Controlled Trial of the Pediatric Acute Care Education (PAC...</td>
+<td>Stanford University</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">100</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06955728" target="_blank"
+    style="color:#60a5fa">NCT06955728</a></td>
+<td title="A Phase-IV Individually Randomized, Placebo-controlled Trial on Safety of RSVA/B-preF Vaccine in Pregnant Women and Efficacy Against Severe RSV-associated Lower Respiratory Tract Infection in Infants">A Phase-IV Individually Randomized, Placebo-controlled Trial on Safety of RSVA/B...</td>
+<td>University of Witwatersrand, South Africa</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">13,000</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT06968481" target="_blank"
+    style="color:#60a5fa">NCT06968481</a></td>
+<td title="A Phase 2, Single-center, Open-label, Randomized, Dose Ascending Trial to Evaluate the Efficacy and Safety of Sublingual Oxytocin for the Prevention of Post-partum Hemorrhage Caused by Uterine Atony in Term Pregnant Women Having an Uncomplicated Vaginal Delivery">A Phase 2, Single-center, Open-label, Randomized, Dose Ascending Trial to Evalua...</td>
+<td>Insud Pharma</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>PHASE2</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">330</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #f1c40f">
+<td><a href="https://clinicaltrials.gov/study/NCT07171086" target="_blank"
+    style="color:#60a5fa">NCT07171086</a></td>
+<td title="AI-POCUS to Improve Maternal and Neonatal Health Outcomes in Rural Ethiopia: A Three-Arm Cluster Randomized Controlled Trial">AI-POCUS to Improve Maternal and Neonatal Health Outcomes in Rural Ethiopia: A T...</td>
+<td>Tsinghua University</td>
+<td>Non-African academic</td>
+<td>Ethiopia</td>
+<td>PHASE4</td>
+<td style="color:#f1c40f">NOT_YET_RECRUITING</td>
+<td style="text-align:right">1,059</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00124540" target="_blank"
+    style="color:#60a5fa">NCT00124540</a></td>
+<td title="Misoprostol for Preventing Postpartum Hemorrhage">Misoprostol for Preventing Postpartum Hemorrhage</td>
+<td>Gynuity Health Projects</td>
+<td>Other</td>
+<td>South Africa, Nigeria, Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,200</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00488579" target="_blank"
+    style="color:#60a5fa">NCT00488579</a></td>
+<td title="Routine Iron Prophylaxis During Pregnancy - Effects on Maternal and Child Health in Maputo City and Province (Mozambique)">Routine Iron Prophylaxis During Pregnancy - Effects on Maternal and Child Health...</td>
+<td>National Istitute For Health and Welfare, Finland</td>
+<td>Other</td>
+<td>Mozambique</td>
+<td>PHASE4</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">4,326</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00615550" target="_blank"
+    style="color:#60a5fa">NCT00615550</a></td>
+<td title="The Effect of Vaginal Progesterone Administration in the Prevention of Preterm Birth in Women With a Short Cervix [Vaginal Progesterone Bioadhesive Gel (Prochieve)® Extending Gestation A New Therapy for Short Cervix - Trial (PREGNANT Short Cervix - Trial)]">The Effect of Vaginal Progesterone Administration in the Prevention of Preterm B...</td>
+<td>Juniper Pharmaceuticals, Inc.</td>
+<td>Other</td>
+<td>Ukraine, Belarus, United States +7</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">465</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT00872469" target="_blank"
+    style="color:#60a5fa">NCT00872469</a></td>
+<td title="Tranexamic Acid for the Treatment of Postpartum Haemorrhage: An International Randomised, Double Blind, Placebo Controlled Trial">Tranexamic Acid for the Treatment of Postpartum Haemorrhage: An International Ra...</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">20,060</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01028547" target="_blank"
+    style="color:#60a5fa">NCT01028547</a></td>
+<td title="Antiemetic Efficacy and Safety of Dexamethasone in Patients Undergoing Caesarean Sections at Mulago Hospital">Antiemetic Efficacy and Safety of Dexamethasone in Patients Undergoing Caesarean...</td>
+<td>Makerere University</td>
+<td>African institution</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">250</td>
+<td style="color:#3498db">Caesarean section</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01073488" target="_blank"
+    style="color:#60a5fa">NCT01073488</a></td>
+<td title="Evaluation of an Emergency Obstetric and Neonatal Care (EmONC) Intervention Package to Reduce Adverse Pregnancy Outcomes in Low Resource Settings (The EmONC Trial)">Evaluation of an Emergency Obstetric and Neonatal Care (EmONC) Intervention Pack...</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Kenya, Guatemala, Argentina +3</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">267,181</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01084096" target="_blank"
+    style="color:#60a5fa">NCT01084096</a></td>
+<td title="Trial of the Use of Antenatal Corticosteroids in Developing Countries">Trial of the Use of Antenatal Corticosteroids in Developing Countries</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Kenya, Guatemala, Argentina +3</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">103,117</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01487707" target="_blank"
+    style="color:#60a5fa">NCT01487707</a></td>
+<td title="Strengthening the Midwife Service Scheme With Community Focused Interventions: Evidence From a Randomized Controlled Field Trial in Nigeria">Strengthening the Midwife Service Scheme With Community Focused Interventions: E...</td>
+<td>Abdul Latif Jameel Poverty Action Lab</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">7,200</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01510574" target="_blank"
+    style="color:#60a5fa">NCT01510574</a></td>
+<td title="A Study of Self-administered Misoprostol to Prevent Bleeding After Childbirth in the Community (MamaMiso)">A Study of Self-administered Misoprostol to Prevent Bleeding After Childbirth in...</td>
+<td>Gynuity Health Projects</td>
+<td>Other</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">749</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01571765" target="_blank"
+    style="color:#60a5fa">NCT01571765</a></td>
+<td title="Scaling Up Maternal and Child Health In Bushenyi and Rubirizi Districts, UGANDA">Scaling Up Maternal and Child Health In Bushenyi and Rubirizi Districts, UGANDA</td>
+<td>University of Calgary</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">10,985</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01866241" target="_blank"
+    style="color:#60a5fa">NCT01866241</a></td>
+<td title="Combating Maternal Mortality in Uganda: An Assessment of the Role of Misoprostol in Prevention of Post-Partum Hemorrhage">Combating Maternal Mortality in Uganda: An Assessment of the Role of Misoprostol...</td>
+<td>Mbarara University of Science and Technology</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,140</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01868737" target="_blank"
+    style="color:#60a5fa">NCT01868737</a></td>
+<td title="The Use of Probiotics in the Management of Necrotizing Enterocolitis in HIV-exposed Premature and Very-low Birth Weight Infants">The Use of Probiotics in the Management of Necrotizing Enterocolitis in HIV-expo...</td>
+<td>University of Stellenbosch</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">184</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01911494" target="_blank"
+    style="color:#60a5fa">NCT01911494</a></td>
+<td title="The CLIP (Community Level Interventions for Pre-eclampsia) Cluster Randomized Controlled Trial">The CLIP (Community Level Interventions for Pre-eclampsia) Cluster Randomized Co...</td>
+<td>University of British Columbia</td>
+<td>Non-African academic</td>
+<td>Mozambique, Pakistan, Nigeria +1</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">87,500</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01934075" target="_blank"
+    style="color:#60a5fa">NCT01934075</a></td>
+<td title="Development of Mental Health Treatment for Obstetric Fistula Patients in Tanzania">Development of Mental Health Treatment for Obstetric Fistula Patients in Tanzani...</td>
+<td>Duke University</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">60</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT01990625" target="_blank"
+    style="color:#60a5fa">NCT01990625</a></td>
+<td title="Global Network First Look: A Cluster-Randomized Trial of Ultrasound Use to Improve Pregnancy Outcomes in Low Income Country Settings">Global Network First Look: A Cluster-Randomized Trial of Ultrasound Use to Impro...</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Kenya, Guatemala, Zambia +2</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">45,038</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02046499" target="_blank"
+    style="color:#60a5fa">NCT02046499</a></td>
+<td title="A Randomized Trial Comparing Oxytocin and Oxytocin + Ergometrine for Prevention of Postpartum Haemorrhage at Caesarean Section">A Randomized Trial Comparing Oxytocin and Oxytocin + Ergometrine for Prevention ...</td>
+<td>University of Pretoria</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">540</td>
+<td style="color:#3498db">Caesarean section</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02238704" target="_blank"
+    style="color:#60a5fa">NCT02238704</a></td>
+<td title="A Cluster-randomized, Non-inferiority Open-label Trial of the Impact of Supplementation Regimen on Consumption of Prenatal Calcium and Iron/Folic Acid Supplements and Adherence to Related Recommendations">A Cluster-randomized, Non-inferiority Open-label Trial of the Impact of Suppleme...</td>
+<td>Cornell University</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,032</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02318420" target="_blank"
+    style="color:#60a5fa">NCT02318420</a></td>
+<td title="The PartoMa Project for Saving Lives at Birth - An Intervention Based Study to Strengthen the Quality of Monitoring, Action and Triage During Labour at an East African Referral Hospital">The PartoMa Project for Saving Lives at Birth - An Intervention Based Study to S...</td>
+<td>Ib Christian Bygbjerg</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">3,087</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02409680" target="_blank"
+    style="color:#60a5fa">NCT02409680</a></td>
+<td title="Aspirin Supplementation for Pregnancy Indicated Risk Reduction In Nulliparas (ASPIRIN)">Aspirin Supplementation for Pregnancy Indicated Risk Reduction In Nulliparas (AS...</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Kenya, Guatemala, Democratic Republic of the Congo +4</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">11,976</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02506413" target="_blank"
+    style="color:#60a5fa">NCT02506413</a></td>
+<td title="Replicating MamaToto in Rural Tanzania">Replicating MamaToto in Rural Tanzania</td>
+<td>University of Calgary</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">8,323</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02605369" target="_blank"
+    style="color:#60a5fa">NCT02605369</a></td>
+<td title="SURVIVAL PLUSS: Increasing Capacity for Mama-baby Survival in Post-conflict Uganda and South Sudan">SURVIVAL PLUSS: Increasing Capacity for Mama-baby Survival in Post-conflict Ugan...</td>
+<td>Makerere University</td>
+<td>African institution</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">1,877</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02811432" target="_blank"
+    style="color:#60a5fa">NCT02811432</a></td>
+<td title="The OMWaNA Study: Operationalising Kangaroo Mother Care Before Stabilisation Amongst Low Birth Weight Neonates in Africa: a Multi-site Randomised Controlled Trial to Examine Mortality Impact in Uganda">The OMWaNA Study: Operationalising Kangaroo Mother Care Before Stabilisation Amo...</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">2,221</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT02910310" target="_blank"
+    style="color:#60a5fa">NCT02910310</a></td>
+<td title="Introduction of a Uterine Balloon Tamponade for Postpartum Hemorrhage in Three Low Income Countries: a Stepped Wedge Cluster Randomized Trial">Introduction of a Uterine Balloon Tamponade for Postpartum Hemorrhage in Three L...</td>
+<td>Gynuity Health Projects</td>
+<td>Other</td>
+<td>Uganda, Senegal, Egypt</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">60,105</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03024905" target="_blank"
+    style="color:#60a5fa">NCT03024905</a></td>
+<td title="Enhancing All Community Health Workers on Maternal and Newborn Health: Rorya Tanzania">Enhancing All Community Health Workers on Maternal and Newborn Health: Rorya Tan...</td>
+<td>Bruyère Health Research Institute.</td>
+<td>Non-African academic</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">17,000</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03112018" target="_blank"
+    style="color:#60a5fa">NCT03112018</a></td>
+<td title="Strengthening Intrapartum and Immediate Newborn Care to Reduce Morbidity and Mortality of Preterm Infants in Health Facilities in Migori County, Kenya and Busoga Region, Uganda: an Implementation Science RCT">Strengthening Intrapartum and Immediate Newborn Care to Reduce Morbidity and Mor...</td>
+<td>University of California, San Francisco</td>
+<td>Non-African academic</td>
+<td>Uganda, Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">102,988</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03350516" target="_blank"
+    style="color:#60a5fa">NCT03350516</a></td>
+<td title="Demonstrating Non-inferiority of Lower Dose Calcium Supplementation During Pregnancy for Reducing Preeclampsia and Neonatal Outcomes">Demonstrating Non-inferiority of Lower Dose Calcium Supplementation During Pregn...</td>
+<td>Harvard School of Public Health (HSPH)</td>
+<td>Other</td>
+<td>Tanzania, India</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">22,000</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03363308" target="_blank"
+    style="color:#60a5fa">NCT03363308</a></td>
+<td title="Effects of a Health Workforce Capacity Building and Quality Improvement Intervention on Intrapartum Stillbirth, Early Newborn Mortality and Post-pregnancy Family Planning in Kinshasa: a Cluster Randomized Evaluation">Effects of a Health Workforce Capacity Building and Quality Improvement Interven...</td>
+<td>Jhpiego</td>
+<td>NGO/multilateral</td>
+<td>Democratic Republic of the Congo</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">250</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03475342" target="_blank"
+    style="color:#60a5fa">NCT03475342</a></td>
+<td title="Tranexamic Acid for the Prevention of Postpartum Bleeding in Women With Anaemia: an International, Randomised, Double-blind, Placebo Controlled Trial.">Tranexamic Acid for the Prevention of Postpartum Bleeding in Women With Anaemia:...</td>
+<td>London School of Hygiene and Tropical Medicine</td>
+<td>Other</td>
+<td>Pakistan, Nigeria, Zambia +1</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">15,068</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03757598" target="_blank"
+    style="color:#60a5fa">NCT03757598</a></td>
+<td title="ePartogram Effectiveness Study: A Mixed Methods Quasi-experimental Study in Kisumu and Meru, Kenya.">ePartogram Effectiveness Study: A Mixed Methods Quasi-experimental Study in Kisu...</td>
+<td>Jhpiego</td>
+<td>NGO/multilateral</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">113</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03871491" target="_blank"
+    style="color:#60a5fa">NCT03871491</a></td>
+<td title="Prevention of Maternal and Neonatal Death/Infections With a Single Oral Dose of Azithromycin in Women in Labor (in Low- and Middle-income Countries): a Randomized Controlled Trial">Prevention of Maternal and Neonatal Death/Infections With a Single Oral Dose of ...</td>
+<td>NICHD Global Network for Women's and Children's Health</td>
+<td>NIH/US Govt</td>
+<td>Kenya, Guatemala, Democratic Republic of the Congo +4</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">58,747</td>
+<td style="color:#9b59b6">Maternal sepsis</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT03978429" target="_blank"
+    style="color:#60a5fa">NCT03978429</a></td>
+<td title="A Cluster Randomized, Parallel-group, Superiority Study to Compare the Effectiveness of a Community-based mHealth Strategy Versus Enhanced Usual Care in the Detection and Management of Pre-eclampsia/Eclampsia in Tanzania">A Cluster Randomized, Parallel-group, Superiority Study to Compare the Effective...</td>
+<td>Dr. Karen Yeates</td>
+<td>Other</td>
+<td>Tanzania</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">3,000</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04287322" target="_blank"
+    style="color:#60a5fa">NCT04287322</a></td>
+<td title="Effect of Auditory and Tactile-kinesthetic Stimulation on Physiological Parameters, Physical Growth and Behaviour of Preterm Neonates">Effect of Auditory and Tactile-kinesthetic Stimulation on Physiological Paramete...</td>
+<td>Moi University</td>
+<td>African institution</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">108</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04341662" target="_blank"
+    style="color:#60a5fa">NCT04341662</a></td>
+<td title="Early Detection of Postpartum Haemorrhage and Treatment Using the World Health Organisation MOTIVE 'First Response' Bundle: a Cluster Randomised Trial With Health Economic Analysis and Mixed-methods Evaluation (E-MOTIVE Trial)">Early Detection of Postpartum Haemorrhage and Treatment Using the World Health O...</td>
+<td>University of Birmingham</td>
+<td>Non-African academic</td>
+<td>Kenya, Nigeria, Tanzania +2</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">99,659</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04501289" target="_blank"
+    style="color:#60a5fa">NCT04501289</a></td>
+<td title="Low Dose Magnesium Sulphate Versus Standard Pritchard Regimen In Management Of Severe Preeclampsia/Eclampsia: A Randomised Controlled Trial">Low Dose Magnesium Sulphate Versus Standard Pritchard Regimen In Management Of S...</td>
+<td>Adebayo Joshua Adeniyi</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">114</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04598165" target="_blank"
+    style="color:#60a5fa">NCT04598165</a></td>
+<td title="Mobile WACh NEO Randomized Clinical Trial: Mobile Phone 2-Way Short Message Service (SMS) Versus Control to Reduce Neonatal Mortality in Kenya">Mobile WACh NEO Randomized Clinical Trial: Mobile Phone 2-Way Short Message Serv...</td>
+<td>Women and Infants Hospital of Rhode Island</td>
+<td>Non-African academic</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">5,020</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04748653" target="_blank"
+    style="color:#60a5fa">NCT04748653</a></td>
+<td title="Comprehensive Reintegration Assistance for Women With Obstetric Fistula">Comprehensive Reintegration Assistance for Women With Obstetric Fistula</td>
+<td>University of California, San Francisco</td>
+<td>Non-African academic</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">12</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT04812522" target="_blank"
+    style="color:#60a5fa">NCT04812522</a></td>
+<td title="CheckList Expansion for Antisepsis and iNfection Control in Cesarean Section - CLEAN-CS: A Cluster-Randomized, Stepped Wedge Interventional Trial to Reduce Postoperative Infections Following Cesarean Delivery">CheckList Expansion for Antisepsis and iNfection Control in Cesarean Section - C...</td>
+<td>The Lifebox Foundation</td>
+<td>Other</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">10,506</td>
+<td style="color:#3498db">Caesarean section</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05253781" target="_blank"
+    style="color:#60a5fa">NCT05253781</a></td>
+<td title="Low Dose Aspirin for Preventing Intrauterine Growth Restriction and Preeclampsia in Sickle Cell Pregnancy (PIPSICKLE): a Randomized Controlled Trial">Low Dose Aspirin for Preventing Intrauterine Growth Restriction and Preeclampsia...</td>
+<td>University of Lagos, Nigeria</td>
+<td>African institution</td>
+<td>Nigeria</td>
+<td>PHASE3</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">476</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05462509" target="_blank"
+    style="color:#60a5fa">NCT05462509</a></td>
+<td title="Feasibility of Use of the PATH bCPAP Kit Including Oxygen Blenders in a Neonatal Population in Uganda">Feasibility of Use of the PATH bCPAP Kit Including Oxygen Blenders in a Neonatal...</td>
+<td>PATH</td>
+<td>NGO/multilateral</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">14</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05508308" target="_blank"
+    style="color:#60a5fa">NCT05508308</a></td>
+<td title="Automated Oxygen Control for Preterm Infants On Continuous Positive Airway Pressure (CPAP): Phase 1/2 Trial In Southwest Nigeria">Automated Oxygen Control for Preterm Infants On Continuous Positive Airway Press...</td>
+<td>Murdoch Childrens Research Institute</td>
+<td>Non-African academic</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">49</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT05631067" target="_blank"
+    style="color:#60a5fa">NCT05631067</a></td>
+<td title="Feasibility and Acceptability of Remote Blood Pressure Monitoring and Risk Stratification in the Fourth Trimester to Reduce Maternal Cardiovascular Morbidity and Mortality in Nigeria">Feasibility and Acceptability of Remote Blood Pressure Monitoring and Risk Strat...</td>
+<td>Washington University School of Medicine</td>
+<td>Non-African academic</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">180</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT06126068" target="_blank"
+    style="color:#60a5fa">NCT06126068</a></td>
+<td title="Comparison of Loading Dose Magnesium Sulphate With Prichard Regimen in the Management of Severe Preeclampsia and Eclampsia in a Resource Poor Setting, Southeast Nigeria.">Comparison of Loading Dose Magnesium Sulphate With Prichard Regimen in the Manag...</td>
+<td>Federal Teaching Hospital Abakaliki</td>
+<td>Non-African academic</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">120</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT06390943" target="_blank"
+    style="color:#60a5fa">NCT06390943</a></td>
+<td title="Low Birthweight and Preterm Infant Feeding Trial and Supportive Care Package (LIFT-UP): Implementation Research of an In-facility and Community Supportive Care Package in India, Malawi and Tanzania">Low Birthweight and Preterm Infant Feeding Trial and Supportive Care Package (LI...</td>
+<td>Harvard School of Public Health (HSPH)</td>
+<td>Other</td>
+<td>Tanzania, Malawi, India</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">632</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT07130890" target="_blank"
+    style="color:#60a5fa">NCT07130890</a></td>
+<td title="Effect of Mobile Health Integrated Antenatal Care Intervention in Improving Maternity Continuum of Care, Obstetric Health Literacy, Maternal and Perinatal Outcomes in Public Hospitals, Ethiopia: A Randomized Control Trial">Effect of Mobile Health Integrated Antenatal Care Intervention in Improving Mate...</td>
+<td>Yibelu Bazezew Bitewa</td>
+<td>Other</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">520</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #2ecc71">
+<td><a href="https://clinicaltrials.gov/study/NCT07436286" target="_blank"
+    style="color:#60a5fa">NCT07436286</a></td>
+<td title="Effect of Umbilical Vein Injection of Oxytocin in Addition to Active Management of Third Stage of Labour: A Study Among Parturients at Ahmadu Bello University Teaching Hospital Zaria">Effect of Umbilical Vein Injection of Oxytocin in Addition to Active Management ...</td>
+<td>Dangana Zakari Adeka</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#2ecc71">COMPLETED</td>
+<td style="text-align:right">416</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT00977912" target="_blank"
+    style="color:#60a5fa">NCT00977912</a></td>
+<td title="Prevention of NEC in Preterm Infants With B. Lactis">Prevention of NEC in Preterm Infants With B. Lactis</td>
+<td>Société des Produits Nestlé (SPN)</td>
+<td>Other</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">318</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #e74c3c">
+<td><a href="https://clinicaltrials.gov/study/NCT03008616" target="_blank"
+    style="color:#60a5fa">NCT03008616</a></td>
+<td title="A Phase 2b/3a, Multi-Center, Randomized, Double-Blind, Placebo-Controlled, Parallel-Group Study of the Efficacy and Safety of AMAG-423, a Digoxin Immune Fab, in Antepartum Subjects With Severe Preeclampsia">A Phase 2b/3a, Multi-Center, Randomized, Double-Blind, Placebo-Controlled, Paral...</td>
+<td>AMAG Pharmaceuticals, Inc.</td>
+<td>Other</td>
+<td>South Africa, United States, Poland</td>
+<td>PHASE2, PHASE3</td>
+<td style="color:#e74c3c">TERMINATED</td>
+<td style="text-align:right">59</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT03549767" target="_blank"
+    style="color:#60a5fa">NCT03549767</a></td>
+<td title="Randomized Trial to Compare Magnesium Sulphate Administration for Preeclampsia and Eclampsia: Springfusor Versus Standard of Approach">Randomized Trial to Compare Magnesium Sulphate Administration for Preeclampsia a...</td>
+<td>Makerere University</td>
+<td>African institution</td>
+<td>Uganda</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">241</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT03896893" target="_blank"
+    style="color:#60a5fa">NCT03896893</a></td>
+<td title="Impact of 1% Chlorhexidine Gluconate and/or Emollient on Neonatal Bacterial Colonization Dynamics">Impact of 1% Chlorhexidine Gluconate and/or Emollient on Neonatal Bacterial Colo...</td>
+<td>University of Stellenbosch</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">80</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT05015023" target="_blank"
+    style="color:#60a5fa">NCT05015023</a></td>
+<td title="Effectiveness of Health Education Provided to Couples on Knowledge, Attitude, and Utilization of Maternity Waiting Homes in Hadiya Zone, Southern Ethiopia: A Cluster-Randomized Controlled Trial">Effectiveness of Health Education Provided to Couples on Knowledge, Attitude, an...</td>
+<td>Jimma University</td>
+<td>African institution</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">320</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT05532215" target="_blank"
+    style="color:#60a5fa">NCT05532215</a></td>
+<td title="Comparison Between Adjunctive Sublingual Misoprostol Versus Adjunctive Placebo in the Reduction of Intraoperative Blood Loss During Caesarean Section">Comparison Between Adjunctive Sublingual Misoprostol Versus Adjunctive Placebo i...</td>
+<td>OZORI EBIOGBO STANLEY</td>
+<td>Other</td>
+<td>Nigeria</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">152</td>
+<td style="color:#3498db">Caesarean section</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT05662995" target="_blank"
+    style="color:#60a5fa">NCT05662995</a></td>
+<td title="Point-of-care Ultrasound Abnormalities in Early Onset Preeclampsia - Prevalence and Association Between Pulmonary Interstitial Syndrome and Cardiac Dysfunction, Brain Natriuretic Peptide, and Serum Albumin">Point-of-care Ultrasound Abnormalities in Early Onset Preeclampsia - Prevalence ...</td>
+<td>University of Cape Town</td>
+<td>African institution</td>
+<td>South Africa</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">60</td>
+<td style="color:#f39c12">Preeclampsia/Eclampsia</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT05865873" target="_blank"
+    style="color:#60a5fa">NCT05865873</a></td>
+<td title="Improving Maternal Health Service Utilization Among Women of Reproductive Age in Sidama Regional State, Ethiopia">Improving Maternal Health Service Utilization Among Women of Reproductive Age in...</td>
+<td>Hawassa University</td>
+<td>Non-African academic</td>
+<td>Ethiopia</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">1,126</td>
+<td style="color:#95a5a6">Other obstetric</td>
+</tr>
+<tr style="border-left:4px solid #95a5a6">
+<td><a href="https://clinicaltrials.gov/study/NCT06166771" target="_blank"
+    style="color:#60a5fa">NCT06166771</a></td>
+<td title="Safety and Effectiveness of the Alma System in Treating Primary Postpartum Hemorrhage">Safety and Effectiveness of the Alma System in Treating Primary Postpartum Hemor...</td>
+<td>ResQ Medical Ltd</td>
+<td>Other</td>
+<td>Kenya</td>
+<td>NA</td>
+<td style="color:#95a5a6">UNKNOWN</td>
+<td style="text-align:right">10</td>
+<td style="color:#e74c3c">Hemorrhage/PPH</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+    Data: ClinicalTrials.gov API v2 (public) | Fetched: 2026-03-28 |
+    Africa trials: 13 (unique: 73) | US trials: 885 |
+    CCI: 45.5x-5616.3x |
+    MMR data: WHO/UNICEF/UNFPA/World Bank 2020 |
+    Generated by fetch_maternal_mortality.py (Project 29)
+</div>
+
+</div><!-- /container -->
+
+<script>
+// -- Country bar chart --
+new Chart(document.getElementById('countryChart'), {
+    type: 'bar',
+    data: {
+        labels: ["South Africa", "Kenya", "Uganda", "Nigeria", "Tanzania", "Ethiopia", "Mozambique", "DRC"],
+        datasets: [{
+            label: 'Trials',
+            data: [11, 16, 15, 17, 12, 7, 2, 2],
+            backgroundColor: '#60a5fa',
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: {
+                grid: { color: 'rgba(255,255,255,0.05)' },
+                ticks: { color: '#9ca3af' },
+                title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#e5e7eb' }
+            }
+        }
+    }
+});
+
+// -- MMR vs Trial Count scatter --
+(function() {
+    var countries = ["South Africa", "Kenya", "Uganda", "Nigeria", "Tanzania", "Ethiopia", "Mozambique", "DRC"];
+    var trials = [11, 16, 15, 17, 12, 7, 2, 2];
+    var mmrVals = [127, 342, 284, 1047, 238, 267, 289, 547];
+    var points = countries.map(function(c, i) {
+        return { x: trials[i], y: mmrVals[i], label: c };
+    });
+    new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Country',
+                data: points,
+                backgroundColor: '#e74c3c',
+                pointRadius: 8,
+                pointHoverRadius: 12,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            var p = ctx.raw;
+                            return p.label + ': ' + p.x + ' trials, MMR ' + p.y + '/100K';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af' },
+                    title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af' },
+                    title: { display: true, text: 'MMR (per 100K live births)', color: '#9ca3af' }
+                }
+            }
+        }
+    });
+})();
+
+// -- Obstetric category doughnut --
+new Chart(document.getElementById('categoryChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["Other obstetric", "Preeclampsia/Eclampsia", "Caesarean section", "Hemorrhage/PPH", "Maternal sepsis"],
+        datasets: [{
+            data: [43, 12, 4, 13, 1],
+            backgroundColor: ["#95a5a6", "#f39c12", "#3498db", "#e74c3c", "#9b59b6"],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#e5e7eb', padding: 12 }
+            }
+        }
+    }
+});
+
+// -- Sponsor doughnut --
+new Chart(document.getElementById('sponsorChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ["Other", "African institution", "Non-African academic", "NIH/US Govt", "NGO/multilateral"],
+        datasets: [{
+            data: [26, 12, 26, 6, 3],
+            backgroundColor: ["#95a5a6", "#2ecc71", "#3498db", "#f39c12", "#9b59b6"],
+            borderWidth: 0,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { color: '#e5e7eb', padding: 12 }
+            }
+        }
+    }
+});
+
+// -- Global comparison bar --
+new Chart(document.getElementById('globalChart'), {
+    type: 'bar',
+    data: {
+        labels: ["Africa", "United States", "India", "Bangladesh"],
+        datasets: [{
+            label: 'Trials',
+            data: [13, 885, 49, 12],
+            backgroundColor: ['#e74c3c', '#3498db', '#f39c12', '#2ecc71'],
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: { color: '#e5e7eb' }
+            },
+            y: {
+                grid: { color: 'rgba(255,255,255,0.05)' },
+                ticks: { color: '#9ca3af' },
+                title: { display: true, text: 'Number of trials', color: '#9ca3af' }
+            }
+        }
+    }
+});
+
+// -- Phase distribution --
+(function() {
+    var phaseLabels = ["PHASE3", "NA", "PHASE4", "PHASE2", "PHASE2, PHASE3"];
+    var phaseValues = [11, 55, 5, 1, 1];
+    var phaseColors = phaseLabels.map(function(l) {
+        if (l.indexOf('PHASE1') >= 0 && l.indexOf('PHASE2') < 0) return '#3498db';
+        if (l.indexOf('PHASE2') >= 0 && l.indexOf('PHASE3') < 0) return '#f39c12';
+        if (l.indexOf('PHASE3') >= 0 && l.indexOf('PHASE4') < 0) return '#2ecc71';
+        if (l.indexOf('PHASE4') >= 0) return '#9b59b6';
+        if (l.indexOf('EARLY') >= 0) return '#1abc9c';
+        return '#95a5a6';
+    });
+    new Chart(document.getElementById('phaseChart'), {
+        type: 'doughnut',
+        data: {
+            labels: phaseLabels,
+            datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: '#e5e7eb', padding: 12 }
+                }
+            }
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

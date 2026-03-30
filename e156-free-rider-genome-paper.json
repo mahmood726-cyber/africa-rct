@@ -1,0 +1,51 @@
+{
+    "title": "The free rider genome: quantifying the gap between African genetic data extraction and pharmacogenomics trial investment",
+    "body": "Does clinical trial investment in genomic medicine reflect the exploitation of African genetic diversity? We applied free rider theory (Olson, 1965) and the tragedy of the commons (Hardin, 1968) to ClinicalTrials.gov data, comparing genomics, pharmacogenomics, and precision oncology trials across Africa, the United States, China, India, and the United Kingdom. Africa had zero pharmacogenomics trials across six critical genes (CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, HLA-B*5701) despite the highest allele diversity for drug-metabolizing enzymes globally. The Free Rider Index, measuring global genomics trial activity relative to African trials, was extremely high. H3Africa sequenced thousands of African genomes cited in over 1200 publications, yet zero interventional trials translated this into African clinical applications. Precision oncology trials for BRCA-targeted and immunotherapy approaches concentrated in the US despite African women having the highest triple-negative breast cancer rates. Applying the Coase theorem, we propose genomic data sovereignty through conditional access requiring clinical trial reciprocity. Limitations include single-registry restriction and pharmacogenomics terminology variation.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does clinical trial investment in genomic medicine reflect the global exploitation of African genetic diversity data, or are Africans free-ridden as a public good?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for genomics, pharmacogenomics, and precision oncology interventional trials across Africa, the United States, China, India, and the United Kingdom, including gene-specific searches for six pharmacogenomics markers."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had zero pharmacogenomics trials across all six clinically critical genes despite Africans having the highest allele diversity globally, with CYP2D6 ultra-rapid metabolizers at 20 to 40 percent versus 1 to 10 percent in Europeans."
+        },
+        {
+            "role": "H3Africa paradox",
+            "text": "The H3Africa consortium sequenced thousands of African genomes cited in over 1200 publications worldwide, yet zero interventional trials have translated this genomic data into clinical applications benefiting African patients."
+        },
+        {
+            "role": "Oncology gap",
+            "text": "Precision oncology trials for BRCA-targeted therapies and immunotherapy were concentrated overwhelmingly in the US despite African women having the highest rates of triple-negative breast cancer globally."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Applying Coase theorem logic, we propose genomic data sovereignty through conditional access agreements requiring pharmacogenomics trial reciprocity as a condition of using African genetic data."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single clinical trial registry and terminology variation in how pharmacogenomics studies are registered, which may undercount relevant trials."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Free Rider Genome Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + China + India + UK, H3Africa consortium data",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}
