@@ -2,12 +2,12 @@
   "title": "AfricaRCT Observatory: Reproducibility Capsule for African Trial-Methods Audits",
   "slug": "africarct",
   "date": "2026-03-28",
-  "path": "/mnt/c/AfricaRCT",
+  "path": "C:\\AfricaRCT",
   "type": "methods",
   "primary_estimand": "documentation proportion",
   "certainty": "moderate",
-  "summary": "Reviewer-facing capsule built from 271 source files, 0 tests, and 136 copied assets.",
-  "body": "Can a reproducibility capsule turn an evidence-synthesis repository into a reviewer-auditable submission without restaging the workflow? We audited the shipped project using 271 source files, 0 test files, 74 manuscript or guide files, and 136 dashboard or figure assets committed locally. The capsule packages a micro-paper, a machine-readable config, an interactive reader, and a protocol so the repository can be inspected across reviewers. Across the inventory, the repository yields a documentation proportion of 0.15, with file-count range 0-271 across core surfaces, while exposing 76 entry points and 0 declared dependencies. Git metadata, file counts, and copied assets provide a stable local audit trail even when engine outputs remain outside the submission bundle. This packaging step converts a diffuse codebase into a citable, inspectable micro-publication suitable for rapid editorial triage and downstream peer review. The capsule does not verify scientific correctness itself; it standardizes what reviewers receive first, and deeper validation still depends on tests and manuscripts.",
+  "summary": "Reviewer-facing capsule built from 388 source files, 1 tests, and 204 copied assets.",
+  "body": "Can a reproducibility capsule turn an evidence-synthesis repository into a reviewer-auditable submission without restaging the workflow? We audited the shipped project using 388 source files, 1 test files, 140 manuscript or guide files, and 204 dashboard or figure assets committed locally. The capsule packages a micro-paper, a machine-readable config, an interactive reader, and a protocol so the repository can be inspected across reviewers. Across the inventory, the repository yields a documentation proportion of 0.19, with file-count range 1-388 across core surfaces, while exposing 157 entry points and 0 declared dependencies. Git metadata, file counts, and copied assets provide a stable local audit trail even when engine outputs remain outside the submission bundle. This packaging step converts a diffuse codebase into a citable, inspectable micro-publication suitable for rapid editorial triage and downstream peer review. The capsule does not verify scientific correctness itself; it standardizes what reviewers receive first, and deeper validation still depends on tests and manuscripts.",
   "sentences": [
     {
       "role": "Question",
@@ -15,7 +15,7 @@
     },
     {
       "role": "Dataset",
-      "text": "We audited the shipped project using 271 source files, 0 test files, 74 manuscript or guide files, and 136 dashboard or figure assets committed locally."
+      "text": "We audited the shipped project using 388 source files, 1 test files, 140 manuscript or guide files, and 204 dashboard or figure assets committed locally."
     },
     {
       "role": "Method",
@@ -23,7 +23,7 @@
     },
     {
       "role": "Primary result",
-      "text": "Across the inventory, the repository yields a documentation proportion of 0.15, with file-count range 0-271 across core surfaces, while exposing 76 entry points and 0 declared dependencies."
+      "text": "Across the inventory, the repository yields a documentation proportion of 0.19, with file-count range 1-388 across core surfaces, while exposing 157 entry points and 0 declared dependencies."
     },
     {
       "role": "Robustness",
@@ -40,7 +40,7 @@
   ],
   "notes": {
     "app": "AfricaRCT E156 Capsule v1.0",
-    "data": "Repository inventory with 271 source files, 0 test files, 74 documents, and 136 assets.",
+    "data": "Repository inventory with 388 source files, 1 test files, 140 documents, and 204 assets.",
     "code": "https://github.com/mahmood726-cyber/africa-rct",
     "doi": "",
     "version": "1.0",
@@ -52,10 +52,11 @@
   },
   "author": "Mahmood Ahmad",
   "affiliation": "Tahir Heart Institute",
-  "email": "author@example.com",
+  "email": "mahmood.ahmad2@nhs.net",
   "references": [
     "Borenstein M, Hedges LV, Higgins JPT, Rothstein HR. Introduction to Meta-Analysis. 2nd ed. Wiley; 2021.",
     "Higgins JPT, Thompson SG, Deeks JJ, Altman DG. Measuring inconsistency in meta-analyses. BMJ. 2003;327(7414):557-560.",
     "Cochrane Handbook for Systematic Reviews of Interventions. Version 6.4. Cochrane; 2023."
-  ]
+  ],
+  "submitted": false
 }
