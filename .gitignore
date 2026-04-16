@@ -3,3 +3,5 @@ __pycache__/
 E156/
 data/
 *.output
+review-findings.md
+review-findings.jsonl
