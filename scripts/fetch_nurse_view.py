@@ -750,7 +750,7 @@ def generate_e156(data):
         "outsideNote": {
             "app": "Nurse's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 8 nursing categories, Africa vs US/UK",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],
@@ -786,7 +786,7 @@ def generate_e156(data):
             "type": "protocol",
             "app": "Nurse's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 8 nursing categories, Africa vs US/UK",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],

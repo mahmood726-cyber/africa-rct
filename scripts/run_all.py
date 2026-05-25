@@ -205,7 +205,7 @@ def main():
     # Update index timestamp
     update_index_timestamp()
 
-    print(f"\n  Open C:\\AfricaRCT\\index.html in a browser.")
+    print("\n  Open index.html in a browser.")
 
 
 if __name__ == "__main__":

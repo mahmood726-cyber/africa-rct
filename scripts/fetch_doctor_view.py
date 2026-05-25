@@ -941,7 +941,7 @@ def generate_e156(data):
         "outsideNote": {
             "app": "Doctor's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 10 conditions, Africa vs US",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],
@@ -977,7 +977,7 @@ def generate_e156(data):
             "type": "protocol",
             "app": "Doctor's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 10 conditions, Africa vs US",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],

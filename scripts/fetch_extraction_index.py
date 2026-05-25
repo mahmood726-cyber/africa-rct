@@ -940,7 +940,7 @@ table.data tr:hover td{{background:rgba(255,255,255,.02)}}
 <div class="footer">
     <p>The Research Extraction Index &bull; Original analysis &bull; {analysis_date}</p>
     <p>Data: ClinicalTrials.gov API v2 (10 conditions &times; Africa/US) + {total_trials_ug:,} Uganda trial-level records</p>
-    <p>Reproducible: <code>python fetch_extraction_index.py</code> in C:\\AfricaRCT\\</p>
+    <p>Reproducible: <code>python fetch_extraction_index.py</code> from the repo root</p>
     <p style="margin-top:10px;color:#444;">AI transparency: Data collection automated via CT.gov API v2.
     Analysis script and HTML generated with AI assistance (Claude, Anthropic).
     All metrics, definitions, and interpretations are original and reproducible.</p>

@@ -721,7 +721,7 @@ def generate_e156(data):
         "outsideNote": {
             "app": "Government's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 7 WHO best-buys, 15 African countries",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],
@@ -757,7 +757,7 @@ def generate_e156(data):
             "type": "protocol",
             "app": "Government's View Analysis v1.0",
             "data": "ClinicalTrials.gov API v2, 7 WHO best-buys, 15 countries",
-            "code": "C:\\AfricaRCT\\",
+            "code": "https://github.com/mahmood726-cyber/africa-rct",
             "doi": "",
             "version": "1.0",
             "date": data["fetch_date"][:10],

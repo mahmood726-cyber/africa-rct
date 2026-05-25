@@ -2,7 +2,7 @@
   "title": "AfricaRCT Observatory: Reproducibility Capsule for African Trial-Methods Audits",
   "slug": "africarct",
   "date": "2026-03-28",
-  "path": "C:\\AfricaRCT",
+  "path": "..",
   "type": "methods",
   "primary_estimand": "documentation proportion",
   "certainty": "moderate",
