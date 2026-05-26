@@ -21,9 +21,10 @@ A comprehensive, multi-dimensional audit of the global clinical research landsca
 ## Quick Start (Reproduction)
 
 To refresh the entire audit data:
-`ash
-python scripts/final_consolidated_audit.py
-`
+
+```bash
+python scripts/run_all.py --quick
+```
 
 ## E156 Compliance
 Each micro-paper follows the strict 7-sentence contract and 156-word count for maximum readability and machine validation.

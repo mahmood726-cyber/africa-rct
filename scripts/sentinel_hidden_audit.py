@@ -1,7 +1,8 @@
 import json
 import math
-import os
 from collections import Counter
+
+from repo_paths import data_file, repo_file
 
 def get_first_digit(n):
     if n is None or n <= 0:
@@ -49,12 +50,12 @@ def analyze_benford(data_list):
     }
 
 def main():
-    data_path = "C:/AfricaRCT/data/mizan_index_data.json"
-    if not os.path.exists(data_path):
+    data_path = data_file("mizan_index_data.json")
+    if not data_path.exists():
         print(f"Error: {data_path} not found.")
         return
 
-    with open(data_path, 'r') as f:
+    with data_path.open('r', encoding='utf-8') as f:
         data = json.load(f)
 
     enrollments = []
@@ -80,15 +81,15 @@ def main():
         }
     }
 
-    output_path = "C:/AfricaRCT/sentinel_audit_results.json"
-    with open(output_path, 'w') as f:
+    output_path = repo_file("sentinel_audit_results.json")
+    with output_path.open('w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
 
     print(f"Audit complete. Results saved to {output_path}")
     
     # Generate TruthCert Summary
-    summary_path = "C:/AfricaRCT/SENTINEL_SUMMARY.md"
-    with open(summary_path, 'w') as f:
+    summary_path = repo_file("SENTINEL_SUMMARY.md")
+    with summary_path.open('w', encoding='utf-8') as f:
         f.write("# Sentinel Forensic Audit: Hidden Realities (AfricaRCT)\n\n")
         f.write(f"**Date**: 2026-04-19\n")
         f.write(f"**Dataset**: `mizan_index_data.json`\n\n")

@@ -5,6 +5,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = REPO_ROOT / "e156-submission" / "config.json"
 PORTABLE_FILES = [
+    REPO_ROOT / "README.md",
     REPO_ROOT / "index.html",
     REPO_ROOT / "novel-analysis-extraction-index.html",
     REPO_ROOT / "e156-submission" / "assets" / "index.html",
@@ -15,6 +16,10 @@ PORTABLE_FILES = [
     REPO_ROOT / "scripts" / "fetch_doctor_view.py",
     REPO_ROOT / "scripts" / "fetch_extraction_index.py",
     REPO_ROOT / "scripts" / "run_all.py",
+    REPO_ROOT / "scripts" / "fetch_comparison_trials.py",
+    REPO_ROOT / "scripts" / "sentinel_hidden_audit.py",
+    REPO_ROOT / "scripts" / "sentinel_sponsor_equity.py",
+    REPO_ROOT / "scripts" / "visualize_research_deserts.py",
 ]
 
 
@@ -29,4 +34,4 @@ def test_release_assets_do_not_reference_local_africarct_root():
     for path in PORTABLE_FILES:
         text = path.read_text(encoding="utf-8")
         assert r"C:\AfricaRCT" not in text, path
-
+        assert "C:/AfricaRCT" not in text, path

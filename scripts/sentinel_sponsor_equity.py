@@ -1,7 +1,8 @@
 import json
 import math
-import os
 from collections import Counter
+
+from repo_paths import data_file, repo_file
 
 def get_first_digit(n):
     if n is None or n <= 0:
@@ -24,8 +25,8 @@ def analyze_benford(data_list):
     return {"total": total, "mad": mad}
 
 def main():
-    data_path = "C:/AfricaRCT/data/mizan_index_data.json"
-    with open(data_path, 'r') as f:
+    data_path = data_file("mizan_index_data.json")
+    with data_path.open('r', encoding='utf-8') as f:
         data = json.load(f)
 
     # Grouping by Sponsor Class
@@ -50,15 +51,15 @@ def main():
         results[group] = analyze_benford(locs)
 
     # Output results
-    output_path = "C:/AfricaRCT/sentinel_sponsor_results.json"
-    with open(output_path, 'w') as f:
+    output_path = repo_file("sentinel_sponsor_results.json")
+    with output_path.open('w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
 
     print(f"Sponsor Equity Audit complete.")
     
     # TruthCert Summary Update
-    summary_path = "C:/AfricaRCT/SPONSOR_EQUITY_REPORT.md"
-    with open(summary_path, 'w') as f:
+    summary_path = repo_file("SPONSOR_EQUITY_REPORT.md")
+    with summary_path.open('w', encoding='utf-8') as f:
         f.write("# Sentinel Deep Dive: The Sponsor-Equity Matrix\n\n")
         f.write("Testing the 'Pharma Extraction' vs 'Academic Stewardship' hypotheses via Benford Analysis.\n\n")
         

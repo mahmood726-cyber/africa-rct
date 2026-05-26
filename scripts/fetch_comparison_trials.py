@@ -2,8 +2,9 @@ import json
 import requests
 import time
 import math
-import os
 from collections import Counter
+
+from repo_paths import repo_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 
@@ -86,8 +87,8 @@ def main():
     eu_locs_audit = analyze_benford(eu_locs)
     
     # Load Africa results for comparison
-    africa_results_path = "C:/AfricaRCT/sentinel_audit_results.json"
-    with open(africa_results_path, 'r') as f:
+    africa_results_path = repo_file("sentinel_audit_results.json")
+    with africa_results_path.open('r', encoding='utf-8') as f:
         africa_results = json.load(f)
         
     comparison = {
@@ -99,14 +100,15 @@ def main():
         "africa": africa_results["metrics"]
     }
     
-    with open("C:/AfricaRCT/sentinel_comparison_results.json", "w") as f:
+    comparison_path = repo_file("sentinel_comparison_results.json")
+    with comparison_path.open("w", encoding='utf-8') as f:
         json.dump(comparison, f, indent=2)
         
     print("Comparison complete.")
     
     # TruthCert Summary Update
-    summary_path = "C:/AfricaRCT/SENTINEL_COMPARISON_SUMMARY.md"
-    with open(summary_path, 'w') as f:
+    summary_path = repo_file("SENTINEL_COMPARISON_SUMMARY.md")
+    with summary_path.open('w', encoding='utf-8') as f:
         f.write("# Sentinel Cross-Regional Forensic Audit\n\n")
         f.write("Comparing Benford's Law conformity between Africa and Europe (Germany).\n\n")
         

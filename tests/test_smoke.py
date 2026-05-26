@@ -8,6 +8,9 @@ REQUIRED_SUBMISSION_FILES = ('config.json', 'paper.md', 'protocol.md', 'index.ht
 def test_repository_smoke():
     root = Path(__file__).resolve().parents[1]
     assert root.exists()
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    assert "python scripts/run_all.py --quick" in readme
+    assert (root / "scripts" / "run_all.py").exists()
 
     submission = root / 'e156-submission'
     if submission.is_dir():

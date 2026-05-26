@@ -1,10 +1,18 @@
 import json
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+
+from repo_paths import repo_file
 
 def create_viz():
+    try:
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+    except ImportError as exc:
+        raise SystemExit(
+            "plotly is required for visualize_research_deserts.py. Install it with `python -m pip install plotly`."
+        ) from exc
+
     # Load data
-    with open("C:/AfricaRCT/sentinel_comparison_results.json", "r") as f:
+    with repo_file("sentinel_comparison_results.json").open("r", encoding="utf-8") as f:
         data = json.load(f)
     
     digits = [str(d) for d in range(1, 10)]
@@ -30,8 +38,9 @@ def create_viz():
         showlegend=True
     )
     
-    fig.write_html("C:/AfricaRCT/research_deserts_viz.html")
-    print("Visualization saved to C:/AfricaRCT/research_deserts_viz.html")
+    output_path = repo_file("research_deserts_viz.html")
+    fig.write_html(str(output_path))
+    print(f"Visualization saved to {output_path}")
 
 if __name__ == "__main__":
     create_viz()
