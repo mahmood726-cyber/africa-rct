@@ -1,7 +1,6 @@
 import json
-import os
 import time
-from pathlib import Path
+import sys
 from datetime import datetime
 
 try:
@@ -12,8 +11,9 @@ except ImportError:
 
 # -- Forensic Config --
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
-OUTPUT_HTML = Path("C:/AfricaRCT/forensic-clinical-audit.html")
+from repo_paths import repo_file
+
+OUTPUT_HTML = repo_file("forensic-clinical-audit.html")
 
 def fetch_forensic_samples(location, count=300):
     print(f"  Conducting forensic sweep of {location}...")
@@ -177,7 +177,7 @@ if __name__ == "__main__":
     af_audit = forensic_audit(fetch_forensic_samples("Africa", 400))
     eu_audit = forensic_audit(fetch_forensic_samples("Europe", 400))
     
-    with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
+    with OUTPUT_HTML.open('w', encoding='utf-8') as f:
         f.write(generate_forensic_html(af_audit, eu_audit))
         
     print(f"\nForensic Audit Complete. Report: {OUTPUT_HTML}")

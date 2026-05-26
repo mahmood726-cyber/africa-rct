@@ -1,7 +1,6 @@
 import json
-import os
 import time
-from pathlib import Path
+import sys
 from datetime import datetime
 import math
 
@@ -13,8 +12,9 @@ except ImportError:
 
 # -- Config --
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
-OUTPUT_HTML = Path("C:/AfricaRCT/unseen-semantic-echo-analysis.html")
+from repo_paths import repo_file
+
+OUTPUT_HTML = repo_file("unseen-semantic-echo-analysis.html")
 
 def fetch_unseen_data(location, count=200):
     print(f"  Extracting hidden layers from {location}...")
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     af_deep = deep_audit(fetch_unseen_data("Africa", 300))
     eu_deep = deep_audit(fetch_unseen_data("Europe", 300))
     
-    with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
+    with OUTPUT_HTML.open('w', encoding='utf-8') as f:
         f.write(generate_unseen_html(af_deep, eu_deep))
     
     print(f"\nUnseen Audit Complete. The Echo is recorded: {OUTPUT_HTML}")

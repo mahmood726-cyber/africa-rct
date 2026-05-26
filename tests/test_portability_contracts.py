@@ -20,6 +20,11 @@ PORTABLE_FILES = [
     REPO_ROOT / "scripts" / "sentinel_hidden_audit.py",
     REPO_ROOT / "scripts" / "sentinel_sponsor_equity.py",
     REPO_ROOT / "scripts" / "visualize_research_deserts.py",
+    REPO_ROOT / "scripts" / "advanced_stats_analysis.py",
+    REPO_ROOT / "scripts" / "experimental_math_analysis.py",
+    REPO_ROOT / "scripts" / "forensic_audit.py",
+    REPO_ROOT / "scripts" / "fluid_dynamics_analysis.py",
+    REPO_ROOT / "scripts" / "unseen_audit.py",
 ]
 
 

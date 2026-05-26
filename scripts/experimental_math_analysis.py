@@ -1,12 +1,12 @@
 import json
 import math
-from pathlib import Path
+
+from repo_paths import data_file, repo_file
 
 # -- Data Loading --
-DATA_DIR = Path("C:/AfricaRCT/data")
-AFRICA_CACHE = DATA_DIR / "collected_data.json"
-COMP_CACHE = DATA_DIR / "comparison_data_v2.json"
-OUTPUT_HTML = Path("C:/AfricaRCT/experimental-math-analysis.html")
+AFRICA_CACHE = data_file("collected_data.json")
+COMP_CACHE = data_file("comparison_data_v2.json")
+OUTPUT_HTML = repo_file("experimental-math-analysis.html")
 
 def calculate_escape_velocity(early_phase, late_phase):
     """
@@ -38,8 +38,8 @@ def calculate_thermal_dissipation(unknown, total):
 def run_experimental_audit():
     print("Initiating Experimental Mathematics Audit...")
     
-    with open(AFRICA_CACHE, 'r') as f: af_raw = json.load(f)
-    with open(COMP_CACHE, 'r') as f: comp_data = json.load(f)
+    with AFRICA_CACHE.open('r', encoding='utf-8') as f: af_raw = json.load(f)
+    with COMP_CACHE.open('r', encoding='utf-8') as f: comp_data = json.load(f)
     
     # 1. Escape Velocity (Astrophysics)
     af_early = comp_data['africa']['phases'].get('PHASE1', 0) + comp_data['africa']['phases'].get('PHASE2', 0)
@@ -163,7 +163,7 @@ def run_experimental_audit():
     </body>
     </html>
     """
-    with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
+    with OUTPUT_HTML.open('w', encoding='utf-8') as f:
         f.write(html)
     print(f"Experimental Audit Complete: {OUTPUT_HTML}")
 
