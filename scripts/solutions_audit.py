@@ -2,10 +2,10 @@
 import json
 import requests
 import time
-from pathlib import Path
+
+from repo_paths import data_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 def audit_solutions(location):
     print(f"  Auditing Structural Solutions in {location}...")
@@ -54,5 +54,5 @@ def audit_solutions(location):
 results = {"Africa": audit_solutions("Africa")}
 print(json.dumps(results, indent=2))
 
-with open(DATA_DIR / "structural_solutions_data.json", "w") as f:
+with data_file("structural_solutions_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

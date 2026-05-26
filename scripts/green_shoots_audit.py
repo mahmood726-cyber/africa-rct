@@ -2,10 +2,10 @@
 import json
 import requests
 import time
-from pathlib import Path
+
+from repo_paths import data_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 def fetch_green_shoots(location):
     print(f"  Searching for Green Shoots in {location}...")
@@ -46,5 +46,5 @@ def fetch_green_shoots(location):
 results = {"Africa": fetch_green_shoots("Africa")}
 print(json.dumps(results, indent=2))
 
-with open(DATA_DIR / "green_shoots_data.json", "w") as f:
+with data_file("green_shoots_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

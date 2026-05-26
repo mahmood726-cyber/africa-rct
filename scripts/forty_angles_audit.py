@@ -4,10 +4,10 @@ import requests
 import time
 import math
 import numpy as np
-from pathlib import Path
+
+from repo_paths import data_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 def fetch_multiscalar_data(location, count=250):
     print(f"  Performing multiscalar probe for {location}...")
@@ -75,7 +75,7 @@ def run_40_angles_audit():
         }
 
     print(json.dumps(results, indent=2))
-    with open(DATA_DIR / "forty_angles_raw_data.json", "w") as f:
+    with data_file("forty_angles_raw_data.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

@@ -1,10 +1,11 @@
-import json
-import os
-from pathlib import Path
 from datetime import datetime
+from textwrap import dedent
 
-# -- Configuration --
-OUTPUT_HTML = Path("C:/AfricaRCT/multi_perspective_review.html")
+from repo_paths import repo_file
+
+
+OUTPUT_HTML = repo_file("multi_perspective_review.html")
+
 
 def generate_review_html():
     html = f"""
@@ -27,7 +28,6 @@ def generate_review_html():
             .quote {{ font-style: italic; font-size: 1.2em; color: #333; margin-bottom: 20px; border-left: 4px solid #1a1a1a; padding-left: 20px; }}
             .verdict-box {{ background: #1a1a1a; color: #fff; padding: 60px; margin-top: 80px; text-align: center; }}
             .verdict-box h2 {{ font-family: 'Crimson Pro', serif; font-size: 2.5em; margin-bottom: 20px; }}
-            .key-finding {{ margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }}
             .tag {{ background: #eee; padding: 4px 12px; border-radius: 20px; font-size: 0.75em; font-weight: 600; margin-right: 10px; }}
         </style>
     </head>
@@ -40,8 +40,6 @@ def generate_review_html():
             </header>
 
             <div class="perspective-grid">
-                
-                <!-- 1. The African Lead Scientist -->
                 <div class="persona-card">
                     <div class="persona-header">
                         <div>
@@ -50,16 +48,15 @@ def generate_review_html():
                         </div>
                     </div>
                     <div class="quote">"The 'Web of Influence' analysis confirms what we feel daily: our leadership is often a shadow of foreign funding."</div>
-                    <p><strong>Review:</strong> The data on <strong>Research Sovereignty</strong> (showing <50% local leadership in many hubs) is a call to action. While the <strong>Volume</strong> in Egypt and South Africa is impressive, the <strong>Innovation Gap</strong> in Phase I/II research suggests we are being used as a validation ground rather than a discovery hub. We must transition from 'Parachute Research' to 'Sovereign Networks'.</p>
+                    <p><strong>Review:</strong> The data on <strong>Research Sovereignty</strong> (showing &lt;50% local leadership in many hubs) is a call to action. While the <strong>Volume</strong> in Egypt and South Africa is impressive, the <strong>Innovation Gap</strong> in Phase I/II research suggests we are being used as a validation ground rather than a discovery hub. We must transition from 'Parachute Research' to 'Sovereign Networks'.</p>
                     <div class="tags"><span class="tag">#LocalLeadership</span><span class="tag">#DiscoveryDivide</span></div>
                 </div>
 
-                <!-- 2. The European Pharma Executive -->
                 <div class="persona-card">
                     <div class="persona-header">
                         <div>
                             <div class="persona-title">Perspective II: Innovation & Regulation</div>
-                            <h2 class="persona-name">Marc-André Dubois</h2>
+                            <h2 class="persona-name">Marc-Andre Dubois</h2>
                         </div>
                     </div>
                     <div class="quote">"Europe's 'Symmetrical Grid' is our strength, but the 'Innovation Horizon' data shows we are fighting to maintain our lead against the US and China."</div>
@@ -67,7 +64,6 @@ def generate_review_html():
                     <div class="tags"><span class="tag">#BiotechEcosystem</span><span class="tag">#RegulatoryEfficiency</span></div>
                 </div>
 
-                <!-- 3. The Global Health Advocate -->
                 <div class="persona-card">
                     <div class="persona-header">
                         <div>
@@ -76,11 +72,10 @@ def generate_review_html():
                         </div>
                     </div>
                     <div class="quote">"The '12 Angles of Moses' is more than a metaphor; it's a map of the 'Lost' trials that fail to report results to the people who need them."</div>
-                    <p><strong>Review:</strong> The <strong>Structural Inequity Analysis</strong> proves that the <strong>10/90 Gap</strong> is alive and well. The <strong>Disease Mismatch</strong> is staggering—Africa is drowning in NCD deaths while the research money is still chasing the Infectious Priesthood (Levi). The <strong>Results Reporting Gap</strong> is a moral failure that must be addressed by global transparency mandates.</p>
+                    <p><strong>Review:</strong> The <strong>Structural Inequity Analysis</strong> proves that the <strong>10/90 Gap</strong> is alive and well. The <strong>Disease Mismatch</strong> is staggering: Africa is drowning in NCD deaths while the research money is still chasing the Infectious Priesthood (Levi). The <strong>Results Reporting Gap</strong> is a moral failure that must be addressed by global transparency mandates.</p>
                     <div class="tags"><span class="tag">#ResearchJustice</span><span class="tag">#10-90Gap</span></div>
                 </div>
 
-                <!-- 4. The Data Architect -->
                 <div class="persona-card">
                     <div class="persona-header">
                         <div>
@@ -89,30 +84,30 @@ def generate_review_html():
                         </div>
                     </div>
                     <div class="quote">"The 'Velocity of Inequity' (Longitudinal Analysis) shows a stabilizing delta. The gap is not an accident; it's a structural equilibrium."</div>
-                    <p><strong>Review:</strong> From a data standpoint, the most revealing metric is <strong>Hub Concentration</strong>. Africa's research 'web' is extremely fragile because it relies on 3-5 cities. If those cities fail, the continent's clinical capacity vanishes. Europe's 'deep grid' model is the only path to long-term sustainability.</p>
+                    <p><strong>Review:</strong> From a data standpoint, the most revealing metric is <strong>Hub Concentration</strong>. Africa's research web is extremely fragile because it relies on 3-5 cities. If those cities fail, the continent's clinical capacity vanishes. Europe's deep-grid model is the only path to long-term sustainability.</p>
                     <div class="tags"><span class="tag">#SystemicStability</span><span class="tag">#DataSymmetry</span></div>
                 </div>
-
             </div>
 
             <div class="verdict-box">
                 <h2>The Unified Verdict</h2>
                 <p style="font-size: 1.3em;">The Africa-Europe research divide is not merely a gap in <strong>Volume</strong>; it is a fundamental difference in <strong>Trajectory</strong>. Europe is building a <strong>Genomic Future</strong> on a foundation of decentralized infrastructure. Africa is operating a <strong>Validation Present</strong> on a foundation of centralized hubs and foreign dependency.</p>
                 <div style="margin-top:40px; border-top: 1px solid #444; padding-top:40px;">
-                    <strong>Recommendation:</strong> Transition the 'Radial Spoke' model into a 'Sovereign Grid' by investing in local Phase I discovery and decentralized rural research infrastructure.
+                    <strong>Recommendation:</strong> Transition the radial-spoke model into a sovereign grid by investing in local Phase I discovery and decentralized rural research infrastructure.
                 </div>
             </div>
 
             <footer style="margin-top: 60px; text-align: center; color: #888; font-size: 0.8em;">
-                Synthesized Review • C:/AfricaRCT/multi_perspective_review.html • {datetime.now().strftime('%Y-%m-%d')}
+                Synthesized Review - {OUTPUT_HTML.name} - {datetime.now().strftime('%Y-%m-%d')}
             </footer>
         </div>
     </body>
     </html>
     """
-    with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
-        f.write(html)
+    with OUTPUT_HTML.open("w", encoding="utf-8") as handle:
+        handle.write(dedent(html).strip() + "\n")
     return OUTPUT_HTML
+
 
 if __name__ == "__main__":
     path = generate_review_html()

@@ -2,11 +2,11 @@
 import json
 import requests
 import time
-from pathlib import Path
 from collections import Counter
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 def fetch_investigator_data(location, count=250):
     print(f"  Tracing Investigators and Sponsors for {location}...")
@@ -64,7 +64,7 @@ def run_pi_audit():
         }
 
     print(json.dumps(results, indent=2))
-    with open(DATA_DIR / "pi_consolidated_audit.json", "w") as f:
+    with data_file("pi_consolidated_audit.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

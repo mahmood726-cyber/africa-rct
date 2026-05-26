@@ -2,10 +2,10 @@
 import json
 import requests
 import time
-from pathlib import Path
+
+from repo_paths import data_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 def fetch_power_metadata(location, count=500):
     print(f"  Auditing Institutional Power for {location}...")
@@ -57,7 +57,7 @@ def run_power_audit():
         }
 
     print(json.dumps(results, indent=2))
-    with open(DATA_DIR / "institutional_power_data.json", "w") as f:
+    with data_file("institutional_power_data.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

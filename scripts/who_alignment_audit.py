@@ -2,11 +2,11 @@
 import json
 import requests
 import time
-from pathlib import Path
+
+from repo_paths import data_file
 
 # WHO GHO API Base
 GHO_URL = "https://ghoapi.azureedge.net/api"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 # Top Hubs
 AFRICA_ISO = ["EGY", "ZAF", "NGA", "KEN", "UGA"]
@@ -51,7 +51,7 @@ def run_alignment_audit():
     expend_data = fetch_who_data("GHED_PHC_pc_US_SHA2011", countries)
     
     # 2. Load existing RCT data (from our comparison_data_v2.json)
-    with open(DATA_DIR / "comparison_data_v2.json", 'r') as f:
+    with data_file("comparison_data_v2.json").open("r", encoding="utf-8") as f:
         rct_data = json.load(f)
     
     # Map ISO to names used in RCT data
@@ -88,7 +88,7 @@ def run_alignment_audit():
     results = {"details": alignment, "summary": summary}
     print(json.dumps(summary, indent=2))
     
-    with open(DATA_DIR / "who_alignment_data.json", "w") as f:
+    with data_file("who_alignment_data.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

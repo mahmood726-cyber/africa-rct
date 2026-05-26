@@ -2,10 +2,10 @@
 import json
 import requests
 import time
-from pathlib import Path
+
+from repo_paths import data_file
 
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
-DATA_DIR = Path("C:/AfricaRCT/data")
 
 GLOBAL_POWERS = ["United States", "United Kingdom", "Germany", "France", "Japan", "Canada", "Australia", "China", "India", "Brazil", "Russia", "South Korea"]
 AFRICA_REGIONS = {
@@ -54,7 +54,7 @@ def run_panoramic_audit():
     results["demographics"]["Africa_eth"] = safe_get({"format": "json", "pageSize": 1, "countTotal": "true", "query.locn": "Africa", "query.term": eth_term, "filter.advanced": "AREA[StudyType]INTERVENTIONAL"})
     
     print(json.dumps(results, indent=2))
-    with open(DATA_DIR / "global_panoramic_data.json", "w") as f:
+    with data_file("global_panoramic_data.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

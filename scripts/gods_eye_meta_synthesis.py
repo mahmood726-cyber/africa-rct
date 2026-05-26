@@ -1,20 +1,19 @@
 # sentinel:skip-file — hardcoded paths are fixture/registry/audit-narrative data for this repo's research workflow, not portable application configuration. Same pattern as push_all_repos.py and E156 workbook files.
 import json
 import os
-from pathlib import Path
 import numpy as np
 
-DATA_DIR = Path("C:/AfricaRCT/data")
+from repo_paths import data_file
 
 def run_meta_synthesis():
     print("Initiating God's Eye View Meta-Synthesis...")
     
     # Load primary data blocks
-    with open(DATA_DIR / "global_panoramic_data.json", 'r') as f: pano = json.load(f)
-    with open(DATA_DIR / "quantum_complexity_data.json", 'r') as f: quantum = json.load(f)
-    with open(DATA_DIR / "value_chain_audit_data.json", 'r') as f: value = json.load(f)
-    with open(DATA_DIR / "biological_sovereignty_data.json", 'r') as f: bio = json.load(f)
-    with open(DATA_DIR / "information_topology_data.json", 'r') as f: info = json.load(f)
+    with data_file("global_panoramic_data.json").open("r", encoding="utf-8") as f: pano = json.load(f)
+    with data_file("quantum_complexity_data.json").open("r", encoding="utf-8") as f: quantum = json.load(f)
+    with data_file("value_chain_audit_data.json").open("r", encoding="utf-8") as f: value = json.load(f)
+    with data_file("biological_sovereignty_data.json").open("r", encoding="utf-8") as f: bio = json.load(f)
+    with data_file("information_topology_data.json").open("r", encoding="utf-8") as f: info = json.load(f)
 
     # 1. The Planetary Singularity (Concentration of Power)
     # Defined as (Global Volume / Global Nations) * Sovereignty
@@ -44,7 +43,7 @@ def run_meta_synthesis():
     }
     
     print(json.dumps(results, indent=2))
-    with open(DATA_DIR / "gods_eye_meta_synthesis.json", "w") as f:
+    with data_file("gods_eye_meta_synthesis.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

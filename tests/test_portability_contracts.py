@@ -21,10 +21,23 @@ PORTABLE_FILES = [
     REPO_ROOT / "scripts" / "sentinel_sponsor_equity.py",
     REPO_ROOT / "scripts" / "visualize_research_deserts.py",
     REPO_ROOT / "scripts" / "advanced_stats_analysis.py",
+    REPO_ROOT / "scripts" / "cluster_audit.py",
     REPO_ROOT / "scripts" / "experimental_math_analysis.py",
+    REPO_ROOT / "scripts" / "forty_angles_audit.py",
     REPO_ROOT / "scripts" / "forensic_audit.py",
     REPO_ROOT / "scripts" / "fluid_dynamics_analysis.py",
+    REPO_ROOT / "scripts" / "generate_advanced_review.py",
+    REPO_ROOT / "scripts" / "gods_eye_meta_synthesis.py",
+    REPO_ROOT / "scripts" / "global_panoramic_audit.py",
+    REPO_ROOT / "scripts" / "green_shoots_audit.py",
+    REPO_ROOT / "scripts" / "hegemony_audit.py",
+    REPO_ROOT / "scripts" / "multi_perspective_review.py",
+    REPO_ROOT / "scripts" / "pi_audit.py",
+    REPO_ROOT / "scripts" / "planetary_bloc_audit.py",
+    REPO_ROOT / "scripts" / "power_audit.py",
+    REPO_ROOT / "scripts" / "solutions_audit.py",
     REPO_ROOT / "scripts" / "unseen_audit.py",
+    REPO_ROOT / "scripts" / "who_alignment_audit.py",
 ]
 
 

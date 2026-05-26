@@ -1,11 +1,12 @@
-# sentinel:skip-file — hardcoded paths are fixture/registry/audit-narrative data for this repo's research workflow, not portable application configuration. Same pattern as push_all_repos.py and E156 workbook files.
-import os
-from pathlib import Path
-from datetime import datetime
+# sentinel:skip-file - static narrative generator; local output path intentionally resolved from repo root.
+from textwrap import dedent
 
-OUTPUT_HTML = Path("C:/AfricaRCT/advanced_multi_persona_review.html")
+from repo_paths import repo_file
 
-html = f"""
+
+OUTPUT_HTML = repo_file("advanced_multi_persona_review.html")
+
+html = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +14,16 @@ html = f"""
     <title>Phase II: Advanced Multi-Persona Critical Review</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300&family=Roboto+Mono&display=swap');
-        body {{ background: #faf9f6; color: #2c3e50; font-family: 'Merriweather', serif; padding: 50px; line-height: 1.8; }}
-        .container {{ max-width: 900px; margin: 0 auto; }}
-        h1 {{ font-size: 2.8em; border-bottom: 2px solid #e74c3c; padding-bottom: 15px; margin-bottom: 40px; color: #c0392b; }}
-        .persona {{ background: #fff; padding: 30px; border-left: 5px solid #34495e; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }}
-        .persona h2 {{ font-family: 'Roboto Mono', monospace; font-size: 1.2em; color: #2980b9; margin-top: 0; text-transform: uppercase; }}
-        .quote {{ font-style: italic; font-size: 1.1em; color: #7f8c8d; padding-left: 15px; border-left: 3px solid #bdc3c7; margin-bottom: 20px; }}
-        .critique {{ font-size: 0.95em; }}
-        .action-plan {{ background: #2c3e50; color: #ecf0f1; padding: 40px; margin-top: 60px; border-radius: 8px; }}
-        .action-plan h2 {{ color: #e74c3c; font-family: 'Roboto Mono', monospace; font-size: 1.5em; margin-top: 0; }}
-        .action-list li {{ margin-bottom: 15px; }}
+        body { background: #faf9f6; color: #2c3e50; font-family: 'Merriweather', serif; padding: 50px; line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 2.8em; border-bottom: 2px solid #e74c3c; padding-bottom: 15px; margin-bottom: 40px; color: #c0392b; }
+        .persona { background: #fff; padding: 30px; border-left: 5px solid #34495e; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .persona h2 { font-family: 'Roboto Mono', monospace; font-size: 1.2em; color: #2980b9; margin-top: 0; text-transform: uppercase; }
+        .quote { font-style: italic; font-size: 1.1em; color: #7f8c8d; padding-left: 15px; border-left: 3px solid #bdc3c7; margin-bottom: 20px; }
+        .critique { font-size: 0.95em; }
+        .action-plan { background: #2c3e50; color: #ecf0f1; padding: 40px; margin-top: 60px; border-radius: 8px; }
+        .action-plan h2 { color: #e74c3c; font-family: 'Roboto Mono', monospace; font-size: 1.5em; margin-top: 0; }
+        .action-list li { margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -60,6 +61,7 @@ html = f"""
 </html>
 """
 
-with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
-    f.write(html)
+with OUTPUT_HTML.open("w", encoding="utf-8") as handle:
+    handle.write(dedent(html).strip() + "\n")
+
 print(f"Phase II Review Generated: {OUTPUT_HTML}")
