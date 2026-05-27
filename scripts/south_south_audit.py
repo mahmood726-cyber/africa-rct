@@ -2,6 +2,8 @@ import json
 import requests
 import time
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 
 SOUTH_HUBS = ["Africa", "India", "China", "Brazil"]
@@ -55,5 +57,5 @@ def analyze_axis(location, count=300):
 results = {hub: analyze_axis(hub) for hub in SOUTH_HUBS}
 print(json.dumps(results, indent=2))
 
-with open("C:/AfricaRCT/data/south_south_axis_data.json", "w") as f:
+with data_file("south_south_axis_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

@@ -3,6 +3,8 @@ import requests
 import time
 from pathlib import Path
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 # 5-year epochs for clarity of "Grand Divergence"
 EPOCHS = [
@@ -40,7 +42,7 @@ for start, end, label in EPOCHS:
     for reg in REGIONS:
         results[reg][label] = fetch_epoch_data(reg, start, end)
 
-with open("C:/AfricaRCT/data/grand_divergence_data.json", "w") as f:
+with data_file("grand_divergence_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)
 
 print("\nGrand Divergence Audit Complete.")

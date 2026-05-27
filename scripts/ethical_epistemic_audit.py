@@ -4,6 +4,8 @@ import requests
 import time
 from pathlib import Path
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 REGIONS = ["Africa", "Europe"]
 
@@ -61,7 +63,7 @@ def run_ethical_audit():
         }
 
     print(json.dumps(results, indent=2))
-    with open("C:/AfricaRCT/data/ethical_epistemic_audit.json", "w") as f:
+    with data_file("ethical_epistemic_audit.json").open("w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
 if __name__ == "__main__":

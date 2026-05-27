@@ -4,6 +4,8 @@ import time
 from datetime import datetime
 import numpy as np
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 REGIONS = ["Africa", "Europe", "China", "India"]
 
@@ -57,5 +59,5 @@ def fetch_evolutionary_data(location, count=250):
 results = {reg: fetch_evolutionary_data(reg) for reg in REGIONS}
 print(json.dumps(results, indent=2))
 
-with open("C:/AfricaRCT/data/clinical_darwinism_data.json", "w") as f:
+with data_file("clinical_darwinism_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

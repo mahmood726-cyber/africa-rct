@@ -2,6 +2,8 @@ import json
 import requests
 import time
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 REGIONS = ["Africa", "Europe", "China", "India"]
 
@@ -46,5 +48,5 @@ def analyze_topology(location, count=200):
 results = {reg: analyze_topology(reg) for reg in REGIONS}
 print(json.dumps(results, indent=2))
 
-with open("C:/AfricaRCT/data/topology_data.json", "w") as f:
+with data_file("topology_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

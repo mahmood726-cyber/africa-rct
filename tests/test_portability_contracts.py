@@ -45,6 +45,35 @@ for pattern in ("fix_*.py", "generate_*.py", "final_*fix.py"):
     PORTABLE_FILES.extend(sorted(SCRIPT_DIR.glob(pattern), key=lambda path: str(path).lower()))
 
 PORTABLE_FILES.append(SCRIPT_DIR / "master_E156_generator.py")
+
+for name in (
+    "catalyst_audit.py",
+    "expanded_global_audit.py",
+    "biological_audit.py",
+    "ethical_epistemic_audit.py",
+    "deep_granularity_audit.py",
+    "complexity_audit.py",
+    "clinical_darwinism_audit.py",
+    "value_chain_audit.py",
+    "topology_analysis.py",
+    "temporal_friction_audit.py",
+    "spheres_audit.py",
+    "sovereignty_audit.py",
+    "fetch_global_rcts.py",
+    "south_south_audit.py",
+    "shock_audit.py",
+    "sharing_sovereignty_audit.py",
+    "semantic_audit.py",
+    "scientific_wisdom_audit.py",
+    "recruitment_audit.py",
+    "quan_totality_audit.py",
+    "info_topology_audit.py",
+    "humanitarian_audit.py",
+    "grand_divergence_audit.py",
+    "genomic_audit.py",
+):
+    PORTABLE_FILES.append(SCRIPT_DIR / name)
+
 PORTABLE_FILES = list(dict.fromkeys(PORTABLE_FILES))
 
 

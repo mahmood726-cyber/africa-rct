@@ -3,6 +3,8 @@ import json
 import requests
 import time
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 
 def audit_sharing_sovereignty(location):
@@ -52,5 +54,5 @@ results = {
 }
 print(json.dumps(results, indent=2))
 
-with open("C:/AfricaRCT/data/sharing_sovereignty_data.json", "w") as f:
+with data_file("sharing_sovereignty_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

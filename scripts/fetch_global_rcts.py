@@ -3,6 +3,8 @@ import requests
 import time
 from datetime import datetime
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 
 NEW_REGIONS = {
@@ -43,5 +45,5 @@ print("\n--- Global RCT Volume (Interventional) ---")
 for reg, count in sorted(results.items(), key=lambda x: x[1], reverse=True):
     print(f"{reg}: {count:,}")
 
-with open("C:/AfricaRCT/data/global_comparison_data.json", "w") as f:
+with data_file("global_comparison_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

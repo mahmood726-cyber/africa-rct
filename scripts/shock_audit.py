@@ -3,6 +3,8 @@ import requests
 import time
 from pathlib import Path
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 YEARS = range(2000, 2026)
 REGIONS = ["Africa", "Europe"]
@@ -49,7 +51,7 @@ for year in YEARS:
     for reg in REGIONS:
         results[reg][year] = fetch_yearly_metrics(reg, year)
 
-with open("C:/AfricaRCT/data/shock_resilience_data.json", "w") as f:
+with data_file("shock_resilience_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)
 
 print("\nShock Audit Data Saved.")

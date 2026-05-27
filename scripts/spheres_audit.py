@@ -4,6 +4,8 @@ import time
 from datetime import datetime
 import numpy as np
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 REGIONS = ["Africa", "Europe"]
 
@@ -97,5 +99,5 @@ def fetch_spheres_data(location, count=300):
 results = {reg: fetch_spheres_data(reg) for reg in REGIONS}
 print(json.dumps(results, indent=2))
 
-with open("C:/AfricaRCT/data/spheres_sovereignty_data.json", "w") as f:
+with data_file("spheres_sovereignty_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

@@ -4,6 +4,8 @@ import time
 from datetime import datetime
 import numpy as np
 
+from repo_paths import data_file
+
 BASE_URL = "https://clinicaltrials.gov/api/v2/studies"
 REGIONS = ["Africa", "Europe", "China", "India"]
 
@@ -53,5 +55,5 @@ for reg in REGIONS:
         results[reg] = {"avg_delay": 0, "median_delay": 0}
 
 print(json.dumps(results, indent=2))
-with open("C:/AfricaRCT/data/temporal_friction_data.json", "w") as f:
+with data_file("temporal_friction_data.json").open("w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)
