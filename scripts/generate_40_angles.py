@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-E156_DIR = Path("C:/AfricaRCT/E156")
+from repo_paths import E156_DIR, template_file
 E156_DIR.mkdir(parents=True, exist_ok=True)
 
 # We'll generate 40 angles based on the categories derived from our deep data probe
@@ -44,7 +44,7 @@ def generate_40_papers():
             
         # HTML
         try:
-            with open(str(Path(__file__).resolve().parent.parent / "templates" / "e156_interactive_template.html"), 'r', encoding='utf-8') as f:
+            with template_file("e156_interactive_template.html").open("r", encoding="utf-8") as f:
                 tpl = f.read()
             final_html = tpl.replace("E156 Interactive Bundle", title + " Dashboard")
             final_html = final_html.replace("Sentence 1: In [population or condition]...", body)

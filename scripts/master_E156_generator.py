@@ -3,7 +3,8 @@ import os
 from pathlib import Path
 
 # This script serves as the 'Source of Truth' for the 57 E156 papers
-E156_DIR = Path("C:/AfricaRCT/E156")
+from repo_paths import E156_DIR, template_file
+
 E156_DIR.mkdir(parents=True, exist_ok=True)
 
 # Helper to ensure exact word count

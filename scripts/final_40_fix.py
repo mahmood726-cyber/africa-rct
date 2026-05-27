@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-E156_DIR = Path("C:/AfricaRCT/E156")
+from repo_paths import E156_DIR, template_file
 
 def fix_word_count(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:

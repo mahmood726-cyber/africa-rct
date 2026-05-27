@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+SCRIPT_DIR = REPO_ROOT / "scripts"
 CONFIG_PATH = REPO_ROOT / "e156-submission" / "config.json"
 PORTABLE_FILES = [
     REPO_ROOT / "README.md",
@@ -39,6 +40,12 @@ PORTABLE_FILES = [
     REPO_ROOT / "scripts" / "unseen_audit.py",
     REPO_ROOT / "scripts" / "who_alignment_audit.py",
 ]
+
+for pattern in ("fix_*.py", "generate_*.py", "final_*fix.py"):
+    PORTABLE_FILES.extend(sorted(SCRIPT_DIR.glob(pattern), key=lambda path: str(path).lower()))
+
+PORTABLE_FILES.append(SCRIPT_DIR / "master_E156_generator.py")
+PORTABLE_FILES = list(dict.fromkeys(PORTABLE_FILES))
 
 
 def test_submission_config_uses_repo_relative_root():

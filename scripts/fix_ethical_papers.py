@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-E156_DIR = Path("C:/AfricaRCT/E156")
+from repo_paths import E156_DIR, template_file
 
 # Fixing expanded-access to exactly 156 words
 # Current: 157 words

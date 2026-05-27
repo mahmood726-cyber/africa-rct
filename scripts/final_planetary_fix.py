@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-E156_DIR = Path("C:/AfricaRCT/E156")
+from repo_paths import E156_DIR, template_file
 
 # Manual fix to exactly 156
 PAPERS = [
@@ -24,7 +24,7 @@ for p in PAPERS:
         f.write(f"# {p['id'].upper()}\n\n{p['body']}\n\n## Note Block\n\n- DOI: 10.156/{p['id']}")
         
     # HTML
-    with open(str(Path(__file__).resolve().parent.parent / "templates" / "e156_interactive_template.html"), 'r', encoding='utf-8') as f:
+    with template_file("e156_interactive_template.html").open("r", encoding="utf-8") as f:
         tpl = f.read()
     final_html = tpl.replace("E156 Interactive Bundle", p['id'].upper() + " Dashboard")
     final_html = final_html.replace("Sentence 1: In [population or condition]...", p['body'])
