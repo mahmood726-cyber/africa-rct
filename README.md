@@ -1,6 +1,6 @@
-﻿# Global Clinical Research Equity Repository
+# Global Clinical Research Equity Repository
 
-A comprehensive, multi-dimensional audit of the global clinical research landscape, analyzing 57 dimensions of inequity across Africa, Europe, China, India, and South America.
+A multi-dimensional audit of the global clinical research landscape, analyzing 57 dimensions of inequity across Africa, Europe, China, India, and South America.
 
 ## Project Structure
 

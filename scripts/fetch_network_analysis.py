@@ -34,7 +34,7 @@ from datetime import datetime
 from pathlib import Path
 
 # ── Windows console UTF-8 safety ─────────────────────────────────────────
-if sys.platform == "win32":
+if sys.platform == "win32" and "pytest" not in sys.modules:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 

@@ -36,7 +36,7 @@ from collections import defaultdict
 # Encoding safety (Windows cp1252)
 # ---------------------------------------------------------------------------
 import io
-if hasattr(sys.stdout, "buffer"):
+if hasattr(sys.stdout, "buffer") and "pytest" not in sys.modules:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 # ---------------------------------------------------------------------------
