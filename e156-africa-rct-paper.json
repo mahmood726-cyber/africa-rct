@@ -1,0 +1,43 @@
+{
+    "title":  "Clinical trial inequity across 20 African nations: cross-sectional registry analysis",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Trial-to-population ratio (trials per million people) in Africa versus comparator regions",
+    "study_count":  20799,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "certainty":  "high (registry data, complete enumeration)",
+    "app":  "C:\\AfricaRCT\\africa-rct-analysis.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_africa_rcts.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-africa-rct-protocol.json",
+    "body":  "Among 20 African countries listed on ClinicalTrials.gov, does the registered interventional trial portfolio reflect the continent's population and disease burden? We extracted all interventional trials for 20 African countries, five comparator regions, and 12 disease areas through the ClinicalTrials.gov API v2 on 27 March 2026, summarising country totals, condition-specific counts, phase distributions, trial status, and sponsor type. Africa had 20,799 registered interventional trials versus 159,196 in the United States, equivalent to just 13.1% of US volume despite carrying 24% of the global disease burden. Egypt and South Africa together accounted for 76% of all African trials, revealing extreme geographic concentration. Hypertension had only 71 trials despite its high regional prevalence, and phase 1 trials made up just 7.3% of the continental total. The overall pattern suggests a structural mismatch between Africa's health burden and its clinical trial portfolio. Registry analyses may miss unregistered studies and can undercount participation in multinational trials if site information is incomplete.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports 20,799 vs 159,196 and 13.1%."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 contains limitation language."
+                                      }
+                                  ]
+                   }
+}
+

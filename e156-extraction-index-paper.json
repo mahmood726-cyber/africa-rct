@@ -1,0 +1,42 @@
+{
+    "title":  "Research Extraction Index: six registry-derived metrics of clinical trial asymmetry in Africa",
+    "type":  "novel methods / cross-sectional registry analysis",
+    "primary_estimand":  "Condition Colonialism Index (CCI) and five derivative extraction metrics",
+    "study_count":  20799,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "certainty":  "moderate (registry-derived with WHO GBD cross-reference)",
+    "app":  "C:\\AfricaRCT\\novel-analysis-extraction-index.html",
+    "data":  "ClinicalTrials.gov API v2 + WHO GBD 2024",
+    "code":  "C:\\AfricaRCT\\fetch_africa_rcts.py + fetch_uganda_rcts.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-extraction-index-protocol.json",
+    "body":  "Can structural extraction from African clinical research be quantified using registry-derived metrics and a true global denominator? We developed six metrics from ClinicalTrials.gov data covering 20 African countries and 783 Uganda trial-level records, using global trial counts as the denominator and WHO Global Burden of Disease estimates as the numerator. The metrics were the Condition Colonialism Index, ghost enrollment score, phase sovereignty gap, condition-level research ownership, temporal stagnation index, and institutional fragility score. Using the true global denominator, sickle cell disease had the highest Condition Colonialism Index at 70.2, meaning Africa bears 75 percent of the burden but runs only 1.1 percent of global trials. Stroke scored 56.4 and hypertension 46.7, while phase one local sovereignty was 2.0 percent and one institution accounted for 68 percent of locally led output. Together the six measures describe a pattern in which Africa contributes participants and risk while retaining minimal research sovereignty. Burden estimates are regional and the Africa location keyword may undercount trials registered under specific country names only.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports SCD CCI 47.7."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 contains limitation language."
+                                      }
+                                  ]
+                   }
+}

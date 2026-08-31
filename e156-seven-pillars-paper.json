@@ -1,0 +1,8 @@
+{
+  "title": "Seven Pillars",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In global clinical governance, do systematic barriers in transparency and efficiency affect the reporting rates of trials conducted in Africa versus Europe? This study analyzed 2,000 trial records using the Seven Pillars framework across visibility, efficiency, and transparency dimensions using the ClinicalTrials.gov longitudinal database. Reviewers applied a multi-pillar scoring system and reported the reporting gap percentage as the lead estimand for research transparency and accountability. A profound reporting gap was identified, with African trial results twenty percent less likely to be publicly archived compared to European trial findings. Trial duration was thirty percent longer in African hubs, indicating significant operational viscosity despite the high volume of participants recruited for these studies. The data suggests that scientific energy in Africa is frequently dissipated into an unknown void due to fragile reporting and infrastructure systems. Reporting status relies on sponsor updates which may be delayed rather than missing, potentially underestimating the true transparency of these international trials for health. - DOI: 10.156/seven-pillars - Date: 2026-03-28 - Type: research - Code: seven_pillars_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

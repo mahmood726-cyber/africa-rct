@@ -1,0 +1,84 @@
+{
+    "title":  "Africa and the Global South: comparison of interventional clinical trial density",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Interventional trials per million population by developing region",
+    "study_count":  null,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-27",
+    "certainty":  "high (registry data, complete enumeration of ClinicalTrials.gov)",
+    "app":  "C:\\AfricaRCT\\global-south-comparison.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_global_south.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-global-south-protocol.json",
+    "body":  "How does Africa's clinical trial density compare with other developing regions when normalised by population? We queried ClinicalTrials.gov API v2 for interventional trial counts across 25 countries spanning Africa, Latin America, South and Southeast Asia, and two high-income comparators. Latin America averaged roughly three to four times Africa's weighted per-capita density, with Brazil, Mexico, and Argentina all exceeding 45 trials per million, while most African nations fell below 10. India and Nigeria, both lower-middle-income countries with large populations, differed by approximately 2.5-fold, suggesting that income alone does not explain the gap. South Africa was the only African country competitive with Latin American densities, at approximately 56 trials per million. Disease portfolios diverged sharply: Africa was dominated by HIV trials reflecting donor funding patterns, whereas Latin America was cancer-heavy and Asia showed a balanced mix. These findings identify an Africa penalty relative to comparable developing regions and suggest regulatory capacity and research culture as key modifiable determinants.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "How does Africa\u0027s registered trial density compare with other lower- and middle-income regions after adjustment for population?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov API v2 for interventional trial counts across 25 countries in Africa, Latin America, South and Southeast Asia, together with two high-income comparators, and calculated trials per million population."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "Latin America averaged about three to four times Africa\u0027s weighted per-capita density, with Brazil, Mexico, and Argentina each above 45 trials per million while many African countries remained below 10."
+                      },
+                      {
+                          "role":  "Secondary result",
+                          "text":  "India and Nigeria, both large lower-middle-income countries, differed by about 2.5-fold, suggesting that income level alone does not explain the gap."
+                      },
+                      {
+                          "role":  "Outlier",
+                          "text":  "South Africa was the only African country approaching the higher Latin American densities in this sample."
+                      },
+                      {
+                          "role":  "Portfolio",
+                          "text":  "Disease portfolios also differed, with African counts weighted toward HIV and Latin American counts more weighted toward cancer."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The comparison is registry-based and cannot fully account for differences in national reporting practices or funding mix."
+                      }
+                  ],
+    "wordCount":  150,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Global South Comparison v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 25 countries across 4 regions",
+                        "code":  "C:\\AfricaRCT\\fetch_global_south.py",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count",
+                                          "ok":  true,
+                                          "detail":  "Found 150 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 3",
+                                          "ok":  true,
+                                          "detail":  "Sentence 3 reports the regional density gap."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 states the main limitation."
+                                      }
+                                  ]
+                   }
+}
+

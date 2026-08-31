@@ -1,0 +1,51 @@
+{
+    "title":  "Country-condition zero-trial gaps in Africa: cross-sectional registry mapping",
+    "body":  "Which country-condition pairs in Africa have literally zero registered interventional clinical trials, and what population burden do these evidence gaps represent? We queried ClinicalTrials.gov for 20 African countries across 12 major health conditions, constructing a 240-cell matrix of interventional trial counts covering a combined population of approximately 1.1 billion people. Each cell was classified as absolute zero, sparse, or adequately covered using predefined count thresholds anchored at clinically meaningful levels. Zero-trial cells were concentrated in Francophone West Africa and the Sahel region, with several high-burden country-condition pairs registering no interventional studies despite populations exceeding 20 million. The pattern was consistent when alternative condition search terms were used and when the analysis was restricted to trials initiated after 2010. The resulting map identifies specific priority targets for investment in clinical trial infrastructure where evidence generation is currently nonexistent. Generalisability is limited to ClinicalTrials.gov registrations and may undercount trials registered exclusively on WHO primary registries or national databases.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Which country-condition pairs in Africa have no registered interventional trials, and how large are the populations living in those gaps?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for 20 African countries across 12 major health conditions and constructed a 240-cell matrix of interventional trial counts."
+                      },
+                      {
+                          "role":  "Method",
+                          "text":  "Each cell was classified as zero, sparse, or better covered using prespecified thresholds."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "Zero-trial cells clustered in the Sahel and Francophone West Africa, with several high-burden country-condition pairs showing no registered interventional studies despite populations above 20 million."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "The pattern was similar in sensitivity analyses using alternative search terms and when restricted to studies initiated after 2010."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The map therefore identifies specific country-condition gaps rather than only continental averages."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "Registry-based mapping will miss studies registered elsewhere and cannot distinguish lack of need from lack of visible registration."
+                      }
+                  ],
+    "wordCount":  128,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Africa Research Desert Map v1.0",
+                        "data":  "ClinicalTrials.gov API v2 -- 20 African countries x 12 conditions (240 pairs), interventional studies only",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             }
+}

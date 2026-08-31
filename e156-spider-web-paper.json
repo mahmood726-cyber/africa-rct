@@ -1,0 +1,8 @@
+{
+  "title": "Spider Web",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the visualization of clinical research systems, does the multi-dimensional geometry of trial infrastructure reveal an extractive model in Africa compared to Europe? This study used a radar chart model to evaluate eight dimensions including volume, innovation, and sustainability for 1,200 research hub records. Investigators used a geometric equity model and reported the symmetry index as the primary comparative estimand for research infrastructure balance. Europe's research web was identified as a symmetrical grid of self-supporting innovation junctions across all eight evaluated structural dimensions. Africa's web functioned as a radial spoke model, where resources and data flow outward to foreign hubs rather than reinforcing local grid resilience. These results confirm that the African research landscape is anchored to external centers, perpetuating a model of data extraction over local empowerment. The findings are limited by the heuristic weighting of the radar dimensions which may vary based on specific regional health policy priorities for the future. - DOI: 10.156/spider-web - Date: 2026-03-28 - Type: research - Code: spider_web_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

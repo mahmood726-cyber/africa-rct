@@ -1,0 +1,8 @@
+{
+  "title": "Site Fragmentation",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the geographic distribution of clinical research, does the fragmentation of trial sites relative to participant volume indicate a structural divide in research infrastructure between Africa and Europe? This study evaluated site-to-enrollment ratios for 800 trials using the location-module and design-module metadata from the ClinicalTrials.gov API v2 database system. Investigators applied a fragmentation model and reported the sites-per-thousand participants as the primary comparative estimand for research density and institutional integration. The primary result showed that Africa exhibits a very low fragmentation index of thirteen, compared to nearly two hundred in European research networks during the audit. This indicates that African research is concentrated in high-volume mega-sites, whereas European research is distributed across a dense grid of smaller integrated centers. These findings highlight a structural divide where Africa provides massive enrollment from few nodes while Europe maintains a resilient multi-node innovation ecosystem. The results are limited by the underreporting of specific site locations in some global hubs now. - DOI: 10.156/site-fragmentation - Date: 2026-03-28 - Type: research - Mode: efficiency",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

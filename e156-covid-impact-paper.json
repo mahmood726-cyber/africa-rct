@@ -1,0 +1,43 @@
+{
+    "title":  "COVID-19\u0027s lasting impact on Africa\u0027s clinical trial capacity: longitudinal registry analysis (2015-2026)",
+    "type":  "longitudinal registry analysis",
+    "primary_estimand":  "Deviation of post-COVID African trial starts from pre-COVID linear trajectory (% recovery)",
+    "study_count":  null,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "certainty":  "moderate (registry data, ecological trend analysis)",
+    "app":  "C:\\AfricaRCT\\covid-impact-africa.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_covid_impact.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-covid-impact-protocol.json",
+    "body":  "Did the COVID-19 pandemic produce a lasting contraction in Africa's clinical trial capacity, and has the continent returned to its pre-pandemic growth trajectory? We queried the ClinicalTrials.gov API v2 for interventional trial starts by year from 2015 to 2026 in Africa and the United States, with condition-specific analyses for HIV, malaria, tuberculosis, cancer, and cardiovascular disease. A linear trend fitted to 2015 to 2019 start counts estimated the expected post-COVID trajectory. Africa's pre-COVID growth averaged about 100 additional trial starts per year, but observed counts in 2020 and 2021 fell below projection despite a temporary surge of COVID-specific studies. HIV and tuberculosis showed the clearest displacement and had not fully recovered by 2025, whereas cancer trials were more resilient. Recovery in the United States was faster when normalised to 2019 levels, consistent with deeper structural barriers in Africa. The findings suggest a durable contraction in Africa's non-COVID research portfolio, although ecological registry analyses cannot establish causality.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count 140-170",
+                                          "ok":  true,
+                                          "detail":  "Found 145 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports pre-COVID growth and COVID deviation."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 contains limitation language."
+                                      }
+                                  ]
+                   }
+}
+

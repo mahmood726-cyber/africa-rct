@@ -1,0 +1,66 @@
+{
+    "title": "Protocol: The Dutch Disease of global health - HIV funding as resource curse in African clinical research",
+    "body": "This cross-sectional registry analysis will test whether concentrated HIV research funding crowds out non-communicable disease trial capacity in Africa, drawing on the Dutch Disease model from resource economics. We will query ClinicalTrials.gov API v2 for interventional trial counts in six disease categories, namely HIV, cancer, cardiovascular disease, diabetes, surgery, and mental health, across fifteen African countries. Ten PEPFAR-heavy countries receiving over one hundred million dollars annually will be compared with five non-PEPFAR comparators of similar income level. The primary metric is the Dutch Disease Coefficient, defined as HIV trials divided by the sum of all non-HIV sector trials, where values above one indicate a diseased portfolio. Secondary outcomes include the HIV Dependency Ratio quantifying what proportion of research vanishes with single-funder withdrawal, per-capita trial density by sector, and sector-level breakdown comparing PEPFAR and non-PEPFAR groups. All query parameters and disease definitions will be prespecified and version controlled. Limitations include ecological design, registry dependence, and inability to capture locally funded studies not registered internationally.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry analysis will test whether concentrated HIV funding crowds out non-communicable disease trial capacity in Africa using the Dutch Disease economic model."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for interventional trial counts in six disease categories across fifteen African countries."
+        },
+        {
+            "role": "Search",
+            "text": "The primary metric is the Dutch Disease Coefficient, defined as HIV trials divided by non-HIV sector trials, with values above one indicating a diseased portfolio."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Secondary outcomes include the HIV Dependency Ratio, per-capita trial density by sector, and sector-level breakdown comparing PEPFAR and non-PEPFAR groups."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "All query parameters and disease definitions will be prespecified and version controlled."
+        },
+        {
+            "role": "Dissemination",
+            "text": "No patient-level data will be used and all analyses are reproducible from the cached data file."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include ecological design, registry dependence, and inability to capture locally funded studies not registered internationally."
+        }
+    ],
+    "wordCount": 157,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Dutch Disease of Global Health v1.0",
+        "data": "ClinicalTrials.gov API v2, 15 African countries (10 PEPFAR + 5 non-PEPFAR)",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "pmid": "36332653"
+        },
+        {
+            "pmid": "34843674"
+        }
+    ]
+}

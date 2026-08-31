@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of rheumatic heart disease trial activity in Africa versus disease burden",
+    "body": "This cross-sectional registry study will quantify the mismatch between Africa rheumatic heart disease mortality and its share of registered trial activity on ClinicalTrials.gov. We will query ClinicalTrials.gov API v2 for all interventional studies matching rheumatic heart disease, rheumatic fever, penicillin prophylaxis, and streptococcal pharyngitis across eight African countries, the United States, India, and the United Kingdom. The primary outcome is the Condition Colonialism Index for RHD, computed as Africa burden share divided by Africa trial share. Secondary analyses will compare benzathine penicillin prophylaxis costs with surgical valve replacement, compute per-country burden-to-trial ratios using Global Burden of Disease 2019 estimates, and classify existing trials by sponsor origin and intervention type. All queries will be scripted in Python with 24-hour cache validity and archived alongside the HTML dashboard. No patient-level data will be accessed and no ethics approval is required. Limitations include restriction to one registry and wide uncertainty around RHD burden estimates in settings without echocardiographic screening.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the mismatch between Africa's rheumatic heart disease mortality burden and its share of registered clinical trial activity on ClinicalTrials.gov."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for all interventional studies matching rheumatic heart disease, rheumatic fever, penicillin prophylaxis, streptococcal pharyngitis, and benzathine penicillin across eight African countries, the United States, India, Brazil, and the United Kingdom."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Condition Colonialism Index for RHD, computed as Africa burden share divided by Africa trial share relative to the combined Africa-plus-US total."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses will compare benzathine penicillin prophylaxis costs with surgical valve replacement, compute per-country burden-to-trial ratios using GBD 2019, and classify existing trials by sponsor origin and intervention type."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Ethics",
+            "text": "No patient-level data will be accessed and no ethics approval is required for aggregate registry queries."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single English-language registry and wide uncertainty around RHD burden estimates in settings lacking population-level echocardiographic screening programmes."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "RHD Tragedy Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 African countries, 4 comparators, GBD 2019",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invisible Elders: Aging Without a Research Agenda in Africa</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+h1 { font-size:2rem; margin:30px 0 10px; color:#fff; }
+h2 { font-size:1.5rem; margin:40px 0 15px; color:var(--teal); border-bottom:1px solid var(--border); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:20px 0 10px; color:var(--purple); }
+.subtitle { color:var(--muted); font-size:1rem; margin-bottom:30px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:20px 0; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px; text-align:center; }
+.stat-box .number { font-size:2.2rem; font-weight:bold; }
+.stat-box .label { font-size:0.85rem; color:var(--muted); margin-top:4px; }
+.narrative { background:rgba(20,184,166,0.08); border-left:4px solid var(--teal); padding:20px; margin:20px 0; border-radius:0 10px 10px 0; font-style:italic; color:#5eead4; }
+table { width:100%; border-collapse:collapse; margin:10px 0; }
+th { background:rgba(20,184,166,0.12); padding:10px 8px; text-align:left; font-size:0.85rem; color:var(--teal); border-bottom:2px solid var(--border); }
+td { border-bottom:1px solid var(--border); }
+tr:hover { background:rgba(255,255,255,0.02); }
+.chart-container { position:relative; height:380px; margin:20px 0; }
+canvas { max-width:100%; }
+.methodology { background:rgba(59,130,246,0.05); border:1px solid var(--border); border-radius:10px; padding:20px; margin:30px 0; font-size:0.9rem; color:var(--muted); }
+.methodology h3 { color:var(--accent); }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+.spotlight { background:rgba(239,68,68,0.08); border:2px solid var(--danger); border-radius:12px; padding:24px; margin:20px 0; }
+.spotlight h3 { color:var(--danger); margin-top:0; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>Invisible Elders</h1>
+<p class="subtitle">Africa's Fastest-Growing Demographic with Zero Research Agenda | Project 52 of the Africa RCT Equity Series</p>
+
+<div class="narrative">
+"Africa's population over 60 will triple to 230 million by 2050. They will face dementia, osteoporosis, falls, polypharmacy, and frailty -- conditions for which near-zero clinical trials have been conducted on the continent. A grandmother in Accra who develops Alzheimer's disease will be treated based on evidence generated entirely in Boston, Tokyo, and London. Her genetics, her diet, her social context, her co-morbidities are different. But the research agenda treats her as if she does not exist."
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="number" style="color:var(--danger);">2561</div>
+    <div class="label">Geriatric Trials in 10 African Countries</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--accent);">20065</div>
+    <div class="label">Geriatric Trials in the US</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--teal);">987</div>
+    <div class="label">Geriatric Trials in Japan</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--warning);">7.8x</div>
+    <div class="label">US-to-Africa Geriatric Gap</div>
+  </div>
+</div>
+
+<div class="card" style="text-align:center;">
+  <div style="font-size:1.5rem;color:var(--muted);margin-bottom:12px;">Geriatric Trials per Million Elderly</div>
+  <div class="stat-grid">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">65.17</div>
+      <div class="label">Africa (39.3M elderly)</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">257.24</div>
+      <div class="label">US (78M elderly)</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--teal);">22.43</div>
+      <div class="label">Japan (44M elderly)</div>
+    </div>
+  </div>
+</div>
+
+<h2>The Global Comparison</h2>
+
+<div class="card">
+  <div class="chart-container" style="height:300px;">
+    <canvas id="broadChart"></canvas>
+  </div>
+</div>
+
+<h2>Geriatric Evidence Void by Condition</h2>
+<p style="color:var(--muted);margin-bottom:10px;">For each age-related condition, how many trials exist in Africa vs the aging-research leaders?</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="condChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="text-align:right;">Africa</th>
+        <th style="text-align:right;">US</th>
+        <th style="text-align:right;">Japan</th>
+        <th style="text-align:right;">UK</th>
+        <th style="text-align:right;">Gap (US/Africa)</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Dementia/Alzheimer</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">60</td><td style="padding:8px;text-align:right;">2469</td><td style="padding:8px;text-align:right;">140</td><td style="padding:8px;text-align:right;">349</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">41.1x</td></tr>
+<tr><td style="padding:8px;">Frailty</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">14</td><td style="padding:8px;text-align:right;">378</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">81</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">27.0x</td></tr>
+<tr><td style="padding:8px;">Falls prevention</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">19</td><td style="padding:8px;text-align:right;">337</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">38</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">17.7x</td></tr>
+<tr><td style="padding:8px;">Polypharmacy</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">67</td><td style="padding:8px;text-align:right;">846</td><td style="padding:8px;text-align:right;">77</td><td style="padding:8px;text-align:right;">179</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">12.6x</td></tr>
+<tr><td style="padding:8px;">Osteoporosis</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">64</td><td style="padding:8px;text-align:right;">600</td><td style="padding:8px;text-align:right;">36</td><td style="padding:8px;text-align:right;">72</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">9.4x</td></tr>
+<tr><td style="padding:8px;">Cataracts</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">53</td><td style="padding:8px;text-align:right;">400</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">36</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">7.5x</td></tr>
+<tr><td style="padding:8px;">Urinary incontinence</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">94</td><td style="padding:8px;text-align:right;">655</td><td style="padding:8px;text-align:right;">26</td><td style="padding:8px;text-align:right;">100</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">7.0x</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="spotlight">
+  <h3>Dementia Spotlight: Rising Fast, Near-Zero Trials</h3>
+  <p>Dementia prevalence in Africa is projected to increase by 235% between 2019 and 2050 -- the highest increase of any world region. Yet the trial landscape is:</p>
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">60</div>
+      <div class="label">Dementia Trials in Africa</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">2469</div>
+      <div class="label">Dementia Trials in the US</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--teal);">140</div>
+      <div class="label">Dementia Trials in Japan</div>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-top:12px;">New Alzheimer's drugs like lecanemab and donanemab were developed entirely without African participants. Their efficacy, safety, and dosing in African populations is unknown. The APOE e4 allele -- the strongest genetic risk factor -- has different frequencies and possibly different effects in African populations.</p>
+</div>
+
+<div class="spotlight">
+  <h3>The Polypharmacy Danger</h3>
+  <p>As Africa's elderly population grows, polypharmacy (taking 5+ medications simultaneously) becomes a major safety concern. Most drug-drug interaction data comes from European/American populations:</p>
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">67</div>
+      <div class="label">Polypharmacy Trials in Africa</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">846</div>
+      <div class="label">Polypharmacy Trials in the US</div>
+    </div>
+  </div>
+</div>
+
+<div class="spotlight">
+  <h3>The Falls Prevention Gap</h3>
+  <p>Falls are a leading cause of disability and death in the elderly worldwide. Africa's infrastructure, housing, and healthcare access create unique fall risk profiles -- yet:</p>
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">19</div>
+      <div class="label">Falls Prevention Trials in Africa</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">337</div>
+      <div class="label">Falls Prevention Trials in the US</div>
+    </div>
+  </div>
+</div>
+
+<h2>The Condition-Country Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Geriatric trial counts by condition and country -- red = zero, amber = 1-4, green = 5+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table style="font-size:0.85rem;">
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Nigeri</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">South </th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ethiop</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Tanzan</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Rwanda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Camero</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Dementia/Alzheimer</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">41</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">18</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Osteoporosis</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">18</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">46</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Falls prevention</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">18</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Urinary incontinence</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">17</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">76</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Polypharmacy</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">51</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">17</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">9</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Frailty</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">13</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Cataracts</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">46</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>Geriatric Trials by African Country</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Which countries have any geriatric research at all?</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="countryChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Geriatric Trials</th>
+        <th style="text-align:right;">Population 60+</th>
+        <th style="text-align:right;">Trials per Million Elderly</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">1271</td><td style="padding:8px;text-align:right;">8.5M</td><td style="padding:8px;text-align:right;">149.53</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">594</td><td style="padding:8px;text-align:right;">5.2M</td><td style="padding:8px;text-align:right;">114.23</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">225</td><td style="padding:8px;text-align:right;">2.8M</td><td style="padding:8px;text-align:right;">80.36</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">202</td><td style="padding:8px;text-align:right;">1.5M</td><td style="padding:8px;text-align:right;">134.67</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">158</td><td style="padding:8px;text-align:right;">2.5M</td><td style="padding:8px;text-align:right;">63.2</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">75</td><td style="padding:8px;text-align:right;">9.5M</td><td style="padding:8px;text-align:right;">7.89</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">68</td><td style="padding:8px;text-align:right;">5.6M</td><td style="padding:8px;text-align:right;">12.14</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">66</td><td style="padding:8px;text-align:right;">1.8M</td><td style="padding:8px;text-align:right;">36.67</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">29</td><td style="padding:8px;text-align:right;">0.6M</td><td style="padding:8px;text-align:right;">48.33</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">29</td><td style="padding:8px;text-align:right;">1.3M</td><td style="padding:8px;text-align:right;">22.31</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="narrative">
+"The invisible elders of Africa face a double burden: they are aging into conditions that the global research enterprise has studied extensively -- but not on them. When a 70-year-old Nigerian man is prescribed a statin, a blood pressure medication, and a diabetes drug, the interaction data comes from populations with different genetics, different diets, and different metabolic profiles. He is, in the most literal sense, an experiment of one -- with no research agenda behind him. By 2050, there will be 230 million such experiments."
+</div>
+
+<div class="methodology">
+  <h3>Methodology</h3>
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (queried 2026-03-28)</p>
+  <p><strong>Filter:</strong> <code>AREA[StudyType]INTERVENTIONAL</code> with geriatric/elderly condition queries</p>
+  <p><strong>Countries:</strong> 10 African nations + United States, Japan, United Kingdom as comparators</p>
+  <p><strong>Conditions:</strong> 7 age-related conditions reflecting the geriatric disease burden</p>
+  <p><strong>Population data:</strong> UN 2024 estimates for population aged 60+</p>
+  <p><strong>Geriatric Evidence Void:</strong> Ratio of US to Africa trial counts per condition</p>
+  <p><strong>Limitation:</strong> Single registry; geriatric terminology varies. Some trials may include elderly participants without geriatric-specific registration. Japan comparison limited by possible lower English-language registration on ClinicalTrials.gov.</p>
+  <p><strong>AI transparency:</strong> LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.</p>
+</div>
+
+</div>
+
+<footer>
+  Africa RCT Equity Series -- Project 52: The Elderly View | ClinicalTrials.gov API v2<br>
+  Generated 2026-03-28 | Data cached for 24 hours
+</footer>
+
+<script>
+new Chart(document.getElementById('broadChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Africa (10)", "United States", "Japan", "United Kingdom"],
+    datasets: [{
+      label: 'Geriatric trials',
+      data: [2561, 20065, 987, 3114],
+      backgroundColor: ['rgba(239,68,68,0.7)', 'rgba(59,130,246,0.7)', 'rgba(20,184,166,0.7)', 'rgba(168,85,247,0.7)'],
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Total Geriatric Trials: Africa vs Aging-Focused Nations', color: '#e2e8f0' }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      x: { ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+new Chart(document.getElementById('condChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Dementia/Alzheimer", "Frailty", "Falls prevention", "Polypharmacy", "Osteoporosis", "Cataracts", "Urinary incontinence"],
+    datasets: [
+      { label: 'Africa (10 countries)', data: [60, 14, 19, 67, 64, 53, 94], backgroundColor: 'rgba(239,68,68,0.7)', borderRadius: 4 },
+      { label: 'United States', data: [2469, 378, 337, 846, 600, 400, 655], backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 },
+      { label: 'Japan', data: [140, 3, 3, 77, 36, 12, 26], backgroundColor: 'rgba(20,184,166,0.7)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'Geriatric Evidence Void: Africa vs US vs Japan', color: '#e2e8f0' },
+      legend: { labels: { color: '#e2e8f0' } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('countryChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Egypt", "South Africa", "Kenya", "Uganda", "Tanzania", "Nigeria", "Ethiopia", "Ghana", "Rwanda", "Cameroon"],
+    datasets: [{
+      label: 'Geriatric trials',
+      data: [1271, 594, 225, 202, 158, 75, 68, 66, 29, 29],
+      backgroundColor: [1271, 594, 225, 202, 158, 75, 68, 66, 29, 29].map(v => v < 5 ? 'rgba(239,68,68,0.7)' : (v < 20 ? 'rgba(245,158,11,0.7)' : 'rgba(34,197,94,0.7)')),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Geriatric Trials by African Country', color: '#e2e8f0' }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

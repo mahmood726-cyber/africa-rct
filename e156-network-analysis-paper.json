@@ -1,0 +1,64 @@
+{
+    "title": "Collaboration network structure and institutional centrality in Uganda's clinical trial ecosystem",
+    "body": "How concentrated is the research collaboration network in Uganda, and which institutions bridge disconnected groups? We built an institution-institution co-occurrence network from 783 interventional trials on ClinicalTrials.gov with Ugandan sites, linking sponsors sharing disease categories. Degree centrality, betweenness centrality, clustering coefficient, and a degree Gini index were computed to characterize hub-and-spoke structure. The network contained 222 institutions and over thirteen thousand edges with density 0.56 and average clustering 0.92, indicating a highly interconnected core. Makerere University had the highest degree centrality at 0.96, connecting to 212 of 222 institutions, while US academic centres occupied the next-highest positions. The degree Gini of 0.25 suggested moderately distributed connectivity rather than a single-star topology. Temporal analysis showed increasing density and diversity from 2000 onward. The co-occurrence approach cannot distinguish deep collaboration from coincidental overlap, and registry data may undercount African-led trials.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "How concentrated is the research collaboration network in Uganda's clinical trial ecosystem, and which institutions serve as structural bridges?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We analysed 783 interventional trials registered on ClinicalTrials.gov with Ugandan sites, constructing an institution-institution network via condition co-occurrence bipartite projection."
+        },
+        {
+            "role": "Method",
+            "text": "Graph metrics including degree centrality, betweenness centrality, clustering coefficient, and a degree Gini index were computed in pure Python to characterise network topology."
+        },
+        {
+            "role": "Primary result",
+            "text": "The 222-node network had density 0.56 and average clustering 0.92, with Makerere University holding degree centrality of 0.96, connecting to 212 of 222 institutions."
+        },
+        {
+            "role": "Robustness",
+            "text": "The degree Gini of 0.25 indicated moderately distributed connectivity, and temporal analysis showed increasing density after 2000."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Uganda's trial network is highly interconnected with Makerere as a non-bottleneck hub, but US academic institutions remain the dominant international partners."
+        },
+        {
+            "role": "Boundary",
+            "text": "Condition co-occurrence cannot distinguish deep from coincidental collaboration, and ClinicalTrials.gov may undercount African-led studies."
+        }
+    ],
+    "wordCount": 138,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Collaboration Network v1.0",
+        "data": "ClinicalTrials.gov API v2, 783 Uganda trials, 222 institutions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "20711585",
+            "note": "Uthman & Uthman 2010, African health research collaboration"
+        },
+        {
+            "pmid": "23768812",
+            "note": "Rottingen et al 2013, global health R&D mapping"
+        }
+    ]
+}

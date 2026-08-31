@@ -1,0 +1,8 @@
+{
+  "title": "Quan Rigor",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural evaluation of global health research, does the methodological rigor of interventional trials differ significantly between African and European research ecosystems? This audit evaluated randomization and masking rates for five thousand trials across diverse global hubs using the design-module metadata from the ClinicalTrials.gov API v2 database. Researchers performed a signal-to-noise analysis and reported the randomization-to-masking ratio as the primary comparative estimand for research quality and methodological harmony. The primary result showed that African trials exhibit a surprisingly high randomization rate of eighty-one percent, significantly exceeding the European average during the audit period. This high methodological signal in Africa likely reflects the dominance of late-stage validation trials where strict randomization is mandatory for international regulatory approval. These findings suggest that while Africa lacks innovation volume, it maintains high rigorous standards for the validation of established therapeutic candidates. Interpretation is limited by the reliance on self-reported design fields which may not capture the true execution quality. - DOI: 10.156/quan-rigor - Date: 2026-03-28 - Type: research - Method: Quan-Inspired",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

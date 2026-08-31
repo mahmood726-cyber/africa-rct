@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Surgical Desert: Africa's Missing Surgical Trials</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+.big-number {
+  font-size: 4rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 1rem 0;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Surgical Desert</h1>
+<p class="subtitle">5 billion people lack access to safe surgery (Lancet Commission, 2015).
+Africa is the epicentre of this crisis &mdash; yet it has only 1991 registered
+interventional surgical trials vs 7,388 in the United States.</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Surgical Trials</div>
+    <div class="value danger">1991</div>
+    <div class="label">Interventional, ClinicalTrials.gov</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Surgical Trials</div>
+    <div class="value" style="color:#3b82f6;">7,388</div>
+    <div class="label">3.7x more than Africa</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Condition Colonialism Index</div>
+    <div class="value danger">1.4</div>
+    <div class="label">1.0 = fair; &gt;5 = severe gap</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Caesarean Trials</div>
+    <div class="value warning">484</div>
+    <div class="label">Critical for maternal mortality</div>
+  </div>
+</div>
+
+<!-- 2. CCI Calculation -->
+<h2>2. Condition Colonialism Index: The Calculation</h2>
+<div class="method-note">
+<strong>CCI = Burden Share / Trial Share</strong><br><br>
+The Lancet Commission on Global Surgery (Meara et al., 2015) estimated that
+5 billion people lack access to safe, affordable, timely surgical care.
+Africa bears approximately <strong>30%</strong> of the global
+surgical disease burden.<br><br>
+<strong>Africa's trial share</strong> = 1991 / (1991 + 7,388)
+= <strong>21.23%</strong><br>
+<strong>CCI</strong> = 30% / 21.23%
+= <strong style="color:#ef4444;">1.4</strong><br><br>
+A CCI of 1.4 means Africa carries 1.4x more surgical disease burden
+than its share of global surgical research warrants.
+</div>
+
+<div class="big-number danger">1.4x</div>
+<p style="text-align:center;color:var(--muted);margin-bottom:2rem;">
+Surgical CCI: Africa's burden-to-research ratio</p>
+
+<!-- 3. Country Breakdown -->
+<h2>3. Country Breakdown: African Surgical Trials</h2>
+<div class="two-col">
+<div>
+<table>
+<thead>
+<tr><th>Country</th><th style="text-align:right;">Surgical Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials/Million</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">80</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;">1.29</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">1,795</td><td style="padding:8px;text-align:right;">110M</td><td style="padding:8px;text-align:right;">16.32</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">19</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;">0.08</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;">0.11</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;">0.25</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;">0.01</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;">34M</td><td style="padding:8px;text-align:right;">0.12</td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="countryBarChart" height="280"></canvas>
+</div>
+</div>
+
+<!-- 4. Subspecialty Bars -->
+<h2>4. Surgical Subspecialties in Africa</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+How many interventional trials exist in Africa for each surgical subspecialty?
+Many subspecialties are virtually absent from the trial registry.
+</p>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Subspecialty</th><th style="text-align:right;">Africa Trials</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Anaesthesia</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">791</td></tr>
+<tr><td style="padding:8px;">Obstetric (caesarean)</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">484</td></tr>
+<tr><td style="padding:8px;">Ophthalmic / cataract</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">399</td></tr>
+<tr><td style="padding:8px;">Orthopedic / fracture</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">310</td></tr>
+<tr><td style="padding:8px;">Cardiac surgery</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">168</td></tr>
+<tr><td style="padding:8px;">Neurosurgery</td><td style="padding:8px;text-align:right;color:#ff4444;font-weight:bold;">4</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="subBarChart" height="280"></canvas>
+</div>
+</div>
+
+<!-- 5. Comparison Table: Africa vs US vs India vs Brazil -->
+<h2>5. Global Comparison: Africa vs US vs India vs Brazil</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr><th>Country/Region</th><th style="text-align:right;">Surgical Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials/Million</th>
+<th style="text-align:right;">Ratio vs Africa</th></tr>
+</thead>
+<tbody>
+<tr style="background:#1a1a2e;"><td style="padding:8px;font-weight:bold;">Africa (total)</td><td style="padding:8px;text-align:right;">1,991</td><td style="padding:8px;text-align:right;">1,500M</td><td style="padding:8px;text-align:right;">1.33</td><td style="padding:8px;text-align:right;">1.0x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United States</td><td style="padding:8px;text-align:right;">7,388</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;">22.05</td><td style="padding:8px;text-align:right;">3.7x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">India</td><td style="padding:8px;text-align:right;">277</td><td style="padding:8px;text-align:right;">1,440M</td><td style="padding:8px;text-align:right;">0.19</td><td style="padding:8px;text-align:right;">0.1x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Brazil</td><td style="padding:8px;text-align:right;">572</td><td style="padding:8px;text-align:right;">217M</td><td style="padding:8px;text-align:right;">2.64</td><td style="padding:8px;text-align:right;">0.3x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">China</td><td style="padding:8px;text-align:right;">2,410</td><td style="padding:8px;text-align:right;">1,425M</td><td style="padding:8px;text-align:right;">1.69</td><td style="padding:8px;text-align:right;">1.2x</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United Kingdom</td><td style="padding:8px;text-align:right;">932</td><td style="padding:8px;text-align:right;">68M</td><td style="padding:8px;text-align:right;">13.71</td><td style="padding:8px;text-align:right;">0.5x</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="danger-note">
+<strong>The scale of disparity:</strong> The United States has 3.7x more
+surgical trials than the entire African continent. Even India, with a similar population
+to Africa, has substantially more surgical research. Africa's 1.5 billion people are
+served by fewer surgical trials than many individual high-income countries.
+</div>
+
+<!-- 6. Obstetric Surgery Spotlight -->
+<h2>6. Obstetric Surgery Spotlight: Caesarean Trials</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Caesarean section is the most common major surgery worldwide.
+In sub-Saharan Africa, lack of access to emergency caesarean section is a leading
+cause of maternal and neonatal death. How many registered caesarean trials exist?
+</p>
+<div class="two-col">
+<div>
+<div class="summary-card">
+  <div class="label">Caesarean / Cesarean Trials in Africa</div>
+  <div class="value warning">484</div>
+  <div class="label">Interventional trials registered</div>
+</div>
+<div class="danger-note" style="margin-top:1rem;">
+<strong>Context:</strong> An estimated 28.3 million additional surgical procedures
+are needed annually in sub-Saharan Africa (Lancet Commission, 2015), with
+caesarean sections representing the single largest unmet surgical need.
+Yet only 484 interventional caesarean trials are registered
+for the entire continent.
+</div>
+</div>
+<div>
+<h3>Sponsor Distribution</h3>
+<table>
+<thead><tr><th>Sponsor Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">47</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">3</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 7. The Anaesthesia Gap -->
+<h2>7. The Anaesthesia Gap</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Safe surgery requires safe anaesthesia. The Lancet Commission documented that
+most of Africa lacks trained anaesthesia providers. How much anaesthesia
+research is being conducted?
+</p>
+<div class="summary-card" style="max-width:400px;">
+  <div class="label">Anaesthesia Trials in Africa</div>
+  <div class="value warning">791</div>
+  <div class="label">Anesthesia OR anaesthesia, interventional</div>
+</div>
+<div class="warning-note" style="margin-top:1rem;">
+<strong>The silent crisis:</strong> With only 791 anaesthesia trials
+across a continent of 1.5 billion people, Africa's anaesthesia evidence base is
+being built almost entirely from research conducted elsewhere. Local context &mdash;
+drug availability, monitoring capacity, workforce constraints &mdash; makes
+extrapolation from high-income settings unreliable.
+</div>
+
+<!-- 8. Sponsor Analysis -->
+<h2>8. Sponsor Analysis</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Who funds surgical research in Africa? The sponsor profile reveals whether
+research is locally driven or externally imposed.
+</p>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">94</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">INDUSTRY</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">NETWORK</td><td style="padding:8px;text-align:right;">1</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top 10 Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Ain Shams University</td><td style="padding:8px;text-align:right;">17</td></tr>
+<tr><td style="padding:8px;">Cairo University</td><td style="padding:8px;text-align:right;">11</td></tr>
+<tr><td style="padding:8px;">Assiut University</td><td style="padding:8px;text-align:right;">10</td></tr>
+<tr><td style="padding:8px;">Mansoura University</td><td style="padding:8px;text-align:right;">9</td></tr>
+<tr><td style="padding:8px;">Tanta University</td><td style="padding:8px;text-align:right;">7</td></tr>
+<tr><td style="padding:8px;">Alexandria University</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">Benha University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Zagazig University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Minia University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Sohag University</td><td style="padding:8px;text-align:right;">3</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 9. Per-Capita Density -->
+<h2>9. Per-Capita Surgical Trial Density</h2>
+<table>
+<thead>
+<tr><th>Country/Region</th><th style="text-align:right;">Surgical Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials / Million</th></tr>
+</thead>
+<tbody>
+<tr style=""><td style="padding:8px;font-weight:normal;">United States</td><td style="padding:8px;text-align:right;">7,388</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;font-weight:bold;">22.05</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Egypt</td><td style="padding:8px;text-align:right;">1,795</td><td style="padding:8px;text-align:right;">110M</td><td style="padding:8px;text-align:right;font-weight:bold;">16.32</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">United Kingdom</td><td style="padding:8px;text-align:right;">932</td><td style="padding:8px;text-align:right;">68M</td><td style="padding:8px;text-align:right;font-weight:bold;">13.71</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Brazil</td><td style="padding:8px;text-align:right;">572</td><td style="padding:8px;text-align:right;">217M</td><td style="padding:8px;text-align:right;font-weight:bold;">2.64</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">China</td><td style="padding:8px;text-align:right;">2,410</td><td style="padding:8px;text-align:right;">1,425M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.69</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;font-weight:bold;">Africa (total)</td><td style="padding:8px;text-align:right;">1,991</td><td style="padding:8px;text-align:right;">1,500M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.33</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">South Africa</td><td style="padding:8px;text-align:right;">80</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.29</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Uganda</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.25</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">India</td><td style="padding:8px;text-align:right;">277</td><td style="padding:8px;text-align:right;">1,440M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.19</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Ghana</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;">34M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.12</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Kenya</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.11</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Nigeria</td><td style="padding:8px;text-align:right;">19</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.08</td></tr>
+<tr style=""><td style="padding:8px;font-weight:normal;">Tanzania</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.01</td></tr>
+
+</tbody>
+</table>
+
+<!-- 10. Phase Distribution -->
+<h2>10. Phase Distribution</h2>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Phase</th><th style="text-align:right;">Count</th>
+<th style="text-align:right;">%</th></tr></thead>
+<tbody><tr><td style="padding:8px;">EARLY_PHASE1</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">6.0%</td></tr>
+<tr><td style="padding:8px;">NA</td><td style="padding:8px;text-align:right;">69</td><td style="padding:8px;text-align:right;">69.0%</td></tr>
+<tr><td style="padding:8px;">PHASE1</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">2.0%</td></tr>
+<tr><td style="padding:8px;">PHASE2</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">1.0%</td></tr>
+<tr><td style="padding:8px;">PHASE2, PHASE3</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">3.0%</td></tr>
+<tr><td style="padding:8px;">PHASE3</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;">4.0%</td></tr>
+<tr><td style="padding:8px;">PHASE4</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">15.0%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="phaseChart" height="250"></canvas>
+</div>
+</div>
+
+<!-- 11. Temporal Trend -->
+<h2>11. Temporal Trend</h2>
+<div class="chart-container">
+<canvas id="trendChart" height="250"></canvas>
+</div>
+
+<footer>
+<p>Data source: ClinicalTrials.gov API v2 | Lancet Commission on Global Surgery (2015) |
+Generated 2026-03-28 12:06</p>
+<p>Surgical Desert CCI methodology: Africa burden share (30%) /
+Africa trial share (21.23%) = 1.4</p>
+<p style="margin-top:0.5rem;">Project 21 of the Africa RCT Landscape Series</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Country bar chart
+  var countryCtx = document.getElementById('countryBarChart');
+  if (countryCtx) {
+    new Chart(countryCtx, {
+      type: 'bar',
+      data: {
+        labels: ["South Africa", "Egypt", "Nigeria", "Kenya", "Uganda", "Tanzania", "Ghana"],
+        datasets: [{
+          label: 'Surgical Trials',
+          data: [80, 1795, 19, 6, 12, 1, 4],
+          backgroundColor: '#3b82f6',
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Surgical Trials by African Country',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          }
+        }
+      }
+    });
+  }
+
+  // Subspecialty bar chart
+  var subCtx = document.getElementById('subBarChart');
+  if (subCtx) {
+    new Chart(subCtx, {
+      type: 'bar',
+      data: {
+        labels: ["Obstetric (caesarean)", "Orthopedic / fracture", "Cardiac surgery", "Neurosurgery", "Ophthalmic / cataract", "Anaesthesia"],
+        datasets: [{
+          label: 'Trials in Africa',
+          data: [484, 310, 168, 4, 399, 791],
+          backgroundColor: ["#3b82f6", "#3b82f6", "#3b82f6", "#ef4444", "#3b82f6", "#3b82f6"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Surgical Subspecialty Trials (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0', font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+
+  // Phase doughnut chart
+  var phaseCtx = document.getElementById('phaseChart');
+  if (phaseCtx) {
+    var phaseData = {"NA": 69, "PHASE2, PHASE3": 3, "PHASE4": 15, "PHASE3": 4, "EARLY_PHASE1": 6, "PHASE1": 2, "PHASE2": 1};
+    var phaseLabels = Object.keys(phaseData);
+    var phaseValues = Object.values(phaseData);
+    var phaseColors = phaseLabels.map(function(l) {
+      if (l.toUpperCase().indexOf('PHASE3') >= 0 || l === 'PHASE3')
+        return '#ef4444';
+      if (l.toUpperCase().indexOf('PHASE2') >= 0) return '#f59e0b';
+      if (l.toUpperCase().indexOf('PHASE1') >= 0) return '#3b82f6';
+      if (l.toUpperCase().indexOf('PHASE4') >= 0) return '#22c55e';
+      return '#6b7280';
+    });
+    new Chart(phaseCtx, {
+      type: 'doughnut',
+      data: {
+        labels: phaseLabels,
+        datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Phase Distribution (Africa Surgical)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        }
+      }
+    });
+  }
+
+  // Temporal trend line chart
+  var trendCtx = document.getElementById('trendChart');
+  if (trendCtx) {
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: [2007, 2008, 2009, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        datasets: [{
+          label: 'Surgical Trials Started (Africa)',
+          data: [1, 1, 1, 2, 1, 3, 2, 3, 3, 6, 14, 12, 11, 10, 15, 13, 2],
+          borderColor: '#ef4444',
+          backgroundColor: 'rgba(239,68,68,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#ef4444',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Surgical Trial Starts by Year (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "title": "Sponsor Sovereignty",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the governance of global clinical research, does the class of lead sponsor indicate a significant regional divide in research sovereignty between Africa and Europe? This metadata audit evaluated sponsor categories for one thousand trials across four global regions using the lead-sponsor-class fields from the ClinicalTrials.gov API v2 database system. Investigators applied a sovereignty-score model and reported the industry-to-academic ratio as the primary comparative estimand for institutional research independence and discovery power. The primary result showed that European research exhibits nearly perfect sovereignty with a balanced academic and industry ecosystem. African research remains heavily dependent on foreign academic and government sponsors from the Global North, with a low local sovereignty score below fifty percent during the audit. These findings reveal a persistent structural dependency that limits the development of a self-sustaining local scientific ecosystem in the African research hubs across the whole world now for all time today in this system. - DOI: 10.156/sponsor-sovereignty - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

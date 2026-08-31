@@ -1,0 +1,8 @@
+{
+  "title": "Design Quality",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In an era when adaptive, Bayesian, and platform trials define the methodological frontier, does Africa receive cutting-edge designs or second-class methodology? This audit queried ClinicalTrials.gov for eleven design types across African versus United States interventional trials, computing a Design Sophistication Index weighted by complexity and a blinding rate for double-blind proportions. Researchers classified designs by sophistication weight from one through five and reported the DSI ratio as primary equity estimand. Africa had only twenty-one cluster-randomized trials despite community-level delivery being the dominant care model, while adaptive and platform trials numbered fewer than fifty combined. The double-blind rate in Africa was substantially lower than in the United States, producing a gap that inflates African effect sizes by nine to seventeen percent. Phase one trials were predominantly pharmacokinetic bridging rather than first-in-human discovery, confirming a validation-not-innovation paradigm. These findings demonstrate Africa receives methodologically inferior designs precisely where efficient advanced methods would yield the greatest benefit, limited by keyword-based",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

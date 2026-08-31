@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of pediatric clinical trial gaps across ten childhood conditions in Africa",
+    "body": "This cross-sectional registry study will quantify the pediatric clinical trial evidence gap for children in Africa. We will query ClinicalTrials.gov API v2 for interventional studies matching pediatric terms combined with ten childhood conditions: pneumonia, diarrheal disease, malnutrition, neonatal sepsis, childhood HIV, childhood malaria, childhood tuberculosis, childhood cancer, childhood epilepsy, and sickle cell disease. Trials will be counted across ten African countries individually and combined, with the United States as comparator. The primary outcome is the Childhood Evidence Gap ratio per condition. Secondary analyses include the neonatal trial void, vaccination versus treatment trial ratios in the pediatric context, condition-country heatmaps identifying systematic zero-trial cells, and per-country pediatric trial rates per million children under fifteen using United Nations population estimates. Broad pediatric queries combining age-related terms will provide overall landscape counts. All queries will be scripted in Python with archived results and cached for twenty-four hours. Limitations include single-registry restriction, variable pediatric terminology in trial registrations, and the inability to filter precisely by age eligibility criteria through condition-based text queries.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the pediatric clinical trial evidence gap for African children across ten conditions that dominate the continent's childhood disease burden."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies matching pediatric terms combined with each of ten childhood conditions across ten African countries and the United States."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Childhood Evidence Gap ratio per condition, computed as the ratio of US to Africa trial counts."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses include the neonatal trial void, vaccination versus treatment trial ratios, condition-country heatmaps, and per-country pediatric rates per million children under fifteen."
+        },
+        {
+            "role": "Population data",
+            "text": "United Nations 2024 population estimates for children under fifteen will be used for per-capita calculations across the ten African countries."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and results archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include single-registry restriction, variable pediatric terminology in trial registrations, and inability to filter precisely by age eligibility criteria through condition-based text queries."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Child View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US comparator, 10 childhood conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

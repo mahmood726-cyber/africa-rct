@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of health system research investment in Africa",
+    "body": "This cross-sectional registry study will quantify the evidence gap facing health system administrators in Africa. We will query ClinicalTrials.gov API v2 for interventional studies across eight categories relevant to health system management: health system strengthening, cost-effectiveness, supply chain, workforce, task-shifting, community health workers, digital health, and pharmaceutical trials for comparison. The primary outcome is the admin-useful to pharma trial ratio, quantifying the structural imbalance between evidence for drug development and evidence for health system decisions. Secondary outcomes include the cost-effectiveness trial gap, country-level distribution of health system research, and identification of innovation areas where Africa leads. All queries are scripted in Python with cached results. Country-level analysis will cover the 15 highest-output African nations. We will classify trials using keyword matching against study titles and conditions. No patient-level data will be accessed. Limitations include restriction to one registry, keyword-based classification, and exclusion of observational health system research.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This study will quantify the evidence gap facing health system administrators in Africa by comparing trial availability across eight management-relevant evidence categories."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies in Africa across health system strengthening, cost-effectiveness, supply chain, workforce, task-shifting, community health workers, digital health, and pharmaceutical trials."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the ratio of pharmaceutical to administrator-useful trials in Africa, quantifying the structural misalignment between research investment and health system needs."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include the cost-effectiveness trial gap between Africa and the US, country-level distribution of health system research, and identification of Africa-led innovation areas."
+        },
+        {
+            "role": "Classification",
+            "text": "Trials will be classified using keyword matching against study titles and conditions within each of the eight health system management categories."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries are scripted in Python with 24-hour cache validity, and both data files and dashboards are archived for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to ClinicalTrials.gov, keyword-based classification that may misclassify multi-component interventions, and exclusion of observational health system studies."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Administrator's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 categories, Africa vs US",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

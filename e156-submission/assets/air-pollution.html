@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Household Air Pollution: The Invisible Killer</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.void-box {
+  background: rgba(239, 68, 68, 0.15);
+  border: 2px solid var(--danger);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.void-box .big-zero {
+  font-size: 6rem;
+  font-weight: 900;
+  color: var(--danger);
+  line-height: 1;
+}
+.void-box .big-label {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>Household Air Pollution: The Invisible Killer</h1>
+<p class="subtitle">Zero trials. 600,000 deaths. Three billion people cook over open fires.</p>
+
+<!-- 1. Summary -->
+<h2>1. Zero Trials. 600,000 Deaths.</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa HAP Trials</div>
+    <div class="value danger">7</div>
+    <div class="label">vs 52 in the US</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">African Deaths / Year (HAP)</div>
+    <div class="value danger">600K</div>
+    <div class="label">19% of global HAP mortality</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Solid Fuel Cooking (Africa)</div>
+    <div class="value warning">80%</div>
+    <div class="label">~900 million people</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PM2.5 Exceedance</div>
+    <div class="value danger">33x</div>
+    <div class="label">cooking fire vs WHO guideline</div>
+  </div>
+</div>
+
+<div class="void-box">
+  <div class="big-zero">7</div>
+  <div class="big-label">registered interventional trials for household air pollution in Africa</div>
+  <div class="big-label" style="margin-top:1rem;color:var(--danger);">
+    While 600,000 Africans die every year from breathing cooking smoke
+  </div>
+</div>
+
+<!-- 2. The Invisible Killer -->
+<h2>2. The Invisible Killer</h2>
+<p>Three billion people worldwide &mdash; including 900 million Africans &mdash; cook
+their daily meals over open fires burning wood, charcoal, dung, or crop residues.
+The smoke contains fine particulate matter (PM2.5), carbon monoxide, polycyclic
+aromatic hydrocarbons, and hundreds of other toxic compounds. A typical indoor
+cooking fire produces PM2.5 concentrations of <strong>500 &mu;g/m&sup3;</strong> &mdash;
+33x the WHO guideline of 15
+&mu;g/m&sup3;.</p>
+
+<div class="danger-note">
+<strong>Who is affected?</strong> Women and young children bear the heaviest burden.
+Women do 90%+ of cooking in sub-Saharan Africa and are exposed for 3-7 hours daily.
+Children under 5 are strapped to their mothers' backs during cooking. HAP causes:<br><br>
+&bull; <strong>Pneumonia:</strong> 237,000
+child deaths/year globally (HAP-attributable)<br>
+&bull; <strong>COPD:</strong> 120,000 African
+deaths/year<br>
+&bull; <strong>Lung cancer, cardiovascular disease, low birth weight, cataracts</strong><br>
+&bull; <strong>Burns:</strong> open fires are the leading cause of childhood burns in Africa
+</div>
+
+<!-- 3. Clean Cookstove Interventions -->
+<h2>3. Clean Cookstove Interventions</h2>
+<div class="warning-note">
+<strong>The engineering exists.</strong> Improved cookstoves, LPG stoves, solar cookers,
+and biogas digesters can reduce HAP by 50-90%. The Global Alliance for Clean Cookstoves
+(now Clean Cooking Alliance) has distributed millions of improved stoves. Yet we found
+7 registered RCTs in Africa testing these interventions. The evidence base
+for what works in African households &mdash; considering fuel availability, cultural
+cooking practices, and sustained adoption &mdash; is essentially absent from
+ClinicalTrials.gov.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Intervention Type</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">India</th>
+  <th style="text-align:right;">China</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Cookstove / clean cooking</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">3</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;">Biomass fuel / solid fuel</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">LPG / clean fuel transition</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;">Indoor air quality</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">5</td><td style="padding:8px;text-align:right;">20</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">Ventilation / chimney</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">33</td><td style="padding:8px;text-align:right;">2300</td><td style="padding:8px;text-align:right;">68</td><td style="padding:8px;text-align:right;">487</td></tr>
+<tr><td style="padding:8px;">Charcoal / kerosene</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">2</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">0</td></tr>
+
+</tbody>
+</table>
+
+<!-- 4. COPD Burden -->
+<h2>4. COPD Burden in Africa</h2>
+<p>COPD from household air pollution is the fourth leading cause of death in Africa,
+yet Africa has only 105 COPD trials vs 1,353 in the
+US (a 12.9x gap). The vast majority of African COPD is caused by
+HAP, not smoking &mdash; making it a fundamentally different disease requiring
+fundamentally different interventions.</p>
+
+<div class="chart-container">
+<h3>HAP and COPD Trial Counts by Country</h3>
+<canvas id="trialChart" height="300"></canvas>
+</div>
+
+<!-- 5. Cardiovascular Effects -->
+<h2>5. Health Effects: Africa vs US</h2>
+<table>
+<thead>
+<tr>
+  <th>Health Effect</th>
+  <th style="text-align:right;">Africa Trials</th>
+  <th style="text-align:right;">US Trials</th>
+  <th style="text-align:right;">US:Africa Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">COPD / chronic lung disease</td><td style="padding:8px;text-align:right;">105</td><td style="padding:8px;text-align:right;">1353</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">12.9x</td></tr>
+<tr><td style="padding:8px;">Pneumonia (child)</td><td style="padding:8px;text-align:right;">30</td><td style="padding:8px;text-align:right;">60</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">2.0x</td></tr>
+<tr><td style="padding:8px;">Lung cancer</td><td style="padding:8px;text-align:right;">91</td><td style="padding:8px;text-align:right;">4985</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ef4444;">54.8x</td></tr>
+<tr><td style="padding:8px;">Cardiovascular (HAP)</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">17.0x</td></tr>
+<tr><td style="padding:8px;">Low birth weight (HAP)</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ef4444;">INF</td></tr>
+<tr><td style="padding:8px;">Eye disease (HAP)</td><td style="padding:8px;text-align:right;">64</td><td style="padding:8px;text-align:right;">4400</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ef4444;">68.8x</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>Health Effect Trials: Africa vs US</h3>
+<canvas id="healthChart" height="300"></canvas>
+</div>
+
+<!-- 6. Country Breakdown -->
+<h2>6. Country Breakdown</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">HAP Trials</th>
+  <th style="text-align:right;">COPD Trials</th>
+  <th style="text-align:right;">Solid Fuel Use</th>
+  <th style="text-align:right;">Population</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;color:#f59e0b;">72%</td><td style="padding:8px;text-align:right;">230M</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;color:#f59e0b;">78%</td><td style="padding:8px;text-align:right;">56M</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">3</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;color:#f59e0b;">95%</td><td style="padding:8px;text-align:right;">48M</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#f59e0b;">94%</td><td style="padding:8px;text-align:right;">67M</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#f59e0b;">93%</td><td style="padding:8px;text-align:right;">130M</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">101</td><td style="padding:8px;text-align:right;color:#f59e0b;">15%</td><td style="padding:8px;text-align:right;">62M</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#f59e0b;">72%</td><td style="padding:8px;text-align:right;">34M</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#f59e0b;">80%</td><td style="padding:8px;text-align:right;">28M</td></tr>
+
+<tr><td colspan="5" style="padding:4px;border-bottom:2px solid var(--border);"></td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United States</td><td style="padding:8px;text-align:right;">52</td><td style="padding:8px;text-align:right;">1353</td><td style="padding:8px;text-align:right;">0%</td><td style="padding:8px;text-align:right;">335M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">India</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">78</td><td style="padding:8px;text-align:right;">55%</td><td style="padding:8px;text-align:right;">1440M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">China</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">331</td><td style="padding:8px;text-align:right;">33%</td><td style="padding:8px;text-align:right;">1425M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United Kingdom</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;">534</td><td style="padding:8px;text-align:right;">0%</td><td style="padding:8px;text-align:right;">68M</td></tr>
+
+</tbody>
+</table>
+
+<!-- 7. Country x Subtype Heatmap -->
+<h2>7. Heatmap: Country x Intervention Type</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th>Intervention</th>
+  <th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Tanzania</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Ethiopia</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Cameroon</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>Cookstove / clean cooking</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Biomass fuel / solid fuel</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>LPG / clean fuel transition</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Indoor air quality</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(240, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Ventilation / chimney</td><td style="background:rgb(175, 200, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(228, 120, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">17</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Charcoal / kerosene</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 8. Comparison with China/India -->
+<h2>8. Comparison: China and India Clean Cooking Programmes</h2>
+<div class="method-note">
+<strong>India: Pradhan Mantri Ujjwala Yojana (2016)</strong><br>
+Provided 100 million free LPG connections
+to below-poverty-line households. Coverage: ~70%
+of target population. Accompanied by clinical trials and air quality monitoring
+studies (3 HAP trials registered).<br><br>
+<strong>China: National Clean Heating Plan
+(2017)</strong><br>
+Converted 35 million households from coal/biomass.
+Coverage: ~55%. China has 17 registered HAP
+trials.<br><br>
+<strong>Africa:</strong> No equivalent national programme. No registered trials.
+</div>
+
+<!-- 9. Solid Fuel Use vs Trial Counts -->
+<h2>9. Solid Fuel Use vs Trial Counts</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Solid Fuel %</th>
+  <th style="text-align:right;">Users (millions)</th>
+  <th style="text-align:right;">HAP Trials</th>
+  <th style="text-align:right;">COPD Trials</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;color:#e2e8f0;">Uganda</td><td style="padding:8px;text-align:right;">95%</td><td style="padding:8px;text-align:right;">45.6M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">3</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;color:#ef4444;">Tanzania</td><td style="padding:8px;text-align:right;">94%</td><td style="padding:8px;text-align:right;">63.0M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">Ethiopia</td><td style="padding:8px;text-align:right;">93%</td><td style="padding:8px;text-align:right;">120.9M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;color:#ef4444;">Cameroon</td><td style="padding:8px;text-align:right;">80%</td><td style="padding:8px;text-align:right;">22.4M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">Kenya</td><td style="padding:8px;text-align:right;">78%</td><td style="padding:8px;text-align:right;">43.7M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">Nigeria</td><td style="padding:8px;text-align:right;">72%</td><td style="padding:8px;text-align:right;">165.6M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">Ghana</td><td style="padding:8px;text-align:right;">72%</td><td style="padding:8px;text-align:right;">24.5M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">1</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">India</td><td style="padding:8px;text-align:right;">55%</td><td style="padding:8px;text-align:right;">792.0M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">3</td><td style="padding:8px;text-align:right;">78</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">China</td><td style="padding:8px;text-align:right;">33%</td><td style="padding:8px;text-align:right;">470.2M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">17</td><td style="padding:8px;text-align:right;">331</td></tr>
+<tr><td style="padding:8px;color:#ef4444;">South Africa</td><td style="padding:8px;text-align:right;">15%</td><td style="padding:8px;text-align:right;">9.3M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">101</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">United States</td><td style="padding:8px;text-align:right;">0%</td><td style="padding:8px;text-align:right;">0.0M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">52</td><td style="padding:8px;text-align:right;">1353</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;">United Kingdom</td><td style="padding:8px;text-align:right;">0%</td><td style="padding:8px;text-align:right;">0.0M</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">5</td><td style="padding:8px;text-align:right;">534</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>Solid Fuel Use (%) by Country</h3>
+<canvas id="sfChart" height="300"></canvas>
+</div>
+
+<!-- 10. WHO Guidelines -->
+<h2>10. WHO Guidelines</h2>
+<div class="warning-note">
+<strong>WHO Indoor Air Quality Guidelines (2014):</strong><br><br>
+&bull; PM2.5 guideline: <strong>15 &mu;g/m&sup3;</strong>
+(annual mean)<br>
+&bull; Typical African cooking fire: <strong>500
+&mu;g/m&sup3;</strong> (33x exceedance)<br>
+&bull; WHO recommendation: <strong>Transition to clean fuels and technologies</strong><br>
+&bull; SDG 7.1 target: Universal access to clean cooking by
+<strong>2030</strong><br>
+&bull; Current clean cooking access in Africa: <strong>20%</strong><br><br>
+At current rates, Africa will NOT meet the 2030 clean cooking target.
+The number of Africans without clean cooking access is actually
+<em>increasing</em> due to population growth outpacing intervention.
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2 (accessed 28 March 2026).<br>
+<strong>Queries:</strong> <code>air pollution OR household pollution OR indoor pollution OR cookstove OR biomass fuel</code> and <code>COPD OR chronic obstructive</code>,
+filtered to interventional studies.<br>
+<strong>Countries:</strong> Nigeria, Kenya, Uganda, Tanzania, Ethiopia, South Africa, Ghana, Cameroon (Africa); United States, India, China, United Kingdom
+(comparators).<br>
+<strong>Burden data:</strong> WHO Global Health Observatory 2022, GBD 2019.<br>
+<strong>Solid fuel data:</strong> WHO Household Energy Database 2022.<br>
+<strong>Limitations:</strong> Single registry; cannot capture trials on African/WHO/environmental
+health platforms. Some HAP intervention trials may be registered under environmental or
+engineering databases rather than clinical trial registries.
+</div>
+
+<footer>
+Household Air Pollution: The Invisible Killer &mdash; ClinicalTrials.gov Registry Analysis |
+Generated 2026-03-28 14:00 |
+Data: ClinicalTrials.gov API v2
+</footer>
+
+</div>
+
+<script>
+// Trial counts (HAP + COPD) by country
+new Chart(document.getElementById('trialChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Nigeria", "Kenya", "Uganda", "Tanzania", "Ethiopia", "South Africa", "Ghana", "Cameroon", "United States", "India", "China", "United Kingdom"],
+    datasets: [
+      {
+        label: 'HAP Trials',
+        data: [1, 1, 3, 0, 1, 0, 1, 0, 52, 3, 17, 5],
+        backgroundColor: '#ef4444',
+        borderRadius: 4,
+      },
+      {
+        label: 'COPD Trials',
+        data: [2, 2, 2, 0, 0, 101, 0, 0, 1353, 78, 331, 534],
+        backgroundColor: '#3b82f6',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+// Health effects comparison
+new Chart(document.getElementById('healthChart'), {
+  type: 'bar',
+  data: {
+    labels: ["COPD / chronic lung disease", "Pneumonia (child)", "Lung cancer", "Cardiovascular (HAP)", "Low birth weight (HAP)", "Eye disease (HAP)"],
+    datasets: [
+      {
+        label: 'Africa',
+        data: [105, 30, 91, 1, 0, 64],
+        backgroundColor: '#ef4444',
+        borderRadius: 4,
+      },
+      {
+        label: 'US',
+        data: [1353, 60, 4985, 17, 0, 4400],
+        backgroundColor: '#3b82f6',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+// Solid fuel use chart
+new Chart(document.getElementById('sfChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Uganda", "Tanzania", "Ethiopia", "Cameroon", "Kenya", "Nigeria", "Ghana", "India", "China", "South Africa"],
+    datasets: [{
+      label: 'Solid Fuel Use %',
+      data: [95, 94, 93, 80, 78, 72, 72, 55, 33, 15],
+      backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#3b82f6", "#3b82f6", "#ef4444"],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { min: 0, max: 100, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      y: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

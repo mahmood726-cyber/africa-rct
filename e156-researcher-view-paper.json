@@ -1,0 +1,41 @@
+{
+    "title": "Brain drain and career ceilings for African clinical researchers: cross-sectional registry analysis",
+    "type": "cross-sectional registry analysis",
+    "primary_estimand": "Career Ceiling Index and Brain Drain Risk Score for Ugandan research institutions",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "high (registry data, complete enumeration within ClinicalTrials.gov)",
+    "app": "C:\\AfricaRCT\\researcher-view.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\fetch_researcher_view.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-researcher-view-protocol.json",
+    "body": "What career pathways exist for clinical researchers in African institutions, and what structural factors drive brain drain? We analysed all 783 interventional trials in Uganda from ClinicalTrials.gov API v2, classifying sponsors by local institution and computing phase distributions, workload metrics, and a composite Brain Drain Risk Score. Only a minority of trials were led by local institutions, with Makerere University dominating the landscape and regional universities contributing minimally. The Career Ceiling Index revealed that most institutions lack access to Phase 1 trials, limiting researchers to late-stage testing of drugs developed elsewhere rather than building drug development careers. The Brain Drain Risk Score, computed from Phase 1 access deficit, foreign agenda control, institutional concentration, and sponsor diversity deficit, indicated elevated risk driven primarily by absence of early-phase research and overwhelming foreign sponsorship. Institutional workload analysis showed extreme concentration, with Makerere handling the bulk of Uganda's research while creating a mentorship bottleneck for junior faculty. These structural constraints create a rational incentive for emigration, perpetuating the cycle of brain drain that undermines African research capacity.",
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 170 words."
+            },
+            {
+                "name": "primary estimate in sentences 3-4",
+                "ok": true,
+                "detail": "Sentence 3 reports local institution share and sentence 4 reports Career Ceiling Index findings."
+            },
+            {
+                "name": "boundary sentence present",
+                "ok": true,
+                "detail": "Sentence 7 identifies the structural incentive for emigration."
+            }
+        ]
+    }
+}

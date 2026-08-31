@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Phase Transition -- When Does Research Become Self-Sustaining?</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --red: #ef4444;
+    --purple: #a78bfa;
+    --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--teal), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin: 20px 0 10px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card .number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .stat-card .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  .insight {
+    background: rgba(45,212,191,0.08);
+    border-left: 4px solid var(--teal);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .insight strong { color: var(--teal); }
+  .warning {
+    background: rgba(239,68,68,0.08);
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .warning strong { color: var(--red); }
+  .policy {
+    background: rgba(34,197,94,0.08);
+    border-left: 4px solid var(--green);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .policy strong { color: var(--green); }
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: start;
+    margin: 24px 0;
+  }
+  .versus-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .versus-divider {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--muted);
+    padding-top: 40px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    text-align: left;
+    padding: 12px 8px;
+    border-bottom: 2px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  td {
+    padding: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:hover { background: rgba(255,255,255,0.02); }
+  .phase-diagram {
+    display: flex;
+    gap: 4px;
+    margin: 20px 0;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: width 0.3s;
+  }
+  .method {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    line-height: 1.7;
+  }
+  .formula {
+    background: rgba(96,165,250,0.1);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: var(--accent);
+    line-height: 1.8;
+  }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 48px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 768px) {
+    .versus { grid-template-columns: 1fr; }
+    .versus-divider { justify-content: center; padding: 8px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Phase Transition</h1>
+<p class="subtitle">
+  When Does Research Become Self-Sustaining? Identifying the Critical Threshold
+  in African Research Ecosystems
+  -- Data from ClinicalTrials.gov API v2, 2026-03-28
+</p>
+
+<!-- ============================================================ -->
+<!-- SUMMARY CARDS -->
+<!-- ============================================================ -->
+<div class="summary-grid">
+  <div class="stat-card">
+    <div class="number" style="color:var(--teal);">1.45</div>
+    <div class="label">Critical Density<br>(trials/million threshold)</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--green);">14</div>
+    <div class="label">Self-Sustaining<br>Countries</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--yellow);">4</div>
+    <div class="label">Transitional<br>Countries</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--red);">2</div>
+    <div class="label">Dependent +<br>Pre-Critical</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--accent);">3.73</div>
+    <div class="label">Carrying Capacity<br>(minimum self-sustaining density)</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHYSICS EXPLANATION -->
+<!-- ============================================================ -->
+<h2>Phase Transitions in Research Ecosystems</h2>
+<div class="card">
+  <p style="font-size:1.05rem;line-height:1.7;margin-bottom:16px;">
+    In statistical physics, a <strong>phase transition</strong> occurs when a system crosses
+    a critical threshold and its behavior changes qualitatively -- water freezes at 0 degrees C,
+    iron becomes magnetic below the Curie temperature. The transition is not gradual:
+    it is a sudden shift in the system's organizing principle.
+  </p>
+  <p style="line-height:1.7;margin-bottom:16px;">
+    We hypothesize that research ecosystems undergo an analogous phase transition.
+    Below a critical per-capita trial density, countries are in a <strong>dependent state</strong>:
+    trials are foreign-led, limited to HIV/malaria, and no local research culture exists.
+    Above the threshold, countries enter a <strong>self-sustaining state</strong>: local
+    sponsors emerge, the condition portfolio diversifies, Phase 1 trials appear, and
+    the system generates its own momentum.
+  </p>
+  <div class="insight">
+    <strong>The critical threshold:</strong> Our data suggest the phase transition occurs
+    at approximately <strong>1.45 trials per million population</strong>.
+    Countries above this density show qualitatively different research ecosystem properties:
+    higher local sponsorship, greater condition diversity, and Phase 1 trial capacity.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PHASE DIAGRAM -->
+<!-- ============================================================ -->
+<h2>Phase State Distribution</h2>
+<div class="card">
+  <p style="margin-bottom:16px;line-height:1.7;">
+    Each country is classified into one of four phase states based on trial density
+    and a composite sovereignty score (weighted: 40% local sponsorship, 30% condition
+    diversity, 20% Phase 1 presence, 10% density normalization).
+  </p>
+
+  <div class="phase-diagram">
+    <div class="phase-bar" style="background:var(--green);width:70%;">
+      Self-sustaining</div>
+    <div class="phase-bar" style="background:var(--yellow);width:20%;">
+      Transitional</div>
+    <div class="phase-bar" style="background:var(--orange);width:10%;">
+      Dependent</div>
+    <div class="phase-bar" style="background:var(--red);width:0%;">
+      Pre-critical</div>
+  </div>
+
+  <table style="margin-top:16px;">
+    <thead>
+      <tr>
+        <th>Phase State</th>
+        <th style="text-align:right;">Countries</th>
+        <th style="text-align:right;">Population</th>
+        <th style="text-align:right;">Pop Share</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:3px 12px;
+      border-radius:12px;font-size:0.8rem;font-weight:bold;">Self-sustaining</span></td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">14</td>
+  <td style="padding:10px;text-align:right;">556M</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">50.9%</td>
+</tr>
+<tr style="background:rgba(234,179,8,0.10);">
+  <td style="padding:10px;">
+    <span style="display:inline-block;background:#eab308;color:#000;padding:3px 12px;
+      border-radius:12px;font-size:0.8rem;font-weight:bold;">Transitional</span></td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">4</td>
+  <td style="padding:10px;text-align:right;">489M</td>
+  <td style="padding:10px;text-align:right;color:#eab308;font-weight:bold;">44.7%</td>
+</tr>
+<tr style="background:rgba(249,115,22,0.10);">
+  <td style="padding:10px;">
+    <span style="display:inline-block;background:#f97316;color:#000;padding:3px 12px;
+      border-radius:12px;font-size:0.8rem;font-weight:bold;">Dependent</span></td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">2</td>
+  <td style="padding:10px;text-align:right;">48M</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">4.4%</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;">
+    <span style="display:inline-block;background:#ef4444;color:#000;padding:3px 12px;
+      border-radius:12px;font-size:0.8rem;font-weight:bold;">Pre-critical</span></td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">0</td>
+  <td style="padding:10px;text-align:right;">0M</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.0%</td>
+</tr>
+
+    </tbody>
+  </table>
+
+  <div class="formula" style="margin-top:20px;">
+    Sovereignty Score = 0.40 x LocalSponsor% + 0.30 x Evenness x 100 + 0.20 x Phase1(0/100) + 0.10 x min(Density/10, 1) x 100<br>
+    Self-sustaining: density >= 3/M AND sovereignty >= 40<br>
+    Transitional: density >= 1/M AND sovereignty >= 20<br>
+    Dependent: density >= 0.5/M<br>
+    Pre-critical: density &lt; 0.5/M
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FULL COUNTRY TABLE -->
+<!-- ============================================================ -->
+<h2>Multi-Dimensional Phase Analysis: 20 Countries</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th><th>Country</th><th style="text-align:right;">Trials</th>
+        <th style="text-align:right;">Per M</th>
+        <th style="text-align:right;">Local %</th>
+        <th style="text-align:right;">Evenness</th>
+        <th style="text-align:center;">Phase 1</th>
+        <th style="text-align:right;">Sovereignty</th>
+        <th>Phase State</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">1</td>
+  <td style="padding:8px;font-weight:bold;">Egypt</td>
+  <td style="padding:8px;text-align:right;">12,395</td>
+  <td style="padding:8px;text-align:right;">112.68</td>
+  <td style="padding:8px;text-align:right;">4.3%</td>
+  <td style="padding:8px;text-align:right;">0.759</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">54.5</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">2</td>
+  <td style="padding:8px;font-weight:bold;">South Africa</td>
+  <td style="padding:8px;text-align:right;">3,473</td>
+  <td style="padding:8px;text-align:right;">56.02</td>
+  <td style="padding:8px;text-align:right;">5.0%</td>
+  <td style="padding:8px;text-align:right;">0.873</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">58.2</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">3</td>
+  <td style="padding:8px;font-weight:bold;">Uganda</td>
+  <td style="padding:8px;text-align:right;">783</td>
+  <td style="padding:8px;text-align:right;">16.31</td>
+  <td style="padding:8px;text-align:right;">21.1%</td>
+  <td style="padding:8px;text-align:right;">0.821</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">63.1</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">4</td>
+  <td style="padding:8px;font-weight:bold;">Malawi</td>
+  <td style="padding:8px;text-align:right;">288</td>
+  <td style="padding:8px;text-align:right;">13.71</td>
+  <td style="padding:8px;text-align:right;">21.5%</td>
+  <td style="padding:8px;text-align:right;">0.811</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">62.9</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">5</td>
+  <td style="padding:8px;font-weight:bold;">Kenya</td>
+  <td style="padding:8px;text-align:right;">720</td>
+  <td style="padding:8px;text-align:right;">12.86</td>
+  <td style="padding:8px;text-align:right;">27.1%</td>
+  <td style="padding:8px;text-align:right;">0.804</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">65.0</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">6</td>
+  <td style="padding:8px;font-weight:bold;">Zambia</td>
+  <td style="padding:8px;text-align:right;">245</td>
+  <td style="padding:8px;text-align:right;">11.67</td>
+  <td style="padding:8px;text-align:right;">40.8%</td>
+  <td style="padding:8px;text-align:right;">0.816</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">70.8</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">7</td>
+  <td style="padding:8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:8px;text-align:right;">121</td>
+  <td style="padding:8px;text-align:right;">8.64</td>
+  <td style="padding:8px;text-align:right;">44.6%</td>
+  <td style="padding:8px;text-align:right;">0.871</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">72.6</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">8</td>
+  <td style="padding:8px;font-weight:bold;">Burkina Faso</td>
+  <td style="padding:8px;text-align:right;">196</td>
+  <td style="padding:8px;text-align:right;">8.52</td>
+  <td style="padding:8px;text-align:right;">33.2%</td>
+  <td style="padding:8px;text-align:right;">0.668</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">61.8</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">9</td>
+  <td style="padding:8px;font-weight:bold;">Ghana</td>
+  <td style="padding:8px;text-align:right;">230</td>
+  <td style="padding:8px;text-align:right;">6.76</td>
+  <td style="padding:8px;text-align:right;">40.0%</td>
+  <td style="padding:8px;text-align:right;">0.852</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">68.3</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">10</td>
+  <td style="padding:8px;font-weight:bold;">Tanzania</td>
+  <td style="padding:8px;text-align:right;">431</td>
+  <td style="padding:8px;text-align:right;">6.43</td>
+  <td style="padding:8px;text-align:right;">24.1%</td>
+  <td style="padding:8px;text-align:right;">0.833</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">61.1</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">11</td>
+  <td style="padding:8px;font-weight:bold;">Mali</td>
+  <td style="padding:8px;text-align:right;">144</td>
+  <td style="padding:8px;text-align:right;">6.26</td>
+  <td style="padding:8px;text-align:right;">34.0%</td>
+  <td style="padding:8px;text-align:right;">0.579</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">57.2</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">12</td>
+  <td style="padding:8px;font-weight:bold;">Senegal</td>
+  <td style="padding:8px;text-align:right;">97</td>
+  <td style="padding:8px;text-align:right;">5.71</td>
+  <td style="padding:8px;text-align:right;">29.9%</td>
+  <td style="padding:8px;text-align:right;">0.868</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">63.7</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">13</td>
+  <td style="padding:8px;font-weight:bold;">Cameroon</td>
+  <td style="padding:8px;text-align:right;">111</td>
+  <td style="padding:8px;text-align:right;">4.11</td>
+  <td style="padding:8px;text-align:right;">15.3%</td>
+  <td style="padding:8px;text-align:right;">0.922</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">57.9</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#22c55e;">14</td>
+  <td style="padding:8px;font-weight:bold;">Mozambique</td>
+  <td style="padding:8px;text-align:right;">123</td>
+  <td style="padding:8px;text-align:right;">3.73</td>
+  <td style="padding:8px;text-align:right;">19.5%</td>
+  <td style="padding:8px;text-align:right;">0.806</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">55.7</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#22c55e;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Self-sustaining</span></td>
+</tr>
+<tr style="background:rgba(234,179,8,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#eab308;">15</td>
+  <td style="padding:8px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:8px;text-align:right;">240</td>
+  <td style="padding:8px;text-align:right;">1.85</td>
+  <td style="padding:8px;text-align:right;">17.5%</td>
+  <td style="padding:8px;text-align:right;">0.893</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">55.6</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#eab308;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Transitional</span></td>
+</tr>
+<tr style="background:rgba(234,179,8,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#eab308;">16</td>
+  <td style="padding:8px;font-weight:bold;">Nigeria</td>
+  <td style="padding:8px;text-align:right;">354</td>
+  <td style="padding:8px;text-align:right;">1.54</td>
+  <td style="padding:8px;text-align:right;">14.1%</td>
+  <td style="padding:8px;text-align:right;">0.895</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">54.0</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#eab308;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Transitional</span></td>
+</tr>
+<tr style="background:rgba(234,179,8,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#eab308;">17</td>
+  <td style="padding:8px;font-weight:bold;">Niger</td>
+  <td style="padding:8px;text-align:right;">37</td>
+  <td style="padding:8px;text-align:right;">1.37</td>
+  <td style="padding:8px;text-align:right;">29.7%</td>
+  <td style="padding:8px;text-align:right;">0.781</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;">No</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">36.7</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#eab308;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Transitional</span></td>
+</tr>
+<tr style="background:rgba(234,179,8,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#eab308;">18</td>
+  <td style="padding:8px;font-weight:bold;">DRC</td>
+  <td style="padding:8px;text-align:right;">105</td>
+  <td style="padding:8px;text-align:right;">1.03</td>
+  <td style="padding:8px;text-align:right;">10.5%</td>
+  <td style="padding:8px;text-align:right;">0.786</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">48.8</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#eab308;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Transitional</span></td>
+</tr>
+<tr style="background:rgba(249,115,22,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#f97316;">19</td>
+  <td style="padding:8px;font-weight:bold;">Madagascar</td>
+  <td style="padding:8px;text-align:right;">24</td>
+  <td style="padding:8px;text-align:right;">0.8</td>
+  <td style="padding:8px;text-align:right;">45.8%</td>
+  <td style="padding:8px;text-align:right;">0.797</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;">Yes</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">63.0</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#f97316;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Dependent</span></td>
+</tr>
+<tr style="background:rgba(249,115,22,0.10);">
+  <td style="padding:8px;text-align:center;font-weight:bold;color:#f97316;">20</td>
+  <td style="padding:8px;font-weight:bold;">Chad</td>
+  <td style="padding:8px;text-align:right;">14</td>
+  <td style="padding:8px;text-align:right;">0.78</td>
+  <td style="padding:8px;text-align:right;">14.3%</td>
+  <td style="padding:8px;text-align:right;">0.572</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;">No</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">23.7</td>
+  <td style="padding:8px;">
+    <span style="display:inline-block;background:#f97316;color:#000;padding:2px 10px;
+      border-radius:12px;font-size:0.75rem;font-weight:bold;">
+      Dependent</span></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- CASE STUDY: RWANDA vs CHAD -->
+<!-- ============================================================ -->
+<h2>Case Study: Rwanda (Supercritical) vs Chad (Subcritical)</h2>
+<div class="card">
+  <p style="line-height:1.7;margin-bottom:20px;">
+    Rwanda and Chad illustrate the two sides of the phase transition. Despite similar
+    population sizes and low-income classification, Rwanda has crossed the critical
+    threshold while Chad remains trapped in the pre-critical/dependent phase.
+  </p>
+
+  <div class="versus">
+    <div class="versus-panel" style="border-color:var(--green);">
+      <h3 style="color:var(--green);margin-bottom:12px;">Rwanda (Supercritical)</h3>
+      <table style="font-size:0.85rem;">
+        <tr><td style="color:var(--muted);">Trial density</td>
+            <td style="text-align:right;font-weight:bold;color:var(--green);">8.64/M</td></tr>
+        <tr><td style="color:var(--muted);">Local sponsorship</td>
+            <td style="text-align:right;">44.6%</td></tr>
+        <tr><td style="color:var(--muted);">Condition evenness</td>
+            <td style="text-align:right;">0.871</td></tr>
+        <tr><td style="color:var(--muted);">Phase 1 trials</td>
+            <td style="text-align:right;color:var(--green);">Yes</td></tr>
+        <tr><td style="color:var(--muted);">Sovereignty score</td>
+            <td style="text-align:right;font-weight:bold;color:var(--green);">72.6</td></tr>
+      </table>
+      <p style="margin-top:12px;font-size:0.85rem;line-height:1.6;color:var(--muted);">
+        Rwanda's success stems from deliberate government investment in research
+        infrastructure, the Einstein-Rwanda partnership (PMID 39972388), and a
+        strategic decision to diversify beyond infectious diseases.
+      </p>
+      <h3 style="margin-top:16px;">Condition Portfolio</h3>
+      <table style="font-size:0.85rem;">
+  <thead><tr>
+    <th style="text-align:left;padding:6px 8px;">Category</th>
+    <th style="text-align:right;padding:6px 8px;">Trials</th>
+    <th style="text-align:right;padding:6px 8px;">Share</th>
+    <th style="padding:6px 8px;">Distribution</th>
+  </tr></thead>
+  <tbody><tr>
+  <td style="padding:6px 8px;">HIV/AIDS</td>
+  <td style="padding:6px 8px;text-align:right;">31</td>
+  <td style="padding:6px 8px;text-align:right;">25.6%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#60a5fa;height:100%;width:51.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Surgical</td>
+  <td style="padding:6px 8px;text-align:right;">19</td>
+  <td style="padding:6px 8px;text-align:right;">15.7%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#60a5fa;height:100%;width:31.4%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Malaria</td>
+  <td style="padding:6px 8px;text-align:right;">15</td>
+  <td style="padding:6px 8px;text-align:right;">12.4%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#60a5fa;height:100%;width:24.8%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Maternal/Neonatal</td>
+  <td style="padding:6px 8px;text-align:right;">15</td>
+  <td style="padding:6px 8px;text-align:right;">12.4%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#60a5fa;height:100%;width:24.8%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Mental Health</td>
+  <td style="padding:6px 8px;text-align:right;">11</td>
+  <td style="padding:6px 8px;text-align:right;">9.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:18.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Respiratory</td>
+  <td style="padding:6px 8px;text-align:right;">8</td>
+  <td style="padding:6px 8px;text-align:right;">6.6%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:13.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Cancer</td>
+  <td style="padding:6px 8px;text-align:right;">5</td>
+  <td style="padding:6px 8px;text-align:right;">4.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:8.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Nutrition</td>
+  <td style="padding:6px 8px;text-align:right;">5</td>
+  <td style="padding:6px 8px;text-align:right;">4.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:8.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Infectious Other</td>
+  <td style="padding:6px 8px;text-align:right;">4</td>
+  <td style="padding:6px 8px;text-align:right;">3.3%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:6.6%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Cardiovascular</td>
+  <td style="padding:6px 8px;text-align:right;">3</td>
+  <td style="padding:6px 8px;text-align:right;">2.5%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:5.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Diabetes</td>
+  <td style="padding:6px 8px;text-align:right;">3</td>
+  <td style="padding:6px 8px;text-align:right;">2.5%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:5.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Tuberculosis</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">0.8%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:1.6%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+</tbody>
+</table>
+    </div>
+
+    <div class="versus-divider">vs</div>
+
+    <div class="versus-panel" style="border-color:var(--red);">
+      <h3 style="color:var(--red);margin-bottom:12px;">Chad (Subcritical)</h3>
+      <table style="font-size:0.85rem;">
+        <tr><td style="color:var(--muted);">Trial density</td>
+            <td style="text-align:right;font-weight:bold;color:var(--red);">0.78/M</td></tr>
+        <tr><td style="color:var(--muted);">Local sponsorship</td>
+            <td style="text-align:right;">14.3%</td></tr>
+        <tr><td style="color:var(--muted);">Condition evenness</td>
+            <td style="text-align:right;">0.572</td></tr>
+        <tr><td style="color:var(--muted);">Phase 1 trials</td>
+            <td style="text-align:right;color:var(--red);">No</td></tr>
+        <tr><td style="color:var(--muted);">Sovereignty score</td>
+            <td style="text-align:right;font-weight:bold;color:var(--red);">23.7</td></tr>
+      </table>
+      <p style="margin-top:12px;font-size:0.85rem;line-height:1.6;color:var(--muted);">
+        Chad's research ecosystem is trapped in a subcritical state: minimal local
+        capacity, foreign-led trials concentrated on a narrow disease portfolio,
+        no Phase 1 capability, and insufficient density to generate self-sustaining
+        momentum.
+      </p>
+      <h3 style="margin-top:16px;">Condition Portfolio</h3>
+      <table style="font-size:0.85rem;">
+  <thead><tr>
+    <th style="text-align:left;padding:6px 8px;">Category</th>
+    <th style="text-align:right;padding:6px 8px;">Trials</th>
+    <th style="text-align:right;padding:6px 8px;">Share</th>
+    <th style="padding:6px 8px;">Distribution</th>
+  </tr></thead>
+  <tbody><tr>
+  <td style="padding:6px 8px;">Nutrition</td>
+  <td style="padding:6px 8px;text-align:right;">6</td>
+  <td style="padding:6px 8px;text-align:right;">42.9%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#60a5fa;height:100%;width:85.8%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Malaria</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">7.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:14.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Tuberculosis</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">7.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:14.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Respiratory</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">7.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:14.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Maternal/Neonatal</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">7.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:14.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Infectious Other</td>
+  <td style="padding:6px 8px;text-align:right;">1</td>
+  <td style="padding:6px 8px;text-align:right;">7.1%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#94a3b8;height:100%;width:14.2%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">HIV/AIDS</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Cancer</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Cardiovascular</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Diabetes</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Mental Health</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;">Surgical</td>
+  <td style="padding:6px 8px;text-align:right;">0</td>
+  <td style="padding:6px 8px;text-align:right;">0.0%</td>
+  <td style="padding:6px 8px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:12px;width:100px;">
+      <div style="background:#475569;height:100%;width:0.0%;border-radius:3px;"></div>
+    </div></td>
+</tr>
+</tbody>
+</table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARRYING CAPACITY -->
+<!-- ============================================================ -->
+<h2>Ecological Carrying Capacity</h2>
+<div class="card">
+  <p style="line-height:1.7;margin-bottom:16px;">
+    In ecology, <strong>carrying capacity</strong> is the maximum population size that
+    an environment can sustain indefinitely. For research ecosystems, we define the
+    <strong>minimum carrying capacity</strong> as the threshold below which a country's
+    research output cannot sustain itself without continuous external support.
+  </p>
+  <div class="insight">
+    <strong>Carrying capacity profile</strong> (average of self-sustaining countries):<br>
+    Minimum density: <strong>3.73/M</strong> |
+    Average density: <strong>19.53/M</strong> |
+    Average sovereignty: <strong>62.3</strong> |
+    Average evenness: <strong>0.806</strong> |
+    Average local sponsorship: <strong>25.7%</strong>
+  </div>
+  <p style="line-height:1.7;margin-top:16px;">
+    Countries below carrying capacity are in an <strong>ecological sink</strong>: they
+    depend on external "immigration" (foreign-led trials) to maintain any research
+    activity. Remove the external input, and the ecosystem collapses. Countries above
+    carrying capacity are <strong>ecological sources</strong>: they generate their own
+    research activity and can even export capacity to neighbors.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- POLICY -->
+<!-- ============================================================ -->
+<h2>Policy: How to Push Countries Past the Threshold</h2>
+<div class="card">
+  <div class="policy">
+    <strong>The physics insight:</strong> Phase transitions are threshold phenomena.
+    Incremental investment below the threshold has no lasting effect -- the system
+    snaps back to its dependent state. Investment must be concentrated enough to
+    push the system past the critical point, after which self-sustaining dynamics
+    take over. This argues against "peanut butter" spreading of research funding
+    across 54 countries and for <strong>focused, sequential capacity-building</strong>
+    targeting countries nearest the threshold.
+  </div>
+  <p style="line-height:1.7;margin-top:16px;">
+    <strong>Four strategies from the phase transition model:</strong>
+  </p>
+  <ol style="margin:12px 0 0 24px;line-height:2;">
+    <li><strong>Identify near-threshold countries:</strong> Focus on transitional
+    countries that are closest to self-sustaining status. These require the smallest
+    "push" to cross the critical point.</li>
+    <li><strong>Build local sponsorship capacity:</strong> Foreign-led trials do not
+    build self-sustaining ecosystems. Fund local ethics review, regulatory capacity,
+    and grant-writing infrastructure to increase local sponsorship from below 10%
+    to above 20%.</li>
+    <li><strong>Diversify the condition portfolio:</strong> Countries trapped in
+    HIV/malaria monocultures lack the breadth to sustain independent research.
+    Seed NCD trials (cardiovascular, diabetes, cancer) to increase Shannon diversity.</li>
+    <li><strong>Enable Phase 1 capability:</strong> Phase 1 trials are the signature
+    of mature research ecosystems. Establishing even one Phase 1 unit (GMP pharmacy,
+    trained pharmacologists) signals the transition to self-sustaining status.</li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- METHOD -->
+<!-- ============================================================ -->
+<div class="method">
+  <strong>Method:</strong> ClinicalTrials.gov API v2 queried for 20 African countries across
+  four dimensions: (1) total interventional trials, (2) condition-specific counts across 12
+  disease categories, (3) local sponsor proxy (sponsor name matching country name),
+  (4) Phase 1 trial count. Shannon entropy computed across condition categories; Pielou's
+  evenness (J = H/H_max) used for diversity. Composite sovereignty score: 40% local
+  sponsorship + 30% condition evenness + 20% Phase 1 presence + 10% density normalization.
+  Phase state classification based on density and sovereignty thresholds. Carrying capacity
+  estimated from average metrics of self-sustaining countries. Population denominators
+  from UN 2025 estimates. All data cached locally with 24-hour TTL.
+</div>
+
+<div class="footer">
+  Project 40 of the Africa RCT Audit Series |
+  Data: ClinicalTrials.gov | Analysis: Python |
+  Theoretical framework: Phase transitions (Landau 1937), Carrying capacity (Verhulst 1838),
+  Research ecosystem dynamics (Sarewitz & Pielke 2007)
+</div>
+
+</div>
+</body>
+</html>

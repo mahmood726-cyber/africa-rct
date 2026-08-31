@@ -1,0 +1,43 @@
+{
+    "title":  "Per-capita clinical trial density across 30 African nations: registry comparison",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Interventional trials per million population for each African country",
+    "study_count":  null,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-27",
+    "certainty":  "high (registry data, complete enumeration of ClinicalTrials.gov)",
+    "app":  "C:\\AfricaRCT\\percapita-league.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_percapita_league.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-percapita-league-protocol.json",
+    "body":  "How does interventional clinical trial density vary across Africa when normalised by population? We queried ClinicalTrials.gov API v2 for all interventional trials across 30 African countries and 5 global comparators, computing trials per million population for each country. Countries were classified as research hub, moderate, desert, or void using density thresholds and ranked into a league table. The density spectrum spanned two orders of magnitude between the highest and lowest African nations, with the continental average falling far below UK and US benchmarks. Most of Africa's population resides in void or desert countries, revealing that trial access is concentrated in a few hub nations while most of the continent remains underserved. Spearman correlation between GDP per capita and trial density was positive but moderate, indicating that economic capacity partly determines research infrastructure but does not fully explain the variation. These findings quantify a pan-African trial density gradient with implications for equitable site selection and funder allocation.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count",
+                                          "ok":  true,
+                                          "detail":  "Found 136 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports the density spread and benchmark gap."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 states the main limitation."
+                                      }
+                                  ]
+                   }
+}
+

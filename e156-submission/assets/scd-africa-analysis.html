@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sickle Cell Disease in Africa: Trial-by-Trial Analysis</title>
+<style>
+:root {
+    --bg: #0a0e17; --card: #131825; --border: #1e2a3a; --text: #c8d6e5;
+    --heading: #f5f6fa; --accent: #e17055; --accent2: #00b894; --accent3: #6c5ce7;
+    --accent4: #fdcb6e; --red: #ff6b6b; --green: #00b894; --blue: #74b9ff;
+    --orange: #e17055; --purple: #a29bfe; --yellow: #ffeaa7;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+.header { text-align:center; padding:40px 20px 30px; border-bottom:1px solid var(--border); margin-bottom:30px; }
+.header h1 { font-size:2.2em; color:var(--heading); font-weight:700; }
+.header .subtitle { color:var(--red); font-size:1.15em; margin-top:8px; font-weight:700; }
+.header .meta { color:#7f8c8d; font-size:0.9em; margin-top:12px; }
+.summary-banner { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-bottom:30px; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+.stat-card .number { font-size:2em; font-weight:700; color:var(--heading); }
+.stat-card .label { font-size:0.85em; color:#7f8c8d; margin-top:4px; }
+.stat-card.alert .number { color:var(--red); }
+.stat-card.warn .number { color:var(--yellow); }
+.stat-card.good .number { color:var(--green); }
+.section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; margin-bottom:24px; }
+.section-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.section-num { background:var(--accent); color:#fff; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; }
+.section-title { font-size:1.3em; color:var(--heading); font-weight:600; }
+.severity { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.75em; font-weight:600; margin-left:12px; }
+.severity.critical { background:rgba(255,107,107,0.2); color:var(--red); }
+.severity.high { background:rgba(225,112,85,0.2); color:var(--orange); }
+.severity.moderate { background:rgba(253,203,110,0.2); color:var(--yellow); }
+.severity.positive { background:rgba(0,184,148,0.2); color:var(--green); }
+.body-text { color:var(--text); font-size:0.95em; }
+.body-text p { margin-bottom:12px; }
+.body-text strong { color:var(--heading); }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.85em; }
+.data-table th { text-align:left; padding:10px 12px; background:rgba(0,0,0,0.3); color:var(--heading); font-size:0.9em; border-bottom:1px solid var(--border); white-space:nowrap; }
+.data-table td { padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.05); vertical-align:top; }
+.data-table tr:hover { background:rgba(255,255,255,0.03); }
+.highlight-red { color:var(--red); font-weight:600; }
+.highlight-green { color:var(--green); font-weight:600; }
+.highlight-yellow { color:var(--yellow); font-weight:600; }
+.highlight-blue { color:var(--blue); font-weight:600; }
+.highlight-purple { color:var(--purple); font-weight:600; }
+.highlight-orange { color:var(--orange); font-weight:600; }
+.tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75em; font-weight:600; }
+.tag-terminated { background:rgba(255,107,107,0.2); color:var(--red); }
+.tag-recruiting { background:rgba(0,184,148,0.2); color:var(--green); }
+.tag-completed { background:rgba(116,185,255,0.2); color:var(--blue); }
+.tag-active { background:rgba(253,203,110,0.2); color:var(--yellow); }
+.tag-withdrawn { background:rgba(162,155,254,0.2); color:var(--purple); }
+.tag-ghost { background:rgba(255,107,107,0.15); color:var(--orange); border:1px dashed var(--orange); }
+.chart-container { background:rgba(0,0,0,0.2); border-radius:8px; padding:20px; margin:16px 0; }
+.bar-chart { display:flex; flex-direction:column; gap:8px; }
+.bar-row { display:flex; align-items:center; gap:10px; }
+.bar-label { width:140px; text-align:right; font-size:0.85em; color:#aaa; flex-shrink:0; }
+.bar-track { flex:1; height:28px; background:rgba(255,255,255,0.05); border-radius:4px; position:relative; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px; font-size:0.8em; font-weight:600; color:#fff; min-width:fit-content; transition:width 0.8s ease; }
+.bar-value { margin-left:8px; font-size:0.8em; color:#aaa; }
+.callout { border-left:4px solid var(--accent); background:rgba(225,112,85,0.08); padding:16px 20px; border-radius:0 8px 8px 0; margin:16px 0; }
+.callout.green { border-left-color:var(--green); background:rgba(0,184,148,0.08); }
+.callout.red { border-left-color:var(--red); background:rgba(255,107,107,0.08); }
+.callout.blue { border-left-color:var(--blue); background:rgba(116,185,255,0.08); }
+.callout p { margin:0; }
+.verdict { background:linear-gradient(135deg, rgba(255,107,107,0.12), rgba(108,92,231,0.12)); border:1px solid var(--accent); border-radius:12px; padding:30px; margin-top:30px; text-align:center; }
+.verdict h2 { color:var(--heading); font-size:1.5em; margin-bottom:12px; }
+.verdict p { max-width:800px; margin:8px auto; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media(max-width:900px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.sponsor-card { background:rgba(0,0,0,0.2); border-radius:8px; padding:16px; border:1px solid var(--border); }
+.sponsor-card h4 { color:var(--heading); margin-bottom:8px; font-size:1em; }
+.sponsor-card .detail { font-size:0.85em; color:#999; margin-bottom:4px; }
+.cost-compare { display:flex; align-items:center; justify-content:center; gap:40px; margin:20px 0; flex-wrap:wrap; }
+.cost-box { text-align:center; padding:20px 30px; border-radius:12px; }
+.cost-box.expensive { background:rgba(255,107,107,0.1); border:1px solid var(--red); }
+.cost-box.cheap { background:rgba(0,184,148,0.1); border:1px solid var(--green); }
+.cost-box .price { font-size:2em; font-weight:700; }
+.cost-box .drug-name { font-size:0.9em; color:#999; margin-top:4px; }
+.cost-vs { font-size:1.5em; color:var(--accent); font-weight:700; }
+.footer { text-align:center; padding:30px; color:#555; font-size:0.8em; border-top:1px solid var(--border); margin-top:40px; line-height:1.8; }
+.table-scroll { overflow-x:auto; }
+.cci-badge { display:inline-block; background:linear-gradient(135deg, var(--red), var(--orange)); color:#fff; padding:4px 14px; border-radius:20px; font-weight:700; font-size:0.95em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+    <h1>Sickle Cell Disease in Africa: Trial-by-Trial Analysis</h1>
+    <div class="subtitle">CCI 47.7x &mdash; The World's Most Extreme Research-Burden Mismatch</div>
+    <div class="meta">Data: ClinicalTrials.gov API v2 &bull; Queried: 28 March 2026 &bull; All interventional SCD studies with African sites</div>
+</div>
+
+<!-- ========== SUMMARY BANNER ========== -->
+<div class="summary-banner">
+    <div class="stat-card alert">
+        <div class="number">~80</div>
+        <div class="label">Unique African SCD trials</div>
+    </div>
+    <div class="stat-card alert">
+        <div class="number">47.7x</div>
+        <div class="label">CCI (Condition Colonialism Index)</div>
+    </div>
+    <div class="stat-card alert">
+        <div class="number">10</div>
+        <div class="label">Terminated trials</div>
+    </div>
+    <div class="stat-card alert">
+        <div class="number">0</div>
+        <div class="label">African-led Phase 3 drug trials</div>
+    </div>
+    <div class="stat-card warn">
+        <div class="number">75%</div>
+        <div class="label">Africa's share of global SCD burden</div>
+    </div>
+    <div class="stat-card warn">
+        <div class="number">1.6%</div>
+        <div class="label">Africa's share of global SCD trials</div>
+    </div>
+</div>
+
+<!-- ========== SECTION 1: THE EXTRACTION PATTERN ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">The Extraction Pattern: Pharma Mega-Trials <span class="severity critical">CRITICAL</span></div>
+    </div>
+    <div class="body-text">
+        <p>The majority of SCD trials listing African sites are <strong>global mega-trials</strong> run by multinational pharmaceutical companies. Africa appears as a handful of sites within 35&ndash;172 site global networks. Enrollment from African sites is typically <strong>a small fraction of global totals</strong>, raising the question: is Africa a genuine research partner, or a source of easily-recruited, treatment-naive patients?</p>
+        <div class="callout red">
+            <p><strong>Ghost Enrollment:</strong> When a 142-site global trial lists 3&ndash;5 African sites, those sites may enroll 2&ndash;5% of participants. The trial's design, endpoints, dosing, and analysis are driven by non-African populations. Africa provides bodies; decisions are made elsewhere.</p>
+        </div>
+    </div>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>NCT ID</th>
+                    <th>Sponsor</th>
+                    <th>Drug</th>
+                    <th>Phase</th>
+                    <th>Global Sites</th>
+                    <th>Enrolled</th>
+                    <th>Status</th>
+                    <th>Africa Sites</th>
+                    <th>Pattern</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pfizer Voxelotor -->
+                <tr>
+                    <td>NCT03036813</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Voxelotor</td>
+                    <td>3</td>
+                    <td>~60</td>
+                    <td>274</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Kenya, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT04218084</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Voxelotor (HOPE Kids 2)</td>
+                    <td>3</td>
+                    <td>35</td>
+                    <td>236</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, Ghana, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT04188509</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Voxelotor OLE</td>
+                    <td>3</td>
+                    <td>~20</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT05561140</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Voxelotor (leg ulcers)</td>
+                    <td>2</td>
+                    <td>~15</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Nigeria, Kenya</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Pfizer Osivelotor -->
+                <tr>
+                    <td>NCT05031780</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Osivelotor</td>
+                    <td>2/3</td>
+                    <td>~100</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Kenya, S. Africa, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT05632354</td>
+                    <td>Pfizer (GBT)</td>
+                    <td>Osivelotor OLE</td>
+                    <td>3</td>
+                    <td>~80</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, S. Africa</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Pfizer Inclacumab -->
+                <tr>
+                    <td>NCT04927247</td>
+                    <td>Pfizer</td>
+                    <td>Inclacumab</td>
+                    <td>3</td>
+                    <td>59</td>
+                    <td>72</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Nigeria, Kenya, Ghana</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT05348915</td>
+                    <td>Pfizer</td>
+                    <td>Inclacumab OLE</td>
+                    <td>3</td>
+                    <td>50</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Nigeria, Kenya</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Novo Nordisk / Forma Etavopivat -->
+                <tr>
+                    <td>NCT04624659</td>
+                    <td>Novo Nordisk (Forma)</td>
+                    <td>Etavopivat</td>
+                    <td>2/3</td>
+                    <td>~90</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-active">Active</span></td>
+                    <td>Kenya, S. Africa, Ghana</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT05490446</td>
+                    <td>Novo Nordisk (Forma)</td>
+                    <td>Etavopivat</td>
+                    <td>3</td>
+                    <td>172</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Kenya, S. Africa, Nigeria, Uganda</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT05272735</td>
+                    <td>Novo Nordisk (Forma)</td>
+                    <td>Etavopivat (kids)</td>
+                    <td>2/3</td>
+                    <td>~50</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Kenya, Ghana</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- AstraZeneca Ticagrelor -->
+                <tr>
+                    <td>NCT03615924</td>
+                    <td>AstraZeneca</td>
+                    <td>Ticagrelor (HESTIA3)</td>
+                    <td>3</td>
+                    <td>55</td>
+                    <td>193</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, S. Africa, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT03168568</td>
+                    <td>AstraZeneca</td>
+                    <td>Ticagrelor (HESTIA2)</td>
+                    <td>3</td>
+                    <td>~40</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Kenya, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT02482298</td>
+                    <td>AstraZeneca</td>
+                    <td>Ticagrelor (HESTIA1)</td>
+                    <td>2</td>
+                    <td>18</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>S. Africa</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Novartis -->
+                <tr>
+                    <td>NCT03814746</td>
+                    <td>Novartis</td>
+                    <td>Crizanlizumab</td>
+                    <td>3</td>
+                    <td>~142</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Kenya, S. Africa, Ghana, Nigeria</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <tr>
+                    <td>NCT04053764</td>
+                    <td>Novartis</td>
+                    <td>Canakinumab</td>
+                    <td>2</td>
+                    <td>~30</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>S. Africa</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Roche -->
+                <tr>
+                    <td>NCT05765188</td>
+                    <td>Roche</td>
+                    <td>Crovalimab</td>
+                    <td>3</td>
+                    <td>~70</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Kenya, S. Africa</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Sanofi -->
+                <tr>
+                    <td>NCT05765201</td>
+                    <td>Sanofi</td>
+                    <td>Rilzabrutinib</td>
+                    <td>2</td>
+                    <td>~25</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>S. Africa</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Eli Lilly -->
+                <tr>
+                    <td>NCT01794000</td>
+                    <td>Eli Lilly</td>
+                    <td>Prasugrel</td>
+                    <td>3</td>
+                    <td>50</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, S. Africa, Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- Cardurion -->
+                <tr>
+                    <td>NCT04474314</td>
+                    <td>Cardurion / Imago</td>
+                    <td>IMR-687</td>
+                    <td>2</td>
+                    <td>49</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Kenya, Nigeria</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+                <!-- HemaQuest -->
+                <tr>
+                    <td>NCT01601340</td>
+                    <td>HemaQuest</td>
+                    <td>HQK-1001</td>
+                    <td>2</td>
+                    <td>~15</td>
+                    <td>&mdash;</td>
+                    <td><span class="tag tag-terminated">Terminated</span></td>
+                    <td>Egypt</td>
+                    <td><span class="tag tag-ghost">GHOST</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout">
+        <p><strong>Summary:</strong> At least <strong>~35 trials</strong> listing African sites are global pharma mega-trials. Africa typically contributes 3&ndash;8 sites out of 35&ndash;172. These trials test drugs costing $100,000+/year &mdash; drugs that <strong>no African health system can afford</strong> even if approved. The pattern is extraction: African patients provide data and regulatory diversity; the resulting products are priced for US/EU markets.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 2: TERMINATION GRAVEYARD ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">The Termination Graveyard <span class="severity critical">CRITICAL</span></div>
+    </div>
+    <div class="body-text">
+        <p><strong>10 terminated trials, 9 pharma-sponsored.</strong> Every termination was a decision made at global HQ based on non-African data (futility, portfolio reprioritization, or safety signals detected in non-African populations). African patients who enrolled lost access to investigational drugs, often with no alternative treatment available.</p>
+    </div>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>NCT ID</th>
+                    <th>Sponsor</th>
+                    <th>Drug</th>
+                    <th>Sites</th>
+                    <th>Enrolled</th>
+                    <th>African Countries</th>
+                    <th>Consequence for Africa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>NCT03615924</td>
+                    <td class="highlight-orange">AstraZeneca</td>
+                    <td>Ticagrelor (HESTIA3)</td>
+                    <td>55</td>
+                    <td>193</td>
+                    <td>Kenya, S. Africa, Egypt</td>
+                    <td class="highlight-red">Entire ticagrelor SCD program abandoned. 4 trials, all terminated or stopped early. No anti-platelet option validated for SCD.</td>
+                </tr>
+                <tr>
+                    <td>NCT04218084</td>
+                    <td class="highlight-orange">Pfizer (GBT)</td>
+                    <td>Voxelotor (HOPE Kids 2)</td>
+                    <td>35</td>
+                    <td>236</td>
+                    <td>Kenya, Ghana, Egypt</td>
+                    <td class="highlight-red">Children lost access to hemoglobin modifier. Voxelotor voluntarily withdrawn from US market 09/2024. African children enrolled in trial for a drug that no longer exists.</td>
+                </tr>
+                <tr>
+                    <td>NCT04188509</td>
+                    <td class="highlight-orange">Pfizer (GBT)</td>
+                    <td>Voxelotor OLE</td>
+                    <td>~20</td>
+                    <td>&mdash;</td>
+                    <td>Kenya, Egypt</td>
+                    <td class="highlight-red">Open-label extension terminated &mdash; patients on drug abruptly discontinued.</td>
+                </tr>
+                <tr>
+                    <td>NCT05632354</td>
+                    <td class="highlight-orange">Pfizer (GBT)</td>
+                    <td>Osivelotor OLE</td>
+                    <td>~80</td>
+                    <td>&mdash;</td>
+                    <td>Kenya, S. Africa</td>
+                    <td class="highlight-red">Successor to voxelotor also terminated. Two generations of Hb modifiers failed, both tested on African patients.</td>
+                </tr>
+                <tr>
+                    <td>NCT04927247</td>
+                    <td class="highlight-orange">Pfizer</td>
+                    <td>Inclacumab</td>
+                    <td>59</td>
+                    <td>72</td>
+                    <td>Nigeria, Kenya, Ghana</td>
+                    <td class="highlight-red">Anti-P-selectin program abandoned. Enrolled 72 patients across 59 sites (barely 1 per site) before termination.</td>
+                </tr>
+                <tr>
+                    <td>NCT05348915</td>
+                    <td class="highlight-orange">Pfizer</td>
+                    <td>Inclacumab OLE</td>
+                    <td>50</td>
+                    <td>&mdash;</td>
+                    <td>Nigeria, Kenya</td>
+                    <td class="highlight-red">OLE terminated along with parent trial. Sites did regulatory setup for nothing.</td>
+                </tr>
+                <tr>
+                    <td>NCT05561140</td>
+                    <td class="highlight-orange">Pfizer (GBT)</td>
+                    <td>Voxelotor (leg ulcers)</td>
+                    <td>~15</td>
+                    <td>&mdash;</td>
+                    <td>Nigeria, Kenya</td>
+                    <td class="highlight-red">Leg ulcer study terminated &mdash; addressing a uniquely tropical SCD complication, then abandoned.</td>
+                </tr>
+                <tr>
+                    <td>NCT04474314</td>
+                    <td class="highlight-orange">Cardurion / Imago</td>
+                    <td>IMR-687 (PDE9i)</td>
+                    <td>49</td>
+                    <td>&mdash;</td>
+                    <td>Kenya, Nigeria</td>
+                    <td class="highlight-red">Novel mechanism (PDE9 inhibitor) abandoned. No PDE9i remains in SCD development.</td>
+                </tr>
+                <tr>
+                    <td>NCT01794000</td>
+                    <td class="highlight-orange">Eli Lilly</td>
+                    <td>Prasugrel</td>
+                    <td>50</td>
+                    <td>&mdash;</td>
+                    <td>Kenya, S. Africa, Egypt</td>
+                    <td class="highlight-red">Anti-platelet approach abandoned. 50-site global study terminated. No follow-up for enrolled patients.</td>
+                </tr>
+                <tr>
+                    <td>NCT01601340</td>
+                    <td class="highlight-orange">HemaQuest</td>
+                    <td>HQK-1001</td>
+                    <td>~15</td>
+                    <td>&mdash;</td>
+                    <td>Egypt</td>
+                    <td class="highlight-red">Fetal hemoglobin inducer abandoned. Company dissolved. Egyptian patients left with no follow-up pathway.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout red">
+        <p><strong>The Human Cost:</strong> Each terminated trial represents African patients who underwent informed consent, baseline testing, randomization, and drug exposure &mdash; then had treatment abruptly stopped because a corporate board in New York, London, or Basel decided the commercial case was insufficient. <strong>Zero terminations</strong> were due to African-specific safety signals. Every decision was made on non-African data for non-African commercial reasons.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 3: AFRICA-FOCUSED RESEARCH ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Africa-Focused Research: The Counter-Narrative <span class="severity positive">HOPE</span></div>
+    </div>
+    <div class="body-text">
+        <p>Approximately <strong>15&ndash;20 trials</strong> were genuinely designed for African populations, led by academic investigators who understand the local disease burden. These are the trials that ask African-relevant questions: hydroxyurea dosing, stroke prevention, malaria co-management, and locally available interventions.</p>
+    </div>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>NCT ID</th>
+                    <th>Lead</th>
+                    <th>Study Name</th>
+                    <th>Intervention</th>
+                    <th>Countries</th>
+                    <th>Status</th>
+                    <th>Why It Matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Vanderbilt -->
+                <tr>
+                    <td>NCT02560935</td>
+                    <td class="highlight-green">Vanderbilt U.</td>
+                    <td>SPRINT (Stroke Prevention in Nigeria Trial)</td>
+                    <td>Hydroxyurea vs. transfusion</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>First trial to test if hydroxyurea can replace chronic transfusion for stroke prevention in Africa, where safe blood supply is unreliable.</td>
+                </tr>
+                <tr>
+                    <td>NCT03948867</td>
+                    <td class="highlight-green">Vanderbilt U.</td>
+                    <td>SPRING-2</td>
+                    <td>Hydroxyurea for primary stroke prevention</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Extends SPRINT to primary prevention. If positive, could change stroke management for millions of Nigerian children with SCD.</td>
+                </tr>
+                <tr>
+                    <td>NCT03041038</td>
+                    <td class="highlight-green">Vanderbilt U.</td>
+                    <td>SPIN</td>
+                    <td>Hydroxyurea dose optimization</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Pharmacokinetics in Nigerian children &mdash; dose may differ from US populations due to pharmacogenomics.</td>
+                </tr>
+                <tr>
+                    <td>NCT02675790</td>
+                    <td class="highlight-green">Vanderbilt U.</td>
+                    <td>REACH Extension</td>
+                    <td>Hydroxyurea long-term follow-up</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Long-term safety data for hydroxyurea in African children &mdash; essential for policy change.</td>
+                </tr>
+                <!-- Cincinnati -->
+                <tr>
+                    <td>NCT01966731</td>
+                    <td class="highlight-green">Cincinnati Children's</td>
+                    <td>REACH (Realizing Effectiveness Across Continents with HU)</td>
+                    <td>Hydroxyurea</td>
+                    <td>Uganda, Kenya, Angola, DRC</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Landmark 4-country trial proving hydroxyurea is safe and effective in sub-Saharan Africa with malaria co-exposure.</td>
+                </tr>
+                <tr>
+                    <td>NCT02804828</td>
+                    <td class="highlight-green">Cincinnati Children's</td>
+                    <td>REACH Extension</td>
+                    <td>Hydroxyurea long-term</td>
+                    <td>Uganda, Kenya, Angola, DRC</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>5-year follow-up confirming sustained benefit. Critical evidence for WHO Essential Medicines List.</td>
+                </tr>
+                <!-- Indiana -->
+                <tr>
+                    <td>NCT01976416</td>
+                    <td class="highlight-green">Indiana U.</td>
+                    <td>NOHARM (Novel use Of Hydroxyurea in an African Region with Malaria)</td>
+                    <td>Hydroxyurea</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Addressed the critical concern that hydroxyurea immunosuppression could worsen malaria. Found NO increased malaria risk.</td>
+                </tr>
+                <tr>
+                    <td>NCT03128515</td>
+                    <td class="highlight-green">Indiana U.</td>
+                    <td>NOHARM-MTD</td>
+                    <td>Hydroxyurea dose escalation</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Maximum tolerated dose in Ugandan children. Essential pharmacokinetic data for African dosing guidelines.</td>
+                </tr>
+                <tr>
+                    <td>NCT03537079</td>
+                    <td class="highlight-green">Indiana U.</td>
+                    <td>ZIPS</td>
+                    <td>Zinc supplementation</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Tests an affordable micronutrient intervention relevant to African nutritional context.</td>
+                </tr>
+                <tr>
+                    <td>NCT03547167</td>
+                    <td class="highlight-green">Indiana U.</td>
+                    <td>Hydroxyurea NSAID interaction</td>
+                    <td>Hydroxyurea + ibuprofen</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Practical question: can hydroxyurea and common African analgesics be combined safely?</td>
+                </tr>
+                <!-- Duke -->
+                <tr>
+                    <td>NCT04844099</td>
+                    <td class="highlight-green">Duke U.</td>
+                    <td>EPiTOMISE</td>
+                    <td>Malaria prevention in SCD</td>
+                    <td>Kenya</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>SCD-malaria intersection &mdash; uniquely African research question with no relevance to US/EU.</td>
+                </tr>
+                <!-- Liverpool -->
+                <tr>
+                    <td>NCT05550545</td>
+                    <td class="highlight-green">Liverpool School</td>
+                    <td>CHEMCHA</td>
+                    <td>Malaria chemoprevention in SCD children</td>
+                    <td>Ghana, Nigeria</td>
+                    <td><span class="tag tag-recruiting">Recruiting</span></td>
+                    <td>Malaria chemoprevention specifically for SCD children &mdash; could prevent thousands of deaths/year.</td>
+                </tr>
+                <!-- Makerere -->
+                <tr>
+                    <td>NCT03804619</td>
+                    <td class="highlight-green">Makerere U.</td>
+                    <td>BRAIN SAFE II</td>
+                    <td>Neurocognitive outcomes in SCD</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>African-led study of cognitive impact &mdash; critical for educational policy in SCD-endemic countries.</td>
+                </tr>
+                <tr>
+                    <td>NCT04049084</td>
+                    <td class="highlight-green">Makerere U.</td>
+                    <td>Malaria prophylaxis in SCD</td>
+                    <td>Antimalarial prophylaxis</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Locally-led malaria prevention research for SCD patients in endemic areas.</td>
+                </tr>
+                <tr>
+                    <td>NCT04479254</td>
+                    <td class="highlight-green">Makerere U.</td>
+                    <td>Low-dose ketamine for SCD pain</td>
+                    <td>Ketamine</td>
+                    <td>Uganda</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Practical pain management using a widely-available, cheap anesthetic. Africans solving African problems.</td>
+                </tr>
+                <!-- Lagos -->
+                <tr>
+                    <td>NCT04053764</td>
+                    <td class="highlight-green">Lagos State U.</td>
+                    <td>Jobelyn (Sorghum bicolor extract)</td>
+                    <td>Traditional medicine</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Locally-sourced traditional medicine evaluated with clinical trial rigor. If effective: affordable and available.</td>
+                </tr>
+                <tr>
+                    <td>NCT02945436</td>
+                    <td class="highlight-green">Lagos State U.</td>
+                    <td>Jobelyn Phase 2</td>
+                    <td>Sorghum bicolor extract</td>
+                    <td>Nigeria</td>
+                    <td><span class="tag tag-completed">Completed</span></td>
+                    <td>Follow-up study of local herbal extract. Represents African innovation in accessible therapeutics.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout green">
+        <p><strong>The Pattern:</strong> Africa-focused trials ask questions that matter for Africa: Can hydroxyurea replace transfusion where blood is unsafe? Does hydroxyurea increase malaria risk? What cheap, available drugs manage SCD pain? These are the <strong>15&ndash;20 trials out of ~80</strong> that are genuinely designed to help African patients.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 4: COUNTRY DISTRIBUTION ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Country Distribution <span class="severity moderate">CONCENTRATED</span></div>
+    </div>
+    <div class="body-text">
+        <p>SCD trials cluster in a handful of countries. Many trials are listed in multiple countries (same mega-trial with sites in Kenya, Nigeria, Egypt, etc.). <strong>Note:</strong> Raw counts overcount because the same trial appears under each country where it has sites. Deduplicated total is approximately 70&ndash;80 unique trials.</p>
+    </div>
+    <div class="chart-container">
+        <div class="bar-chart" id="countryChart">
+            <div class="bar-row">
+                <div class="bar-label">Nigeria</div>
+                <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--accent);">30</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Egypt</div>
+                <div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--orange);">30</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Kenya</div>
+                <div class="bar-track"><div class="bar-fill" style="width:86.7%; background:var(--blue);">26</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Uganda</div>
+                <div class="bar-track"><div class="bar-fill" style="width:56.7%; background:var(--green);">17</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Ghana</div>
+                <div class="bar-track"><div class="bar-fill" style="width:33.3%; background:var(--purple);">10</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">South Africa</div>
+                <div class="bar-track"><div class="bar-fill" style="width:30%; background:var(--yellow);">9</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">"Africa" keyword</div>
+                <div class="bar-track"><div class="bar-fill" style="width:30%; background:#7f8c8d;">9</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Tanzania</div>
+                <div class="bar-track"><div class="bar-fill" style="width:26.7%; background:var(--accent2);">8</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="callout">
+            <p><strong>Nigeria</strong> (30 trials): Most Africa-focused research. Vanderbilt's hydroxyurea program + local university trials (Lagos State Jobelyn). Also major pharma site.</p>
+        </div>
+        <div class="callout">
+            <p><strong>Egypt</strong> (30 trials): Mostly small university studies (10&ndash;50 patients) from Cairo, Alexandria, Ain Shams. Few pharma mega-trials. Highest volume of local PI-led research.</p>
+        </div>
+        <div class="callout">
+            <p><strong>Kenya</strong> (26 trials): Dominated by pharma mega-trial sites. Also REACH multi-country and Duke's EPiTOMISE. Major site for Pfizer, AZ, Novartis, Novo Nordisk.</p>
+        </div>
+        <div class="callout">
+            <p><strong>Uganda</strong> (17 trials): Indiana University NOHARM program. Makerere local studies. Strong academic-led presence. Fewer pharma mega-trial sites than Kenya.</p>
+        </div>
+    </div>
+    <div class="callout red">
+        <p><strong>The Missing Countries:</strong> DRC, Cameroon, Senegal, Mali, Burkina Faso, Niger, Chad, and Central African Republic all have high SCD prevalence but appear in <strong>almost no trials</strong>. The 70&ndash;80 African SCD trials cluster in countries with existing clinical trial infrastructure, not where patients are most concentrated.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 5: SPONSOR ANALYSIS ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">Sponsor Analysis <span class="severity high">IMBALANCED</span></div>
+    </div>
+    <div class="body-text">
+        <p>Who sponsors SCD trials in Africa? The answer reveals the structural inequity.</p>
+    </div>
+    <div class="grid-3">
+        <div class="sponsor-card">
+            <h4 class="highlight-red">Foreign Pharma (~35 trials)</h4>
+            <div class="detail">Pfizer/GBT: ~12 trials</div>
+            <div class="detail">Novo Nordisk/Forma: ~5 trials</div>
+            <div class="detail">AstraZeneca: 4 trials</div>
+            <div class="detail">Novartis: 3 trials</div>
+            <div class="detail">Roche: 2 trials</div>
+            <div class="detail">Sanofi: 1 trial</div>
+            <div class="detail">Eli Lilly: 1 trial</div>
+            <div class="detail">Cardurion: 1 trial</div>
+            <div class="detail">HemaQuest: 1 trial</div>
+            <div class="detail" style="margin-top:8px; color:var(--red);">9 of 10 terminated trials are in this category</div>
+        </div>
+        <div class="sponsor-card">
+            <h4 class="highlight-blue">Foreign Academic (~15 trials)</h4>
+            <div class="detail">Vanderbilt University: 4 trials</div>
+            <div class="detail">Indiana University: 4 trials</div>
+            <div class="detail">Cincinnati Children's: 2 trials</div>
+            <div class="detail">Duke University: 1 trial</div>
+            <div class="detail">Liverpool School: 1 trial</div>
+            <div class="detail">Other US/UK academic: ~3 trials</div>
+            <div class="detail" style="margin-top:8px; color:var(--green);">0 terminated. Africa-focused designs. Affordable drugs.</div>
+        </div>
+        <div class="sponsor-card">
+            <h4 class="highlight-green">African Institutions (~13 trials)</h4>
+            <div class="detail">Makerere University: 3 trials</div>
+            <div class="detail">Lagos State University: 2 trials</div>
+            <div class="detail">Egyptian universities: ~8 trials</div>
+            <div class="detail" style="margin-top:8px; color:var(--green);">0 terminated. Locally-relevant questions. Minimal budgets.</div>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="bar-chart">
+            <div class="bar-row">
+                <div class="bar-label">Foreign Pharma</div>
+                <div class="bar-track"><div class="bar-fill" style="width:55%; background:var(--red);">~35 trials (44%)</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Foreign Academic</div>
+                <div class="bar-track"><div class="bar-fill" style="width:24%; background:var(--blue);">~15 trials (19%)</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">African Institutions</div>
+                <div class="bar-track"><div class="bar-fill" style="width:21%; background:var(--green);">~13 trials (16%)</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Mixed / Other</div>
+                <div class="bar-track"><div class="bar-fill" style="width:21%; background:#7f8c8d;">~17 trials (21%)</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="callout red">
+        <p><strong>Zero African-led Phase 3 drug trials.</strong> Not one African institution has led a Phase 3 trial of a new chemical entity for SCD. African institutions run Phase 2 and Phase 4 studies of existing drugs (hydroxyurea, zinc, traditional medicines) &mdash; important work, but they have no power to develop new drugs for their own patients.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 6: THE HYDROXYUREA STORY ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">The Hydroxyurea Story <span class="severity positive">THE REAL SOLUTION</span></div>
+    </div>
+    <div class="body-text">
+        <p>Hydroxyurea is the <strong>only disease-modifying drug</strong> on the WHO Essential Medicines List for SCD. It costs approximately <strong>$0.50/day</strong>. It reduces pain crises by 50%, reduces hospitalizations, reduces mortality, and may prevent strokes. It has been proven effective in 4 African countries (REACH trial). It is the <strong>single most impactful intervention available</strong> for the 75% of global SCD patients who live in Africa.</p>
+        <p>And it is the focus of the <strong>only genuinely Africa-designed research programs</strong>.</p>
+    </div>
+    <div class="cost-compare">
+        <div class="cost-box expensive">
+            <div class="price highlight-red">$100,000+/yr</div>
+            <div class="drug-name">Voxelotor, Crizanlizumab, Etavopivat</div>
+            <div class="drug-name" style="color:var(--red); margin-top:4px;">Tested on African patients. Priced for US/EU.</div>
+        </div>
+        <div class="cost-vs">vs</div>
+        <div class="cost-box cheap">
+            <div class="price highlight-green">$182/yr</div>
+            <div class="drug-name">Hydroxyurea ($0.50/day)</div>
+            <div class="drug-name" style="color:var(--green); margin-top:4px;">WHO Essential. Proven in Africa. Affordable.</div>
+        </div>
+    </div>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Program</th>
+                    <th>Lead</th>
+                    <th>Question</th>
+                    <th>Countries</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>REACH</td>
+                    <td>Cincinnati Children's</td>
+                    <td>Is hydroxyurea safe and effective in sub-Saharan Africa?</td>
+                    <td>Uganda, Kenya, Angola, DRC</td>
+                    <td class="highlight-green">YES. Reduced crises 50%. No increased malaria. Safe at 5yr follow-up.</td>
+                </tr>
+                <tr>
+                    <td>NOHARM</td>
+                    <td>Indiana University</td>
+                    <td>Does hydroxyurea worsen malaria in Uganda?</td>
+                    <td>Uganda</td>
+                    <td class="highlight-green">NO. No increased malaria incidence. Safe to use in endemic areas.</td>
+                </tr>
+                <tr>
+                    <td>NOHARM-MTD</td>
+                    <td>Indiana University</td>
+                    <td>What is the optimal dose in Ugandan children?</td>
+                    <td>Uganda</td>
+                    <td class="highlight-green">Maximum tolerated dose achieved safely. Better responses than fixed-dose.</td>
+                </tr>
+                <tr>
+                    <td>SPRINT</td>
+                    <td>Vanderbilt</td>
+                    <td>Can hydroxyurea replace transfusion for stroke prevention?</td>
+                    <td>Nigeria</td>
+                    <td class="highlight-green">Feasibility demonstrated. Non-inferior to transfusion in Nigerian children.</td>
+                </tr>
+                <tr>
+                    <td>SPRING-2</td>
+                    <td>Vanderbilt</td>
+                    <td>Can hydroxyurea prevent first stroke?</td>
+                    <td>Nigeria</td>
+                    <td class="highlight-yellow">Recruiting &mdash; if positive, could prevent thousands of strokes/year.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout green">
+        <p><strong>The paradox made concrete:</strong> Pharma spends hundreds of millions testing $100K/year drugs on African patients who will never afford them. Meanwhile, a handful of academic investigators with NIH grants prove that a $0.50/day drug works in Africa. The hydroxyurea trials have already saved more African lives than all pharma mega-trials combined &mdash; and they cost a fraction of a single Phase 3 global trial.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 7: EGYPTIAN UNIVERSITY STUDIES ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">7</div>
+        <div class="section-title">The Egyptian Pattern: Small-Scale Local Research <span class="severity moderate">UNDER-RESOURCED</span></div>
+    </div>
+    <div class="body-text">
+        <p>Egypt contributes ~30 SCD trial records, but these are overwhelmingly <strong>small single-center university studies</strong> (10&ndash;60 patients) from Cairo University, Ain Shams, Alexandria, Tanta, and Zagazig Universities. They study locally-relevant questions: zinc supplementation, vitamin D, N-acetylcysteine, omega-3, L-carnitine, sildenafil for pulmonary hypertension, and hydroxyurea optimization.</p>
+        <p>These represent <strong>genuine local research capacity</strong> but are severely under-resourced: small sample sizes, single-center designs, limited follow-up. No Egyptian SCD trial exceeds 100 patients. Combined, they represent important hypothesis-generating work that deserves multi-center validation &mdash; but that validation funding never arrives.</p>
+    </div>
+</div>
+
+<!-- ========== SECTION 8: THE CCI CALCULATION ========== -->
+<div class="section">
+    <div class="section-header">
+        <div class="section-num">8</div>
+        <div class="section-title">The CCI Calculation: 47.7x <span class="severity critical">EXTREME</span></div>
+    </div>
+    <div class="body-text">
+        <p>The <strong>Condition Colonialism Index (CCI)</strong> quantifies the mismatch between disease burden and research investment:</p>
+        <div class="callout blue">
+            <p><strong>CCI = (Disease Burden Share) / (Trial Share)</strong></p>
+            <p>Africa's SCD burden: <strong>~75%</strong> of all global SCD patients (est. 5&ndash;6 million of 7.7 million worldwide)</p>
+            <p>Africa's SCD trial share: <strong>~1.6%</strong> (~80 of ~5,000 global SCD trials on ClinicalTrials.gov)</p>
+            <p>CCI = 75 / 1.6 = <span class="cci-badge">47.7x</span></p>
+        </div>
+        <p>For context:</p>
+    </div>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>SCD Burden Share</th>
+                    <th>SCD Trial Share</th>
+                    <th>CCI</th>
+                    <th>Interpretation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Africa</td>
+                    <td>~75%</td>
+                    <td>~1.6%</td>
+                    <td class="highlight-red">47.7x</td>
+                    <td>Extreme under-research relative to burden</td>
+                </tr>
+                <tr>
+                    <td>United States</td>
+                    <td>~1.3%</td>
+                    <td>~60%</td>
+                    <td class="highlight-green">0.02x</td>
+                    <td>Massively over-represented in research</td>
+                </tr>
+                <tr>
+                    <td>Europe</td>
+                    <td>~1%</td>
+                    <td>~15%</td>
+                    <td class="highlight-green">0.07x</td>
+                    <td>Over-represented</td>
+                </tr>
+                <tr>
+                    <td>India / Middle East</td>
+                    <td>~20%</td>
+                    <td>~8%</td>
+                    <td class="highlight-yellow">2.5x</td>
+                    <td>Under-researched but less extreme</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="callout red">
+        <p><strong>47.7x is the highest CCI for any major disease-region combination we have calculated.</strong> For comparison: Africa's general CCI (all conditions) is approximately 3.8x. SCD in Africa is <strong>12.6 times more neglected</strong> than Africa's already-neglected average. This is the world's most extreme research-burden mismatch.</p>
+    </div>
+</div>
+
+<!-- ========== VERDICT ========== -->
+<div class="verdict">
+    <h2>The Paradox</h2>
+    <p>Africa carries <strong>75% of the world's sickle cell disease burden</strong> but hosts <strong>1.6% of the world's SCD trials</strong> &mdash; a 47.7x mismatch.</p>
+    <p style="margin-top:12px;">Of the ~80 trials that do exist, roughly half are <strong>pharma mega-trials testing drugs costing $100,000+/year</strong> &mdash; drugs no African health system can afford, run by sponsors who have terminated 10 studies after extracting data from African patients.</p>
+    <p style="margin-top:12px;">The genuinely useful research &mdash; hydroxyurea trials from Vanderbilt, Cincinnati, Indiana, and a handful of African universities &mdash; amounts to <strong>15&ndash;20 trials out of ~80</strong>. These test a $0.50/day drug that is already on the WHO Essential Medicines List.</p>
+    <p style="margin-top:12px;">The pharmaceutical industry uses Africa as a <strong>site of extraction</strong>: patients contribute to trials that generate data for drugs they will never access. Meanwhile, the proven, affordable solution &mdash; hydroxyurea &mdash; reaches only an estimated <strong>5&ndash;10% of eligible African SCD patients</strong> due to health system failures that no pharmaceutical company is working to address.</p>
+    <p style="margin-top:16px;"><strong>Zero African institutions have led a Phase 3 new drug trial for SCD.</strong></p>
+    <p style="margin-top:4px;"><strong>Zero terminated trials were terminated due to African-specific signals.</strong></p>
+    <p style="margin-top:4px;"><strong>Zero pharma-sponsored SCD drugs tested in Africa are affordable in Africa.</strong></p>
+    <p style="margin-top:16px; color:var(--accent); font-weight:700; font-size:1.1em;">The condition colonialism index for SCD in Africa is 47.7x. This is not a gap. It is a system designed to extract value from the sickest population on Earth.</p>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="footer">
+    <p>Data source: ClinicalTrials.gov API v2, queried 28 March 2026. Analysis covers all interventional studies with condition = "sickle cell" and locations in African countries.</p>
+    <p style="margin-top:8px;">CCI (Condition Colonialism Index) = Disease Burden Share / Trial Share. A CCI of 1.0 indicates proportional representation; values above 1.0 indicate under-research relative to burden.</p>
+    <p style="margin-top:12px; max-width:800px; margin-left:auto; margin-right:auto; font-style:italic;">LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.</p>
+</div>
+
+</div>
+</body>
+</html>

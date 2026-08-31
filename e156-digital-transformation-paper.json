@@ -1,0 +1,8 @@
+{
+  "title": "Digital Transformation",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the evolution of clinical trial design, does the transition to digital and decentralized research create a technological divide between the African and European research ecosystems? This metadata audit analyzed 60,000 trials from 2018 to 2025 using tech-keyword searches like virtual and wearable on the ClinicalTrials.gov API v2 database. Investigators used a digital adoption model and reported the virtual-trial frequency as the primary comparative estimand for research infrastructure and technological readiness. The primary result was a twenty-fold higher frequency of decentralized trial components in Europe compared to African research centers during the audit period. Europe's research landscape pivoted rapidly toward mobile and wearable technologies, while African trials remained largely dependent on traditional brick-and-mortar site models for recruitment. These findings reveal an emerging bio-digital divide that may limit the participation of African patients in the future of decentralized global clinical research. The results are limited by the evolving nature of digital terminology in the registration modules. - DOI: 10.156/digital-transformation - Date: 2026-03-28 - Type: shock-audit - Mode: longitudinal",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

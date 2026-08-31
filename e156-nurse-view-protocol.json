@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of nursing trial evidence in Africa",
+    "body": "This cross-sectional registry study will quantify the evidence gap for nursing interventions in Africa, where nurses deliver the majority of healthcare. We will query ClinicalTrials.gov API v2 for interventional studies in eight nursing categories: nursing/nurse-led, midwifery, wound care, infection control, patient education, palliative nursing, task-shifting to nurses, and maternal/neonatal nursing. The primary outcome is nursing trial density: the percentage of all interventional trials in Africa that involve nursing interventions, compared with the United States and United Kingdom. Secondary outcomes include category-specific trial counts, US:Africa and UK:Africa ratios, country-level nursing trial distribution across 15 African countries, and identification of evidence gaps in critical areas including midwifery, wound care, and infection control. The United Kingdom was selected as an additional comparator because of its established nursing research tradition and dedicated research infrastructure. All queries will be scripted in Python with cached results. No patient-level data will be accessed. Limitations include restriction to one registry, keyword-based trial identification that may miss nursing components in multidisciplinary trials, and exclusion of quality improvement studies.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This study will quantify the nursing trial evidence gap in Africa by comparing trial availability across eight categories with the United States and United Kingdom."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies in nursing, midwifery, wound care, infection control, patient education, palliative nursing, task-shifting, and maternal/neonatal nursing."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is nursing trial density: the percentage of all interventional trials in Africa involving nursing interventions, benchmarked against the US and UK."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include category-specific counts, geographic ratios, country-level distribution across 15 nations, and identification of critical evidence gaps in midwifery and wound care."
+        },
+        {
+            "role": "UK comparator",
+            "text": "The United Kingdom was selected as additional comparator for its established nursing research tradition, providing a benchmark for what dedicated research infrastructure can achieve."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries are scripted in Python with 24-hour cache validity, and data files and dashboards are archived for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to ClinicalTrials.gov, keyword-based identification that may miss embedded nursing interventions, and exclusion of observational and quality improvement studies."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Nurse's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 nursing categories, Africa vs US/UK",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

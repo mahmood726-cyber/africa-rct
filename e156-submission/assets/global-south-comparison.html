@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa vs the Developing World: A Global South Comparison</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #151b2b;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #ef4444;
+    --green: #22c55e;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6; padding: 20px; max-width: 1400px; margin: 0 auto;
+  }
+  h1 {
+    font-size: 2rem; margin-bottom: 8px;
+    background: linear-gradient(135deg, #ef4444, #22c55e, #3b82f6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 {
+    font-size: 1.4rem; margin: 40px 0 16px 0; color: var(--text);
+    border-bottom: 2px solid var(--border); padding-bottom: 8px;
+  }
+  h3 {
+    font-size: 1.1rem; margin: 24px 0 12px 0; color: var(--muted);
+  }
+  .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 24px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; margin-bottom: 24px;
+  }
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+  }
+  .stat-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; text-align: center;
+  }
+  .stat-box .label { color: var(--muted); font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 4px; }
+  .stat-box .value { font-size: 2rem; font-weight: bold; }
+  table {
+    width: 100%; border-collapse: collapse; margin-bottom: 16px;
+  }
+  th {
+    background: rgba(255,255,255,0.05); padding: 12px 10px;
+    text-align: left; font-size: 0.8rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border);
+  }
+  td { border-bottom: 1px solid var(--border); }
+  tr:hover { background: rgba(255,255,255,0.03); }
+  .narrative {
+    background: rgba(239,68,68,0.06); border-left: 4px solid var(--accent);
+    padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0;
+    color: var(--text); font-size: 0.95rem;
+  }
+  .narrative.green {
+    background: rgba(34,197,94,0.06); border-left-color: var(--green);
+  }
+  .narrative.blue {
+    background: rgba(59,130,246,0.06); border-left-color: var(--blue);
+  }
+  .narrative.amber {
+    background: rgba(245,158,11,0.06); border-left-color: var(--amber);
+  }
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0;
+    font-size: 0.85rem;
+  }
+  .legend span {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .legend .dot {
+    width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+  }
+  .comparison-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  @media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .footer {
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.8rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Africa vs the Developing World</h1>
+<p class="subtitle">The first systematic comparison of clinical trial density across the Global South
+| Data: ClinicalTrials.gov API v2 | Generated: 28 March 2026</p>
+
+<!-- ================================================================ -->
+<!-- 1. SUMMARY -->
+<!-- ================================================================ -->
+<h2>1. The Global Picture</h2>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="label">Africa Average</div>
+    <div class="value" style="color:#ef4444;">23.5/M</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Latin America Average</div>
+    <div class="value" style="color:#22c55e;">53.8/M</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">South/SE Asia Average</div>
+    <div class="value" style="color:#3b82f6;">7.3/M</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">United States</div>
+    <div class="value" style="color:#9ca3af;">475.2/M</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Developing World Avg</div>
+    <div class="value" style="color:#f59e0b;">30.5/M</div>
+  </div>
+  <div class="stat-box">
+    <div class="label">Africa Penalty</div>
+    <div class="value" style="color:#ef4444;">1.3x</div>
+    <div style="color:var(--muted);font-size:0.75rem;">Dev world avg / Africa avg</div>
+  </div>
+</div>
+
+<div class="narrative">
+<strong>The Africa Penalty:</strong> The average developing-world country has <strong>1.3x</strong>
+more clinical trials per capita than the average African country. Africa's weighted average of
+<strong>23.5 trials/M</strong> lags behind Latin America (53.8/M) and
+South/SE Asia (7.3/M). The US (475.2/M) is in another universe entirely.
+</div>
+
+<!-- ================================================================ -->
+<!-- 2. GLOBAL LEAGUE TABLE -->
+<!-- ================================================================ -->
+<h2>2. The Global League Table</h2>
+
+<p style="color:var(--muted);margin-bottom:12px;">
+All ~25 countries ranked by interventional trials per million population.
+Colored by region.</p>
+
+<div class="legend">
+  <span><span class="dot" style="background:#ef4444;"></span> Africa</span>
+  <span><span class="dot" style="background:#22c55e;"></span> Latin America</span>
+  <span><span class="dot" style="background:#3b82f6;"></span> South/SE Asia</span>
+  <span><span class="dot" style="background:#9ca3af;"></span> High-income</span>
+</div>
+
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th style="text-align:center;">Rank</th>
+  <th>Country</th>
+  <th style="text-align:center;">Region</th>
+  <th style="text-align:right;">Population</th>
+  <th style="text-align:right;">Trials</th>
+  <th style="text-align:right;">Per Million</th>
+  <th style="text-align:right;">Income</th>
+  <th>Density</th>
+</tr></thead>
+<tbody>
+<tr style="background:rgba(156,163,175,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#9ca3af;">
+    1</td>
+  <td style="padding:10px;font-weight:bold;">United States</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#9ca3af;font-size:0.75rem;font-weight:bold;">
+      High-income</span></td>
+  <td style="padding:10px;text-align:right;">335M</td>
+  <td style="padding:10px;text-align:right;">159,196</td>
+  <td style="padding:10px;text-align:right;color:#9ca3af;font-weight:bold;">
+    475.2</td>
+  <td style="padding:10px;text-align:right;">High</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#9ca3af;height:100%;width:100.0%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(156,163,175,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#9ca3af;">
+    2</td>
+  <td style="padding:10px;font-weight:bold;">United Kingdom</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#9ca3af;font-size:0.75rem;font-weight:bold;">
+      High-income</span></td>
+  <td style="padding:10px;text-align:right;">68M</td>
+  <td style="padding:10px;text-align:right;">22,049</td>
+  <td style="padding:10px;text-align:right;color:#9ca3af;font-weight:bold;">
+    324.2</td>
+  <td style="padding:10px;text-align:right;">High</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#9ca3af;height:100%;width:68.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    3</td>
+  <td style="padding:10px;font-weight:bold;">Chile</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">20M</td>
+  <td style="padding:10px;text-align:right;">2,447</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    122.3</td>
+  <td style="padding:10px;text-align:right;">High</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:25.7%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    4</td>
+  <td style="padding:10px;font-weight:bold;">Egypt</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">110M</td>
+  <td style="padding:10px;text-align:right;">12,395</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    112.7</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:23.7%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    5</td>
+  <td style="padding:10px;font-weight:bold;">Argentina</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">46M</td>
+  <td style="padding:10px;text-align:right;">4,019</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    87.4</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:18.4%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    6</td>
+  <td style="padding:10px;font-weight:bold;">South Africa</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">62M</td>
+  <td style="padding:10px;text-align:right;">3,473</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    56.0</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:11.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    7</td>
+  <td style="padding:10px;font-weight:bold;">Mexico</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">130M</td>
+  <td style="padding:10px;text-align:right;">6,847</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    52.7</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:11.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    8</td>
+  <td style="padding:10px;font-weight:bold;">Peru</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">34M</td>
+  <td style="padding:10px;text-align:right;">1,726</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    50.8</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:10.7%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    9</td>
+  <td style="padding:10px;font-weight:bold;">Thailand</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">72M</td>
+  <td style="padding:10px;text-align:right;">3,483</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    48.4</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:10.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    10</td>
+  <td style="padding:10px;font-weight:bold;">Brazil</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">216M</td>
+  <td style="padding:10px;text-align:right;">9,890</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    45.8</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:9.6%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(34,197,94,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#22c55e;">
+    11</td>
+  <td style="padding:10px;font-weight:bold;">Colombia</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#22c55e;font-size:0.75rem;font-weight:bold;">
+      Latin America</span></td>
+  <td style="padding:10px;text-align:right;">52M</td>
+  <td style="padding:10px;text-align:right;">1,872</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">
+    36.0</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#22c55e;height:100%;width:7.6%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    12</td>
+  <td style="padding:10px;font-weight:bold;">Pakistan</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">240M</td>
+  <td style="padding:10px;text-align:right;">4,641</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    19.3</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:4.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    13</td>
+  <td style="padding:10px;font-weight:bold;">Uganda</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">48M</td>
+  <td style="padding:10px;text-align:right;">783</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    16.3</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:3.4%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    14</td>
+  <td style="padding:10px;font-weight:bold;">Kenya</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">56M</td>
+  <td style="padding:10px;text-align:right;">720</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    12.9</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:2.7%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    15</td>
+  <td style="padding:10px;font-weight:bold;">Philippines</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">117M</td>
+  <td style="padding:10px;text-align:right;">1,192</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    10.2</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:2.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    16</td>
+  <td style="padding:10px;font-weight:bold;">Vietnam</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">100M</td>
+  <td style="padding:10px;text-align:right;">932</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    9.3</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:2.0%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    17</td>
+  <td style="padding:10px;font-weight:bold;">Rwanda</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">14M</td>
+  <td style="padding:10px;text-align:right;">121</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    8.6</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:1.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    18</td>
+  <td style="padding:10px;font-weight:bold;">Ghana</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">34M</td>
+  <td style="padding:10px;text-align:right;">230</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    6.8</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:1.4%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    19</td>
+  <td style="padding:10px;font-weight:bold;">Tanzania</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">67M</td>
+  <td style="padding:10px;text-align:right;">431</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    6.4</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:1.3%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    20</td>
+  <td style="padding:10px;font-weight:bold;">Indonesia</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">280M</td>
+  <td style="padding:10px;text-align:right;">1,299</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    4.6</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:1.0%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    21</td>
+  <td style="padding:10px;font-weight:bold;">India</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">1,430M</td>
+  <td style="padding:10px;text-align:right;">5,388</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    3.8</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:0.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(59,130,246,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#3b82f6;">
+    22</td>
+  <td style="padding:10px;font-weight:bold;">Bangladesh</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#3b82f6;font-size:0.75rem;font-weight:bold;">
+      South/SE Asia</span></td>
+  <td style="padding:10px;text-align:right;">173M</td>
+  <td style="padding:10px;text-align:right;">649</td>
+  <td style="padding:10px;text-align:right;color:#3b82f6;font-weight:bold;">
+    3.8</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#3b82f6;height:100%;width:0.8%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    23</td>
+  <td style="padding:10px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">130M</td>
+  <td style="padding:10px;text-align:right;">240</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    1.8</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:0.4%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    24</td>
+  <td style="padding:10px;font-weight:bold;">Nigeria</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">230M</td>
+  <td style="padding:10px;text-align:right;">354</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    1.5</td>
+  <td style="padding:10px;text-align:right;">Lower-middle</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:0.3%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    25</td>
+  <td style="padding:10px;font-weight:bold;">Chad</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">18M</td>
+  <td style="padding:10px;text-align:right;">14</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.8</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:0.2%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    26</td>
+  <td style="padding:10px;font-weight:bold;">South Sudan</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">11M</td>
+  <td style="padding:10px;text-align:right;">6</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.5</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:0.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.10);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">
+    27</td>
+  <td style="padding:10px;font-weight:bold;">Somalia</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="color:#ef4444;font-size:0.75rem;font-weight:bold;">
+      Africa</span></td>
+  <td style="padding:10px;text-align:right;">18M</td>
+  <td style="padding:10px;text-align:right;">8</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.4</td>
+  <td style="padding:10px;text-align:right;">Low</td>
+  <td style="padding:10px;min-width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;
+      width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:0.1%;
+        border-radius:4px;"></div>
+    </div></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 3. REGIONAL AVERAGES -->
+<!-- ================================================================ -->
+<h2>3. Regional Averages Comparison</h2>
+
+<div class="card">
+
+<div style="margin-bottom:16px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+    <span style="font-weight:bold;color:#ef4444;">Africa (12 countries)</span>
+    <span style="color:var(--muted);">weighted 23.5/M | mean 18.7/M</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:6px;height:28px;width:100%;">
+    <div style="background:#ef4444;height:100%;width:5.2%;border-radius:6px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#fff;font-weight:bold;font-size:0.8rem;">23.5/M</span>
+    </div>
+  </div>
+</div>
+<div style="margin-bottom:16px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+    <span style="font-weight:bold;color:#22c55e;">Latin America (6 countries)</span>
+    <span style="color:var(--muted);">weighted 53.8/M | mean 65.8/M</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:6px;height:28px;width:100%;">
+    <div style="background:#22c55e;height:100%;width:12.0%;border-radius:6px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#fff;font-weight:bold;font-size:0.8rem;">53.8/M</span>
+    </div>
+  </div>
+</div>
+<div style="margin-bottom:16px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+    <span style="font-weight:bold;color:#3b82f6;">South/SE Asia (7 countries)</span>
+    <span style="color:var(--muted);">weighted 7.3/M | mean 14.2/M</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:6px;height:28px;width:100%;">
+    <div style="background:#3b82f6;height:100%;width:1.6%;border-radius:6px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#fff;font-weight:bold;font-size:0.8rem;">7.3/M</span>
+    </div>
+  </div>
+</div>
+<div style="margin-bottom:16px;">
+  <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+    <span style="font-weight:bold;color:#9ca3af;">High-income (2 countries)</span>
+    <span style="color:var(--muted);">weighted 449.7/M | mean 399.7/M</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:6px;height:28px;width:100%;">
+    <div style="background:#9ca3af;height:100%;width:100.0%;border-radius:6px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#fff;font-weight:bold;font-size:0.8rem;">449.7/M</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 4. THE NIGERIA VS INDIA PROBLEM -->
+<!-- ================================================================ -->
+<h2>4. The Nigeria vs India Problem</h2>
+
+<div class="narrative amber">
+<strong>Why does this matter?</strong> Nigeria (230M, lower-middle-income) and India
+(1,430M, lower-middle-income) are both massive, economically similar developing nations.
+Yet India manages <strong>3.8/M</strong> while Nigeria
+achieves only <strong>1.5/M</strong> &mdash;
+a <strong>2.5x</strong> gap.
+</div>
+
+<div class="comparison-grid">
+  <div class="card" style="border-left:4px solid #ef4444;">
+    <h3 style="color:#ef4444;">Nigeria</h3>
+    <table>
+      <tr><td style="padding:8px;color:var(--muted);">Population</td>
+          <td style="padding:8px;text-align:right;">230M</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Trials</td>
+          <td style="padding:8px;text-align:right;">354</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Per Million</td>
+          <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+            1.5</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Income Group</td>
+          <td style="padding:8px;text-align:right;">Lower-middle</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">GDP/capita</td>
+          <td style="padding:8px;text-align:right;">$1,600</td></tr>
+    </table>
+  </div>
+  <div class="card" style="border-left:4px solid #3b82f6;">
+    <h3 style="color:#3b82f6;">India</h3>
+    <table>
+      <tr><td style="padding:8px;color:var(--muted);">Population</td>
+          <td style="padding:8px;text-align:right;">1430M</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Trials</td>
+          <td style="padding:8px;text-align:right;">5,388</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Per Million</td>
+          <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+            3.8</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Income Group</td>
+          <td style="padding:8px;text-align:right;">Lower-middle</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">GDP/capita</td>
+          <td style="padding:8px;text-align:right;">$2,500</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+<h3>Possible Explanations</h3>
+<ul style="padding-left:20px;color:var(--muted);">
+  <li><strong>Regulatory framework:</strong> India's CDSCO, despite criticism, provides a
+    relatively clear pathway for trial registration. Nigeria's NAFDAC has historically been
+    slower to process approvals.</li>
+  <li><strong>Pharma infrastructure:</strong> India has a massive generic pharmaceutical
+    industry that generates domestic clinical research capacity.</li>
+  <li><strong>Academic research culture:</strong> India's ICMR-funded research ecosystem
+    and IIT/AIIMS networks create domestic trial generation at scale.</li>
+  <li><strong>CRO presence:</strong> Major CROs have deep Indian operations; African CRO
+    presence is largely limited to South Africa and Egypt.</li>
+</ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- 5. THE LATIN AMERICA SUCCESS -->
+<!-- ================================================================ -->
+<h2>5. The Latin America Success</h2>
+
+<div class="narrative green">
+<strong>What did they do differently?</strong> Brazil (45.8/M), Mexico (52.7/M), and
+Argentina (87.4/M) all achieve trial densities that would place them in Africa's top
+tier. The entire Latin America region averages <strong>53.8/M</strong> &mdash;
+multiples above Africa's 23.5/M.
+</div>
+
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Country</th><th style="text-align:right;">Population</th>
+  <th style="text-align:right;">Trials</th><th style="text-align:right;">Per Million</th>
+  <th style="text-align:right;">Income</th><th style="text-align:right;">GDP/capita</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Chile</td>
+  <td style="padding:10px;text-align:right;">20M</td>
+  <td style="padding:10px;text-align:right;">2,447</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">122.3</td>
+  <td style="padding:10px;text-align:right;">High</td>
+  <td style="padding:10px;text-align:right;">$16,800</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Argentina</td>
+  <td style="padding:10px;text-align:right;">46M</td>
+  <td style="padding:10px;text-align:right;">4,019</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">87.4</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">$13,500</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Mexico</td>
+  <td style="padding:10px;text-align:right;">130M</td>
+  <td style="padding:10px;text-align:right;">6,847</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">52.7</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">$11,500</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Peru</td>
+  <td style="padding:10px;text-align:right;">34M</td>
+  <td style="padding:10px;text-align:right;">1,726</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">50.8</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">$7,000</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Brazil</td>
+  <td style="padding:10px;text-align:right;">216M</td>
+  <td style="padding:10px;text-align:right;">9,890</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">45.8</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">$10,200</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Colombia</td>
+  <td style="padding:10px;text-align:right;">52M</td>
+  <td style="padding:10px;text-align:right;">1,872</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">36.0</td>
+  <td style="padding:10px;text-align:right;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">$6,600</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Success Factors</h3>
+<ul style="padding-left:20px;color:var(--muted);">
+  <li><strong>ANVISA (Brazil) and ANMAT (Argentina):</strong> Regulatory agencies that
+    balance rigour with efficiency, making them attractive to pharma sponsors.</li>
+  <li><strong>Strong public hospital networks:</strong> Brazil's SUS and Argentina's
+    public hospitals provide large patient pools with electronic records.</li>
+  <li><strong>LATAM CRO networks:</strong> Well-established regional CRO presence
+    (Parexel, IQVIA, PPD) with deep local expertise.</li>
+  <li><strong>Upper-middle income:</strong> Higher GDP enables better research
+    infrastructure, trained workforce, and regulatory capacity.</li>
+  <li><strong>Disease burden alignment:</strong> NCDs (cancer, cardiovascular, diabetes)
+    match pharma's therapeutic priorities, attracting industry funding.</li>
+</ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- 6. SOUTH AFRICA AS AFRICA'S BRAZIL -->
+<!-- ================================================================ -->
+<h2>6. South Africa as Africa's Brazil</h2>
+
+<div class="narrative blue">
+<strong>The sole African competitor:</strong> South Africa at
+<strong>56.0/M</strong> is the ONLY African country
+that can compete with Latin American nations. Brazil achieves
+<strong>45.8/M</strong>. Both are upper-middle-income
+with strong regulatory agencies (SAHPRA vs ANVISA).
+</div>
+
+<div class="comparison-grid">
+  <div class="card" style="border-left:4px solid #ef4444;">
+    <h3 style="color:#ef4444;">South Africa</h3>
+    <table>
+      <tr><td style="padding:8px;color:var(--muted);">Population</td>
+          <td style="padding:8px;text-align:right;">62M</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Trials</td>
+          <td style="padding:8px;text-align:right;">3,473</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Per Million</td>
+          <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+            56.0</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Income</td>
+          <td style="padding:8px;text-align:right;">Upper-middle ($6,500)</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Regulatory body</td>
+          <td style="padding:8px;text-align:right;">SAHPRA</td></tr>
+    </table>
+  </div>
+  <div class="card" style="border-left:4px solid #22c55e;">
+    <h3 style="color:#22c55e;">Brazil</h3>
+    <table>
+      <tr><td style="padding:8px;color:var(--muted);">Population</td>
+          <td style="padding:8px;text-align:right;">216M</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Trials</td>
+          <td style="padding:8px;text-align:right;">9,890</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Per Million</td>
+          <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+            45.8</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Income</td>
+          <td style="padding:8px;text-align:right;">Upper-middle ($10,200)</td></tr>
+      <tr><td style="padding:8px;color:var(--muted);">Regulatory body</td>
+          <td style="padding:8px;text-align:right;">ANVISA</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+<h3>The Gap Between SA and the Rest of Africa</h3>
+<p style="color:var(--muted);">
+South Africa's 56.0/M makes it competitive with Latin America,
+but it is an island of capability. The next African countries (Egypt aside, which is inflated
+by small university studies) are Uganda (16.3/M)
+and Kenya (12.9/M)
+&mdash; a massive drop. No other African country even approaches South Africa's density when
+Egypt is excluded.
+</p>
+</div>
+
+<!-- ================================================================ -->
+<!-- 7. DISEASE PORTFOLIO -->
+<!-- ================================================================ -->
+<h2>7. Disease Portfolio Comparison</h2>
+
+<div class="narrative amber">
+<strong>Africa is HIV-heavy, Latin America is cancer-heavy, Asia is mixed.</strong>
+The disease portfolio reveals how colonial and donor legacies shape what gets studied where.
+</div>
+
+<h3>Absolute Trial Counts by Condition</h3>
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Condition</th>
+  <th style="text-align:right;color:#ef4444;">Africa</th>
+  <th style="text-align:right;color:#22c55e;">Latin America</th>
+  <th style="text-align:right;color:#3b82f6;">South/SE Asia</th>
+</tr></thead>
+<tbody>
+<tr><td style='padding:10px;font-weight:bold;'>Hiv</td><td style='padding:10px;text-align:right;'>1,287</td><td style='padding:10px;text-align:right;'>605</td><td style='padding:10px;text-align:right;'>375</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Cancer</td><td style='padding:10px;text-align:right;'>1,799</td><td style='padding:10px;text-align:right;'>5,934</td><td style='padding:10px;text-align:right;'>1,994</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Diabetes</td><td style='padding:10px;text-align:right;'>589</td><td style='padding:10px;text-align:right;'>1,598</td><td style='padding:10px;text-align:right;'>999</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Cardiovascular</td><td style='padding:10px;text-align:right;'>953</td><td style='padding:10px;text-align:right;'>2,885</td><td style='padding:10px;text-align:right;'>1,500</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<h3>Portfolio Share (% of condition trials within region)</h3>
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Condition</th>
+  <th style="text-align:right;color:#ef4444;">Africa %</th>
+  <th style="text-align:right;color:#22c55e;">Latin America %</th>
+  <th style="text-align:right;color:#3b82f6;">South/SE Asia %</th>
+</tr></thead>
+<tbody>
+<tr><td style='padding:10px;font-weight:bold;'>Hiv</td><td style='padding:10px;text-align:right;'>27.8%</td><td style='padding:10px;text-align:right;'>5.5%</td><td style='padding:10px;text-align:right;'>7.7%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Cancer</td><td style='padding:10px;text-align:right;'>38.9%</td><td style='padding:10px;text-align:right;'>53.8%</td><td style='padding:10px;text-align:right;'>41.0%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Diabetes</td><td style='padding:10px;text-align:right;'>12.7%</td><td style='padding:10px;text-align:right;'>14.5%</td><td style='padding:10px;text-align:right;'>20.5%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Cardiovascular</td><td style='padding:10px;text-align:right;'>20.6%</td><td style='padding:10px;text-align:right;'>26.2%</td><td style='padding:10px;text-align:right;'>30.8%</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Interpretation</h3>
+<ul style="padding-left:20px;color:var(--muted);">
+  <li><strong>Africa's HIV dominance:</strong> Reflects PEPFAR/Global Fund investment.
+    This is both a success (HIV research saves lives) and a trap (other diseases are neglected).</li>
+  <li><strong>Latin America's cancer focus:</strong> Upper-middle-income NCD burden plus
+    pharma oncology pipelines create a cancer-research ecosystem.</li>
+  <li><strong>Asia's balance:</strong> India and Thailand have diverse disease burdens
+    and research capacity spanning infectious and non-communicable diseases.</li>
+</ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- 8. INCOME VS TRIALS -->
+<!-- ================================================================ -->
+<h2>8. Income Group Analysis: GDP per Capita vs Trials per Million</h2>
+
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Income Group</th><th style="text-align:right;">Countries</th>
+  <th style="text-align:right;">Population</th>
+  <th style="text-align:right;">Trials</th>
+  <th style="text-align:right;">Per Million</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Low</td>
+  <td style="padding:10px;text-align:right;">6</td>
+  <td style="padding:10px;text-align:right;">239M</td>
+  <td style="padding:10px;text-align:right;">1,172</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">4.9</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Lower-middle</td>
+  <td style="padding:10px;text-align:right;">10</td>
+  <td style="padding:10px;text-align:right;">2557M</td>
+  <td style="padding:10px;text-align:right;">26,932</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">10.5</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Upper-middle</td>
+  <td style="padding:10px;text-align:right;">8</td>
+  <td style="padding:10px;text-align:right;">892M</td>
+  <td style="padding:10px;text-align:right;">32,609</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">36.6</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">High</td>
+  <td style="padding:10px;text-align:right;">3</td>
+  <td style="padding:10px;text-align:right;">423M</td>
+  <td style="padding:10px;text-align:right;">183,692</td>
+  <td style="padding:10px;text-align:right;color:#60a5fa;font-weight:bold;">434.3</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<h3>GDP per Capita vs Trial Density (Developing Countries Only)</h3>
+<p style="color:var(--muted);margin-bottom:8px;">Spearman rho = 0.793 (strong positive correlation)</p>
+
+<div class="card" style="overflow-x:auto;max-height:500px;overflow-y:auto;">
+<table>
+<thead><tr>
+  <th>Country</th><th style="text-align:center;">Region</th>
+  <th style="text-align:right;">GDP/capita</th>
+  <th style="text-align:right;">Trials/M</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Chile</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$16,800</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    122.3</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Argentina</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$13,500</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    87.4</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Mexico</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$11,500</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    52.7</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Brazil</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$10,200</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    45.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Thailand</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$7,200</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    48.4</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Peru</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$7,000</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    50.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#22c55e;">Colombia</td>
+  <td style="padding:8px;text-align:center;color:#22c55e;font-size:0.75rem;">
+    Latin America</td>
+  <td style="padding:8px;text-align:right;">$6,600</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">
+    36.0</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">South Africa</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$6,500</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    56.0</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Indonesia</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$4,800</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    4.6</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Egypt</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$4,300</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    112.7</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Vietnam</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$4,300</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    9.3</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Philippines</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$3,600</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    10.2</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Bangladesh</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$2,800</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    3.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">India</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$2,500</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    3.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Ghana</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$2,300</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    6.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Kenya</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$2,100</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    12.9</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#3b82f6;">Pakistan</td>
+  <td style="padding:8px;text-align:center;color:#3b82f6;font-size:0.75rem;">
+    South/SE Asia</td>
+  <td style="padding:8px;text-align:right;">$1,600</td>
+  <td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">
+    19.3</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Nigeria</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$1,600</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    1.5</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Tanzania</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$1,200</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    6.4</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Ethiopia</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$1,020</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    1.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Uganda</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$960</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    16.3</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Rwanda</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$960</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    8.6</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Chad</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$700</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.8</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">Somalia</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$450</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.4</td>
+</tr>
+<tr>
+  <td style="padding:8px;color:#ef4444;">South Sudan</td>
+  <td style="padding:8px;text-align:center;color:#ef4444;font-size:0.75rem;">
+    Africa</td>
+  <td style="padding:8px;text-align:right;">$420</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">
+    0.5</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="narrative">
+<strong>Money matters, but it's not everything.</strong> Income explains some of the variance,
+but countries like Argentina ($13,500 GDP/capita, 87.4/M) vastly outperform Nigeria ($1,600, 1.5/M)
+and even India ($2,500, 3.8/M) despite similar-ish income levels. Regulatory capacity,
+CRO infrastructure, and research culture are the multipliers.
+</div>
+
+<!-- ================================================================ -->
+<!-- 9. PHASE DISTRIBUTION -->
+<!-- ================================================================ -->
+<h2>9. Phase Distribution: Does Africa Have More Phase 3?</h2>
+
+<div class="narrative amber">
+<strong>The outsourcing hypothesis:</strong> If Africa is primarily a testing ground for
+drugs developed elsewhere, we would expect a disproportionate share of Phase 3 trials
+(confirmatory testing) and fewer Phase 1/2 (early development).
+</div>
+
+<h3>Absolute Phase Counts by Region</h3>
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Phase</th>
+  <th style="text-align:right;color:#ef4444;">Africa</th>
+  <th style="text-align:right;color:#22c55e;">Latin America</th>
+  <th style="text-align:right;color:#3b82f6;">South/SE Asia</th>
+</tr></thead>
+<tbody>
+<tr><td style='padding:10px;font-weight:bold;'>Early Phase 1</td><td style='padding:10px;text-align:right;'>219</td><td style='padding:10px;text-align:right;'>79</td><td style='padding:10px;text-align:right;'>105</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 1</td><td style='padding:10px;text-align:right;'>933</td><td style='padding:10px;text-align:right;'>1,147</td><td style='padding:10px;text-align:right;'>974</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 2</td><td style='padding:10px;text-align:right;'>2,625</td><td style='padding:10px;text-align:right;'>5,179</td><td style='padding:10px;text-align:right;'>2,248</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 3</td><td style='padding:10px;text-align:right;'>3,654</td><td style='padding:10px;text-align:right;'>11,437</td><td style='padding:10px;text-align:right;'>4,603</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 4</td><td style='padding:10px;text-align:right;'>1,474</td><td style='padding:10px;text-align:right;'>1,828</td><td style='padding:10px;text-align:right;'>1,401</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<h3>Phase Proportions (%)</h3>
+<div class="card" style="overflow-x:auto;">
+<table>
+<thead><tr>
+  <th>Phase</th>
+  <th style="text-align:right;color:#ef4444;">Africa %</th>
+  <th style="text-align:right;color:#22c55e;">Latin America %</th>
+  <th style="text-align:right;color:#3b82f6;">South/SE Asia %</th>
+</tr></thead>
+<tbody>
+<tr><td style='padding:10px;font-weight:bold;'>Early Phase 1</td><td style='padding:10px;text-align:right;'>2.5%</td><td style='padding:10px;text-align:right;'>0.4%</td><td style='padding:10px;text-align:right;'>1.1%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 1</td><td style='padding:10px;text-align:right;'>10.5%</td><td style='padding:10px;text-align:right;'>5.8%</td><td style='padding:10px;text-align:right;'>10.4%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 2</td><td style='padding:10px;text-align:right;'>29.5%</td><td style='padding:10px;text-align:right;'>26.3%</td><td style='padding:10px;text-align:right;'>24.1%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 3</td><td style='padding:10px;text-align:right; color:#f59e0b;font-weight:bold;'>41.0%</td><td style='padding:10px;text-align:right; color:#f59e0b;font-weight:bold;'>58.1%</td><td style='padding:10px;text-align:right; color:#f59e0b;font-weight:bold;'>49.3%</td></tr>
+<tr><td style='padding:10px;font-weight:bold;'>Phase 4</td><td style='padding:10px;text-align:right;'>16.6%</td><td style='padding:10px;text-align:right;'>9.3%</td><td style='padding:10px;text-align:right;'>15.0%</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Interpretation</h3>
+<ul style="padding-left:20px;color:var(--muted);">
+  <li>A higher Phase 3 share in Africa would suggest the continent serves primarily
+    as a testing ground for drugs developed in high-income countries.</li>
+  <li>A lower Phase 1 share indicates fewer early-development studies, consistent
+    with limited pharmaceutical R&amp;D infrastructure.</li>
+  <li>Latin America's distribution reflects both domestic pharma innovation and
+    large-scale multinational Phase 3 programs.</li>
+</ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- FOOTER -->
+<!-- ================================================================ -->
+<div class="footer">
+  <p>Africa vs the Developing World: A Global South Comparison</p>
+  <p>Data source: ClinicalTrials.gov API v2 | Population: 2025 estimates |
+    GDP: World Bank 2024 estimates</p>
+  <p>Generated: 28 March 2026 11:25 |
+    Cache: data/global_south_data.json (24h TTL)</p>
+  <p style="margin-top:8px;">Part of the AfricaRCT project &mdash;
+    mapping the clinical trial landscape across Africa</p>
+</div>
+
+</body>
+</html>

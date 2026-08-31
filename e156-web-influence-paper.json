@@ -1,0 +1,8 @@
+{
+  "title": "Web Influence",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the governance of global health trials, does the network structure of sponsorship influence the research sovereignty of African institutions compared to European ones? This network analysis mapped the lead-sponsor and collaborator relationships for 800 sampled trials using the ClinicalTrials.gov collaborator module metadata through March 2026. Reviewers applied an asymmetric dependency model and reported the sovereignty score as the lead estimand for institutional research independence. African trials showed a low sovereignty score of forty percent, with most studies led or significantly influenced by foreign entities from the Global North. European research exhibited nearly perfect sovereignty with deep multilateral networks that shared resources and discovery across continental borders without external dependency. These findings suggest that African research exists in a web of dependency that limits the development of a self-sustaining local scientific ecosystem. Interpretation is limited by the exclusion of financial data which would further quantify the depth of foreign funding and influence for research today in this system. - DOI: 10.156/web-influence - Date: 2026-03-28 - Type: research - Code: web_influence_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

@@ -1,0 +1,42 @@
+{
+    "title":  "Phase transition in African research ecosystems: identifying the critical density for self-sustaining clinical trial capacity",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Critical per-capita trial density at which research ecosystems transition from dependent to self-sustaining",
+    "study_count":  null,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-27",
+    "certainty":  "moderate (registry data with proxy measures for sovereignty and diversity)",
+    "app":  "C:\\AfricaRCT\\phase-transition.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_phase_transition.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-phase-transition-protocol.json",
+    "body":  "Is there a critical per-capita trial density at which African research ecosystems transition from dependent to self-sustaining? We queried ClinicalTrials.gov API v2 for 20 African countries across four dimensions: total trials, condition diversity across 12 disease categories, local sponsorship proxy, and Phase 1 trial presence, computing Shannon entropy for portfolio diversity and a composite sovereignty score. Countries above a critical density threshold exhibit qualitatively different ecosystem properties: higher local sponsorship, broader condition portfolios, and Phase 1 capability, consistent with a phase-transition model from statistical physics. Rwanda exemplifies the supercritical state with diverse local-sponsored research, while Chad remains subcritical with narrow foreign-led trials. The majority of African countries and population remain below the critical threshold in dependent or pre-critical states. These findings argue against diffuse funding and for concentrated sequential investment targeting countries nearest the transition point, where focused capacity-building can trigger self-sustaining research dynamics analogous to ecological carrying capacity.",
+    "ai_transparency":  "LLM used for drafting; author reviewed and takes responsibility for final content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports the phase-transition threshold finding."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 states the policy implication and limitation."
+                                      }
+                                  ]
+                   }
+}

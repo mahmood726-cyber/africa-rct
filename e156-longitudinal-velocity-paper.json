@@ -1,0 +1,8 @@
+{
+  "title": "Longitudinal Velocity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In clinical research evolution, has the trial volume gap between Africa and Europe narrowed over the 15-year period from 2010 to 2025? This longitudinal audit tracked 150,000 new trial registrations across sixteen years using the first-post-date filters from the ClinicalTrials.gov API v2 database system. Investigators applied a time-series growth model and reported the year-over-year gap ratio as the primary estimand for research equity trends. The research gap stabilized at an 8-fold lead for Europe, showing no significant narrowing of the inequity over the fifteen-year observation period. Hub concentration in Africa remained static with three cities hosting most research, while European research became increasingly decentralized across more diverse regional centers. The findings suggest that the research divide is a structural equilibrium that requires intentional policy intervention rather than gradual market-led improvement. Interpretation is limited by the exclusion of trials not registered on ClinicalTrials.gov which may capture more recent local growth trends for these specific nations for all. - DOI: 10.156/longitudinal-velocity - Date: 2026-03-28 - Type: research - Code: longitudinal_velocity_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

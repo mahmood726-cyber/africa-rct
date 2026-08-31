@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Research Desert Map</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0a0e17; color:#e0e0e0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.6; }
+
+.container { max-width:1400px; margin:0 auto; padding:20px 30px; }
+
+h1 { font-size:2.2em; font-weight:700; margin-bottom:8px; color:#fff;
+      background:linear-gradient(90deg,#ff4444,#ff8800,#ffcc00);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text; }
+.subtitle { font-size:1.1em; color:#888; margin-bottom:30px; }
+
+/* Summary cards */
+.summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:40px; }
+.summary-card { background:#131a2b; border:1px solid #1e2a45; border-radius:10px; padding:20px; text-align:center; }
+.summary-card.alert { border-color:#ff4444; background:#1a0a0a; }
+.card-value { font-size:2.4em; font-weight:800; color:#ff4444; }
+.card-value.green { color:#44ff88; }
+.card-label { font-size:0.85em; color:#888; margin-top:4px; }
+
+/* Heatmap */
+.heatmap-section { margin-bottom:50px; overflow-x:auto; }
+.section-title { font-size:1.5em; font-weight:600; color:#fff; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid #1e2a45; }
+.section-desc { color:#999; margin-bottom:20px; font-size:0.95em; }
+
+.heatmap { border-collapse:collapse; width:100%; min-width:900px; }
+.heatmap th { background:#0f1520; padding:10px 6px; font-size:0.75em; font-weight:600; color:#aaa; text-transform:uppercase; letter-spacing:0.5px; }
+.heatmap th.corner { background:#0f1520; }
+.cond-header { writing-mode:vertical-lr; text-orientation:mixed; transform:rotate(180deg); height:110px; vertical-align:bottom; }
+.cond-header div { white-space:nowrap; }
+
+.heatmap td { padding:8px 4px; text-align:center; font-size:0.9em; font-weight:600; transition:transform 0.15s; }
+.heatmap td:hover { transform:scale(1.15); z-index:10; position:relative; }
+
+.row-label { text-align:left !important; padding-left:12px !important; font-weight:600; color:#ddd; white-space:nowrap; min-width:170px; }
+.pop { font-weight:400; color:#666; font-size:0.8em; }
+
+.cell-zero { background:#000 !important; border:2px solid #ff0000 !important; color:#ff4444 !important; }
+.cell-low { background:#4a0000; color:#ff6666; }
+.cell-med { background:#7a4400; color:#fff; }
+.cell-high { background:#8a8a00; color:#000; }
+.cell-good { background:#1a6b1a; color:#fff; }
+
+.desert-score { color:#ff8800; font-weight:700; }
+.zero-count { color:#ff4444; }
+
+/* Legend */
+.legend { display:flex; gap:16px; align-items:center; margin:12px 0 30px; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:0.85em; }
+.legend-swatch { width:24px; height:18px; border-radius:3px; display:inline-block; }
+
+/* Desert ranking */
+.ranking-section { margin-bottom:50px; }
+.ranking-table { border-collapse:collapse; width:100%; max-width:800px; }
+.ranking-table th { background:#0f1520; padding:10px 12px; text-align:left; font-size:0.8em; color:#888; text-transform:uppercase; }
+.ranking-table td { padding:10px 12px; border-bottom:1px solid #1a2035; }
+.rank-num { width:40px; color:#666; font-weight:700; }
+.rank-country { font-weight:600; color:#ddd; }
+.rank-zeros { color:#ff4444; font-weight:700; }
+.rank-score { color:#ff8800; font-weight:700; }
+.rank-bar td { padding:0; }
+.bar { height:20px; background:linear-gradient(90deg,#ff0000,#ff4400,#ff8800); border-radius:0 4px 4px 0; min-width:2px; }
+
+/* Zero list */
+.zeros-section { margin-bottom:50px; }
+.zero-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:8px; }
+.zero-item { background:#0f1520; border:1px solid #1a2035; border-radius:6px; padding:10px 14px; font-size:0.9em; }
+.zero-country { color:#ff8800; font-weight:600; }
+.zero-x { color:#555; }
+.zero-cond { color:#ff4444; font-weight:600; }
+.zero-pop { color:#666; font-size:0.85em; }
+.critical-badge { background:#ff0000; color:#fff; font-size:0.7em; padding:2px 6px; border-radius:3px; font-weight:700; margin-left:6px; }
+
+/* Critical zeros */
+.critical-section { margin-bottom:50px; }
+.critical-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(380px,1fr)); gap:10px; }
+.critical-item { background:#1a0505; border:2px solid #ff0000; border-radius:8px; padding:14px 18px; }
+.crit-country { color:#ff8800; font-weight:700; font-size:1.05em; }
+.crit-cond { color:#ff4444; font-weight:700; font-size:1.05em; }
+.crit-pop { color:#aaa; margin:0 6px; }
+.crit-label { display:block; margin-top:4px; color:#ff6666; font-size:0.8em; font-weight:600; text-transform:uppercase; letter-spacing:1px; }
+
+/* Condition analysis */
+.cond-section { margin-bottom:50px; }
+.cond-table { border-collapse:collapse; width:100%; }
+.cond-table th { background:#0f1520; padding:10px 12px; text-align:left; font-size:0.8em; color:#888; text-transform:uppercase; }
+.cond-table td { padding:10px 12px; border-bottom:1px solid #1a2035; }
+.ca-cond { font-weight:600; color:#ddd; }
+.ca-zeros { color:#ff4444; font-weight:700; }
+.ca-us { color:#44ff88; }
+.ca-countries { color:#999; font-size:0.85em; }
+.none-text { color:#555; font-style:italic; }
+
+/* US comparison */
+.comparison-section { margin-bottom:50px; }
+.comparison-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:700px; }
+.comp-card { background:#131a2b; border:1px solid #1e2a45; border-radius:10px; padding:24px; text-align:center; }
+.comp-card.us { border-color:#44ff88; }
+.comp-card.africa { border-color:#ff4444; }
+.comp-val { font-size:2em; font-weight:800; }
+.comp-val.us { color:#44ff88; }
+.comp-val.africa { color:#ff4444; }
+.comp-sub { color:#888; font-size:0.85em; margin-top:4px; }
+
+/* Footer */
+.footer { margin-top:40px; padding-top:20px; border-top:1px solid #1a2035; color:#555; font-size:0.8em; text-align:center; }
+.footer a { color:#4488ff; text-decoration:none; }
+
+/* Responsive */
+@media (max-width:768px) {
+    .container { padding:10px; }
+    h1 { font-size:1.5em; }
+    .summary-grid { grid-template-columns:1fr 1fr; }
+    .comparison-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa Research Desert Map</h1>
+<p class="subtitle">Complete mapping of clinical trial absence: 20 countries &times; 12 conditions &mdash; 240 pairs queried from ClinicalTrials.gov</p>
+
+<!-- ================================================================== -->
+<!-- SECTION 1: Summary -->
+<!-- ================================================================== -->
+
+<div class="summary-grid">
+    <div class="summary-card alert">
+        <div class="card-value">36</div>
+        <div class="card-label">Country-condition pairs with ZERO trials (out of 240)</div>
+    </div>
+    <div class="summary-card alert">
+        <div class="card-value">15%</div>
+        <div class="card-label">of all pairs are absolute zeros</div>
+    </div>
+    <div class="summary-card">
+        <div class="card-value" style="color:#ff8800">Chad</div>
+        <div class="card-label">Worst country (9/12 conditions with zero trials)</div>
+    </div>
+    <div class="summary-card">
+        <div class="card-value" style="color:#ff8800">Stroke</div>
+        <div class="card-label">Most absent condition (6/20 countries with zero)</div>
+    </div>
+    <div class="summary-card">
+        <div class="card-value" style="color:#ffcc00">3</div>
+        <div class="card-label">Critical zeros (high burden + zero trials)</div>
+    </div>
+    <div class="summary-card">
+        <div class="card-value green">11,064</div>
+        <div class="card-label">Total interventional trials across all 240 pairs</div>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 2: THE HEATMAP -->
+<!-- ================================================================== -->
+
+<div class="heatmap-section">
+    <h2 class="section-title">The Complete Heatmap</h2>
+    <p class="section-desc">Each cell shows the number of interventional clinical trials registered on ClinicalTrials.gov. Black cells with red borders = absolute zero.</p>
+
+    <div class="legend">
+        <div class="legend-item"><span class="legend-swatch" style="background:#000;border:2px solid #ff0000"></span> 0 trials</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#4a0000"></span> 1-3</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#7a4400"></span> 4-10</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#8a8a00"></span> 11-50</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:#1a6b1a"></span> 50+</div>
+    </div>
+
+    <table class="heatmap">
+    <thead>
+        <tr>
+            <th class="corner">Country</th>
+            <th class="cond-header"><div>HIV</div></th><th class="cond-header"><div>Malaria</div></th><th class="cond-header"><div>Tuberculosis</div></th><th class="cond-header"><div>Cancer</div></th><th class="cond-header"><div>Diabetes</div></th><th class="cond-header"><div>Hypertension</div></th><th class="cond-header"><div>Stroke</div></th><th class="cond-header"><div>Cardiovascular</div></th><th class="cond-header"><div>Mental health</div></th><th class="cond-header"><div>Sickle cell</div></th><th class="cond-header"><div>Maternal</div></th><th class="cond-header"><div>Neonatal</div></th>
+            <th>Desert Score</th>
+            <th>Zeros</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td class="row-label">South Africa <span class="pop">(62M)</span></td><td class="cell-good" title="South Africa x HIV: 608 trials">608</td><td class="cell-med" title="South Africa x Malaria: 7 trials">7</td><td class="cell-good" title="South Africa x Tuberculosis: 237 trials">237</td><td class="cell-good" title="South Africa x Cancer: 557 trials">557</td><td class="cell-good" title="South Africa x Diabetes: 248 trials">248</td><td class="cell-good" title="South Africa x Hypertension: 70 trials">70</td><td class="cell-high" title="South Africa x Stroke: 44 trials">44</td><td class="cell-good" title="South Africa x Cardiovascular: 329 trials">329</td><td class="cell-good" title="South Africa x Mental health: 96 trials">96</td><td class="cell-med" title="South Africa x Sickle cell: 9 trials">9</td><td class="cell-good" title="South Africa x Maternal: 273 trials">273</td><td class="cell-good" title="South Africa x Neonatal: 191 trials">191</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Egypt <span class="pop">(110M)</span></td><td class="cell-low" title="Egypt x HIV: 2 trials">2</td><td class="cell-zero" title="Egypt x Malaria: 0 trials">0</td><td class="cell-low" title="Egypt x Tuberculosis: 2 trials">2</td><td class="cell-good" title="Egypt x Cancer: 1117 trials">1117</td><td class="cell-good" title="Egypt x Diabetes: 314 trials">314</td><td class="cell-good" title="Egypt x Hypertension: 191 trials">191</td><td class="cell-good" title="Egypt x Stroke: 108 trials">108</td><td class="cell-good" title="Egypt x Cardiovascular: 525 trials">525</td><td class="cell-good" title="Egypt x Mental health: 78 trials">78</td><td class="cell-high" title="Egypt x Sickle cell: 30 trials">30</td><td class="cell-good" title="Egypt x Maternal: 1161 trials">1161</td><td class="cell-good" title="Egypt x Neonatal: 557 trials">557</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">Kenya <span class="pop">(56M)</span></td><td class="cell-good" title="Kenya x HIV: 283 trials">283</td><td class="cell-good" title="Kenya x Malaria: 106 trials">106</td><td class="cell-high" title="Kenya x Tuberculosis: 28 trials">28</td><td class="cell-good" title="Kenya x Cancer: 51 trials">51</td><td class="cell-med" title="Kenya x Diabetes: 8 trials">8</td><td class="cell-high" title="Kenya x Hypertension: 14 trials">14</td><td class="cell-low" title="Kenya x Stroke: 1 trials">1</td><td class="cell-high" title="Kenya x Cardiovascular: 18 trials">18</td><td class="cell-high" title="Kenya x Mental health: 36 trials">36</td><td class="cell-high" title="Kenya x Sickle cell: 26 trials">26</td><td class="cell-good" title="Kenya x Maternal: 131 trials">131</td><td class="cell-good" title="Kenya x Neonatal: 54 trials">54</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Uganda <span class="pop">(48M)</span></td><td class="cell-good" title="Uganda x HIV: 329 trials">329</td><td class="cell-good" title="Uganda x Malaria: 94 trials">94</td><td class="cell-good" title="Uganda x Tuberculosis: 88 trials">88</td><td class="cell-high" title="Uganda x Cancer: 32 trials">32</td><td class="cell-low" title="Uganda x Diabetes: 3 trials">3</td><td class="cell-med" title="Uganda x Hypertension: 10 trials">10</td><td class="cell-med" title="Uganda x Stroke: 6 trials">6</td><td class="cell-high" title="Uganda x Cardiovascular: 27 trials">27</td><td class="cell-high" title="Uganda x Mental health: 29 trials">29</td><td class="cell-high" title="Uganda x Sickle cell: 17 trials">17</td><td class="cell-good" title="Uganda x Maternal: 102 trials">102</td><td class="cell-high" title="Uganda x Neonatal: 42 trials">42</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Nigeria <span class="pop">(230M)</span></td><td class="cell-high" title="Nigeria x HIV: 47 trials">47</td><td class="cell-high" title="Nigeria x Malaria: 23 trials">23</td><td class="cell-med" title="Nigeria x Tuberculosis: 9 trials">9</td><td class="cell-high" title="Nigeria x Cancer: 35 trials">35</td><td class="cell-high" title="Nigeria x Diabetes: 12 trials">12</td><td class="cell-high" title="Nigeria x Hypertension: 29 trials">29</td><td class="cell-high" title="Nigeria x Stroke: 18 trials">18</td><td class="cell-high" title="Nigeria x Cardiovascular: 45 trials">45</td><td class="cell-med" title="Nigeria x Mental health: 10 trials">10</td><td class="cell-high" title="Nigeria x Sickle cell: 30 trials">30</td><td class="cell-good" title="Nigeria x Maternal: 54 trials">54</td><td class="cell-high" title="Nigeria x Neonatal: 44 trials">44</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Tanzania <span class="pop">(67M)</span></td><td class="cell-good" title="Tanzania x HIV: 137 trials">137</td><td class="cell-good" title="Tanzania x Malaria: 94 trials">94</td><td class="cell-high" title="Tanzania x Tuberculosis: 47 trials">47</td><td class="cell-high" title="Tanzania x Cancer: 20 trials">20</td><td class="cell-med" title="Tanzania x Diabetes: 4 trials">4</td><td class="cell-med" title="Tanzania x Hypertension: 5 trials">5</td><td class="cell-low" title="Tanzania x Stroke: 3 trials">3</td><td class="cell-high" title="Tanzania x Cardiovascular: 12 trials">12</td><td class="cell-high" title="Tanzania x Mental health: 14 trials">14</td><td class="cell-med" title="Tanzania x Sickle cell: 8 trials">8</td><td class="cell-good" title="Tanzania x Maternal: 74 trials">74</td><td class="cell-high" title="Tanzania x Neonatal: 27 trials">27</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Ethiopia <span class="pop">(130M)</span></td><td class="cell-high" title="Ethiopia x HIV: 18 trials">18</td><td class="cell-high" title="Ethiopia x Malaria: 20 trials">20</td><td class="cell-high" title="Ethiopia x Tuberculosis: 18 trials">18</td><td class="cell-med" title="Ethiopia x Cancer: 7 trials">7</td><td class="cell-med" title="Ethiopia x Diabetes: 4 trials">4</td><td class="cell-low" title="Ethiopia x Hypertension: 3 trials">3</td><td class="cell-low" title="Ethiopia x Stroke: 3 trials">3</td><td class="cell-med" title="Ethiopia x Cardiovascular: 9 trials">9</td><td class="cell-high" title="Ethiopia x Mental health: 12 trials">12</td><td class="cell-zero" title="Ethiopia x Sickle cell: 0 trials">0</td><td class="cell-high" title="Ethiopia x Maternal: 45 trials">45</td><td class="cell-high" title="Ethiopia x Neonatal: 13 trials">13</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">Ghana <span class="pop">(34M)</span></td><td class="cell-high" title="Ghana x HIV: 19 trials">19</td><td class="cell-good" title="Ghana x Malaria: 55 trials">55</td><td class="cell-med" title="Ghana x Tuberculosis: 5 trials">5</td><td class="cell-med" title="Ghana x Cancer: 7 trials">7</td><td class="cell-med" title="Ghana x Diabetes: 6 trials">6</td><td class="cell-high" title="Ghana x Hypertension: 14 trials">14</td><td class="cell-med" title="Ghana x Stroke: 6 trials">6</td><td class="cell-high" title="Ghana x Cardiovascular: 18 trials">18</td><td class="cell-med" title="Ghana x Mental health: 10 trials">10</td><td class="cell-med" title="Ghana x Sickle cell: 10 trials">10</td><td class="cell-high" title="Ghana x Maternal: 44 trials">44</td><td class="cell-high" title="Ghana x Neonatal: 19 trials">19</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Cameroon <span class="pop">(27M)</span></td><td class="cell-high" title="Cameroon x HIV: 31 trials">31</td><td class="cell-high" title="Cameroon x Malaria: 13 trials">13</td><td class="cell-med" title="Cameroon x Tuberculosis: 9 trials">9</td><td class="cell-med" title="Cameroon x Cancer: 9 trials">9</td><td class="cell-high" title="Cameroon x Diabetes: 12 trials">12</td><td class="cell-med" title="Cameroon x Hypertension: 8 trials">8</td><td class="cell-low" title="Cameroon x Stroke: 2 trials">2</td><td class="cell-high" title="Cameroon x Cardiovascular: 15 trials">15</td><td class="cell-zero" title="Cameroon x Mental health: 0 trials">0</td><td class="cell-low" title="Cameroon x Sickle cell: 1 trials">1</td><td class="cell-high" title="Cameroon x Maternal: 13 trials">13</td><td class="cell-med" title="Cameroon x Neonatal: 4 trials">4</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">Mozambique <span class="pop">(33M)</span></td><td class="cell-high" title="Mozambique x HIV: 39 trials">39</td><td class="cell-high" title="Mozambique x Malaria: 38 trials">38</td><td class="cell-high" title="Mozambique x Tuberculosis: 22 trials">22</td><td class="cell-med" title="Mozambique x Cancer: 6 trials">6</td><td class="cell-low" title="Mozambique x Diabetes: 1 trials">1</td><td class="cell-med" title="Mozambique x Hypertension: 4 trials">4</td><td class="cell-low" title="Mozambique x Stroke: 1 trials">1</td><td class="cell-med" title="Mozambique x Cardiovascular: 10 trials">10</td><td class="cell-med" title="Mozambique x Mental health: 5 trials">5</td><td class="cell-zero" title="Mozambique x Sickle cell: 0 trials">0</td><td class="cell-high" title="Mozambique x Maternal: 18 trials">18</td><td class="cell-low" title="Mozambique x Neonatal: 3 trials">3</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">Malawi <span class="pop">(21M)</span></td><td class="cell-good" title="Malawi x HIV: 135 trials">135</td><td class="cell-high" title="Malawi x Malaria: 40 trials">40</td><td class="cell-high" title="Malawi x Tuberculosis: 30 trials">30</td><td class="cell-high" title="Malawi x Cancer: 14 trials">14</td><td class="cell-low" title="Malawi x Diabetes: 2 trials">2</td><td class="cell-med" title="Malawi x Hypertension: 4 trials">4</td><td class="cell-low" title="Malawi x Stroke: 1 trials">1</td><td class="cell-med" title="Malawi x Cardiovascular: 4 trials">4</td><td class="cell-high" title="Malawi x Mental health: 17 trials">17</td><td class="cell-low" title="Malawi x Sickle cell: 1 trials">1</td><td class="cell-high" title="Malawi x Maternal: 49 trials">49</td><td class="cell-med" title="Malawi x Neonatal: 8 trials">8</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Zambia <span class="pop">(21M)</span></td><td class="cell-good" title="Zambia x HIV: 106 trials">106</td><td class="cell-high" title="Zambia x Malaria: 29 trials">29</td><td class="cell-high" title="Zambia x Tuberculosis: 28 trials">28</td><td class="cell-med" title="Zambia x Cancer: 4 trials">4</td><td class="cell-low" title="Zambia x Diabetes: 2 trials">2</td><td class="cell-med" title="Zambia x Hypertension: 6 trials">6</td><td class="cell-low" title="Zambia x Stroke: 2 trials">2</td><td class="cell-med" title="Zambia x Cardiovascular: 10 trials">10</td><td class="cell-high" title="Zambia x Mental health: 13 trials">13</td><td class="cell-low" title="Zambia x Sickle cell: 1 trials">1</td><td class="cell-good" title="Zambia x Maternal: 60 trials">60</td><td class="cell-high" title="Zambia x Neonatal: 26 trials">26</td><td class="desert-score">0.00</td><td class="zero-count">0/12</td></tr><tr><td class="row-label">Zimbabwe <span class="pop">(15M)</span></td><td class="cell-good" title="Zimbabwe x HIV: 118 trials">118</td><td class="cell-zero" title="Zimbabwe x Malaria: 0 trials">0</td><td class="cell-high" title="Zimbabwe x Tuberculosis: 23 trials">23</td><td class="cell-med" title="Zimbabwe x Cancer: 10 trials">10</td><td class="cell-zero" title="Zimbabwe x Diabetes: 0 trials">0</td><td class="cell-zero" title="Zimbabwe x Hypertension: 0 trials">0</td><td class="cell-low" title="Zimbabwe x Stroke: 2 trials">2</td><td class="cell-low" title="Zimbabwe x Cardiovascular: 3 trials">3</td><td class="cell-med" title="Zimbabwe x Mental health: 8 trials">8</td><td class="cell-zero" title="Zimbabwe x Sickle cell: 0 trials">0</td><td class="cell-high" title="Zimbabwe x Maternal: 30 trials">30</td><td class="cell-low" title="Zimbabwe x Neonatal: 3 trials">3</td><td class="desert-score">0.33</td><td class="zero-count">4/12</td></tr><tr><td class="row-label">Senegal <span class="pop">(17M)</span></td><td class="cell-high" title="Senegal x HIV: 15 trials">15</td><td class="cell-high" title="Senegal x Malaria: 22 trials">22</td><td class="cell-med" title="Senegal x Tuberculosis: 4 trials">4</td><td class="cell-med" title="Senegal x Cancer: 5 trials">5</td><td class="cell-zero" title="Senegal x Diabetes: 0 trials">0</td><td class="cell-low" title="Senegal x Hypertension: 3 trials">3</td><td class="cell-zero" title="Senegal x Stroke: 0 trials">0</td><td class="cell-low" title="Senegal x Cardiovascular: 2 trials">2</td><td class="cell-low" title="Senegal x Mental health: 1 trials">1</td><td class="cell-low" title="Senegal x Sickle cell: 2 trials">2</td><td class="cell-high" title="Senegal x Maternal: 16 trials">16</td><td class="cell-low" title="Senegal x Neonatal: 2 trials">2</td><td class="desert-score">0.17</td><td class="zero-count">2/12</td></tr><tr><td class="row-label">Rwanda <span class="pop">(14M)</span></td><td class="cell-high" title="Rwanda x HIV: 31 trials">31</td><td class="cell-high" title="Rwanda x Malaria: 15 trials">15</td><td class="cell-low" title="Rwanda x Tuberculosis: 1 trials">1</td><td class="cell-med" title="Rwanda x Cancer: 5 trials">5</td><td class="cell-low" title="Rwanda x Diabetes: 3 trials">3</td><td class="cell-low" title="Rwanda x Hypertension: 1 trials">1</td><td class="cell-low" title="Rwanda x Stroke: 1 trials">1</td><td class="cell-low" title="Rwanda x Cardiovascular: 3 trials">3</td><td class="cell-med" title="Rwanda x Mental health: 8 trials">8</td><td class="cell-zero" title="Rwanda x Sickle cell: 0 trials">0</td><td class="cell-high" title="Rwanda x Maternal: 12 trials">12</td><td class="cell-med" title="Rwanda x Neonatal: 6 trials">6</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">DRC <span class="pop">(102M)</span></td><td class="cell-med" title="DRC x HIV: 6 trials">6</td><td class="cell-high" title="DRC x Malaria: 32 trials">32</td><td class="cell-low" title="DRC x Tuberculosis: 2 trials">2</td><td class="cell-low" title="DRC x Cancer: 2 trials">2</td><td class="cell-low" title="DRC x Diabetes: 1 trials">1</td><td class="cell-low" title="DRC x Hypertension: 1 trials">1</td><td class="cell-zero" title="DRC x Stroke: 0 trials">0</td><td class="cell-low" title="DRC x Cardiovascular: 1 trials">1</td><td class="cell-med" title="DRC x Mental health: 9 trials">9</td><td class="cell-med" title="DRC x Sickle cell: 4 trials">4</td><td class="cell-high" title="DRC x Maternal: 25 trials">25</td><td class="cell-high" title="DRC x Neonatal: 16 trials">16</td><td class="desert-score">0.08</td><td class="zero-count">1/12</td></tr><tr><td class="row-label">Burkina Faso <span class="pop">(23M)</span></td><td class="cell-high" title="Burkina Faso x HIV: 15 trials">15</td><td class="cell-good" title="Burkina Faso x Malaria: 105 trials">105</td><td class="cell-low" title="Burkina Faso x Tuberculosis: 1 trials">1</td><td class="cell-low" title="Burkina Faso x Cancer: 2 trials">2</td><td class="cell-low" title="Burkina Faso x Diabetes: 3 trials">3</td><td class="cell-zero" title="Burkina Faso x Hypertension: 0 trials">0</td><td class="cell-zero" title="Burkina Faso x Stroke: 0 trials">0</td><td class="cell-low" title="Burkina Faso x Cardiovascular: 3 trials">3</td><td class="cell-low" title="Burkina Faso x Mental health: 2 trials">2</td><td class="cell-low" title="Burkina Faso x Sickle cell: 1 trials">1</td><td class="cell-high" title="Burkina Faso x Maternal: 28 trials">28</td><td class="cell-med" title="Burkina Faso x Neonatal: 10 trials">10</td><td class="desert-score">0.17</td><td class="zero-count">2/12</td></tr><tr><td class="row-label">Mali <span class="pop">(23M)</span></td><td class="cell-med" title="Mali x HIV: 8 trials">8</td><td class="cell-good" title="Mali x Malaria: 80 trials">80</td><td class="cell-zero" title="Mali x Tuberculosis: 0 trials">0</td><td class="cell-low" title="Mali x Cancer: 3 trials">3</td><td class="cell-med" title="Mali x Diabetes: 4 trials">4</td><td class="cell-zero" title="Mali x Hypertension: 0 trials">0</td><td class="cell-zero" title="Mali x Stroke: 0 trials">0</td><td class="cell-zero" title="Mali x Cardiovascular: 0 trials">0</td><td class="cell-zero" title="Mali x Mental health: 0 trials">0</td><td class="cell-low" title="Mali x Sickle cell: 1 trials">1</td><td class="cell-high" title="Mali x Maternal: 12 trials">12</td><td class="cell-low" title="Mali x Neonatal: 3 trials">3</td><td class="desert-score">0.42</td><td class="zero-count">5/12</td></tr><tr><td class="row-label">Niger <span class="pop">(27M)</span></td><td class="cell-low" title="Niger x HIV: 2 trials">2</td><td class="cell-med" title="Niger x Malaria: 8 trials">8</td><td class="cell-low" title="Niger x Tuberculosis: 1 trials">1</td><td class="cell-zero" title="Niger x Cancer: 0 trials">0</td><td class="cell-zero" title="Niger x Diabetes: 0 trials">0</td><td class="cell-zero" title="Niger x Hypertension: 0 trials">0</td><td class="cell-zero" title="Niger x Stroke: 0 trials">0</td><td class="cell-zero" title="Niger x Cardiovascular: 0 trials">0</td><td class="cell-zero" title="Niger x Mental health: 0 trials">0</td><td class="cell-zero" title="Niger x Sickle cell: 0 trials">0</td><td class="cell-med" title="Niger x Maternal: 4 trials">4</td><td class="cell-zero" title="Niger x Neonatal: 0 trials">0</td><td class="desert-score">0.67</td><td class="zero-count">8/12</td></tr><tr><td class="row-label">Chad <span class="pop">(18M)</span></td><td class="cell-zero" title="Chad x HIV: 0 trials">0</td><td class="cell-low" title="Chad x Malaria: 1 trials">1</td><td class="cell-low" title="Chad x Tuberculosis: 1 trials">1</td><td class="cell-zero" title="Chad x Cancer: 0 trials">0</td><td class="cell-zero" title="Chad x Diabetes: 0 trials">0</td><td class="cell-zero" title="Chad x Hypertension: 0 trials">0</td><td class="cell-zero" title="Chad x Stroke: 0 trials">0</td><td class="cell-zero" title="Chad x Cardiovascular: 0 trials">0</td><td class="cell-zero" title="Chad x Mental health: 0 trials">0</td><td class="cell-zero" title="Chad x Sickle cell: 0 trials">0</td><td class="cell-low" title="Chad x Maternal: 1 trials">1</td><td class="cell-zero" title="Chad x Neonatal: 0 trials">0</td><td class="desert-score">0.75</td><td class="zero-count">9/12</td></tr>
+    </tbody>
+    </table>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 3: Desert Score Ranking -->
+<!-- ================================================================== -->
+
+<div class="ranking-section">
+    <h2 class="section-title">Desert Score Ranking</h2>
+    <p class="section-desc">Countries ranked by proportion of conditions with zero trials. Score 1.00 = no trials for ANY condition; 0.00 = at least one trial for every condition.</p>
+
+    <table class="ranking-table">
+    <thead>
+        <tr><th>#</th><th>Country</th><th>Zeros</th><th>Score</th><th>Bar</th></tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td class="rank-num">1</td>
+            <td class="rank-country">Chad (18M)</td>
+            <td class="rank-zeros">9/12</td>
+            <td class="rank-score">0.75</td>
+            <td class="rank-bar"><div class="bar" style="width:75%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">2</td>
+            <td class="rank-country">Niger (27M)</td>
+            <td class="rank-zeros">8/12</td>
+            <td class="rank-score">0.67</td>
+            <td class="rank-bar"><div class="bar" style="width:66%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">3</td>
+            <td class="rank-country">Mali (23M)</td>
+            <td class="rank-zeros">5/12</td>
+            <td class="rank-score">0.42</td>
+            <td class="rank-bar"><div class="bar" style="width:41%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">4</td>
+            <td class="rank-country">Zimbabwe (15M)</td>
+            <td class="rank-zeros">4/12</td>
+            <td class="rank-score">0.33</td>
+            <td class="rank-bar"><div class="bar" style="width:33%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">5</td>
+            <td class="rank-country">Senegal (17M)</td>
+            <td class="rank-zeros">2/12</td>
+            <td class="rank-score">0.17</td>
+            <td class="rank-bar"><div class="bar" style="width:16%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">6</td>
+            <td class="rank-country">Burkina Faso (23M)</td>
+            <td class="rank-zeros">2/12</td>
+            <td class="rank-score">0.17</td>
+            <td class="rank-bar"><div class="bar" style="width:16%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">7</td>
+            <td class="rank-country">Egypt (110M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">8</td>
+            <td class="rank-country">Ethiopia (130M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">9</td>
+            <td class="rank-country">Cameroon (27M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">10</td>
+            <td class="rank-country">Mozambique (33M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">11</td>
+            <td class="rank-country">Rwanda (14M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">12</td>
+            <td class="rank-country">DRC (102M)</td>
+            <td class="rank-zeros">1/12</td>
+            <td class="rank-score">0.08</td>
+            <td class="rank-bar"><div class="bar" style="width:8%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">13</td>
+            <td class="rank-country">South Africa (62M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">14</td>
+            <td class="rank-country">Kenya (56M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">15</td>
+            <td class="rank-country">Uganda (48M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">16</td>
+            <td class="rank-country">Nigeria (230M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">17</td>
+            <td class="rank-country">Tanzania (67M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">18</td>
+            <td class="rank-country">Ghana (34M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">19</td>
+            <td class="rank-country">Malawi (21M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+        <tr>
+            <td class="rank-num">20</td>
+            <td class="rank-country">Zambia (21M)</td>
+            <td class="rank-zeros">0/12</td>
+            <td class="rank-score">0.00</td>
+            <td class="rank-bar"><div class="bar" style="width:0%"></div></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 4: The Absolute Zeros -->
+<!-- ================================================================== -->
+
+<div class="zeros-section">
+    <h2 class="section-title">The Absolute Zeros &mdash; 36 Pairs with ZERO Trials</h2>
+    <p class="section-desc">Every country-condition pair where not a single interventional trial has ever been registered. Sorted by population (most affected first).</p>
+
+    <div class="zero-grid">
+        <div class="zero-item"><span class="zero-country">Ethiopia</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(130M people)</span></div><div class="zero-item"><span class="zero-country">Egypt</span> <span class="zero-x">&times;</span> <span class="zero-cond">Malaria</span> <span class="zero-pop">(110M people)</span></div><div class="zero-item"><span class="zero-country">DRC</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(102M people)</span></div><div class="zero-item"><span class="zero-country">Mozambique</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(33M people)</span></div><div class="zero-item"><span class="zero-country">Cameroon</span> <span class="zero-x">&times;</span> <span class="zero-cond">Mental health</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Cancer</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Diabetes</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Hypertension</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Cardiovascular</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Mental health</span> <span class="zero-pop">(27M people)</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(27M people)</span> <span class="critical-badge">CRITICAL</span></div><div class="zero-item"><span class="zero-country">Niger</span> <span class="zero-x">&times;</span> <span class="zero-cond">Neonatal</span> <span class="zero-pop">(27M people)</span> <span class="critical-badge">CRITICAL</span></div><div class="zero-item"><span class="zero-country">Burkina Faso</span> <span class="zero-x">&times;</span> <span class="zero-cond">Hypertension</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Burkina Faso</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Mali</span> <span class="zero-x">&times;</span> <span class="zero-cond">Tuberculosis</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Mali</span> <span class="zero-x">&times;</span> <span class="zero-cond">Hypertension</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Mali</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Mali</span> <span class="zero-x">&times;</span> <span class="zero-cond">Cardiovascular</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Mali</span> <span class="zero-x">&times;</span> <span class="zero-cond">Mental health</span> <span class="zero-pop">(23M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">HIV</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Cancer</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Diabetes</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Hypertension</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Cardiovascular</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Mental health</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(18M people)</span></div><div class="zero-item"><span class="zero-country">Chad</span> <span class="zero-x">&times;</span> <span class="zero-cond">Neonatal</span> <span class="zero-pop">(18M people)</span> <span class="critical-badge">CRITICAL</span></div><div class="zero-item"><span class="zero-country">Senegal</span> <span class="zero-x">&times;</span> <span class="zero-cond">Diabetes</span> <span class="zero-pop">(17M people)</span></div><div class="zero-item"><span class="zero-country">Senegal</span> <span class="zero-x">&times;</span> <span class="zero-cond">Stroke</span> <span class="zero-pop">(17M people)</span></div><div class="zero-item"><span class="zero-country">Zimbabwe</span> <span class="zero-x">&times;</span> <span class="zero-cond">Malaria</span> <span class="zero-pop">(15M people)</span></div><div class="zero-item"><span class="zero-country">Zimbabwe</span> <span class="zero-x">&times;</span> <span class="zero-cond">Diabetes</span> <span class="zero-pop">(15M people)</span></div><div class="zero-item"><span class="zero-country">Zimbabwe</span> <span class="zero-x">&times;</span> <span class="zero-cond">Hypertension</span> <span class="zero-pop">(15M people)</span></div><div class="zero-item"><span class="zero-country">Zimbabwe</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(15M people)</span></div><div class="zero-item"><span class="zero-country">Rwanda</span> <span class="zero-x">&times;</span> <span class="zero-cond">Sickle cell</span> <span class="zero-pop">(14M people)</span></div>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 5: Critical Zeros -->
+<!-- ================================================================== -->
+
+<div class="critical-section">
+    <h2 class="section-title">Critical Zeros &mdash; 3 High-Burden Gaps</h2>
+    <p class="section-desc">These are the most egregious gaps: countries where a condition is a major health burden, yet ZERO clinical trials exist.</p>
+
+    <div class="critical-grid">
+        <div class="critical-item"><span class="crit-country">Niger</span> <span class="zero-x">&times;</span> <span class="crit-cond">Sickle cell</span> <span class="crit-pop">(27M)</span><span class="crit-label">High burden, ZERO trials</span></div><div class="critical-item"><span class="crit-country">Niger</span> <span class="zero-x">&times;</span> <span class="crit-cond">Neonatal</span> <span class="crit-pop">(27M)</span><span class="crit-label">High burden, ZERO trials</span></div><div class="critical-item"><span class="crit-country">Chad</span> <span class="zero-x">&times;</span> <span class="crit-cond">Neonatal</span> <span class="crit-pop">(18M)</span><span class="crit-label">High burden, ZERO trials</span></div>
+    </div>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 6: Per-Condition Analysis -->
+<!-- ================================================================== -->
+
+<div class="cond-section">
+    <h2 class="section-title">Per-Condition Analysis</h2>
+    <p class="section-desc">Which conditions are most absent across the 20 African countries? US counts shown for comparison.</p>
+
+    <table class="cond-table">
+    <thead>
+        <tr><th>Condition</th><th>Countries with Zero</th><th>US Trials</th><th>Countries with Zero Trials</th></tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td class="ca-cond">Stroke</td>
+            <td class="ca-zeros">6/20</td>
+            <td class="ca-us">1,923</td>
+            <td class="ca-countries">Senegal, DRC, Burkina Faso, Mali, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Sickle cell</td>
+            <td class="ca-zeros">6/20</td>
+            <td class="ca-us">574</td>
+            <td class="ca-countries">Ethiopia, Mozambique, Zimbabwe, Rwanda, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Hypertension</td>
+            <td class="ca-zeros">5/20</td>
+            <td class="ca-us">3,093</td>
+            <td class="ca-countries">Zimbabwe, Burkina Faso, Mali, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Diabetes</td>
+            <td class="ca-zeros">4/20</td>
+            <td class="ca-us">6,930</td>
+            <td class="ca-countries">Zimbabwe, Senegal, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Mental health</td>
+            <td class="ca-zeros">4/20</td>
+            <td class="ca-us">6,625</td>
+            <td class="ca-countries">Cameroon, Mali, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Cardiovascular</td>
+            <td class="ca-zeros">3/20</td>
+            <td class="ca-us">15,064</td>
+            <td class="ca-countries">Mali, Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Malaria</td>
+            <td class="ca-zeros">2/20</td>
+            <td class="ca-us">108</td>
+            <td class="ca-countries">Egypt, Zimbabwe</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Cancer</td>
+            <td class="ca-zeros">2/20</td>
+            <td class="ca-us">42,379</td>
+            <td class="ca-countries">Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Neonatal</td>
+            <td class="ca-zeros">2/20</td>
+            <td class="ca-us">7,805</td>
+            <td class="ca-countries">Niger, Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">HIV</td>
+            <td class="ca-zeros">1/20</td>
+            <td class="ca-us">4,363</td>
+            <td class="ca-countries">Chad</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Tuberculosis</td>
+            <td class="ca-zeros">1/20</td>
+            <td class="ca-us">129</td>
+            <td class="ca-countries">Mali</td>
+        </tr>
+        <tr>
+            <td class="ca-cond">Maternal</td>
+            <td class="ca-zeros">0/20</td>
+            <td class="ca-us">11,823</td>
+            <td class="ca-countries"><span class="none-text">None</span></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<!-- ================================================================== -->
+<!-- SECTION 7: US Comparison -->
+<!-- ================================================================== -->
+
+<div class="comparison-section">
+    <h2 class="section-title">The Comparison That Matters</h2>
+    <p class="section-desc">How many condition-zeros would the United States have across these same 12 conditions?</p>
+
+    <div class="comparison-grid">
+        <div class="comp-card us">
+            <div class="comp-val us">0</div>
+            <div class="comp-sub">US conditions with zero trials (out of 12)</div>
+            <div class="comp-sub" style="margin-top:8px;">Total US trials: <strong style="color:#44ff88">100,816</strong></div>
+            <div class="comp-sub">Population: 335M</div>
+        </div>
+        <div class="comp-card africa">
+            <div class="comp-val africa">36</div>
+            <div class="comp-sub">Africa country-condition zeros (out of 240)</div>
+            <div class="comp-sub" style="margin-top:8px;">Total Africa trials: <strong style="color:#ff4444">11,064</strong></div>
+            <div class="comp-sub">Combined population: 1,078M</div>
+        </div>
+    </div>
+
+    <div style="margin-top:20px;padding:20px;background:#131a2b;border-radius:10px;max-width:700px;">
+        <p style="color:#ccc;font-size:0.95em;">
+            The United States, with <strong>335M</strong> people, has <strong style="color:#44ff88">100,816</strong>
+            interventional trials across these 12 conditions and <strong style="color:#44ff88">0</strong> zeros.
+        </p>
+        <p style="color:#ccc;font-size:0.95em;margin-top:10px;">
+            These 20 African countries, with a combined <strong>1,078M</strong> people, have
+            <strong style="color:#ff4444">11,064</strong> trials and
+            <strong style="color:#ff4444">36</strong> absolute zeros.
+        </p>
+        <p style="color:#ff8800;font-size:0.95em;margin-top:10px;font-weight:600;">
+            Trials per million people &mdash; US: 300,943 | Africa-20: 10,263
+        </p>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Data: ClinicalTrials.gov API v2 (interventional studies only) | Fetched: 2026-03-28</p>
+    <p>20 countries &times; 12 conditions = 240 pairs | Africa Research Desert Map &copy; 2026</p>
+</div>
+
+</div>
+</body>
+</html>

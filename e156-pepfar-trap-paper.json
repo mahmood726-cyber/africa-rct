@@ -1,0 +1,65 @@
+{
+    "title":  "PEPFAR-focused HIV infrastructure and non-communicable disease trial capacity in Africa",
+    "body":  "Does PEPFAR-built HIV clinical trial infrastructure transfer to non-communicable disease research capacity in recipient African countries? We queried ClinicalTrials.gov for interventional HIV, NCD, and total trials across ten PEPFAR-focus countries receiving over one hundred million dollars annually, comparing them with eight non-PEPFAR African nations of similar income level. The PEPFAR Spillover Index, defined as NCD trials divided by HIV trials, was computed alongside per-capita trial rates and HIV Dominance Scores for each individual country. PEPFAR-focus countries had high HIV trial density but spillover indices generally below one, indicating that NCD trial activity remained much lower than HIV activity in those nations. Comparator non-PEPFAR countries often had fewer total trials but exhibited more balanced portfolios across disease areas with lower HIV dominance scores. The pattern suggests that disease-specific infrastructure investment has not automatically translated into proportional NCD research capacity in Africa. Ecological comparisons cannot establish causation, and the analysis may miss African-led studies not captured in ClinicalTrials.gov.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Does large HIV research investment appear to spill over into broader non-communicable disease trial capacity in high-burden African countries?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for interventional HIV trials, NCD trials, and total trials across ten major PEPFAR-focus countries and eight non-PEPFAR comparators with similar income levels."
+                      },
+                      {
+                          "role":  "Method",
+                          "text":  "The primary metric was the PEPFAR Spillover Index, defined as NCD trials divided by HIV trials, alongside per-capita trial density and HIV dominance scores."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "PEPFAR-focus countries had high HIV trial density but spillover indices generally below 1, indicating that NCD trial activity remained much lower than HIV activity."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "Comparator countries often had fewer total trials but more balanced portfolios across disease areas."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The pattern suggests that disease-specific infrastructure has not automatically translated into proportional NCD research capacity."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "Ecological comparisons cannot identify causation and may miss African-led studies not captured in ClinicalTrials.gov."
+                      }
+                  ],
+    "wordCount":  135,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "PEPFAR Dependency Trap v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 10 PEPFAR-focus + 8 non-PEPFAR African countries",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             },
+    "references":  [
+                       {
+                           "pmid":  "39972388"
+                       },
+                       {
+                           "pmid":  "37643290"
+                       },
+                       {
+                           "pmid":  "36332653"
+                       },
+                       {
+                           "pmid":  "34843674"
+                       }
+                   ]
+}

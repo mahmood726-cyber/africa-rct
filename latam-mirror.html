@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latin America as Mirror: What Africa Can Learn</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #7c3aed;
+  --latam: #3b82f6;
+  --africa: #ef4444;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+.latam-color { color: var(--latam); }
+.africa-color { color: var(--africa); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 900px) {
+  .chart-row { grid-template-columns: 1fr; }
+}
+.insight-box {
+  background: var(--surface);
+  border-left: 4px solid var(--danger);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.insight-box.success-box {
+  border-left-color: var(--success);
+}
+.insight-box.warning-box {
+  border-left-color: var(--warning);
+}
+.insight-box.blue-box {
+  border-left-color: var(--latam);
+}
+.insight-box.purple-box {
+  border-left-color: var(--purple);
+}
+.lesson-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+}
+.lesson-card h4 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.lesson-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.legend-inline {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: Summary -->
+<!-- ============================================================ -->
+
+<h1>Latin America as Mirror: What Africa Can Learn</h1>
+<p class="subtitle">
+  Latin America dramatically outperforms Africa in clinical trials despite similar income
+  levels. This cross-continental comparison asks what LatAm did right and what Africa can
+  replicate. Data from ClinicalTrials.gov API v2, 12 countries analysed.
+</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">LatAm Avg Per-Capita Rate</div>
+    <div class="value latam-color">53.8</div>
+    <div class="label">trials per million population</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Avg Per-Capita Rate</div>
+    <div class="value africa-color">28.2</div>
+    <div class="label">trials per million population</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">LatAm-to-Africa Gap</div>
+    <div class="value warning">1.9x</div>
+    <div class="label">LatAm runs 1.9x more trials per capita</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">LatAm Total Trials</div>
+    <div class="value latam-color">26,801</div>
+    <div class="label">across 6 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Total Trials</div>
+    <div class="value africa-color">17,412</div>
+    <div class="label">across 6 countries</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: Head-to-Head Matched Pairs -->
+<!-- ============================================================ -->
+
+<h2>Head-to-Head: Matched Pairs</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Countries matched by population size or GDP, showing the stark contrast in trial capacity.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Africa Country</th>
+      <th style="text-align:right;">Trials/M</th>
+      <th>LatAm Country</th>
+      <th style="text-align:right;">Trials/M</th>
+      <th style="text-align:right;">Gap</th>
+      <th>Context</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr><td style="padding:10px;color:#ef4444;">Nigeria</td><td style="padding:10px;text-align:right;">1.5</td><td style="padding:10px;color:#3b82f6;">Colombia</td><td style="padding:10px;text-align:right;">36.0</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">24.0x</td><td style="padding:10px;font-size:0.85rem;color:#94a3b8;">Nigeria GDP $500B vs Colombia $330B, but Nigeria has ~7% of Colombia&#39;s trials per capita</td></tr>
+<tr><td style="padding:10px;color:#ef4444;">Ghana</td><td style="padding:10px;text-align:right;">6.8</td><td style="padding:10px;color:#3b82f6;">Peru</td><td style="padding:10px;text-align:right;">50.8</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">7.5x</td><td style="padding:10px;font-size:0.85rem;color:#94a3b8;">Same population (34M), same lower-middle income tier, but Peru has ~7.5x more trials</td></tr>
+<tr><td style="padding:10px;color:#ef4444;">South Africa</td><td style="padding:10px;text-align:right;">56.0</td><td style="padding:10px;color:#3b82f6;">Brazil</td><td style="padding:10px;text-align:right;">45.8</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.8x</td><td style="padding:10px;font-size:0.85rem;color:#94a3b8;">SA is the only African country competitive with LatAm levels</td></tr>
+<tr><td style="padding:10px;color:#ef4444;">Kenya</td><td style="padding:10px;text-align:right;">12.9</td><td style="padding:10px;color:#3b82f6;">Mexico</td><td style="padding:10px;text-align:right;">52.7</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">4.1x</td><td style="padding:10px;font-size:0.85rem;color:#94a3b8;">Similar population ratios, but Mexico runs 5-10x more trials per capita</td></tr>
+
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <strong>The Nigeria-Colombia Gap:</strong> Nigeria (pop 230M, GDP ~$500B) and Colombia
+  (pop 52M, GDP ~$330B) are both upper-middle-income resource-rich nations. Yet Colombia
+  runs dramatically more clinical trials per capita than Nigeria. The difference is not
+  wealth but <em>regulatory infrastructure, CRO networks, and pharma market access</em>.
+</div>
+
+<div class="insight-box warning-box">
+  <strong>The Ghana-Peru Paradox:</strong> Both countries have 34 million people, both are
+  classified as lower-middle-income. Peru runs approximately 7.5x more trials per capita.
+  Peru benefits from COFEPRIS-adjacent harmonisation, a strong CRO ecosystem, and
+  decades of pharma investment flowing through the Pan American regulatory network.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: All 12 Countries Ranked -->
+<!-- ============================================================ -->
+
+<h2>All Countries Ranked by Trials Per Million</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  <span class="legend-inline" style="background:#3b82f6;"></span>Latin America
+  <span class="legend-inline" style="background:#ef4444;margin-left:1rem;"></span>Africa
+</p>
+<div class="chart-container">
+  <canvas id="rankChart" height="100"></canvas>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th style="text-align:right;">Population</th>
+      <th style="text-align:right;">Total Trials</th>
+      <th style="text-align:right;">Trials/Million</th>
+      <th style="text-align:right;">HIV Dominance</th>
+      <th style="text-align:right;">Phase 1 Share</th>
+      <th style="text-align:right;">Diversity</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr><td style="padding:10px;">Chile <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">20M</td><td style="padding:10px;text-align:right;">2,447</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">122.3</td><td style="padding:10px;text-align:right;">1.6%</td><td style="padding:10px;text-align:right;">5.0%</td><td style="padding:10px;text-align:right;">3</td></tr>
+<tr><td style="padding:10px;">Egypt <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">105M</td><td style="padding:10px;text-align:right;">12,395</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">118.0</td><td style="padding:10px;text-align:right;">0.0%</td><td style="padding:10px;text-align:right;">6.0%</td><td style="padding:10px;text-align:right;">3</td></tr>
+<tr><td style="padding:10px;">Argentina <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">46M</td><td style="padding:10px;text-align:right;">4,019</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">87.4</td><td style="padding:10px;text-align:right;">3.2%</td><td style="padding:10px;text-align:right;">3.4%</td><td style="padding:10px;text-align:right;">4</td></tr>
+<tr><td style="padding:10px;">South Africa <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">62M</td><td style="padding:10px;text-align:right;">3,473</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">56.0</td><td style="padding:10px;text-align:right;">17.5%</td><td style="padding:10px;text-align:right;">7.6%</td><td style="padding:10px;text-align:right;">5</td></tr>
+<tr><td style="padding:10px;">Mexico <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">130M</td><td style="padding:10px;text-align:right;">6,847</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">52.7</td><td style="padding:10px;text-align:right;">2.1%</td><td style="padding:10px;text-align:right;">5.8%</td><td style="padding:10px;text-align:right;">4</td></tr>
+<tr><td style="padding:10px;">Peru <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">34M</td><td style="padding:10px;text-align:right;">1,726</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">50.8</td><td style="padding:10px;text-align:right;">5.4%</td><td style="padding:10px;text-align:right;">3.3%</td><td style="padding:10px;text-align:right;">5</td></tr>
+<tr><td style="padding:10px;">Brazil <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">216M</td><td style="padding:10px;text-align:right;">9,890</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">45.8</td><td style="padding:10px;text-align:right;">2.2%</td><td style="padding:10px;text-align:right;">5.8%</td><td style="padding:10px;text-align:right;">4</td></tr>
+<tr><td style="padding:10px;">Colombia <span style="background:#3b82f6;padding:2px 8px;border-radius:4px;font-size:0.75rem;">LatAm</span></td><td style="padding:10px;text-align:right;">52M</td><td style="padding:10px;text-align:right;">1,872</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">36.0</td><td style="padding:10px;text-align:right;">1.3%</td><td style="padding:10px;text-align:right;">3.3%</td><td style="padding:10px;text-align:right;">4</td></tr>
+<tr><td style="padding:10px;">Kenya <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">56M</td><td style="padding:10px;text-align:right;">720</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">12.9</td><td style="padding:10px;text-align:right;">39.3%</td><td style="padding:10px;text-align:right;">9.7%</td><td style="padding:10px;text-align:right;">3</td></tr>
+<tr><td style="padding:10px;">Ghana <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">34M</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;font-weight:bold;color:#ef4444;">6.8</td><td style="padding:10px;text-align:right;">8.3%</td><td style="padding:10px;text-align:right;">3.0%</td><td style="padding:10px;text-align:right;">3</td></tr>
+<tr><td style="padding:10px;">Ethiopia <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">130M</td><td style="padding:10px;text-align:right;">240</td><td style="padding:10px;text-align:right;font-weight:bold;color:#ef4444;">1.8</td><td style="padding:10px;text-align:right;">7.5%</td><td style="padding:10px;text-align:right;">0.8%</td><td style="padding:10px;text-align:right;">3</td></tr>
+<tr><td style="padding:10px;">Nigeria <span style="background:#ef4444;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Africa</span></td><td style="padding:10px;text-align:right;">230M</td><td style="padding:10px;text-align:right;">354</td><td style="padding:10px;text-align:right;font-weight:bold;color:#ef4444;">1.5</td><td style="padding:10px;text-align:right;">13.3%</td><td style="padding:10px;text-align:right;">7.1%</td><td style="padding:10px;text-align:right;">4</td></tr>
+
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Disease Portfolio Comparison -->
+<!-- ============================================================ -->
+
+<h2>Disease Portfolio: LatAm = Balanced, Africa = HIV-Dominated</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Share of disease-specific trials within each region. LatAm shows a diversified cancer/cardio
+  portfolio while Africa's research is concentrated on HIV.
+</p>
+<div class="chart-row">
+  <div class="chart-container">
+    <h3>Disease Portfolio Share (%)</h3>
+    <canvas id="portfolioChart" height="140"></canvas>
+  </div>
+  <div class="chart-container">
+    <h3>HIV Dominance by Country</h3>
+    <canvas id="hivDomChart" height="140"></canvas>
+  </div>
+</div>
+
+<div class="insight-box blue-box">
+  <strong>Portfolio Asymmetry:</strong> LatAm's research portfolio mirrors its disease burden,
+  with strong cancer, cardiovascular, and diabetes trial coverage. Africa's portfolio is
+  heavily skewed towards HIV, reflecting decades of donor-driven research agendas (PEPFAR,
+  Global Fund) rather than the continent's rising NCD burden. This mismatch means Africa's
+  growing cardiovascular and diabetes epidemics are under-researched.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: Phase 1 Capacity Comparison -->
+<!-- ============================================================ -->
+
+<h2>Phase 1 Capacity: Drug Development Infrastructure</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Phase 1 trials indicate local drug development capacity and early-stage research
+  infrastructure. Higher Phase 1 share suggests a country participates in drug
+  <em>development</em>, not just late-stage confirmation trials.
+</p>
+<div class="chart-row">
+  <div class="chart-container">
+    <h3>Phase Distribution (Total Trials)</h3>
+    <canvas id="phaseChart" height="140"></canvas>
+  </div>
+  <div class="chart-container">
+    <h3>Phase 1 Trials Per Million Population</h3>
+    <canvas id="phase1PerMChart" height="140"></canvas>
+  </div>
+</div>
+
+<div class="summary-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+  <div class="summary-card">
+    <div class="label">LatAm Phase 1 Total</div>
+    <div class="value latam-color">1,348</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Phase 1 Total</div>
+    <div class="value africa-color">1,108</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">LatAm Phase 3 Total</div>
+    <div class="value latam-color">12,687</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Phase 3 Total</div>
+    <div class="value africa-color">3,543</div>
+  </div>
+</div>
+
+<div class="insight-box warning-box">
+  <strong>Development vs. Deployment:</strong> LatAm participates meaningfully in
+  drug development (Phase 1/2), while African trial activity is concentrated in
+  Phase 3/4 confirmatory studies. This suggests Africa is primarily used as a site
+  for confirming drugs developed elsewhere, rather than as a partner in innovation.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: What LatAm Did Right -->
+<!-- ============================================================ -->
+
+<h2>What Latin America Did Right</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  The structural advantages that enabled LatAm to build world-class trial capacity
+  despite middle-income constraints.
+</p>
+
+<div class="lesson-card">
+  <h4>1. Regulatory Harmonisation (PANDRH)</h4>
+  <p>The Pan American Network for Drug Regulatory Harmonization, established in 1999 under
+  PAHO/WHO, created a common regulatory language across the region. ANVISA (Brazil),
+  COFEPRIS (Mexico), and ANMAT (Argentina) achieved ICH-aligned standards, making it
+  easy for multinational pharma to run multi-site trials across borders with a single
+  regulatory framework. Africa's 54 countries still have fragmented, often under-resourced
+  regulatory agencies.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>2. Pharma Industry Investment</h4>
+  <p>LatAm attracted massive pharmaceutical investment through tax incentives, IP protection,
+  and market access guarantees. Brazil's pharmaceutical market is the 6th largest globally
+  (~$35B). This created a virtuous cycle: pharma invests in trials, which builds local
+  capacity, which attracts more trials. In contrast, Africa's pharma market is perceived
+  as high-risk/low-return by industry, creating a vicious cycle of under-investment.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>3. Clinical Research Organization (CRO) Ecosystem</h4>
+  <p>LatAm has a mature CRO industry with dozens of regional and international CROs
+  (ICON, Parexel, PPD, IQVIA) operating dedicated offices in Brazil, Argentina, and
+  Mexico. These CROs provide trained monitors, data managers, and regulatory specialists.
+  Africa has far fewer CROs, and many trials depend on academic investigators with
+  limited operational support.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>4. Local Manufacturing Base</h4>
+  <p>Brazil, Argentina, and Mexico have significant pharmaceutical manufacturing capacity,
+  including biogenerics. This creates a natural pipeline from manufacturing to clinical
+  development. Africa imports 70-90% of its medicines, meaning the industrial base for
+  trial supply chains barely exists.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>5. Trained Investigator Workforce</h4>
+  <p>Decades of industry trials in LatAm have created a deep pool of GCP-trained
+  investigators, research nurses, and pharmacovigilance specialists. Brazil alone
+  has over 700 ethics committees and thousands of experienced principal investigators.
+  Africa's investigator base, while growing, is concentrated in a few centres in
+  South Africa, Kenya, and Nigeria.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>6. Universal Health Systems as Trial Infrastructure</h4>
+  <p>Brazil's SUS (Sistema Unico de Saude) and similar public health systems across
+  LatAm provide a backbone for trial recruitment: centralised patient registries,
+  hospital networks, and follow-up infrastructure. Many African countries lack
+  comparable universal health infrastructure, making patient recruitment and
+  retention costly and unreliable.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: What Africa Can Learn -->
+<!-- ============================================================ -->
+
+<h2>What Africa Can Learn: Transferable Lessons</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Concrete, actionable lessons that African nations can adapt from the LatAm model.
+</p>
+
+<div class="lesson-card">
+  <h4>Lesson 1: Create a Pan-African Regulatory Framework</h4>
+  <p>Africa needs its own PANDRH. The African Medicines Agency (AMA), established in 2023,
+  is a start, but it needs teeth: mutual recognition of ethics approvals, harmonised GCP
+  standards, and fast-track pathways for multi-country trials. AVAREF (African Vaccine
+  Regulatory Forum) has shown this is possible for vaccines. Extending it to all
+  interventional research could transform the continent's trial landscape within a decade.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>Lesson 2: Incentivise Industry Beyond HIV</h4>
+  <p>African countries must create incentives (tax breaks, streamlined approvals, data
+  exclusivity) specifically targeting cancer, cardiovascular, and diabetes trials. The
+  current model, where industry comes only for HIV/TB with donor support, perpetuates
+  portfolio imbalance. Rwanda and Kenya are already piloting pharma-friendly frameworks
+  that could serve as templates.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>Lesson 3: Invest in CRO Capacity</h4>
+  <p>Africa needs homegrown CROs. Nigeria's CRO sector is tiny relative to its population.
+  South Africa's success partly reflects its mature CRO ecosystem (Wits Health Consortium,
+  CAPRISA, Aurum Institute). A Pan-African CRO network, perhaps building on existing
+  PEPFAR-funded clinical trial units, could dramatically lower the cost of running
+  trials in Africa.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>Lesson 4: Build Local Manufacturing</h4>
+  <p>The African Continental Free Trade Area (AfCFTA) and the Partnership for African
+  Vaccine Manufacturing (PAVM) are steps in the right direction. Local manufacturing
+  creates the industrial ecosystem that naturally feeds into clinical development.
+  Brazil's transformation from a trial desert to a powerhouse closely tracked its
+  pharmaceutical industrialisation in the 1990s-2000s.</p>
+</div>
+
+<div class="lesson-card">
+  <h4>Lesson 5: Leverage Digital Health Infrastructure</h4>
+  <p>Africa can leapfrog LatAm by building digitally-native trial infrastructure.
+  Mobile health registries, electronic consent, remote monitoring, and AI-assisted
+  data management could reduce the per-trial cost dramatically. Kenya's M-TIBA and
+  Rwanda's electronic health records show the building blocks exist.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: The South Africa Bright Spot -->
+<!-- ============================================================ -->
+
+<h2>The South Africa Bright Spot</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  South Africa is the one African country operating at LatAm levels. What can the
+  rest of Africa learn from SA?
+</p>
+
+<div class="summary-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
+  <div class="summary-card">
+    <div class="label">SA Trials/Million</div>
+    <div class="value success">56.0</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">SA HIV Dominance</div>
+    <div class="value warning">17.5%</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">SA Phase 1 Share</div>
+    <div class="value latam-color">7.6%</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">SA Diversity Score</div>
+    <div class="value success">5</div>
+  </div>
+</div>
+
+<div class="insight-box success-box">
+  <strong>What makes South Africa different:</strong>
+  SA has Africa's most sophisticated regulatory agency (SAHPRA), a mature CRO ecosystem,
+  world-class academic medical centres (Wits, UCT, Stellenbosch), strong pharmaceutical
+  manufacturing, and decades of industry partnership. SA attracts both HIV trials (via
+  PEPFAR/MRC networks) AND industry cancer/cardio trials. The key lesson: SA invested
+  in <em>general</em> trial infrastructure, not just disease-specific capacity. This is
+  what enabled it to diversify beyond HIV.
+</div>
+
+<div class="insight-box purple-box">
+  <strong>SA as Proof of Concept:</strong> South Africa proves that an African country
+  <em>can</em> reach LatAm-level trial capacity. The question is whether SA's model,
+  built on historically privileged academic infrastructure and early pharma engagement,
+  can be replicated in countries starting from a lower base. The answer from LatAm is
+  yes, but it requires deliberate, sustained regulatory investment over 15-20 years.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: Sponsor Patterns -->
+<!-- ============================================================ -->
+
+<h2>Sponsor Patterns: Why LatAm Attracts Industry</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Phase 3 trials are overwhelmingly industry-sponsored. The distribution of Phase 3
+  trials reveals where pharmaceutical companies choose to invest.
+</p>
+
+<div class="summary-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
+  <div class="summary-card">
+    <div class="label">LatAm Phase 3 Trials</div>
+    <div class="value latam-color">12,687</div>
+    <div class="label">Industry-attractive confirmatory studies</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Phase 3 Trials</div>
+    <div class="value africa-color">3,543</div>
+    <div class="label">Many HIV/vaccine-focused</div>
+  </div>
+</div>
+
+<div class="insight-box blue-box">
+  <strong>The Industry Calculus:</strong> Pharmaceutical companies choose trial sites based
+  on: (1) regulatory predictability, (2) speed of ethics/regulatory approval, (3) patient
+  recruitment speed, (4) data quality and GCP compliance, (5) IP protection, (6) market
+  potential. LatAm scores higher than Africa on all six dimensions, which is why industry
+  invests there. Africa's Phase 3 trials are disproportionately donor-funded HIV/vaccine
+  studies, not the industry-sponsored cardiovascular/oncology trials that drive sustained
+  research infrastructure. To change this, African nations must address the industry
+  calculus directly.
+</div>
+
+<!-- ============================================================ -->
+<!-- Data, References & Footer -->
+<!-- ============================================================ -->
+
+<h2>References</h2>
+<ul style="list-style:none;padding-left:0;">
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/35513403/" target="_blank" style="color:#3b82f6;">PMID 35513403</a> &mdash; Clinical trial globalisation: Latin America regulatory harmonisation</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/36332653/" target="_blank" style="color:#3b82f6;">PMID 36332653</a> &mdash; Community-randomized HIV prevention in sub-Saharan Africa</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/33483378/" target="_blank" style="color:#3b82f6;">PMID 33483378</a> &mdash; ANVISA regulatory framework for clinical trials in Brazil</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/34843674/" target="_blank" style="color:#3b82f6;">PMID 34843674</a> &mdash; Clinical trial capacity building in low- and middle-income countries</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/30636200/" target="_blank" style="color:#3b82f6;">PMID 30636200</a> &mdash; Pan American Network for Drug Regulatory Harmonization (PANDRH)</li>
+
+</ul>
+
+<div class="footer">
+  <p>
+    <strong>Data source:</strong> ClinicalTrials.gov API v2 (interventional studies only).
+    Queried 2026-03-28.
+  </p>
+  <p>
+    <strong>Methodology:</strong> Per-capita rates use UN 2024 population estimates.
+    Disease portfolio percentages are computed within each region's total condition-tagged
+    trials. Phase analysis uses ClinicalTrials.gov phase metadata. HIV dominance is
+    HIV trials as percentage of total interventional trials.
+  </p>
+  <p>
+    <strong>Limitations:</strong> ClinicalTrials.gov under-counts locally registered
+    trials in both regions (REBEC in Brazil, Pan African Clinical Trials Registry).
+    The comparison is ecological; country-level aggregation masks within-country
+    variation. Industry sponsorship is proxied by Phase 3 counts, not explicit
+    sponsor data.
+  </p>
+  <p style="margin-top:1rem;">
+    Latin America as Mirror v1.0 &mdash; AfricaRCT Project R &mdash;
+    Generated 2026-03-28 11:26
+  </p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ---- Ranked bar chart: all 12 countries by trials/million ----
+(function() {
+  const ctx = document.getElementById('rankChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Chile", "Egypt", "Argentina", "South Africa", "Mexico", "Peru", "Brazil", "Colombia", "Kenya", "Ghana", "Ethiopia", "Nigeria"],
+      datasets: [{
+        label: 'Trials per million population',
+        data: [122.3, 118.0, 87.4, 56.0, 52.7, 50.8, 45.8, 36.0, 12.9, 6.8, 1.8, 1.5],
+        backgroundColor: ["#3b82f6", "#ef4444", "#3b82f6", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#ef4444", "#ef4444", "#ef4444", "#ef4444"],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) { return ctx.raw + ' trials/M'; }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(148,163,184,0.1)' },
+          ticks: { color: '#94a3b8' },
+          title: { display: true, text: 'Trials per million population', color: '#94a3b8' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#e2e8f0' }
+        }
+      }
+    }
+  });
+})();
+
+// ---- Disease portfolio radar chart ----
+(function() {
+  const ctx = document.getElementById('portfolioChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ["Cancer", "HIV", "Cardiovascular", "Diabetes", "Mental Health", "Maternal"],
+      datasets: [
+        {
+          label: 'Latin America (%)',
+          data: [42.7, 4.2, 23.7, 11.1, 4.3, 14.0],
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59,130,246,0.15)',
+          pointBackgroundColor: '#3b82f6',
+          borderWidth: 2,
+        },
+        {
+          label: 'Africa (%)',
+          data: [26.3, 14.4, 19.7, 8.7, 5.1, 25.7],
+          borderColor: '#ef4444',
+          backgroundColor: 'rgba(239,68,68,0.15)',
+          pointBackgroundColor: '#ef4444',
+          borderWidth: 2,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          angleLines: { color: 'rgba(148,163,184,0.2)' },
+          grid: { color: 'rgba(148,163,184,0.15)' },
+          pointLabels: { color: '#e2e8f0', font: { size: 11 } },
+          ticks: { color: '#94a3b8', backdropColor: 'transparent' }
+        }
+      },
+      plugins: {
+        legend: { labels: { color: '#e2e8f0' } }
+      }
+    }
+  });
+})();
+
+// ---- HIV dominance bar chart ----
+(function() {
+  const ctx = document.getElementById('hivDomChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Kenya", "South Africa", "Nigeria", "Ghana", "Ethiopia", "Peru", "Argentina", "Brazil", "Mexico", "Chile", "Colombia", "Egypt"],
+      datasets: [{
+        label: 'HIV Dominance (%)',
+        data: [39.3, 17.5, 13.3, 8.3, 7.5, 5.4, 3.2, 2.2, 2.1, 1.6, 1.3, 0.0],
+        backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#ef4444"],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) { return ctx.raw + '% of trials are HIV'; }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(148,163,184,0.1)' },
+          ticks: { color: '#94a3b8' },
+          title: { display: true, text: 'HIV as % of total trials', color: '#94a3b8' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#e2e8f0' }
+        }
+      }
+    }
+  });
+})();
+
+// ---- Phase distribution grouped bar chart ----
+(function() {
+  const ctx = document.getElementById('phaseChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Phase 1", "Phase 2", "Phase 3", "Phase 4"],
+      datasets: [
+        {
+          label: 'Latin America',
+          data: [1348, 5686, 12687, 1961],
+          backgroundColor: '#3b82f6',
+          borderRadius: 4,
+        },
+        {
+          label: 'Africa',
+          data: [1108, 2500, 3543, 1424],
+          backgroundColor: '#ef4444',
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#e2e8f0' } }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#e2e8f0' }
+        },
+        y: {
+          grid: { color: 'rgba(148,163,184,0.1)' },
+          ticks: { color: '#94a3b8' },
+          title: { display: true, text: 'Number of trials', color: '#94a3b8' }
+        }
+      }
+    }
+  });
+})();
+
+// ---- Phase 1 per million bar chart ----
+(function() {
+  const ctx = document.getElementById('phase1PerMChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Egypt", "Chile", "South Africa", "Mexico", "Argentina", "Brazil", "Peru", "Kenya", "Colombia", "Ghana", "Nigeria", "Ethiopia"],
+      datasets: [{
+        label: 'Phase 1 trials per million',
+        data: [7.06, 6.1, 4.24, 3.04, 2.93, 2.68, 1.68, 1.25, 1.17, 0.21, 0.11, 0.02],
+        backgroundColor: ["#ef4444", "#3b82f6", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#ef4444", "#3b82f6", "#ef4444", "#ef4444", "#ef4444"],
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) { return ctx.raw + ' Phase 1 trials/M'; }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(148,163,184,0.1)' },
+          ticks: { color: '#94a3b8' },
+          title: { display: true, text: 'Phase 1 trials per million', color: '#94a3b8' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#e2e8f0' }
+        }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

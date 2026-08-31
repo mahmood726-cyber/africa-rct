@@ -1,0 +1,8 @@
+{
+  "title": "Design Quality",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "This protocol describes the registry audit for The Methodological Quality Audit, targeting reproducible comparison of trial design sophistication between Africa and the United States. Eligible records include all interventional studies on ClinicalTrials.gov without restrictions, classified by eleven design types including double-blind, adaptive, Bayesian, cluster-randomized, stepped-wedge, platform, non-inferiority, equivalence, and pragmatic. Searches query the ClinicalTrials.gov API v2 using query.term for design keywords, query.locn for geographic filtering, and filter.advanced with AREA[StudyType]INTERVENTIONAL and AREA[Phase] for phase sub-analyses. The primary estimand is the Design Sophistication Index computed as weighted design counts divided by total trials, with weights from one for basic to five for frontier designs, reported as the DSI ratio between regions. Secondary analyses include blinding rate comparison, Phase 1 sub-classification into first-in-human versus pharmacokinetic, and temporal trends across four periods. Code is archived at fetch_design_quality.py with results following PRISMA-S guidelines. Limitations include keyword-based classification that may misattribute designs described only in full protocols and restriction to one public",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

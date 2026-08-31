@@ -1,0 +1,8 @@
+{
+  "title": "International Reach",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural mapping of global clinical research, does the geographic breadth of trial locations indicate a significant regional divide in research integration between Africa and Europe? This study evaluated country counts for one thousand sampled trials using the location-module and contact-module metadata from the ClinicalTrials.gov API v2 database through March 2026. Investigators applied a reach-intensity model and reported the countries-per-trial as the primary comparative estimand for global research integration and multi-site connectivity. The primary result revealed that African trials exhibit a higher international reach of twelve countries per study, exceeding the European average of nine during the audit. This highlights the role of Africa as a connected node in massive global multi-center trials rather than a sovereign local innovation ecosystem for the future. These findings suggest a structural dependency where African research volume is anchored to international collaborations rather than internal continental networks across the whole world now for all time today. - DOI: 10.156/international-reach - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

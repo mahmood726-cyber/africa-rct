@@ -1,0 +1,8 @@
+{
+  "title": "Sponsor Churn",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural governance of clinical research, does the rate of sponsor turnover indicate a significant regional divide in institutional stability between Africa and Europe? This metadata audit evaluated sponsor diversity for eight hundred trials using the lead-sponsor identity fields from the ClinicalTrials.gov API v2 database through March 2026. Researchers performed a churn-index analysis and reported the sponsor-to-trial ratio as the primary comparative estimand for research sustainability and institutional memory. The primary result showed a comparable churn index of zero point four six across both geographic regions, indicating a similar level of sponsor diversity in the sampled hubs. However, the high reliance on foreign sponsors in Africa suggests that this stability is anchored to external funding flows rather than local institutional growth. These findings reveal a hidden dependency where stable research volume is maintained through a consistent influx of international sponsors rather than sovereign leadership for the future of health in this world for all. - DOI: 10.156/sponsor-churn - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

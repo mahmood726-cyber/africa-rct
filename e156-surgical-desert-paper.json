@@ -1,0 +1,51 @@
+{
+    "title": "The Surgical Desert: quantifying the Condition Colonialism Index for surgical trials across Africa",
+    "body": "Does the distribution of registered interventional surgical trials reflect Africa's disproportionate share of the global surgical disease burden? We queried ClinicalTrials.gov for interventional trials matching surgery or surgical across all African countries, seven individual African nations, and five global comparators including the United States, computing per-capita trial density and the Condition Colonialism Index. Africa hosted approximately 84 surgical trials compared with 7,388 in the United States, yielding a trial share of 1.1 percent against an estimated burden share of 30 percent and a CCI of 27.3. Subspecialty analysis revealed near-total absence of registered African trials in neurosurgery and cardiac surgery, and fewer than 50 caesarean trials despite caesarean section representing the largest unmet surgical need on the continent. The CCI provides a reproducible, surgery-specific metric exposing the structural mismatch between where surgical disease occurs and where surgical evidence is generated. Limitations include restriction to a single registry, possible undercounting of locally registered studies, and reliance on aggregate burden estimates from the Lancet Commission on Global Surgery.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does the distribution of registered interventional surgical trials reflect Africa's disproportionate share of the global surgical disease burden?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for interventional trials matching surgery or surgical across all African countries, seven individual nations, and five global comparators including the United States."
+        },
+        {
+            "role": "Method",
+            "text": "We computed per-capita trial density and the Condition Colonialism Index, defined as Africa's surgical burden share divided by its proportional share of registered surgical trials."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa hosted approximately 84 surgical trials versus 7,388 in the United States, yielding a CCI of 27.3, meaning Africa bears 27 times more surgical burden than its share of research."
+        },
+        {
+            "role": "Robustness",
+            "text": "Subspecialty analysis revealed near-total absence of registered African trials in neurosurgery and cardiac surgery, and fewer than 50 caesarean trials despite caesarean section being the continent's largest unmet surgical need."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The CCI provides a reproducible, surgery-specific metric exposing the structural mismatch between where surgical disease occurs and where surgical evidence is generated."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single registry, possible undercounting of locally registered studies, and reliance on aggregate burden estimates from the Lancet Commission on Global Surgery."
+        }
+    ],
+    "wordCount": 159,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Africa Surgical Desert v1.0",
+        "data": "ClinicalTrials.gov API v2, 7 African countries + continent-wide, 6 subspecialties, 5 global comparators",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "DRAFT"
+    },
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Benford Adherence",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the forensic evaluation of clinical trial metadata, does the adherence of enrollment numbers to Benford's Law indicate regional differences in reporting integrity and data naturalness? This audit applied number-theory filters to enrollment data for two thousand interventional trials across four global regions using the design-module fields from the ClinicalTrials.gov API v2 database system. Investigators performed a digit-frequency analysis and reported the Mean Absolute Deviation as the lead estimand for research naturalness and reporting consistency across the global hubs. The primary result showed that while all regions exhibited high adherence to natural distribution laws, African enrollment numbers showed slightly higher deviations compared to European and Chinese datasets. These findings suggest a generally robust reporting culture across the global database, though subtle anomalies in high-volume hubs warrant further investigative scrutiny for data quality. The results are limited by the use of self-reported enrollment counts which may be subject to rounding errors by sponsors today. - DOI: 10.156/benford-adherence - Date: 2026-03-28 - Type: research - Method: Advanced-Math",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

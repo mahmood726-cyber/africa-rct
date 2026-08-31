@@ -1,0 +1,70 @@
+{
+    "title": "Protocol: clinical trial attrition in Africa and global sponsor decisions",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "body": "This cross-sectional registry study will quantify how often trial attrition in Africa follows global sponsor decisions rather than local failure. We will query ClinicalTrials.gov API v2 for all interventional African trials with status TERMINATED, WITHDRAWN, or COMPLETED and extract sponsor name, sponsor class, site count, phase, condition, total enrollment, dates, and recorded stop reasons for each record. Each stopped trial will be classified as a global decision, local failure, safety signal, futility, or unknown using prespecified rules based on sponsor type, multinational scope, number of participating countries, and stop-reason text keywords. The primary outcome is the proportion of stopped trials attributed to global decisions versus local causes. Secondary outcomes include sponsor and condition breakdowns, temporal trends in termination rates, and an inventory of interventions lost to African patients after trial closure. The full classification logic and keyword dictionary will be version controlled and archived. Misclassification remains possible because registry stop reasons are incomplete and often brief.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry analysis will quantify how often trial terminations in Africa are driven by global sponsor decisions rather than local factors."
+        },
+        {
+            "role": "Data source",
+            "text": "We will query ClinicalTrials.gov API v2 for all interventional studies in Africa with status TERMINATED, WITHDRAWN, or COMPLETED using filter.advanced syntax with AREA[StudyType]INTERVENTIONAL and AREA[OverallStatus] per status, combined with query.locn=Africa."
+        },
+        {
+            "role": "Variables",
+            "text": "For each stopped trial we will extract NCT identifier, sponsor name and class, site count, phase, conditions, enrollment, start date, and stop reason."
+        },
+        {
+            "role": "Classification",
+            "text": "Each trial will be classified into five categories: global decision, local failure, safety signal, futility, or unknown based on sponsor identity, site count, and stop-reason keywords."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "Primary outcome is the proportion of terminations attributable to global decisions."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include Africa versus global termination rate, sponsor and condition breakdowns, temporal trends, and an inventory of lost interventions."
+        },
+        {
+            "role": "Limitations",
+            "text": "Limitations include reliance on registry metadata and the heuristic classification algorithm."
+        }
+    ],
+    "wordCount": 143,
+    "sentenceCount": 7,
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "143 words",
+                "ok": true,
+                "detail": "Body is 143 words (target 140-170)."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Data source and classification precede outcome definitions."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses limitations."
+            }
+        ]
+    },
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

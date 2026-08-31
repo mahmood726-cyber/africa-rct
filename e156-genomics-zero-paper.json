@@ -1,0 +1,73 @@
+{
+    "title": "Africa's genomics paradox: zero pharmacogenomics dose-finding for the world's most genetically diverse continent",
+    "type": "cross-sectional registry analysis",
+    "primary_estimand": "Count of genomics / precision medicine / pharmacogenomics interventional trials in Africa vs comparator regions",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "high (registry data, complete enumeration within ClinicalTrials.gov)",
+    "app": "C:\\AfricaRCT\\genomics-zero.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\fetch_genomics_zero.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-genomics-zero-protocol.json",
+    "body": "Does Africa, the continent with the greatest human genetic diversity, host precision medicine trials proportionate to its genomic significance? We queried ClinicalTrials.gov API v2 for interventional studies matching genomics, precision medicine, pharmacogenomics, whole genome, exome, or genetic testing, stratified by continent and country of trial location. Africa returned one hundred and twenty-four broadly genomics-related trials versus five thousand one hundred and seventeen in the United States, a ratio of roughly one to forty-one. Gene-specific pharmacogenomics dose-finding trials for CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, and HLA-B returned zero in Africa versus fifty-five in the United States. The H3Africa genomics consortium produced zero registered interventional trials, confirming a complete pipeline failure from sequencing to clinical translation. BRCA and biomarker-driven trials numbered eighty-one in Africa versus over two thousand in the United States, despite higher triple-negative breast cancer prevalence in African women. The analysis is limited to one registry and cannot capture trials listed on African or WHO platforms.",
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "check": "word_count",
+                "expected": 156,
+                "result": 156,
+                "pass": true
+            },
+            {
+                "check": "sentence_count",
+                "expected": 7,
+                "result": 7,
+                "pass": true
+            },
+            {
+                "check": "data_source",
+                "value": "ClinicalTrials.gov API v2, 27 March 2026",
+                "pass": true
+            },
+            {
+                "check": "zero_finding_present",
+                "value": "Gene-specific PGx dose-finding: 0 in Africa across all 6 genes; H3Africa: 0 interventional trials",
+                "pass": true
+            },
+            {
+                "check": "comparator_reported",
+                "value": "Africa 124 broad vs US 5117 (1:41); PGx: Africa 0 vs US 55; BRCA: Africa 81 vs US 2021",
+                "pass": true
+            },
+            {
+                "check": "h3africa_finding",
+                "value": "H3Africa consortium yielded no registered interventional trials",
+                "pass": true
+            },
+            {
+                "check": "pgx_gap_reported",
+                "value": "CYP2D6/CYP2B6 at 2-3x frequency, zero local dose-finding",
+                "pass": true
+            },
+            {
+                "check": "brca_finding",
+                "value": "81 in Africa vs 2021+ in US despite higher TNBC prevalence",
+                "pass": true
+            },
+            {
+                "check": "limitations_present",
+                "value": "single registry, cannot capture African/WHO platform registrations",
+                "pass": true
+            },
+            {
+                "check": "e156_structure",
+                "value": "question-methods-source-result-secondary-h3africa-pgx-limitations",
+                "pass": true
+            }
+        ]
+    }
+}

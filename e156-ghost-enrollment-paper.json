@@ -1,0 +1,43 @@
+{
+    "title":  "Ghost enrollment in African clinical trials: mega-trials with minimal local participation",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Ghost Score (1 - estimated_africa_enrollment / total_enrollment) for mega-trials listing African sites",
+    "study_count":  783,
+    "mega_trials":  55,
+    "giant_trials":  16,
+    "version":  "2.0.0",
+    "date":  "2026-03-27",
+    "certainty":  "high (complete registry enumeration with trial-level site count data)",
+    "app":  "C:\\AfricaRCT\\ghost-enrollment-audit.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_uganda_rcts.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-ghost-enrollment-protocol.json",
+    "body":  "We define ghost enrollment as a multinational trial that lists African sites while drawing too few African participants to support locally informative inference. Among 783 interventional trials with Ugandan sites on ClinicalTrials.gov, we classified trials by site count and calculated a Ghost Score as one minus the ratio of estimated African enrollment to total enrollment. Fifty-five trials were mega-trials with more than twenty sites, and sixteen were giant trials with more than one hundred sites. The median Ghost Score among giant trials was 0.99, implying that African sites contributed under 1% of total participants, and none of the 55 mega-trials had enough African enrollment for subgroup analysis. Four giant ghost trials were terminated after using local ethics, regulatory, and site resources. Sickle cell disease illustrated the paradox: Africa carries most of the global burden yet had minimal representation in these large multinational studies. Registry counts can therefore exaggerate research participation while yielding little locally actionable evidence.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found exactly 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports median Ghost Score 0.99 and zero subgroup-powered trials."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 states ghost enrollment inflates counts without actionable evidence."
+                                      }
+                                  ]
+                   }
+}

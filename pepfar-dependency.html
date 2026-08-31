@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The PEPFAR Dependency Trap</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #7c3aed;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.insight-box {
+  background: var(--surface);
+  border-left: 4px solid var(--danger);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.insight-box.success-box {
+  border-left-color: var(--success);
+}
+.insight-box.warning-box {
+  border-left-color: var(--warning);
+}
+.insight-box.purple-box {
+  border-left-color: var(--purple);
+}
+.metric-def {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: Summary -->
+<!-- ============================================================ -->
+
+<h1>The PEPFAR Dependency Trap</h1>
+<p class="subtitle">
+  Does PEPFAR-built HIV infrastructure transfer to NCD research, or does it
+  create dependency? A cross-sectional registry analysis of 18 African nations.
+</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">PEPFAR Group HIV Trials</div>
+    <div class="value purple">1,820</div>
+    <div class="label">across 10 countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR Group NCD Trials</div>
+    <div class="value warning">1,445</div>
+    <div class="label">cardiovascular, diabetes, HTN, cancer, stroke</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR Spillover Index</div>
+    <div class="value danger">0.79</div>
+    <div class="label">&lt;1.0 = spillover failure</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Non-PEPFAR Spillover</div>
+    <div class="value success">0.92</div>
+    <div class="label">comparator group</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">PEPFAR Avg HIV Dominance</div>
+    <div class="value danger">34.4%</div>
+    <div class="label">of total trials are HIV</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Non-PEPFAR HIV Dominance</div>
+    <div class="value success">9.9%</div>
+    <div class="label">more balanced portfolio</div>
+  </div>
+</div>
+
+<div class="metric-def">
+  <strong>PEPFAR Spillover Index</strong> = NCD trials / HIV trials.<br>
+  Values &gt;1.0 indicate good spillover (NCD research exceeds HIV); values
+  &lt;1.0 indicate that HIV infrastructure has NOT translated into broader
+  research capacity.<br><br>
+  <strong>HIV Dominance Score</strong> = HIV trials / total trials.<br>
+  Higher values indicate greater dependency on HIV-focused research.
+  If PEPFAR funding stopped, this proportion of registered research would
+  be at risk.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: Country Comparison Table -->
+<!-- ============================================================ -->
+
+<h2>Country-Level Comparison</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  All 18 countries ranked by spillover index (worst first).
+  Classification: Good (&gt;1.0), Moderate (0.5&ndash;1.0), Weak (0.2&ndash;0.5),
+  HIV-dependent (&lt;0.2).
+</p>
+
+<div style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">HIV Trials</th>
+  <th style="text-align:right;">NCD Trials</th>
+  <th style="text-align:right;">Total</th>
+  <th style="text-align:right;">Spillover Index</th>
+  <th style="text-align:right;">Dependency %</th>
+  <th>Classification</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Niger <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">0</td><td style="padding:10px;text-align:right;">37</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.00</td><td style="padding:10px;text-align:right;">5.4%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">HIV-dependent</td></tr>
+<tr><td style="padding:10px;">Zimbabwe <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">118</td><td style="padding:10px;text-align:right;">13</td><td style="padding:10px;text-align:right;">166</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.11</td><td style="padding:10px;text-align:right;">71.1%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">HIV-dependent</td></tr>
+<tr><td style="padding:10px;">Malawi <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">135</td><td style="padding:10px;text-align:right;">20</td><td style="padding:10px;text-align:right;">288</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.15</td><td style="padding:10px;text-align:right;">46.9%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">HIV-dependent</td></tr>
+<tr><td style="padding:10px;">Zambia <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">106</td><td style="padding:10px;text-align:right;">17</td><td style="padding:10px;text-align:right;">245</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.16</td><td style="padding:10px;text-align:right;">43.3%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">HIV-dependent</td></tr>
+<tr><td style="padding:10px;">Uganda <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">329</td><td style="padding:10px;text-align:right;">63</td><td style="padding:10px;text-align:right;">783</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.19</td><td style="padding:10px;text-align:right;">42.0%</td><td style="padding:10px;color:#ef4444;font-weight:bold;">HIV-dependent</td></tr>
+<tr><td style="padding:10px;">Tanzania <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">137</td><td style="padding:10px;text-align:right;">34</td><td style="padding:10px;text-align:right;">431</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.25</td><td style="padding:10px;text-align:right;">31.8%</td><td style="padding:10px;color:#fb923c;font-weight:bold;">Weak spillover</td></tr>
+<tr><td style="padding:10px;">Kenya <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">283</td><td style="padding:10px;text-align:right;">77</td><td style="padding:10px;text-align:right;">720</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.27</td><td style="padding:10px;text-align:right;">39.3%</td><td style="padding:10px;color:#fb923c;font-weight:bold;">Weak spillover</td></tr>
+<tr><td style="padding:10px;">Mozambique <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">39</td><td style="padding:10px;text-align:right;">16</td><td style="padding:10px;text-align:right;">123</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.41</td><td style="padding:10px;text-align:right;">31.7%</td><td style="padding:10px;color:#fb923c;font-weight:bold;">Weak spillover</td></tr>
+<tr><td style="padding:10px;">Burkina Faso <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">196</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.47</td><td style="padding:10px;text-align:right;">7.7%</td><td style="padding:10px;color:#fb923c;font-weight:bold;">Weak spillover</td></tr>
+<tr><td style="padding:10px;">Senegal <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">9</td><td style="padding:10px;text-align:right;">97</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.60</td><td style="padding:10px;text-align:right;">15.5%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate spillover</td></tr>
+<tr><td style="padding:10px;">DRC <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">6</td><td style="padding:10px;text-align:right;">5</td><td style="padding:10px;text-align:right;">132</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.83</td><td style="padding:10px;text-align:right;">4.5%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate spillover</td></tr>
+<tr><td style="padding:10px;">Mali <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">8</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">144</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">0.88</td><td style="padding:10px;text-align:right;">5.6%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate spillover</td></tr>
+<tr><td style="padding:10px;">Cameroon <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;">111</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.00</td><td style="padding:10px;text-align:right;">27.9%</td><td style="padding:10px;color:#f59e0b;font-weight:bold;">Moderate spillover</td></tr>
+<tr><td style="padding:10px;">Ethiopia <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">18</td><td style="padding:10px;text-align:right;">20</td><td style="padding:10px;text-align:right;">240</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.11</td><td style="padding:10px;text-align:right;">7.5%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Good spillover</td></tr>
+<tr><td style="padding:10px;">Ghana <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">19</td><td style="padding:10px;text-align:right;">28</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.47</td><td style="padding:10px;text-align:right;">8.3%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Good spillover</td></tr>
+<tr><td style="padding:10px;">South Africa <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">608</td><td style="padding:10px;text-align:right;">1,093</td><td style="padding:10px;text-align:right;">3,473</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.80</td><td style="padding:10px;text-align:right;">17.5%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Good spillover</td></tr>
+<tr><td style="padding:10px;">Nigeria <span style="background:#7c3aed;padding:2px 8px;border-radius:4px;font-size:0.75rem;">PEPFAR</span></td><td style="padding:10px;text-align:right;">47</td><td style="padding:10px;text-align:right;">92</td><td style="padding:10px;text-align:right;">354</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.96</td><td style="padding:10px;text-align:right;">13.3%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Good spillover</td></tr>
+<tr><td style="padding:10px;">Madagascar <span style="background:#374151;padding:2px 8px;border-radius:4px;font-size:0.75rem;">Non-PEPFAR</span></td><td style="padding:10px;text-align:right;">1</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">24</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">2.00</td><td style="padding:10px;text-align:right;">4.2%</td><td style="padding:10px;color:#22c55e;font-weight:bold;">Good spillover</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: The Spillover Failure -->
+<!-- ============================================================ -->
+
+<h2>The Spillover Failure</h2>
+
+<div class="insight-box">
+  <strong>Key finding:</strong> PEPFAR-focus countries have built extraordinary
+  HIV trial capacity (1,820 trials), but NCD research has NOT benefited
+  proportionally (1,445 NCD trials, spillover index 0.79).
+  The billions invested in HIV infrastructure &mdash; clinical sites, ethical review
+  boards, data management systems, trained staff &mdash; remain siloed within
+  HIV programs rather than being leveraged for the NCD epidemic that now kills
+  more Africans than infectious diseases combined.
+</div>
+
+<p style="margin:1rem 0;color:var(--muted);">
+  This pattern is consistent with what Hayes et al. (PMID 37643290) found in the
+  PopART trial: despite building massive community health infrastructure across
+  Zambia and South Africa, the systems were designed for HIV-specific endpoints
+  and did not naturally extend to cardiovascular or metabolic disease screening.
+</p>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Bar Chart (HIV vs NCD per Country) -->
+<!-- ============================================================ -->
+
+<h2>HIV vs NCD Trials by Country</h2>
+
+<div class="chart-container">
+  <canvas id="hivNcdChart" height="120"></canvas>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: The Dependency Metric -->
+<!-- ============================================================ -->
+
+<h2>The Dependency Metric</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  If PEPFAR funding stopped tomorrow, what percentage of each country's
+  registered interventional research would be at risk? This chart shows
+  HIV trials as a fraction of total trials for PEPFAR-focus countries.
+</p>
+
+<div class="chart-container">
+  <canvas id="dependencyChart" height="80"></canvas>
+</div>
+
+<div class="insight-box">
+  <strong>Dependency interpretation:</strong> Countries where HIV trials constitute
+  more than 40% of all registered research face severe vulnerability to funding
+  shifts. The PEPFAR transition to "country ownership" may leave research
+  infrastructure stranded if NCD capacity was never built alongside HIV programs.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: Success Stories -->
+<!-- ============================================================ -->
+
+<h2>Success Stories: PEPFAR Countries Where NCDs ARE Growing</h2>
+
+<div class="insight-box success-box">
+  Are there PEPFAR countries that have successfully leveraged HIV infrastructure
+  for broader research? We identify countries where the spillover index exceeds
+  0.5, indicating at least moderate cross-pollination from HIV to NCD research.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">HIV Trials</th>
+  <th style="text-align:right;">NCD Trials</th>
+  <th style="text-align:right;">Spillover Index</th>
+  <th style="text-align:right;">NCD/Million Pop</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;color:#22c55e;">Nigeria</td><td style="padding:10px;text-align:right;">47</td><td style="padding:10px;text-align:right;">92</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.96</td><td style="padding:10px;text-align:right;">0.4</td></tr>
+<tr><td style="padding:10px;color:#22c55e;">South Africa</td><td style="padding:10px;text-align:right;">608</td><td style="padding:10px;text-align:right;">1,093</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.80</td><td style="padding:10px;text-align:right;">17.63</td></tr>
+<tr><td style="padding:10px;color:#22c55e;">Ethiopia</td><td style="padding:10px;text-align:right;">18</td><td style="padding:10px;text-align:right;">20</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.11</td><td style="padding:10px;text-align:right;">0.15</td></tr>
+
+</tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: The Non-PEPFAR Paradox -->
+<!-- ============================================================ -->
+
+<h2>The Non-PEPFAR Paradox</h2>
+
+<div class="insight-box purple-box">
+  <strong>Paradox:</strong> Countries that did NOT receive massive PEPFAR investment
+  may actually have more balanced research portfolios. Without the gravitational
+  pull of HIV funding, these nations' (limited) research capacity is distributed
+  more evenly across disease categories. Their absolute numbers are lower, but
+  they are not structurally dependent on a single funder's priorities.
+</div>
+
+<h3>Non-PEPFAR Countries with Balanced Portfolios (HIV Dominance &lt;30%)</h3>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">HIV Trials</th>
+  <th style="text-align:right;">NCD Trials</th>
+  <th style="text-align:right;">Total Trials</th>
+  <th style="text-align:right;">HIV Dominance</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Madagascar</td><td style="padding:10px;text-align:right;">1</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">24</td><td style="padding:10px;text-align:right;font-weight:bold;">4.2%</td></tr>
+<tr><td style="padding:10px;">DRC</td><td style="padding:10px;text-align:right;">6</td><td style="padding:10px;text-align:right;">5</td><td style="padding:10px;text-align:right;">132</td><td style="padding:10px;text-align:right;font-weight:bold;">4.5%</td></tr>
+<tr><td style="padding:10px;">Niger</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">0</td><td style="padding:10px;text-align:right;">37</td><td style="padding:10px;text-align:right;font-weight:bold;">5.4%</td></tr>
+<tr><td style="padding:10px;">Mali</td><td style="padding:10px;text-align:right;">8</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">144</td><td style="padding:10px;text-align:right;font-weight:bold;">5.6%</td></tr>
+<tr><td style="padding:10px;">Burkina Faso</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">196</td><td style="padding:10px;text-align:right;font-weight:bold;">7.7%</td></tr>
+<tr><td style="padding:10px;">Ghana</td><td style="padding:10px;text-align:right;">19</td><td style="padding:10px;text-align:right;">28</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;font-weight:bold;">8.3%</td></tr>
+<tr><td style="padding:10px;">Senegal</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">9</td><td style="padding:10px;text-align:right;">97</td><td style="padding:10px;text-align:right;font-weight:bold;">15.5%</td></tr>
+<tr><td style="padding:10px;">Cameroon</td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;">111</td><td style="padding:10px;text-align:right;font-weight:bold;">27.9%</td></tr>
+
+</tbody>
+</table>
+
+<h3>Per-Capita Trial Rates (All 18 Countries)</h3>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Population</th>
+  <th style="text-align:right;">HIV/Million</th>
+  <th style="text-align:right;">NCD/Million</th>
+  <th>Group</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">South Africa</td><td style="padding:10px;text-align:right;">62M</td><td style="padding:10px;text-align:right;">9.81</td><td style="padding:10px;text-align:right;">17.63</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Kenya</td><td style="padding:10px;text-align:right;">56M</td><td style="padding:10px;text-align:right;">5.05</td><td style="padding:10px;text-align:right;">1.38</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Uganda</td><td style="padding:10px;text-align:right;">48M</td><td style="padding:10px;text-align:right;">6.85</td><td style="padding:10px;text-align:right;">1.31</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Cameroon</td><td style="padding:10px;text-align:right;">27M</td><td style="padding:10px;text-align:right;">1.15</td><td style="padding:10px;text-align:right;">1.15</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Malawi</td><td style="padding:10px;text-align:right;">21M</td><td style="padding:10px;text-align:right;">6.43</td><td style="padding:10px;text-align:right;">0.95</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Zimbabwe</td><td style="padding:10px;text-align:right;">15M</td><td style="padding:10px;text-align:right;">7.87</td><td style="padding:10px;text-align:right;">0.87</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Ghana</td><td style="padding:10px;text-align:right;">34M</td><td style="padding:10px;text-align:right;">0.56</td><td style="padding:10px;text-align:right;">0.82</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Zambia</td><td style="padding:10px;text-align:right;">21M</td><td style="padding:10px;text-align:right;">5.05</td><td style="padding:10px;text-align:right;">0.81</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Senegal</td><td style="padding:10px;text-align:right;">17M</td><td style="padding:10px;text-align:right;">0.88</td><td style="padding:10px;text-align:right;">0.53</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Tanzania</td><td style="padding:10px;text-align:right;">67M</td><td style="padding:10px;text-align:right;">2.04</td><td style="padding:10px;text-align:right;">0.51</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Mozambique</td><td style="padding:10px;text-align:right;">33M</td><td style="padding:10px;text-align:right;">1.18</td><td style="padding:10px;text-align:right;">0.48</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Nigeria</td><td style="padding:10px;text-align:right;">230M</td><td style="padding:10px;text-align:right;">0.2</td><td style="padding:10px;text-align:right;">0.4</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Burkina Faso</td><td style="padding:10px;text-align:right;">23M</td><td style="padding:10px;text-align:right;">0.65</td><td style="padding:10px;text-align:right;">0.3</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Mali</td><td style="padding:10px;text-align:right;">23M</td><td style="padding:10px;text-align:right;">0.35</td><td style="padding:10px;text-align:right;">0.3</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Ethiopia</td><td style="padding:10px;text-align:right;">130M</td><td style="padding:10px;text-align:right;">0.14</td><td style="padding:10px;text-align:right;">0.15</td><td style="padding:10px;font-size:0.8rem;">PEPFAR</td></tr>
+<tr><td style="padding:10px;">Madagascar</td><td style="padding:10px;text-align:right;">30M</td><td style="padding:10px;text-align:right;">0.03</td><td style="padding:10px;text-align:right;">0.07</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">DRC</td><td style="padding:10px;text-align:right;">102M</td><td style="padding:10px;text-align:right;">0.06</td><td style="padding:10px;text-align:right;">0.05</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+<tr><td style="padding:10px;">Niger</td><td style="padding:10px;text-align:right;">27M</td><td style="padding:10px;text-align:right;">0.07</td><td style="padding:10px;text-align:right;">0.0</td><td style="padding:10px;font-size:0.8rem;">Non-PEPFAR</td></tr>
+
+</tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: Policy Implications -->
+<!-- ============================================================ -->
+
+<h2>Policy Implications: Pivoting HIV Infrastructure to NCD Research</h2>
+
+<div class="insight-box warning-box">
+  <strong>The window is closing.</strong> As PEPFAR transitions to "country ownership"
+  and funding plateaus, the HIV infrastructure will either be repurposed or lost.
+  The data above show that spontaneous spillover is NOT happening &mdash; active
+  policy intervention is required.
+</div>
+
+<div style="margin:1.5rem 0;">
+<h3>1. Dual-mandate clinical sites</h3>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Require PEPFAR-funded clinical sites to run at least one NCD study per HIV study.
+  The physical infrastructure (pharmacy, lab, data systems) is already in place.
+</p>
+
+<h3>2. NCD riders on HIV cohorts</h3>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  HIV cohorts in PEPFAR countries already track thousands of patients longitudinally.
+  Adding blood pressure, glucose, and lipid measurements costs marginal dollars but
+  generates invaluable NCD data.
+</p>
+
+<h3>3. Ethics board cross-training</h3>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  PEPFAR built institutional review board capacity that currently reviews only HIV
+  protocols. Cross-training these boards for NCD trials removes a major bottleneck.
+</p>
+
+<h3>4. Data infrastructure sharing</h3>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Electronic data capture systems (REDCap, DHIS2) deployed for HIV programs can
+  be extended to NCD registries at minimal cost.
+</p>
+
+<h3>5. Workforce transition planning</h3>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Clinical research coordinators, data managers, and community health workers
+  trained by PEPFAR programs represent a skilled workforce that could pivot to
+  NCD research &mdash; if transition funding is provided.
+</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- References -->
+<!-- ============================================================ -->
+
+<h2>References</h2>
+<ol style="padding-left:1.5rem;color:var(--muted);">
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/39972388/" target="_blank" style="color:#3b82f6;">PMID 39972388</a> &mdash; PEPFAR infrastructure sustainability analysis</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/37643290/" target="_blank" style="color:#3b82f6;">PMID 37643290</a> &mdash; PopART trial long-term outcomes</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/36332653/" target="_blank" style="color:#3b82f6;">PMID 36332653</a> &mdash; PopART community-randomized HIV prevention</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/34843674/" target="_blank" style="color:#3b82f6;">PMID 34843674</a> &mdash; PEPFAR infrastructure and trial capacity</li>
+
+</ol>
+
+<!-- ============================================================ -->
+<!-- Footer -->
+<!-- ============================================================ -->
+
+<div class="footer">
+  <p>Data source: ClinicalTrials.gov API v2 | Generated: 2026-03-28 10:12</p>
+  <p>PEPFAR-focus countries: Uganda, Kenya, Tanzania, Mozambique, South Africa, Nigeria, Zambia, Malawi, Zimbabwe, Ethiopia</p>
+  <p>Non-PEPFAR comparators: Ghana, Senegal, Burkina Faso, Mali, DRC, Madagascar, Niger, Cameroon</p>
+  <p style="margin-top:0.5rem;">
+    <em>Limitation: ClinicalTrials.gov captures primarily US-registered trials.
+    Local African registries (PACTR, Pan African Clinical Trials Registry) may
+    contain additional studies not reflected here. The "dependency" metric is a
+    structural proxy, not a causal claim.</em>
+  </p>
+</div>
+
+</div><!-- end container -->
+
+<script>
+// --- HIV vs NCD Bar Chart ---
+(function() {
+  var ctx = document.getElementById('hivNcdChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Niger", "Zimbabwe", "Malawi", "Zambia", "Uganda", "Tanzania", "Kenya", "Mozambique", "Burkina Faso", "Senegal", "DRC", "Mali", "Cameroon", "Ethiopia", "Ghana", "South Africa", "Nigeria", "Madagascar"],
+      datasets: [
+        {
+          label: 'HIV Trials',
+          data: [2, 118, 135, 106, 329, 137, 283, 39, 15, 15, 6, 8, 31, 18, 19, 608, 47, 1],
+          backgroundColor: 'rgba(239, 68, 68, 0.7)',
+          borderColor: 'rgba(239, 68, 68, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'NCD Trials',
+          data: [0, 13, 20, 17, 63, 34, 77, 16, 7, 9, 5, 7, 31, 20, 28, 1093, 92, 2],
+          backgroundColor: 'rgba(59, 130, 246, 0.7)',
+          borderColor: 'rgba(59, 130, 246, 1)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#e2e8f0' } },
+        title: {
+          display: true,
+          text: 'HIV vs NCD Interventional Trials by Country',
+          color: '#e2e8f0',
+          font: { size: 16 }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#94a3b8', maxRotation: 45 },
+          grid: { color: 'rgba(30,41,59,0.5)' }
+        },
+        y: {
+          ticks: { color: '#94a3b8' },
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          title: {
+            display: true,
+            text: 'Number of Trials',
+            color: '#94a3b8'
+          }
+        }
+      }
+    }
+  });
+})();
+
+// --- Dependency Chart ---
+(function() {
+  var ctx2 = document.getElementById('dependencyChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ["Zimbabwe", "Malawi", "Zambia", "Uganda", "Kenya", "Tanzania", "Mozambique", "South Africa", "Nigeria", "Ethiopia"],
+      datasets: [{
+        label: 'HIV as % of Total Trials',
+        data: [71.1, 46.9, 43.3, 42.0, 39.3, 31.8, 31.7, 17.5, 13.3, 7.5],
+        backgroundColor: function(context) {
+          var v = context.raw;
+          if (v > 40) return 'rgba(239, 68, 68, 0.8)';
+          if (v > 25) return 'rgba(245, 158, 11, 0.8)';
+          return 'rgba(34, 197, 94, 0.8)';
+        },
+        borderWidth: 1
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'PEPFAR Dependency: % of Research at Risk if HIV Funding Stops',
+          color: '#e2e8f0',
+          font: { size: 15 }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } },
+          grid: { color: 'rgba(30,41,59,0.5)' },
+          max: 100
+        },
+        y: {
+          ticks: { color: '#94a3b8' },
+          grid: { color: 'rgba(30,41,59,0.3)' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

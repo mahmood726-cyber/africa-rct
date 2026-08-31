@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Trial Lifecycle -- From Registration to Patient Impact (Uganda)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0f1a; color: #e2e8f0;
+    line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px 24px; }
+  h1 {
+    text-align: center; font-size: 2.2rem; margin: 40px 0 8px;
+    background: linear-gradient(135deg, #60a5fa, #22d3ee, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    text-align: center; color: #94a3b8; font-size: 1.05rem; margin-bottom: 10px;
+    font-style: italic;
+  }
+  .epigraph {
+    text-align: center; color: #64748b; font-size: 0.9rem;
+    max-width: 700px; margin: 0 auto 32px;
+    border-left: 3px solid #334155; padding-left: 16px;
+    text-align: left;
+  }
+  .section {
+    background: #111827; border: 1px solid #1e293b; border-radius: 12px;
+    padding: 28px; margin: 28px 0;
+  }
+  .section h2 {
+    font-size: 1.4rem; margin: 0 0 6px; color: #f1f5f9;
+  }
+  .section h3 {
+    font-size: 1.1rem; margin: 20px 0 10px; color: #cbd5e1;
+  }
+  .section-desc {
+    color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.9rem;
+  }
+  th {
+    text-align: left; padding: 10px 14px; color: #94a3b8;
+    border-bottom: 2px solid #1e293b; font-weight: 600;
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  td { border-bottom: 1px solid #1e293b33; }
+  tr:hover { background: rgba(255,255,255,0.02); }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin: 20px 0;
+  }
+  .kpi {
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px; text-align: center;
+  }
+  .kpi-value {
+    font-size: 2.2rem; font-weight: bold; margin: 4px 0;
+  }
+  .kpi-label {
+    font-size: 0.8rem; color: #94a3b8; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi-sub {
+    font-size: 0.75rem; color: #64748b; margin-top: 4px;
+  }
+  .funnel-container {
+    margin: 24px 0;
+  }
+  .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 0.75rem; font-weight: 600;
+  }
+  .alert-box {
+    background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 10px; padding: 20px; margin: 16px 0;
+  }
+  .success-box {
+    background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 10px; padding: 20px; margin: 16px 0;
+  }
+  .footer {
+    text-align: center; color: #475569; font-size: 0.8rem;
+    margin-top: 40px; padding: 20px 0 40px;
+    border-top: 1px solid #1e293b;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 12px; }
+    h1 { font-size: 1.5rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ================================================================ -->
+<!-- HEADER -->
+<!-- ================================================================ -->
+<h1>The Trial Lifecycle</h1>
+<div class="subtitle">From Registration to Patient Impact -- Uganda's 783 Clinical Trials</div>
+<div class="epigraph">
+  <strong>"Glory be to the One Who took His servant by night from the Sacred Mosque
+  to the Farthest Mosque."</strong> -- Surah Al-Isra (17:1)<br><br>
+  Like the Prophet's miraculous Night Journey, every clinical trial must travel
+  a long path from registration to patient impact. In Uganda, most trials never
+  complete this journey. We trace where they fall.
+</div>
+
+<!-- ================================================================ -->
+<!-- 1. KEY METRICS -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>1. The Journey at a Glance</h2>
+  <p class="section-desc">
+    Of 783 registered Ugandan trials, how many complete each stage of the
+    lifecycle from registration through to patient access?
+  </p>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Total Trials</div>
+      <div class="kpi-value" style="color:#60a5fa;">783</div>
+      <div class="kpi-sub">Registered on ClinicalTrials.gov</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Completed</div>
+      <div class="kpi-value" style="color:#34d399;">500</div>
+      <div class="kpi-sub">63.9% of registered</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Results Graveyard</div>
+      <div class="kpi-value" style="color:#ef4444;">140</div>
+      <div class="kpi-sub">17.9% of all trials</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Access Chasm</div>
+      <div class="kpi-value" style="color:#f97316;">140</div>
+      <div class="kpi-sub">28.0% of completed trials</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 2. THE FUNNEL -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>2. The Funnel: 783 Trials Narrowing at Each Stage</h2>
+  <p class="section-desc">
+    A CONSORT-style funnel showing how many trials reach each lifecycle stage.
+    Each row shows the absolute count, percentage of the original 783, and the
+    step-wise survival from the previous stage.
+  </p>
+
+  <div class="funnel-container">
+    
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #60a5fa33, #60a5fa11);
+    border:2px solid #60a5fa;border-radius:8px;width:700px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 1: Registration</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#60a5fa;">783</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">100.0% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #a78bfa33, #a78bfa11);
+    border:2px solid #a78bfa;border-radius:8px;width:694px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 2: Enrollment</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#a78bfa;">777</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">99.2% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #34d39933, #34d39911);
+    border:2px solid #34d399;border-radius:8px;width:447px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 3: Completion</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#34d399;">500</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">63.9% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #fbbf2433, #fbbf2411);
+    border:2px solid #fbbf24;border-radius:8px;width:603px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 4: Results</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#fbbf24;">675</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">86.2% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #f472b633, #f472b611);
+    border:2px solid #f472b6;border-radius:8px;width:447px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 5: Publication</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#f472b6;">500</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">63.9% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+<div style="text-align:center;margin:4px 0;">
+  <div style="display:inline-block;background:linear-gradient(135deg, #22d3ee33, #22d3ee11);
+    border:2px solid #22d3ee;border-radius:8px;width:322px;padding:12px 20px;
+    position:relative;">
+    <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;
+      letter-spacing:1px;">Stage 6: Access</div>
+    <div style="font-size:1.8rem;font-weight:bold;color:#22d3ee;">360</div>
+    <div style="font-size:0.85rem;color:#cbd5e1;">46.0% of total</div>
+  </div>
+</div>
+<div style="text-align:center;color:#475569;font-size:1.2rem;">&#x25BC;</div>
+
+  </div>
+
+  <table>
+    <thead><tr>
+      <th>Stage</th><th>Name</th>
+      <th style="text-align:right;">Count</th>
+      <th style="text-align:right;">% of Total</th>
+      <th style="text-align:right;">% of Previous</th>
+      <th>Visual</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#60a5fa;font-size:1.1rem;">
+    Stage 1</td>
+  <td style="padding:12px 16px;font-weight:bold;">Registration</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#60a5fa;">783</td>
+  <td style="padding:12px 16px;text-align:right;">100.0%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    100.0%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#60a5fa;height:100%;width:100.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#a78bfa;font-size:1.1rem;">
+    Stage 2</td>
+  <td style="padding:12px 16px;font-weight:bold;">Enrollment</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#a78bfa;">777</td>
+  <td style="padding:12px 16px;text-align:right;">99.2%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    99.2%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#a78bfa;height:100%;width:99.2%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#34d399;font-size:1.1rem;">
+    Stage 3</td>
+  <td style="padding:12px 16px;font-weight:bold;">Completion</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#34d399;">500</td>
+  <td style="padding:12px 16px;text-align:right;">63.9%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    64.4%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#34d399;height:100%;width:63.9%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#fbbf24;font-size:1.1rem;">
+    Stage 4</td>
+  <td style="padding:12px 16px;font-weight:bold;">Results</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#fbbf24;">675</td>
+  <td style="padding:12px 16px;text-align:right;">86.2%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    135.0%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#fbbf24;height:100%;width:86.2%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#f472b6;font-size:1.1rem;">
+    Stage 5</td>
+  <td style="padding:12px 16px;font-weight:bold;">Publication</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#f472b6;">500</td>
+  <td style="padding:12px 16px;text-align:right;">63.9%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    74.1%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#f472b6;height:100%;width:63.9%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:12px 16px;font-weight:bold;color:#22d3ee;font-size:1.1rem;">
+    Stage 6</td>
+  <td style="padding:12px 16px;font-weight:bold;">Access</td>
+  <td style="padding:12px 16px;text-align:right;font-size:1.3rem;font-weight:bold;
+    color:#22d3ee;">360</td>
+  <td style="padding:12px 16px;text-align:right;">46.0%</td>
+  <td style="padding:12px 16px;text-align:right;color:#94a3b8;font-size:0.85rem;">
+    72.0%</td>
+  <td style="padding:12px 16px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:250px;vertical-align:middle;"><div style="background:#22d3ee;height:100%;width:46.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 3. STAGE-BY-STAGE SURVIVAL -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>3. Lifecycle Score Distribution</h2>
+  <p class="section-desc">
+    Each trial receives a score from 0 to 6 based on how many lifecycle stages
+    it has completed. A score of 6 means the trial completed the full journey
+    from registration to patient access.
+  </p>
+  <table>
+    <thead><tr>
+      <th>Score</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Percentage</th>
+      <th>Distribution</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:8px 14px;font-weight:bold;color:#f97316;">Score 2/6</td>
+  <td style="padding:8px 14px;text-align:right;font-weight:bold;">114</td>
+  <td style="padding:8px 14px;text-align:right;">14.6%</td>
+  <td style="padding:8px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#f97316;height:100%;width:14.6%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:8px 14px;font-weight:bold;color:#f97316;">Score 3/6</td>
+  <td style="padding:8px 14px;text-align:right;font-weight:bold;">169</td>
+  <td style="padding:8px 14px;text-align:right;">21.6%</td>
+  <td style="padding:8px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#f97316;height:100%;width:21.6%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:8px 14px;font-weight:bold;color:#eab308;">Score 5/6</td>
+  <td style="padding:8px 14px;text-align:right;font-weight:bold;">140</td>
+  <td style="padding:8px 14px;text-align:right;">17.9%</td>
+  <td style="padding:8px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#eab308;height:100%;width:17.9%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:8px 14px;font-weight:bold;color:#22c55e;">Score 6/6</td>
+  <td style="padding:8px 14px;text-align:right;font-weight:bold;">360</td>
+  <td style="padding:8px 14px;text-align:right;">46.0%</td>
+  <td style="padding:8px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#22c55e;height:100%;width:46.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 4. DROP-OFF ANALYSIS -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>4. Drop-Off Analysis: Where Do Trials Die?</h2>
+  <p class="section-desc">
+    For each trial, we identify the first lifecycle stage it failed to reach.
+    This reveals the critical bottlenecks in the Ugandan trial ecosystem.
+  </p>
+  <table>
+    <thead><tr>
+      <th></th><th>Drop-Off Point</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Percentage</th>
+      <th>Visual</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:10px 14px;color:#22c55e;font-size:1.1rem;">&#x2714;</td>
+  <td style="padding:10px 14px;font-weight:bold;">Full Journey</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#22c55e;">360</td>
+  <td style="padding:10px 14px;text-align:right;">46.0%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#22c55e;height:100%;width:46.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;color:#ef4444;font-size:1.1rem;">&#x2718;</td>
+  <td style="padding:10px 14px;font-weight:bold;">No Enrollment</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#ef4444;">6</td>
+  <td style="padding:10px 14px;text-align:right;">0.8%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#ef4444;height:100%;width:0.8%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;color:#ef4444;font-size:1.1rem;">&#x2718;</td>
+  <td style="padding:10px 14px;font-weight:bold;">Not Completed</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#ef4444;">277</td>
+  <td style="padding:10px 14px;text-align:right;">35.4%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#ef4444;height:100%;width:35.4%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;color:#ef4444;font-size:1.1rem;">&#x2718;</td>
+  <td style="padding:10px 14px;font-weight:bold;">No Results Update</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#ef4444;">0</td>
+  <td style="padding:10px 14px;text-align:right;">0.0%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#ef4444;height:100%;width:0.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;color:#ef4444;font-size:1.1rem;">&#x2718;</td>
+  <td style="padding:10px 14px;font-weight:bold;">Not Published</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#ef4444;">0</td>
+  <td style="padding:10px 14px;text-align:right;">0.0%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#ef4444;height:100%;width:0.0%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px 14px;color:#ef4444;font-size:1.1rem;">&#x2718;</td>
+  <td style="padding:10px 14px;font-weight:bold;">Not Accessible</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;
+    color:#ef4444;">140</td>
+  <td style="padding:10px 14px;text-align:right;">17.9%</td>
+  <td style="padding:10px 14px;"><div style="display:inline-block;background:rgba(255,255,255,0.06);border-radius:4px;height:16px;width:200px;vertical-align:middle;"><div style="background:#ef4444;height:100%;width:17.9%;border-radius:4px;transition:width 0.5s;"></div></div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 5. LOCAL VS FOREIGN LIFECYCLE -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>5. Stratification: Local vs Foreign Lifecycle Completion</h2>
+  <p class="section-desc">
+    Do locally sponsored trials complete the lifecycle journey at the same rate
+    as foreign-sponsored ones? This comparison reveals structural dependency.
+  </p>
+
+  <h3>Summary by Sponsor Type</h3>
+  <table>
+    <thead><tr>
+      <th>Sponsor Type</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Avg Score</th>
+      <th style="text-align:right;">Completion %</th>
+      <th style="text-align:right;">Full Journey %</th>
+    </tr></thead>
+    <tbody>
+      <tr style="background:rgba(255,255,255,0.02);">
+  <td style="padding:10px 14px;font-weight:bold;color:#22c55e;text-transform:capitalize;">
+    local</td>
+  <td style="padding:10px 14px;text-align:right;">149</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;">
+    3.86</td>
+  <td style="padding:10px 14px;text-align:right;">47.0%</td>
+  <td style="padding:10px 14px;text-align:right;color:#22c55e;font-weight:bold;">
+    32.9%</td>
+</tr>
+<tr style="background:rgba(255,255,255,0.02);">
+  <td style="padding:10px 14px;font-weight:bold;color:#f97316;text-transform:capitalize;">
+    foreign</td>
+  <td style="padding:10px 14px;text-align:right;">633</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;">
+    4.77</td>
+  <td style="padding:10px 14px;text-align:right;">67.9%</td>
+  <td style="padding:10px 14px;text-align:right;color:#f97316;font-weight:bold;">
+    49.1%</td>
+</tr>
+<tr style="background:rgba(255,255,255,0.02);">
+  <td style="padding:10px 14px;font-weight:bold;color:#94a3b8;text-transform:capitalize;">
+    ambiguous</td>
+  <td style="padding:10px 14px;text-align:right;">1</td>
+  <td style="padding:10px 14px;text-align:right;font-weight:bold;">
+    2.0</td>
+  <td style="padding:10px 14px;text-align:right;">0.0%</td>
+  <td style="padding:10px 14px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.0%</td>
+</tr>
+
+    </tbody>
+  </table>
+
+  <h3>Funnel Comparison: Local vs Foreign</h3>
+  <table>
+    <thead><tr>
+      <th>Stage</th>
+      <th style="text-align:right;">Local</th>
+      <th style="text-align:right;">Foreign</th>
+    </tr></thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;font-weight:bold;color:#60a5fa;">Registration</td><td style="padding:8px 12px;text-align:right;">149 (100.0%)</td><td style="padding:8px 12px;text-align:right;">633 (100.0%)</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold;color:#a78bfa;">Enrollment</td><td style="padding:8px 12px;text-align:right;">149 (100.0%)</td><td style="padding:8px 12px;text-align:right;">627 (99.1%)</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold;color:#34d399;">Completion</td><td style="padding:8px 12px;text-align:right;">70 (47.0%)</td><td style="padding:8px 12px;text-align:right;">430 (67.9%)</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold;color:#fbbf24;">Results</td><td style="padding:8px 12px;text-align:right;">88 (59.1%)</td><td style="padding:8px 12px;text-align:right;">587 (92.7%)</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold;color:#f472b6;">Publication</td><td style="padding:8px 12px;text-align:right;">70 (47.0%)</td><td style="padding:8px 12px;text-align:right;">430 (67.9%)</td></tr>
+<tr><td style="padding:8px 12px;font-weight:bold;color:#22d3ee;">Access</td><td style="padding:8px 12px;text-align:right;">49 (32.9%)</td><td style="padding:8px 12px;text-align:right;">311 (49.1%)</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 6. CONDITION STRATIFICATION -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>6. Lifecycle by Disease Category</h2>
+  <p class="section-desc">
+    HIV trials dominate Uganda's portfolio. But do they also dominate the
+    lifecycle journey? Which conditions have the best and worst completion-to-access
+    pipelines?
+  </p>
+  <table>
+    <thead><tr>
+      <th>Condition</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Avg Score</th>
+      <th style="text-align:right;">Completion %</th>
+      <th style="text-align:right;">Access %</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:8px 12px;font-weight:bold;">HIV</td>
+  <td style="padding:8px 12px;text-align:right;">300</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.88</td>
+  <td style="padding:8px 12px;text-align:right;">67.3%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    64.3%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Other</td>
+  <td style="padding:8px 12px;text-align:right;">171</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.27</td>
+  <td style="padding:8px 12px;text-align:right;">62.6%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    25.1%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Malaria</td>
+  <td style="padding:8px 12px;text-align:right;">75</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.96</td>
+  <td style="padding:8px 12px;text-align:right;">70.7%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    70.7%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Tuberculosis</td>
+  <td style="padding:8px 12px;text-align:right;">52</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.44</td>
+  <td style="padding:8px 12px;text-align:right;">51.9%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    51.9%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Infectious Other</td>
+  <td style="padding:8px 12px;text-align:right;">42</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.45</td>
+  <td style="padding:8px 12px;text-align:right;">66.7%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    21.4%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Maternal/Neonatal</td>
+  <td style="padding:8px 12px;text-align:right;">29</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#f97316;">
+    3.97</td>
+  <td style="padding:8px 12px;text-align:right;">51.7%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    17.2%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Mental Health</td>
+  <td style="padding:8px 12px;text-align:right;">28</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.5</td>
+  <td style="padding:8px 12px;text-align:right;">71.4%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    14.3%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Cancer</td>
+  <td style="padding:8px 12px;text-align:right;">21</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#f97316;">
+    3.81</td>
+  <td style="padding:8px 12px;text-align:right;">38.1%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    9.5%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Cardiovascular</td>
+  <td style="padding:8px 12px;text-align:right;">20</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.65</td>
+  <td style="padding:8px 12px;text-align:right;">65.0%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    50.0%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Nutrition</td>
+  <td style="padding:8px 12px;text-align:right;">18</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.33</td>
+  <td style="padding:8px 12px;text-align:right;">61.1%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    44.4%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">NCD Other</td>
+  <td style="padding:8px 12px;text-align:right;">16</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#f97316;">
+    3.94</td>
+  <td style="padding:8px 12px;text-align:right;">37.5%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    18.8%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Surgery/Trauma</td>
+  <td style="padding:8px 12px;text-align:right;">8</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    5.12</td>
+  <td style="padding:8px 12px;text-align:right;">100.0%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    12.5%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Vaccine</td>
+  <td style="padding:8px 12px;text-align:right;">3</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    5.0</td>
+  <td style="padding:8px 12px;text-align:right;">66.7%</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">
+    66.7%</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 7. THE RESULTS GRAVEYARD -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>7. The Results Graveyard</h2>
+  <div class="alert-box">
+    <p style="margin:0;font-size:1.1rem;">
+      <strong style="color:#ef4444;">140 trials</strong> completed
+      their study but the tested intervention is not accessible to patients in Uganda.
+      These trials extracted data from Ugandan communities but returned no tangible
+      benefit to the population that bore the research burden.
+    </p>
+    <p style="margin:12px 0 0;color:#94a3b8;font-size:0.9rem;">
+      17.9% of all 783 registered trials sit in this graveyard --
+      completed, perhaps published, but delivering no patient impact in Uganda.
+    </p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 8. THE ACCESS CHASM -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>8. The Access Chasm</h2>
+  <div class="alert-box">
+    <p style="margin:0;font-size:1.1rem;">
+      Of <strong style="color:#34d399;">500</strong> completed trials,
+      <strong style="color:#f97316;">140</strong> tested interventions
+      that are <em>not available</em> on the WHO Essential Medicines List or through
+      known Ugandan drug access programs.
+    </p>
+    <p style="margin:12px 0 0;color:#94a3b8;font-size:0.9rem;">
+      28.0% of completed trials fall into this chasm -- the intervention was tested
+      on Ugandan patients, but those same patients cannot access it.
+      This is the final and cruelest stage of the lifecycle failure.
+    </p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 9. TIME ANALYSIS -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>9. Time Analysis: How Long Does Each Stage Take?</h2>
+  <p class="section-desc">
+    Average journey length (years from start date to present) grouped by the
+    lifecycle score each trial achieved. Higher scores tend to correlate with
+    older trials that had time to complete more stages.
+  </p>
+  <table>
+    <thead><tr>
+      <th>Lifecycle Score</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Mean Duration</th>
+      <th style="text-align:right;">Min</th>
+      <th style="text-align:right;">Max</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:8px 12px;font-weight:bold;color:#f97316;">Score 2</td>
+  <td style="padding:8px 12px;text-align:right;">114</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">8.7 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">1.1 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">22.7 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;color:#f97316;">Score 3</td>
+  <td style="padding:8px 12px;text-align:right;">149</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">4.4 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">0.1 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">25.1 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;color:#eab308;">Score 5</td>
+  <td style="padding:8px 12px;text-align:right;">140</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">9.0 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">0.1 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">28.1 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;color:#22c55e;">Score 6</td>
+  <td style="padding:8px 12px;text-align:right;">356</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;">10.9 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">1.1 yrs</td>
+  <td style="padding:8px 12px;text-align:right;">27.4 yrs</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 10. PHASE STRATIFICATION -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>10. Lifecycle by Trial Phase</h2>
+  <p class="section-desc">
+    Early-phase trials rarely reach patient access. Later-phase trials
+    theoretically should, but do they in Uganda?
+  </p>
+  <table>
+    <thead><tr>
+      <th>Phase</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Avg Score</th>
+      <th style="text-align:right;">Completion %</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:8px 12px;font-weight:bold;">Phase 1</td>
+  <td style="padding:8px 12px;text-align:right;">33</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.82</td>
+  <td style="padding:8px 12px;text-align:right;">66.7%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Phase 2</td>
+  <td style="padding:8px 12px;text-align:right;">116</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.57</td>
+  <td style="padding:8px 12px;text-align:right;">62.1%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Phase 3</td>
+  <td style="padding:8px 12px;text-align:right;">167</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.7</td>
+  <td style="padding:8px 12px;text-align:right;">62.9%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">Phase 4</td>
+  <td style="padding:8px 12px;text-align:right;">69</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.8</td>
+  <td style="padding:8px 12px;text-align:right;">68.1%</td>
+</tr>
+<tr>
+  <td style="padding:8px 12px;font-weight:bold;">NA</td>
+  <td style="padding:8px 12px;text-align:right;">398</td>
+  <td style="padding:8px 12px;text-align:right;font-weight:bold;color:#eab308;">
+    4.5</td>
+  <td style="padding:8px 12px;text-align:right;">63.8%</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 11. TEMPORAL TRENDS -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>11. Temporal Trends: Lifecycle Score Over Time</h2>
+  <p class="section-desc">
+    How has the average lifecycle score changed across registration years?
+    Older trials have had more time to progress; newer trials may still be active.
+  </p>
+  <table>
+    <thead><tr>
+      <th>Year</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Avg Score</th>
+      <th>Volume</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+  <td style="padding:6px 10px;font-weight:bold;">2000</td>
+  <td style="padding:6px 10px;text-align:right;">1</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.0</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:3px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2001</td>
+  <td style="padding:6px 10px;text-align:right;">1</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.0</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:3px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2002</td>
+  <td style="padding:6px 10px;text-align:right;">4</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.25</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:12px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2003</td>
+  <td style="padding:6px 10px;text-align:right;">8</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.62</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:24px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2004</td>
+  <td style="padding:6px 10px;text-align:right;">12</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.92</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:36px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2005</td>
+  <td style="padding:6px 10px;text-align:right;">16</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.38</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:48px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2006</td>
+  <td style="padding:6px 10px;text-align:right;">13</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.69</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:39px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2007</td>
+  <td style="padding:6px 10px;text-align:right;">15</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.2</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:45px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2008</td>
+  <td style="padding:6px 10px;text-align:right;">17</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.76</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:51px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2009</td>
+  <td style="padding:6px 10px;text-align:right;">14</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.57</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:42px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2010</td>
+  <td style="padding:6px 10px;text-align:right;">23</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.48</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:69px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2011</td>
+  <td style="padding:6px 10px;text-align:right;">28</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.07</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:84px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2012</td>
+  <td style="padding:6px 10px;text-align:right;">26</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.23</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:78px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2013</td>
+  <td style="padding:6px 10px;text-align:right;">35</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.83</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:105px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2014</td>
+  <td style="padding:6px 10px;text-align:right;">28</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.11</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:84px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2015</td>
+  <td style="padding:6px 10px;text-align:right;">34</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    5.15</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:102px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2016</td>
+  <td style="padding:6px 10px;text-align:right;">37</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.76</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:111px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2017</td>
+  <td style="padding:6px 10px;text-align:right;">40</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.78</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:120px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2018</td>
+  <td style="padding:6px 10px;text-align:right;">46</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.76</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:138px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2019</td>
+  <td style="padding:6px 10px;text-align:right;">53</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.72</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:159px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2020</td>
+  <td style="padding:6px 10px;text-align:right;">49</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.88</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:147px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2021</td>
+  <td style="padding:6px 10px;text-align:right;">67</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.4</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:200px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2022</td>
+  <td style="padding:6px 10px;text-align:right;">53</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.98</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:159px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2023</td>
+  <td style="padding:6px 10px;text-align:right;">51</td>
+  <td style="padding:6px 10px;text-align:right;color:#eab308;font-weight:bold;">
+    4.16</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#eab308;height:12px;width:153px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2024</td>
+  <td style="padding:6px 10px;text-align:right;">47</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.68</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:141px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2025</td>
+  <td style="padding:6px 10px;text-align:right;">30</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.07</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:90px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2026</td>
+  <td style="padding:6px 10px;text-align:right;">28</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.07</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:84px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+<tr>
+  <td style="padding:6px 10px;font-weight:bold;">2027</td>
+  <td style="padding:6px 10px;text-align:right;">1</td>
+  <td style="padding:6px 10px;text-align:right;color:#f97316;font-weight:bold;">
+    3.0</td>
+  <td style="padding:6px 10px;">
+    <div style="background:#f97316;height:12px;width:3px;border-radius:3px;
+      opacity:0.7;"></div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ================================================================ -->
+<!-- 12. THE BEST JOURNEYS -->
+<!-- ================================================================ -->
+<div class="section">
+  <h2>12. The Best Journeys: Full Lifecycle Completion</h2>
+  <p class="section-desc">
+    These trials completed the full journey from registration to patient access --
+    the Night Journey realized. They represent what is possible when the system works.
+  </p>
+  
+  <table><thead><tr><th>#</th><th>NCT ID</th><th>Title</th><th style='text-align:right;'>Enrollment</th><th style='text-align:center;'>Category</th><th style='text-align:center;'>Sponsor</th><th style='text-align:right;'>Duration</th></tr></thead><tbody><tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">1</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT05950191</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">LLIN Evaluation in Uganda Project (LLINEUP3)</td>
+  <td style="padding:8px 10px;text-align:right;">215,903</td>
+  <td style="padding:8px 10px;text-align:center;">Malaria</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">2.3 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">2</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT01971710</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Advancing Community Level Action for Improving MCH/PMTCT</td>
+  <td style="padding:8px 10px;text-align:right;">187,335</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">13.0 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">3</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT01864603</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Sustainable East Africa Research in Community Health</td>
+  <td style="padding:8px 10px;text-align:right;">150,395</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">13.0 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">4</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT03112018</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Strengthening Facility-based Intrapartum/Immediate Newborn Care to Reduce Mortal...</td>
+  <td style="padding:8px 10px;text-align:right;">102,988</td>
+  <td style="padding:8px 10px;text-align:center;">Maternal/Neonatal</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">9.5 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">5</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT05609513</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Integration of Hypertension Management in HIV Care in Uganda</td>
+  <td style="padding:8px 10px;text-align:right;">87,421</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">local</td>
+  <td style="padding:8px 10px;text-align:right;">3.1 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">6</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT05276999</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Rheumatic Heart Disease Community Streptococcal Treatment Program &quot;RESET&quot;</td>
+  <td style="padding:8px 10px;text-align:right;">66,123</td>
+  <td style="padding:8px 10px;text-align:center;">Cardiovascular</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">4.2 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">7</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT02910310</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Introduction of UBT for PPH Management in Three Countries</td>
+  <td style="padding:8px 10px;text-align:right;">60,105</td>
+  <td style="padding:8px 10px;text-align:center;">Maternal/Neonatal</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">9.5 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">8</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT04566510</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">LLIN Evaluation in Uganda Project</td>
+  <td style="padding:8px 10px;text-align:right;">32,895</td>
+  <td style="padding:8px 10px;text-align:center;">Malaria</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">5.4 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">9</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT01024426</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Impact of Enhanced Health Facility Care in Uganda</td>
+  <td style="padding:8px 10px;text-align:right;">25,000</td>
+  <td style="padding:8px 10px;text-align:center;">Malaria</td>
+  <td style="padding:8px 10px;text-align:center;">local</td>
+  <td style="padding:8px 10px;text-align:right;">15.3 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">10</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT04904549</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Study of Monovalent and Bivalent Recombinant Protein Vaccines Against COVID-19 i...</td>
+  <td style="padding:8px 10px;text-align:right;">23,726</td>
+  <td style="padding:8px 10px;text-align:center;">Infectious Other</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">5.6 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">11</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT02448823</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Evaluating Demand Generation (Stylish Man , Stylish Living) for HIV Prevention/F...</td>
+  <td style="padding:8px 10px;text-align:right;">17,386</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">12.7 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">12</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT05168813</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Efficacy Study of COVID-19 mRNA Vaccine in Regions With SARS-CoV-2 Variants of C...</td>
+  <td style="padding:8px 10px;text-align:right;">14,237</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">4.3 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">13</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT00716599</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Training in Fever Case Management With Rapid Diagnostic Tests (RDTs) for Malaria...</td>
+  <td style="padding:8px 10px;text-align:right;">14,000</td>
+  <td style="padding:8px 10px;text-align:center;">Malaria</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">18.2 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">14</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT02050763</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">Assessing the Impact of an Intervention to Prevent Intimate Partner Violence and...</td>
+  <td style="padding:8px 10px;text-align:right;">11,451</td>
+  <td style="padding:8px 10px;text-align:center;">HIV</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">21.1 yrs</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;text-align:center;color:#22c55e;font-weight:bold;">15</td>
+  <td style="padding:8px 10px;font-size:0.8rem;color:#94a3b8;">NCT02009215</td>
+  <td style="padding:8px 10px;font-size:0.85rem;">School-Based Treatment With ACT to Reduce Transmission</td>
+  <td style="padding:8px 10px;text-align:right;">10,746</td>
+  <td style="padding:8px 10px;text-align:center;">Malaria</td>
+  <td style="padding:8px 10px;text-align:center;">foreign</td>
+  <td style="padding:8px 10px;text-align:right;">12.1 yrs</td>
+</tr>
+</tbody></table>
+</div>
+
+<!-- ================================================================ -->
+<!-- METHODOLOGY -->
+<!-- ================================================================ -->
+<div class="section" style="border-color:#334155;">
+  <h2 style="color:#94a3b8;">Methodology</h2>
+  <p style="color:#64748b;font-size:0.85rem;margin:0;">
+    <strong>Data source:</strong> ClinicalTrials.gov API v2, 783 interventional
+    trials listing a Ugandan site (accessed March 2026).<br>
+    <strong>Lifecycle stages:</strong> (1) Registration = present in registry;
+    (2) Enrollment = enrollment &gt; 0; (3) Completion = status COMPLETED;
+    (4) Results = status is not UNKNOWN; (5) Publication = COMPLETED and not
+    UNKNOWN; (6) Access = intervention matches WHO EML or known Ugandan drug
+    access programs (PEPFAR ARVs, EPI vaccines, essential medicines).<br>
+    <strong>Sponsor classification:</strong> keyword matching on sponsor name
+    for Ugandan institutions (Makerere, Mulago, IDI, JCRC, etc.).<br>
+    <strong>Limitations:</strong> Access assessment uses intervention name matching
+    against WHO EML keywords, which is approximate. Actual drug availability
+    varies by district. Publication status is proxied from registry metadata,
+    not verified against PubMed. Some trials may be registered on other
+    registries not captured here.
+  </p>
+</div>
+
+<div class="footer">
+  Project 62: The Trial Lifecycle -- AfricaRCT Series<br>
+  Inspired by Surah Al-Isra (17:1) -- the Night Journey<br>
+  Data: ClinicalTrials.gov API v2 | Generated: 2026-03-28 18:43
+</div>
+
+</div>
+</body>
+</html>

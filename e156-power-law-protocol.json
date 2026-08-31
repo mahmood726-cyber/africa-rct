@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: power-law distribution and concentration of clinical trials across 30 African nations",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "body": "This cross-sectional registry analysis will characterise the distributional form and concentration of interventional clinical trials across 30 African countries, comparing with 15 Latin American and 15 Asian nations. We will query ClinicalTrials.gov API v2 for total interventional trial counts per country using AREA[StudyType]INTERVENTIONAL and query.locn, then rank countries by trial count to produce a rank-frequency distribution. A power-law model log(count) = alpha + beta x log(rank) will be fitted via ordinary least squares, with R-squared to assess goodness of fit and beta as the Zipf exponent. The Gini coefficient will be computed from trial count vectors for each region, alongside the Herfindahl-Hirschman Index for market concentration and Shannon entropy for distributional evenness. A tipping-point analysis will identify the rank at which per-capita density drops below one trial per million. Cross-regional comparison will contrast trial Gini against World Bank income Gini. No patient-level data will be accessed; limitations include single-registry dependence and population denominator uncertainty.",
+    "ai_transparency": "LLM used for drafting; author reviewed and takes responsibility for final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "API query and statistical methods precede outcome definitions."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses single-registry and denominator limitations."
+            }
+        ]
+    }
+}

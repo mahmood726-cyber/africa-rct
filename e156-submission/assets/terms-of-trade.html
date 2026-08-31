@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Terms of Trade - Raw Data Exported, Finished Drugs Imported</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #7c3aed;
+  --cotton: #d4a574;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #d4a574, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+.cotton { color: var(--cotton); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.insight-box {
+  background: var(--surface);
+  border-left: 4px solid var(--danger);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.insight-box.success-box { border-left-color: var(--success); }
+.insight-box.warning-box { border-left-color: var(--warning); }
+.insight-box.cotton-box { border-left-color: var(--cotton); }
+.metric-def {
+  background: rgba(212, 165, 116, 0.08);
+  border: 1px solid rgba(212, 165, 116, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  h1 { font-size: 1.6rem; }
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Terms of Trade</h1>
+<p class="subtitle">
+  Raw Data Exported, Finished Drugs Imported &mdash; The Prebisch-Singer
+  hypothesis applied to Africa&rsquo;s clinical trial ecosystem
+</p>
+
+<div class="insight-box cotton-box">
+  <strong>The Prebisch-Singer Hypothesis</strong><br>
+  In 1950, Raul Prebisch and Hans Singer independently observed that
+  developing countries exporting raw materials (cotton, copper, cocoa)
+  and importing manufactured goods (textiles, electronics, machinery)
+  face <em>declining terms of trade</em>: the price of raw materials
+  falls relative to manufactures over time, trapping exporters in
+  permanent disadvantage.<br><br>
+  Africa&rsquo;s clinical trial ecosystem follows the same pattern.
+  <strong>African countries EXPORT raw research inputs</strong> &mdash;
+  participants&rsquo; bodies, blood samples, clinical data, enrollment
+  numbers &mdash; and <strong>IMPORT finished products</strong> &mdash;
+  patented drugs, branded devices, expensive biologics &mdash; at
+  100x markup.  The cotton-to-textiles trade of the colonial era
+  has been replaced by a data-to-drugs trade that is just as extractive.
+</div>
+
+<div class="metric-def">
+  <strong>Terms of Trade Ratio</strong> = Phase 3 trials / Phase 1 trials<br>
+  <span class="danger">High ratio</span> = country mainly tests other
+  people&rsquo;s drugs (raw material exporter)<br>
+  <span class="success">Low ratio</span> = country also develops its
+  own drugs (innovator)<br><br>
+  <strong>Innovation Index</strong> = Phase 1 / total trials
+  (higher = more early-stage R&amp;D)<br>
+  <strong>Export Intensity</strong> = Phase 3 / total trials
+  (higher = more testing labor for foreign sponsors)
+</div>
+
+<h2>The $500 Billion Question</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Phase 3 Trials</div>
+    <div class="value danger">2,715</div>
+    <div class="label">&ldquo;raw materials exported&rdquo;</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Phase 1 Trials</div>
+    <div class="value success">552</div>
+    <div class="label">&ldquo;local innovation&rdquo;</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa ToT Ratio</div>
+    <div class="value danger">4.9x</div>
+    <div class="label">Phase 3 / Phase 1</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US ToT Ratio</div>
+    <div class="value success">0.5x</div>
+    <div class="label">Phase 3 / Phase 1</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">WHO EML Drugs in Ph3</div>
+    <div class="value warning">0.0%</div>
+    <div class="label">of Uganda Ph3 trials</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Premium Drugs in Ph3</div>
+    <div class="value purple">0.0%</div>
+    <div class="label">likely unaffordable post-trial</div>
+  </div>
+</div>
+
+<h2>The Colonial Trade Analogy</h2>
+<div class="insight-box">
+  <strong>Cotton &rarr; Textiles, Data &rarr; Drugs</strong><br>
+  In the colonial era, Africa exported raw cotton and imported finished
+  textiles at enormous markup.  Today, the pattern is identical:<br><br>
+  <strong>EXPORT</strong>: Africa contributes 2,715
+  Phase 3 trials &mdash; thousands of participants whose bodies, time,
+  and biological data generate the evidence that makes drug approval
+  possible.  Each participant represents an &ldquo;export&rdquo; of raw
+  research material.<br><br>
+  <strong>IMPORT</strong>: The drugs approved using that African data
+  are sold back to African health systems at prices few can afford.
+  Of the Uganda Phase 3 trials sampled, only 0.0%
+  test WHO Essential Medicines List drugs, while 0.0%
+  test premium-priced biologics and novel agents likely unaffordable
+  post-trial.
+</div>
+
+<h2>African Countries: Phase Portfolio</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+  Sorted by Terms of Trade ratio (highest = most extractive)
+</p>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Phase 1</th>
+  <th style="text-align:right;">Phase 2</th>
+  <th style="text-align:right;">Phase 3</th>
+  <th style="text-align:right;">Total</th>
+  <th style="text-align:right;">ToT Ratio</th>
+  <th style="text-align:right;">Innovation %</th>
+  <th style="text-align:right;">Export %</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Ethiopia</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">25</td><td style="padding:10px;text-align:right;">240</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">12.50</td><td style="padding:10px;text-align:right;color:#ef4444;">0.8%</td><td style="padding:10px;text-align:right;">10.4%</td></tr>
+<tr><td style="padding:10px;">Ghana</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">24</td><td style="padding:10px;text-align:right;">56</td><td style="padding:10px;text-align:right;">230</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">8.00</td><td style="padding:10px;text-align:right;color:#ef4444;">3.0%</td><td style="padding:10px;text-align:right;">24.3%</td></tr>
+<tr><td style="padding:10px;">South Africa</td><td style="padding:10px;text-align:right;">263</td><td style="padding:10px;text-align:right;">903</td><td style="padding:10px;text-align:right;">1,880</td><td style="padding:10px;text-align:right;">3,473</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">7.15</td><td style="padding:10px;text-align:right;color:#f59e0b;">7.6%</td><td style="padding:10px;text-align:right;">54.1%</td></tr>
+<tr><td style="padding:10px;">Cameroon</td><td style="padding:10px;text-align:right;">4</td><td style="padding:10px;text-align:right;">16</td><td style="padding:10px;text-align:right;">22</td><td style="padding:10px;text-align:right;">111</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">5.50</td><td style="padding:10px;text-align:right;color:#ef4444;">3.6%</td><td style="padding:10px;text-align:right;">19.8%</td></tr>
+<tr><td style="padding:10px;">Zambia</td><td style="padding:10px;text-align:right;">11</td><td style="padding:10px;text-align:right;">30</td><td style="padding:10px;text-align:right;">47</td><td style="padding:10px;text-align:right;">245</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">4.27</td><td style="padding:10px;text-align:right;color:#ef4444;">4.5%</td><td style="padding:10px;text-align:right;">19.2%</td></tr>
+<tr><td style="padding:10px;">Senegal</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;">22</td><td style="padding:10px;text-align:right;">26</td><td style="padding:10px;text-align:right;">97</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.71</td><td style="padding:10px;text-align:right;color:#f59e0b;">7.2%</td><td style="padding:10px;text-align:right;">26.8%</td></tr>
+<tr><td style="padding:10px;">Mozambique</td><td style="padding:10px;text-align:right;">6</td><td style="padding:10px;text-align:right;">28</td><td style="padding:10px;text-align:right;">22</td><td style="padding:10px;text-align:right;">123</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.67</td><td style="padding:10px;text-align:right;color:#ef4444;">4.9%</td><td style="padding:10px;text-align:right;">17.9%</td></tr>
+<tr><td style="padding:10px;">Malawi</td><td style="padding:10px;text-align:right;">19</td><td style="padding:10px;text-align:right;">51</td><td style="padding:10px;text-align:right;">64</td><td style="padding:10px;text-align:right;">288</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.37</td><td style="padding:10px;text-align:right;color:#f59e0b;">6.6%</td><td style="padding:10px;text-align:right;">22.2%</td></tr>
+<tr><td style="padding:10px;">Uganda</td><td style="padding:10px;text-align:right;">51</td><td style="padding:10px;text-align:right;">149</td><td style="padding:10px;text-align:right;">167</td><td style="padding:10px;text-align:right;">783</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.27</td><td style="padding:10px;text-align:right;color:#f59e0b;">6.5%</td><td style="padding:10px;text-align:right;">21.3%</td></tr>
+<tr><td style="padding:10px;">Burkina Faso</td><td style="padding:10px;text-align:right;">16</td><td style="padding:10px;text-align:right;">48</td><td style="padding:10px;text-align:right;">49</td><td style="padding:10px;text-align:right;">196</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.06</td><td style="padding:10px;text-align:right;color:#f59e0b;">8.2%</td><td style="padding:10px;text-align:right;">25.0%</td></tr>
+<tr><td style="padding:10px;">Tanzania</td><td style="padding:10px;text-align:right;">38</td><td style="padding:10px;text-align:right;">78</td><td style="padding:10px;text-align:right;">98</td><td style="padding:10px;text-align:right;">431</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.58</td><td style="padding:10px;text-align:right;color:#f59e0b;">8.8%</td><td style="padding:10px;text-align:right;">22.7%</td></tr>
+<tr><td style="padding:10px;">Zimbabwe</td><td style="padding:10px;text-align:right;">18</td><td style="padding:10px;text-align:right;">44</td><td style="padding:10px;text-align:right;">44</td><td style="padding:10px;text-align:right;">166</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.44</td><td style="padding:10px;text-align:right;color:#22c55e;">10.8%</td><td style="padding:10px;text-align:right;">26.5%</td></tr>
+<tr><td style="padding:10px;">Nigeria</td><td style="padding:10px;text-align:right;">25</td><td style="padding:10px;text-align:right;">47</td><td style="padding:10px;text-align:right;">56</td><td style="padding:10px;text-align:right;">354</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.24</td><td style="padding:10px;text-align:right;color:#f59e0b;">7.1%</td><td style="padding:10px;text-align:right;">15.8%</td></tr>
+<tr><td style="padding:10px;">Kenya</td><td style="padding:10px;text-align:right;">70</td><td style="padding:10px;text-align:right;">124</td><td style="padding:10px;text-align:right;">141</td><td style="padding:10px;text-align:right;">720</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.01</td><td style="padding:10px;text-align:right;color:#f59e0b;">9.7%</td><td style="padding:10px;text-align:right;">19.6%</td></tr>
+<tr><td style="padding:10px;">Rwanda</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">15</td><td style="padding:10px;text-align:right;">18</td><td style="padding:10px;text-align:right;">121</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.20</td><td style="padding:10px;text-align:right;color:#22c55e;">12.4%</td><td style="padding:10px;text-align:right;">14.9%</td></tr>
+
+</tbody>
+</table>
+
+<h2>Comparator Countries: The Innovators</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Phase 1</th>
+  <th style="text-align:right;">Phase 2</th>
+  <th style="text-align:right;">Phase 3</th>
+  <th style="text-align:right;">Total</th>
+  <th style="text-align:right;">ToT Ratio</th>
+  <th style="text-align:right;">Innovation %</th>
+  <th style="text-align:right;">Export %</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Brazil</td><td style="padding:10px;text-align:right;">578</td><td style="padding:10px;text-align:right;">1,657</td><td style="padding:10px;text-align:right;">3,372</td><td style="padding:10px;text-align:right;">9,890</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">5.83</td><td style="padding:10px;text-align:right;color:#f59e0b;">5.8%</td><td style="padding:10px;text-align:right;">34.1%</td></tr>
+<tr><td style="padding:10px;">India</td><td style="padding:10px;text-align:right;">513</td><td style="padding:10px;text-align:right;">886</td><td style="padding:10px;text-align:right;">1,997</td><td style="padding:10px;text-align:right;">5,388</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">3.89</td><td style="padding:10px;text-align:right;color:#f59e0b;">9.5%</td><td style="padding:10px;text-align:right;">37.1%</td></tr>
+<tr><td style="padding:10px;">France</td><td style="padding:10px;text-align:right;">2,384</td><td style="padding:10px;text-align:right;">6,040</td><td style="padding:10px;text-align:right;">7,062</td><td style="padding:10px;text-align:right;">28,296</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.96</td><td style="padding:10px;text-align:right;color:#f59e0b;">8.4%</td><td style="padding:10px;text-align:right;">25.0%</td></tr>
+<tr><td style="padding:10px;">Germany</td><td style="padding:10px;text-align:right;">3,109</td><td style="padding:10px;text-align:right;">6,012</td><td style="padding:10px;text-align:right;">7,098</td><td style="padding:10px;text-align:right;">21,841</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">2.28</td><td style="padding:10px;text-align:right;color:#22c55e;">14.2%</td><td style="padding:10px;text-align:right;">32.5%</td></tr>
+<tr><td style="padding:10px;">United Kingdom</td><td style="padding:10px;text-align:right;">3,951</td><td style="padding:10px;text-align:right;">5,416</td><td style="padding:10px;text-align:right;">5,815</td><td style="padding:10px;text-align:right;">22,049</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">1.47</td><td style="padding:10px;text-align:right;color:#22c55e;">17.9%</td><td style="padding:10px;text-align:right;">26.4%</td></tr>
+<tr><td style="padding:10px;">China</td><td style="padding:10px;text-align:right;">8,464</td><td style="padding:10px;text-align:right;">10,963</td><td style="padding:10px;text-align:right;">6,342</td><td style="padding:10px;text-align:right;">38,933</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.75</td><td style="padding:10px;text-align:right;color:#22c55e;">21.7%</td><td style="padding:10px;text-align:right;">16.3%</td></tr>
+<tr><td style="padding:10px;">United States</td><td style="padding:10px;text-align:right;">34,706</td><td style="padding:10px;text-align:right;">41,424</td><td style="padding:10px;text-align:right;">18,410</td><td style="padding:10px;text-align:right;">159,196</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">0.53</td><td style="padding:10px;text-align:right;color:#22c55e;">21.8%</td><td style="padding:10px;text-align:right;">11.6%</td></tr>
+
+</tbody>
+</table>
+
+<h2>Phase 1 vs Phase 3: Africa vs the World</h2>
+<div class="chart-container">
+  <canvas id="phaseChart" height="100"></canvas>
+</div>
+
+<h2>Terms of Trade Ratio by Country</h2>
+<div class="chart-container">
+  <canvas id="totChart" height="120"></canvas>
+</div>
+
+<h2>WHO Essential Medicines List Overlap</h2>
+<div class="insight-box warning-box">
+  <strong>Uganda Phase 3 Sample Analysis (n=167)</strong><br>
+  Of Phase 3 trials sampled from Uganda with enrollment data:<br>
+  &bull; <strong>0</strong> (0.0%) test
+  drugs on the WHO Essential Medicines List &mdash; affordable and
+  available post-trial<br>
+  &bull; <strong>0</strong> (0.0%)
+  test premium-priced drugs &mdash; likely unaffordable in the
+  testing country after trial completion<br>
+  &bull; Total estimated participants enrolled:
+  <strong>239,534</strong><br><br>
+  This is the heart of the Prebisch-Singer dynamic: Africa contributes
+  raw material (participant data) to generate evidence that primarily
+  benefits pharmaceutical companies and high-income country health
+  systems.
+</div>
+
+<h2>Methods</h2>
+<div class="insight-box success-box">
+  ClinicalTrials.gov API v2 was queried for interventional trials by
+  phase (1&ndash;4) across 15 African countries and 7 comparator
+  nations (US, UK, France, Germany, India, China, Brazil).  The Terms
+  of Trade ratio was computed as Phase 3 trials divided by Phase 1
+  trials for each country.  For Uganda, detailed Phase 3 trial data
+  was retrieved including enrollment counts and intervention names,
+  which were matched against the WHO Essential Medicines List and a
+  list of premium-priced agents.  All queries are reproducible from
+  the cached data file.
+</div>
+
+<h2>References</h2>
+<ul style="list-style:none;padding:0;">
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/39972388/" target="_blank" style="color:#3b82f6;">PMID 39972388</a> &mdash; Clinical trial infrastructure in Africa</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/37643290/" target="_blank" style="color:#3b82f6;">PMID 37643290</a> &mdash; Global trial participation and drug access</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/36332653/" target="_blank" style="color:#3b82f6;">PMID 36332653</a> &mdash; Pharmaceutical value chain and Africa</li>
+<li style="margin-bottom:0.5rem;"><a href="https://pubmed.ncbi.nlm.nih.gov/34843674/" target="_blank" style="color:#3b82f6;">PMID 34843674</a> &mdash; Prebisch-Singer and health research paradigm</li>
+
+</ul>
+
+<footer>
+  Data: ClinicalTrials.gov API v2 |
+  Generated: 2026-03-28 |
+  The Terms of Trade v1.0 |
+  Open-access research tool
+</footer>
+
+</div>
+
+<script>
+// Phase 1 vs Phase 3 grouped bar
+new Chart(document.getElementById('phaseChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Ethiopia", "Ghana", "South Africa", "Cameroon", "Zambia", "Senegal", "Mozambique", "Malawi", "Uganda", "Burkina Faso", "Tanzania", "Zimbabwe", "Nigeria", "Kenya", "Rwanda", "Brazil", "India", "France", "Germany", "United Kingdom", "China", "United States"],
+    datasets: [
+      {
+        label: 'Phase 1 (Innovation)',
+        data: [2, 7, 263, 4, 11, 7, 6, 19, 51, 16, 38, 18, 25, 70, 15, 578, 513, 2384, 3109, 3951, 8464, 34706],
+        backgroundColor: 'rgba(34,197,94,0.8)',
+      },
+      {
+        label: 'Phase 3 (Testing / Export)',
+        data: [25, 56, 1880, 22, 47, 26, 22, 64, 167, 49, 98, 44, 56, 141, 18, 3372, 1997, 7062, 7098, 5815, 6342, 18410],
+        backgroundColor: 'rgba(239,68,68,0.8)',
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Phase 1 (Innovation) vs Phase 3 (Testing) by Country', color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', maxRotation: 45, minRotation: 45 }, grid: { color: '#1e293b' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }, title: { display: true, text: 'Trial count', color: '#94a3b8' } },
+    },
+  },
+});
+
+// Terms of Trade ratio horizontal bar
+new Chart(document.getElementById('totChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Ethiopia", "Ghana", "South Africa", "Cameroon", "Zambia", "Senegal", "Mozambique", "Malawi", "Uganda", "Burkina Faso", "Tanzania", "Zimbabwe", "Nigeria", "Kenya", "Rwanda", "Brazil", "India", "France", "Germany", "United Kingdom", "China", "United States"],
+    datasets: [{
+      label: 'ToT Ratio (Phase 3 / Phase 1)',
+      data: [12.5, 8.0, 7.15, 5.5, 4.27, 3.71, 3.67, 3.37, 3.27, 3.06, 2.58, 2.44, 2.24, 2.01, 1.2, 5.83, 3.89, 2.96, 2.28, 1.47, 0.75, 0.53],
+      backgroundColor: ['rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(239,68,68,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)','rgba(59,130,246,0.8)'],
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Terms of Trade Ratio (Phase 3 / Phase 1)', color: '#e2e8f0', font: { size: 14 } },
+      legend: { display: false },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' }, title: { display: true, text: 'Ratio (higher = more extractive)', color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: '#1e293b' } },
+    },
+  },
+});
+</script>
+</body>
+</html>

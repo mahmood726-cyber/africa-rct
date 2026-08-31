@@ -1,0 +1,8 @@
+{
+  "title": "South South Axis",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural reorganization of global clinical research, does the emergence of South-South collaboration networks indicate a shift toward research sovereignty for African and Asian institutions? This metadata audit evaluated collaborator relationships for 1,200 trials across Africa, India, China, and Brazil using the ClinicalTrials.gov API v2 collaborator module. Researchers performed a network-directionality analysis and reported the South-South collaboration ratio as the primary comparative estimand for global research integration and independence. The primary result showed that while pure local trials dominate these hubs, emerging South-South partnerships now exceed South-North collaborations in several critical therapeutic areas including infectious disease. Africa and India exhibit the strongest bilateral research links, suggesting the formation of an alternative axis of discovery outside traditional Global North funding structures. These findings signal a burgeoning clinical research autonomy that challenges the historical radial spoke model of global innovation. Interpretation is limited by the heuristic identification of collaborator locations which may undercount complex multilateral partnerships now. - DOI: 10.156/south-south-axis - Date: 2026-03-28 - Type: research - Axis: Global South",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

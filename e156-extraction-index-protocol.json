@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: Research Extraction Index for clinical trial asymmetry in Africa",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "body": "This methods study will develop and compute six registry-derived metrics intended to quantify structural extraction in African clinical research using ClinicalTrials.gov as the primary data source. Using records from 20 African countries with Uganda trial-level data and WHO burden estimates for disease denominators, we will calculate the Condition Colonialism Index, ghost enrollment score, phase sovereignty gap, condition-level research ownership ratio, temporal stagnation index, and institutional fragility score. The primary outputs are the metric values themselves and their ranking across diseases and trial domains for each country. Trial records will be classified with prespecified rules for sponsor origin, site count, disease category, and geographic scope of the study. All calculations will be scripted and version controlled so that alternative denominators and thresholds can be tested transparently. No patient-level data are involved and all inputs are public registry records. Metric values will depend on the completeness of registry data and on the burden estimates used in the denominator.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "156 words",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Metric definitions precede data source specification."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses limitations."
+            }
+        ]
+    }
+}

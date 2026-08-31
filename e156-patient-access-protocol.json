@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of clinical trial accessibility from the patient perspective in Africa",
+    "body": "This cross-sectional registry study will quantify clinical trial accessibility from the patient perspective across ten African countries. We will query ClinicalTrials.gov API v2 for currently recruiting interventional studies, computing three primary metrics: recruiting trials per million population, the Patient Desert Score counting conditions with zero recruiting trials per country, and capital city concentration as a proxy for rural exclusion. Five high-burden conditions will be examined: HIV, cancer, diabetes, hypertension, and malaria. The United States will serve as a comparator. Secondary analyses will generate condition-country heatmaps identifying systematic diagnostic dead ends. Capital concentration will be estimated by comparing recruiting trial counts matching the capital city name versus the country total. Population data from United Nations 2024 estimates will be used for per-capita calculations. All queries will be scripted in Python with archived results. Limitations include restriction to a single registry, approximate capital city matching, and the inability to capture trials registered on regional or national registries not indexed on ClinicalTrials.gov.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify clinical trial accessibility from the patient perspective across ten African countries using three patient-centered metrics."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for currently recruiting interventional studies across ten African countries and the United States as comparator."
+        },
+        {
+            "role": "Primary outcomes",
+            "text": "Primary metrics include recruiting trials per million population, the Patient Desert Score counting conditions with zero recruiting trials per country, and capital city concentration as a rural exclusion proxy."
+        },
+        {
+            "role": "Conditions",
+            "text": "Five high-burden conditions will be examined: HIV, cancer, diabetes, hypertension, and malaria, reflecting the most common diagnostic journeys for African patients."
+        },
+        {
+            "role": "Capital proxy",
+            "text": "Capital concentration will be estimated by comparing recruiting trial counts matching the capital city location name versus the full country total."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and results archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single registry, approximate capital city name matching, and inability to capture trials registered on regional or national registries not indexed on ClinicalTrials.gov."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Patient Access Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US comparator, 5 conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}
