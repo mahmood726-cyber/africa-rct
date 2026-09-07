@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of evidence availability for the ten highest-burden clinical conditions in Africa",
+    "body": "This cross-sectional registry study will quantify the evidence gap facing African clinicians by comparing trial availability across the ten conditions they encounter most frequently. We will query ClinicalTrials.gov API v2 for interventional studies in Africa versus the United States for hypertension, diabetes, malaria, HIV, tuberculosis, pneumonia, diarrheal disease, stroke, heart failure, and asthma/COPD. The primary outcome is the Evidence-Free Practice Score, defined as the proportion of conditions with fewer than 10 registered interventional trials in any African country. Secondary outcomes include the Guideline Applicability Gap (proportion of conditions where more than half of African trials are mega-trials with token sites), and Africa-Specific Data Rate (percentage of trials generating local dosing or stratified outcome data). Uganda will serve as a case study, with condition-level analysis of whether trials generated Africa-specific dosing or pharmacogenomic evidence. Trial design classification will use heuristic analysis of protocol descriptions, country distributions, and enrollment sizes. Limitations include restriction to one clinical trial registry, approximate heuristic classification of trial design specificity, and potential undercount of Africa-led trials registered on regional platforms.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This study will quantify the evidence gap facing African clinicians by measuring trial availability and local evidence generation across the ten most common clinical conditions."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies in Africa versus the United States across hypertension, diabetes, malaria, HIV, TB, pneumonia, diarrheal disease, stroke, heart failure, and asthma/COPD."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Evidence-Free Practice Score: the proportion of conditions with fewer than 10 interventional trials registered in any African country."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include Guideline Applicability Gap, Africa-Specific Data Rate, and a Uganda case study of condition-level dosing and pharmacogenomic evidence availability."
+        },
+        {
+            "role": "Classification",
+            "text": "Trial design classification will use heuristic analysis of protocol descriptions, country distributions, and enrollment sizes to distinguish Africa-specific from token-site trials."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity, and both raw data and generated dashboards will be archived for reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to ClinicalTrials.gov, heuristic classification of trial specificity, and potential undercount of Africa-led trials on regional platforms such as PACTR."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Doctor's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 conditions, Africa vs US",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

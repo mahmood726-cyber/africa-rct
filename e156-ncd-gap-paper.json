@@ -1,0 +1,52 @@
+{
+    "title":  "Condition Colonialism Index for the NCD trial gap across ten African nations",
+    "body":  "Does the global distribution of interventional NCD trials reflect Africa's disproportionate share of non-communicable disease burden? We queried ClinicalTrials.gov for interventional trials in ten NCD conditions across ten African countries, using the United States as comparator and computing per-capita rates. For each condition, we calculated a Condition Colonialism Index by dividing Africa's WHO-estimated burden share by its proportional share of registered trials. Several conditions had index values above 5, indicating that Africa carries many times more disease burden than its share of global research activity warrants. Numerous country-condition pairs had no registered interventional trials at all, and per-capita trial density in most African countries was under one tenth of the US level for every condition examined. The index offers a reproducible, condition-specific way to quantify the misalignment between disease burden and clinical trial investment in Africa. Limitations include reliance on a single registry, possible undercounting of African-led studies, and exclusion of observational or implementation research designs.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Does the global distribution of interventional NCD trials reflect Africa\u0027s disproportionate share of non-communicable disease burden?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for interventional trials across ten NCD conditions in ten African countries, using the United States as comparator."
+                      },
+                      {
+                          "role":  "Method",
+                          "text":  "The Condition Colonialism Index was computed as each condition\u0027s WHO-estimated African burden share divided by Africa\u0027s proportional share of registered trials."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "CCI values exceeded five for multiple conditions, indicating that Africa bears several-fold more disease burden than its share of research investment."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "Numerous country-condition pairs registered zero interventional trials, and per-capita trial density in most African nations was less than one-tenth that of the United States."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The CCI provides a reproducible, condition-specific metric for quantifying structural inequity in global clinical research allocation relative to actual disease burden."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "Limitations include reliance on a single registry, potential undercounting of locally registered African trials, and exclusion of observational and implementation studies from the analysis."
+                      }
+                  ],
+    "wordCount":  147,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Africa NCD Trial Gap v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 10 African countries, 10 NCD conditions, US comparator",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "DRAFT"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             }
+}
+

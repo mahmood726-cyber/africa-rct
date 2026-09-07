@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa NCD Trial Gap Analysis</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa's NCD Trial Gap</h1>
+<p class="subtitle">Condition Colonialism Index &mdash; Mapping the mismatch between
+disease burden and clinical research investment across 10 African nations</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Total NCD Trials in Africa</div>
+    <div class="value">4,933</div>
+    <div class="label">Across 10 countries, 10 conditions</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">CCI Range</div>
+    <div class="value danger">1.07 &ndash; 4.85</div>
+    <div class="label">1.0 = fair, &gt;5 = severe gap</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Worst Conditions</div>
+    <div class="value warning" style="font-size:1.3rem;">Epilepsy, Mental health, Sickle cell</div>
+    <div class="label">Highest CCI scores</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Zero-Trial Pairs</div>
+    <div class="value danger">14</div>
+    <div class="label">Country-condition pairs with no trials</div>
+  </div>
+</div>
+
+<div class="method-note">
+<strong>Condition Colonialism Index (CCI)</strong> = Africa's share of global disease burden (%)
+divided by Africa's share of trials vs the US (%). A CCI of 1.0 means proportional research
+investment. Values above 1.0 indicate under-researched conditions relative to burden.
+Values above 5.0 represent severe research colonialism.
+</div>
+
+<!-- 2. CCI Heatmap -->
+<h2>2. Trial Count Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Rows = NCD conditions. Columns = African countries. Cell color:
+<span style="color:#ff4444;">0-5 trials (red)</span>,
+<span style="color:#cccc44;">6-20 (yellow)</span>,
+<span style="color:#44cc66;">20+ (green)</span>,
+<span style="background:#111;padding:2px 6px;">0 = black</span>.
+</p>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Tanzania</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Ethiopia</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Malawi</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Zambia</th>
+<th style="padding:8px;writing-mode:vertical-rl;">CCI</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>CVD</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">334</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">551</td><td style="background:rgb(168, 237, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">18</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">27</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">46</td><td style="background:rgb(208, 183, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(228, 156, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">9</td><td style="background:rgb(168, 237, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">18</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(221, 165, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">3.81</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Hypertension</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">70</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">191</td><td style="background:rgb(195, 201, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">14</td><td style="background:rgb(221, 165, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">29</td><td style="background:rgb(255, 63, 63);color:#fff;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(195, 201, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">14</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(248, 129, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">3.78</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Diabetes</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">248</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">314</td><td style="background:rgb(235, 147, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">8</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(208, 183, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(248, 129, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">3.12</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Stroke</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">44</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">108</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(248, 129, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:rgb(168, 237, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">18</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(248, 129, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">3.52</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Cancer</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">557</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">1117</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">51</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">32</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">35</td><td style="background:rgb(155, 255, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">20</td><td style="background:rgb(241, 138, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(241, 138, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(195, 201, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">14</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">2.4</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>CKD</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">46</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">78</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">2.01</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>COPD/Asthma</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">207</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">78</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#44cc66;color:#000;text-align:center;padding:8px;font-weight:bold;">1.07</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Mental health</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">96</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">78</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">36</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">29</td><td style="background:rgb(221, 165, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:rgb(195, 201, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">14</td><td style="background:rgb(208, 183, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(221, 165, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:rgb(175, 228, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">17</td><td style="background:rgb(201, 192, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">13</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">4.41</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Epilepsy</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">21</td><td style="background:rgb(155, 255, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">20</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">4.85</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Sickle cell</td><td style="background:rgb(228, 156, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">9</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">30</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">26</td><td style="background:rgb(175, 228, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">17</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">30</td><td style="background:rgb(235, 147, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">8</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(221, 165, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">4.01</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 3. CCI Bar Chart -->
+<h2>3. Condition Colonialism Index by Condition</h2>
+<div class="chart-container">
+<canvas id="cciBarChart" height="300"></canvas>
+</div>
+
+<!-- 4. Per-Capita Density -->
+<h2>4. NCD Trial Density (per million population)</h2>
+<table>
+<thead>
+<tr><th>Country</th><th style="text-align:right;">Total Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials / Million</th></tr>
+</thead>
+<tbody>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United States  (comparator)</td><td style="padding:8px;text-align:right;">81,486</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;font-weight:bold;">243.24</td></tr>
+<tr style=""><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">1,632</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">26.32</td></tr>
+<tr style=""><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">2,565</td><td style="padding:8px;text-align:right;">110M</td><td style="padding:8px;text-align:right;font-weight:bold;">23.32</td></tr>
+<tr style=""><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">159</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">2.84</td></tr>
+<tr style=""><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">131</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">2.73</td></tr>
+<tr style=""><td style="padding:8px;">Malawi</td><td style="padding:8px;text-align:right;">47</td><td style="padding:8px;text-align:right;">21M</td><td style="padding:8px;text-align:right;font-weight:bold;">2.24</td></tr>
+<tr style=""><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;">71</td><td style="padding:8px;text-align:right;">34M</td><td style="padding:8px;text-align:right;font-weight:bold;">2.09</td></tr>
+<tr style=""><td style="padding:8px;">Zambia</td><td style="padding:8px;text-align:right;">38</td><td style="padding:8px;text-align:right;">21M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.81</td></tr>
+<tr style=""><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">67</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.0</td></tr>
+<tr style=""><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">184</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.8</td></tr>
+<tr style=""><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;">39</td><td style="padding:8px;text-align:right;">130M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.3</td></tr>
+
+</tbody>
+</table>
+
+<!-- 5. US Comparison -->
+<h2>5. Africa vs United States by Condition</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr><th>Condition</th><th style="text-align:right;">Africa</th>
+<th style="text-align:right;">US</th><th style="text-align:right;">US/Africa Ratio</th>
+<th style="text-align:right;">Africa Burden</th>
+<th style="text-align:right;">CCI</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">CVD</td><td style="padding:8px;text-align:right;">1,029</td><td style="padding:8px;text-align:right;">15,292</td><td style="padding:8px;text-align:right;font-weight:bold;">14.9x</td><td style="padding:8px;text-align:right;">24%</td><td style="padding:8px;text-align:right;font-weight:bold;">3.81</td></tr>
+<tr><td style="padding:8px;">Hypertension</td><td style="padding:8px;text-align:right;">346</td><td style="padding:8px;text-align:right;">3,093</td><td style="padding:8px;text-align:right;font-weight:bold;">8.9x</td><td style="padding:8px;text-align:right;">38%</td><td style="padding:8px;text-align:right;font-weight:bold;">3.78</td></tr>
+<tr><td style="padding:8px;">Diabetes</td><td style="padding:8px;text-align:right;">603</td><td style="padding:8px;text-align:right;">6,930</td><td style="padding:8px;text-align:right;font-weight:bold;">11.5x</td><td style="padding:8px;text-align:right;">25%</td><td style="padding:8px;text-align:right;font-weight:bold;">3.12</td></tr>
+<tr><td style="padding:8px;">Stroke</td><td style="padding:8px;text-align:right;">192</td><td style="padding:8px;text-align:right;">1,923</td><td style="padding:8px;text-align:right;font-weight:bold;">10.0x</td><td style="padding:8px;text-align:right;">32%</td><td style="padding:8px;text-align:right;font-weight:bold;">3.52</td></tr>
+<tr><td style="padding:8px;">Cancer</td><td style="padding:8px;text-align:right;">1,844</td><td style="padding:8px;text-align:right;">42,379</td><td style="padding:8px;text-align:right;font-weight:bold;">23.0x</td><td style="padding:8px;text-align:right;">10%</td><td style="padding:8px;text-align:right;font-weight:bold;">2.4</td></tr>
+<tr><td style="padding:8px;">CKD</td><td style="padding:8px;text-align:right;">125</td><td style="padding:8px;text-align:right;">1,549</td><td style="padding:8px;text-align:right;font-weight:bold;">12.4x</td><td style="padding:8px;text-align:right;">15%</td><td style="padding:8px;text-align:right;font-weight:bold;">2.01</td></tr>
+<tr><td style="padding:8px;">COPD/Asthma</td><td style="padding:8px;text-align:right;">296</td><td style="padding:8px;text-align:right;">2,347</td><td style="padding:8px;text-align:right;font-weight:bold;">7.9x</td><td style="padding:8px;text-align:right;">12%</td><td style="padding:8px;text-align:right;font-weight:bold;">1.07</td></tr>
+<tr><td style="padding:8px;">Mental health</td><td style="padding:8px;text-align:right;">315</td><td style="padding:8px;text-align:right;">6,625</td><td style="padding:8px;text-align:right;font-weight:bold;">21.0x</td><td style="padding:8px;text-align:right;">20%</td><td style="padding:8px;text-align:right;font-weight:bold;">4.41</td></tr>
+<tr><td style="padding:8px;">Epilepsy</td><td style="padding:8px;text-align:right;">51</td><td style="padding:8px;text-align:right;">774</td><td style="padding:8px;text-align:right;font-weight:bold;">15.2x</td><td style="padding:8px;text-align:right;">30%</td><td style="padding:8px;text-align:right;font-weight:bold;">4.85</td></tr>
+<tr><td style="padding:8px;">Sickle cell</td><td style="padding:8px;text-align:right;">132</td><td style="padding:8px;text-align:right;">574</td><td style="padding:8px;text-align:right;font-weight:bold;">4.3x</td><td style="padding:8px;text-align:right;">75%</td><td style="padding:8px;text-align:right;font-weight:bold;">4.01</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 6. Phase Distribution -->
+<h2>6. Phase Distribution (Outsourced Testing?)</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Phase 3 trials conducted in Africa by non-African sponsors may indicate
+outsourced testing rather than locally-driven research.
+</p>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Phase</th><th style="text-align:right;">Count</th>
+<th style="text-align:right;">%</th></tr></thead>
+<tbody><tr><td style="padding:8px;">EARLY_PHASE1</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">0.7%</td></tr>
+<tr><td style="padding:8px;">NA</td><td style="padding:8px;text-align:right;">372</td><td style="padding:8px;text-align:right;">39.7%</td></tr>
+<tr><td style="padding:8px;">PHASE1</td><td style="padding:8px;text-align:right;">27</td><td style="padding:8px;text-align:right;">2.9%</td></tr>
+<tr><td style="padding:8px;">PHASE1, PHASE2</td><td style="padding:8px;text-align:right;">14</td><td style="padding:8px;text-align:right;">1.5%</td></tr>
+<tr><td style="padding:8px;">PHASE2</td><td style="padding:8px;text-align:right;">101</td><td style="padding:8px;text-align:right;">10.8%</td></tr>
+<tr><td style="padding:8px;color:#ff6644;font-weight:bold;">PHASE2, PHASE3</td><td style="padding:8px;text-align:right;">28</td><td style="padding:8px;text-align:right;">3.0%</td></tr>
+<tr><td style="padding:8px;color:#ff6644;font-weight:bold;">PHASE3</td><td style="padding:8px;text-align:right;">310</td><td style="padding:8px;text-align:right;">33.1%</td></tr>
+<tr><td style="padding:8px;">PHASE4</td><td style="padding:8px;text-align:right;">77</td><td style="padding:8px;text-align:right;">8.2%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="phaseChart" height="250"></canvas>
+</div>
+</div>
+
+<!-- 7. Sponsor Analysis -->
+<h2>7. Sponsor Analysis</h2>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">549</td></tr>
+<tr><td style="padding:8px;">INDUSTRY</td><td style="padding:8px;text-align:right;">360</td></tr>
+<tr><td style="padding:8px;">NETWORK</td><td style="padding:8px;text-align:right;">15</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">9</td></tr>
+<tr><td style="padding:8px;">NIH</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;">FED</td><td style="padding:8px;text-align:right;">1</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top 10 Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Cairo University</td><td style="padding:8px;text-align:right;">82</td></tr>
+<tr><td style="padding:8px;">Ain Shams University</td><td style="padding:8px;text-align:right;">44</td></tr>
+<tr><td style="padding:8px;">AstraZeneca</td><td style="padding:8px;text-align:right;">40</td></tr>
+<tr><td style="padding:8px;">Novartis Pharmaceuticals</td><td style="padding:8px;text-align:right;">32</td></tr>
+<tr><td style="padding:8px;">Assiut University</td><td style="padding:8px;text-align:right;">28</td></tr>
+<tr><td style="padding:8px;">Sanofi</td><td style="padding:8px;text-align:right;">27</td></tr>
+<tr><td style="padding:8px;">Mansoura University</td><td style="padding:8px;text-align:right;">25</td></tr>
+<tr><td style="padding:8px;">Novo Nordisk A/S</td><td style="padding:8px;text-align:right;">23</td></tr>
+<tr><td style="padding:8px;">GlaxoSmithKline</td><td style="padding:8px;text-align:right;">22</td></tr>
+<tr><td style="padding:8px;">Tanta University</td><td style="padding:8px;text-align:right;">20</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 8. Missing Trials -->
+<h2>8. The Missing Trials</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Country-condition pairs with zero or near-zero interventional trials.
+These represent complete research blind spots for major diseases.
+</p>
+<div class="scroll-x">
+<table>
+<thead><tr><th>Country</th><th>Condition</th><th style="text-align:center;">Trials</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px;color:#ff4444;">Kenya</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Uganda</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Tanzania</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Tanzania</td><td style="padding:8px;color:#ff4444;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ethiopia</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ethiopia</td><td style="padding:8px;color:#ff4444;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ethiopia</td><td style="padding:8px;color:#ff4444;">Sickle cell</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ghana</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ghana</td><td style="padding:8px;color:#ff4444;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Ghana</td><td style="padding:8px;color:#ff4444;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Malawi</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Zambia</td><td style="padding:8px;color:#ff4444;">CKD</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Zambia</td><td style="padding:8px;color:#ff4444;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ff4444;">Zambia</td><td style="padding:8px;color:#ff4444;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ff4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Kenya</td><td style="padding:8px;color:#ffaa33;">Stroke</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Kenya</td><td style="padding:8px;color:#ffaa33;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Kenya</td><td style="padding:8px;color:#ffaa33;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Uganda</td><td style="padding:8px;color:#ffaa33;">Diabetes</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Uganda</td><td style="padding:8px;color:#ffaa33;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Nigeria</td><td style="padding:8px;color:#ffaa33;">CKD</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Nigeria</td><td style="padding:8px;color:#ffaa33;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Nigeria</td><td style="padding:8px;color:#ffaa33;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Tanzania</td><td style="padding:8px;color:#ffaa33;">Stroke</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Tanzania</td><td style="padding:8px;color:#ffaa33;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Ethiopia</td><td style="padding:8px;color:#ffaa33;">Hypertension</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Ethiopia</td><td style="padding:8px;color:#ffaa33;">Stroke</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Ethiopia</td><td style="padding:8px;color:#ffaa33;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Malawi</td><td style="padding:8px;color:#ffaa33;">Diabetes</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Malawi</td><td style="padding:8px;color:#ffaa33;">Stroke</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Malawi</td><td style="padding:8px;color:#ffaa33;">COPD/Asthma</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Malawi</td><td style="padding:8px;color:#ffaa33;">Epilepsy</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Malawi</td><td style="padding:8px;color:#ffaa33;">Sickle cell</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">1</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Zambia</td><td style="padding:8px;color:#ffaa33;">Diabetes</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;color:#ffaa33;">Zambia</td><td style="padding:8px;color:#ffaa33;">Stroke</td><td style="padding:8px;text-align:center;color:#ffaa33;font-weight:bold;">2</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 9. Temporal Trend -->
+<h2>9. Temporal Trend: Are NCD Trials Growing?</h2>
+<div class="chart-container">
+<canvas id="trendChart" height="250"></canvas>
+</div>
+
+<footer>
+<p>Data source: ClinicalTrials.gov API v2 | WHO Global Health Estimates |
+Generated 2026-03-28 11:09</p>
+<p>Condition Colonialism Index (CCI) methodology: Africa burden % / Africa trial share %</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // CCI Bar Chart
+  var cciCtx = document.getElementById('cciBarChart');
+  if (cciCtx) {
+    new Chart(cciCtx, {
+      type: 'bar',
+      data: {
+        labels: ["Epilepsy", "Mental health", "Sickle cell", "CVD", "Hypertension", "Stroke", "Diabetes", "Cancer", "CKD", "COPD/Asthma"],
+        datasets: [{
+          label: 'Condition Colonialism Index',
+          data: [4.85, 4.41, 4.01, 3.81, 3.78, 3.52, 3.12, 2.4, 2.01, 1.07],
+          backgroundColor: ["#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#ffaa33", "#44cc66"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'CCI by Condition (higher = worse gap)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'CCI (1.0 = fair)', color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          }
+        }
+      }
+    });
+  }
+
+  // Phase pie chart
+  var phaseCtx = document.getElementById('phaseChart');
+  if (phaseCtx) {
+    var phaseData = {"PHASE2": 101, "PHASE3": 310, "NA": 372, "PHASE2, PHASE3": 28, "PHASE4": 77, "PHASE1, PHASE2": 14, "PHASE1": 27, "EARLY_PHASE1": 7};
+    var phaseLabels = Object.keys(phaseData);
+    var phaseValues = Object.values(phaseData);
+    var phaseColors = phaseLabels.map(function(l) {
+      if (l.toUpperCase().indexOf('PHASE3') >= 0 || l === 'PHASE3')
+        return '#ef4444';
+      if (l.toUpperCase().indexOf('PHASE2') >= 0) return '#f59e0b';
+      if (l.toUpperCase().indexOf('PHASE1') >= 0) return '#3b82f6';
+      if (l.toUpperCase().indexOf('PHASE4') >= 0) return '#22c55e';
+      return '#6b7280';
+    });
+    new Chart(phaseCtx, {
+      type: 'doughnut',
+      data: {
+        labels: phaseLabels,
+        datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Phase Distribution',
+                    color: '#e2e8f0', font: { size: 14 } }
+        }
+      }
+    });
+  }
+
+  // Temporal trend line chart
+  var trendCtx = document.getElementById('trendChart');
+  if (trendCtx) {
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        datasets: [{
+          label: 'NCD Trials Started (Africa)',
+          data: [3, 1, 3, 1, 13, 20, 29, 23, 20, 17, 18, 26, 21, 28, 44, 25, 21, 52, 48, 63, 38, 57, 86, 85, 84, 87, 18],
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59,130,246,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#3b82f6',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'NCD Trial Starts by Year (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+</body>
+</html>

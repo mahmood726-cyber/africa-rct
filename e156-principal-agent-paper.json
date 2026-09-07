@@ -1,0 +1,51 @@
+{
+    "title": "The principal-agent problem in African clinical trials: quantifying misalignment between foreign sponsors and local disease burden using Uganda's registry data",
+    "body": "Does Africa's clinical trial agenda align with local disease burden or reflect foreign sponsor priorities? We applied principal-agent theory (Jensen and Meckling, 1976) to ClinicalTrials.gov data for Uganda, South Africa, and Nigeria, computing four metrics: Agenda Alignment Score (Spearman correlation between GBD burden ranking and trial condition ranking across 15 conditions), Information Rent (percentage of completed trials posting results), Incentive Gap (Phase 3 to implementation research ratio), and Voice Score (community engagement percentage). Uganda showed misalignment between burden ranking and trial portfolio, with HIV dominating while non-communicable diseases were under-studied. Results posting rates were low across all three countries, indicating persistent information asymmetry. Phase 3 trials serving regulatory approval outnumbered implementation research serving local needs. South Africa showed higher local sponsorship and stronger alignment. Agency theory prescribes monitoring (mandatory results posting), bonding (implementation quotas proportional to Phase 3 activity), and principal empowerment (funding African investigators rather than sites alone). This analysis is limited to one registry with approximate burden rankings.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does the clinical trial agenda in African countries align with local disease burden, or does it reflect the priorities of foreign sponsors acting as misaligned agents?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We applied principal-agent theory to ClinicalTrials.gov registry data for Uganda, South Africa, and Nigeria, computing Agenda Alignment Score, Information Rent, Incentive Gap, and Voice Score across 15 disease conditions."
+        },
+        {
+            "role": "Primary result",
+            "text": "Uganda showed misalignment between disease burden ranking and trial portfolio, with HIV dominating the research agenda while rising non-communicable diseases remained under-studied relative to their growing burden."
+        },
+        {
+            "role": "Information asymmetry",
+            "text": "Results posting rates were low across all three countries, confirming persistent information asymmetry where foreign sponsors extract data without reporting outcomes back to host communities."
+        },
+        {
+            "role": "Incentive structure",
+            "text": "Phase 3 trials serving foreign regulatory approval substantially outnumbered implementation research addressing local health delivery needs, while South Africa's higher local sponsorship was associated with stronger agenda alignment."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Agency theory prescribes three realignment mechanisms: mandatory results posting to reduce information rent, implementation research quotas proportional to Phase 3 activity, and funding African principal investigators rather than merely African trial sites."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to a single clinical trial registry, uses approximate GBD burden rankings, and classifies sponsor origin by keyword matching which may misclassify some institutions."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Principal-Agent Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, Uganda + South Africa + Nigeria, GBD 2019 burden rankings",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

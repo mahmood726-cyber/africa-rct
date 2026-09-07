@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: Advanced statistical deep-dive into Uganda clinical trials",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "body": "This study applies six advanced statistical methods to Uganda trial-level data from ClinicalTrials.gov API v2 covering all 783 registered interventional studies listing a Ugandan site. We compute Kaplan-Meier survival curves for trial completion stratified by sponsor class, phase, and disease condition, with median time-to-completion as the primary endpoint. Bootstrap resampling with 1000 iterations estimates 95 percent confidence intervals for the clinical concentration index, local sponsorship rate, and Phase 1 local sovereignty proportion. Bayesian Beta-Binomial conjugate analysis using a Beta two one prior yields posterior completion probabilities and 95 percent credible intervals by phase and sponsor type. Monte Carlo simulation with 10000 Poisson-varied iterations models three counterfactual scenarios: Nigeria at India per-capita rate, PEPFAR funding withdrawal impact, and Latin America parity. OLS regression across 20 African countries tests GDP per capita, language, PEPFAR status, conflict, and population as predictors of trial density. Limitations include single-registry dependence and approximate statistical implementations in pure Python without specialised numerical libraries.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "156 words",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Six methods enumerated in sentences 2-6 before limitation in sentence 7."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses single-registry and implementation limitations."
+            }
+        ]
+    }
+}

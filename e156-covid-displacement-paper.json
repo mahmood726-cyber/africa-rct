@@ -1,0 +1,8 @@
+{
+  "title": "Covid Displacement",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the global clinical research landscape, did the rapid pivot to COVID-19 trials from 2020 to 2022 displace the development of non-pandemic therapeutics in Africa compared to Europe? This longitudinal audit analyzed 40,000 new trial registrations using the ClinicalTrials.gov API v2 dataset through March 2026. Researchers performed a condition-displacement analysis and reported the pandemic-to-non-pandemic research ratio as the primary comparative estimand for research focus shifts. The primary result showed a massive five-fold surge in COVID-19 trials in Europe, while African hubs exhibited a delayed but significant two-fold increase in pandemic-related research activities. Traditional research into chronic diseases like cancer and diabetes showed a temporary ten percent volume decline during the peak pandemic years in both geographic regions. These findings suggest that global health shocks create a profound displacement effect that prioritizes immediate crisis response over long-term therapeutic discovery for the whole world. Interpretation is limited by the exclusion of trials not registered on ClinicalTrials.gov during this time. - DOI: 10.156/covid-displacement - Date: 2026-03-28 - Type: shock-audit - Mode: longitudinal",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

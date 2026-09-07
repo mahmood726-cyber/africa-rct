@@ -1,0 +1,41 @@
+{
+    "title": "Protocol: three futures for Africa's clinical trial landscape to 2035",
+    "type": "protocol",
+    "primary_estimand": "Projected annual trial count under three scenarios and years to Latin American parity",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\future-view.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_future_view.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This scenario-projection study will model Africa's clinical trial landscape to 2035 using historical ClinicalTrials.gov data as baseline. We will extract trial start dates from Uganda's 783 interventional trials registered on ClinicalTrials.gov API v2 to construct an annual time series from 1998 to 2026, then fit three projection models: status quo using linear regression on 2019-2025 data, optimistic using 15 percent annual exponential growth matching India's recent trajectory, and pessimistic using negative 5 percent annual decline reflecting PEPFAR funding cuts and post-COVID stagnation. The primary outcomes are projected annual trial counts per scenario for 2026 through 2035 and years to parity defined as the time until Uganda matches Latin America's current per-capita trial rate of approximately 42 trials per million. Secondary analyses will project NCD trial share, local sponsorship percentage, per-capita rates relative to benchmarks from India and Brazil, and an evidence gap metric estimating person-years of missing clinical evidence attributable to the trial deficit. All projection parameters will be prespecified and sensitivity analyses will test alternative growth rates. Limitations include model dependence, single-registry data source, and the inherent uncertainty of ten-year projections.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 182 words."
+            },
+            {
+                "name": "methods described",
+                "ok": true,
+                "detail": "Protocol describes three scenario models, projection parameters, and parity calculation."
+            },
+            {
+                "name": "outcomes specified",
+                "ok": true,
+                "detail": "Primary (projected counts, years to parity) and secondary (NCD share, local sponsorship, evidence gap) outcomes specified."
+            }
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Regulatory Oversight",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural evaluation of clinical trial governance, does the prevalence of international regulatory oversight indicate a significant regional divide in research rigor between Africa and Europe? This audit evaluated FDA oversight and Data Monitoring Committee rates for two thousand trials across four global regions using the oversight-module metadata from the ClinicalTrials.gov API v2 database system. Investigators applied a regulatory-rigor model and reported the FDA-oversight percentage as the lead estimand for global standardization and research accountability. The primary result showed that while European research maintains high oversight rates, African trials exhibit a significant thirty-one percent FDA oversight rate, reflecting the high volume of internationally-sponsored Phase 3 research. China and India showed lower rates of US-based regulatory oversight, suggesting more self-contained or locally-governed research ecosystems compared to the integrated African model. These findings highlight a structural divide where African research is heavily integrated into Global North regulatory frameworks. Interpretation is limited by the reliance on voluntary disclosure. - DOI: 10.156/regulatory-oversight - Date: 2026-03-28 - Type: deep-audit - Mode: granularity",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

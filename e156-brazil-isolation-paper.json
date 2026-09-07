@@ -1,0 +1,8 @@
+{
+  "title": "Brazil Isolation",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the regional distribution of clinical research, does Brazil's dominance as a research hub influence the overall research equity across the South American continent? This cross-sectional audit evaluated 9,890 interventional trials in Brazil compared to smaller neighboring countries using the ClinicalTrials.gov API v2 dataset through March 2026. Researchers performed a geographic hub concentration analysis and reported the regional centralization index as the primary estimand for research infrastructure and access. The primary result showed that Brazil hosts nearly eighty percent of all interventional research conducted in the South American region during the audit. This extreme hub isolation creates a structural barrier for neighboring nations to develop their own sovereign research ecosystems and clinical networks. These results suggest that South America's research landscape is highly centralized, mirroring the concentration patterns seen in the African research hubs. Interpretation is limited by the focus on interventional studies which may overlook observational research networks that are better distributed for the whole",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

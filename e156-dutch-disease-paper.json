@@ -1,0 +1,65 @@
+{
+    "title": "The Dutch Disease of global health: HIV funding as resource curse in African clinical research",
+    "body": "Does concentrated HIV funding crowd out other disease research in Africa, analogous to the Dutch Disease in resource economics? We queried ClinicalTrials.gov for interventional trials across 15 African countries, comparing HIV trial counts against five non-HIV sectors: cancer, cardiovascular disease, diabetes, surgery, and mental health. We computed a Dutch Disease Coefficient, defined as HIV trials divided by non-HIV trials, for ten PEPFAR-heavy countries and five non-PEPFAR comparators. Countries with high PEPFAR investment showed Dutch Disease Coefficients above one, indicating that HIV research dominated the portfolio while non-HIV sectors were proportionally underrepresented. Non-PEPFAR comparator countries exhibited lower coefficients and more balanced research portfolios despite fewer total trials. The HIV Dependency Ratio revealed that in several PEPFAR-heavy nations, a single funder withdrawal could eliminate most active research capacity. Like oil-dependent economies that suffer when commodity prices fall, these research ecosystems are structurally fragile. Ecological design limits causal inference and the analysis cannot capture African-led studies absent from international registries.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does concentrated HIV funding crowd out other disease research in Africa, analogous to the Dutch Disease in resource economics?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for interventional trials across 15 African countries, comparing HIV trial counts against five non-HIV sectors: cancer, cardiovascular disease, diabetes, surgery, and mental health."
+        },
+        {
+            "role": "Method",
+            "text": "We computed a Dutch Disease Coefficient, defined as HIV trials divided by non-HIV trials, for ten PEPFAR-heavy countries and five non-PEPFAR comparators."
+        },
+        {
+            "role": "Primary result",
+            "text": "PEPFAR-heavy countries showed Dutch Disease Coefficients above one, indicating HIV research dominated the portfolio while non-HIV sectors were proportionally underrepresented."
+        },
+        {
+            "role": "Robustness",
+            "text": "Non-PEPFAR comparator countries exhibited lower coefficients and more balanced research portfolios despite fewer total trials."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Like oil-dependent economies that suffer when commodity prices fall, these research ecosystems are structurally fragile to single-funder withdrawal."
+        },
+        {
+            "role": "Boundary",
+            "text": "Ecological design limits causal inference and the analysis cannot capture African-led studies absent from international registries."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Dutch Disease of Global Health v1.0",
+        "data": "ClinicalTrials.gov API v2, 15 African countries (10 PEPFAR + 5 non-PEPFAR)",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "pmid": "36332653"
+        },
+        {
+            "pmid": "34843674"
+        }
+    ]
+}

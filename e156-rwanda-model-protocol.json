@@ -1,0 +1,40 @@
+{
+    "title": "Protocol: Rwanda's clinical trial capacity relative to peer low-income countries",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "body": "This cross-sectional registry study will compare Rwanda interventional clinical trial output against ten peer countries matched by population or income level using ClinicalTrials.gov as the data source. We will query the ClinicalTrials.gov API v2 for total interventional trials per country using filter.advanced with AREA[StudyType]INTERVENTIONAL and query.locn for location, with 500-millisecond rate-limiting between calls. Peer countries are Burundi, Malawi, Sierra Leone, Liberia, Guinea, Chad, Niger, Madagascar, and Togo, with South Africa, Uganda, and the United States queried as benchmarks. For each country we will compute per-capita trial density, the Rwanda Ratio defined as Rwanda per-capita divided by comparator per-capita, condition diversity across HIV, cancer, malaria, and maternal health, and growth trajectory comparing pre-2015 with 2015-2025 counts. Secondary analyses will identify replicable enablers including centralised ethics review, partnership models, and post-conflict institutional design. Results will be cached and rendered as a dark-theme interactive HTML dashboard. Limitations include restriction to a single registry and reliance on approximate population estimates.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "references": [
+        {
+            "pmid": "39972388",
+            "citation": "Hedt-Gauthier BL, et al. Building research capacity through a hospital-based research partnership: the experience of Einstein and Rwanda. BMC Glob Public Health. 2025;3:12.",
+            "doi": "10.1186/s44263-025-00138-8"
+        }
+    ],
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 111 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "API query method and peer selection precede outcome definitions."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses single-registry limitation."
+            }
+        ]
+    }
+}

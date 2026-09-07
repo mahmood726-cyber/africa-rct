@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of policy-relevant trial evidence for WHO best-buy interventions in Africa",
+    "body": "This cross-sectional registry study will quantify the evidence gap facing African health policymakers by mapping implementation trial availability for WHO-recommended NCD interventions. We will query ClinicalTrials.gov API v2 for interventional studies related to seven WHO best-buy NCD interventions across 15 African countries: tobacco control, salt reduction, alcohol policy, HPV vaccination, cervical screening, hypertension treatment, and diabetes management. The primary outcome is the Policy Evidence Score per country, defined as the percentage of WHO best-buy interventions with at least one registered implementation trial in that country. Secondary outcomes include total implementation trial counts per best-buy, UHC trial availability, implementation science trial counts, and identification of countries with strongest and weakest policy evidence bases. We will also query four policy-level categories: programme evaluation, UHC, regulation, and implementation science. All queries will be scripted in Python with cached results archived alongside generated dashboards. Limitations include restriction to one clinical trial registry, keyword-based trial classification, and exclusion of quasi-experimental and observational policy-relevant evidence.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This study will quantify the evidence gap facing African health policymakers by mapping implementation trial availability for seven WHO best-buy NCD interventions across 15 countries."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies related to tobacco control, salt reduction, alcohol policy, HPV vaccination, cervical screening, hypertension treatment, and diabetes management in each country."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Policy Evidence Score per country: the percentage of WHO best-buy interventions with at least one local implementation trial."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include total best-buy implementation trials, UHC trial availability, implementation science trial counts, and country-level variation in policy evidence bases."
+        },
+        {
+            "role": "Policy queries",
+            "text": "We will additionally query four policy-level categories: programme evaluation, universal health coverage, regulation and pharmacovigilance, and implementation science."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries are scripted in Python with 24-hour cache validity, and both data files and generated dashboards will be archived for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to ClinicalTrials.gov, keyword-based classification, and exclusion of quasi-experimental and observational implementation evidence which may inform policy."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Government's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 7 WHO best-buys, 15 countries",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

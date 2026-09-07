@@ -1,0 +1,65 @@
+{
+    "title": "The terms of trade in African clinical research: raw data exported, finished drugs imported",
+    "body": "Does Africa function as a raw material exporter in the global clinical trial economy, analogous to the Prebisch-Singer hypothesis in development economics? We queried ClinicalTrials.gov for interventional trials by phase across fifteen African countries and seven comparator nations. We computed a Terms of Trade ratio, defined as Phase 3 trials divided by Phase 1 trials, as a proxy for the balance between testing labor exported and innovation capacity retained. African countries showed substantially higher Terms of Trade ratios than comparators, indicating that they primarily test drugs developed elsewhere rather than generating their own early-stage research. The United States showed a lower ratio, reflecting balanced innovation and testing. In a detailed analysis of Uganda Phase 3 trials, a minority tested WHO Essential Medicines List drugs likely to be affordable post-trial, while a proportion tested premium-priced agents probably unaffordable in the country where participants were enrolled. The pattern mirrors the colonial cotton-to-textiles trade: Africa exports raw research inputs and reimports finished pharmaceutical products at enormous markup. Registry-based ecological analysis cannot establish causation, and locally funded studies may be underrepresented.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does Africa function as a raw material exporter in the global clinical trial economy, analogous to the Prebisch-Singer hypothesis in development economics?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for interventional trials by phase across fifteen African countries and seven comparator nations."
+        },
+        {
+            "role": "Method",
+            "text": "We computed a Terms of Trade ratio, defined as Phase 3 trials divided by Phase 1 trials, as a proxy for the balance between testing labor and local innovation."
+        },
+        {
+            "role": "Primary result",
+            "text": "African countries showed substantially higher Terms of Trade ratios than comparators, indicating they primarily test drugs developed elsewhere."
+        },
+        {
+            "role": "Robustness",
+            "text": "In Uganda Phase 3 trials, a minority tested WHO Essential Medicines List drugs, while a proportion tested premium agents likely unaffordable post-trial."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The pattern mirrors the colonial cotton-to-textiles trade: Africa exports raw research inputs and reimports finished pharmaceutical products at enormous markup."
+        },
+        {
+            "role": "Boundary",
+            "text": "Registry-based ecological analysis cannot establish causation, and locally funded studies may be underrepresented."
+        }
+    ],
+    "wordCount": 159,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Terms of Trade v1.0",
+        "data": "ClinicalTrials.gov API v2, 15 African + 7 comparator countries",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "pmid": "36332653"
+        },
+        {
+            "pmid": "34843674"
+        }
+    ]
+}

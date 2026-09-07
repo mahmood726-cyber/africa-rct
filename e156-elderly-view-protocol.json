@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of geriatric clinical trial equity across seven age-related conditions in Africa",
+    "body": "This cross-sectional registry study will quantify the geriatric clinical trial evidence void for Africa's aging population. We will query ClinicalTrials.gov API v2 for interventional studies matching geriatric and elderly-related terms across ten African countries, the United States, Japan, and the United Kingdom. Seven age-related conditions will be examined: dementia and Alzheimer disease, osteoporosis, falls prevention, urinary incontinence, polypharmacy, frailty, and cataracts. The primary outcome is the Geriatric Evidence Void ratio per condition computed as the comparator-to-Africa trial count ratio. Secondary analyses include geriatric trials per million elderly population using United Nations estimates for population aged sixty and over, condition-country heatmaps identifying systematic zero-trial cells, and country-level geriatric trial access rankings. Japan is included as the world's most aging-focused research nation for maximal contrast. Broad geriatric queries combining age-related terms will provide overall landscape counts. All queries will be scripted in Python with twenty-four-hour cached results. Limitations include single-registry restriction, variable geriatric terminology, possible undercount of Japanese trials registered on domestic registries, and population estimates that aggregate diverse aging trajectories across the continent.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the geriatric clinical trial evidence void for Africa's rapidly aging population across seven conditions that define the elderly disease burden."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies matching geriatric and elderly terms across ten African countries and three comparators including Japan as the world's most aging-focused research nation."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Geriatric Evidence Void ratio per condition, computed as the comparator-to-Africa trial count ratio for each of seven age-related conditions."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses include geriatric trials per million elderly population, condition-country heatmaps identifying systematic zero-trial cells, and country-level geriatric trial access rankings."
+        },
+        {
+            "role": "Population data",
+            "text": "United Nations 2024 estimates for population aged sixty and over will be used for per-capita calculations across the ten African countries and comparator regions."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and results archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include single-registry restriction, variable geriatric terminology, possible undercount of Japanese trials on domestic registries, and population estimates aggregating diverse aging trajectories."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Elderly View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + Japan + UK, 7 geriatric conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Protocol: Condition Colonialism Index for the palliative care trial desert across Africa",
+  "body": "This cross-sectional registry study will quantify the clinical trial deficit for palliative care across Africa relative to need. We will search ClinicalTrials.gov for interventional trials tagged with palliative care, hospice, end of life, pain management, or symptom management in African countries, with the United States, United Kingdom, India, and Brazil as comparators. The primary outcome is the ratio of African palliative trials to US trials adjusted for estimated burden share, expressed as a Condition Colonialism Index. Secondary outcomes include the distribution of trials across HIV versus cancer palliative care, opioid-related trial counts as a proxy for pain research access, country-level variation, sponsor classification, and identification of countries with national palliative care policies. Burden estimates will be drawn from the Lancet Commission on Palliative Care and the WHO serious health-related suffering framework. The study cannot capture trials registered outside ClinicalTrials.gov or informal hospice programmes operating without formal registration.",
+  "sentences": [
+    {
+      "role": "Objective",
+      "text": "This protocol describes a cross-sectional registry analysis quantifying the gap between palliative care need and interventional trial investment across Africa."
+    },
+    {
+      "role": "Eligibility",
+      "text": "Eligible records include all interventional studies on ClinicalTrials.gov matching palliative, hospice, end of life, pain management, or symptom management with at least one African site, plus condition subtype queries for HIV palliative, cancer palliative, and pediatric palliative care, and a separate opioid and morphine access query."
+    },
+    {
+      "role": "Search",
+      "text": "The search uses the ClinicalTrials.gov API version two, filtering by study type, location, and condition, with the United States, India, Brazil, and the United Kingdom as global comparators."
+    },
+    {
+      "role": "Analysis plan",
+      "text": "The primary metric, the Condition Colonialism Index, equals Africa's Lancet Commission palliative care burden share divided by its proportional share of registered trials versus the United States."
+    },
+    {
+      "role": "Heterogeneity plan",
+      "text": "Country-level heterogeneity will be assessed via per-capita trial density, condition subtype distribution, phase composition, sponsor classification, intervention categorization, and a spotlight on Uganda as a palliative care policy exemplar."
+    },
+    {
+      "role": "Dissemination",
+      "text": "Results will be reported as an interactive HTML dashboard with analysis code archived for independent replication."
+    },
+    {
+      "role": "Limitation",
+      "text": "Anticipated limitations include incomplete registry coverage of African palliative trials, reliance on aggregate burden estimates, and possible misclassification of palliative interventions by keyword-based condition queries."
+    }
+  ],
+  "wordCount": 147,
+  "sentenceCount": 7,
+  "outsideNote": {
+    "type": "protocol",
+    "app": "Africa Palliative Care Desert v1.0",
+    "data": "ClinicalTrials.gov API v2, 4 African countries + continent-wide, 3 condition subtypes + opioid access, 4 global comparators",
+    "code": "C:\\AfricaRCT\\",
+    "doi": "",
+    "version": "1.0",
+    "date": "2026-03-27",
+    "validationStatus": "DRAFT"
+  },
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+  "meta": {
+    "created": "2026-03-27",
+    "valid": true,
+    "schemaVersion": "0.1"
+  }
+}

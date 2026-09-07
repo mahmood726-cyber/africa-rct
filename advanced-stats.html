@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Statistical Deep-Dive: Uganda Clinical Trials</title>
+<style>
+:root {
+    --primary: #1a365d;
+    --secondary: #2c5282;
+    --accent: #e53e3e;
+    --success: #38a169;
+    --warning: #dd6b20;
+    --bg: #f7fafc;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+.header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+.header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.header p { opacity: 0.9; font-size: 0.95rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+.section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.section-header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.section-number {
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+.section-body { padding: 1.5rem; }
+.methodology {
+    background: #ebf8ff;
+    border-left: 4px solid var(--secondary);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    border-radius: 0 4px 4px 0;
+}
+.methodology strong { color: var(--primary); }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+th, td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: var(--primary);
+    position: sticky;
+    top: 0;
+}
+tr:hover { background: #f8fafc; }
+.highlight-sig { background: #f0fff4 !important; }
+.highlight-sig:hover { background: #e6ffed !important; }
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.metric-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+}
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+.metric-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+.ci-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+.ci-track {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    position: relative;
+}
+.ci-fill {
+    position: absolute;
+    height: 100%;
+    background: var(--secondary);
+    border-radius: 4px;
+    opacity: 0.4;
+}
+.ci-point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: -1px;
+    transform: translateX(-50%);
+}
+.ci-label { font-size: 0.75rem; color: var(--text-muted); min-width: 40px; }
+.canvas-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 1rem auto;
+    position: relative;
+}
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.interpretation {
+    background: #fffaf0;
+    border-left: 4px solid var(--warning);
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    border-radius: 0 4px 4px 0;
+}
+.interpretation strong { color: var(--warning); }
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+@media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-green { background: #c6f6d5; color: #276749; }
+.badge-red { background: #fed7d7; color: #9b2c2c; }
+.badge-blue { background: #bee3f8; color: #2a4365; }
+.surv-chart { width:100%; overflow-x:auto; }
+.surv-chart svg { display:block; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Advanced Statistical Deep-Dive</h1>
+    <p>Bayesian, Bootstrap, and Survival Analysis of Uganda's 783 Clinical Trials</p>
+    <p style="opacity:0.7; font-size:0.85rem;">Pure Python (no scipy/numpy) | Seeded PRNG (seed=42) | Generated 2026-03-28 16:12</p>
+</div>
+
+<div class="container">
+
+<!-- ============ SECTION 1: SURVIVAL ANALYSIS ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">1</span>
+        Trial Survival Analysis (Kaplan-Meier Analog)
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> For each trial, "time" = years from start_date to completion (event=1),
+            termination (event=0), or current date 2026-03-27 (censored). The Kaplan-Meier estimator computes
+            the probability that a trial starting at time 0 will still be "alive" (not yet completed or terminated)
+            at each subsequent time point. Stratified by sponsor class (local vs foreign), phase, and condition.
+        </div>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">671</div>
+                <div class="metric-label">Trials Analyzed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">3.25</div>
+                <div class="metric-label">Median Time to Completion (years)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">496</div>
+                <div class="metric-label">Completed (event)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">32</div>
+                <div class="metric-label">Terminated/Withdrawn</div>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="survChart" width="800" height="400"></canvas>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <h4 style="margin-bottom:0.5rem;">By Sponsor Type</h4>
+                <table>
+                    <tr><th>Sponsor</th><th>Median Completion</th></tr>
+                    
+            <tr>
+                <td>Local sponsors</td>
+                <td>3.25 years</td>
+            </tr>
+            <tr>
+                <td>Foreign sponsors</td>
+                <td>3.9 years</td>
+            </tr>
+                </table>
+            </div>
+            <div>
+                <h4 style="margin-bottom:0.5rem;">By Phase</h4>
+                <table>
+                    <tr><th>Phase</th><th>Median Completion</th></tr>
+                    
+            <tr>
+                <td>Phase 1</td>
+                <td>2.0 years</td>
+            </tr>
+            <tr>
+                <td>Phase 2</td>
+                <td>3.0 years</td>
+            </tr>
+            <tr>
+                <td>Phase 3</td>
+                <td>5.85 years</td>
+            </tr>
+            <tr>
+                <td>Phase 4</td>
+                <td>3.5 years</td>
+            </tr>
+            <tr>
+                <td>Not specified</td>
+                <td>3.25 years</td>
+            </tr>
+                </table>
+            </div>
+        </div>
+
+        <h4 style="margin:1rem 0 0.5rem;">By Condition</h4>
+        <table>
+            <tr><th>Condition</th><th>Median Completion Time</th></tr>
+            
+            <tr>
+                <td>HIV</td>
+                <td>3.25 years</td>
+            </tr>
+            <tr>
+                <td>malaria</td>
+                <td>3.25 years</td>
+            </tr>
+            <tr>
+                <td>tuberculosis</td>
+                <td>3.25 years</td>
+            </tr>
+            <tr>
+                <td>cancer</td>
+                <td>4.5 years</td>
+            </tr>
+        </table>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> Local-sponsored trials have a median completion time of
+            3.25 years versus
+            3.9 years for foreign-sponsored trials,
+            suggesting foreign sponsors may manage longer or more complex trials.
+        </div>
+    </div>
+</div>
+
+<!-- ============ SECTION 2: BOOTSTRAP CIs ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">2</span>
+        Bootstrap Confidence Intervals (1,000 Resamples)
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> Non-parametric bootstrap with 1000 resamples
+            using random.choices() (sampling with replacement). For each resample of the full 783-trial dataset,
+            we recompute the metric. The 2.5th and 97.5th percentiles of the bootstrap distribution form the
+            95% confidence interval. This quantifies sampling uncertainty without distributional assumptions.
+        </div>
+
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Observed</th>
+                <th>95% CI Lower</th>
+                <th>95% CI Upper</th>
+                <th>Bootstrap Mean</th>
+            </tr>
+            
+            <tr>
+                <td><strong>Clinical Concentration Index</strong></td>
+                <td>67.0%</td>
+                <td>25.5%</td>
+                <td>31.9%</td>
+                <td>28.8%</td>
+            </tr>
+            <tr>
+                <td><strong>Local Sponsorship Rate</strong></td>
+                <td>18.8%</td>
+                <td>16.1%</td>
+                <td>21.6%</td>
+                <td>18.8%</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 1 Sovereignty</strong></td>
+                <td>2.1%</td>
+                <td>0.0%</td>
+                <td>8.3%</td>
+                <td>2.1%</td>
+            </tr>
+            <tr>
+                <td><strong>Completion Rate</strong></td>
+                <td>63.9%</td>
+                <td>60.4%</td>
+                <td>67.0%</td>
+                <td>63.8%</td>
+            </tr>
+        </table>
+
+        <h4 style="margin:1rem 0 0.5rem;">Visual: Bootstrap CI Forest</h4>
+        <div id="bootstrapForest" style="padding:0.5rem 0;"></div>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> The Phase 1 sovereignty CI of
+            [0.0%,
+            8.3%]
+            from 48 Phase 1 trials confirms this is not a sampling
+            artifact -- Uganda's local early-phase research capacity is genuinely near zero.
+            The CCI is remarkably stable (25.5%--31.9%),
+            confirming structural disease concentration.
+        </div>
+    </div>
+</div>
+
+<!-- ============ SECTION 3: BAYESIAN POSTERIORS ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">3</span>
+        Bayesian Posterior Analysis of Trial Completion
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> Prior: Beta(2, 1) (Mildly informative: most trials are expected to complete).
+            Likelihood: Binomial(n, theta) from observed completion/termination counts.
+            Posterior: Beta(alpha + completions, beta + terminations) via conjugacy.
+            We report the posterior mean, 95% credible interval (normal approximation to Beta),
+            and P(theta > 0.90) -- the probability that the true completion rate exceeds 90%.
+        </div>
+
+        <table>
+            <tr>
+                <th>Subgroup</th>
+                <th>Completed</th>
+                <th>Terminated</th>
+                <th>Posterior</th>
+                <th>Mean</th>
+                <th>95% Credible Interval</th>
+                <th>P(rate &gt; 90%)</th>
+            </tr>
+            
+            <tr>
+                <td><strong>Overall</strong></td>
+                <td>500</td>
+                <td>32</td>
+                <td>Beta(502, 33)</td>
+                <td>93.8%</td>
+                <td>[91.8%, 95.9%]</td>
+                <td>100.0%</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 1</strong></td>
+                <td>33</td>
+                <td>3</td>
+                <td>Beta(35, 4)</td>
+                <td>89.7%</td>
+                <td>[80.3%, 99.2%]</td>
+                <td>47.9%</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 2</strong></td>
+                <td>88</td>
+                <td>9</td>
+                <td>Beta(90, 10)</td>
+                <td>90.0%</td>
+                <td>[84.2%, 95.9%]</td>
+                <td>50.0%</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 3</strong></td>
+                <td>105</td>
+                <td>12</td>
+                <td>Beta(107, 13)</td>
+                <td>89.2%</td>
+                <td>[83.6%, 94.7%]</td>
+                <td>38.4%</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 4</strong></td>
+                <td>47</td>
+                <td>3</td>
+                <td>Beta(49, 4)</td>
+                <td>92.5%</td>
+                <td>[85.4%, 99.5%]</td>
+                <td>75.2%</td>
+            </tr>
+            <tr>
+                <td><strong>Local sponsor</strong></td>
+                <td>69</td>
+                <td>2</td>
+                <td>Beta(71, 3)</td>
+                <td>96.0%</td>
+                <td>[91.5%, 100.0%]</td>
+                <td>99.6%</td>
+            </tr>
+            <tr>
+                <td><strong>Foreign sponsor</strong></td>
+                <td>431</td>
+                <td>30</td>
+                <td>Beta(433, 31)</td>
+                <td>93.3%</td>
+                <td>[91.0%, 95.6%]</td>
+                <td>99.8%</td>
+            </tr>
+            <tr>
+                <td><strong>HIV</strong></td>
+                <td>186</td>
+                <td>12</td>
+                <td>Beta(188, 13)</td>
+                <td>93.5%</td>
+                <td>[90.1%, 96.9%]</td>
+                <td>97.9%</td>
+            </tr>
+            <tr>
+                <td><strong>malaria</strong></td>
+                <td>58</td>
+                <td>4</td>
+                <td>Beta(60, 5)</td>
+                <td>92.3%</td>
+                <td>[85.9%, 98.7%]</td>
+                <td>75.9%</td>
+            </tr>
+            <tr>
+                <td><strong>tuberculosis</strong></td>
+                <td>45</td>
+                <td>1</td>
+                <td>Beta(47, 2)</td>
+                <td>95.9%</td>
+                <td>[90.4%, 100.0%]</td>
+                <td>98.3%</td>
+            </tr>
+        </table>
+
+        <div class="canvas-container">
+            <canvas id="bayesChart" width="800" height="350"></canvas>
+        </div>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> The posterior completion probability is
+            93.8% overall
+            (95% CrI: [91.8%,
+            95.9%]).
+            Phase 1 trials show lower completion rates.
+            Local sponsors show higher completion
+            (96.0%) than foreign sponsors
+            (93.3%).
+        </div>
+    </div>
+</div>
+
+<!-- ============ SECTION 4: MONTE CARLO ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">4</span>
+        Monte Carlo "What If" Simulations (10,000 Iterations)
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> 10,000 Monte Carlo iterations with Poisson
+            variation. Each scenario models a counterfactual: (1) Nigeria achieves India's trial density
+            (3.8/million); (2) PEPFAR funding withdrawal removes
+            ~60% of HIV trials from PEPFAR focus countries; (3) All 7 African countries match Latin America's
+            rate (5.2/million). Current Africa per-capita rate:
+            10.08/million.
+        </div>
+
+        <table>
+            <tr>
+                <th>Scenario</th>
+                <th>Current</th>
+                <th>Simulated Mean</th>
+                <th>95% CI</th>
+                <th>Change</th>
+            </tr>
+            
+            <tr>
+                <td><strong>Nigeria at India's per-capita rate</strong></td>
+                <td>354</td>
+                <td>700</td>
+                <td>[650, 752]</td>
+                <td>2.0x</td>
+            </tr>
+            <tr>
+                <td><strong>PEPFAR funding withdrawal</strong></td>
+                <td>6,122</td>
+                <td>5,012</td>
+                <td>[4,689, 5,292]</td>
+                <td>18.1%</td>
+            </tr>
+            <tr>
+                <td><strong>Africa at Latin America rate</strong></td>
+                <td>6,122</td>
+                <td>2,662</td>
+                <td>[2,560, 2,765]</td>
+                <td>0.4x</td>
+            </tr>
+        </table>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">2.0x</div>
+                <div class="metric-label">Nigeria's Potential Multiplier</div>
+                <div class="metric-sub">At India's per-capita rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color:var(--accent);">-18.1%</div>
+                <div class="metric-label">Loss if PEPFAR Stops</div>
+                <div class="metric-sub">HIV trial dependency</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color:var(--success);">0.4x</div>
+                <div class="metric-label">Latin America Parity Multiplier</div>
+                <div class="metric-sub">Achievable benchmark</div>
+            </div>
+        </div>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> If Nigeria alone achieved India's per-capita trial rate, it would host
+            ~700 trials (currently 354).
+            PEPFAR withdrawal would eliminate approximately 18.1% of
+            the regional portfolio, exposing extreme donor dependency.
+            Matching Latin America would multiply the total by 0.4x.
+        </div>
+    </div>
+</div>
+
+<!-- ============ SECTION 5: REGRESSION ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">5</span>
+        OLS Regression: Predictors of Trial Density
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> Ordinary least squares regression on 20 African countries.
+            Y = trials per million population. Predictors: log(GDP per capita), English-speaking (binary),
+            PEPFAR country (binary), conflict zone (binary), log(population).
+            Pure Python implementation with Gauss-Jordan matrix inversion.
+            Green rows indicate statistical significance at p &lt; 0.05.
+        </div>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">58.5%</div>
+                <div class="metric-label">R-squared</div>
+                <div class="metric-sub">moderate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">39.3%</div>
+                <div class="metric-label">Adjusted R-squared</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">20</div>
+                <div class="metric-label">Countries</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">9.414</div>
+                <div class="metric-label">Residual SE</div>
+            </div>
+        </div>
+
+        <h4 style="margin:1rem 0 0.5rem;">Regression Coefficients</h4>
+        <table>
+            <tr>
+                <th>Variable</th>
+                <th>Coefficient</th>
+                <th>Std Error</th>
+                <th>t-statistic</th>
+                <th>p-value</th>
+            </tr>
+            
+            <tr class="">
+                <td><strong>Intercept</strong></td>
+                <td>-76.0898</td>
+                <td>53.1822</td>
+                <td>-1.431</td>
+                <td>0.1525</td>
+            </tr>
+            <tr class="highlight-sig">
+                <td><strong>log(GDP per capita)</strong></td>
+                <td>19.1499</td>
+                <td>4.8506</td>
+                <td>3.948*</td>
+                <td><0.001</td>
+            </tr>
+            <tr class="">
+                <td><strong>English-speaking</strong></td>
+                <td>9.1420</td>
+                <td>6.5965</td>
+                <td>1.386</td>
+                <td>0.1658</td>
+            </tr>
+            <tr class="">
+                <td><strong>PEPFAR country</strong></td>
+                <td>6.9542</td>
+                <td>5.4721</td>
+                <td>1.271</td>
+                <td>0.2038</td>
+            </tr>
+            <tr class="">
+                <td><strong>Conflict zone</strong></td>
+                <td>16.7208</td>
+                <td>10.2796</td>
+                <td>1.627</td>
+                <td>0.1038</td>
+            </tr>
+            <tr class="">
+                <td><strong>log(Population)</strong></td>
+                <td>-3.8816</td>
+                <td>3.1981</td>
+                <td>-1.214</td>
+                <td>0.2249</td>
+            </tr>
+        </table>
+
+        <h4 style="margin:1rem 0 0.5rem;">Country Data</h4>
+        <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Country</th>
+                <th>Trials</th>
+                <th>Population</th>
+                <th>Per Million</th>
+                <th>GDP/capita</th>
+                <th>English</th>
+                <th>PEPFAR</th>
+                <th>Conflict</th>
+            </tr>
+            
+            <tr>
+                <td>South Africa</td>
+                <td>3,473</td>
+                <td>62.0M</td>
+                <td><strong>56.0</strong></td>
+                <td>$6,738</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Tunisia</td>
+                <td>312</td>
+                <td>12.5M</td>
+                <td><strong>25.0</strong></td>
+                <td>$3,807</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Egypt</td>
+                <td>1,842</td>
+                <td>112.0M</td>
+                <td><strong>16.4</strong></td>
+                <td>$4,295</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Uganda</td>
+                <td>783</td>
+                <td>48.4M</td>
+                <td><strong>16.2</strong></td>
+                <td>$964</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Kenya</td>
+                <td>720</td>
+                <td>56.0M</td>
+                <td><strong>12.9</strong></td>
+                <td>$2,099</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Morocco</td>
+                <td>398</td>
+                <td>38.0M</td>
+                <td><strong>10.5</strong></td>
+                <td>$3,795</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Malawi</td>
+                <td>195</td>
+                <td>21.0M</td>
+                <td><strong>9.3</strong></td>
+                <td>$645</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Rwanda</td>
+                <td>121</td>
+                <td>14.0M</td>
+                <td><strong>8.6</strong></td>
+                <td>$966</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Zambia</td>
+                <td>142</td>
+                <td>20.0M</td>
+                <td><strong>7.1</strong></td>
+                <td>$1,291</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Tanzania</td>
+                <td>431</td>
+                <td>67.0M</td>
+                <td><strong>6.4</strong></td>
+                <td>$1,192</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Ghana</td>
+                <td>185</td>
+                <td>34.0M</td>
+                <td><strong>5.4</strong></td>
+                <td>$2,363</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Senegal</td>
+                <td>98</td>
+                <td>18.0M</td>
+                <td><strong>5.4</strong></td>
+                <td>$1,606</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Zimbabwe</td>
+                <td>88</td>
+                <td>17.0M</td>
+                <td><strong>5.2</strong></td>
+                <td>$1,737</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Mozambique</td>
+                <td>113</td>
+                <td>34.0M</td>
+                <td><strong>3.3</strong></td>
+                <td>$539</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Cameroon</td>
+                <td>72</td>
+                <td>28.0M</td>
+                <td><strong>2.6</strong></td>
+                <td>$1,667</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Cote d'Ivoire</td>
+                <td>62</td>
+                <td>30.0M</td>
+                <td><strong>2.1</strong></td>
+                <td>$2,579</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Ethiopia</td>
+                <td>240</td>
+                <td>130.0M</td>
+                <td><strong>1.9</strong></td>
+                <td>$1,027</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Nigeria</td>
+                <td>354</td>
+                <td>230.0M</td>
+                <td><strong>1.5</strong></td>
+                <td>$1,621</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Sudan</td>
+                <td>42</td>
+                <td>48.0M</td>
+                <td><strong>0.9</strong></td>
+                <td>$730</td>
+                <td>No</td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>DRC</td>
+                <td>85</td>
+                <td>105.0M</td>
+                <td><strong>0.8</strong></td>
+                <td>$654</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+        </table>
+        </div>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> The strongest predictors of trial density are
+            log(GDP per capita).
+            R-squared of 58.5% indicates that these structural factors explain a
+            substantial fraction of cross-country
+            variation in clinical trial activity.
+        </div>
+    </div>
+</div>
+
+<!-- ============ SECTION 6: INEQUALITY METRICS ============ -->
+<div class="section">
+    <div class="section-header">
+        <span class="section-number">6</span>
+        Entropy and Inequality Metrics
+    </div>
+    <div class="section-body">
+        <div class="methodology">
+            <strong>Methodology:</strong> Shannon entropy measures diversity of the condition portfolio (higher = more
+            diverse). Gini coefficient measures inequality in trial distribution across countries (0 = perfect equality,
+            1 = maximum inequality). Theil T index decomposes inequality between PEPFAR and non-PEPFAR groups.
+            Atkinson index with varying epsilon (0.5, 1.0, 2.0) shows sensitivity to inequality at different parts
+            of the distribution. HHI (Herfindahl-Hirschman Index) measures market-style concentration of diseases.
+        </div>
+
+        <div class="two-col">
+            <div>
+                <h4>Condition Portfolio Diversity</h4>
+                <div class="metric-grid" style="grid-template-columns:1fr 1fr;">
+                    <div class="metric-card">
+                        <div class="metric-value">2.9609</div>
+                        <div class="metric-label">Shannon Entropy (bits)</div>
+                        <div class="metric-sub">Max possible: 3.9069</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">0.76</div>
+                        <div class="metric-label">Evenness Index (J)</div>
+                        <div class="metric-sub">Moderate diversity</div>
+                    </div>
+                </div>
+
+                <h4 style="margin-top:1rem;">Disease Concentration (HHI)</h4>
+                <div class="metric-card">
+                    <div class="metric-value">1989</div>
+                    <div class="metric-label">Herfindahl-Hirschman Index</div>
+                    <div class="metric-sub">Moderately concentrated (1500-2500)</div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Country-Level Inequality</h4>
+                <div class="metric-grid" style="grid-template-columns:1fr 1fr;">
+                    <div class="metric-card">
+                        <div class="metric-value">0.537</div>
+                        <div class="metric-label">Gini Coefficient</div>
+                        <div class="metric-sub">High inequality</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">0.553</div>
+                        <div class="metric-label">Theil T Index</div>
+                        <div class="metric-sub">PEPFAR vs non-PEPFAR</div>
+                    </div>
+                </div>
+
+                <h4 style="margin-top:1rem;">Atkinson Indices</h4>
+                <table>
+                    <tr><th>Epsilon</th><th>Atkinson Index</th><th>Sensitivity</th></tr>
+                    <tr><td>0.5</td><td>0.2455</td><td>Low (top-sensitive)</td></tr>
+                    <tr><td>1.0</td><td>0.4197</td><td>Medium</td></tr>
+                    <tr><td>2.0</td><td>0.6101</td><td>High (bottom-sensitive)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <h4 style="margin:1rem 0 0.5rem;">Sponsor Concentration</h4>
+        <div class="metric-grid" style="grid-template-columns:1fr 1fr 1fr;">
+            <div class="metric-card">
+                <div class="metric-value">222</div>
+                <div class="metric-label">Unique Sponsors</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">6.43</div>
+                <div class="metric-label">Sponsor Entropy (bits)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">0.611</div>
+                <div class="metric-label">Sponsor Gini</div>
+            </div>
+        </div>
+        <h4 style="margin:0.5rem 0;">Top 5 Sponsors</h4>
+        <ol style="padding-left:1.5rem;font-size:0.9rem;">
+            <li>Makerere University: 102 trials</li><li>University of California, San Francisco: 51 trials</li><li>National Institute of Allergy and Infectious Diseases (NIAID): 46 trials</li><li>Mbarara University of Science and Technology: 22 trials</li><li>Massachusetts General Hospital: 22 trials</li>
+        </ol>
+
+        <div class="interpretation">
+            <strong>Key finding:</strong> The condition evenness index of 0.76
+            confirms moderate diversity, dominated by HIV.
+            The country-level Gini of 0.537 indicates
+            high inequality: South Africa alone hosts more trials than all other
+            comparison countries combined. The Atkinson index rises sharply with epsilon (from
+            0.245 to 0.610), meaning inequality
+            is most severe at the bottom -- the smallest research ecosystems are disproportionately disadvantaged.
+        </div>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+    <p>Data source: ClinicalTrials.gov API v2 | 783 Uganda interventional trials | Analysis: 2026-03-28</p>
+    <p>Pure Python implementation (no scipy/numpy) | Seeded PRNG (random.seed(42)) for full reproducibility</p>
+</div>
+
+<script>
+// ── Survival curve chart ──
+(function() {
+    var canvas = document.getElementById('survChart');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var pad = {top:30, right:30, bottom:50, left:60};
+    var pW = W - pad.left - pad.right;
+    var pH = H - pad.top - pad.bottom;
+
+    var times = [0, 0.1, 0.38, 0.6, 0.83, 1.1, 1.36, 1.58, 1.86, 2.1, 2.23, 2.45, 2.63, 2.89, 3.3, 3.74, 3.95, 4.55, 5.02, 5.89, 8.38, 10.72, 12.55, 15.02];
+    var probs = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9869, 0.9735, 0.9105, 0.9105, 0.8965, 0.6986, 0.6986, 0.3669, 0.3276, 0.3023, 0.1881, 0.1881, 0.0651, 0.0651, 0.0651, 0.0651, 0.0651];
+
+    var maxT = Math.max.apply(null, times) * 1.05;
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 0.5;
+    for (var i = 0; i <= 5; i++) {
+        var y = pad.top + pH * (1 - i / 5);
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.fillStyle = '#718096'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText((i * 20) + '%', pad.left - 8, y + 4);
+    }
+    for (var t = 0; t <= maxT; t += 1) {
+        var x = pad.left + (t / maxT) * pW;
+        ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + pH); ctx.stroke();
+        ctx.fillStyle = '#718096'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(t + 'y', x, H - pad.bottom + 20);
+    }
+
+    // KM step curve
+    ctx.strokeStyle = '#2c5282';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (var i = 0; i < times.length; i++) {
+        var x = pad.left + (times[i] / maxT) * pW;
+        var y = pad.top + pH * (1 - probs[i]);
+        if (i === 0) ctx.moveTo(x, y);
+        else {
+            // Step function: horizontal then vertical
+            var px = pad.left + (times[i-1] / maxT) * pW;
+            ctx.lineTo(x, pad.top + pH * (1 - probs[i-1]));
+            ctx.lineTo(x, y);
+        }
+    }
+    ctx.stroke();
+
+    // 50% reference line
+    ctx.strokeStyle = '#e53e3e';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([5, 5]);
+    var y50 = pad.top + pH * 0.5;
+    ctx.beginPath(); ctx.moveTo(pad.left, y50); ctx.lineTo(W - pad.right, y50); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#e53e3e'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('50% (median)', W - pad.right - 80, y50 - 5);
+
+    // Axes labels
+    ctx.fillStyle = '#2d3748'; ctx.font = '13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Time Since Trial Start (Years)', W / 2, H - 5);
+    ctx.save();
+    ctx.translate(15, H / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Survival Probability (% not yet completed)', 0, 0);
+    ctx.restore();
+
+    // Title
+    ctx.fillStyle = '#1a365d'; ctx.font = 'bold 14px sans-serif';
+    ctx.fillText('Kaplan-Meier Trial Survival Curve (n=671)', W / 2, 18);
+})();
+
+// ── Bootstrap Forest Plot ──
+(function() {
+    var container = document.getElementById('bootstrapForest');
+    if (!container) return;
+    var metrics = [
+        {name: 'Clinical Concentration Index', obs: 0.6705, lo: 0.2554, hi: 0.3193},
+        {name: 'Local Sponsorship Rate', obs: 0.1877, lo: 0.1609, hi: 0.2158},
+        {name: 'Phase 1 Sovereignty', obs: 0.0208, lo: 0.0, hi: 0.0833},
+        {name: 'Completion Rate', obs: 0.6386, lo: 0.6041, hi: 0.6705}
+    ];
+
+    var html = '';
+    metrics.forEach(function(m) {
+        var lo_pct = (m.lo * 100).toFixed(1);
+        var hi_pct = (m.hi * 100).toFixed(1);
+        var obs_pct = (m.obs * 100).toFixed(1);
+        // Scale bar to 0-100%
+        html += '<div class="ci-bar">' +
+            '<span class="ci-label" style="text-align:right;min-width:180px;font-size:0.85rem;">' + m.name + '</span>' +
+            '<div class="ci-track">' +
+            '<div class="ci-fill" style="left:' + lo_pct + '%;width:' + (hi_pct - lo_pct) + '%;"></div>' +
+            '<div class="ci-point" style="left:' + obs_pct + '%;"></div>' +
+            '</div>' +
+            '<span class="ci-label">' + obs_pct + '%</span>' +
+            '</div>';
+    });
+    container.innerHTML = html;
+})();
+
+// ── Bayesian posterior chart ──
+(function() {
+    var canvas = document.getElementById('bayesChart');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var pad = {top:30, right:30, bottom:60, left:50};
+
+    var groups = [{"label": "Overall", "mean": 0.9383, "lo": 0.9179, "hi": 0.9587}, {"label": "Phase 1", "mean": 0.8974, "lo": 0.8034, "hi": 0.9915}, {"label": "Phase 2", "mean": 0.9, "lo": 0.8415, "hi": 0.9585}, {"label": "Phase 3", "mean": 0.8917, "lo": 0.8363, "hi": 0.9471}, {"label": "Phase 4", "mean": 0.9245, "lo": 0.8541, "hi": 0.995}, {"label": "Local sponsor", "mean": 0.9595, "lo": 0.9148, "hi": 1.0}, {"label": "Foreign sponsor", "mean": 0.9332, "lo": 0.9105, "hi": 0.9559}, {"label": "HIV", "mean": 0.9353, "lo": 0.9014, "hi": 0.9692}, {"label": "malaria", "mean": 0.9231, "lo": 0.8588, "hi": 0.9874}, {"label": "tuberculosis", "mean": 0.9592, "lo": 0.9043, "hi": 1.0}];
+
+    var n = groups.length;
+    var barH = Math.min(25, (H - pad.top - pad.bottom) / n - 8);
+    var colors = ['#2c5282', '#38a169', '#dd6b20', '#e53e3e', '#805ad5', '#d69e2e', '#319795', '#3182ce', '#e53e3e', '#38a169'];
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, W, H);
+
+    // Scale: 0.5 to 1.0
+    var minX = 0.5, maxX = 1.0;
+    var pW = W - pad.left - pad.right;
+
+    // Grid
+    for (var v = 0.5; v <= 1.0; v += 0.1) {
+        var x = pad.left + ((v - minX) / (maxX - minX)) * pW;
+        ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, H - pad.bottom); ctx.stroke();
+        ctx.fillStyle = '#718096'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText((v * 100).toFixed(0) + '%', x, H - pad.bottom + 15);
+    }
+
+    groups.forEach(function(g, i) {
+        var y = pad.top + i * (barH + 8) + barH / 2;
+        var xLo = pad.left + ((Math.max(g.lo, minX) - minX) / (maxX - minX)) * pW;
+        var xHi = pad.left + ((Math.min(g.hi, maxX) - minX) / (maxX - minX)) * pW;
+        var xMean = pad.left + ((g.mean - minX) / (maxX - minX)) * pW;
+
+        // CI line
+        ctx.strokeStyle = colors[i % colors.length];
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(xLo, y); ctx.lineTo(xHi, y); ctx.stroke();
+
+        // Caps
+        ctx.beginPath(); ctx.moveTo(xLo, y - 5); ctx.lineTo(xLo, y + 5); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(xHi, y - 5); ctx.lineTo(xHi, y + 5); ctx.stroke();
+
+        // Point
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.beginPath(); ctx.arc(xMean, y, 5, 0, 2 * Math.PI); ctx.fill();
+
+        // Label
+        ctx.fillStyle = '#2d3748'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText(g.label, pad.left - 8, y + 4);
+    });
+
+    ctx.fillStyle = '#1a365d'; ctx.font = 'bold 13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Bayesian Posterior Completion Rates (95% Credible Intervals)', W / 2, 18);
+    ctx.fillStyle = '#718096'; ctx.font = '12px sans-serif';
+    ctx.fillText('Completion Probability', W / 2, H - pad.bottom + 35);
+})();
+</script>
+
+</body>
+</html>

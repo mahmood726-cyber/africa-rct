@@ -1,0 +1,12 @@
+{
+  "title": "Protocol: maternal mortality trial landscape analysis",
+  "type": "protocol",
+  "primary_estimand": "Condition Colonialism Index for maternal mortality trials in Africa",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "app": "C:\\AfricaRCT\\maternal-mortality.html",
+  "data": "ClinicalTrials.gov API v2",
+  "code": "C:\\AfricaRCT\fetch_maternal_mortality.py",
+  "body": "This protocol describes the planned registry audit for The Maternal Mortality Scandal, targeting reproducible estimation of the burden-to-trial ratio for obstetric research across Africa. Eligible records include interventional studies on ClinicalTrials.gov addressing maternal mortality, postpartum hemorrhage, preeclampsia, eclampsia, caesarean delivery, maternal sepsis, and peripartum cardiomyopathy without date or language restrictions. Searches will query the ClinicalTrials.gov API v2 using filter.advanced with AREA[StudyType]INTERVENTIONAL, query.cond for condition terms, and query.locn for geographic filtering across eight African countries and three comparators. The primary analysis will compute the Condition Colonialism Index as burden share divided by trial share, reporting conservative and direct estimates against the United States. Country-level stratification, obstetric sub-condition classification, and sponsor-origin decomposition will examine heterogeneity using keyword heuristics. Analysis code is archived at fetch_maternal_mortality.py with results reported following PRISMA-S guidelines for search documentation. Anticipated limitations include undercount of unregistered trials, keyword-based classification that may miscategorize complex obstetric studies, and aggregate location metadata that cannot confirm site-level enrollment. ai_transparency:",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

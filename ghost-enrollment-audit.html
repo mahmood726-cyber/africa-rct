@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Enrollment Audit: Uganda Clinical Trials</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --card: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #22d3ee;
+  --danger: #f87171;
+  --warn: #fb923c;
+  --success: #4ade80;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+h1 {
+  font-size: 2.2em;
+  background: linear-gradient(135deg, #f87171, #fb923c, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+h2 {
+  font-size: 1.5em;
+  color: var(--accent);
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+h3 {
+  font-size: 1.15em;
+  color: var(--warn);
+  margin: 20px 0 10px;
+}
+.subtitle {
+  color: var(--muted);
+  font-size: 1.1em;
+  margin-bottom: 24px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.stat-number {
+  font-size: 2.5em;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.stat-label {
+  font-size: 0.85em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+}
+th {
+  background: #1e293b;
+  color: var(--accent);
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+td {
+  padding: 8px;
+  vertical-align: middle;
+}
+.table-wrap {
+  max-height: 800px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.table-wrap::-webkit-scrollbar { width: 8px; }
+.table-wrap::-webkit-scrollbar-track { background: var(--card); }
+.table-wrap::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+.invisible-callout {
+  background: linear-gradient(135deg, #1a0a0a, #1a1a0a);
+  border: 2px solid var(--danger);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 20px 0;
+}
+.invisible-number {
+  font-size: 4em;
+  font-weight: 900;
+  color: var(--danger);
+  line-height: 1;
+}
+.invisible-subtext {
+  font-size: 1.3em;
+  color: var(--warn);
+  margin-top: 8px;
+}
+.eml-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 800px) {
+  .eml-split { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+a { color: var(--accent); }
+a:hover { text-decoration: underline; }
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85em;
+  margin-top: 48px;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+}
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Ghost Enrollment Audit</h1>
+<p class="subtitle">Where Uganda becomes invisible: mega-trials with 21-622 sites
+where Ugandan patients contribute &lt;1% of enrollment</p>
+
+<!-- Section 1: Summary Stats -->
+<h2>1. Summary Statistics</h2>
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--accent)">783</div>
+    <div class="stat-label">Total Uganda Trials</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--danger)">16</div>
+    <div class="stat-label">Ghost Trials (&gt;100 sites)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--warn)">39</div>
+    <div class="stat-label">Mega-Trials (21-100 sites)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--success)">55</div>
+    <div class="stat-label">Total Mega + Ghost</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--danger)">32,735</div>
+    <div class="stat-label">Ghost Total Enrollment</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--warn)">192</div>
+    <div class="stat-label">Est. Uganda Ghost Enrollment</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--danger)">0.59%</div>
+    <div class="stat-label">Uganda % of Ghost Enrollment</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--warn)">2,164</div>
+    <div class="stat-label">Est. Uganda Mega Enrollment</div>
+  </div>
+</div>
+
+<!-- Section 2: Full Trial Table -->
+<h2>2. Complete Mega + Ghost Trial Registry (55 trials)</h2>
+<p style="color:var(--muted);margin-bottom:8px">
+  All trials with &ge;21 sites that include a Ugandan location.
+  Uganda Pct = estimated enrollment contribution (1 / total sites).
+</p>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterTable('all')">All (55)</button>
+  <button class="filter-btn" onclick="filterTable('Ghost')" style="border-color:#f87171">
+    Ghost (16)</button>
+  <button class="filter-btn" onclick="filterTable('Mega-trial')" style="border-color:#fb923c">
+    Mega (39)</button>
+  <button class="filter-btn" onclick="filterTable('INDUSTRY')">Industry</button>
+  <button class="filter-btn" onclick="filterTable('NIH')">NIH</button>
+  <button class="filter-btn" onclick="filterTable('TERMINATED')">Terminated</button>
+</div>
+
+<div class="table-wrap">
+<table id="trialTable">
+<thead>
+<tr>
+  <th>NCT ID</th>
+  <th>Title</th>
+  <th>Sponsor</th>
+  <th>Sites</th>
+  <th>Uganda %</th>
+  <th>Drug / EML</th>
+  <th>Phase</th>
+  <th>Status</th>
+  <th>Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04961996"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04961996</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study Evaluating the Efficacy and Safety of Adjuvant Giredestrant Compared With Physician&#39;s Choice of Adjuvant Endocrine Monotherapy in Participants With Estrogen Receptor-Positive, HER2-Negative Early Breast Cancer (lidERA Breast Cancer)">A Study Evaluating the Efficacy and Safety of Adjuvant Giredes...</td>
+<td style="font-size:0.85em">Hoffmann-La Roche</td>
+<td style="text-align:center;color:#f87171;font-weight:700">622</td>
+<td style="text-align:center;color:#f87171">0.2%</td>
+<td style="font-size:0.85em">giredestrant <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04873362"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04873362</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study Evaluating the Efficacy and Safety of Adjuvant Atezolizumab or Placebo and Trastuzumab Emtansine for Participants With HER2-Positive Breast Cancer at High Risk of Recurrence Following Preoperative Therapy">A Study Evaluating the Efficacy and Safety of Adjuvant Atezoli...</td>
+<td style="font-size:0.85em">Hoffmann-La Roche</td>
+<td style="text-align:center;color:#f87171;font-weight:700">238</td>
+<td style="text-align:center;color:#f87171">0.4%</td>
+<td style="font-size:0.85em">atezolizumab <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00867048"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00867048</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Strategic Timing of Antiretroviral Treatment">Strategic Timing of Antiretroviral Treatment</td>
+<td style="font-size:0.85em">University of Minnesota</td>
+<td style="text-align:center;color:#f87171;font-weight:700">218</td>
+<td style="text-align:center;color:#f87171">0.5%</td>
+<td style="font-size:0.85em">antiretroviral therapy <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph4</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05296798"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05296798</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study to Evaluate the Efficacy and Safety of Giredestrant in Combination With Phesgo (Pertuzumab, Trastuzumab, and Hyaluronidase-zzxf) Versus Phesgo in Participants With Locally Advanced or Metastatic Breast Cancer (heredERA Breast Cancer)">A Study to Evaluate the Efficacy and Safety of Giredestrant in...</td>
+<td style="font-size:0.85em">Hoffmann-La Roche</td>
+<td style="text-align:center;color:#f87171;font-weight:700">208</td>
+<td style="text-align:center;color:#f87171">0.5%</td>
+<td style="font-size:0.85em">giredestrant + palbociclib <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05305547"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05305547</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study to Compare S-217622 With Placebo in Non-Hospitalized Participants With COVID-19">A Study to Compare S-217622 With Placebo in Non-Hospitalized P...</td>
+<td style="font-size:0.85em">Shionogi</td>
+<td style="text-align:center;color:#f87171;font-weight:700">196</td>
+<td style="text-align:center;color:#f87171">0.5%</td>
+<td style="font-size:0.85em">ensitrelvir (S-217622) <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05894239"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05894239</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study to Evaluate the Efficacy and Safety of Inavolisib in Combination With Phesgo Versus Placebo in Combination With Phesgo in Participants With PIK3CA-Mutated HER2-Positive Locally Advanced or Metastatic Breast Cancer">A Study to Evaluate the Efficacy and Safety of Inavolisib in C...</td>
+<td style="font-size:0.85em">Hoffmann-La Roche</td>
+<td style="text-align:center;color:#f87171;font-weight:700">187</td>
+<td style="text-align:center;color:#f87171">0.5%</td>
+<td style="font-size:0.85em">inavolisib + pertuzumab/trastuzumab <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05605093"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05605093</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Strategies and Treatments for Respiratory Infections &amp; Viral Emergencies (STRIVE): Shionogi Protease Inhibitor (Ensitrelvir)">Strategies and Treatments for Respiratory Infections &amp; Viral E...</td>
+<td style="font-size:0.85em">University of Minnesota</td>
+<td style="text-align:center;color:#f87171;font-weight:700">187</td>
+<td style="text-align:center;color:#f87171">0.5%</td>
+<td style="font-size:0.85em">multiple antivirals <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#f87171;text-align:center;font-size:0.85em">Terminated</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06612268"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06612268</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study to Evaluate How Well Etavopivat Works in People With Sickle Cell Disease">A Study to Evaluate How Well Etavopivat Works in People With S...</td>
+<td style="font-size:0.85em">Novo Nordisk A/S</td>
+<td style="text-align:center;color:#f87171;font-weight:700">172</td>
+<td style="text-align:center;color:#f87171">0.6%</td>
+<td style="font-size:0.85em">etavopivat <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05904886"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05904886</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study Evaluating Atezolizumab and Bevacizumab, With or Without Tiragolumab, in Participants With Untreated Locally Advanced or Metastatic Hepatocellular Carcinoma (HCC) (IMbrave152)">A Study Evaluating Atezolizumab and Bevacizumab, With or Witho...</td>
+<td style="font-size:0.85em">Hoffmann-La Roche</td>
+<td style="text-align:center;color:#f87171;font-weight:700">171</td>
+<td style="text-align:center;color:#f87171">0.6%</td>
+<td style="font-size:0.85em">atezolizumab + bevacizumab + tiragolumab <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02832544"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02832544</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="INVestIgation of rheumatiC AF Treatment Using Vitamin K Antagonists, Rivaroxaban or Aspirin Studies, Non-Inferiority">INVestIgation of rheumatiC AF Treatment Using Vitamin K Antago...</td>
+<td style="font-size:0.85em">Population Health Research Institut</td>
+<td style="text-align:center;color:#f87171;font-weight:700">139</td>
+<td style="text-align:center;color:#f87171">0.7%</td>
+<td style="font-size:0.85em">rivaroxaban <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02344290"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02344290</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Evaluating the Use of Pitavastatin to Reduce the Risk of Cardiovascular Disease in HIV-Infected Adults">Evaluating the Use of Pitavastatin to Reduce the Risk of Cardi...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">137</td>
+<td style="text-align:center;color:#f87171">0.7%</td>
+<td style="font-size:0.85em">pitavastatin <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04501978"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04501978</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="ACTIV-3: Therapeutics for Inpatients With COVID-19">ACTIV-3: Therapeutics for Inpatients With COVID-19</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">135</td>
+<td style="text-align:center;color:#f87171">0.7%</td>
+<td style="font-size:0.85em">multiple COVID therapeutics <span style="color:#4ade80">EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05780437"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05780437</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="AZD7442 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatment Trial)">AZD7442 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatmen...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">124</td>
+<td style="text-align:center;color:#f87171">0.8%</td>
+<td style="font-size:0.85em">tixagevimab/cilgavimab (AZD7442) <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05780424"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05780424</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="BRII-196/BRII-198 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatment Trial)">BRII-196/BRII-198 for Inpatients With COVID-19 (An ACTIV-3/TIC...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">107</td>
+<td style="text-align:center;color:#f87171">0.9%</td>
+<td style="font-size:0.85em">BRII-196/BRII-198 <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05780281"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05780281</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="VIR-7831 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatment Trial)">VIR-7831 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatme...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">105</td>
+<td style="text-align:center;color:#f87171">0.9%</td>
+<td style="font-size:0.85em">sotrovimab (VIR-7831) <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05780463"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05780463</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="MP0420 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatment Trial)">MP0420 for Inpatients With COVID-19 (An ACTIV-3/TICO Treatment...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#f87171;font-weight:700">105</td>
+<td style="text-align:center;color:#f87171">0.9%</td>
+<td style="font-size:0.85em">ensovibep (MP0420) <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT01705574"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT01705574</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Safety and Efficacy of E/C/F/TDF Versus RTV-Boosted ATV Plus FTC/TDF in HIV-1 Infected, Antiretroviral Treatment-Naive Women">Safety and Efficacy of E/C/F/TDF Versus RTV-Boosted ATV Plus F...</td>
+<td style="font-size:0.85em">Gilead Sciences</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">99</td>
+<td style="text-align:center;color:#fb923c">1.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04904549"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04904549</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Study of Monovalent and Bivalent Recombinant Protein Vaccines Against COVID-19 in Adults 18 Years of Age and Older">Study of Monovalent and Bivalent Recombinant Protein Vaccines ...</td>
+<td style="font-size:0.85em">Sanofi Pasteur, a Sanofi Company</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">86</td>
+<td style="text-align:center;color:#fb923c">1.2%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04910269"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04910269</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Outpatient Treatment With Anti-Coronavirus Immunoglobulin">Outpatient Treatment With Anti-Coronavirus Immunoglobulin</td>
+<td style="font-size:0.85em">University of Minnesota</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">65</td>
+<td style="text-align:center;color:#fb923c">1.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00151775"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00151775</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Assessment of Efficacy and Safety of Olmesartan Medoxomil in Children and Adolescent Patients With High Blood Pressure">Assessment of Efficacy and Safety of Olmesartan Medoxomil in C...</td>
+<td style="font-size:0.85em">Daiichi Sankyo</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">65</td>
+<td style="text-align:center;color:#fb923c">1.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04038632"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04038632</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Impact of an Innovative Childhood TB Diagnostic Approach Decentralized to District Hospital and Primary Health Care Levels on Childhood Tuberculosis Case Detection and Management in High Tuberculosis Incidence Countries (TB-Speed Decentralisation)">Impact of an Innovative Childhood TB Diagnostic Approach Decen...</td>
+<td style="font-size:0.85em">Institut National de la Santé Et de</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">59</td>
+<td style="text-align:center;color:#fb923c">1.7%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">NA</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02652624"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02652624</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Safety and Efficacy of Switching to a FDC of B/F/TAF From E/C/F/TAF, E/C/F/TDF, or ATV+RTV+FTC/TDF in Virologically Suppressed HIV-1 Infected Women">Safety and Efficacy of Switching to a FDC of B/F/TAF From E/C/...</td>
+<td style="font-size:0.85em">Gilead Sciences</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">56</td>
+<td style="text-align:center;color:#fb923c">1.8%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03615924"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03615924</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Effect of Ticagrelor vs. Placebo in the Reduction of Vaso-occlusive Crises in Pediatric Patients With Sickle Cell Disease">Effect of Ticagrelor vs. Placebo in the Reduction of Vaso-occl...</td>
+<td style="font-size:0.85em">AstraZeneca</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">55</td>
+<td style="text-align:center;color:#fb923c">1.8%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#f87171;text-align:center;font-size:0.85em">Terminated</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05580666"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05580666</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Reducing Mortality in Adults With Advanced HIV Disease (REVIVE)">Reducing Mortality in Adults With Advanced HIV Disease (REVIVE)</td>
+<td style="font-size:0.85em">Population Health Research Institut</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">52</td>
+<td style="text-align:center;color:#fb923c">1.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02140255"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02140255</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Very Early Intensive Treatment of Infants Living With HIV to Achieve HIV Remission">Very Early Intensive Treatment of Infants Living With HIV to A...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">50</td>
+<td style="text-align:center;color:#fb923c">2.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph1/Ph2</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04474314"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04474314</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study of IMR-687 in Subjects With Sickle Cell Disease">A Study of IMR-687 in Subjects With Sickle Cell Disease</td>
+<td style="font-size:0.85em">Cardurion Pharmaceuticals, Inc.</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">49</td>
+<td style="text-align:center;color:#fb923c">2.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#f87171;text-align:center;font-size:0.85em">Terminated</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05168813"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05168813</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Efficacy Study of COVID-19 mRNA Vaccine in Regions With SARS-CoV-2 Variants of Concern">Efficacy Study of COVID-19 mRNA Vaccine in Regions With SARS-C...</td>
+<td style="font-size:0.85em">COVID-19 Prevention Network</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">47</td>
+<td style="text-align:center;color:#fb923c">2.1%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04193189"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04193189</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="B-Enhancement of HBV Vaccination in Persons Living With HIV (BEe-HIVe): Evaluation of HEPLISAV-B">B-Enhancement of HBV Vaccination in Persons Living With HIV (B...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">41</td>
+<td style="text-align:center;color:#fb923c">2.4%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06705478"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06705478</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Pramipexole Versus Escitalopram to Treat Major Depressive Disorder (MDD) and Comorbid MDD With Mild Neurocognitive Disorder (MND) in Persons With HIV">Pramipexole Versus Escitalopram to Treat Major Depressive Diso...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">40</td>
+<td style="text-align:center;color:#fb923c">2.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#a78bfa;text-align:center;font-size:0.85em">Not Yet Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00110305"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00110305</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study of TMC278 in Human Immunodeficiency Virus Type 1 Infected Patients, Who Are Not Treated With Antiretroviral Medicines">A Study of TMC278 in Human Immunodeficiency Virus Type 1 Infec...</td>
+<td style="font-size:0.85em">Tibotec Pharmaceuticals, Ireland</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">40</td>
+<td style="text-align:center;color:#fb923c">2.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03512210"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03512210</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Monitoring SOF/VEL in Treatment Naïve, HCV Participants With Active Infection">Monitoring SOF/VEL in Treatment Naïve, HCV Participants With A...</td>
+<td style="font-size:0.85em">Advancing Clinical Therapeutics Glo</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">38</td>
+<td style="text-align:center;color:#fb923c">2.6%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph4</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06134362"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06134362</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Long-term Follow-up of Long-acting Cabotegravir (CAB LA) for PrEP (Pre-exposure Prophylaxis) in Participants at Risk of Acquiring HIV (Human Immunodeficiency Virus)">Long-term Follow-up of Long-acting Cabotegravir (CAB LA) for P...</td>
+<td style="font-size:0.85em">ViiV Healthcare</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">34</td>
+<td style="text-align:center;color:#fb923c">2.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02410772"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02410772</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="TBTC Study 31: Rifapentine-containing Tuberculosis Treatment Shortening Regimens">TBTC Study 31: Rifapentine-containing Tuberculosis Treatment S...</td>
+<td style="font-size:0.85em">Centers for Disease Control and Pre</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">33</td>
+<td style="text-align:center;color:#fb923c">3.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT05842954"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT05842954</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Efficacy, Safety and Tolerability of KLU156 in Adults and Children With Uncomplicated P. Falciparum Malaria">Efficacy, Safety and Tolerability of KLU156 in Adults and Chil...</td>
+<td style="font-size:0.85em">Novartis Pharmaceuticals</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">33</td>
+<td style="text-align:center;color:#fb923c">3.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03568383"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03568383</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Protecting Households On Exposure to Newly Diagnosed Index Multidrug-Resistant Tuberculosis Patients">Protecting Households On Exposure to Newly Diagnosed Index Mul...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">31</td>
+<td style="text-align:center;color:#fb923c">3.2%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02383108"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02383108</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Strategy for Maintenance of HIV Suppression With Once Daily Integrate Inhibitor+Darunavir/Ritonavir in Children">Strategy for Maintenance of HIV Suppression With Once Daily In...</td>
+<td style="font-size:0.85em">PENTA Foundation</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">31</td>
+<td style="text-align:center;color:#fb923c">3.2%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT01973829"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT01973829</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="The Checklist for Early Recognition and Treatment of Acute Illness (CERTAIN)">The Checklist for Early Recognition and Treatment of Acute Ill...</td>
+<td style="font-size:0.85em">Mayo Clinic</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">30</td>
+<td style="text-align:center;color:#fb923c">3.3%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">NA</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06439082"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06439082</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study to Investigate the Efficacy and Safety of Crizanlizumab (5 mg/kg) Compared With Placebo in Adolescent and Adult Sickle Cell Disease Patients Who Experience Frequent Vaso-Occlusive Crises (SPARKLE)">A Study to Investigate the Efficacy and Safety of Crizanlizuma...</td>
+<td style="font-size:0.85em">Novartis Pharmaceuticals</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">30</td>
+<td style="text-align:center;color:#fb923c">3.3%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04969250"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04969250</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Vaccination for Recovered Inpatients With COVID-19 (VATICO)">Vaccination for Recovered Inpatients With COVID-19 (VATICO)</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">30</td>
+<td style="text-align:center;color:#fb923c">3.3%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph4</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00694629"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00694629</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="TBTC Study 29: Rifapentine During Intensive Phase Tuberculosis (TB) Treatment">TBTC Study 29: Rifapentine During Intensive Phase Tuberculosis...</td>
+<td style="font-size:0.85em">Centers for Disease Control and Pre</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">29</td>
+<td style="text-align:center;color:#fb923c">3.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT07071623"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT07071623</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="A Study of MK-8527 to Prevent Human Immunodeficiency Virus Type 1 (HIV-1) (MK-8527-010)">A Study of MK-8527 to Prevent Human Immunodeficiency Virus Typ...</td>
+<td style="font-size:0.85em">Merck Sharp &amp; Dohme LLC</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">28</td>
+<td style="text-align:center;color:#fb923c">3.6%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02259127"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02259127</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="ODYSSEY (PENTA 20)">ODYSSEY (PENTA 20)</td>
+<td style="font-size:0.85em">PENTA Foundation</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">28</td>
+<td style="text-align:center;color:#fb923c">3.6%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04994509"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04994509</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Pre-Exposure Prophylaxis Study of Lenacapavir and Emtricitabine/Tenofovir Alafenamide in Adolescent Girls and Young Women at Risk of HIV Infection">Pre-Exposure Prophylaxis Study of Lenacapavir and Emtricitabin...</td>
+<td style="font-size:0.85em">Gilead Sciences</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">28</td>
+<td style="text-align:center;color:#fb923c">3.6%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06192160"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06192160</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Trial of Novel Regimens for the Treatment of Pulmonary Tuberculosis">Trial of Novel Regimens for the Treatment of Pulmonary Tubercu...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">28</td>
+<td style="text-align:center;color:#fb923c">3.6%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#22d3ee;text-align:center;font-size:0.85em">Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00144417"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00144417</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="TBTC Study 28: Moxifloxacin Versus Isoniazid for TB Treatment">TBTC Study 28: Moxifloxacin Versus Isoniazid for TB Treatment</td>
+<td style="font-size:0.85em">Centers for Disease Control and Pre</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">26</td>
+<td style="text-align:center;color:#fb923c">3.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00108862"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00108862</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Immediate Versus Deferred Start of Anti-HIV Therapy in HIV-Infected Adults Being Treated for Tuberculosis">Immediate Versus Deferred Start of Anti-HIV Therapy in HIV-Inf...</td>
+<td style="font-size:0.85em">Advancing Clinical Therapeutics Glo</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">26</td>
+<td style="text-align:center;color:#fb923c">3.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph4</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03338621"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03338621</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Trial to Evaluate the Efficacy, Safety and Tolerability of BPaMZ in Drug-Sensitive (DS-TB) Adult Patients and Drug-Resistant (DR-TB) Adult Patients">Trial to Evaluate the Efficacy, Safety and Tolerability of BPa...</td>
+<td style="font-size:0.85em">Global Alliance for TB Drug Develop</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">26</td>
+<td style="text-align:center;color:#fb923c">3.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02342886"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02342886</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Shortening Treatment by Advancing Novel Drugs">Shortening Treatment by Advancing Novel Drugs</td>
+<td style="font-size:0.85em">Global Alliance for TB Drug Develop</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">26</td>
+<td style="text-align:center;color:#fb923c">3.9%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02881320"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02881320</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Study of Bictegravir/Emtricitabine/Tenofovir Alafenamide Fixed Dose Combination in Adolescents and Children With Human Immunodeficiency Virus-1">Study of Bictegravir/Emtricitabine/Tenofovir Alafenamide Fixed...</td>
+<td style="font-size:0.85em">Gilead Sciences</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">25</td>
+<td style="text-align:center;color:#fb923c">4.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03832023"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03832023</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Community-based Tuberculosis Tracing and Preventive Therapy">Community-based Tuberculosis Tracing and Preventive Therapy</td>
+<td style="font-size:0.85em">Elizabeth Glaser Pediatric AIDS Fou</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">25</td>
+<td style="text-align:center;color:#fb923c">4.0%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">NA</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT04644029"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT04644029</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Oral ISL QM as PrEP in Cisgender Women at High Risk for HIV-1 Infection (MK-8591-022)">Oral ISL QM as PrEP in Cisgender Women at High Risk for HIV-1 ...</td>
+<td style="font-size:0.85em">Merck Sharp &amp; Dohme LLC</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">24</td>
+<td style="text-align:center;color:#fb923c">4.2%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#f87171;text-align:center;font-size:0.85em">Terminated</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT02016924"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT02016924</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Study of Cobicistat-Boosted Atazanavir (ATV/co), Cobicistat-Boosted Darunavir (DRV/co) and Emtricitabine/Tenofovir Alafenamide (F/TAF) in Children With HIV">Study of Cobicistat-Boosted Atazanavir (ATV/co), Cobicistat-Bo...</td>
+<td style="font-size:0.85em">Gilead Sciences</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">23</td>
+<td style="text-align:center;color:#fb923c">4.3%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2/Ph3</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT00140309"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT00140309</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="TBTC Study 27: Moxifloxacin vs Ethambutol for TB Treatment">TBTC Study 27: Moxifloxacin vs Ethambutol for TB Treatment</td>
+<td style="font-size:0.85em">Centers for Disease Control and Pre</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">23</td>
+<td style="text-align:center;color:#fb923c">4.3%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT06058299"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT06058299</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Phase 2 Trial Assessing TBAJ876 or Bedaquiline, with Pretomanid and Linezolid in Adults with Drug-sensitive Pulmonary Tuberculosis">Phase 2 Trial Assessing TBAJ876 or Bedaquiline, with Pretomani...</td>
+<td style="font-size:0.85em">Global Alliance for TB Drug Develop</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">22</td>
+<td style="text-align:center;color:#fb923c">4.5%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph2</td>
+<td style="color:#60a5fa;text-align:center;font-size:0.85em">Active Not Recruiting</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace;white-space:nowrap">
+  <a href="https://clinicaltrials.gov/study/NCT03048422"
+     target="_blank" style="color:#22d3ee;text-decoration:none">NCT03048422</a>
+</td>
+<td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+    title="Evaluating the Efficacy and Safety of Dolutegravir-Containing Versus Efavirenz-Containing Antiretroviral Therapy Regimens in HIV-1-Infected Pregnant Women and Their Infants">Evaluating the Efficacy and Safety of Dolutegravir-Containing ...</td>
+<td style="font-size:0.85em">National Institute of Allergy and I</td>
+<td style="text-align:center;color:#fb923c;font-weight:700">21</td>
+<td style="text-align:center;color:#fb923c">4.8%</td>
+<td style="font-size:0.85em">Unknown <span style="color:#f87171">Not EML</span></td>
+<td style="text-align:center">Ph3</td>
+<td style="color:#4ade80;text-align:center;font-size:0.85em">Completed</td>
+<td style="text-align:center;font-weight:700;color:#fb923c">Mega-trial</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Section 3: Site Tier Distribution -->
+<h2>3. Site-Tier Distribution (All 783 Trials)</h2>
+<div class="card">
+
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0">
+  <div style="width:100px;text-align:right;color:#60a5fa;font-weight:600;font-size:0.9em">Single-site</div>
+  <div style="flex:1;background:#1e293b;border-radius:6px;height:32px;position:relative;overflow:hidden">
+    <div style="width:100.0%;height:100%;background:#60a5fa;border-radius:6px;
+                transition:width 0.6s"></div>
+    <span style="position:absolute;left:12px;top:6px;font-weight:700;font-size:0.9em;color:#fff">
+      436 (55.7%)</span>
+  </div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0">
+  <div style="width:100px;text-align:right;color:#4ade80;font-weight:600;font-size:0.9em">Small multi</div>
+  <div style="flex:1;background:#1e293b;border-radius:6px;height:32px;position:relative;overflow:hidden">
+    <div style="width:42.201834862385326%;height:100%;background:#4ade80;border-radius:6px;
+                transition:width 0.6s"></div>
+    <span style="position:absolute;left:12px;top:6px;font-weight:700;font-size:0.9em;color:#fff">
+      184 (23.5%)</span>
+  </div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0">
+  <div style="width:100px;text-align:right;color:#fbbf24;font-weight:600;font-size:0.9em">Regional</div>
+  <div style="flex:1;background:#1e293b;border-radius:6px;height:32px;position:relative;overflow:hidden">
+    <div style="width:24.770642201834864%;height:100%;background:#fbbf24;border-radius:6px;
+                transition:width 0.6s"></div>
+    <span style="position:absolute;left:12px;top:6px;font-weight:700;font-size:0.9em;color:#fff">
+      108 (13.8%)</span>
+  </div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0">
+  <div style="width:100px;text-align:right;color:#fb923c;font-weight:600;font-size:0.9em">Mega-trial</div>
+  <div style="flex:1;background:#1e293b;border-radius:6px;height:32px;position:relative;overflow:hidden">
+    <div style="width:8.944954128440367%;height:100%;background:#fb923c;border-radius:6px;
+                transition:width 0.6s"></div>
+    <span style="position:absolute;left:12px;top:6px;font-weight:700;font-size:0.9em;color:#fff">
+      39 (5.0%)</span>
+  </div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:8px 0">
+  <div style="width:100px;text-align:right;color:#f87171;font-weight:600;font-size:0.9em">Ghost</div>
+  <div style="flex:1;background:#1e293b;border-radius:6px;height:32px;position:relative;overflow:hidden">
+    <div style="width:3.669724770642202%;height:100%;background:#f87171;border-radius:6px;
+                transition:width 0.6s"></div>
+    <span style="position:absolute;left:12px;top:6px;font-weight:700;font-size:0.9em;color:#fff">
+      16 (2.0%)</span>
+  </div>
+</div>
+</div>
+
+<!-- Section 4: The Invisible Patients -->
+<h2>4. The Invisible Patients</h2>
+<div class="invisible-callout">
+  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <div>
+      <div class="invisible-number">0.59%</div>
+      <div class="invisible-subtext">Uganda's share of ghost-trial enrollment</div>
+    </div>
+    <div style="flex:1;min-width:300px">
+      <p style="font-size:1.1em;margin-bottom:12px">
+        Across <strong style="color:var(--danger)">16 ghost trials</strong>
+        enrolling <strong>32,735</strong> participants worldwide,
+        Uganda contributes an estimated <strong style="color:var(--danger)">192</strong> patients.
+      </p>
+      <p style="color:var(--muted)">
+        These patients bear the risks of experimental treatment but their country has
+        virtually no influence on trial design, endpoint selection, or post-trial drug pricing.
+        The median ghost trial has <strong>172</strong> sites,
+        making Uganda one data point among hundreds.
+      </p>
+      <p style="margin-top:12px">
+        Combined with <strong style="color:var(--warn)">39 mega-trials</strong>
+        (est. <strong>2,164</strong> Ugandan participants),
+        a total of <strong>2,356</strong>
+        Ugandans are enrolled in trials where they constitute &lt;5% of the study population.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Section 5: Drug Accessibility -->
+<h2>5. Drug Accessibility Analysis (Ghost Trials)</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Of 16 ghost-trial drugs tested with Ugandan participants,
+  how many are actually available in Uganda?
+</p>
+<div class="eml-split">
+  <div class="card" style="border-color:#4ade80">
+    <h3 style="color:#4ade80">On WHO Essential Medicines List (6)</h3>
+    <p style="color:var(--muted);font-size:0.9em;margin-bottom:8px">
+      Drugs with a pathway to availability in LMICs</p>
+    <ul style="list-style:none;padding:0">
+      <li style="color:#4ade80;margin:4px 0">atezolizumab <span style="color:#94a3b8">(NCT04873362 - Breast Cancer)</span></li><li style="color:#4ade80;margin:4px 0">antiretroviral therapy <span style="color:#94a3b8">(NCT00867048 - HIV Infection)</span></li><li style="color:#4ade80;margin:4px 0">multiple antivirals <span style="color:#94a3b8">(NCT05605093 - COVID-19)</span></li><li style="color:#4ade80;margin:4px 0">rivaroxaban <span style="color:#94a3b8">(NCT02832544 - Rheumatic Heart Disease)</span></li><li style="color:#4ade80;margin:4px 0">pitavastatin <span style="color:#94a3b8">(NCT02344290 - HIV)</span></li><li style="color:#4ade80;margin:4px 0">multiple COVID therapeutics <span style="color:#94a3b8">(NCT04501978 - Covid19)</span></li>
+    </ul>
+  </div>
+  <div class="card" style="border-color:#f87171">
+    <h3 style="color:#f87171">NOT on WHO EML (10)</h3>
+    <p style="color:var(--muted);font-size:0.9em;margin-bottom:8px">
+      Likely unavailable or unaffordable in Uganda post-trial</p>
+    <ul style="list-style:none;padding:0">
+      <li style="color:#f87171;margin:4px 0">giredestrant <span style="color:#94a3b8">(NCT04961996 - Early Breast Cancer)</span></li><li style="color:#f87171;margin:4px 0">giredestrant + palbociclib <span style="color:#94a3b8">(NCT05296798 - Locally Advanced or Metastatic Breast Cancer)</span></li><li style="color:#f87171;margin:4px 0">ensitrelvir (S-217622) <span style="color:#94a3b8">(NCT05305547 - SARS-CoV-2 Infection)</span></li><li style="color:#f87171;margin:4px 0">inavolisib + pertuzumab/trastuzumab <span style="color:#94a3b8">(NCT05894239 - Metastatic Breast Cancer)</span></li><li style="color:#f87171;margin:4px 0">etavopivat <span style="color:#94a3b8">(NCT06612268 - Sickle Cell Disease)</span></li><li style="color:#f87171;margin:4px 0">atezolizumab + bevacizumab + tiragolumab <span style="color:#94a3b8">(NCT05904886 - Hepatocellular Carcinoma)</span></li><li style="color:#f87171;margin:4px 0">tixagevimab/cilgavimab (AZD7442) <span style="color:#94a3b8">(NCT05780437 - COVID-19)</span></li><li style="color:#f87171;margin:4px 0">BRII-196/BRII-198 <span style="color:#94a3b8">(NCT05780424 - COVID-19)</span></li><li style="color:#f87171;margin:4px 0">sotrovimab (VIR-7831) <span style="color:#94a3b8">(NCT05780281 - COVID-19)</span></li><li style="color:#f87171;margin:4px 0">ensovibep (MP0420) <span style="color:#94a3b8">(NCT05780463 - COVID-19)</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Section 6: Sponsor Patterns -->
+<h2>6. Sponsor Patterns for Ghost Trials</h2>
+<div class="card">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div>
+      <h3>Ghost Trials (16)</h3>
+      
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#f87171"></div>
+  <span style="color:#f87171;font-weight:600">Pharma/Industry</span>
+  <span style="color:#94a3b8">: 7 trials</span>
+</div>
+
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#60a5fa"></div>
+  <span style="color:#60a5fa;font-weight:600">NIH/US Gov</span>
+  <span style="color:#94a3b8">: 6 trials</span>
+</div>
+
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#4ade80"></div>
+  <span style="color:#4ade80;font-weight:600">Academic/NGO</span>
+  <span style="color:#94a3b8">: 3 trials</span>
+</div>
+      <p style="color:var(--muted);margin-top:12px;font-size:0.9em">
+        Hoffmann-La Roche alone sponsors 5
+        of 16 ghost trials (oncology-focused).</p>
+    </div>
+    <div>
+      <h3>Mega-Trials (39)</h3>
+      
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#f87171"></div>
+  <span style="color:#f87171;font-weight:600">Pharma/Industry</span>
+  <span style="color:#94a3b8">: 15 trials</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#4ade80"></div>
+  <span style="color:#4ade80;font-weight:600">Academic/NGO</span>
+  <span style="color:#94a3b8">: 7 trials</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#60a5fa"></div>
+  <span style="color:#60a5fa;font-weight:600">NIH/US Gov</span>
+  <span style="color:#94a3b8">: 7 trials</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#22d3ee"></div>
+  <span style="color:#22d3ee;font-weight:600">Research Network</span>
+  <span style="color:#94a3b8">: 5 trials</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#a78bfa"></div>
+  <span style="color:#a78bfa;font-weight:600">US Federal</span>
+  <span style="color:#94a3b8">: 4 trials</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0">
+  <div style="width:16px;height:16px;border-radius:50%;background:#fbbf24"></div>
+  <span style="color:#fbbf24;font-weight:600">Government (non-US)</span>
+  <span style="color:#94a3b8">: 1 trial</span>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 7: Terminated Ghost Trials -->
+<h2>7. Terminated Mega/Ghost Trials</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Trials killed by global decisions where Ugandan sites had no say
+  (4 found)
+</p>
+<div class="card">
+<table>
+<thead>
+<tr>
+  <th>NCT ID</th>
+  <th>Title</th>
+  <th>Sites</th>
+  <th>Sponsor</th>
+  <th>Status</th>
+  <th>Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace">
+  <a href="https://clinicaltrials.gov/study/NCT05605093" target="_blank"
+     style="color:#22d3ee;text-decoration:none">NCT05605093</a></td>
+<td>Strategies and Treatments for Respiratory Infections &amp; Viral E...</td>
+<td style="text-align:center;color:#f87171">187</td>
+<td>University of Minnesota</td>
+<td style="color:#f87171">Terminated</td>
+<td style="color:#f87171">Ghost</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace">
+  <a href="https://clinicaltrials.gov/study/NCT03615924" target="_blank"
+     style="color:#22d3ee;text-decoration:none">NCT03615924</a></td>
+<td>Effect of Ticagrelor vs. Placebo in the Reduction of Vaso-occl...</td>
+<td style="text-align:center;color:#fb923c">55</td>
+<td>AstraZeneca</td>
+<td style="color:#f87171">Terminated</td>
+<td style="color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace">
+  <a href="https://clinicaltrials.gov/study/NCT04474314" target="_blank"
+     style="color:#22d3ee;text-decoration:none">NCT04474314</a></td>
+<td>A Study of IMR-687 in Subjects With Sickle Cell Disease</td>
+<td style="text-align:center;color:#fb923c">49</td>
+<td>Cardurion Pharmaceuticals, Inc.</td>
+<td style="color:#f87171">Terminated</td>
+<td style="color:#fb923c">Mega-trial</td>
+</tr>
+<tr style="border-bottom:1px solid #1e293b">
+<td style="color:#22d3ee;font-family:monospace">
+  <a href="https://clinicaltrials.gov/study/NCT04644029" target="_blank"
+     style="color:#22d3ee;text-decoration:none">NCT04644029</a></td>
+<td>Oral ISL QM as PrEP in Cisgender Women at High Risk for HIV-1 ...</td>
+<td style="text-align:center;color:#fb923c">24</td>
+<td>Merck Sharp &amp; Dohme LLC</td>
+<td style="color:#f87171">Terminated</td>
+<td style="color:#fb923c">Mega-trial</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Section 8: Ghost Conditions -->
+<h2>8. Disease Areas in Ghost Trials</h2>
+<div class="card">
+  <p style="color:var(--muted);margin-bottom:12px">
+    Conditions studied in the 16 ghost trials
+    (not necessarily Uganda's priorities):</p>
+  <div style="display:flex;flex-wrap:wrap;gap:4px">
+    <span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">COVID-19 <strong style="color:#22d3ee">(5)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Early Breast Cancer <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Breast Cancer <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">HIV Infection <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Locally Advanced or Metastatic Breast Cancer <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">SARS-CoV-2 Infection <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Metastatic Breast Cancer <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Sickle Cell Disease <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Hepatocellular Carcinoma <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Rheumatic Heart Disease <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">HIV <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Cardiovascular Diseases <strong style="color:#22d3ee">(1)</strong></span>
+<span style="display:inline-block;background:#1e293b;padding:4px 12px;border-radius:20px;margin:4px;font-size:0.9em;color:#e2e8f0">Covid19 <strong style="color:#22d3ee">(1)</strong></span>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Ghost Enrollment Audit | AfricaRCT Project B | Generated 2026-03-28 16:12</p>
+  <p>Data: ClinicalTrials.gov API v2 | 783 Uganda interventional trials</p>
+  <p style="margin-top:8px">Enrollment estimates use 1/locations_count as a proxy for
+  per-site enrollment. Actual enrollment may vary by site.</p>
+</div>
+
+</div>
+
+<script>
+function filterTable(filter) {
+  const rows = document.querySelectorAll('#trialTable tbody tr');
+  const btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    if (cells.length < 9) return;
+    const tier = cells[8].textContent.trim();
+    const sponsor = cells[2].textContent.trim();
+    const status = cells[7].textContent.trim().toUpperCase().replace(/ /g, '_');
+
+    if (filter === 'all') {
+      row.style.display = '';
+    } else if (filter === 'Ghost' || filter === 'Mega-trial') {
+      row.style.display = tier === filter ? '' : 'none';
+    } else if (filter === 'INDUSTRY') {
+      const industrySponsors = ['Hoffmann-La Roche', 'Gilead', 'Sanofi', 'Novartis',
+        'AstraZeneca', 'Merck', 'ViiV', 'Shionogi', 'Novo Nordisk', 'Cardurion',
+        'Tibotec', 'Daiichi'];
+      const isIndustry = industrySponsors.some(s => sponsor.includes(s));
+      row.style.display = isIndustry ? '' : 'none';
+    } else if (filter === 'NIH') {
+      row.style.display = sponsor.includes('National Institute') ? '' : 'none';
+    } else if (filter === 'TERMINATED') {
+      row.style.display = status === 'TERMINATED' || status === 'WITHDRAWN' ||
+                          status === 'SUSPENDED' ? '' : 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>

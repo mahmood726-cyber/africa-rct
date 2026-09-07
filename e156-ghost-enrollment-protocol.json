@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: ghost enrollment in African clinical trials",
+    "type": "protocol",
+    "version": "2.0.0",
+    "date": "2026-03-27",
+    "body": "This registry study will quantify ghost enrollment in African clinical trials using ClinicalTrials.gov data for studies listing sites in Uganda and South Africa. We will retrieve all interventional trials in these countries and extract site count, total enrollment, sponsor name, condition, phase, and current recruitment status for each record. Trials will be classified as single-site, small multisite with two to twenty sites, mega-trial with more than twenty sites, or giant trial with more than one hundred sites. The primary outcome is the Ghost Score, defined as one minus estimated African enrollment divided by total enrollment, with African enrollment approximated from proportional site counts. Secondary outcomes include sponsor distribution across geographic scope categories, therapeutic area concentration, disease relevance to local burden, and trial completion versus termination rates. All code and classification thresholds will be prespecified and archived for replication. Because per-site enrollment is not reported directly, the Ghost Score is an approximation rather than a direct measure.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "156 words",
+                "ok": true,
+                "detail": "Found exactly 156 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Data retrieval (S2) precedes outcome definitions (S4-S5)."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses proportional estimation, registry restriction, and per-site data limitation."
+            }
+        ]
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of genomic medicine trial equity and pharmacogenomics gaps in Africa",
+    "body": "This cross-sectional registry study will quantify the free rider problem in African genomics by measuring the gap between global use of African genetic data and clinical trial investment benefiting Africans. We will query ClinicalTrials.gov API v2 for interventional studies in six genomic medicine categories across ten African countries, the United States, China, India, and the United Kingdom. The primary outcome is the Free Rider Index, the ratio of combined genomics trials in comparator regions to Africa. Secondary analyses will examine pharmacogenomics trials for six genes critical for African drug metabolism (CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, HLA-B*5701), precision oncology trials for BRCA, HER2, triple-negative breast cancer, and immunotherapy. Published allele frequency data from PharmGKB and gnomAD will contextualize the pharmacogenomics gap. All queries will be scripted in Python with archived results. No patient-level data will be accessed. Limitations include restriction to one registry where pharmacogenomics trials may use varied terminology, and allele frequencies are population-level estimates with intra-African variation.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the free rider problem in African genomics by measuring the gap between global exploitation of African genetic diversity data and reciprocal clinical trial investment."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies in six genomic medicine categories across ten African countries and four comparator regions."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Free Rider Index, computed as the ratio of combined genomics trial counts in comparator regions to the Africa total, quantifying the degree of unreciprocated data extraction."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses will examine gene-specific pharmacogenomics trials for CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, and HLA-B*5701, plus precision oncology trials for BRCA, HER2, TNBC, and immunotherapy."
+        },
+        {
+            "role": "Context data",
+            "text": "Published allele frequency data from PharmGKB and gnomAD will contextualize the clinical significance of the pharmacogenomics trial gap for African populations."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single registry where pharmacogenomics trials may use varied terminology, and allele frequencies represent population-level estimates with substantial intra-African variation."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Free Rider Genome Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + China + India + UK, PharmGKB, gnomAD",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

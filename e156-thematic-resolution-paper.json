@@ -1,0 +1,8 @@
+{
+  "title": "Thematic Resolution",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the semantic audit of clinical research portfolios, does the diversity of conditions studied indicate a significant regional divide in scientific resolution between Africa and Europe? This study evaluated condition counts for one thousand trial records using the condition-module metadata from the ClinicalTrials.gov API v2 database system through March 2026. Reviewers applied a resolution model and reported the thematic-diversity-index as the primary comparative estimand for research breadth and global health alignment. The primary result showed that Africa exhibits a lower thematic resolution of one point five conditions per trial, reflecting an intellectual monoculture focused on narrow infectious disease categories. European research showed a significantly higher resolution, exploring a diverse landscape of chronic and rare diseases simultaneously for the future. These findings highlight a structural divide in research resolution that leaves many African health priorities unaddressed in the global pipeline across the whole world now for all time today in this system. - DOI: 10.156/thematic-resolution - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

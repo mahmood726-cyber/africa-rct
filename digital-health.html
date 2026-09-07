@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa's Digital Health Bright Spot</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #22c55e;
+  --accent2: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.accent { color: var(--accent); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(34, 197, 94, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.bright-note {
+  background: rgba(34, 197, 94, 0.15);
+  border-left: 4px solid var(--success);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa's Digital Health Bright Spot</h1>
+<p class="subtitle">The leapfrog opportunity &mdash; where 80%+ mobile penetration meets
+clinical trial innovation</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Digital Health Trials</div>
+    <div class="value accent">118</div>
+    <div class="label">vs 2,338 in the US</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US-to-Africa Ratio</div>
+    <div class="value warning">19.8x</div>
+    <div class="label">gap narrower than most disease areas</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Average Mobile Penetration (Africa 6)</div>
+    <div class="value success">81%</div>
+    <div class="label">foundation for leapfrog</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">HIV mHealth Dominance</div>
+    <div class="value danger">34.7%</div>
+    <div class="label">of Africa digital health trials = HIV</div>
+  </div>
+</div>
+
+<div class="bright-note">
+<strong>Africa's ONE positive story:</strong> Mobile phone penetration across sub-Saharan Africa
+exceeds 80%, and digital health is the ONE area where Africa can potentially leapfrog
+traditional clinical trial infrastructure. M-Pesa showed Africa can skip landlines entirely;
+can mHealth do the same for clinical trials?
+</div>
+
+<!-- 2. The Leapfrog -->
+<h2>2. The Leapfrog</h2>
+<p>Africa missed the era of large hospital-based clinical trial infrastructure, but with
+mobile penetration at 81%
+across our 6 target countries, digital health trials represent Africa's best chance to build
+evidence capacity without replicating Western brick-and-mortar models.</p>
+
+<div class="method-note">
+<strong>The M-Pesa Precedent:</strong> Kenya's M-Pesa mobile money service launched in 2007
+and now processes transactions worth over 50% of Kenya's GDP. It succeeded precisely
+because Kenya lacked existing banking infrastructure. Can mHealth trials follow the
+same pattern &mdash; leapfrogging rather than catching up?
+</div>
+
+<div class="chart-container">
+<h3>Mobile Phone Penetration vs Digital Health Trials</h3>
+<canvas id="mobileChart" height="300"></canvas>
+</div>
+
+<!-- 3. Country Breakdown -->
+<h2>3. Country Breakdown</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Digital Health Trials</th>
+  <th style="text-align:right;">Population</th>
+  <th style="text-align:right;">Mobile %</th>
+  <th style="text-align:right;">Trials/Million</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;">91%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.21</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">37</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;">87%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.661</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">31</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;">72%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.646</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;">84%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.074</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;">14M</td><td style="padding:8px;text-align:right;">78%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.571</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;">76%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.224</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>Digital Health Trial Counts by Country</h3>
+<canvas id="countryChart" height="300"></canvas>
+</div>
+
+<!-- 4. What's Being Tested -->
+<h2>4. What's Being Tested</h2>
+<p>Digital health interventions in Africa cluster around SMS-based adherence reminders
+and basic mHealth apps. More advanced interventions (AI, wearables, EHR integration)
+remain almost exclusively in high-income country trials.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Intervention Type</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">India</th>
+  <th style="text-align:right;">US:Africa Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">SMS reminders / text message</td><td style="padding:8px;text-align:right;">53</td><td style="padding:8px;text-align:right;">482</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">9.1x</td></tr>
+<tr><td style="padding:8px;">mHealth apps / mobile app</td><td style="padding:8px;text-align:right;">92</td><td style="padding:8px;text-align:right;">1,511</td><td style="padding:8px;text-align:right;">19</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">16.4x</td></tr>
+<tr><td style="padding:8px;">Telemedicine / teleconsultation</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">1,088</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ff4444;">72.5x</td></tr>
+<tr><td style="padding:8px;">Electronic health records</td><td style="padding:8px;text-align:right;">11</td><td style="padding:8px;text-align:right;">983</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ff4444;">89.4x</td></tr>
+<tr><td style="padding:8px;">Wearable / remote monitoring</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">504</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ff4444;">252.0x</td></tr>
+<tr><td style="padding:8px;">AI / machine learning health</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;">256</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ff4444;">51.2x</td></tr>
+
+</tbody>
+</table>
+
+<!-- 5. HIV mHealth Dominance -->
+<h2>5. HIV mHealth Dominance</h2>
+<p>An estimated <span style="color:var(--danger);font-weight:bold;">34.7%</span>
+of Africa's digital health trials focus on HIV/AIDS. This reflects the massive PEPFAR/Global
+Fund investment in HIV, but creates a dangerous blind spot: as NCDs overtake infectious
+diseases as Africa's leading cause of death, digital health tools for diabetes,
+hypertension, and mental health remain critically under-researched.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Disease Focus</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">% of Africa DH</th>
+  <th style="text-align:right;">US</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">HIV / AIDS</td><td style="padding:8px;text-align:right;">41</td><td style="padding:8px;text-align:right;">34.7%</td><td style="padding:8px;text-align:right;">154</td></tr>
+<tr><td style="padding:8px;">Tuberculosis</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;">6.8%</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">Malaria</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">2.5%</td><td style="padding:8px;text-align:right;">0</td></tr>
+<tr><td style="padding:8px;">Maternal / antenatal</td><td style="padding:8px;text-align:right;">32</td><td style="padding:8px;text-align:right;">27.1%</td><td style="padding:8px;text-align:right;">140</td></tr>
+<tr><td style="padding:8px;">Diabetes / NCD</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;">6.8%</td><td style="padding:8px;text-align:right;">282</td></tr>
+<tr><td style="padding:8px;">Mental health</td><td style="padding:8px;text-align:right;">11</td><td style="padding:8px;text-align:right;">9.3%</td><td style="padding:8px;text-align:right;">487</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>Disease Focus: Africa vs US Digital Health</h3>
+<canvas id="diseaseChart" height="300"></canvas>
+</div>
+
+<!-- 6. NCD mHealth Gap -->
+<h2>6. NCD mHealth Gap</h2>
+<div class="danger-note">
+<strong>The NCD blind spot:</strong> Africa has 8 digital health
+NCD trials vs 282 in the US (a 35.2x gap). NCDs now
+account for 37% of all deaths in sub-Saharan Africa and rising &mdash; yet the digital
+health infrastructure being built is almost entirely HIV-focused. When the NCD
+tsunami fully arrives, Africa will have mHealth tools for ART adherence but nothing
+for hypertension management.
+</div>
+
+<!-- 7. Country x Subtype Heatmap -->
+<h2>7. Heatmap: Country x Technology Type</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th>Technology</th>
+  <th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Rwanda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Tanzania</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>SMS reminders / text message</td><td style="background:rgb(226, 158, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">23</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(255, 85, 51);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(155, 255, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">10</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>mHealth apps / mobile app</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">13</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">22</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">24</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">15</td><td style="background:rgb(197, 197, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Telemedicine / teleconsultation</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(226, 158, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(138, 46, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(255, 85, 51);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Electronic health records</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(197, 197, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 46, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(255, 85, 51);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Wearable / remote monitoring</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>AI / machine learning health</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(138, 46, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(196, 65, 39);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 8. Comparison with US and India -->
+<h2>8. Comparison: Africa vs US vs India</h2>
+
+<div class="method-note">
+India is the most relevant comparator: similar population scale, similar mobile
+penetration (~82%), but India has far more digital health trials. The difference
+is institutional &mdash; India has ICMR infrastructure and a thriving health tech
+startup ecosystem. Africa needs its own version.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Trials</th>
+  <th style="text-align:right;">Population</th>
+  <th style="text-align:right;">Mobile %</th>
+  <th style="text-align:right;">Trials/Million</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United States  (comparator)</td><td style="padding:8px;text-align:right;">2,338</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;">97%</td><td style="padding:8px;text-align:right;font-weight:bold;">6.979</td></tr>
+<tr style=""><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">37</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;">87%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.661</td></tr>
+<tr style=""><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">31</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;">72%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.646</td></tr>
+<tr style=""><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;">14M</td><td style="padding:8px;text-align:right;">78%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.571</td></tr>
+<tr style=""><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;">76%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.224</td></tr>
+<tr style=""><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;">91%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.21</td></tr>
+<tr style=""><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;">84%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.074</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">India  (comparator)</td><td style="padding:8px;text-align:right;">34</td><td style="padding:8px;text-align:right;">1440M</td><td style="padding:8px;text-align:right;">82%</td><td style="padding:8px;text-align:right;font-weight:bold;">0.024</td></tr>
+
+</tbody>
+</table>
+
+<!-- 9. M-Pesa Model for Health -->
+<h2>9. The M-Pesa Model for Health</h2>
+<div class="bright-note">
+<strong>Lesson from M-Pesa:</strong> Kenya's mobile money revolution succeeded because
+it was designed FOR African realities, not transplanted from Western models.
+Digital health trials in Africa should follow the same principle:<br><br>
+&bull; <strong>SMS-first, not app-first</strong> &mdash; most phones are feature phones<br>
+&bull; <strong>Community health worker integration</strong> &mdash; leverage existing trust networks<br>
+&bull; <strong>Offline-capable</strong> &mdash; intermittent connectivity is the norm<br>
+&bull; <strong>Swahili/Yoruba/Amharic</strong> &mdash; not English-only interfaces<br>
+&bull; <strong>USSD-based</strong> &mdash; works on any phone, no data plan needed
+</div>
+
+<!-- 10. Rwanda's Digital Health Strategy -->
+<h2>10. Rwanda's Digital Health Strategy</h2>
+<div class="method-note">
+<strong>Rwanda: Africa's digital health leader.</strong> Rwanda has invested heavily in
+national digital health infrastructure including:<br><br>
+&bull; <strong>RapidSMS</strong> &mdash; nationwide maternal/child health monitoring via SMS<br>
+&bull; <strong>Zipline drones</strong> &mdash; blood/vaccine delivery to remote clinics<br>
+&bull; <strong>OpenMRS</strong> &mdash; open-source electronic medical records nationwide<br>
+&bull; <strong>Babyl (Babylon Health)</strong> &mdash; AI-assisted telemedicine reaching 2M+ users<br><br>
+Rwanda demonstrates that small African nations CAN build digital health infrastructure
+&mdash; the question is whether this translates into registered clinical trials and
+rigorous evidence generation.
+</div>
+
+<!-- 11. Sponsors -->
+<h2>11. Sponsor Analysis</h2>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">100</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Trials</th></tr></thead>
+<tbody><tr><td style="padding:8px;">University of Washington</td><td style="padding:8px;text-align:right;">10</td></tr>
+<tr><td style="padding:8px;">Duke University</td><td style="padding:8px;text-align:right;">7</td></tr>
+<tr><td style="padding:8px;">Mbarara University of Science and Technology</td><td style="padding:8px;text-align:right;">6</td></tr>
+<tr><td style="padding:8px;">Makerere University</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">Massachusetts General Hospital</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Columbia University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Center for Primary Care and Public Health (Unisante), University of Lausanne, Switzerland</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">University of California, San Francisco</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Queen&#39;s University</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;">University of Stellenbosch</td><td style="padding:8px;text-align:right;">2</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 12. Temporal Trend -->
+<h2>12. Temporal Trend</h2>
+<div class="chart-container">
+<h3>Africa Digital Health Trials by Year</h3>
+<canvas id="trendChart" height="250"></canvas>
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2 (accessed 28 March 2026).<br>
+<strong>Query:</strong> <code>mHealth OR mobile health OR telemedicine OR digital health OR SMS intervention</code>, filtered to interventional studies.<br>
+<strong>Countries:</strong> South Africa, Kenya, Uganda, Nigeria, Rwanda, Tanzania (Africa); United States, India (comparators).<br>
+<strong>Mobile data:</strong> ITU/GSMA 2024 estimates.<br>
+<strong>Limitations:</strong> Single registry; cannot capture trials on PACTR or national platforms.
+Digital health terminology evolves rapidly and early trials may use different terms.
+</div>
+
+<footer>
+Africa's Digital Health Bright Spot &mdash; ClinicalTrials.gov Registry Analysis |
+Generated 2026-03-28 13:58 |
+Data: ClinicalTrials.gov API v2
+</footer>
+
+</div>
+
+<script>
+// Country comparison chart
+new Chart(document.getElementById('countryChart'), {
+  type: 'bar',
+  data: {
+    labels: ["South Africa", "Kenya", "Uganda", "Nigeria", "Rwanda", "Tanzania", "United States", "India"],
+    datasets: [{
+      label: 'Digital Health Trials',
+      data: [13, 37, 31, 17, 8, 15, 2338, 34],
+      backgroundColor: ["#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#3b82f6", "#f59e0b"],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+// Trend chart
+new Chart(document.getElementById('trendChart'), {
+  type: 'line',
+  data: {
+    labels: [2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+    datasets: [{
+      label: 'Trials Started',
+      data: [2, 1, 2, 1, 2, 5, 4, 8, 5, 5, 3, 9, 9, 8, 11, 6, 12, 3, 4],
+      borderColor: '#22c55e',
+      backgroundColor: 'rgba(34, 197, 94, 0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// Mobile penetration chart
+new Chart(document.getElementById('mobileChart'), {
+  type: 'bar',
+  data: {
+    labels: ["South Africa", "Kenya", "Uganda", "Nigeria", "Rwanda", "Tanzania", "United States", "India"],
+    datasets: [{
+      label: 'Mobile Penetration %',
+      data: [91, 87, 72, 84, 78, 76, 97, 82],
+      backgroundColor: ["#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#3b82f6", "#3b82f6"],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 0, max: 100, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+// Disease focus chart
+new Chart(document.getElementById('diseaseChart'), {
+  type: 'bar',
+  data: {
+    labels: ["HIV / AIDS", "Tuberculosis", "Malaria", "Maternal / antenatal", "Diabetes / NCD", "Mental health"],
+    datasets: [
+      {
+        label: 'Africa',
+        data: [41, 8, 3, 32, 8, 11],
+        backgroundColor: '#22c55e',
+        borderRadius: 4,
+      },
+      {
+        label: 'US',
+        data: [154, 5, 0, 140, 282, 487],
+        backgroundColor: '#3b82f6',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

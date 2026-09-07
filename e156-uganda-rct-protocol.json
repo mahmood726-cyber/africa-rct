@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: Uganda clinical trial landscape",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "body": "This registry study will characterise Uganda clinical trial portfolio using ClinicalTrials.gov data retrieved via API v2 for all interventional studies listing a Ugandan site. We will extract sponsor name, phase, condition, total enrollment, site count, start date, and status for every eligible record. The primary outcome is disease-specific trial volume across 15 predefined categories including HIV, malaria, tuberculosis, cancer, cardiovascular disease, diabetes, maternal health, nutrition, mental health, sickle cell disease, neglected tropical diseases, respiratory infections, neonatal conditions, surgical interventions, and vaccines. Secondary outcomes include sponsor classification as Uganda-local or foreign using a predefined institutional keyword list, phase distribution by sponsor type, temporal trends in annual registration, enrollment patterns, and single-site versus multisite structure indicating collaboration scope. Sponsor classification will be checked manually where keyword matching is ambiguous. Comparator summaries will be generated for Kenya, Tanzania, South Africa, and the United States. Limitations include dependence on a single registry and possible misclassification of joint ventures or consortia.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "156 words",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Data retrieval precedes outcome definitions."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses limitations."
+            }
+        ]
+    }
+}

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COVID's Lasting Impact on Africa's Clinical Trial Capacity</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></"script>
+<style>
+:root {
+    --bg: #0a0e17;
+    --card: #131a2b;
+    --border: #1e2d4a;
+    --text: #c8d6e5;
+    --heading: #f5f6fa;
+    --accent: #00b4d8;
+    --accent2: #e74c3c;
+    --accent3: #f39c12;
+    --positive: #2ecc71;
+    --negative: #e74c3c;
+    --muted: #576574;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+}
+h1 {
+    color: var(--heading);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+h2 {
+    color: var(--heading);
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+h3 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin: 1rem 0 0.5rem;
+}
+.subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+}
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+.stat-value.warn { color: var(--accent3); }
+.stat-value.danger { color: var(--accent2); }
+.stat-value.good { color: var(--positive); }
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+    margin: 1rem 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+th, td {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+th {
+    color: var(--heading);
+    font-weight: 600;
+    background: rgba(0,180,216,0.08);
+}
+td.positive { color: var(--positive); font-weight: 600; }
+td.negative { color: var(--negative); font-weight: 600; }
+.insight {
+    background: rgba(0,180,216,0.08);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+}
+.warning {
+    background: rgba(231,76,60,0.08);
+    border-left: 3px solid var(--accent2);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+}
+.pepfar-box {
+    background: rgba(243,156,18,0.08);
+    border-left: 3px solid var(--accent3);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>COVID's Lasting Impact on Africa's Clinical Trial Capacity</h1>
+    <p class="subtitle">
+        ClinicalTrials.gov API v2 | Interventional studies | Data retrieved 2026-03-28
+    </p>
+
+    <!-- ── Summary Cards ──────────────────────────────────────── -->
+    <div class="summary-grid">
+        <div class="stat-card">
+            <div class="stat-value">139</div>
+            <div class="stat-label">Pre-COVID annual average<br>(2015-2019)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value warn">180</div>
+            <div class="stat-label">Peak year: 2021</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value good">97</div>
+            <div class="stat-label">2025 trial starts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value good">115.6%</div>
+            <div class="stat-label">Recovery vs trajectory<br>(2023-2025 avg)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value warn">90</div>
+            <div class="stat-label">COVID trials in Africa<br>(2020-2022)</div>
+        </div>
+    </div>
+
+    <!-- ── Chart 1: Africa Timeline ──────────────────────────── -->
+    <div class="card">
+        <h2>1. Africa Trial Starts: Actual vs Pre-COVID Trajectory</h2>
+        <p>The dashed line shows where Africa would have been without COVID, based on the 2015-2019 linear trend
+           (slope: -3.4 trials/year).</p>
+        <div class="chart-container">
+            <canvas id="timelineChart"></canvas>
+        </div>
+    </div>
+
+    <!-- ── Chart 2: Normalized Comparison ────────────────────── -->
+    <div class="card">
+        <h2>2. Africa vs United States: Normalized to 2019 = 100</h2>
+        <p>Both regions indexed to their 2019 trial start counts, showing relative trajectory divergence.</p>
+        <div class="chart-container">
+            <canvas id="normalizedChart"></canvas>
+        </div>
+    </div>
+
+    <!-- ── COVID Disruption Table ────────────────────────────── -->
+    <div class="card">
+        <h2>3. COVID-Period Disruption (2020-2021)</h2>
+        <table>
+            <thead>
+                <tr><th>Year</th><th>Actual</th><th>Expected (trend)</th><th>Deviation</th></tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>2020</td>
+                <td>130</td>
+                <td>128.4</td>
+                <td class="positive">+2 (+1.2%)</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>180</td>
+                <td>125.0</td>
+                <td class="positive">+55 (+44.0%)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ── COVID Surge ───────────────────────────────────────── -->
+    <div class="card">
+        <h2>4. COVID-19 Trial Surge in Africa</h2>
+        <p>How many COVID-specific interventional trials appeared in Africa during the pandemic.</p>
+        <div class="chart-container" style="max-height: 300px;">
+            <canvas id="covidSurgeChart"></canvas>
+        </div>
+        <div class="insight">
+            <strong>COVID trial concentration:</strong> 90 COVID-specific
+            interventional trials were registered in Africa between 2020-2022. This represents a
+            significant redirection of research infrastructure toward a single disease.
+        </div>
+    </div>
+
+    <!-- ── Displacement Analysis ─────────────────────────────── -->
+    <div class="card">
+        <h2>5. Displacement Analysis: Did COVID Crowd Out Other Research?</h2>
+        <p>Comparing average annual trial starts for key African disease conditions before, during,
+           and after COVID. Displacement % shows the change during COVID versus the 2018-2019 baseline.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Condition</th>
+                    <th>Baseline avg<br>(2018-19)</th>
+                    <th>COVID avg<br>(2020-21)</th>
+                    <th>Displacement</th>
+                    <th>Post-COVID avg<br>(2022-23)</th>
+                    <th>Recovery %</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>HIV</td>
+                <td>25</td>
+                <td>32</td>
+                <td class="positive">+28.0%</td>
+                <td>40</td>
+                <td class="positive">160.0%</td>
+            </tr>
+            <tr>
+                <td>Malaria</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="negative">+0.0%</td>
+                <td>0</td>
+                <td class="negative">0.0%</td>
+            </tr>
+            <tr>
+                <td>Tuberculosis</td>
+                <td>12</td>
+                <td>13</td>
+                <td class="positive">+4.0%</td>
+                <td>14</td>
+                <td class="positive">112.0%</td>
+            </tr>
+            <tr>
+                <td>Cancer</td>
+                <td>18</td>
+                <td>22</td>
+                <td class="positive">+28.6%</td>
+                <td>28</td>
+                <td class="positive">162.9%</td>
+            </tr>
+            <tr>
+                <td>Cardiovascular</td>
+                <td>8</td>
+                <td>2</td>
+                <td class="negative">-68.8%</td>
+                <td>13</td>
+                <td class="positive">162.5%</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ── Per-Condition Recovery Chart ──────────────────────── -->
+    <div class="card">
+        <h2>6. Per-Condition Recovery Trajectories</h2>
+        <p>Year-by-year trial starts for key disease conditions in Africa (2018-2025).</p>
+        <div class="chart-container">
+            <canvas id="conditionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- ── PEPFAR Plateau ────────────────────────────────────── -->
+    <div class="card">
+        <h2>7. The PEPFAR Plateau</h2>
+        <div class="pepfar-box">
+            <h3>Background</h3>
+            <p>PEPFAR (the US President's Emergency Plan for AIDS Relief) has been the single
+               largest funder of HIV/AIDS research infrastructure in Africa since 2003. Congressional
+               debate over PEPFAR reauthorization since 2023, followed by budget cuts and
+               program restructuring in 2024-2025, may compound COVID's disruption to
+               Africa's clinical trial ecosystem.</p>
+            <h3>Observed Pattern</h3>
+            <p>HIV trials in Africa:
+               baseline average (2018-19) = 25.0,
+               COVID average (2020-21) = 32.0,
+               post-COVID average (2022-23) = 40.0.</p>
+            <p>If post-COVID HIV trial recovery stalls below baseline, the PEPFAR funding trajectory
+               is a plausible contributing factor alongside COVID disruption. This represents a
+               compounding risk to Africa's research capacity in its highest-burden disease area.</p>
+        </div>
+        <div class="warning">
+            <strong>Caution:</strong> Correlation between PEPFAR budget changes and trial counts
+            does not establish causation. Multiple confounders exist including domestic funding changes,
+            global health priority shifts, and site-level capacity constraints.
+        </div>
+    </div>
+
+    <!-- ── Post-COVID Recovery Table ─────────────────────────── -->
+    <div class="card">
+        <h2>8. Post-COVID Recovery vs Pre-COVID Trajectory</h2>
+        <table>
+            <thead>
+                <tr><th>Year</th><th>Actual</th><th>Expected (trend)</th><th>Recovery %</th></tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>2022</td>
+                <td>178</td>
+                <td>121.6</td>
+                <td class="positive">146.4%</td>
+            </tr>
+            <tr>
+                <td>2023</td>
+                <td>173</td>
+                <td>118.2</td>
+                <td class="positive">146.4%</td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td>128</td>
+                <td>114.8</td>
+                <td class="positive">111.5%</td>
+            </tr>
+            <tr>
+                <td>2025</td>
+                <td>97</td>
+                <td>111.4</td>
+                <td class="negative">87.1%</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ── Projection ────────────────────────────────────────── -->
+    <div class="card">
+        <h2>9. Projection: When Will Africa Recover?</h2>
+        <div class="insight">
+            <p><strong>Pre-COVID growth rate:</strong> -3.4 trials/year</p>
+            <p><strong>Current growth rate (2022-2025):</strong> -28.8 trials/year</p>
+            <p><strong>Trajectories diverging:</strong> Africa's trial output has already converged with the pre-COVID trajectory (projected intersection: 2025).</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Data source: ClinicalTrials.gov API v2 (public, no authentication) |
+           Analysis: Interventional studies only | Generated 2026-03-28</p>
+        <p>E156 micro-publication: e156-covid-impact-paper.json</p>
+    </div>
+</div>
+
+<script>
+// ── Chart defaults ──────────────────────────────────────────────
+Chart.defaults.color = '#c8d6e5';
+Chart.defaults.borderColor = '#1e2d4a';
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+const africaCounts = [162, 119, 137, 141, 134, 130, 180, 178, 173, 128, 97, 16];
+const projectedCounts = [145.4, 142.0, 138.6, 135.2, 131.8, 128.4, 125.0, 121.6, 118.2, 114.8, 111.4, 108.0];
+const usCounts = [6760, 6879, 7916, 8306, 8300, 7708, 8977, 8287, 8212, 7851, 7788, 3429];
+const normAfrica = [120.9, 88.8, 102.2, 105.2, 100.0, 97.0, 134.3, 132.8, 129.1, 95.5, 72.4, 11.9];
+const normUS = [81.4, 82.9, 95.4, 100.1, 100.0, 92.9, 108.2, 99.8, 98.9, 94.6, 93.8, 41.3];
+
+// ── Chart 1: Africa Timeline ────────────────────────────────────
+new Chart(document.getElementById('timelineChart'), {
+    type: 'line',
+    data: {
+        labels: years,
+        datasets: [
+            {
+                label: 'Africa (actual)',
+                data: africaCounts,
+                borderColor: '#00b4d8',
+                backgroundColor: '#00b4d833',
+                borderWidth: 3,
+                tension: 0.3,
+                pointRadius: 5,
+                pointBackgroundColor: '#00b4d8',
+                fill: false,
+            },
+            {
+                label: 'Pre-COVID trajectory',
+                data: projectedCounts,
+                borderColor: '#576574',
+                borderDash: [8, 4],
+                borderWidth: 2,
+                tension: 0,
+                pointRadius: 0,
+                fill: false,
+            },
+        ],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'top' },
+            tooltip: {
+                callbacks: {
+                    afterLabel: function(ctx) {
+                        if (ctx.datasetIndex === 0) {
+                            const expected = projectedCounts[ctx.dataIndex];
+                            const diff = ctx.raw - expected;
+                            const pct = expected > 0 ? ((diff / expected) * 100).toFixed(1) : 0;
+                            return 'vs trend: ' + (diff >= 0 ? '+' : '') + diff.toFixed(0) + ' (' + (diff >= 0 ? '+' : '') + pct + '%)';
+                        }
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: false,
+                title: { display: true, text: 'Trial starts' },
+                grid: { color: '#1e2d4a' },
+            },
+            x: {
+                grid: { color: '#1e2d4a' },
+            },
+        },
+    },
+});
+
+// ── Chart 2: Normalized Comparison ──────────────────────────────
+new Chart(document.getElementById('normalizedChart'), {
+    type: 'line',
+    data: {
+        labels: years,
+        datasets: [
+            {
+                label: 'Africa (indexed)',
+                data: normAfrica,
+                borderColor: '#00b4d8',
+                borderWidth: 3,
+                tension: 0.3,
+                pointRadius: 4,
+                fill: false,
+            },
+            {
+                label: 'United States (indexed)',
+                data: normUS,
+                borderColor: '#e74c3c',
+                borderWidth: 3,
+                tension: 0.3,
+                pointRadius: 4,
+                fill: false,
+            },
+            {
+                label: 'Baseline (100)',
+                data: years.map(() => 100),
+                borderColor: '#576574',
+                borderDash: [4, 4],
+                borderWidth: 1,
+                pointRadius: 0,
+                fill: false,
+            },
+        ],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'top' },
+        },
+        scales: {
+            y: {
+                title: { display: true, text: 'Index (2019 = 100)' },
+                grid: { color: '#1e2d4a' },
+            },
+            x: {
+                grid: { color: '#1e2d4a' },
+            },
+        },
+    },
+});
+
+// ── Chart 3: COVID Surge ────────────────────────────────────────
+new Chart(document.getElementById('covidSurgeChart'), {
+    type: 'bar',
+    data: {
+        labels: [2020, 2021, 2022],
+        datasets: [{
+            label: 'COVID-19 trials in Africa',
+            data: [33, 34, 23],
+            backgroundColor: ['#e74c3c99', '#e74c3c77', '#e74c3c55'],
+            borderColor: '#e74c3c',
+            borderWidth: 2,
+        }],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: { display: true, text: 'COVID-19 trials' },
+                grid: { color: '#1e2d4a' },
+            },
+            x: {
+                grid: { display: false },
+            },
+        },
+    },
+});
+
+// ── Chart 4: Per-Condition Recovery ─────────────────────────────
+new Chart(document.getElementById('conditionChart'), {
+    type: 'line',
+    data: {
+        labels: [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        datasets: [
+                    {
+                        label: 'HIV',
+                        data: [19, 31, 25, 39, 44, 36, 31, 23],
+                        borderColor: '#e74c3c',
+                        backgroundColor: '#e74c3c33',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Malaria',
+                        data: [0, 0, 0, 0, 0, 0, 1, 0],
+                        borderColor: '#f39c12',
+                        backgroundColor: '#f39c1233',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Tuberculosis',
+                        data: [10, 15, 9, 17, 11, 17, 12, 10],
+                        borderColor: '#3498db',
+                        backgroundColor: '#3498db33',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Cancer',
+                        data: [19, 16, 19, 26, 27, 30, 12, 16],
+                        borderColor: '#9b59b6',
+                        backgroundColor: '#9b59b633',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                    },
+                    {
+                        label: 'Cardiovascular',
+                        data: [10, 6, 1, 4, 12, 14, 11, 9],
+                        borderColor: '#1abc9c',
+                        backgroundColor: '#1abc9c33',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointRadius: 4,
+                    },
+        ],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'top' },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Trial starts' },
+                grid: { color: '#1e2d4a' },
+            },
+            x: {
+                grid: { color: '#1e2d4a' },
+            },
+        },
+    },
+});
+</script>
+</body>
+</html>

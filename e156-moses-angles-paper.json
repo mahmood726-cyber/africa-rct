@@ -1,0 +1,8 @@
+{
+  "title": "Moses Angles",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the mapping of clinical research hubs, do the twelve systemic dimensions of inequity influence the distribution of trial infrastructure in Africa compared to Europe? This metadata sweep evaluated 5,000 trials through twelve symbolic and data-driven filters including volume, concentration, and results reporting status on ClinicalTrials.gov. Researchers used an angular equity model and reported the hub concentration index as the lead estimand for geographic research centralization across the continent. The primary result showed that eighty percent of African research is confined to three nations, creating a fortress of concentration compared to Europe's distributed grid. Pediatric testing was disproportionately high in African hubs, while result reporting lagged significantly behind international standards for transparency and data sharing. These findings illustrate a continent that is frequently used for validation but rarely empowered for sovereign research leadership or discovery. Interpretation is constrained by the reliance on public metadata which may not capture private clinical networks operating outside the main registration systems now. - DOI: 10.156/moses-angles - Date: 2026-03-28 - Type: research - Code: moses_angles_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

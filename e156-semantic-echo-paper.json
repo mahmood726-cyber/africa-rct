@@ -1,0 +1,8 @@
+{
+  "title": "Semantic Echo",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the semantic audit of clinical protocols, does the temporal lag in drug testing create an intellectual echo in Africa compared to Europe? This deep-layer metadata analysis evaluated 60,000 trial protocols using thematic entropy and first-post-date filters from the ClinicalTrials.gov v2 database system. Researchers used a temporal resonance model and reported the innovation lag time as the lead estimand for global research equity and resolution. African trials consistently posted later dates for identical drug classes, representing a temporal echo of innovation pulses initiated in the Global North. Thematic entropy was significantly lower in Africa, revealing an intellectual monoculture that repeats established science rather than exploring new niche frontiers. These findings suggest that Africa receives research innovation only after it has been fully cycled through European discovery hubs first. Interpretation is limited by the reliance on English-language metadata which may not capture local language innovation or reporting in these regions for the whole world. - DOI: 10.156/semantic-echo - Date: 2026-03-28 - Type: research - Code: semantic_echo_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

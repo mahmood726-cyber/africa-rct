@@ -1,0 +1,51 @@
+{
+    "title": "Invisible elders: quantifying the geriatric clinical trial void across seven age-related conditions in Africa",
+    "body": "Africa's population over sixty will triple to two hundred thirty million by 2050, yet near-zero geriatric clinical trials exist on the continent. We queried ClinicalTrials.gov API v2 for geriatric and elderly-related interventional trials across ten African countries, the United States, Japan, and the United Kingdom. Seven age-related conditions were examined: dementia and Alzheimer disease, osteoporosis, falls prevention, urinary incontinence, polypharmacy, frailty, and cataracts. Africa had dramatically fewer geriatric trials than all comparators, with the US-to-Africa gap ratio being extremely large. The per-capita geriatric trial rate per million elderly was orders of magnitude lower in Africa than in the US or Japan. The dementia gap was particularly concerning given that Africa faces the highest projected increase in dementia prevalence of any world region at two hundred thirty-five percent between 2019 and 2050. Polypharmacy trials were near-zero despite growing multi-morbidity in the aging population. The condition-country heatmap revealed that most African countries had zero trials for most geriatric conditions, creating a comprehensive evidence void for a rapidly expanding demographic.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "As Africa's population over sixty triples to two hundred thirty million by 2050, does the continent have any geriatric clinical trial evidence to guide the care of its aging population?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for geriatric and elderly-related interventional trials across ten African countries, the United States, Japan, and the United Kingdom, examining seven age-related conditions."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had dramatically fewer geriatric trials than all comparators, with the per-capita rate per million elderly being orders of magnitude lower than in the United States or Japan."
+        },
+        {
+            "role": "Dementia spotlight",
+            "text": "The dementia gap was particularly concerning given Africa faces the highest projected increase in dementia prevalence of any world region, yet new Alzheimer drugs were developed entirely without African participants."
+        },
+        {
+            "role": "Polypharmacy danger",
+            "text": "Polypharmacy trials were near-zero in Africa despite growing multi-morbidity, meaning drug-drug interaction safety data for African elderly comes entirely from other populations with different genetics and metabolism."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The comprehensive evidence void across nearly all condition-country pairs means that by 2050, two hundred thirty million African elderly will be treated based entirely on evidence generated in populations unlike them."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include single-registry restriction, geriatric terminology variation, and possible underrepresentation of Japanese trials on ClinicalTrials.gov compared to domestic registries."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Elderly View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + Japan + UK comparators, 7 geriatric conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

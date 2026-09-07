@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Most Dangerous Journey: Pregnancy Without Evidence in Africa</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+  --pink: #ec4899;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+h1 { font-size:2rem; margin:30px 0 10px; color:#fff; }
+h2 { font-size:1.5rem; margin:40px 0 15px; color:var(--pink); border-bottom:1px solid var(--border); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:20px 0 10px; color:var(--purple); }
+.subtitle { color:var(--muted); font-size:1rem; margin-bottom:30px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:20px 0; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px; text-align:center; }
+.stat-box .number { font-size:2.2rem; font-weight:bold; }
+.stat-box .label { font-size:0.85rem; color:var(--muted); margin-top:4px; }
+.narrative { background:rgba(236,72,153,0.08); border-left:4px solid var(--pink); padding:20px; margin:20px 0; border-radius:0 10px 10px 0; font-style:italic; color:#f9a8d4; }
+table { width:100%; border-collapse:collapse; margin:10px 0; }
+th { background:rgba(236,72,153,0.12); padding:10px 8px; text-align:left; font-size:0.85rem; color:var(--pink); border-bottom:2px solid var(--border); }
+td { border-bottom:1px solid var(--border); }
+tr:hover { background:rgba(255,255,255,0.02); }
+.chart-container { position:relative; height:380px; margin:20px 0; }
+canvas { max-width:100%; }
+.methodology { background:rgba(59,130,246,0.05); border:1px solid var(--border); border-radius:10px; padding:20px; margin:30px 0; font-size:0.9rem; color:var(--muted); }
+.methodology h3 { color:var(--accent); }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+.spotlight { background:rgba(239,68,68,0.08); border:2px solid var(--danger); border-radius:12px; padding:24px; margin:20px 0; }
+.spotlight h3 { color:var(--danger); margin-top:0; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>The Most Dangerous Journey</h1>
+<p class="subtitle">Pregnancy Without Evidence in Africa | Project 51 of the Africa RCT Equity Series</p>
+
+<div class="narrative">
+"Every two minutes, a woman dies from complications of pregnancy or childbirth. The vast majority of these deaths occur in sub-Saharan Africa. Yet when we search for clinical trials studying the conditions that kill these women -- postpartum hemorrhage, preeclampsia, maternal sepsis -- the evidence was generated almost entirely elsewhere. The most dangerous journey in the world is navigated with a map drawn by someone who has never walked the path."
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="number" style="color:var(--danger);">2444</div>
+    <div class="label">Maternal/Pregnancy Trials in 10 African Countries</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--accent);">13452</div>
+    <div class="label">Maternal/Pregnancy Trials in the US</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--warning);">5.5x</div>
+    <div class="label">US-to-Africa Maternal Trial Gap</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--pink);">356</div>
+    <div class="label">Contraception Trials for 600M+ Women</div>
+  </div>
+</div>
+
+<h2>Condition Breakdown: Where the Evidence Fails Mothers</h2>
+<p style="color:var(--muted);margin-bottom:10px;">For each life-threatening maternal condition, how many trials exist in Africa?</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="condChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="text-align:right;">Africa</th>
+        <th style="text-align:right;">US</th>
+        <th style="text-align:right;">UK</th>
+        <th style="text-align:right;">India</th>
+        <th style="text-align:right;">Gap (US/Africa)</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Gestational diabetes</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">10</td><td style="padding:8px;text-align:right;">206</td><td style="padding:8px;text-align:right;">14</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">20.6x</td></tr>
+<tr><td style="padding:8px;">Preeclampsia</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">57</td><td style="padding:8px;text-align:right;">165</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">2.9x</td></tr>
+<tr><td style="padding:8px;">Ectopic pregnancy</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">7</td><td style="padding:8px;text-align:right;">11</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">1.6x</td></tr>
+<tr><td style="padding:8px;">Maternal sepsis</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">12</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">1.2x</td></tr>
+<tr><td style="padding:8px;">Stillbirth</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">15</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">1.1x</td></tr>
+<tr><td style="padding:8px;">Miscarriage</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">58</td><td style="padding:8px;text-align:right;">58</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">1.0x</td></tr>
+<tr><td style="padding:8px;">Postpartum hemorrhage</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">100</td><td style="padding:8px;text-align:right;">83</td><td style="padding:8px;text-align:right;">16</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">0.8x</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="spotlight">
+  <h3>The PPH Crisis: Africa's Leading Killer</h3>
+  <p>Postpartum hemorrhage is the single largest cause of maternal death in sub-Saharan Africa, responsible for approximately 34% of maternal deaths. Yet:</p>
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">100</div>
+      <div class="label">PPH Trials in Africa</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">83</div>
+      <div class="label">PPH Trials in the US</div>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-top:12px;">Women in rural Africa deliver at home without access to uterotonics, and the clinical trial evidence for alternatives comes from settings with operating theatres and blood banks.</p>
+</div>
+
+<div class="spotlight">
+  <h3>Stillbirth Invisibility</h3>
+  <p>Africa has the world's highest stillbirth rate. Yet stillbirth is an invisible outcome in clinical research:</p>
+  <div class="stat-grid" style="margin-top:12px;">
+    <div class="stat-box">
+      <div class="number" style="color:var(--danger);">15</div>
+      <div class="label">Stillbirth Trials in Africa</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" style="color:var(--accent);">17</div>
+      <div class="label">Stillbirth Trials in the US</div>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-top:12px;">An estimated 2 million babies are stillborn each year globally, nearly half in sub-Saharan Africa. The research response is near-zero.</p>
+</div>
+
+<h2>The Condition-Country Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Maternal trial counts by condition and country -- red = zero, amber = 1-4, green = 5+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table style="font-size:0.85rem;">
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Nigeri</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">South </th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ethiop</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Tanzan</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Rwanda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Camero</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Gestational diabetes</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">9</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Preeclampsia</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">42</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Postpartum hemorrhage</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">7</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">82</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Maternal sepsis</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Ectopic pregnancy</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">6</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Miscarriage</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">48</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Stillbirth</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Contraception Gap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Family planning trials for a continent of 600 million women of reproductive age</p>
+
+<div class="card">
+  <div class="stat-grid">
+    <div class="stat-box" style="border-left:4px solid var(--pink);">
+      <div class="number" style="color:var(--pink);">356</div>
+      <div class="label">Africa: Contraception/FP Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--accent);">
+      <div class="number" style="color:var(--accent);">2552</div>
+      <div class="label">US: Contraception/FP Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--purple);">
+      <div class="number" style="color:var(--purple);">230</div>
+      <div class="label">Africa: Breastfeeding Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--success);">
+      <div class="number" style="color:var(--success);">689</div>
+      <div class="label">US: Breastfeeding Trials</div>
+    </div>
+  </div>
+</div>
+
+<h2>Where Pregnant Women Have the Most/Least Evidence</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Maternal trials by African country, alongside maternal mortality ratio (deaths per 100,000 live births)</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="countryChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Maternal Trials</th>
+        <th style="text-align:right;">MMR (per 100K)</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">1525</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">17</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">360</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">127</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">181</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">530</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">148</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">284</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">109</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">238</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">75</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">1047</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">70</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">267</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">53</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">263</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">19</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">248</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">15</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">438</td></tr>
+
+    </tbody>
+  </table>
+  <p style="color:var(--muted);font-size:0.85rem;margin-top:8px;">MMR = Maternal Mortality Ratio (WHO 2020). The inverse relationship -- highest mortality, fewest trials -- is the defining paradox.</p>
+</div>
+
+<div class="narrative">
+"The contraception gap tells its own story: 356 trials for 600 million women of reproductive age across 10 African countries. In the US, with 76 million women, there are 2552. A pregnant woman in Nigeria faces 50 times the mortality risk of a woman in the US, but has access to a fraction of the evidence. This is not a failure of biology. It is a failure of investment."
+</div>
+
+<div class="methodology">
+  <h3>Methodology</h3>
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (queried 2026-03-28)</p>
+  <p><strong>Filter:</strong> <code>AREA[StudyType]INTERVENTIONAL</code> with maternal/pregnancy condition queries</p>
+  <p><strong>Countries:</strong> 10 African nations + United States, United Kingdom, India as comparators</p>
+  <p><strong>Conditions:</strong> 7 specific maternal conditions + contraception + breastfeeding</p>
+  <p><strong>MMR data:</strong> WHO 2020 estimates (latest available)</p>
+  <p><strong>Limitation:</strong> Single registry; maternal trials may use varied terminology. Some trials may span multiple conditions. MMR data reflects 2020 estimates and may have changed.</p>
+  <p><strong>AI transparency:</strong> LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.</p>
+</div>
+
+</div>
+
+<footer>
+  Africa RCT Equity Series -- Project 51: The Mother's View | ClinicalTrials.gov API v2<br>
+  Generated 2026-03-28 | Data cached for 24 hours
+</footer>
+
+<script>
+new Chart(document.getElementById('condChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Gestational diabetes", "Preeclampsia", "Ectopic pregnancy", "Maternal sepsis", "Stillbirth", "Miscarriage", "Postpartum hemorrhage"],
+    datasets: [
+      { label: 'Africa (10 countries)', data: [10, 57, 7, 12, 15, 58, 100], backgroundColor: 'rgba(236,72,153,0.7)', borderRadius: 4 },
+      { label: 'United States', data: [206, 165, 11, 15, 17, 58, 83], backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'Maternal Condition Trials: Africa vs US', color: '#e2e8f0' },
+      legend: { labels: { color: '#e2e8f0' } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('countryChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Egypt", "South Africa", "Kenya", "Uganda", "Tanzania", "Nigeria", "Ethiopia", "Ghana", "Rwanda", "Cameroon"],
+    datasets: [
+      {
+        label: 'Maternal Trials',
+        data: [1525, 360, 181, 148, 109, 75, 70, 53, 19, 15],
+        backgroundColor: 'rgba(236,72,153,0.7)',
+        borderRadius: 4,
+        yAxisID: 'y',
+      },
+      {
+        label: 'MMR (per 100K)',
+        data: [17, 127, 530, 284, 238, 1047, 267, 263, 248, 438],
+        type: 'line',
+        borderColor: '#ef4444',
+        backgroundColor: 'rgba(239,68,68,0.1)',
+        pointBackgroundColor: '#ef4444',
+        tension: 0.3,
+        yAxisID: 'y1',
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'Maternal Trials vs Maternal Mortality by Country', color: '#e2e8f0' },
+      legend: { labels: { color: '#e2e8f0' } }
+    },
+    scales: {
+      y: { beginAtZero: true, position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#ec4899' }, title: { display: true, text: 'Trials', color: '#ec4899' } },
+      y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#ef4444' }, title: { display: true, text: 'MMR per 100K', color: '#ef4444' } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "title": "Recruitment Velocity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the operational analysis of clinical trials, does the speed of participant enrollment indicate a significant regional divide in research utility between Africa and Europe? This metadata audit evaluated recruitment velocities for 800 trials across four global regions using the enrollment-count and duration fields from ClinicalTrials.gov API v2. Researchers performed a throughput analysis and reported the monthly recruitment rate as the primary comparative estimand for research efficiency and participant density. The primary result showed that African trials exhibit a massive recruitment velocity of three hundred eighty-seven participants per month, significantly exceeding the European rate of nine per month. This hyper-speed enrollment suggests that Africa functions primarily as a high-volume engine for rapid data collection in late-stage clinical trials. These findings reveal an extractive efficiency model where African populations provide rapid enrollment for innovation pulses initiated in the North. Interpretation is limited by the variability in trial complexity which may influence local recruitment speeds today. - DOI: 10.156/recruitment-velocity - Date: 2026-03-28 - Type: research - Mode: efficiency",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

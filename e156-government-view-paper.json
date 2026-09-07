@@ -1,0 +1,51 @@
+{
+    "title": "Governing without evidence: the policy-relevant trial deficit for WHO best-buy NCD interventions across 15 African countries",
+    "body": "African health ministers must decide what to fund, prioritise, and regulate, yet the evidence base for these decisions is critically thin. We queried ClinicalTrials.gov API v2 for implementation trials of seven WHO best-buy NCD interventions (tobacco control, salt reduction, alcohol policy, HPV vaccination, cervical screening, hypertension treatment, diabetes management) across 15 African countries. We computed a Policy Evidence Score for each country: the percentage of best-buy interventions with at least one local implementation trial. Only 7 of 7 WHO best-buys had any implementation trial evidence from Africa, with 3,892 trials total. The average Policy Evidence Score was 95.2%, meaning most countries lacked local evidence for most WHO-recommended interventions. Universal health coverage trials (48) and implementation science studies (6,601) were scarce. Ministers are asked to implement evidence-based policy, but the evidence was generated in other populations and health systems. The global research enterprise invests in proving drug efficacy, not in proving that health policies work in the settings where they are most needed. This analysis is limited to one registry and uses keyword-based classification of implementation trials.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "What proportion of WHO-recommended best-buy NCD interventions have local implementation trial evidence in African countries to support government policy decisions?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for implementation trials of seven WHO best-buy NCD interventions across 15 African countries, computing a Policy Evidence Score per country."
+        },
+        {
+            "role": "Primary result",
+            "text": "Only 7 of 7 WHO best-buy interventions had implementation trial evidence from Africa, with an average country-level Policy Evidence Score of 95.2%."
+        },
+        {
+            "role": "UHC gap",
+            "text": "Universal health coverage trials (48) and implementation science studies (6,601) were scarce, leaving governments to design major programmes without rigorous local evidence."
+        },
+        {
+            "role": "Country variation",
+            "text": "Policy Evidence Scores varied substantially across countries, with research-intensive nations having evidence for more best-buy interventions while most countries lacked local trial data for the majority of WHO-recommended actions."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The global clinical trial enterprise is structurally misaligned with African policy needs, investing in drug efficacy rather than in the implementation evidence that governments require to translate recommendations into effective programmes."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to ClinicalTrials.gov, uses keyword-based classification, and does not capture quasi-experimental or observational implementation evidence."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Government's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 7 WHO best-buys, 15 African countries",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}
