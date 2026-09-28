@@ -1,0 +1,58 @@
+{
+    "title": "Protocol: sickle cell disease trial activity in Africa",
+    "type": "protocol",
+    "primary_estimand": "Condition Colonialism Index (CCI) for SCD trials in Africa",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\scd-africa-analysis.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_scd_africa.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry study will quantify the mismatch between Africa sickle cell disease burden and its share of registered clinical trial activity using ClinicalTrials.gov. We will query ClinicalTrials.gov API v2 for all interventional sickle cell studies with African sites, deduplicate records by NCT identifier, and classify each trial by sponsor origin, geographic scope, phase, affordability tier, and completion status. The primary outcome is the Condition Colonialism Index for sickle cell disease, computed as Africa burden share divided by Africa trial share relative to the global total. Secondary outcomes include the proportion of terminated trials by sponsor type, the balance between Africa-designed and extraction-pattern studies, the number of locally led late-phase drug trials, and country-level concentration analysis. Classification rules, cost thresholds, and sponsor keyword lists will be specified in advance and archived with all code. No patient-level data will be used. The analysis is limited by the completeness of a single registry and by imperfect affordability proxies.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "check": "word_count",
+                "expected": 156,
+                "result": 156,
+                "pass": true
+            },
+            {
+                "check": "sentence_count",
+                "expected": 7,
+                "result": 7,
+                "pass": true
+            },
+            {
+                "check": "primary_outcome_defined",
+                "value": "CCI = burden share / trial share",
+                "pass": true
+            },
+            {
+                "check": "secondary_outcomes_defined",
+                "value": "termination proportion, Africa-designed ratio, African-led Phase 3 count",
+                "pass": true
+            },
+            {
+                "check": "classification_scheme",
+                "value": "pharma industry / foreign academic / African institution",
+                "pass": true
+            },
+            {
+                "check": "countries_specified",
+                "value": "Nigeria, Kenya, Uganda, Ghana, Tanzania, Egypt, South Africa, and additional",
+                "pass": true
+            },
+            {
+                "check": "data_ethics",
+                "value": "no patient-level data, public registry only",
+                "pass": true
+            }
+        ]
+    }
+}

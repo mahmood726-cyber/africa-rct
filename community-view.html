@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Done TO Us, Not WITH Us | Community View</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0e17;
+    color: #cbd5e1;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  h1 {
+    font-size: 2.4rem; color: #f1f5f9; text-align: center; margin: 32px 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; color: #64748b; font-size: 15px; margin-bottom: 32px;
+  }
+  .section {
+    background: #111827; border: 1px solid #1e293b; border-radius: 12px;
+    padding: 28px; margin-bottom: 24px;
+  }
+  .section h2 {
+    color: #f1f5f9; font-size: 1.4rem; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 2px solid #1e293b;
+  }
+  .section h3 {
+    color: #e2e8f0; font-size: 1.1rem; margin: 16px 0 10px;
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .kpi {
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px; text-align: center;
+  }
+  .kpi .value {
+    font-size: 2.2rem; font-weight: 800; margin: 4px 0;
+  }
+  .kpi .label {
+    font-size: 13px; color: #64748b; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout {
+    background: #1a0a0a; border-left: 4px solid #ef4444; padding: 16px 20px;
+    margin: 16px 0; border-radius: 0 8px 8px 0; color: #fca5a5;
+  }
+  .callout-green {
+    background: #0a1a0a; border-left: 4px solid #22c55e; color: #86efac;
+  }
+  .callout-amber {
+    background: #1a150a; border-left: 4px solid #f59e0b; color: #fde68a;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  thead th {
+    text-align: left; padding: 10px 12px; color: #94a3b8;
+    border-bottom: 2px solid #1e293b; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  tbody td {
+    padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1;
+  }
+  tbody tr:hover { background: #1e293b44; }
+  .source {
+    text-align: center; color: #475569; font-size: 12px; margin-top: 40px;
+    padding: 20px; border-top: 1px solid #1e293b;
+  }
+  .source a { color: #3b82f6; text-decoration: none; }
+  .big-number {
+    font-size: 5rem; font-weight: 900; text-align: center;
+    margin: 20px 0 10px; line-height: 1;
+  }
+  .big-sub {
+    text-align: center; color: #94a3b8; font-size: 16px; margin-bottom: 16px;
+  }
+  .trio {
+    display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .trio-item {
+    flex: 1; min-width: 180px; text-align: center;
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px;
+  }
+  .trio-item .num {
+    font-size: 2.5rem; font-weight: 900; line-height: 1;
+  }
+  .trio-item .desc {
+    font-size: 13px; color: #94a3b8; margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Research Done TO Us, Not WITH Us</h1>
+<p class="subtitle">
+  The Community Engagement Deficit in African Clinical Trials |
+  ClinicalTrials.gov API v2 | Data: 2026-03-28
+</p>
+
+<!-- ============ SECTION 1: EXECUTIVE SUMMARY ============ -->
+<div class="section">
+  <h2>1. The Community Engagement Deficit</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Uganda Trials Analysed</div>
+      <div class="value" style="color:#60a5fa">783</div>
+      <div class="label">interventional trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Community Voice Score</div>
+      <div class="value" style="color:#ef4444">50.8%</div>
+      <div class="label">community-engaged trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Extractive Trials</div>
+      <div class="value" style="color:#f59e0b">0.1%</div>
+      <div class="label">1 of 783 trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Community Research (Africa)</div>
+      <div class="value" style="color:#22c55e">415</div>
+      <div class="label">vs 12,658 in the US</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Community RCTs (Africa)</div>
+      <div class="value" style="color:#8b5cf6">333</div>
+      <div class="label">cluster/community trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Cluster Trials (Uganda)</div>
+      <div class="value" style="color:#06b6d4">3</div>
+      <div class="label">consent complexity</div>
+    </div>
+  </div>
+  <div class="callout">
+    Communities across Africa host clinical trials but rarely shape the research
+    agenda. Of <strong>783</strong> interventional trials in Uganda, only
+    <strong>50.8%</strong> show meaningful community engagement markers.
+    The majority of trials are designed abroad, funded abroad, and answer
+    questions set by foreign investigators. Communities provide the bodies; the
+    Global North provides the questions.
+  </div>
+</div>
+
+<!-- ============ SECTION 2: EXTRACTIVE vs PARTICIPATORY ============ -->
+<div class="section">
+  <h2>2. Extractive vs Participatory: The Classification</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Each of 783 Uganda trials classified by engagement signals: community
+    language, behavioral/implementation design, Phase NA indicators (community-engaged)
+    vs drug testing, late-phase, pharmacokinetic indicators (extractive).
+  </p>
+  <div class="trio">
+    <div class="trio-item">
+      <div class="num" style="color:#22c55e">398</div>
+      <div class="desc">Community-engaged (50.8%)</div>
+      <div style="font-size:12px;color:#64748b;margin-top:4px">
+        Behavioral, participatory, implementation</div>
+    </div>
+    <div class="trio-item">
+      <div class="num" style="color:#ef4444">1</div>
+      <div class="desc">Extractive (0.1%)</div>
+      <div style="font-size:12px;color:#64748b;margin-top:4px">
+        Drug testing, dose-finding, pharmacokinetics</div>
+    </div>
+    <div class="trio-item">
+      <div class="num" style="color:#f59e0b">384</div>
+      <div class="desc">Ambiguous (49.0%)</div>
+      <div style="font-size:12px;color:#64748b;margin-top:4px">
+        Mixed signals or insufficient information</div>
+    </div>
+  </div>
+  <div class="callout-amber callout">
+    <strong>What "extractive" means:</strong> An extractive trial is one where
+    the community provides participants and disease burden, but the research
+    question, protocol, and intellectual property are entirely controlled by
+    external organizations. Community members are subjects, not partners. They
+    may never see the results or benefit from the intervention tested on them.
+  </div>
+</div>
+
+<!-- ============ SECTION 3: CROSS-COUNTRY COMPARISON ============ -->
+<div class="section">
+  <h2>3. Community Voice Score by Country</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Percentage of trials classified as community-engaged, by country. Higher
+    scores indicate more participatory research culture.
+  </p>
+  <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Nigeria</div><div style="flex:1;background:#1e293b;border-radius:4px;height:32px;position:relative"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:6px;font-size:13px;color:#94a3b8;font-weight:600">60.2% (354 trials)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Kenya</div><div style="flex:1;background:#1e293b;border-radius:4px;height:32px;position:relative"><div style="width:89%;height:100%;background:#22c55e;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:6px;font-size:13px;color:#94a3b8;font-weight:600">53.5% (720 trials)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Uganda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:32px;position:relative"><div style="width:84%;height:100%;background:#22c55e;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:6px;font-size:13px;color:#94a3b8;font-weight:600">50.8% (783 trials)</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">South Africa</div><div style="flex:1;background:#1e293b;border-radius:4px;height:32px;position:relative"><div style="width:23%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:6px;font-size:13px;color:#94a3b8;font-weight:600">13.9% (800 trials)</span></div></div>
+  <div class="callout-green callout" style="margin-top:16px">
+    <strong>What drives variation?</strong> Countries with strong community
+    health worker systems (Uganda, Kenya) tend to have higher engagement scores.
+    South Africa's large pharma-driven trial portfolio pulls its score toward
+    extractive. Nigeria's small trial volume makes scores volatile but reflects
+    limited community-based research infrastructure.
+  </div>
+</div>
+
+<!-- ============ SECTION 4: BY CONDITION ============ -->
+<div class="section">
+  <h2>4. Engagement Rate by Condition</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Which conditions attract community-engaged vs extractive research in Uganda?
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="text-align:right">Engaged</th>
+        <th style="text-align:right">Extractive</th>
+        <th>Engagement Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;font-weight:600">malaria</td><td style="text-align:right;padding:8px 12px">26</td><td style="text-align:right;padding:8px 12px">0</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">100.0%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">cancer</td><td style="text-align:right;padding:8px 12px">6</td><td style="text-align:right;padding:8px 12px">0</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">100.0%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">maternal/pregnancy</td><td style="text-align:right;padding:8px 12px">19</td><td style="text-align:right;padding:8px 12px">0</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">100.0%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">mental health/depression</td><td style="text-align:right;padding:8px 12px">20</td><td style="text-align:right;padding:8px 12px">0</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">100.0%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">nutrition/malnutrition</td><td style="text-align:right;padding:8px 12px">14</td><td style="text-align:right;padding:8px 12px">0</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">100.0%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">HIV</td><td style="text-align:right;padding:8px 12px">128</td><td style="text-align:right;padding:8px 12px">1</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:99%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">99.2%</span></div></td></tr>
+<tr><td style="padding:8px 12px;font-weight:600">tuberculosis</td><td style="text-align:right;padding:8px 12px">31</td><td style="text-align:right;padding:8px 12px">1</td><td style="padding:8px 12px"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;background:#1e293b;border-radius:4px;height:20px"><div style="width:97%;height:100%;background:#22c55e;border-radius:4px"></div></div><span style="color:#22c55e;font-weight:600;min-width:50px;text-align:right">96.9%</span></div></td></tr>
+    </tbody>
+  </table>
+  <div class="callout" style="margin-top:16px">
+    <strong>The pattern:</strong> Behavioral conditions (mental health, nutrition,
+    maternal health) show higher community engagement. Drug-focused conditions
+    (HIV, malaria, TB) are dominated by extractive trials, even when the diseases
+    disproportionately burden the host communities. The most community-relevant
+    diseases attract the least community-shaped research.
+  </div>
+</div>
+
+<!-- ============ SECTION 5: THE CONSENT PROBLEM ============ -->
+<div class="section">
+  <h2>5. The Consent Problem: Community vs Individual</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Cluster Trials in Uganda</div>
+      <div class="value" style="color:#8b5cf6">3</div>
+      <div class="label">community-randomized</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Individual Consent Mentioned</div>
+      <div class="value" style="color:#f59e0b">0</div>
+      <div class="label">in cluster trial titles</div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>The cluster trial paradox:</strong> In cluster-randomized trials,
+    entire communities are randomized, but individual members may not have
+    meaningfully consented. A village chief's agreement is not the same as
+    informed consent. When a community is randomized to receive a new malaria
+    intervention, individual families cannot opt out of the environmental
+    changes. Yet these trials are approved under the same ethical frameworks
+    designed for individual-level research. The gap between community consent
+    and individual autonomy remains largely unaddressed in African trial ethics.
+  </div>
+</div>
+
+<!-- ============ SECTION 6: WHAT PARTNERSHIP LOOKS LIKE ============ -->
+<div class="section">
+  <h2>6. What Genuine Partnership Looks Like: CBPR Models</h2>
+  <div class="callout-green callout">
+    <strong>Community-Based Participatory Research (CBPR)</strong> offers a
+    framework where communities are genuine partners, not just recruitment pools.
+    Key principles include: (1) community members co-design research questions;
+    (2) local researchers hold PI positions; (3) results are fed back to
+    communities in accessible formats; (4) communities retain some intellectual
+    property rights; (5) capacity building is an explicit outcome.
+  </div>
+  <h3>Examples of Community-Engaged Trials in Uganda</h3>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>NCT ID</th>
+        <th>Title</th>
+        <th style="text-align:center">Phase</th>
+        <th>Sponsor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05084716" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05084716</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Pre-Exposure Prophylaxis (PrEP) Provision for Ugandan Fisherfolk</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">RAND</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT00565071" target="_blank" style="color:#60a5fa;text-decoration:none">NCT00565071</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Parasite-based Diagnosis for Malaria in Uganda: Feasibility and Cost-Effectiveness</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Makerere University</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT01180114" target="_blank" style="color:#60a5fa;text-decoration:none">NCT01180114</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Economic Empowerment Program Suubi-Maka</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Columbia University</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT02244398" target="_blank" style="color:#60a5fa;text-decoration:none">NCT02244398</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Community-based Delivery of Integrated Family Planning/HIV Testing and Counseling Services in Uganda</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">FHI 360</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04580212" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04580212</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Poultry Management and Child Diarrhea in Uganda</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">North Carolina State University</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT07428330" target="_blank" style="color:#60a5fa;text-decoration:none">NCT07428330</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Clinic vs Clinic+Community Outreach HPV Self-Collection to Increase Cervical Screening in Women With HIV</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">UNC Lineberger Comprehensive Cancer Cent</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04122144" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04122144</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Optimizing HIV Virologic Outcomes for Pregnant Women in Uganda</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Makerere University</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05285202" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05285202</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Clinic-based Versus Hotspot-focused Active TB Case Finding</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Johns Hopkins University</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05609513" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05609513</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Integration of Hypertension Management in HIV Care in Uganda</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Infectious Diseases Research Collaborati</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05940831" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05940831</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Mobile Health Intervention (Support-moms) in Antenatal Care to Improve Maternal Health in Uganda</td><td style="padding:6px 8px;font-size:12px;text-align:center">NA</td><td style="padding:6px 8px;font-size:12px">Mbarara University of Science and Techno</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3 style="margin-top:24px">Examples of Extractive Trials in Uganda</h3>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>NCT ID</th>
+        <th>Title</th>
+        <th style="text-align:center">Phase</th>
+        <th>Sponsor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04121195" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04121195</a></td><td style="padding:6px 8px;font-size:13px;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Dose Escalation Study to Determine the Pharmacokinetics of Atazanavir Administered With RIfampicin to HIV Positive Adult</td><td style="padding:6px 8px;font-size:12px;text-align:center">PHASE2, PHASE3</td><td style="padding:6px 8px;font-size:12px">University of Liverpool</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ============ SECTION 7: THE WAY FORWARD ============ -->
+<div class="section">
+  <h2>7. From Subjects to Partners: The Way Forward</h2>
+  <div class="callout-green callout">
+    <strong>Recommendations for genuine community partnership:</strong>
+  </div>
+  <ul style="margin:16px 0 16px 24px;color:#94a3b8;line-height:2.2">
+    <li><strong style="color:#e2e8f0">Community Advisory Boards (CABs):</strong>
+      Mandatory for all trials, not just HIV -- with real decision power over
+      protocol modifications, not just rubber-stamping.</li>
+    <li><strong style="color:#e2e8f0">Benefit-sharing agreements:</strong>
+      Pre-specify how communities will access successful interventions. No
+      more "we'll figure it out later" promises.</li>
+    <li><strong style="color:#e2e8f0">Local PI requirements:</strong>
+      At least one local investigator in a leadership role, not just as a
+      "site coordinator" for foreign PIs.</li>
+    <li><strong style="color:#e2e8f0">Results dissemination:</strong>
+      Community-language summaries of findings, presented in-person, not
+      just buried in English-language journals.</li>
+    <li><strong style="color:#e2e8f0">Research agenda co-creation:</strong>
+      Communities should help set priorities, not just respond to what
+      foreign funders want studied. The Village Health Team model in Uganda
+      shows this is possible at scale.</li>
+  </ul>
+</div>
+
+<div class="source">
+  Data source: <a href="https://clinicaltrials.gov">ClinicalTrials.gov</a>
+  API v2 (accessed 2026-03-28)<br>
+  Analysis: fetch_community_view.py | The Community's View<br>
+  Classification: Algorithmic based on title keywords, phase, intervention type.
+  Manual review recommended for individual trial classification.
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+    "title":  "Vaccine clinical trial concentration across Africa: cross-sectional registry analysis",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Share of African vaccine trials located in South Africa and Africa-to-US vaccine trial ratio",
+    "study_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-27",
+    "certainty":  "high (registry data, complete enumeration within ClinicalTrials.gov)",
+    "app":  "C:\\AfricaRCT\\vaccine-colony.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_vaccine_colony.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-vaccine-colony-protocol.json",
+    "body":  "How are vaccine clinical trials distributed across Africa, and which countries bear the testing burden? We queried ClinicalTrials.gov API v2 on 27 March 2026 for interventional vaccine trials by country, vaccine type, sponsor, and phase, covering twelve African nations plus the United States and United Kingdom as comparators. Africa registered only 177 vaccine trials compared to 3,485 in the United States, a ratio of 5.1 percent. South Africa accounted for 176 of 177 African vaccine trials, a 99.4 percent monopoly driven by GCP infrastructure, linguistic accessibility, and established research institutions such as MRC and SAMRC. Nigeria, despite a population of 230 million and the highest meningitis belt burden, had only 11 vaccine trials registered. Phase 3 trials were disproportionately represented, confirming Africa's role as a testing ground rather than a development site. The concentration of vaccine research in a single country, combined with systematic post-trial access delays, raises fundamental questions about equity in global vaccine development.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count",
+                                          "ok":  true,
+                                          "detail":  "Found 141 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentences 3-4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 3 reports the Africa-to-US count and sentence 4 reports South Africa\u0027s share."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 states the main limitation."
+                                      }
+                                  ]
+                   }
+}
+

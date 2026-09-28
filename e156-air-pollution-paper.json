@@ -1,0 +1,51 @@
+{
+    "title": "Household air pollution in Africa: zero registered trials for 600,000 annual deaths from cooking smoke",
+    "body": "Are there registered trials addressing household air pollution in Africa, where cooking fires kill 600,000 people annually? We queried ClinicalTrials.gov for interventional trials matching air pollution, household pollution, indoor pollution, cookstove, or biomass fuel across eight African countries, the United States, India, and China, with subgroup searches for cookstove technologies and related health outcomes. Africa had zero registered household air pollution trials despite 80 percent of the population cooking with solid fuels and PM2.5 from cooking fires exceeding WHO guidelines 33-fold. India and China, which launched national clean cooking programmes reaching tens of millions of households, had substantially more registered trials. COPD trials in Africa were drastically underrepresented, with biomass-fuel COPD representing a different disease from smoking-related COPD in high-income settings. The absence of African HAP trials means cookstove programmes operate without local evidence for adoption or health impact. This analysis is limited to one clinical trial registry and may miss studies on environmental research platforms.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Are there registered clinical trials addressing household air pollution interventions in Africa, where cooking fires are estimated to kill 600,000 people annually?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for interventional trials matching air pollution, household pollution, indoor pollution, cookstove, or biomass fuel across eight African countries, the United States, India, and China, with subgroup analyses for cookstove technologies and health outcomes."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had zero registered household air pollution intervention trials despite 80 percent of the population cooking with solid fuels and typical indoor PM2.5 concentrations exceeding WHO guidelines by 33-fold."
+        },
+        {
+            "role": "Comparators",
+            "text": "India and China, which have launched national clean cooking programmes reaching tens of millions of households, had substantially more registered trials testing intervention effectiveness and health outcomes."
+        },
+        {
+            "role": "COPD gap",
+            "text": "COPD trials in Africa were drastically underrepresented relative to the burden, with biomass-fuel COPD representing a fundamentally different disease phenotype from the smoking-related COPD studied overwhelmingly in high-income settings."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The complete absence of registered African HAP trials means clean cookstove distribution programmes currently operate without rigorous African-context evidence for adoption rates, sustained use, or measurable health impact."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to a single clinical trial registry and may undercount HAP intervention studies registered on environmental health or engineering research platforms rather than ClinicalTrials.gov."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Household Air Pollution Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 African countries, US + India + China comparators, WHO HAP burden data",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

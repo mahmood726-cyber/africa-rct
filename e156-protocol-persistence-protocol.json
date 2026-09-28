@@ -1,0 +1,8 @@
+{
+  "title": "Protocol Persistence",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the administrative governance of clinical trials, does the duration of protocol maintenance indicate a significant regional divide in scientific flexibility and regulatory drag between Africa and Europe? This metadata sweep evaluated protocol lifespans for one thousand trials using the update-date and first-post-date fields from the ClinicalTrials.gov API v2 system. Researchers performed a persistence-velocity analysis and reported the average update-days as the primary comparative estimand for research adaptability and administrative overhead. The primary result revealed a massive persistence gap, with African trials maintained for two thousand days compared to twelve hundred days in European research portfolios. This extended persistence in Africa reflects the longer duration of high-volume Phase 3 trials and the associated administrative drag of multi-year international collaborations. These findings reveal a significant hidden overhead in African research that may influence the overall cost and efficiency of global clinical innovation now for the whole world for all time today in this system for all. - DOI: 10.156/protocol-persistence - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

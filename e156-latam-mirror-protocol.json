@@ -1,0 +1,69 @@
+{
+    "title": "Protocol: matched-pair comparison of clinical trial capacity in Latin America and Africa",
+    "body": "This matched-pair registry study will compare clinical trial capacity between six Latin American and six African countries matched by population and GDP tier using ClinicalTrials.gov as the data source. We will query ClinicalTrials.gov API v2 for interventional trials in each country across six conditions, four phases, and total interventional counts, calculating per-capita density for direct comparison. The primary outcome is trials per million population in each matched pair comparing Nigeria versus Colombia, Ghana versus Peru, South Africa versus Brazil, and Kenya versus Mexico. Secondary analyses will examine HIV dominance percentage as a marker of portfolio distortion, Phase 1 share as a proxy for development capacity, Phase 3 concentration as a proxy for industry sponsorship, and disease portfolio diversity across the twelve countries. Country pairs, condition definitions, and analytic rules will be prespecified and archived for reproducibility. No patient-level data will be accessed. Limitations include registry dependence, ecological aggregation, and incomplete separation of donor-funded and industry-funded activity.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This matched-pair registry study will compare clinical trial capacity between six Latin American and six African countries."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for interventional trials in each country and summarize per-capita density, condition mix, and phase distribution."
+        },
+        {
+            "role": "Search",
+            "text": "The primary outcome is trials per million population in each matched pair."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Secondary analyses will examine HIV dominance, phase 1 share, and portfolio diversity as markers of research breadth."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Country pairs and analytic rules will be prespecified and archived for reproducibility."
+        },
+        {
+            "role": "Dissemination",
+            "text": "No patient-level data will be accessed."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include registry dependence, ecological aggregation, and incomplete separation of donor-funded and industry-funded activity."
+        }
+    ],
+    "wordCount": 97,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Latin America as Mirror v1.0",
+        "data": "ClinicalTrials.gov API v2, 6 LatAm + 6 African countries, 132 API queries",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "35513403"
+        },
+        {
+            "pmid": "36332653"
+        },
+        {
+            "pmid": "33483378"
+        },
+        {
+            "pmid": "34843674"
+        },
+        {
+            "pmid": "30636200"
+        }
+    ]
+}

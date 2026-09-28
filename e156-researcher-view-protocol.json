@@ -1,0 +1,41 @@
+{
+    "title": "Protocol: brain drain and career ceilings for African clinical researchers",
+    "type": "protocol",
+    "primary_estimand": "Career Ceiling Index per institution and composite Brain Drain Risk Score",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\researcher-view.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_researcher_view.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry study will characterise the career landscape for African clinical researchers using ClinicalTrials.gov sponsor and phase data from Uganda. We will classify all 783 interventional trial sponsors into local Ugandan institutions using keyword matching against twelve institution-specific patterns, then compute phase distributions per institution to derive a Career Ceiling Index scored from zero to four based on the most advanced phase led locally. The primary outcomes are the Career Ceiling Index per institution and a composite Brain Drain Risk Score combining four equally weighted components: Phase 1 access deficit, foreign control of research agenda, institutional concentration measured by top-institution share, and sponsor diversity deficit. Secondary analyses will compare institutional workload as trials per active year, condition diversity per institution to assess research breadth, and Makerere University concentration versus regional institutions. The Rwanda research capacity model will serve as a policy comparator, drawing on PMID 39972388. Limitations include proxy measurement of career pathways from registry data only and inability to capture non-registered research activities or teaching commitments.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 162 words."
+            },
+            {
+                "name": "methods described",
+                "ok": true,
+                "detail": "Protocol describes institution classification, Career Ceiling Index, Brain Drain Risk Score components."
+            },
+            {
+                "name": "outcomes specified",
+                "ok": true,
+                "detail": "Primary (CCI, BDRS) and secondary (workload, condition diversity, Rwanda comparator) outcomes specified."
+            }
+        ]
+    }
+}

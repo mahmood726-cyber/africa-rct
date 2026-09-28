@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: decolonization scorecard for African clinical trial portfolios",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "body": "This registry study will construct a research sovereignty score for 15 African countries using prespecified dimensions derived from published decolonization frameworks. We will retrieve all interventional trials per country from ClinicalTrials.gov API v2 and classify sponsor origin using country-specific institutional keyword lists. The primary outcome is a composite zero to one hundred score built from five equally weighted dimensions: local sponsorship percentage, Phase 1 sovereignty, burden-research alignment with WHO disease rankings, institutional diversity, and per-capita trial density relative to global benchmarks. Secondary analyses will examine individual country rankings on each dimension, dimension-level performance across the cohort, and identification of the largest component gaps within each national trial portfolio. Query logic, keyword lists, scoring rules, and dimension weights will be version controlled so that alternative specifications can be tested transparently and replicated. No patient-level data will be used. Limitations include registry dependence, possible sponsor misclassification of joint ventures, and normative assumptions embedded in the composite scoring system.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 123 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "Data retrieval precedes outcome definitions."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses limitations."
+            }
+        ]
+    }
+}

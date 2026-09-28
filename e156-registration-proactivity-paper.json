@@ -1,0 +1,8 @@
+{
+  "title": "Registration Proactivity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the administrative governance of clinical research, does the delay between trial posting and initiation indicate a significant regional divide in registration proactivity between Africa and Europe? This study evaluated temporal gaps for one thousand trials across four global regions using the first-post-date and start-date fields from ClinicalTrials.gov API v2. Researchers performed a registration-velocity analysis and reported the median proactivity-index as the primary comparative estimand for research transparency and administrative efficiency. The primary result showed that both Africa and Europe exhibit a proactive protocol-first registration culture, with many trials posted before participant enrollment begins. This high proactivity signal contrasts significantly with emerging hubs in Asia where retrospective registration remains more common during the audit period. These findings suggest a strong alignment with international transparency standards in the African research hubs despite other structural resource constraints across the whole world now for all time today in this system. - DOI: 10.156/registration-proactivity - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

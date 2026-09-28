@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can I Find a Trial? The Patient's View of Clinical Trial Access in Africa</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+h1 { font-size:2rem; margin:30px 0 10px; color:#fff; }
+h2 { font-size:1.5rem; margin:40px 0 15px; color:var(--accent); border-bottom:1px solid var(--border); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:20px 0 10px; color:var(--purple); }
+.subtitle { color:var(--muted); font-size:1rem; margin-bottom:30px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:20px 0; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px; text-align:center; }
+.stat-box .number { font-size:2.2rem; font-weight:bold; }
+.stat-box .label { font-size:0.85rem; color:var(--muted); margin-top:4px; }
+.narrative { background:rgba(168,85,247,0.08); border-left:4px solid var(--purple); padding:20px; margin:20px 0; border-radius:0 10px 10px 0; font-style:italic; color:#c4b5fd; }
+table { width:100%; border-collapse:collapse; margin:10px 0; }
+th { background:rgba(59,130,246,0.15); padding:10px 8px; text-align:left; font-size:0.85rem; color:var(--accent); border-bottom:2px solid var(--border); }
+td { border-bottom:1px solid var(--border); }
+tr:hover { background:rgba(255,255,255,0.02); }
+.chart-container { position:relative; height:350px; margin:20px 0; }
+canvas { max-width:100%; }
+.methodology { background:rgba(59,130,246,0.05); border:1px solid var(--border); border-radius:10px; padding:20px; margin:30px 0; font-size:0.9rem; color:var(--muted); }
+.methodology h3 { color:var(--accent); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.75rem; font-weight:bold; }
+.badge-danger { background:rgba(239,68,68,0.2); color:#ef4444; }
+.badge-warning { background:rgba(245,158,11,0.2); color:#f59e0b; }
+.badge-ok { background:rgba(34,197,94,0.2); color:#22c55e; }
+.journey-step { display:flex; align-items:center; gap:16px; margin:12px 0; padding:16px; background:rgba(30,41,59,0.5); border-radius:10px; }
+.journey-step .step-num { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem; flex-shrink:0; }
+.journey-step .step-text { flex:1; }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>Can I Find a Trial?</h1>
+<p class="subtitle">The Patient's View: Clinical Trial Accessibility Across Africa | Project 49 of the Africa RCT Equity Series</p>
+
+<div class="narrative">
+"I have been diagnosed with diabetes in Lagos. My doctor says there might be a clinical trial that could help. I search online -- and find nothing recruiting in my country for my condition. In New York, the same search returns hundreds of options. This is the patient's reality of clinical trial access in Africa."
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="number" style="color:var(--danger);">1917</div>
+    <div class="label">Recruiting Trials Across 10 African Countries</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--accent);">18043</div>
+    <div class="label">Recruiting Trials in the US</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--warning);">2.49</div>
+    <div class="label">Africa: Recruiting Trials per Million</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--success);">53.86</div>
+    <div class="label">US: Recruiting Trials per Million</div>
+  </div>
+</div>
+
+<div class="card" style="text-align:center;">
+  <div style="font-size:3rem;font-weight:bold;color:var(--danger);">21.6x</div>
+  <div style="color:var(--muted);">A patient in the US has 21.6x more recruiting trials per capita than a patient in Africa</div>
+</div>
+
+<h2>The Patient Journey: Searching for a Trial</h2>
+
+<div class="journey-step">
+  <div class="step-num" style="background:rgba(59,130,246,0.2);color:var(--accent);">1</div>
+  <div class="step-text">
+    <strong>Patient receives diagnosis</strong><br>
+    <span style="color:var(--muted);">HIV, cancer, diabetes, hypertension, or malaria -- the conditions that define Africa's disease burden</span>
+  </div>
+</div>
+<div class="journey-step">
+  <div class="step-num" style="background:rgba(245,158,11,0.2);color:var(--warning);">2</div>
+  <div class="step-text">
+    <strong>Patient searches for recruiting trials</strong><br>
+    <span style="color:var(--muted);">On ClinicalTrials.gov -- the world's largest trial registry. But how many are actually recruiting in their country?</span>
+  </div>
+</div>
+<div class="journey-step">
+  <div class="step-num" style="background:rgba(239,68,68,0.2);color:var(--danger);">3</div>
+  <div class="step-text">
+    <strong>Result: zero or near-zero options</strong><br>
+    <span style="color:var(--muted);">Average Patient Desert Score = 1.4/5 -- most countries have zero recruiting trials for multiple conditions</span>
+  </div>
+</div>
+<div class="journey-step">
+  <div class="step-num" style="background:rgba(168,85,247,0.2);color:var(--purple);">4</div>
+  <div class="step-text">
+    <strong>Even when trials exist, they are in the capital</strong><br>
+    <span style="color:var(--muted);">Average capital concentration: 39.0% of recruiting trials are in the capital city -- rural patients are excluded</span>
+  </div>
+</div>
+
+<h2>Recruiting Trials Per Million Population</h2>
+<p style="color:var(--muted);margin-bottom:10px;">The LIVE access metric: how many trials could a patient actually join today?</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="rateChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Recruiting Trials</th>
+        <th style="text-align:right;">Population</th>
+        <th style="text-align:right;">Per Million</th>
+        <th style="text-align:right;">Gap vs US</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">1392</td><td style="padding:8px;text-align:right;">112M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">12.43</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">4.3x</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">226</td><td style="padding:8px;text-align:right;">60M</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">3.77</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">14.3x</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">74</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">1.54</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">35.0x</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">74</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">1.32</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">40.8x</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;">32</td><td style="padding:8px;text-align:right;">34M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.94</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">57.3x</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">14M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.5</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">107.7x</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;">10</td><td style="padding:8px;text-align:right;">28M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.36</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">149.6x</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">23</td><td style="padding:8px;text-align:right;">66M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.35</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">153.9x</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">53</td><td style="padding:8px;text-align:right;">224M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.24</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">224.4x</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;">26</td><td style="padding:8px;text-align:right;">127M</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.2</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">269.3x</td></tr>
+<tr style="background:rgba(59,130,246,0.1);border-top:2px solid var(--accent);"><td style="padding:8px;font-weight:bold;">United States</td><td style="padding:8px;text-align:right;">18043</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;color:#3b82f6;font-weight:bold;">53.86</td><td style="padding:8px;text-align:right;">1.0x</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>Can I Find a Trial for My Condition?</h2>
+<p style="color:var(--muted);margin-bottom:10px;">A patient searches for their specific condition -- Africa vs US recruiting trials</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="condChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="text-align:right;">Africa Recruiting</th>
+        <th style="text-align:right;">US Recruiting</th>
+        <th style="text-align:right;">Gap</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">HIV</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">105</td><td style="padding:8px;text-align:right;">266</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">2.5x</td></tr>
+<tr><td style="padding:8px;">Cancer</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">219</td><td style="padding:8px;text-align:right;">5783</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">26.4x</td></tr>
+<tr><td style="padding:8px;">Diabetes</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">34</td><td style="padding:8px;text-align:right;">675</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">19.9x</td></tr>
+<tr><td style="padding:8px;">Hypertension</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">34</td><td style="padding:8px;text-align:right;">334</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">9.8x</td></tr>
+<tr><td style="padding:8px;">Malaria</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">19</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">0.2x</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Patient Desert Score</h2>
+<p style="color:var(--muted);margin-bottom:10px;">How many of 5 major conditions have ZERO recruiting trials in each country?<br>
+Score of 5/5 = complete patient desert; 0/5 = at least one trial per condition</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="desertChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:center;">Desert Score</th>
+        <th>Conditions with Zero Trials</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:center;color:#ef4444;font-weight:bold;font-size:1.3rem;">3/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Cancer, Diabetes, Hypertension</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:center;color:#ef4444;font-weight:bold;font-size:1.3rem;">3/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Diabetes, Hypertension, Malaria</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">2/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Diabetes, Hypertension</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Malaria</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Malaria</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Malaria</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Cancer</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Diabetes</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:center;color:#f59e0b;font-weight:bold;font-size:1.3rem;">1/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">Diabetes</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:center;color:#22c55e;font-weight:bold;font-size:1.3rem;">0/5</td><td style="padding:8px;font-size:0.85rem;color:var(--muted);">None</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Condition-Country Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Recruiting trial counts by condition and country -- red = zero, amber = 1-4, green = 5+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table style="font-size:0.85rem;">
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Nigeri</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">South </th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Ethiop</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Tanzan</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Rwanda</th><th style="padding:6px;font-size:0.7rem;writing-mode:vertical-rl;text-orientation:mixed;">Camero</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;font-weight:bold;">HIV</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">8</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">45</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">23</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">3</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">33</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">6</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">3</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Cancer</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">9</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">45</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">6</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">151</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">4</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">6</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Diabetes</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">31</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Hypertension</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">5</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">6</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">20</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">3</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">1</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">Malaria</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">6</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">3</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">3</td><td style="padding:6px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;">5</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;">2</td><td style="padding:6px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;">0</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Capital City Problem</h2>
+<p style="color:var(--muted);margin-bottom:10px;">What percentage of recruiting trials concentrate in the capital? Rural patients -- the majority -- are excluded.</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="capitalChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Capital</th>
+        <th style="text-align:right;">Capital Trials</th>
+        <th style="text-align:right;">Country Total</th>
+        <th style="text-align:right;">Concentration</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;">Kigali</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">85.7%</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;">Kampala</td><td style="padding:8px;text-align:right;">53</td><td style="padding:8px;text-align:right;">74</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">71.6%</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;">Accra</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">32</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">46.9%</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;">Cairo</td><td style="padding:8px;text-align:right;">580</td><td style="padding:8px;text-align:right;">1392</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">41.7%</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;">Yaounde</td><td style="padding:8px;text-align:right;">4</td><td style="padding:8px;text-align:right;">10</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">40.0%</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;">Nairobi</td><td style="padding:8px;text-align:right;">28</td><td style="padding:8px;text-align:right;">74</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">37.8%</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;">Pretoria</td><td style="padding:8px;text-align:right;">81</td><td style="padding:8px;text-align:right;">226</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">35.8%</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;">Abuja</td><td style="padding:8px;text-align:right;">16</td><td style="padding:8px;text-align:right;">53</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">30.2%</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;">Addis Ababa</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">26</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">0.0%</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;">Dar es Salaam</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;">23</td><td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">0.0%</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="narrative">
+"The numbers tell a simple story: if you are a patient in Africa, clinical trials are not designed for you. They are not recruiting in your country, not studying your condition, and not located near where you live. The evidence that will guide your treatment was generated somewhere else, on someone else."
+</div>
+
+<div class="methodology">
+  <h3>Methodology</h3>
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (queried 2026-03-28)</p>
+  <p><strong>Filter:</strong> <code>AREA[StudyType]INTERVENTIONAL AND AREA[OverallStatus]RECRUITING</code></p>
+  <p><strong>Countries:</strong> 10 African nations (Nigeria, South Africa, Kenya, Ethiopia, Egypt, Ghana, Uganda, Tanzania, Rwanda, Cameroon) + United States as comparator</p>
+  <p><strong>Conditions:</strong> HIV, cancer, diabetes, hypertension, malaria -- the five conditions defining Africa's disease burden</p>
+  <p><strong>Patient Desert Score:</strong> Count of conditions with zero recruiting trials per country (0-5 scale)</p>
+  <p><strong>Capital concentration:</strong> Recruiting trials matching the capital city name vs country total</p>
+  <p><strong>Limitation:</strong> Single registry; some trials may be registered elsewhere. Capital city proxy uses location name matching. Population data from UN 2024 estimates.</p>
+  <p><strong>AI transparency:</strong> LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.</p>
+</div>
+
+</div>
+
+<footer>
+  Africa RCT Equity Series -- Project 49: The Patient's View | ClinicalTrials.gov API v2<br>
+  Generated 2026-03-28 | Data cached for 24 hours
+</footer>
+
+<script>
+const rateLabels = ["Egypt", "South Africa", "Uganda", "Kenya", "Ghana", "Rwanda", "Cameroon", "Tanzania", "Nigeria", "Ethiopia"];
+const rateValues = [12.43, 3.77, 1.54, 1.32, 0.94, 0.5, 0.36, 0.35, 0.24, 0.2];
+const usRate = 53.86;
+
+new Chart(document.getElementById('rateChart'), {
+  type: 'bar',
+  data: {
+    labels: rateLabels,
+    datasets: [{
+      label: 'Recruiting trials per million',
+      data: rateValues,
+      backgroundColor: rateValues.map(v => v < 1 ? 'rgba(239,68,68,0.7)' : (v < 5 ? 'rgba(245,158,11,0.7)' : 'rgba(34,197,94,0.7)')),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Recruiting Trials per Million Population (US rate = ' + usRate + ')', color: '#e2e8f0' },
+      annotation: {}
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+new Chart(document.getElementById('condChart'), {
+  type: 'bar',
+  data: {
+    labels: ["HIV", "Cancer", "Diabetes", "Hypertension", "Malaria"],
+    datasets: [
+      { label: 'Africa (10 countries)', data: [105, 219, 34, 34, 19], backgroundColor: 'rgba(239,68,68,0.7)', borderRadius: 4 },
+      { label: 'United States', data: [266, 5783, 675, 334, 3], backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'Recruiting Trials by Condition: Africa vs US', color: '#e2e8f0' },
+      legend: { labels: { color: '#e2e8f0' } }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      x: { ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+new Chart(document.getElementById('desertChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Rwanda", "Cameroon", "Ethiopia", "Nigeria", "South Africa", "Egypt", "Ghana", "Uganda", "Tanzania", "Kenya"],
+    datasets: [{
+      label: 'Patient Desert Score (out of 5)',
+      data: [3, 3, 2, 1, 1, 1, 1, 1, 1, 0],
+      backgroundColor: [3, 3, 2, 1, 1, 1, 1, 1, 1, 0].map(v => v >= 3 ? 'rgba(239,68,68,0.7)' : (v >= 1 ? 'rgba(245,158,11,0.7)' : 'rgba(34,197,94,0.7)')),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Patient Desert Score: Conditions with Zero Recruiting Trials', color: '#e2e8f0' }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 5, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', stepSize: 1 } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+
+new Chart(document.getElementById('capitalChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Rwanda", "Uganda", "Ghana", "Egypt", "Cameroon", "Kenya", "South Africa", "Nigeria", "Ethiopia", "Tanzania"],
+    datasets: [{
+      label: 'Capital concentration (%)',
+      data: [85.7, 71.6, 46.9, 41.7, 40.0, 37.8, 35.8, 30.2, 0.0, 0.0],
+      backgroundColor: [85.7, 71.6, 46.9, 41.7, 40.0, 37.8, 35.8, 30.2, 0.0, 0.0].map(v => v > 80 ? 'rgba(239,68,68,0.7)' : (v > 50 ? 'rgba(245,158,11,0.7)' : 'rgba(34,197,94,0.7)')),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Capital City Concentration of Recruiting Trials (%)', color: '#e2e8f0' }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

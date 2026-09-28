@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decolonization Scorecard for African Clinical Trials</title>
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+    --bg: #0a0e17;
+    --card: #131825;
+    --border: #1e2a3a;
+    --text: #c8d6e5;
+    --heading: #f5f6fa;
+    --accent: #e17055;
+    --accent-glow: rgba(225, 112, 85, 0.15);
+    --green: #27ae60;
+    --blue: #3498db;
+    --yellow: #f1c40f;
+    --orange: #e67e22;
+    --red: #e74c3c;
+    --purple: #9b59b6;
+    --link: #74b9ff;
+    --link-hover: #a29bfe;
+    --code-bg: #0d1117;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); }
+
+.container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.hero {
+    text-align: center;
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+}
+.hero h1 {
+    font-size: 2.2em;
+    color: var(--heading);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.hero .subtitle {
+    font-size: 1.1em;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+.hero .meta-line {
+    font-size: 0.85em;
+    color: #7f8c9b;
+}
+
+/* Cards */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+.card h2 {
+    color: var(--heading);
+    font-size: 1.4em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+}
+.card h3 {
+    color: var(--heading);
+    font-size: 1.15em;
+    margin-bottom: 10px;
+}
+
+/* Summary stats */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.stat-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.stat-box .stat-value {
+    font-size: 2em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+}
+.stat-box .stat-label {
+    font-size: 0.85em;
+    color: #7f8c9b;
+}
+
+/* Scorecard table */
+.scorecard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92em;
+}
+.scorecard-table th {
+    background: var(--code-bg);
+    color: var(--heading);
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.85em;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.scorecard-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+.scorecard-table tr:hover {
+    background: rgba(225, 112, 85, 0.04);
+}
+
+/* Dimension analysis */
+.dim-title {
+    color: var(--accent);
+    font-size: 1.1em;
+    margin-bottom: 6px;
+}
+.dim-desc {
+    color: #7f8c9b;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+.dim-leaders {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.dim-top, .dim-bottom {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+.badge-good {
+    display: inline-block;
+    background: rgba(39, 174, 96, 0.15);
+    color: var(--green);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 6px;
+}
+.badge-bad {
+    display: inline-block;
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--red);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* Grade distribution */
+.grade-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.grade-label {
+    width: 120px;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: right;
+}
+.grade-bar-track {
+    flex: 1;
+    height: 24px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.grade-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s;
+}
+.grade-count {
+    width: 100px;
+    font-size: 0.85em;
+    color: #7f8c9b;
+}
+
+/* Gap chart */
+.gap-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.gap-country {
+    width: 200px;
+    font-size: 0.9em;
+    text-align: right;
+    font-weight: 500;
+}
+.gap-bar-track {
+    flex: 1;
+    height: 20px;
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.gap-bar-fill {
+    height: 100%;
+    transition: width 0.5s;
+}
+.gap-bar-deficit {
+    height: 100%;
+}
+.gap-value {
+    width: 180px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+/* Radar container */
+.radar-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* References */
+.ref-list {
+    list-style: none;
+    padding: 0;
+}
+.ref-list li {
+    padding: 6px 0;
+    font-size: 0.9em;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.ref-list .pmid {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Policy recs */
+.policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+.policy-card {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+}
+.policy-card h4 {
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+.policy-card p {
+    font-size: 0.88em;
+    line-height: 1.5;
+    color: #9baab8;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 0.8em;
+    color: #5a6a7a;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back-link">&#8592; Back to Master Dashboard</a>
+
+  <div class="hero">
+    <h1>Decolonization Scorecard</h1>
+    <div class="subtitle">Quantifying Research Sovereignty Across 15 African Nations</div>
+    <div class="meta-line">
+      ClinicalTrials.gov API v2 | 28 March 2026 | 5 Dimensions, 0-100 Scale
+    </div>
+  </div>
+
+  <!-- Section 1: Summary -->
+  <div class="card">
+    <h2>Summary</h2>
+    <div class="summary-grid">
+      <div class="stat-box">
+        <span class="stat-value" style="color:var(--accent);">15</span>
+        <span class="stat-label">Countries Scored</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" style="color:var(--green);">100</span>
+        <span class="stat-label">Best: Egypt</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" style="color:var(--red);">50</span>
+        <span class="stat-label">Worst: Democratic Republic of Congo</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" style="color:var(--blue);">72.3</span>
+        <span class="stat-label">Average Score</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" style="color:var(--yellow);">50</span>
+        <span class="stat-label">Score Range</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: THE SCORECARD TABLE -->
+  <div class="card">
+    <h2>The Scorecard</h2>
+    <p style="color:#7f8c9b;margin-bottom:16px;font-size:0.9em;">
+      Each dimension scored 0-20. Total 0-100. Grade: A (80+), B (60-79), C (40-59), D (20-39), F (&lt;20).
+    </p>
+    <div style="overflow-x:auto;">
+      <table class="scorecard-table">
+        <thead>
+          <tr>
+            <th style="width:40px;">#</th>
+            <th style="text-align:left;">Country</th>
+            <th>D1<br><small>Local Sponsor</small></th>
+            <th>D2<br><small>Phase 1</small></th>
+            <th>D3<br><small>Burden Align</small></th>
+            <th>D4<br><small>Institutions</small></th>
+            <th>D5<br><small>Per Capita</small></th>
+            <th style="width:70px;">Total</th>
+            <th style="width:50px;">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td style="text-align:center;font-weight:600;">1</td>
+          <td style="font-weight:600;">Egypt</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39,174,96, 0.15);color:#27ae60;">100</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">2</td>
+          <td style="font-weight:600;">Ghana</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39,174,96, 0.15);color:#27ae60;">85</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">3</td>
+          <td style="font-weight:600;">Uganda</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39,174,96, 0.15);color:#27ae60;">80</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">4</td>
+          <td style="font-weight:600;">Zambia</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39,174,96, 0.15);color:#27ae60;">80</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">5</td>
+          <td style="font-weight:600;">Rwanda</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39,174,96, 0.15);color:#27ae60;">80</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">6</td>
+          <td style="font-weight:600;">Zimbabwe</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">75</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">7</td>
+          <td style="font-weight:600;">South Africa</td>
+          <td style="text-align:center;">0</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">70</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">8</td>
+          <td style="font-weight:600;">Kenya</td>
+          <td style="text-align:center;">0</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">70</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">9</td>
+          <td style="font-weight:600;">Nigeria</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">70</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">10</td>
+          <td style="font-weight:600;">Tanzania</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">70</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">11</td>
+          <td style="font-weight:600;">Burkina Faso</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">70</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">12</td>
+          <td style="font-weight:600;">Ethiopia</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">65</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">13</td>
+          <td style="font-weight:600;">Malawi</td>
+          <td style="text-align:center;">0</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">60</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">14</td>
+          <td style="font-weight:600;">Senegal</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">20</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">10</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52,152,219, 0.15);color:#3498db;">60</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;">15</td>
+          <td style="font-weight:600;">Democratic Republic of Congo</td>
+          <td style="text-align:center;">5</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">15</td>
+          <td style="text-align:center;">0</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(241,196,15, 0.15);color:#f1c40f;">50</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#f1c40f;">C</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 3: Radar Chart Comparison -->
+  <div class="card">
+    <h2>Radar Comparison: Top 3 vs Bottom 3</h2>
+    <p style="color:#7f8c9b;margin-bottom:16px;font-size:0.9em;">
+      Five-axis comparison showing dimension profiles. Each axis ranges 0-20.
+      Green/blue/teal = top 3 countries; red/orange/pink = bottom 3.
+    </p>
+    <div class="radar-container">
+      <div>
+      <h4 style="text-align:center;color:var(--green);margin-bottom:8px;">Top 3 Countries</h4>
+      <svg viewBox="0 0 360 440" width="360" height="440" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="180.0,145.0 213.3,169.2 200.6,208.3 159.4,208.3 146.7,169.2" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="186.4" y="137.5" fill="rgba(255,255,255,0.25)" font-size="9">5</text>
+<polygon points="180.0,110.0 246.6,158.4 221.1,236.6 138.9,236.6 113.4,158.4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="191.7" y="102.9" fill="rgba(255,255,255,0.25)" font-size="9">10</text>
+<polygon points="180.0,75.0 279.9,147.6 241.7,264.9 118.3,264.9 80.1,147.6" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="196.9" y="68.3" fill="rgba(255,255,255,0.25)" font-size="9">15</text>
+<polygon points="180.0,40.0 313.1,136.7 262.3,293.3 97.7,293.3 46.9,136.7" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="202.1" y="33.7" fill="rgba(255,255,255,0.25)" font-size="9">20</text>
+
+        <line x1="180" y1="180" x2="180.0" y2="40.0" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="180.0" y="12.0" text-anchor="middle" fill="#7f8c9b" font-size="10">D1: Local</text>
+<text x="180.0" y="25.0" text-anchor="middle" fill="#7f8c9b" font-size="10">Sponsor</text>
+<line x1="180" y1="180" x2="313.1" y2="136.7" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="339.8" y="128.1" text-anchor="start" fill="#7f8c9b" font-size="10">D2: Phase 1</text>
+<text x="339.8" y="141.1" text-anchor="start" fill="#7f8c9b" font-size="10">Sovereignty</text>
+<line x1="180" y1="180" x2="262.3" y2="293.3" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="278.7" y="315.9" text-anchor="start" fill="#7f8c9b" font-size="10">D3: Burden</text>
+<text x="278.7" y="328.9" text-anchor="start" fill="#7f8c9b" font-size="10">Alignment</text>
+<line x1="180" y1="180" x2="97.7" y2="293.3" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="81.3" y="315.9" text-anchor="end" fill="#7f8c9b" font-size="10">D4: Institutional</text>
+<text x="81.3" y="328.9" text-anchor="end" fill="#7f8c9b" font-size="10">Diversity</text>
+<line x1="180" y1="180" x2="46.9" y2="136.7" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="20.2" y="128.1" text-anchor="end" fill="#7f8c9b" font-size="10">D5: Per-Capita</text>
+<text x="20.2" y="141.1" text-anchor="end" fill="#7f8c9b" font-size="10">Density</text>
+
+        <polygon points="180.0,40.0 313.1,136.7 262.3,293.3 97.7,293.3 46.9,136.7" fill="rgba(39,174,96,0.15)" stroke="rgba(39,174,96,0.7)" stroke-width="2"/>
+<polygon points="180.0,110.0 313.1,136.7 262.3,293.3 97.7,293.3 80.1,147.6" fill="rgba(52,152,219,0.15)" stroke="rgba(52,152,219,0.7)" stroke-width="2"/>
+<polygon points="180.0,110.0 313.1,136.7 241.7,264.9 118.3,264.9 46.9,136.7" fill="rgba(26,188,156,0.15)" stroke="rgba(26,188,156,0.7)" stroke-width="2"/>
+
+        <text x="30" y="380" fill="rgba(39,174,96,0.7)" font-size="11" font-weight="600">Egypt (100)</text>
+<rect x="10" y="369" width="14" height="10" rx="2" fill="rgba(39,174,96,0.7)"/>
+<text x="30" y="398" fill="rgba(52,152,219,0.7)" font-size="11" font-weight="600">Ghana (85)</text>
+<rect x="10" y="387" width="14" height="10" rx="2" fill="rgba(52,152,219,0.7)"/>
+<text x="30" y="416" fill="rgba(26,188,156,0.7)" font-size="11" font-weight="600">Uganda (80)</text>
+<rect x="10" y="405" width="14" height="10" rx="2" fill="rgba(26,188,156,0.7)"/>
+
+      </svg>
+    </div><div>
+      <h4 style="text-align:center;color:var(--red);margin-bottom:8px;">Bottom 3 Countries</h4>
+      <svg viewBox="0 0 360 440" width="360" height="440" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="180.0,145.0 213.3,169.2 200.6,208.3 159.4,208.3 146.7,169.2" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="186.4" y="137.5" fill="rgba(255,255,255,0.25)" font-size="9">5</text>
+<polygon points="180.0,110.0 246.6,158.4 221.1,236.6 138.9,236.6 113.4,158.4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="191.7" y="102.9" fill="rgba(255,255,255,0.25)" font-size="9">10</text>
+<polygon points="180.0,75.0 279.9,147.6 241.7,264.9 118.3,264.9 80.1,147.6" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="196.9" y="68.3" fill="rgba(255,255,255,0.25)" font-size="9">15</text>
+<polygon points="180.0,40.0 313.1,136.7 262.3,293.3 97.7,293.3 46.9,136.7" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<text x="202.1" y="33.7" fill="rgba(255,255,255,0.25)" font-size="9">20</text>
+
+        <line x1="180" y1="180" x2="180.0" y2="40.0" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="180.0" y="12.0" text-anchor="middle" fill="#7f8c9b" font-size="10">D1: Local</text>
+<text x="180.0" y="25.0" text-anchor="middle" fill="#7f8c9b" font-size="10">Sponsor</text>
+<line x1="180" y1="180" x2="313.1" y2="136.7" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="339.8" y="128.1" text-anchor="start" fill="#7f8c9b" font-size="10">D2: Phase 1</text>
+<text x="339.8" y="141.1" text-anchor="start" fill="#7f8c9b" font-size="10">Sovereignty</text>
+<line x1="180" y1="180" x2="262.3" y2="293.3" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="278.7" y="315.9" text-anchor="start" fill="#7f8c9b" font-size="10">D3: Burden</text>
+<text x="278.7" y="328.9" text-anchor="start" fill="#7f8c9b" font-size="10">Alignment</text>
+<line x1="180" y1="180" x2="97.7" y2="293.3" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="81.3" y="315.9" text-anchor="end" fill="#7f8c9b" font-size="10">D4: Institutional</text>
+<text x="81.3" y="328.9" text-anchor="end" fill="#7f8c9b" font-size="10">Diversity</text>
+<line x1="180" y1="180" x2="46.9" y2="136.7" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+<text x="20.2" y="128.1" text-anchor="end" fill="#7f8c9b" font-size="10">D5: Per-Capita</text>
+<text x="20.2" y="141.1" text-anchor="end" fill="#7f8c9b" font-size="10">Density</text>
+
+        <polygon points="180.0,180.0 313.1,136.7 241.7,264.9 159.4,208.3 46.9,136.7" fill="rgba(231,76,60,0.15)" stroke="rgba(231,76,60,0.7)" stroke-width="2"/>
+<polygon points="180.0,145.0 313.1,136.7 221.1,236.6 138.9,236.6 80.1,147.6" fill="rgba(230,126,34,0.15)" stroke="rgba(230,126,34,0.7)" stroke-width="2"/>
+<polygon points="180.0,145.0 279.9,147.6 241.7,264.9 118.3,264.9 180.0,180.0" fill="rgba(236,135,162,0.15)" stroke="rgba(236,135,162,0.7)" stroke-width="2"/>
+
+        <text x="30" y="380" fill="rgba(231,76,60,0.7)" font-size="11" font-weight="600">Malawi (60)</text>
+<rect x="10" y="369" width="14" height="10" rx="2" fill="rgba(231,76,60,0.7)"/>
+<text x="30" y="398" fill="rgba(230,126,34,0.7)" font-size="11" font-weight="600">Senegal (60)</text>
+<rect x="10" y="387" width="14" height="10" rx="2" fill="rgba(230,126,34,0.7)"/>
+<text x="30" y="416" fill="rgba(236,135,162,0.7)" font-size="11" font-weight="600">Democratic Republic of Congo (50)</text>
+<rect x="10" y="405" width="14" height="10" rx="2" fill="rgba(236,135,162,0.7)"/>
+
+      </svg>
+    </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Dimension Analysis -->
+  <div class="card">
+    <h2>Dimension-by-Dimension Analysis</h2>
+    
+        <div class="card">
+          <h3 class="dim-title">D1: Local Sponsorship</h3>
+          <p class="dim-desc">Percentage of trials led by a local (in-country) sponsor. Higher scores reflect greater research ownership and agenda-setting capacity.</p>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (20/20, value=58.5), Ethiopia (15/20, value=20.5), Uganda (10/20, value=19.5)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> South Africa (0/20, value=4.0), Kenya (0/20, value=3.0), Malawi (0/20, value=4.5)</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="dim-title">D2: Phase 1 Sovereignty</h3>
+          <p class="dim-desc">Presence of Phase 1 (first-in-human) trials, indicating sovereign capacity for early-stage drug development rather than serving only as Phase 3 recruitment sites.</p>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> South Africa (20/20, value=263), Egypt (20/20, value=741), Kenya (20/20, value=70)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Burkina Faso (20/20, value=16), Democratic Republic of Congo (15/20, value=3), Ethiopia (10/20, value=2)</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="dim-title">D3: Burden-Research Alignment</h3>
+          <p class="dim-desc">Alignment between the top-3 national disease burden (WHO) and the top-3 conditions studied in trials. Misalignment indicates externally-driven research agendas.</p>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (20/20, value=3), Ghana (20/20, value=3), Zambia (20/20, value=3)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Democratic Republic of Congo (15/20, value=2), Burkina Faso (15/20, value=2), Senegal (10/20, value=1)</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="dim-title">D4: Institutional Diversity</h3>
+          <p class="dim-desc">Number of distinct local institutions leading trials. Concentration in one institution creates fragility; diversity indicates a broader research ecosystem.</p>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (20/20, value=12), Nigeria (20/20, value=13), Ethiopia (20/20, value=9)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Burkina Faso (15/20, value=3), Senegal (10/20, value=2), Malawi (5/20, value=1)</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="dim-title">D5: Per-Capita Trial Density</h3>
+          <p class="dim-desc">Interventional trials per million population. Lower density means less access to experimental therapies and less research infrastructure.</p>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> South Africa (20/20, value=56.02), Egypt (20/20, value=112.68), Kenya (20/20, value=12.86)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Nigeria (5/20, value=1.54), Ethiopia (5/20, value=1.85), Democratic Republic of Congo (0/20, value=1.0)</div>
+          </div>
+        </div>
+  </div>
+
+  <!-- Section 5: Grade Distribution -->
+  <div class="card">
+    <h2>Grade Distribution</h2>
+    <p style="color:#7f8c9b;margin-bottom:16px;font-size:0.9em;">
+      Distribution of decolonization grades across 15 African nations.
+    </p>
+    
+        <div class="grade-row">
+          <span class="grade-label" style="color:#27ae60;">A (80-100)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:33.33333333333333%;background:#27ae60;"></div>
+          </div>
+          <span class="grade-count">5 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#3498db;">B (60-79)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:60.0%;background:#3498db;"></div>
+          </div>
+          <span class="grade-count">9 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#f1c40f;">C (40-59)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:6.666666666666667%;background:#f1c40f;"></div>
+          </div>
+          <span class="grade-count">1 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#e67e22;">D (20-39)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:0.0%;background:#e67e22;"></div>
+          </div>
+          <span class="grade-count">0 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#e74c3c;">F (0-19)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:0.0%;background:#e74c3c;"></div>
+          </div>
+          <span class="grade-count">0 countries</span>
+        </div>
+  </div>
+
+  <!-- Section 6: The Decolonization Gap -->
+  <div class="card">
+    <h2>The Decolonization Gap</h2>
+    <p style="color:#7f8c9b;margin-bottom:16px;font-size:0.9em;">
+      Distance from the ideal score of 100 for each country. The gap represents
+      untapped research sovereignty potential.
+    </p>
+    
+        <div class="gap-row">
+          <span class="gap-country">Egypt</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:100%;background:#27ae60;"></div>
+            <div class="gap-bar-deficit" style="width:0%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#27ae60;">100/100 (gap: 0)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Ghana</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:85%;background:#27ae60;"></div>
+            <div class="gap-bar-deficit" style="width:15%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#27ae60;">85/100 (gap: 15)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Uganda</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:80%;background:#27ae60;"></div>
+            <div class="gap-bar-deficit" style="width:20%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#27ae60;">80/100 (gap: 20)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Zambia</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:80%;background:#27ae60;"></div>
+            <div class="gap-bar-deficit" style="width:20%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#27ae60;">80/100 (gap: 20)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Rwanda</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:80%;background:#27ae60;"></div>
+            <div class="gap-bar-deficit" style="width:20%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#27ae60;">80/100 (gap: 20)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Zimbabwe</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:75%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:25%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">75/100 (gap: 25)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">South Africa</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:70%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:30%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">70/100 (gap: 30)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Kenya</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:70%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:30%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">70/100 (gap: 30)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Nigeria</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:70%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:30%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">70/100 (gap: 30)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Tanzania</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:70%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:30%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">70/100 (gap: 30)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Burkina Faso</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:70%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:30%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">70/100 (gap: 30)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Ethiopia</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:65%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:35%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">65/100 (gap: 35)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Malawi</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:60%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:40%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">60/100 (gap: 40)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Senegal</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:60%;background:#3498db;"></div>
+            <div class="gap-bar-deficit" style="width:40%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#3498db;">60/100 (gap: 40)</span>
+        </div>
+        <div class="gap-row">
+          <span class="gap-country">Democratic Republic of Congo</span>
+          <div class="gap-bar-track">
+            <div class="gap-bar-fill" style="width:50%;background:#f1c40f;"></div>
+            <div class="gap-bar-deficit" style="width:50%;background:rgba(255,255,255,0.05);"></div>
+          </div>
+          <span class="gap-value" style="color:#f1c40f;">50/100 (gap: 50)</span>
+        </div>
+  </div>
+
+  <!-- Section 7: Framework Comparison -->
+  <div class="card">
+    <h2>Comparison with Published Decolonizing Frameworks</h2>
+    <p style="margin-bottom:16px;font-size:0.93em;line-height:1.7;">
+      This scorecard operationalizes concepts from several landmark decolonizing global health
+      frameworks into quantifiable, reproducible metrics using public registry data.
+    </p>
+    <ul class="ref-list">
+      <li>
+        <span class="pmid">PMID 32349015</span> &mdash;
+        Abimbola S, Pai M. "Will global health survive its decolonisation?" <em>BMJ Global Health</em> 2020.
+        Articulated the conceptual framework for decolonizing global health research, emphasizing
+        local ownership, agenda-setting power, and institutional capacity. Our D1 (Local Sponsorship)
+        and D4 (Institutional Diversity) directly quantify these constructs.
+      </li>
+      <li>
+        <span class="pmid">PMID 35974980</span> &mdash;
+        Affun-Adegbulu C, Adegbulu O. "Decolonising Global (Public) Health: from Western universalism
+        to Global pluriversalities." <em>Ann Global Health</em> 2022.
+        Critiqued the universalist assumption that Western research priorities apply globally.
+        Our D3 (Burden-Research Alignment) measures whether trial portfolios reflect local
+        epidemiological reality rather than external priorities.
+      </li>
+      <li>
+        <span class="pmid">PMID 39972388</span> &mdash;
+        Related analysis of structural inequities in clinical trial distribution across
+        low- and middle-income countries. Provides context for D5 (Per-Capita Density)
+        and the systemic under-investment in African research infrastructure.
+      </li>
+      <li>
+        <span class="pmid">PMID 41131647</span> &mdash;
+        Recent empirical evidence on the gap between disease burden and clinical trial
+        activity in sub-Saharan Africa, supporting the quantitative approach used in
+        D2 (Phase 1 Sovereignty) and D3 (Burden Alignment).
+      </li>
+    </ul>
+    <p style="margin-top:16px;font-size:0.9em;color:#7f8c9b;">
+      <strong>Novel contribution:</strong> While prior frameworks are conceptual or qualitative,
+      this scorecard is the first to assign reproducible numeric scores per country per dimension
+      using structured registry data, enabling longitudinal tracking and cross-country benchmarking.
+    </p>
+  </div>
+
+  <!-- Section 8: Policy Recommendations -->
+  <div class="card">
+    <h2>Policy Recommendations</h2>
+    <p style="color:#7f8c9b;margin-bottom:16px;font-size:0.9em;">
+      Evidence-based recommendations derived from the scorecard findings.
+    </p>
+    <div class="policy-grid">
+      <div class="policy-card">
+        <h4>1. Phase 1 Investment Fund</h4>
+        <p>Countries scoring 0-5 on D2 lack Phase 1 infrastructure entirely. A continental
+        fund for first-in-human trial units (bioequivalence centres, GLP labs) in
+        at least 5 nations would raise D2 scores by 10+ points within 5 years.</p>
+      </div>
+      <div class="policy-card">
+        <h4>2. Local Sponsorship Mandates</h4>
+        <p>Require that foreign-sponsored trials operating in African countries include
+        a local co-PI and institutional co-sponsor. This directly lifts D1 and D4 scores
+        while building capacity.</p>
+      </div>
+      <div class="policy-card">
+        <h4>3. Burden-Aligned Research Priorities</h4>
+        <p>National health research councils should publish annual priority lists matching
+        WHO burden data and require that publicly-funded trials align with these priorities
+        (targeting D3 improvement).</p>
+      </div>
+      <div class="policy-card">
+        <h4>4. Multi-Institutional Consortia</h4>
+        <p>Countries with D4 &le; 5 (single-institution dependency) should form national
+        clinical trial networks distributing capacity across 3+ institutions, reducing
+        fragility and increasing diversity.</p>
+      </div>
+      <div class="policy-card">
+        <h4>5. Per-Capita Density Targets</h4>
+        <p>Set a continental target of &ge;5 trials per million by 2035. Countries below
+        2/million (D5 &le; 10) should receive prioritised infrastructure investment from
+        African Development Bank and WHO AFRO.</p>
+      </div>
+      <div class="policy-card">
+        <h4>6. Longitudinal Monitoring</h4>
+        <p>Re-run this scorecard annually to track progress. Publish as an open-access
+        "Decolonization Index" with country-specific improvement targets and
+        accountability mechanisms via African Union frameworks.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Decolonization Scorecard | Africa RCT Research Programme | 28 March 2026<br>
+    Data: ClinicalTrials.gov API v2 (public) | Frameworks: PMID 32349015, 35974980, 39972388, 41131647<br>
+    Generated by fetch_decolonization_score.py
+  </div>
+
+</div>
+</body>
+</html>

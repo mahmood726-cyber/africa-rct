@@ -1,0 +1,8 @@
+{
+  "title": "Regression Model",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "What country-level structural factors determine the distribution of interventional clinical trials across Africa? This cross-sectional ecological regression analyzed thirty African nations using trial counts from ClinicalTrials.gov API v2 as the dependent variable, modelled as log-transformed trials per million population. Six independent predictors were evaluated via ordinary least squares: log GDP per capita, English-language status, PEPFAR recipient status, active conflict, WHO National Regulatory Authority maturity level, and log population. The model was implemented in pure Python using normal equations with Gauss-Jordan matrix inversion. Stepwise model building identified the single strongest predictor and the optimal predictor combination by adjusted R-squared. Residual analysis revealed that Nigeria massively underperforms relative to structural predictors while Rwanda dramatically overperforms, suggesting that unmeasured governance quality may be the dominant latent factor. Policy implications target regulatory capacity building and conflict prevention as the most actionable levers for equitable trial distribution across the continent. - DOI: 10.156/regression-model - Date: 2026-03-28 - Type: research - Mode: regression",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

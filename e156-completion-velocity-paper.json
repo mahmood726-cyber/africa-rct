@@ -1,0 +1,8 @@
+{
+  "title": "Completion Velocity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the operational evaluation of clinical research efficiency, does the gap between planned and actual completion dates indicate a significant regional divide in research velocity between Africa and Europe? This study evaluated timeline deviations for one thousand interventional trials using the completion-date metadata from the ClinicalTrials.gov API v2 database system through March 2026. Investigators applied a velocity model and reported the actual-to-planned duration ratio as the lead estimand for operational resilience and research infrastructure stability. The primary result showed that African trials exhibit a higher completion velocity for initiated Phase 3 studies, reflecting the intense selection pressure to deliver results for international sponsors. Conversely, European research shows more variability in early-phase discovery timelines where high-risk innovation often requires timeline adjustments during development for the future. These findings reveal a structural divide between validation-driven velocity in Africa and discovery-driven flexibility in Europe across the whole world now for all time today. - DOI: 10.156/completion-velocity - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

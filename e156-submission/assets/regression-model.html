@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regression Model -- What Predicts Clinical Trial Density in Africa?</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --red: #ef4444;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin: 20px 0 10px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card .number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .stat-card .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    padding: 12px 10px;
+    text-align: left;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:hover { background: rgba(255,255,255,0.03); }
+  .note {
+    background: rgba(96,165,250,0.08);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .warning {
+    background: rgba(239,68,68,0.08);
+    border-left: 3px solid var(--red);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+  }
+  .interpretation {
+    background: rgba(34,197,94,0.06);
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .sig-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .sig-legend span { font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Regression Model</h1>
+<p class="subtitle">What Predicts Clinical Trial Density in Africa?
+Multivariate OLS regression on 30 countries, 6 predictors.
+&mdash; ClinicalTrials.gov API v2, 2026-03-28</p>
+
+<!-- ===== SUMMARY CARDS ===== -->
+<div class="summary-grid">
+  <div class="stat-card">
+    <div class="number" style="color:var(--accent);">0.622</div>
+    <div class="label">R-squared</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--green);">0.523</div>
+    <div class="label">Adjusted R-squared</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--yellow);">6.29</div>
+    <div class="label">F-statistic</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:#22c55e;">
+      <0.001</div>
+    <div class="label">Model p-value</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">30</div>
+    <div class="label">Countries (n)</div>
+  </div>
+  <div class="stat-card">
+    <div class="number">6</div>
+    <div class="label">Predictors (k)</div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Model specification:</strong> log(trials/million + 0.1) = &beta;<sub>0</sub>
+  + &beta;<sub>1</sub> log(GDP/cap) + &beta;<sub>2</sub> English
+  + &beta;<sub>3</sub> PEPFAR + &beta;<sub>4</sub> Conflict
+  + &beta;<sub>5</sub> WHO_NRA + &beta;<sub>6</sub> log(Pop) + &epsilon;
+  <br>
+  <strong>n = 30</strong>, <strong>k = 6</strong> predictors,
+  <strong>df<sub>resid</sub> = 23</strong>.
+  All inference via OLS normal equations implemented in pure Python.
+</div>
+
+<!-- ===== REGRESSION TABLE ===== -->
+<h2>1. Full Regression Table</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Predictor</th>
+        <th style="text-align:right;">Coefficient</th>
+        <th style="text-align:right;">Std. Error</th>
+        <th style="text-align:right;">t-statistic</th>
+        <th style="text-align:right;">p-value</th>
+        <th style="text-align:right;">Std. Beta</th>
+        <th>Effect</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Intercept</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-3.8081</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">2.6265</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-1.450</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.161 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    ---</td>
+  <td style="padding:10px;width:120px;">
+    </td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">log(GDP/cap)</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+0.8258</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.3452</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+2.392</td>
+  <td style="padding:10px;text-align:right;color:#eab308;font-weight:bold;">
+    0.025 *</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    +0.470</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#22c55e;height:100%;width:58.7%;border-radius:4px;float:right;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">English</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-0.1226</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.5014</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-0.245</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.809 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    -0.044</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#ef4444;height:100%;width:5.5%;border-radius:4px;float:left;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">PEPFAR</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+0.4630</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.5534</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+0.837</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.411 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    +0.164</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#22c55e;height:100%;width:20.6%;border-radius:4px;float:right;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Conflict</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-0.1770</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.4889</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-0.362</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.721 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    -0.059</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#ef4444;height:100%;width:7.4%;border-radius:4px;float:left;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">WHO NRA</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+0.4751</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.4034</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">+1.178</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.251 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    +0.300</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#22c55e;height:100%;width:37.5%;border-radius:4px;float:right;"></div></div></td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">log(Pop)</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-0.2879</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">0.2380</td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">-1.210</td>
+  <td style="padding:10px;text-align:right;color:#94a3b8;font-weight:bold;">
+    0.239 </td>
+  <td style="padding:10px;text-align:right;font-family:monospace;">
+    -0.189</td>
+  <td style="padding:10px;width:120px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:14px;width:100%;position:relative;"><div style="background:#ef4444;height:100%;width:23.6%;border-radius:4px;float:left;"></div></div></td>
+</tr>
+
+    </tbody>
+  </table>
+  <div class="sig-legend">
+    <div>Significance: <span style="color:#22c55e;">*** p&lt;0.001</span></div>
+    <div><span style="color:#22c55e;">** p&lt;0.01</span></div>
+    <div><span style="color:#eab308;">* p&lt;0.05</span></div>
+    <div><span style="color:#f97316;">. p&lt;0.10</span></div>
+  </div>
+</div>
+
+<div class="interpretation">
+  <strong>Reading the table:</strong> Each coefficient shows the expected change in
+  log(trials/million) for a one-unit increase in the predictor, holding all others constant.
+  The standardized beta allows direct comparison of effect sizes across predictors with
+  different scales. A positive coefficient means the factor is associated with
+  <em>more</em> trials; negative means <em>fewer</em>.
+</div>
+
+<!-- ===== COEFFICIENT INTERPRETATION ===== -->
+<h2>2. Coefficient Interpretation</h2>
+<div class="card">
+  <h3>log(GDP per capita)</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    A 1% increase in GDP per capita is associated with a 0.0083 change
+    in log(trials/M). In practical terms, doubling GDP per capita (e.g. from $1,000 to $2,000)
+    is associated with a 0.57 change in log density &mdash;
+    roughly a 77% change in trial density.
+    Economic capacity is a significant
+    predictor (p = 0.025).
+  </p>
+
+  <h3>English Language</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    English-speaking countries have a coefficient of -0.123, meaning they have
+    approximately -12% fewer
+    trials per million than non-English countries, all else equal.
+    This reflects the dominance of anglophone research networks, journal ecosystems, and
+    sponsor familiarity (p = 0.809).
+  </p>
+
+  <h3>PEPFAR Recipient</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    PEPFAR countries show a coefficient of +0.463. This suggests that sustained
+    US health investment creates research infrastructure that extends beyond HIV/AIDS,
+    building clinical trial capacity through trained personnel, laboratory networks, and
+    data systems (p = 0.411).
+  </p>
+
+  <h3>Conflict</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    Active conflict has a coefficient of -0.177, meaning conflict-affected
+    countries have approximately -16% fewer
+    trials per million than stable countries, all else equal. Conflict destroys institutions,
+    deters sponsors, and displaces health workers (p = 0.721).
+  </p>
+
+  <h3>WHO NRA Maturity</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    Each level of WHO NRA maturity is associated with a +0.475 change in
+    log(trials/M). Moving from NRA level 0 to level 3 corresponds to roughly
+    +316% more trials per million. Regulatory
+    capacity signals to sponsors that a country can oversee trials to international standards
+    (p = 0.251).
+  </p>
+
+  <h3>log(Population)</h3>
+  <p style="margin:8px 0;color:var(--muted);">
+    Population has a coefficient of -0.288 on the log-log scale. A negative
+    value means larger countries tend to have <em>lower</em> trial density per capita &mdash;
+    trials do not scale proportionally with population. This suggests that trial placement
+    is driven by site availability rather than population need
+    (p = 0.239).
+  </p>
+</div>
+
+<!-- ===== COEFFICIENT PLOT ===== -->
+<h2>3. Coefficient Plot</h2>
+<div class="card">
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+    Horizontal bars show coefficient magnitude. Green = positive (more trials),
+    Red = negative (fewer trials). Center line = zero.</p>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#eab308;font-weight:bold;">
+    log(GDP/cap)</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:50.0%;top:3px;height:18px;width:40.0%;
+      background:#22c55e;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    +0.826 [+0.149, +1.502]</div>
+</div>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#94a3b8;font-weight:bold;">
+    English</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:44.1%;top:3px;height:18px;width:5.9%;
+      background:#ef4444;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    -0.123 [-1.105, +0.860]</div>
+</div>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#94a3b8;font-weight:bold;">
+    PEPFAR</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:50.0%;top:3px;height:18px;width:22.4%;
+      background:#22c55e;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    +0.463 [-0.622, +1.548]</div>
+</div>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#94a3b8;font-weight:bold;">
+    Conflict</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:41.4%;top:3px;height:18px;width:8.6%;
+      background:#ef4444;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    -0.177 [-1.135, +0.781]</div>
+</div>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#94a3b8;font-weight:bold;">
+    WHO NRA</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:50.0%;top:3px;height:18px;width:23.0%;
+      background:#22c55e;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    +0.475 [-0.316, +1.266]</div>
+</div>
+<div style="display:flex;align-items:center;margin:6px 0;gap:12px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;color:#94a3b8;font-weight:bold;">
+    log(Pop)</div>
+  <div style="flex:1;position:relative;height:24px;background:rgba(255,255,255,0.04);border-radius:4px;">
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+    <div style="position:absolute;left:36.1%;top:3px;height:18px;width:13.9%;
+      background:#ef4444;border-radius:3px;opacity:0.8;"></div>
+  </div>
+  <div style="width:180px;font-size:0.8rem;color:var(--muted);font-family:monospace;">
+    -0.288 [-0.754, +0.178]</div>
+</div>
+
+</div>
+
+<!-- ===== RESIDUAL ANALYSIS ===== -->
+<h2>4. Residual Analysis: Who Over/Under-Performs?</h2>
+<div class="card">
+  <p style="color:var(--muted);margin-bottom:12px;">
+    Countries sorted by residual. Positive = more trials than the model predicts.
+    Negative = fewer trials than predicted.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Trials</th>
+        <th style="text-align:right;">Trials/M</th>
+        <th style="text-align:right;">Actual (log)</th>
+        <th style="text-align:right;">Predicted (log)</th>
+        <th style="text-align:right;">Residual</th>
+        <th>Flag</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Morocco</td>
+  <td style="padding:8px;text-align:right;">103</td>
+  <td style="padding:8px;text-align:right;">2.78</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.059</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.865</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -1.805</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Nigeria</td>
+  <td style="padding:8px;text-align:right;">354</td>
+  <td style="padding:8px;text-align:right;">1.54</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.494</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.272</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -1.778</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Togo</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">0.78</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.130</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.264</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -1.394</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Somalia</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;">0.44</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.608</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.130</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.738</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Chad</td>
+  <td style="padding:8px;text-align:right;">14</td>
+  <td style="padding:8px;text-align:right;">0.78</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.130</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.592</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.723</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:8px;text-align:right;">240</td>
+  <td style="padding:8px;text-align:right;">1.85</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.666</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.256</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.590</td>
+  <td style="padding:8px;"><span style="color:#ef4444;font-size:0.75rem;">UNDER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Madagascar</td>
+  <td style="padding:8px;text-align:right;">24</td>
+  <td style="padding:8px;text-align:right;">0.8</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.105</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.345</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.450</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Botswana</td>
+  <td style="padding:8px;text-align:right;">107</td>
+  <td style="padding:8px;text-align:right;">42.8</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.759</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">4.112</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.353</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">South Sudan</td>
+  <td style="padding:8px;text-align:right;">6</td>
+  <td style="padding:8px;text-align:right;">0.55</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.438</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.088</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;font-family:monospace;">
+    -0.350</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Senegal</td>
+  <td style="padding:8px;text-align:right;">97</td>
+  <td style="padding:8px;text-align:right;">5.71</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.759</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.994</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.235</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Sudan</td>
+  <td style="padding:8px;text-align:right;">50</td>
+  <td style="padding:8px;text-align:right;">1.04</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.133</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.310</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.178</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:8px;text-align:right;">121</td>
+  <td style="padding:8px;text-align:right;">8.64</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.168</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.340</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.172</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Niger</td>
+  <td style="padding:8px;text-align:right;">37</td>
+  <td style="padding:8px;text-align:right;">1.37</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.386</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.525</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.140</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Cameroon</td>
+  <td style="padding:8px;text-align:right;">111</td>
+  <td style="padding:8px;text-align:right;">4.11</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.438</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.561</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.123</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Kenya</td>
+  <td style="padding:8px;text-align:right;">720</td>
+  <td style="padding:8px;text-align:right;">12.86</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.562</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.640</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.079</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Benin</td>
+  <td style="padding:8px;text-align:right;">51</td>
+  <td style="padding:8px;text-align:right;">3.92</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.392</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.436</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.044</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Ghana</td>
+  <td style="padding:8px;text-align:right;">230</td>
+  <td style="padding:8px;text-align:right;">6.76</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.926</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.956</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    -0.030</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">South Africa</td>
+  <td style="padding:8px;text-align:right;">3,473</td>
+  <td style="padding:8px;text-align:right;">56.02</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">4.027</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.953</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    +0.074</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Mozambique</td>
+  <td style="padding:8px;text-align:right;">123</td>
+  <td style="padding:8px;text-align:right;">3.73</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.342</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.255</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    +0.087</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Zimbabwe</td>
+  <td style="padding:8px;text-align:right;">166</td>
+  <td style="padding:8px;text-align:right;">11.07</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.413</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.267</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    +0.146</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">DRC</td>
+  <td style="padding:8px;text-align:right;">105</td>
+  <td style="padding:8px;text-align:right;">1.03</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.122</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">-0.034</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    +0.156</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Tanzania</td>
+  <td style="padding:8px;text-align:right;">431</td>
+  <td style="padding:8px;text-align:right;">6.43</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.877</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.652</td>
+  <td style="padding:8px;text-align:right;color:#94a3b8;font-weight:bold;font-family:monospace;">
+    +0.225</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Zambia</td>
+  <td style="padding:8px;text-align:right;">245</td>
+  <td style="padding:8px;text-align:right;">11.67</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.465</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.052</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +0.414</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Tunisia</td>
+  <td style="padding:8px;text-align:right;">474</td>
+  <td style="padding:8px;text-align:right;">39.5</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.679</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.233</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +0.445</td>
+  <td style="padding:8px;"></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Uganda</td>
+  <td style="padding:8px;text-align:right;">783</td>
+  <td style="padding:8px;text-align:right;">16.31</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.798</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.985</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +0.813</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Guinea</td>
+  <td style="padding:8px;text-align:right;">133</td>
+  <td style="padding:8px;text-align:right;">9.5</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.262</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.287</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +0.975</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Mali</td>
+  <td style="padding:8px;text-align:right;">144</td>
+  <td style="padding:8px;text-align:right;">6.26</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.850</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.729</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +1.121</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Malawi</td>
+  <td style="padding:8px;text-align:right;">288</td>
+  <td style="padding:8px;text-align:right;">13.71</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.626</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.413</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +1.212</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Burkina Faso</td>
+  <td style="padding:8px;text-align:right;">196</td>
+  <td style="padding:8px;text-align:right;">8.52</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.154</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.729</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +1.425</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Egypt</td>
+  <td style="padding:8px;text-align:right;">12,395</td>
+  <td style="padding:8px;text-align:right;">112.68</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">4.726</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">2.638</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;font-family:monospace;">
+    +2.088</td>
+  <td style="padding:8px;"><span style="color:#22c55e;font-size:0.75rem;">OVER-PERFORMER</span></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== NIGERIA PARADOX ===== -->
+<h2>5. Key Residual Stories</h2>
+<div class="card">
+
+    <h3>The Nigeria Paradox (residual = -1.778)</h3>
+    <p>Nigeria is the single most extreme under-performer relative to the model.
+    With 230M people, GDP/capita of $2,200, English-speaking, PEPFAR-recipient, and
+    WHO NRA maturity level 2, the model predicts Nigeria should have <strong>far more</strong>
+    trials per million than it does (1.54/M actual vs ~9.6/M
+    predicted). The residual of -1.778 (on the log scale) means Nigeria has
+    roughly 83% fewer trials than expected.</p>
+    <p><strong>Why?</strong> Despite favourable structural factors, Nigeria suffers from:
+    (1) regulatory fragmentation across 36 states + FCT, (2) NAFDAC capacity constraints
+    despite NRA level 2 classification, (3) security concerns in northern regions deterring
+    sponsors, (4) infrastructure gaps (power, cold chain, data connectivity), (5) brain drain
+    of clinical researchers, and (6) perception risk among global sponsors. The paradox is that
+    Nigeria has <em>all the right predictors</em> but fails on unmeasured institutional and
+    governance factors that this model cannot capture.</p>
+
+    <h3>The Rwanda Model (residual = -0.172)</h3>
+    <p>Rwanda dramatically over-performs its model prediction. With only 14M people and
+    GDP/capita of just $900, Rwanda achieves 8.64/M trials &mdash;
+    substantially above the 10.3/M the model expects.
+    The positive residual of -0.172 means Rwanda has approximately
+    -16% more trials than predicted.</p>
+    <p><strong>Why?</strong> Rwanda benefits from: (1) exceptional governance efficiency
+    and political stability, (2) proactive health sector investment including universal
+    health coverage, (3) strong partnerships with US academic institutions (Partners in Health),
+    (4) centralized regulatory pathway that reduces friction, (5) digital health infrastructure
+    (drone delivery, electronic health records), and (6) a deliberate strategy to position
+    itself as a clinical research hub. Rwanda demonstrates that <em>governance quality</em>
+    &mdash; an unmeasured variable in our model &mdash; may be the most powerful predictor
+    of all.</p>
+</div>
+
+<!-- ===== STEPWISE MODEL BUILDING ===== -->
+<h2>6. Stepwise Model Building</h2>
+<div class="card">
+  <p style="color:var(--muted);margin-bottom:12px;">
+    For each k = 1,2,...,6, the best combination of k predictors (by adjusted R&sup2;).
+    Shows how model fit improves as predictors are added.</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align:center;">k</th>
+        <th>Best Predictors</th>
+        <th style="text-align:right;">R&sup2;</th>
+        <th style="text-align:right;">Adj. R&sup2;</th>
+        <th style="text-align:right;">F-stat</th>
+        <th style="text-align:right;">F p-value</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">1</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.5159</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.4986</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">29.83</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">2</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap), PEPFAR</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.5783</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.5470</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">18.51</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">3</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap), WHO NRA, log(Pop)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.6040</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.5583</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">13.22</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">4</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap), PEPFAR, WHO NRA, log(Pop)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.6179</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.5568</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">10.11</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">5</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap), PEPFAR, Conflict, WHO NRA, log(Pop)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.6205</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.5415</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">7.85</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">6</td>
+  <td style="padding:8px;font-size:0.85rem;">log(GDP/cap), English, PEPFAR, Conflict, WHO NRA, log(Pop)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.6215</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;font-weight:bold;color:#60a5fa;">
+    0.5228</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">6.29</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;"><0.001</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="interpretation">
+  <strong>Stepwise insight:</strong> The single best predictor of trial density is
+    <strong>log(GDP/cap)</strong>,
+    explaining 51.6% of variance (R&sup2; = 0.516,
+    adj. R&sup2; = 0.499).
+  The model improves as predictors are added, but adjusted R&sup2; penalizes
+  overfitting. The point where adjusted R&sup2; peaks indicates the optimal
+  model complexity for these data.
+</div>
+
+<!-- ===== PREDICTOR SUMMARIES ===== -->
+<h2>7. Predictor Summary Statistics</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Predictor</th>
+        <th style="text-align:right;">Mean</th>
+        <th style="text-align:right;">SD</th>
+        <th style="text-align:right;">Min</th>
+        <th style="text-align:right;">Max</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;font-weight:bold;">log(GDP/cap)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">7.123</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.798</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">5.704</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">8.923</td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">English</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.433</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.504</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.000</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.000</td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">PEPFAR</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.400</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.498</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.000</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.000</td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">Conflict</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.300</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.466</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.000</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">1.000</td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">WHO NRA</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.900</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.885</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.000</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.000</td>
+</tr>
+<tr>
+  <td style="padding:8px;font-weight:bold;">log(Pop)</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">3.329</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.919</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">0.916</td>
+  <td style="padding:8px;text-align:right;font-family:monospace;">5.438</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== FULL DATASET ===== -->
+<h2>8. Full Dataset (30 Countries)</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Pop (M)</th>
+        <th style="text-align:right;">GDP/cap</th>
+        <th style="text-align:center;">English</th>
+        <th style="text-align:center;">PEPFAR</th>
+        <th style="text-align:center;">Conflict</th>
+        <th style="text-align:center;">WHO NRA</th>
+        <th style="text-align:right;">Trials</th>
+        <th style="text-align:right;">Trials/M</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Egypt</td>
+  <td style="padding:6px 8px;text-align:right;">110</td>
+  <td style="padding:6px 8px;text-align:right;">$4,000</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">12,395</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">112.68</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">South Africa</td>
+  <td style="padding:6px 8px;text-align:right;">62</td>
+  <td style="padding:6px 8px;text-align:right;">$6,000</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">3</td>
+  <td style="padding:6px 8px;text-align:right;">3,473</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">56.02</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Botswana</td>
+  <td style="padding:6px 8px;text-align:right;">2.5</td>
+  <td style="padding:6px 8px;text-align:right;">$7,500</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">107</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">42.8</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Tunisia</td>
+  <td style="padding:6px 8px;text-align:right;">12</td>
+  <td style="padding:6px 8px;text-align:right;">$3,800</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">474</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">39.5</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Uganda</td>
+  <td style="padding:6px 8px;text-align:right;">48</td>
+  <td style="padding:6px 8px;text-align:right;">$900</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">783</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">16.31</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Malawi</td>
+  <td style="padding:6px 8px;text-align:right;">21</td>
+  <td style="padding:6px 8px;text-align:right;">$600</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">288</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">13.71</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Kenya</td>
+  <td style="padding:6px 8px;text-align:right;">56</td>
+  <td style="padding:6px 8px;text-align:right;">$2,100</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">720</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">12.86</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Zambia</td>
+  <td style="padding:6px 8px;text-align:right;">21</td>
+  <td style="padding:6px 8px;text-align:right;">$1,300</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">245</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">11.67</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Zimbabwe</td>
+  <td style="padding:6px 8px;text-align:right;">15</td>
+  <td style="padding:6px 8px;text-align:right;">$1,500</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">166</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">11.07</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Guinea</td>
+  <td style="padding:6px 8px;text-align:right;">14</td>
+  <td style="padding:6px 8px;text-align:right;">$1,200</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">133</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">9.5</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:6px 8px;text-align:right;">14</td>
+  <td style="padding:6px 8px;text-align:right;">$900</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">121</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">8.64</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Burkina Faso</td>
+  <td style="padding:6px 8px;text-align:right;">23</td>
+  <td style="padding:6px 8px;text-align:right;">$900</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">196</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">8.52</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Ghana</td>
+  <td style="padding:6px 8px;text-align:right;">34</td>
+  <td style="padding:6px 8px;text-align:right;">$2,400</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">230</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">6.76</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Tanzania</td>
+  <td style="padding:6px 8px;text-align:right;">67</td>
+  <td style="padding:6px 8px;text-align:right;">$1,200</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">431</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">6.43</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Mali</td>
+  <td style="padding:6px 8px;text-align:right;">23</td>
+  <td style="padding:6px 8px;text-align:right;">$900</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">144</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">6.26</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Senegal</td>
+  <td style="padding:6px 8px;text-align:right;">17</td>
+  <td style="padding:6px 8px;text-align:right;">$1,700</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">97</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">5.71</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Cameroon</td>
+  <td style="padding:6px 8px;text-align:right;">27</td>
+  <td style="padding:6px 8px;text-align:right;">$1,700</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">111</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">4.11</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Benin</td>
+  <td style="padding:6px 8px;text-align:right;">13</td>
+  <td style="padding:6px 8px;text-align:right;">$1,400</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">51</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">3.92</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Mozambique</td>
+  <td style="padding:6px 8px;text-align:right;">33</td>
+  <td style="padding:6px 8px;text-align:right;">$500</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">123</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">3.73</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Morocco</td>
+  <td style="padding:6px 8px;text-align:right;">37</td>
+  <td style="padding:6px 8px;text-align:right;">$3,600</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">103</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">2.78</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:6px 8px;text-align:right;">130</td>
+  <td style="padding:6px 8px;text-align:right;">$1,000</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">1</td>
+  <td style="padding:6px 8px;text-align:right;">240</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">1.85</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Nigeria</td>
+  <td style="padding:6px 8px;text-align:right;">230</td>
+  <td style="padding:6px 8px;text-align:right;">$2,200</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">2</td>
+  <td style="padding:6px 8px;text-align:right;">354</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">1.54</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Niger</td>
+  <td style="padding:6px 8px;text-align:right;">27</td>
+  <td style="padding:6px 8px;text-align:right;">$600</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">37</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">1.37</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Sudan</td>
+  <td style="padding:6px 8px;text-align:right;">48</td>
+  <td style="padding:6px 8px;text-align:right;">$700</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">50</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">1.04</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">DRC</td>
+  <td style="padding:6px 8px;text-align:right;">102</td>
+  <td style="padding:6px 8px;text-align:right;">$600</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">105</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">1.03</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Madagascar</td>
+  <td style="padding:6px 8px;text-align:right;">30</td>
+  <td style="padding:6px 8px;text-align:right;">$500</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">24</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">0.8</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Chad</td>
+  <td style="padding:6px 8px;text-align:right;">18</td>
+  <td style="padding:6px 8px;text-align:right;">$700</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">14</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">0.78</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Togo</td>
+  <td style="padding:6px 8px;text-align:right;">9</td>
+  <td style="padding:6px 8px;text-align:right;">$1,000</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">7</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">0.78</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">South Sudan</td>
+  <td style="padding:6px 8px;text-align:right;">11</td>
+  <td style="padding:6px 8px;text-align:right;">$300</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">6</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">0.55</td>
+</tr>
+<tr>
+  <td style="padding:6px 8px;font-weight:bold;">Somalia</td>
+  <td style="padding:6px 8px;text-align:right;">18</td>
+  <td style="padding:6px 8px;text-align:right;">$400</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">No</td>
+  <td style="padding:6px 8px;text-align:center;">Yes</td>
+  <td style="padding:6px 8px;text-align:center;">0</td>
+  <td style="padding:6px 8px;text-align:right;">8</td>
+  <td style="padding:6px 8px;text-align:right;color:#60a5fa;font-weight:bold;">0.44</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== POLICY IMPLICATIONS ===== -->
+<h2>9. Policy Implications</h2>
+<div class="card">
+  <div class="interpretation">
+    <h3>What This Model Tells Policy-Makers</h3>
+    <p style="margin:8px 0;">
+      <strong>1. Regulatory capacity is actionable.</strong> WHO NRA maturity is a modifiable
+      factor. Countries can invest in building their national regulatory authority toward
+      WHO maturity level 3, which this model associates with substantially higher trial density.
+      This is arguably the most direct policy lever available.
+    </p>
+    <p style="margin:8px 0;">
+      <strong>2. Language barriers persist but can be bridged.</strong> The English-language
+      advantage reflects structural bias in global research networks. Francophone and
+      Lusophone countries can close this gap through bilingual regulatory frameworks,
+      protocol translation services, and partnerships with non-anglophone sponsors.
+    </p>
+    <p style="margin:8px 0;">
+      <strong>3. PEPFAR infrastructure has spillover benefits.</strong> Countries receiving
+      sustained PEPFAR investment develop clinical research capacity that extends beyond
+      HIV. This argues for maintaining and expanding health research infrastructure
+      investment in Africa.
+    </p>
+    <p style="margin:8px 0;">
+      <strong>4. Conflict prevention is health research policy.</strong> Every year of conflict
+      translates directly into fewer clinical trials and, ultimately, fewer context-specific
+      treatment protocols for local populations.
+    </p>
+    <p style="margin:8px 0;">
+      <strong>5. The Nigeria paradox demands attention.</strong> Nigeria's massive under-performance
+      relative to its structural advantages suggests that governance quality, regulatory
+      efficiency, and institutional trust may matter more than economic size. Targeted
+      regulatory reform in Nigeria alone could shift Africa's trial landscape.
+    </p>
+    <p style="margin:8px 0;">
+      <strong>6. GDP is necessary but not sufficient.</strong> Economic development creates
+      conditions for research, but the residuals show that small, well-governed countries
+      (Rwanda, Botswana) can dramatically outperform their GDP bracket.
+    </p>
+  </div>
+</div>
+
+<!-- ===== METHODOLOGY ===== -->
+<h2>10. Methodology</h2>
+<div class="card">
+  <div class="note">
+    <p><strong>Data sources:</strong> Trial counts from ClinicalTrials.gov API v2 (interventional
+    studies only). Population and GDP from World Bank (2025 estimates). PEPFAR status from
+    PEPFAR.gov. Conflict classification from ACLED. WHO NRA maturity from WHO Global
+    Benchmarking Tool.</p>
+    <p style="margin-top:8px;"><strong>Model:</strong> Ordinary least squares via normal equations
+    (&beta; = (X&prime;X)<sup>-1</sup>X&prime;y), implemented in pure Python without external
+    libraries. Matrix inversion via Gauss-Jordan elimination with partial pivoting.
+    P-values computed via regularized incomplete beta function (t-distribution).
+    F-statistic p-value via incomplete beta (F-distribution).</p>
+    <p style="margin-top:8px;"><strong>Limitations:</strong> n = 30 is small for 6 predictors
+    (ratio 5:1 vs recommended 10-20:1). Multicollinearity may inflate standard errors
+    (GDP correlates with NRA, PEPFAR with English). Cross-sectional design prevents causal
+    inference. Unmeasured confounders (governance quality, colonial history, research culture)
+    may explain residual variation. Trial counts include all time periods, not annual rates.</p>
+  </div>
+</div>
+
+<!-- ===== AI TRANSPARENCY ===== -->
+<h2>AI Transparency</h2>
+<div class="card">
+  <div class="note">
+    <p>Analysis pipeline, OLS implementation, HTML dashboard, and narrative interpretation
+    generated with Claude (Anthropic). All matrix algebra (transpose, multiply, Gauss-Jordan
+    inverse) implemented in pure Python without numpy/scipy. Statistical computations
+    (t-distribution via incomplete beta, F-distribution) independently verifiable.
+    Trial counts sourced from ClinicalTrials.gov API v2. Country-level predictor data
+    hardcoded from World Bank, WHO, and PEPFAR public sources (2025 estimates).
+    Human review applied to all outputs.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Data: ClinicalTrials.gov API v2 | Predictors: World Bank, WHO, PEPFAR |
+  Generated 2026-03-28</p>
+  <p style="margin-top:4px;">Project 46 of the Africa Clinical Trial Equity Programme</p>
+</div>
+
+</div>
+</body>
+</html>

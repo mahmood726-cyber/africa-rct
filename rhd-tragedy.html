@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RHD: The $0.02 Tragedy</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.cost-highlight {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.2);
+  border: 2px solid var(--danger);
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--danger);
+  margin: 0.5rem 0;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>RHD: The $0.02 Tragedy</h1>
+<p class="subtitle">Rheumatic heart disease kills 240,000 Africans per year. Prevention
+costs two US cents per dose. Yet Africa has 14 trials.</p>
+
+<!-- 1. Summary -->
+<h2>1. $0.02 vs 240,000 Lives</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa RHD Trials</div>
+    <div class="value danger">14</div>
+    <div class="label">vs 29 in the US</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">African Deaths / Year</div>
+    <div class="value danger">240,000</div>
+    <div class="label">78% of global RHD mortality</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Prevention Cost / Dose</div>
+    <div class="value success">$0.02</div>
+    <div class="label">benzathine penicillin G</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Surgery vs Prevention</div>
+    <div class="value warning">62,500x</div>
+    <div class="label">$15,000 surgery vs $0.24/yr prevention</div>
+  </div>
+</div>
+
+<div class="danger-note">
+<strong>The most cost-effective intervention never tested:</strong> Benzathine penicillin G
+prevents rheumatic fever recurrence and subsequent rheumatic heart disease at
+<span class="cost-highlight">$0.02/dose</span>. Annual prophylaxis costs
+$0.24 per child. Yet valve replacement surgery &mdash;
+needed when prevention fails &mdash; costs $15,000, a
+62,500-fold difference. With only 14 RHD
+trial(s) in all of Africa, the evidence base for delivery strategies in
+the highest-burden continent is essentially nonexistent.
+</div>
+
+<!-- 2. The Preventable Tragedy -->
+<h2>2. The Preventable Tragedy</h2>
+<p>Rheumatic heart disease follows a tragic but entirely preventable cascade:</p>
+<div class="method-note">
+<strong>The RHD Cascade:</strong><br>
+1. <strong>Group A Streptococcus</strong> causes pharyngitis (sore throat)<br>
+2. Untreated strep triggers <strong>acute rheumatic fever</strong> in susceptible individuals<br>
+3. Repeated rheumatic fever attacks damage heart valves &rarr; <strong>RHD</strong><br>
+4. RHD leads to heart failure and death, median age <strong>28</strong> in Africa
+   vs 72 in HICs<br><br>
+<strong>Every step is preventable.</strong> Treat the sore throat with penicillin.
+Prevent recurrence with monthly BPG injections. High-income countries eliminated
+RHD in the 1960s using exactly this approach.
+</div>
+
+<!-- 3. Penicillin Access Crisis -->
+<h2>3. The Penicillin Access Crisis</h2>
+<div class="danger-note">
+<strong>The paradox:</strong> Benzathine penicillin G is on the WHO Essential Medicines List.
+It costs $0.02 per dose. It has been available since 1955. Yet chronic global
+shortages mean African children cannot access it reliably. The reasons are
+structural:<br><br>
+&bull; <strong>No profit incentive:</strong> At $0.02/dose, no manufacturer invests in
+production capacity<br>
+&bull; <strong>Supply chain failures:</strong> Cold chain requirements in tropical climates<br>
+&bull; <strong>Quality concerns:</strong> Painful injections from poor-quality formulations
+reduce adherence<br>
+&bull; <strong>No political priority:</strong> RHD kills quietly, one patient at a time,
+unlike epidemics
+</div>
+
+<!-- 4. Country Burden -->
+<h2>4. Country Burden</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">RHD Trials</th>
+  <th style="text-align:right;">Strep Trials</th>
+  <th style="text-align:right;">Death Rate /100K</th>
+  <th style="text-align:right;">Population</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">5.3</td><td style="padding:8px;text-align:right;">62M</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">12.4</td><td style="padding:8px;text-align:right;">48M</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">7.5</td><td style="padding:8px;text-align:right;">56M</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">8.2</td><td style="padding:8px;text-align:right;">230M</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">11.8</td><td style="padding:8px;text-align:right;">130M</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">9.7</td><td style="padding:8px;text-align:right;">67M</td></tr>
+<tr><td style="padding:8px;">Mozambique</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">10.9</td><td style="padding:8px;text-align:right;">34M</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">3.1</td><td style="padding:8px;text-align:right;">110M</td></tr>
+
+<tr><td colspan="5" style="padding:4px;border-bottom:2px solid var(--border);"></td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United States</td><td style="padding:8px;text-align:right;">29</td><td style="padding:8px;text-align:right;">9</td><td style="padding:8px;text-align:right;">0.3</td><td style="padding:8px;text-align:right;">335M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">India</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">6.8</td><td style="padding:8px;text-align:right;">1440M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">Brazil</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">1.4</td><td style="padding:8px;text-align:right;">217M</td></tr>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United Kingdom</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">0.1</td><td style="padding:8px;text-align:right;">68M</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>RHD Death Rate per 100,000 by Country</h3>
+<canvas id="burdenChart" height="300"></canvas>
+</div>
+
+<!-- 5. Burden vs Trials -->
+<h2>5. Burden vs Trials: The Mismatch</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Death Rate /100K</th>
+  <th style="text-align:right;">RHD Trials</th>
+  <th style="text-align:right;">Est. Deaths/yr</th>
+  <th style="text-align:right;">Deaths per Trial</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Uganda</td><td style="padding:8px;text-align:right;">12.4</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">5,952</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">850</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Ethiopia</td><td style="padding:8px;text-align:right;">11.8</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">15,340</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">5,113</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Mozambique</td><td style="padding:8px;text-align:right;">10.9</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">3,706</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">3,706</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Tanzania</td><td style="padding:8px;text-align:right;">9.7</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">6,499</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">6,499</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Nigeria</td><td style="padding:8px;text-align:right;">8.2</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">18,860</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">18,860</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Kenya</td><td style="padding:8px;text-align:right;">7.5</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">4,200</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">4,200</td></tr>
+<tr><td style="padding:8px;color:#94a3b8;font-weight:normal;">India</td><td style="padding:8px;text-align:right;">6.8</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">97,920</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">32,640</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">South Africa</td><td style="padding:8px;text-align:right;">5.3</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">3,286</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">1,643</td></tr>
+<tr><td style="padding:8px;color:#ef4444;font-weight:bold;">Egypt</td><td style="padding:8px;text-align:right;">3.1</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;">3,410</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">682</td></tr>
+<tr><td style="padding:8px;color:#94a3b8;font-weight:normal;">Brazil</td><td style="padding:8px;text-align:right;">1.4</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">3,038</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">234</td></tr>
+<tr><td style="padding:8px;color:#94a3b8;font-weight:normal;">United States</td><td style="padding:8px;text-align:right;">0.3</td><td style="padding:8px;text-align:right;">29</td><td style="padding:8px;text-align:right;">1,005</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">35</td></tr>
+<tr><td style="padding:8px;color:#94a3b8;font-weight:normal;">United Kingdom</td><td style="padding:8px;text-align:right;">0.1</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;">68</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">11</td></tr>
+
+</tbody>
+</table>
+
+<!-- 6. RHD Subtypes -->
+<h2>6. Trial Subtypes: Africa vs US</h2>
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">US:Africa Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Streptococcal pharyngitis</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">9</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">9.0x</td></tr>
+<tr><td style="padding:8px;">Acute rheumatic fever</td><td style="padding:8px;text-align:right;">11</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">0.0x</td></tr>
+<tr><td style="padding:8px;">Rheumatic heart disease</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">23</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">1.8x</td></tr>
+<tr><td style="padding:8px;">Penicillin prophylaxis</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">0.0x</td></tr>
+<tr><td style="padding:8px;">Valve disease (rheumatic)</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">0.0x</td></tr>
+<tr><td style="padding:8px;">Benzathine penicillin</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">2.0x</td></tr>
+
+</tbody>
+</table>
+
+<!-- 7. Country x Subtype Heatmap -->
+<h2>7. Heatmap: Country x Category</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Ethiopia</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Tanzania</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Mozambique</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>Streptococcal pharyngitis</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Acute rheumatic fever</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(228, 120, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(228, 120, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">3</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Rheumatic heart disease</td><td style="background:rgb(240, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(228, 120, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(201, 160, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">4</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Penicillin prophylaxis</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(240, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Valve disease (rheumatic)</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(240, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Benzathine penicillin</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(160, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 8. Comparison with HIC -->
+<h2>8. Comparison: HIC Eliminated RHD</h2>
+<div class="method-note">
+<strong>RHD was eliminated in high-income countries decades ago.</strong><br><br>
+&bull; US RHD death rate: <strong>0.3/100K</strong> (estimated 1,005
+deaths/yr)<br>
+&bull; UK RHD death rate: <strong>0.1/100K</strong> (estimated
+68 deaths/yr)<br>
+&bull; Africa average: <strong>8.6/100K</strong> (240,000
+deaths/yr)<br><br>
+The method of elimination was simple: <strong>universal treatment of strep throat with
+penicillin</strong> plus secondary prophylaxis for those who develop rheumatic fever.
+No new technology needed. No expensive drugs. Just reliable access to a medicine
+that has existed for 70 years.
+</div>
+
+<div class="chart-container">
+<h3>RHD Trial Counts by Country</h3>
+<canvas id="trialChart" height="300"></canvas>
+</div>
+
+<!-- 9. Cost-Effectiveness Case -->
+<h2>9. The Cost-Effectiveness Case</h2>
+<div class="warning-note">
+<strong>RHD prevention is among the most cost-effective interventions in global health:</strong><br><br>
+&bull; BPG dose: <strong>$0.02</strong><br>
+&bull; Annual prophylaxis: <strong>$0.24</strong> (12 monthly doses)<br>
+&bull; Children needing prophylaxis in Africa: <strong>5,700,000</strong><br>
+&bull; Total annual cost to protect all at-risk children: <strong>$1,368,000</strong><br>
+&bull; Cost per death averted: <strong>$5.7</strong><br>
+&bull; For comparison, valve replacement surgery: <strong>$15,000</strong><br><br>
+The total cost to provide secondary prophylaxis to every at-risk African child is
+<strong>$1,368,000</strong> per year &mdash; less than the cost of
+a single day's funding for many global health programmes.
+</div>
+
+<!-- 10. African RHD Trials -->
+<h2>10. Individual African RHD Trials</h2>
+
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th>NCT ID</th>
+  <th>Title</th>
+  <th>Phase</th>
+  <th>Status</th>
+  <th>Sponsor</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT05502042" target="_blank" style="color:#3b82f6;">NCT05502042</a></td><td style="padding:8px;">Case Management and Peer Support Groups for Prophylaxis Adherence in Rheumatic H</td><td style="padding:8px;">NA</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cinc</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT06400628" target="_blank" style="color:#3b82f6;">NCT06400628</a></td><td style="padding:8px;">Effectiveness of Chronic Self-management Education on Behavioral and Clinical Ou</td><td style="padding:8px;">NA</td><td style="padding:8px;">RECRUITING</td><td style="padding:8px;">Jimma University</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT05693545" target="_blank" style="color:#3b82f6;">NCT05693545</a></td><td style="padding:8px;">GOALIE: Intramuscular vs. Enteral Penicillin Prophylaxis to Prevent Progression </td><td style="padding:8px;">PHASE2</td><td style="padding:8px;">ACTIVE_NOT_RECRUITING</td><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cinc</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT06150274" target="_blank" style="color:#3b82f6;">NCT06150274</a></td><td style="padding:8px;">Comparison of Wire Assisted Percutaneous Balloon Mitral Valvulotomy With Standar</td><td style="padding:8px;">NA</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Helse Stavanger HF</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT05276999" target="_blank" style="color:#3b82f6;">NCT05276999</a></td><td style="padding:8px;">Rheumatic Heart Disease Community Streptococcal Treatment Program &quot;RESET&quot;</td><td style="padding:8px;">NA</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cinc</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT05668611" target="_blank" style="color:#3b82f6;">NCT05668611</a></td><td style="padding:8px;">Train the Trainer Curriculum to Scale up AI Supported Echo for RHD Screening in </td><td style="padding:8px;">NA</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cinc</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT03156972" target="_blank" style="color:#3b82f6;">NCT03156972</a></td><td style="padding:8px;">Speckle Tracking for Timing of Surgical Operation in Severe Mitral Regurge</td><td style="padding:8px;">NA</td><td style="padding:8px;">UNKNOWN</td><td style="padding:8px;">Mohammed mahmoud mohammed othman</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT05783375" target="_blank" style="color:#3b82f6;">NCT05783375</a></td><td style="padding:8px;">Accelerating Delivery of rheUmatic Heart Disease Preventive iNterventions in Nor</td><td style="padding:8px;">NA</td><td style="padding:8px;">RECRUITING</td><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cinc</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT02111564" target="_blank" style="color:#3b82f6;">NCT02111564</a></td><td style="padding:8px;">A Study of Rivaroxaban (JNJ-39039039) on the Venous Thromboembolic Risk in Post-</td><td style="padding:8px;">PHASE3</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Janssen Research &amp; Development, LLC</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT03346525" target="_blank" style="color:#3b82f6;">NCT03346525</a></td><td style="padding:8px;">Determining the Impact of Penicillin in Latent RHD: The GOAL Trial</td><td style="padding:8px;">PHASE2</td><td style="padding:8px;">UNKNOWN</td><td style="padding:8px;">Children&#39;s National Research Institute</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT01704482" target="_blank" style="color:#3b82f6;">NCT01704482</a></td><td style="padding:8px;">N-acetylcysteine for Renal Protection in Patients With Rheumatic Heart Disease U</td><td style="padding:8px;">PHASE2</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Assiut University</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT07089381" target="_blank" style="color:#3b82f6;">NCT07089381</a></td><td style="padding:8px;">Efficacy and Safety of Resveratrol in Patients With Rheumatoid Arthritis.</td><td style="padding:8px;">NA</td><td style="padding:8px;">RECRUITING</td><td style="padding:8px;">Ain Shams University</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT06347042" target="_blank" style="color:#3b82f6;">NCT06347042</a></td><td style="padding:8px;">Effect of Qigong on Sleep Quality in Fibromyalgia</td><td style="padding:8px;">NA</td><td style="padding:8px;">NOT_YET_RECRUITING</td><td style="padding:8px;">Cairo University</td></tr>
+<tr><td style="padding:8px;"><a href="https://clinicaltrials.gov/study/NCT02832544" target="_blank" style="color:#3b82f6;">NCT02832544</a></td><td style="padding:8px;">INVestIgation of rheumatiC AF Treatment Using Vitamin K Antagonists, Rivaroxaban</td><td style="padding:8px;">PHASE3</td><td style="padding:8px;">COMPLETED</td><td style="padding:8px;">Population Health Research Institute</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 11. Sponsors -->
+<h2>11. Sponsor Analysis</h2>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">12</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">INDUSTRY</td><td style="padding:8px;text-align:right;">1</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Trials</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Children&#39;s Hospital Medical Center, Cincinnati</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">Jimma University</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Helse Stavanger HF</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Mohammed mahmoud mohammed othman</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Janssen Research &amp; Development, LLC</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Children&#39;s National Research Institute</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Assiut University</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Ain Shams University</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Cairo University</td><td style="padding:8px;text-align:right;">1</td></tr>
+<tr><td style="padding:8px;">Population Health Research Institute</td><td style="padding:8px;text-align:right;">1</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2 (accessed 28 March 2026).<br>
+<strong>Queries:</strong> <code>rheumatic heart disease OR rheumatic fever OR penicillin prophylaxis AND rheumatic</code> and <code>streptococcal pharyngitis</code>,
+filtered to interventional studies.<br>
+<strong>Countries:</strong> South Africa, Uganda, Kenya, Nigeria, Ethiopia, Tanzania, Mozambique, Egypt (Africa); United States, India, Brazil, United Kingdom (comparators).<br>
+<strong>Burden data:</strong> GBD 2019 estimates, WHO Global Health Observatory.<br>
+<strong>Cost data:</strong> WHO Essential Medicines List, published pharmacoeconomic analyses.<br>
+<strong>Limitations:</strong> Single registry; cannot capture trials on African/WHO platforms.
+RHD burden estimates have wide uncertainty intervals in low-resource settings.
+</div>
+
+<footer>
+RHD: The $0.02 Tragedy &mdash; ClinicalTrials.gov Registry Analysis |
+Generated 2026-03-28 13:59 |
+Data: ClinicalTrials.gov API v2
+</footer>
+
+</div>
+
+<script>
+// Burden chart
+new Chart(document.getElementById('burdenChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Uganda", "Ethiopia", "Mozambique", "Tanzania", "Nigeria", "Kenya", "South Africa", "Egypt", "India", "Brazil", "United States", "United Kingdom"],
+    datasets: [{
+      label: 'RHD Deaths per 100K',
+      data: [12.4, 11.8, 10.9, 9.7, 8.2, 7.5, 5.3, 3.1, 6.8, 1.4, 0.3, 0.1],
+      backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6"],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      y: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// Trial counts chart
+new Chart(document.getElementById('trialChart'), {
+  type: 'bar',
+  data: {
+    labels: ["South Africa", "Uganda", "Kenya", "Nigeria", "Ethiopia", "Tanzania", "Mozambique", "Egypt", "United States", "India", "Brazil", "United Kingdom"],
+    datasets: [{
+      label: 'RHD Trials',
+      data: [2, 7, 1, 1, 3, 1, 1, 5, 29, 3, 13, 6],
+      backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6"],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

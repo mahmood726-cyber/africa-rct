@@ -1,0 +1,51 @@
+{
+    "title": "Managing without evidence: quantifying the health system research deficit in Africa using clinical trial registry data",
+    "body": "Health system administrators in Africa must allocate scarce resources without local evidence. We queried ClinicalTrials.gov API v2 for trials in eight categories relevant to health system management: health system strengthening, cost-effectiveness analysis, supply chain, workforce development, task-shifting, community health workers, digital health, and drug/pharma trials (for comparison). Africa had 9,267 administrator-useful trials compared with 11,540 pharmaceutical trials -- a 1.2x imbalance. Administrator-useful trials comprised only 44.5% of Africa's total trial portfolio. Cost-effectiveness evaluations were particularly scarce (908 in Africa vs 4,780 in the US), leaving administrators to extrapolate from Western economic models where costs and epidemiology differ fundamentally. Task-shifting (110 trials) and community health worker programmes (347 trials) represent areas where Africa generates its own evidence. Health system trials concentrated in South Africa, Kenya, and Uganda, leaving most countries without locally relevant evidence. The global research enterprise produces evidence for pharmaceutical companies, not for those who run African health systems. This analysis is limited to one registry and uses keyword-based classification.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "What evidence exists to support health system resource allocation decisions in Africa, and how does it compare with pharmaceutical research investment?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for interventional studies in Africa across eight categories: health system strengthening, cost-effectiveness, supply chain, workforce, task-shifting, community health workers, digital health, and pharma/drug trials."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had 9,267 administrator-useful trials versus 11,540 pharmaceutical trials, a 1.2x imbalance, with administrator-useful evidence comprising only 44.5% of the trial portfolio."
+        },
+        {
+            "role": "CEA gap",
+            "text": "Cost-effectiveness trials were severely deficient (908 in Africa vs 4,780 in the US), forcing administrators to extrapolate from economic models built on non-African cost structures and disease patterns."
+        },
+        {
+            "role": "Innovation areas",
+            "text": "Task-shifting (110 trials) and community health worker interventions (347 trials) represent areas where African researchers generate locally relevant evidence for health system innovation."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The global clinical trial enterprise is structurally misaligned with African health system needs, producing evidence to sell drugs rather than to run health systems."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to ClinicalTrials.gov, uses keyword-based classification that may misclassify some trials, and does not capture studies registered on WHO ICTRP or PACTR."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Administrator's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 health system categories, Africa vs US",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

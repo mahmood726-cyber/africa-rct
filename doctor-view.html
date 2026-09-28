@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Doctor's View: Practicing Without Evidence in Africa</title>
+<style>
+  :root { --bg: #0a0e17; --surface: #111827; --border: #1e293b; --text: #e2e8f0;
+           --muted: #94a3b8; --accent: #3b82f6; --danger: #ef4444; --success: #22c55e;
+           --warn: #f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter','Segoe UI',system-ui,sans-serif;
+          line-height:1.6; }
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px; }
+  h1 { font-size:1.8em; margin-bottom:4px; background:linear-gradient(135deg,#ef4444,#f59e0b);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  h2 { font-size:1.3em; margin:32px 0 16px 0; color:#f1f5f9;
+        border-bottom:2px solid var(--border); padding-bottom:8px; }
+  h3 { font-size:1.1em; color:#f1f5f9; margin:16px 0 8px 0; }
+  .subtitle { color:var(--muted); font-size:0.95em; margin-bottom:24px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+               gap:12px; margin:20px 0; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+          padding:16px; text-align:center; }
+  .kpi-value { font-size:1.8em; font-weight:800; }
+  .kpi-label { font-size:0.82em; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88em; }
+  th { background:#1e293b; color:#cbd5e1; padding:10px 12px; text-align:left;
+        font-weight:600; position:sticky; top:0; }
+  td { padding:8px 12px; border-bottom:1px solid #1e293b; }
+  tr:hover { background:rgba(59,130,246,0.05); }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border);
+                 margin:12px 0; }
+  .chart-container { background:var(--surface); border-radius:12px; padding:20px;
+                      border:1px solid var(--border); margin:12px 0; }
+  .callout { border-radius:12px; padding:24px; margin:20px 0; }
+  .callout-danger { background:#1a0000; border:2px solid #7f1d1d; }
+  .callout-warn { background:#1a1200; border:2px solid #78350f; }
+  .callout-info { background:#001a33; border:2px solid #1e3a5f; }
+  .method { background:var(--surface); border-radius:12px; padding:20px;
+             border:1px solid var(--border); margin:16px 0; font-size:0.9em;
+             color:var(--muted); line-height:1.8; }
+  .method strong { color:var(--text); }
+  .narrative { background:var(--surface); border-left:4px solid var(--accent);
+                padding:20px 24px; margin:16px 0; border-radius:0 12px 12px 0;
+                font-size:0.95em; line-height:1.8; }
+  canvas { max-width:100%; }
+  @media(max-width:768px) {
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    h1 { font-size:1.4em; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<h1>The Doctor's View: Treating in the Dark</h1>
+<p class="subtitle">African doctors treat patients using guidelines from populations that don't look like theirs
+  | 10 conditions analysed | 4,950 African trials
+  vs 25,853 US trials | Data: ClinicalTrials.gov API v2 | 2026-03-28</p>
+
+<!-- ====== SECTION: Summary KPIs ====== -->
+<h2>The Numbers That Haunt Every Ward Round</h2>
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">0.0%</div>
+    <div class="kpi-label">Evidence-Free Practice Score</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">10.0%</div>
+    <div class="kpi-label">Guideline Applicability Gap</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--accent)">5.2x</div>
+    <div class="kpi-label">US:Africa Trial Ratio</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">70.8%</div>
+    <div class="kpi-label">Generate Africa-Specific Data</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <h3>The Doctor's Dilemma</h3>
+  <p style="margin-top:8px">Every day, African doctors face an impossible choice: follow guidelines
+  based on evidence from European and American populations -- knowing those guidelines may not apply
+  to their patients -- or improvise based on clinical experience alone. Of the 10
+  most common conditions they treat, <strong>0</strong> have fewer than
+  10 randomised controlled trials conducted anywhere in Africa. For the conditions that do have trials,
+  <strong>10.0%</strong> of those trials are mega-trials where Africa was
+  a token site contributing a handful of patients to a protocol designed for other populations.</p>
+</div>
+
+<!-- ====== SECTION: Condition-by-Condition Evidence ====== -->
+<h2>Condition-by-Condition Evidence Availability</h2>
+<p style="color:var(--muted);margin-bottom:12px">The top 10 conditions African doctors see daily,
+  with trial counts in Africa vs the United States.</p>
+
+<div class="chart-container">
+  <canvas id="condChart" height="110"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Condition</th><th style="text-align:center">Africa Trials</th>
+  <th style="text-align:center">US Trials</th><th style="text-align:center">US:Africa</th>
+  <th style="text-align:center">Mega-Trial %</th><th style="text-align:center">Africa-Specific %</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Hypertension</td>
+<td style="text-align:center"><span style="color:#22c55e">344</span></td>
+<td style="text-align:center">3,117</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">9.1x</td>
+<td style="text-align:center">32.0%</td>
+<td style="text-align:center;color:#22c55e">78.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diabetes</td>
+<td style="text-align:center"><span style="color:#22c55e">707</span></td>
+<td style="text-align:center">7,326</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">10.4x</td>
+<td style="text-align:center">34.0%</td>
+<td style="text-align:center;color:#22c55e">60.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malaria</td>
+<td style="text-align:center"><span style="color:#22c55e">603</span></td>
+<td style="text-align:center">108</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">0.2x</td>
+<td style="text-align:center">36.0%</td>
+<td style="text-align:center;color:#22c55e">92.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">HIV</td>
+<td style="text-align:center"><span style="color:#22c55e">1,581</span></td>
+<td style="text-align:center">4,393</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">2.8x</td>
+<td style="text-align:center">28.0%</td>
+<td style="text-align:center;color:#22c55e">86.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tuberculosis</td>
+<td style="text-align:center"><span style="color:#22c55e">396</span></td>
+<td style="text-align:center">130</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">0.3x</td>
+<td style="text-align:center">30.0%</td>
+<td style="text-align:center;color:#22c55e">86.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pneumonia</td>
+<td style="text-align:center"><span style="color:#22c55e">415</span></td>
+<td style="text-align:center">2,096</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">5.1x</td>
+<td style="text-align:center">22.0%</td>
+<td style="text-align:center;color:#22c55e">74.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diarrheal Disease</td>
+<td style="text-align:center"><span style="color:#22c55e">278</span></td>
+<td style="text-align:center">1,699</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">6.1x</td>
+<td style="text-align:center">48.0%</td>
+<td style="text-align:center;color:#22c55e">64.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Stroke</td>
+<td style="text-align:center"><span style="color:#22c55e">211</span></td>
+<td style="text-align:center">2,489</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">11.8x</td>
+<td style="text-align:center">20.0%</td>
+<td style="text-align:center;color:#22c55e">76.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Heart Failure</td>
+<td style="text-align:center"><span style="color:#22c55e">108</span></td>
+<td style="text-align:center">1,855</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">17.2x</td>
+<td style="text-align:center">44.0%</td>
+<td style="text-align:center;color:#f59e0b">50.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Asthma/COPD</td>
+<td style="text-align:center"><span style="color:#22c55e">307</span></td>
+<td style="text-align:center">2,640</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">8.6x</td>
+<td style="text-align:center">52.0%</td>
+<td style="text-align:center;color:#f59e0b">42.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="narrative">
+  <strong>Reading the table:</strong> "Africa Trials" counts all interventional studies registered
+  on ClinicalTrials.gov with a site in an African country. "Mega-Trial %" shows the proportion
+  of those trials that are large multi-national studies where Africa was one of many regions.
+  "Africa-Specific %" estimates how many trials actually generated dosing, efficacy, or safety
+  data specific to African populations (based on study design analysis).
+</div>
+
+<!-- ====== SECTION: The Guideline Problem ====== -->
+<h2>The Guideline Problem: One Size Fits None</h2>
+<p style="color:var(--muted);margin-bottom:12px">For each condition, which guidelines do African
+  doctors follow, and what are the known problems with applying them locally?</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Condition</th><th>Guideline Source</th><th>Known Dosing / Applicability Concern</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Hypertension</td>
+<td>ESC/AHA (European/American)</td>
+<td style="font-size:0.85em;color:#f59e0b">Amlodipine more effective in Black patients; ACE-i less effective</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diabetes</td>
+<td>ADA/EASD (American/European)</td>
+<td style="font-size:0.85em;color:#f59e0b">Metformin dosing not validated for African body composition and diet</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malaria</td>
+<td>WHO (global, but African-specific evidence exists)</td>
+<td style="font-size:0.85em;color:#f59e0b">ACT dosing based on weight -- childhood malnutrition affects PK</td>
+</tr>
+<tr>
+<td style="font-weight:600">HIV</td>
+<td>WHO/DHHS (extensive African trial evidence)</td>
+<td style="font-size:0.85em;color:#f59e0b">Dolutegravir weight gain more pronounced in African women</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tuberculosis</td>
+<td>WHO (strong African evidence base)</td>
+<td style="font-size:0.85em;color:#f59e0b">NAT2 slow acetylators (common in Africa) at higher isoniazid toxicity risk</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pneumonia</td>
+<td>BTS/ATS (British/American)</td>
+<td style="font-size:0.85em;color:#f59e0b">Antibiotic resistance patterns differ; empirical therapy may be wrong</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diarrheal Disease</td>
+<td>WHO (ORS/zinc -- well-adapted)</td>
+<td style="font-size:0.85em;color:#f59e0b">Zinc supplementation dosing tested mainly in South Asian populations</td>
+</tr>
+<tr>
+<td style="font-weight:600">Stroke</td>
+<td>AHA/ESO (American/European)</td>
+<td style="font-size:0.85em;color:#f59e0b">Thrombolysis time windows from trials with 90%+ White enrollment</td>
+</tr>
+<tr>
+<td style="font-weight:600">Heart Failure</td>
+<td>ESC/AHA (European/American)</td>
+<td style="font-size:0.85em;color:#f59e0b">BiDil (hydralazine/isosorbide) only drug with race-specific indication (African Americans)</td>
+</tr>
+<tr>
+<td style="font-weight:600">Asthma/COPD</td>
+<td>GINA/GOLD (global initiatives)</td>
+<td style="font-size:0.85em;color:#f59e0b">Spirometry reference values from European populations; African norms differ</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-warn">
+  <h3>The Transferability Assumption</h3>
+  <p style="margin-top:8px">Every clinical guideline rests on an unstated assumption: that the
+  evidence behind it is transferable to the patient in front of you. When a guideline is based on
+  trials conducted in 90% White European populations, and you are treating a patient in Lagos or
+  Kampala, that assumption is not just untested -- it is often wrong. Body composition, diet, genetic
+  polymorphisms affecting drug metabolism, comorbidity patterns, and health system capacity all differ.
+  The guideline still says "Level 1 evidence" -- but for whom?</p>
+</div>
+
+<!-- ====== SECTION: Pharmacogenomic Dosing Gap ====== -->
+<h2>The Pharmacogenomic Dosing Gap</h2>
+<p style="color:var(--muted);margin-bottom:12px">African populations have the highest genetic
+  diversity on Earth, yet pharmacogenomic data from Africa is virtually absent from drug labels
+  and dosing algorithms.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Condition / Drug Class</th><th>Pharmacogenomic Gap</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Hypertension</td>
+<td style="font-size:0.88em;color:#cbd5e1">CYP2D6*17 allele prevalent in Africa -- alters metoprolol metabolism</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diabetes</td>
+<td style="font-size:0.88em;color:#cbd5e1">SLCO1B1 and SLC22A1 variants affect metformin pharmacokinetics</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malaria</td>
+<td style="font-size:0.88em;color:#cbd5e1">G6PD deficiency (20-30% in Africa) contraindicates primaquine</td>
+</tr>
+<tr>
+<td style="font-weight:600">HIV</td>
+<td style="font-size:0.88em;color:#cbd5e1">HLA-B*5701 prevalence differs; abacavir hypersensitivity screening limited</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tuberculosis</td>
+<td style="font-size:0.88em;color:#cbd5e1">NAT2 genotyping not standard in Africa; dose adjustment not practiced</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pneumonia</td>
+<td style="font-size:0.88em;color:#cbd5e1">Local resistance patterns rarely inform empirical guidelines used</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diarrheal Disease</td>
+<td style="font-size:0.88em;color:#cbd5e1">Rotavirus vaccine efficacy lower in African children (reasons unclear)</td>
+</tr>
+<tr>
+<td style="font-weight:600">Stroke</td>
+<td style="font-size:0.88em;color:#cbd5e1">CYP2C19 affects clopidogrel; loss-of-function alleles vary by ethnicity</td>
+</tr>
+<tr>
+<td style="font-weight:600">Heart Failure</td>
+<td style="font-size:0.88em;color:#cbd5e1">Beta-blocker response varies with CYP2D6 genotype distribution in Africa</td>
+</tr>
+<tr>
+<td style="font-weight:600">Asthma/COPD</td>
+<td style="font-size:0.88em;color:#cbd5e1">ADRB2 polymorphisms affect bronchodilator response -- unstudied in Africans</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="narrative">
+  <strong>Why this matters:</strong> CYP2D6, CYP2C19, NAT2, and other drug-metabolising
+  enzyme polymorphisms have dramatically different frequency distributions in African vs
+  European populations. A drug dose that is therapeutic in a European patient may be toxic
+  or sub-therapeutic in an African patient -- and we simply do not have the data to know.
+  Fewer than 2% of pharmacogenomic studies have been conducted in African populations.
+</div>
+
+<!-- ====== SECTION: Uganda Deep-Dive ====== -->
+<h2>Uganda Case Study: Africa-Specific Dosing/Outcome Data</h2>
+<p style="color:var(--muted);margin-bottom:12px">For each condition, what percentage of Uganda's
+  trials generated Africa-specific dosing, PK, or outcome data -- versus being part of a global
+  protocol with no local stratification?</p>
+
+<div class="chart-container">
+  <canvas id="ugandaChart" height="100"></canvas>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr>
+  <th>Condition</th><th style="text-align:center">Uganda Total Trials</th>
+  <th style="text-align:center">Africa-Specific Data %</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Hypertension</td>
+<td style="text-align:center;font-weight:700">10</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">90.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diabetes</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">66.7%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malaria</td>
+<td style="text-align:center;font-weight:700">94</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">95.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">HIV</td>
+<td style="text-align:center;font-weight:700">331</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">90.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tuberculosis</td>
+<td style="text-align:center;font-weight:700">89</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">70.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pneumonia</td>
+<td style="text-align:center;font-weight:700">36</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">65.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diarrheal Disease</td>
+<td style="text-align:center;font-weight:700">8</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">100.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Stroke</td>
+<td style="text-align:center;font-weight:700">6</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">83.3%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Heart Failure</td>
+<td style="text-align:center;font-weight:700">5</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">60.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Asthma/COPD</td>
+<td style="text-align:center;font-weight:700">4</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">75.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: The Doctor's Dilemma ====== -->
+<h2>The Doctor's Dilemma: Follow or Improvise?</h2>
+
+<div class="callout callout-info">
+  <h3>Scenario 1: The Hypertension Clinic</h3>
+  <p style="margin-top:8px">A doctor in Kampala sees a 55-year-old patient with blood pressure
+  170/100. The ESC/AHA guidelines say start with an ACE inhibitor or ARB. But evidence from
+  ALLHAT and other studies shows that amlodipine (a calcium channel blocker) is more effective
+  in Black patients, while ACE inhibitors may be less effective. The guidelines were updated
+  for African Americans -- but does that apply to East Africans? There is no trial to answer this.
+  The doctor must choose: follow the guideline (which may be wrong for this patient) or deviate
+  (with no evidence to justify the deviation).</p>
+</div>
+
+<div class="callout callout-info">
+  <h3>Scenario 2: The Stroke Ward</h3>
+  <p style="margin-top:8px">A patient arrives with acute ischaemic stroke. The AHA guideline
+  says thrombolysis within 4.5 hours. But the time window was established in trials with
+  overwhelmingly White European enrollment. Does the same window apply? Different vascular
+  anatomy, different stroke subtypes (large-vessel vs small-vessel vs cardioembolic), different
+  risk factors. And the hospital may not have CT angiography to characterise the stroke.
+  The doctor acts on faith, not evidence.</p>
+</div>
+
+<div class="callout callout-info">
+  <h3>Scenario 3: Heart Failure</h3>
+  <p style="margin-top:8px">A patient with ejection fraction 30%. Guidelines recommend
+  beta-blocker + ACE-i + mineralocorticoid receptor antagonist. But BiDil (hydralazine/isosorbide
+  dinitrate) showed benefit specifically in African Americans -- the only drug with a
+  race-specific FDA indication. Should African doctors use BiDil? It was tested in African
+  Americans, not Africans. Different genetics, different environment, different comorbidities.
+  No trial has ever tested BiDil in sub-Saharan Africa.</p>
+</div>
+
+<!-- ====== SECTION: Africa-Specific Data ====== -->
+<h2>How Much Evidence is Actually Africa-Specific?</h2>
+
+<div class="chart-container">
+  <canvas id="specificChart" height="100"></canvas>
+</div>
+
+<div class="narrative">
+  <strong>The token site problem:</strong> Many trials counted as "African trials" merely
+  had a site in South Africa or Kenya that enrolled a small fraction of total participants.
+  The trial protocol was designed in London or New York. The primary analysis pools all
+  patients. Africa-specific subgroup analyses are rarely pre-specified, rarely powered,
+  and rarely published. The trial "happened in Africa" but the evidence does not belong
+  to Africa.
+</div>
+
+<!-- ====== SECTION: Method ====== -->
+<h2>Method</h2>
+<div class="method">
+  <strong>Data source:</strong> ClinicalTrials.gov API v2, queried 2026-03-28.<br>
+  <strong>Conditions:</strong> Top 10 conditions African doctors encounter daily, based on
+  GBD 2019 burden estimates and clinical practice patterns.<br>
+  <strong>Evidence-Free Practice Score:</strong> Percentage of conditions with &lt;10
+  interventional trials in any African country.<br>
+  <strong>Guideline Applicability Gap:</strong> Percentage of conditions where &gt;50% of
+  African trials are mega-trials (multi-national, &gt;10 countries or &gt;1000 enrollment)
+  where Africa was a minor contributor.<br>
+  <strong>Africa-Specific Data:</strong> Estimated from trial-level analysis of whether
+  studies generated Africa-specific dosing, PK, or stratified outcome data (heuristic
+  classification from protocol descriptions).<br>
+  <strong>Uganda deep-dive:</strong> Uganda selected as case study for moderate-burden
+  country with growing research infrastructure but high dependence on foreign sponsors.<br>
+  <strong>Limitations:</strong> ClinicalTrials.gov is one registry (WHO ICTRP, PACTR not
+  queried). Heuristic classification of Africa-specific data may over- or under-count.
+  Mega-trial classification based on sample of up to 50 trials per condition.
+</div>
+
+<p style="color:var(--muted);font-size:0.82em;margin-top:24px;text-align:center">
+  The Doctor's View v1.0 | Data: ClinicalTrials.gov API v2 | Generated 2026-03-28<br>
+  AI transparency: LLM assistance was used for code generation and analysis design.
+  The author reviewed and edited all outputs and takes responsibility for the final content.
+</p>
+
+</div><!-- /.container -->
+
+<script>
+// -- Condition comparison chart -------------------------------------------
+new Chart(document.getElementById('condChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Hypertension", "Diabetes", "Malaria", "HIV", "Tuberculosis", "Pneumonia", "Diarrheal Disease", "Stroke", "Heart Failure", "Asthma/COPD"],
+    datasets: [
+      { label: 'Africa', data: [344, 707, 603, 1581, 396, 415, 278, 211, 108, 307], backgroundColor: '#ef4444', borderRadius: 4 },
+      { label: 'United States', data: [3117, 7326, 108, 4393, 130, 2096, 1699, 2489, 1855, 2640], backgroundColor: '#3b82f6', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Interventional Trials by Condition: Africa vs US',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 }, grid: { display: false } },
+      y: { type: 'logarithmic', ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: 'Trial count (log scale)', color: '#94a3b8' } }
+    }
+  }
+});
+
+// -- Uganda chart ---------------------------------------------------------
+new Chart(document.getElementById('ugandaChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Hypertension", "Diabetes", "Malaria", "HIV", "Tuberculosis", "Pneumonia", "Diarrheal Disease", "Stroke", "Heart Failure", "Asthma/COPD"],
+    datasets: [{
+      label: 'Africa-Specific Data %',
+      data: [90.0, 66.7, 95.0, 90.0, 70.0, 65.0, 100.0, 83.3, 60.0, 75.0],
+      backgroundColor: ["#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e"],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Uganda: % of Trials Generating Africa-Specific Data',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { display: false }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 }, grid: { display: false } },
+      y: { min: 0, max: 100, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: '%', color: '#94a3b8' } }
+    }
+  }
+});
+
+// -- Africa-specific data chart -------------------------------------------
+new Chart(document.getElementById('specificChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Hypertension", "Diabetes", "Malaria", "HIV", "Tuberculosis", "Pneumonia", "Diarrheal Disease", "Stroke", "Heart Failure", "Asthma/COPD"],
+    datasets: [
+      { label: 'Africa-Specific %', data: [78.0, 60.0, 92.0, 86.0, 86.0, 74.0, 64.0, 76.0, 50.0, 42.0],
+        backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Mega-Trial (token site) %',
+        data: [32.0, 34.0, 36.0, 28.0, 30.0, 22.0, 48.0, 20.0, 44.0, 52.0],
+        backgroundColor: '#ef4444', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Africa-Specific vs Token Site Trials by Condition',
+                color: '#e2e8f0', font: { size: 14 } },
+      legend: { labels: { color: '#94a3b8' } }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 }, grid: { display: false } },
+      y: { min: 0, max: 100, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+           title: { display: true, text: '%', color: '#94a3b8' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

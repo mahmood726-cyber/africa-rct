@@ -1,0 +1,51 @@
+{
+    "title": "The Mizan Index: a 7-dimension composite score measuring research justice across 20 African countries through the lens of balance",
+    "body": "Is clinical research in Africa distributed justly, and can we measure the imbalance? We queried ClinicalTrials.gov API v2 for interventional trials across 20 African countries, computing a composite Mizan Index from seven dimensions inspired by Maqasid al-Shariah: Protection of Life (trial-burden alignment), Justice (per-capita fairness), Stewardship (local sponsorship), Consultation (community-engaged research share), No Harm (inverse ghost enrollment), Knowledge (Phase 1 sovereignty and institutional diversity), and Accountability (results transparency). The continental average Mizan Index was far below the theoretical maximum, with Justice and Stewardship consistently the weakest dimensions, indicating that African populations lack both equitable trial access and control over their research agendas. The highest-scoring countries combined strong local institutional leadership with burden-aligned trial portfolios, while the lowest-scoring countries were characterised by external sponsorship dominance and negligible per-capita trial density. The principle that you cannot fix injustice you have not measured makes composite justice indices essential for evidence-based research policy. This analysis is limited to a single registry and uses proxy indicators; national trial registries and qualitative community data would strengthen future iterations.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Is clinical research in Africa distributed justly across countries, and can the imbalance be measured through a composite index grounded in ethical principles?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for interventional trials across 20 African countries, computing a composite Mizan Index from seven dimensions inspired by Maqasid al-Shariah: Protection of Life, Justice, Stewardship, Consultation, No Harm, Knowledge, and Accountability."
+        },
+        {
+            "role": "Primary result",
+            "text": "The continental average Mizan Index was far below the theoretical maximum of 100, with Justice (per-capita equity) and Stewardship (local sponsorship) consistently the weakest dimensions across the continent."
+        },
+        {
+            "role": "Highest scorers",
+            "text": "The highest-scoring countries combined strong local institutional leadership with burden-aligned trial portfolios and meaningful Phase 1 trial capacity, demonstrating that research sovereignty and disease relevance reinforce each other."
+        },
+        {
+            "role": "Lowest scorers",
+            "text": "The lowest-scoring countries were characterised by external sponsorship dominance, negligible per-capita trial density, and misalignment between their disease burden and their trial portfolio."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The Quranic principle that justice requires honest measurement makes composite justice indices essential: without quantifying which dimensions of research equity are failing, policy interventions remain unfocused and unaccountable."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to a single clinical trial registry and uses proxy indicators for community engagement and exploitation; national registries such as PACTR and qualitative community data would strengthen future iterations."
+        }
+    ],
+    "wordCount": 157,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Mizan Index Dashboard v1.0",
+        "data": "ClinicalTrials.gov API v2, 20 African countries, WHO GBD burden data, UN population estimates",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "title":  "Matched-pair comparison of clinical trial capacity in Latin America and Africa",
+    "body":  "Can Latin America's clinical trial success offer transferable lessons for Africa, given similar income levels but vastly different research output? We queried ClinicalTrials.gov for interventional trials across six Latin American and six African countries, stratified by condition and phase using matched-pair comparisons. Latin America averaged four to six times more trials per million than Africa, with portfolios balanced across cancer, cardiovascular, and diabetes, whereas African research was dominated by HIV. Matched pairs revealed stark disparities: Peru ran seven times more trials per capita than Ghana despite similar income, while Nigeria achieved only seven percent of Colombia's rate. South Africa was the sole African country reaching Latin American levels, attributable to its mature regulatory agency and clinical research organization ecosystem. These findings identify regulatory harmonisation, industry incentivisation, and local manufacturing as structural pillars enabling Latin America's ascent that Africa can replicate. Limitations include restriction to one registry, ecological aggregation, and inability to separate donor-funded from industry-funded trials.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Can comparison with Latin America help identify structural differences in clinical trial capacity relevant to Africa?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for interventional trials across six Latin American and six African countries and compared per-capita density, condition mix, and phase distribution in matched pairs."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "Latin America averaged four to six times more trials per million than Africa, with broader representation across cancer, cardiovascular disease, and diabetes, whereas several African portfolios were dominated by HIV."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "Peru had roughly seven times the per-capita trial density of Ghana, and Nigeria reached only about seven percent of Colombia\u0027s per-capita rate despite its larger economy."
+                      },
+                      {
+                          "role":  "Mechanism",
+                          "text":  "South Africa was the only African country in the sample approaching the higher Latin American densities."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The contrast is consistent with differences in regulatory capacity, research organization networks, and industrial participation, although these mechanisms were not directly measured."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "The study relies on a single registry and cannot separate donor-funded from industry-funded activity with complete precision."
+                      }
+                  ],
+    "wordCount":  153,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Latin America as Mirror v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 6 LatAm + 6 African countries, condition + phase stratification",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             },
+    "references":  [
+                       {
+                           "pmid":  "35513403"
+                       },
+                       {
+                           "pmid":  "36332653"
+                       },
+                       {
+                           "pmid":  "33483378"
+                       },
+                       {
+                           "pmid":  "34843674"
+                       },
+                       {
+                           "pmid":  "30636200"
+                       }
+                   ]
+}
+

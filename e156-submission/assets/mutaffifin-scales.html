@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scales of Al-Mutaffifin -- Pharma Accountability in Africa</title>
+<style>
+:root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1e293b;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --gold: #d4a843;
+    --gold-dim: #b8922e;
+    --accent: #60a5fa;
+    --red: #ef4444;
+    --green: #22c55e;
+    --amber: #f59e0b;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Islamic geometric header pattern */
+.header {
+    background: linear-gradient(135deg, #0a0e17 0%, #1a1a2e 50%, #16213e 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 50px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(212,168,67,0.03) 30deg 60deg);
+    pointer-events: none;
+}
+.arabic-verse {
+    font-family: 'Traditional Arabic', 'Simplified Arabic', serif;
+    font-size: 2em;
+    color: var(--gold);
+    direction: rtl;
+    margin-bottom: 12px;
+    text-shadow: 0 0 30px rgba(212,168,67,0.3);
+    line-height: 1.8;
+}
+.english-verse {
+    font-size: 1.05em;
+    color: var(--gold-dim);
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-style: italic;
+    line-height: 1.7;
+}
+.verse-ref {
+    font-size: 0.85em;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+}
+h1 {
+    font-size: 2.2em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+h1 span { color: var(--gold); font-weight: 700; }
+.subtitle {
+    color: var(--text-dim);
+    font-size: 1em;
+}
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+
+/* Section headers */
+.section-title {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gold-dim);
+    color: var(--gold);
+}
+.section-title span { font-weight: 700; }
+
+/* Summary cards */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.summary-card .big-num {
+    font-size: 2em;
+    font-weight: 700;
+    margin: 5px 0;
+}
+.summary-card .label {
+    font-size: 0.85em;
+    color: var(--text-dim);
+}
+
+/* Company cards */
+.company-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.2s;
+}
+.company-card:hover { transform: translateY(-2px); }
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.card-header h3 { font-size: 1.4em; font-weight: 600; }
+.verdict { font-size: 1.1em; font-weight: 600; }
+.ms-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    color: #000;
+    font-weight: 700;
+    margin-left: 6px;
+}
+.card-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    font-size: 0.9em;
+    color: var(--text-dim);
+}
+.card-meta b { color: var(--text); }
+
+/* Scales visualization */
+.scales-viz {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 10px;
+    align-items: start;
+    margin: 16px 0;
+    padding: 16px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+.scale-side { padding: 8px; }
+.scale-label {
+    font-weight: 600;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+.taking-side .scale-label { color: var(--red); }
+.giving-side .scale-label { color: var(--green); }
+.score-num {
+    font-size: 0.85em;
+    opacity: 0.8;
+    font-weight: 400;
+}
+.scale-bar-bg {
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    height: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.scale-bar {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+}
+.sub-scores { font-size: 0.82em; }
+.sub-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.scale-fulcrum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    color: var(--gold);
+    text-shadow: 0 0 15px rgba(212,168,67,0.4);
+}
+
+/* Drug section */
+.drug-section { margin: 12px 0; }
+.drug-section h4 {
+    font-size: 0.9em;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+}
+.drug-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+/* Terminated section */
+.terminated-section { margin: 12px 0; }
+.terminated-section h4 {
+    font-size: 0.9em;
+    color: var(--red);
+    margin-bottom: 6px;
+}
+.mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82em;
+}
+.mini-table th {
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    font-weight: 600;
+}
+.mini-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.card-notes {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.82em;
+    color: var(--text-dim);
+}
+
+/* Accountability table */
+.full-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+.full-table th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--gold-dim);
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.full-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+}
+.full-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+/* Verdict cards */
+.verdict-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+}
+.verdict-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+.verdict-card h4 { font-size: 1.1em; margin-bottom: 6px; }
+.verdict-card .big-score { font-size: 2.2em; font-weight: 700; margin: 8px 0; }
+.verdict-card .detail { font-size: 0.82em; color: var(--text-dim); margin-top: 6px; }
+.extractor {
+    border: 1px solid var(--red);
+    background: rgba(239,68,68,0.05);
+}
+.extractor .big-score { color: var(--red); }
+.bright {
+    border: 1px solid var(--green);
+    background: rgba(34,197,94,0.05);
+}
+.balanced {
+    border: 1px solid var(--amber);
+    background: rgba(245,158,11,0.05);
+}
+
+/* Graveyard */
+.graveyard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+    margin: 16px 0;
+}
+.graveyard-table th {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--red);
+    color: var(--red);
+    font-weight: 600;
+}
+.graveyard-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Policy section */
+.policy-section {
+    background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(212,168,67,0.02));
+    border: 1px solid var(--gold-dim);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px 0;
+}
+.policy-section h3 {
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-size: 1.3em;
+}
+.policy-list {
+    list-style: none;
+    padding: 0;
+}
+.policy-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(212,168,67,0.15);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+.policy-list li::before {
+    content: '\2696';
+    color: var(--gold);
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* Method box */
+.method-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 0.9em;
+    color: var(--text-dim);
+}
+.method-box h4 { color: var(--gold-dim); margin-bottom: 8px; }
+.method-box code {
+    background: rgba(255,255,255,0.05);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.92em;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .scales-viz { grid-template-columns: 1fr; }
+    .scale-fulcrum { transform: rotate(90deg); padding: 10px 0; }
+    .card-header { flex-direction: column; align-items: flex-start; }
+    .arabic-verse { font-size: 1.4em; }
+    h1 { font-size: 1.5em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header with Quranic Verse -->
+<div class="header">
+    <div class="arabic-verse">
+        &#1608;&#1614;&#1610;&#1618;&#1604;&#1612; &#1604;&#1616;&#1604;&#1618;&#1605;&#1615;&#1591;&#1614;&#1601;&#1617;&#1616;&#1601;&#1616;&#1610;&#1606;&#1614; &#1757;
+        &#1575;&#1604;&#1617;&#1614;&#1584;&#1616;&#1610;&#1606;&#1614; &#1573;&#1616;&#1584;&#1614;&#1575; &#1575;&#1603;&#1618;&#1578;&#1614;&#1575;&#1604;&#1615;&#1608;&#1575; &#1593;&#1614;&#1604;&#1614;&#1609; &#1575;&#1604;&#1606;&#1617;&#1614;&#1575;&#1587;&#1616; &#1610;&#1614;&#1587;&#1618;&#1578;&#1614;&#1608;&#1618;&#1601;&#1615;&#1608;&#1606;&#1614; &#1757;
+        &#1608;&#1614;&#1573;&#1616;&#1584;&#1614;&#1575; &#1603;&#1614;&#1575;&#1604;&#1615;&#1608;&#1607;&#1615;&#1605;&#1618; &#1571;&#1614;&#1608;&#1618; &#1608;&#1614;&#1586;&#1614;&#1606;&#1615;&#1608;&#1607;&#1615;&#1605;&#1618; &#1610;&#1615;&#1582;&#1618;&#1587;&#1616;&#1585;&#1615;&#1608;&#1606;&#1614;
+    </div>
+    <div class="english-verse">
+        "Woe to those who give less than due &mdash; who, when they take a measure from people,
+        take in full, but when they give by measure or weight to them, give less than due."
+    </div>
+    <div class="verse-ref">Surah Al-Mutaffifin (83:1&ndash;3)</div>
+    <h1>The Scales of <span>Al-Mutaffifin</span></h1>
+    <div class="subtitle">Weighing What Pharma Takes from Africa vs What It Gives Back</div>
+</div>
+
+<div class="container">
+
+    <!-- Summary -->
+    <div class="summary-grid">
+        <div class="summary-card">
+            <div class="label">Companies Analysed</div>
+            <div class="big-num" style="color:var(--gold)">10</div>
+        </div>
+        <div class="summary-card">
+            <div class="label">Africa Trials (Total)</div>
+            <div class="big-num" style="color:var(--accent)">1,152</div>
+        </div>
+        <div class="summary-card">
+            <div class="label">Global Trials (Total)</div>
+            <div class="big-num">20,284</div>
+        </div>
+        <div class="summary-card">
+            <div class="label">Est. African Participants</div>
+            <div class="big-num" style="color:var(--amber)">129,726</div>
+        </div>
+        <div class="summary-card">
+            <div class="label">Terminated/Withdrawn</div>
+            <div class="big-num" style="color:var(--red)">123</div>
+        </div>
+        <div class="summary-card">
+            <div class="label">Net Extractors</div>
+            <div class="big-num" style="color:var(--red)">4</div>
+        </div>
+    </div>
+
+    <!-- Method box -->
+    <div class="method-box">
+        <h4>Methodology: The Mutaffifin Score</h4>
+        <p>For each company, we compute a <b>Taking Score</b> (0&ndash;50) and a <b>Giving Score</b> (0&ndash;50).
+        The <b>Mutaffifin Score = Taking &minus; Giving</b>. Positive scores indicate net extraction;
+        negative scores indicate net contribution.</p>
+        <p style="margin-top:8px"><b>Taking</b> measures: African enrollment volume (0&ndash;15), Phase 3 dominance (0&ndash;10),
+        termination rate (0&ndash;10), token-site proportion (0&ndash;15).</p>
+        <p style="margin-top:4px"><b>Giving</b> measures: WHO EML drugs from Africa trials (0&ndash;15),
+        Africa-focused trial % (0&ndash;10), tiered pricing (0&ndash;10), local manufacturing (0&ndash;10),
+        Phase 1 investment (0&ndash;5).</p>
+        <p style="margin-top:8px;font-size:0.9em">Data: ClinicalTrials.gov API v2, accessed 2026-03-28. Tiered pricing and manufacturing data from published corporate reports.</p>
+    </div>
+
+    <!-- Full Accountability Table -->
+    <h2 class="section-title"><span>Full</span> Accountability Table</h2>
+    <div style="overflow-x:auto">
+    <table class="full-table">
+        <thead><tr>
+            <th>#</th><th>Company</th><th>Africa Trials</th><th>Est. Participants</th>
+            <th>Taking</th><th>Giving</th><th>Score</th><th>Verdict</th>
+        </tr></thead>
+        <tbody>
+            <tr>
+            <td style="text-align:center">1</td>
+            <td style="font-weight:600">AstraZeneca</td>
+            <td style="text-align:right">183</td>
+            <td style="text-align:right">17,470</td>
+            <td style="text-align:right;color:#ef4444">29.3</td>
+            <td style="text-align:right;color:#22c55e">16.0</td>
+            <td style="text-align:right;font-weight:700;color:#ef4444">+13.3</td>
+            <td style="color:#ef4444">NET EXTRACTOR</td>
+        </tr><tr>
+            <td style="text-align:center">2</td>
+            <td style="font-weight:600">Pfizer</td>
+            <td style="text-align:right">169</td>
+            <td style="text-align:right">23,850</td>
+            <td style="text-align:right;color:#ef4444">32.7</td>
+            <td style="text-align:right;color:#22c55e">20.8</td>
+            <td style="text-align:right;font-weight:700;color:#ef4444">+11.9</td>
+            <td style="color:#ef4444">NET EXTRACTOR</td>
+        </tr><tr>
+            <td style="text-align:center">3</td>
+            <td style="font-weight:600">Roche</td>
+            <td style="text-align:right">121</td>
+            <td style="text-align:right">5,235</td>
+            <td style="text-align:right;color:#ef4444">25.6</td>
+            <td style="text-align:right;color:#22c55e">18.1</td>
+            <td style="text-align:right;font-weight:700;color:#ef4444">+7.5</td>
+            <td style="color:#ef4444">NET EXTRACTOR</td>
+        </tr><tr>
+            <td style="text-align:center">4</td>
+            <td style="font-weight:600">Merck Sharp & Dohme</td>
+            <td style="text-align:right">85</td>
+            <td style="text-align:right">9,620</td>
+            <td style="text-align:right;color:#ef4444">24.5</td>
+            <td style="text-align:right;color:#22c55e">18.3</td>
+            <td style="text-align:right;font-weight:700;color:#ef4444">+6.2</td>
+            <td style="color:#ef4444">NET EXTRACTOR</td>
+        </tr><tr>
+            <td style="text-align:center">5</td>
+            <td style="font-weight:600">Johnson & Johnson</td>
+            <td style="text-align:right">7</td>
+            <td style="text-align:right">549</td>
+            <td style="text-align:right;color:#ef4444">23.8</td>
+            <td style="text-align:right;color:#22c55e">22.5</td>
+            <td style="text-align:right;font-weight:700;color:#f59e0b">+1.3</td>
+            <td style="color:#f59e0b">BALANCED</td>
+        </tr><tr>
+            <td style="text-align:center">6</td>
+            <td style="font-weight:600">Novartis</td>
+            <td style="text-align:right">154</td>
+            <td style="text-align:right">12,916</td>
+            <td style="text-align:right;color:#ef4444">27.4</td>
+            <td style="text-align:right;color:#22c55e">26.5</td>
+            <td style="text-align:right;font-weight:700;color:#f59e0b">+0.9</td>
+            <td style="color:#f59e0b">BALANCED</td>
+        </tr><tr>
+            <td style="text-align:center">7</td>
+            <td style="font-weight:600">Gilead</td>
+            <td style="text-align:right">32</td>
+            <td style="text-align:right">6,922</td>
+            <td style="text-align:right;color:#ef4444">23.8</td>
+            <td style="text-align:right;color:#22c55e">24.8</td>
+            <td style="text-align:right;font-weight:700;color:#f59e0b">-1.0</td>
+            <td style="color:#f59e0b">BALANCED</td>
+        </tr><tr>
+            <td style="text-align:center">8</td>
+            <td style="font-weight:600">Novo Nordisk</td>
+            <td style="text-align:right">109</td>
+            <td style="text-align:right">13,390</td>
+            <td style="text-align:right;color:#ef4444">25.5</td>
+            <td style="text-align:right;color:#22c55e">34.0</td>
+            <td style="text-align:right;font-weight:700;color:#22c55e">-8.5</td>
+            <td style="color:#22c55e">NET CONTRIBUTOR</td>
+        </tr><tr>
+            <td style="text-align:center">9</td>
+            <td style="font-weight:600">Sanofi</td>
+            <td style="text-align:right">147</td>
+            <td style="text-align:right">14,844</td>
+            <td style="text-align:right;color:#ef4444">24.7</td>
+            <td style="text-align:right;color:#22c55e">38.9</td>
+            <td style="text-align:right;font-weight:700;color:#22c55e">-14.2</td>
+            <td style="color:#22c55e">NET CONTRIBUTOR</td>
+        </tr><tr>
+            <td style="text-align:center">10</td>
+            <td style="font-weight:600">GlaxoSmithKline</td>
+            <td style="text-align:right">145</td>
+            <td style="text-align:right">24,930</td>
+            <td style="text-align:right;color:#ef4444">26.8</td>
+            <td style="text-align:right;color:#22c55e">45.1</td>
+            <td style="text-align:right;font-weight:700;color:#22c55e">-18.3</td>
+            <td style="color:#22c55e">NET CONTRIBUTOR</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- The Net Extractors -->
+    <h2 class="section-title"><span>The Net</span> Extractors</h2>
+    <p style="color:var(--text-dim);margin-bottom:16px">Companies with Mutaffifin Score &gt; +5: taking far more than they give.</p>
+    <div class="verdict-grid">
+        <div class="verdict-card extractor">
+            <h4>AstraZeneca</h4>
+            <div class="big-score">+13.3</div>
+            <p>Taking 29.3 vs Giving 16.0</p>
+            <p class="detail">COVID vaccine supply to Africa, oncology mega-trials</p>
+        </div><div class="verdict-card extractor">
+            <h4>Pfizer</h4>
+            <div class="big-score">+11.9</div>
+            <p>Taking 32.7 vs Giving 20.8</p>
+            <p class="detail">Largest pharma trial sponsor globally</p>
+        </div><div class="verdict-card extractor">
+            <h4>Roche</h4>
+            <div class="big-score">+7.5</div>
+            <p>Taking 25.6 vs Giving 18.1</p>
+            <p class="detail">Oncology-dominated; diagnostics presence</p>
+        </div><div class="verdict-card extractor">
+            <h4>Merck Sharp & Dohme</h4>
+            <div class="big-score">+6.2</div>
+            <p>Taking 24.5 vs Giving 18.3</p>
+            <p class="detail">Keytruda mega-trials, HPV vaccine (Gardasil)</p>
+        </div>
+    </div>
+
+    <!-- The Bright Spots -->
+    <h2 class="section-title"><span>The Bright</span> Spots</h2>
+    <p style="color:var(--text-dim);margin-bottom:16px">Any company giving more than taking? (Mutaffifin Score &lt; &minus;5)</p>
+    <div class="verdict-grid">
+        <div class="verdict-card bright">
+            <h4>Novo Nordisk</h4>
+            <div class="big-score" style="color:#22c55e">-8.5</div>
+            <p>Taking 25.5 vs Giving 34.0</p>
+            <p class="detail">Highest extraction ratio; diabetes prevalence rising in Africa</p>
+        </div><div class="verdict-card bright">
+            <h4>Sanofi</h4>
+            <div class="big-score" style="color:#22c55e">-14.2</div>
+            <p>Taking 24.7 vs Giving 38.9</p>
+            <p class="detail">Highest ratio among big-5; malaria, NTDs, vaccines</p>
+        </div><div class="verdict-card bright">
+            <h4>GlaxoSmithKline</h4>
+            <div class="big-score" style="color:#22c55e">-18.3</div>
+            <p>Taking 26.8 vs Giving 45.1</p>
+            <p class="detail">Genuine Africa-focused vaccine work (Mosquirix, rotavirus)</p>
+        </div>
+    </div>
+
+    <!-- Balanced -->
+    
+    <h2 class="section-title"><span>The</span> Balanced</h2>
+    <p style="color:var(--text-dim);margin-bottom:16px">Companies with scores between &minus;5 and +5.</p>
+    <div class="verdict-grid">
+        <div class="verdict-card balanced">
+            <h4>Johnson & Johnson</h4>
+            <div class="big-score" style="color:#f59e0b">+1.3</div>
+            <p>Taking 23.8 vs Giving 22.5</p>
+        </div><div class="verdict-card balanced">
+            <h4>Novartis</h4>
+            <div class="big-score" style="color:#f59e0b">+0.9</div>
+            <p>Taking 27.4 vs Giving 26.5</p>
+        </div><div class="verdict-card balanced">
+            <h4>Gilead</h4>
+            <div class="big-score" style="color:#f59e0b">-1.0</div>
+            <p>Taking 23.8 vs Giving 24.8</p>
+        </div>
+    </div>
+    
+
+    <!-- Company-by-Company Scales -->
+    <h2 class="section-title"><span>Company-by-Company</span> Accountability</h2>
+    
+        <div class="company-card" style="border-left:4px solid #ef4444">
+            <div class="card-header">
+                <h3>AstraZeneca</h3>
+                <div class="verdict" style="color:#ef4444">&#9878; NET EXTRACTOR <span class="ms-badge" style="background:#ef4444">+13.3</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>183</b> / 2,462 global (7.4%)</span>
+                <span>Est. African participants: <b>17,470</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">29.3/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:58.599999999999994%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>5.2/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (77%)</span><span>7.7/10</span></div>
+                        <div class="sub-row"><span>Termination rate (10%)</span><span>3.3/10</span></div>
+                        <div class="sub-row"><span>Token sites (87%)</span><span>13.1/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">16.0/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:32.0%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (3)</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (0%)</span><span>0.2/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (partial)</span><span>5.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (2)</span><span>3.3/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">balcinrenone/dapagliflozin 15 mg/10 mg a</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">balcinrenone/dapagliflozin 40 mg/10 mg a</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">dapagliflozin 10 mg and matching placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">AZD7798</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Baxdrostat</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Benralizumab</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Esomeprazole</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Dapagliflozin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Saxagliptin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Glyburide</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Metformin<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01151215" target="_blank" style="color:#60a5fa">NCT01151215</a></td>
+                <td>A Phase II, Randomised, Double-blind, Placebo-controlled, Mu...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>482</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT03961815" target="_blank" style="color:#60a5fa">NCT03961815</a></td>
+                <td>An Open-label, Long-term Extension Study of Brazikumab in Pa...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>18</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT03616821" target="_blank" style="color:#60a5fa">NCT03616821</a></td>
+                <td>A 54-Week, Multicenter, Randomized, Double-blind, Placebo Co...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>242</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00206089" target="_blank" style="color:#60a5fa">NCT00206089</a></td>
+                <td>The "EXTEND" Study: A Randomized, Double-blind, Parallel-gro...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>3,300</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01242514" target="_blank" style="color:#60a5fa">NCT01242514</a></td>
+                <td>(OSKIRA-X): A Long-term Extension Study to Assess the Safety...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>1,917</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> COVID-19 vaccine, oncology, respiratory</span>
+                <span><b>Pricing:</b> COVID vaccine at cost (via Serum Institute); limited for oncology</span>
+                <span><b>Manufacturing:</b> COVID vaccine manufactured by Serum Institute (India) for Africa, not in Africa</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #ef4444">
+            <div class="card-header">
+                <h3>Pfizer</h3>
+                <div class="verdict" style="color:#ef4444">&#9878; NET EXTRACTOR <span class="ms-badge" style="background:#ef4444">+11.9</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>169</b> / 3,170 global (5.3%)</span>
+                <span>Est. African participants: <b>23,850</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">32.7/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:65.4%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>7.2/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (60%)</span><span>6.0/10</span></div>
+                        <div class="sub-row"><span>Termination rate (20%)</span><span>6.5/10</span></div>
+                        <div class="sub-row"><span>Token sites (87%)</span><span>13.0/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">20.8/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:41.6%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (4)</span><span>10.0/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (2%)</span><span>0.8/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (partial)</span><span>5.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (5)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Etanercept</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">UK-453,061 Dose 1</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">UK-453,061 Dose 2</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Etravirine</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fesoterodine PR 4 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fesoterodine PR 8 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Oxybutynin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fesoterodine PR</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fesoterodine BIC 2 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fesoterodine BIC 4 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">PF-07321332</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00823979" target="_blank" style="color:#60a5fa">NCT00823979</a></td>
+                <td>A Phase 2b Multicenter, Randomized, Comparative Trial Of Uk-...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>105</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00809354" target="_blank" style="color:#60a5fa">NCT00809354</a></td>
+                <td>A PHASE 3, MULTI-CENTER, RANDOMIZED, DOUBLE-BLIND, CONTROLLE...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>2,720</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT05011513" target="_blank" style="color:#60a5fa">NCT05011513</a></td>
+                <td>AN INTERVENTIONAL EFFICACY AND SAFETY, PHASE 2/3, DOUBLE-BLI...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>1,440</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00676143" target="_blank" style="color:#60a5fa">NCT00676143</a></td>
+                <td>A Phase Iii, Multicenter, Randomized, Double-blind, Placebo-...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>1,100</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00793546" target="_blank" style="color:#60a5fa">NCT00793546</a></td>
+                <td>A Phase 2, Randomized, Open-Label Study Of Bosutinib Adminis...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>42</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Oncology, vaccines, cardiology mega-trials</span>
+                <span><b>Pricing:</b> Tiered pricing for some vaccines (Prevnar); limited for oncology</span>
+                <span><b>Manufacturing:</b> No owned manufacturing in Africa; some contract fill-finish via Aspen</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #ef4444">
+            <div class="card-header">
+                <h3>Roche</h3>
+                <div class="verdict" style="color:#ef4444">&#9878; NET EXTRACTOR <span class="ms-badge" style="background:#ef4444">+7.5</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>121</b> / 1,701 global (7.1%)</span>
+                <span>Est. African participants: <b>5,235</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">25.6/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:51.2%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>1.6/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (76%)</span><span>7.6/10</span></div>
+                        <div class="sub-row"><span>Termination rate (8%)</span><span>2.8/10</span></div>
+                        <div class="sub-row"><span>Token sites (91%)</span><span>13.6/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">18.1/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:36.2%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (3)</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (2%)</span><span>0.6/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (partial)</span><span>5.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (7)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Inavolisib</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Phesgo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Taxane-based Chemotherapy</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Optional Endocrine Therapy of Investigat</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">ibandronate [Bonviva/Boniva]</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Crovalimab</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Tobemstomig</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Pembrolizumab</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Nab-Paclitaxel</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Atezolizumab</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Bevacizumab</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01209702" target="_blank" style="color:#60a5fa">NCT01209702</a></td>
+                <td>A Ph II/III Seamless, Multi-center, Randomized, Double-blind...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>306</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT03452137" target="_blank" style="color:#60a5fa">NCT03452137</a></td>
+                <td>A Phase III, Multicenter, Randomized, Double-Blind, Placebo-...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>406</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT02118584" target="_blank" style="color:#60a5fa">NCT02118584</a></td>
+                <td>An Open-Label Extension and Safety Monitoring Study of Moder...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>1,822</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01209689" target="_blank" style="color:#60a5fa">NCT01209689</a></td>
+                <td>A Randomized, Double-blind, Parallel Group Placebo-controlle...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>113</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT03114657" target="_blank" style="color:#60a5fa">NCT03114657</a></td>
+                <td>A Phase III, Multicenter, Randomized, Double-Blind, Placebo-...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>806</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Oncology, diagnostics, hepatitis</span>
+                <span><b>Pricing:</b> Diagnostics (GeneXpert) tiered; oncology biologics minimally tiered</span>
+                <span><b>Manufacturing:</b> Diagnostics distribution hub in South Africa; no drug manufacturing</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #ef4444">
+            <div class="card-header">
+                <h3>Merck Sharp & Dohme</h3>
+                <div class="verdict" style="color:#ef4444">&#9878; NET EXTRACTOR <span class="ms-badge" style="background:#ef4444">+6.2</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>85</b> / 2,002 global (4.2%)</span>
+                <span>Est. African participants: <b>9,620</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">24.5/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:49.0%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>2.9/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (71%)</span><span>7.1/10</span></div>
+                        <div class="sub-row"><span>Termination rate (5%)</span><span>1.6/10</span></div>
+                        <div class="sub-row"><span>Token sites (86%)</span><span>12.9/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">18.3/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:36.6%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (3)</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (2%)</span><span>0.8/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (partial)</span><span>5.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (10)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Ifinatamab deruxtecan</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Docetaxel</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Prednisone</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Rescue Medication</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Opevesostat</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Dexamethasone</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fludrocortisone acetate</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Hydrocortisone</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Abiraterone acetate</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Prednisone acetate</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Enzalutamide</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Nemtabrutinib</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04575584" target="_blank" style="color:#60a5fa">NCT04575584</a></td>
+                <td>A Phase 2/3, Randomized, Placebo-Controlled, Double-Blind Cl...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>304</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04652700" target="_blank" style="color:#60a5fa">NCT04652700</a></td>
+                <td>A Phase 3, Randomized, Active-Controlled, Double-Blind Clini...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>494</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04152863" target="_blank" style="color:#60a5fa">NCT04152863</a></td>
+                <td>A Phase 2, Randomized Clinical Study of Intravenous or Intra...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>85</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04644029" target="_blank" style="color:#60a5fa">NCT04644029</a></td>
+                <td>A Phase 3, Randomized, Active-Controlled, Double-blind Clini...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>730</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> HPV vaccine, oncology, HIV (efavirenz legacy)</span>
+                <span><b>Pricing:</b> Gardasil tiered pricing; Keytruda priced near-globally; efavirenz generics licensed</span>
+                <span><b>Manufacturing:</b> No owned manufacturing in Africa; efavirenz licensed to generics</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #f59e0b">
+            <div class="card-header">
+                <h3>Johnson & Johnson</h3>
+                <div class="verdict" style="color:#f59e0b">&#9878; BALANCED <span class="ms-badge" style="background:#f59e0b">+1.3</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>7</b> / 848 global (0.8%)</span>
+                <span>Est. African participants: <b>549</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">23.8/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:47.6%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>0.2/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (86%)</span><span>8.6/10</span></div>
+                        <div class="sub-row"><span>Termination rate (0%)</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Token sites (100%)</span><span>15.0/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">22.5/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:45.0%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (3)</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (0%)</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (partial)</span><span>5.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (0)</span><span>0.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Rabeprazole sodium 5 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Rabeprazole sodium 10 mg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Rivaroxaban</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Warfarin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Matching placebo for Rivaroxaban arm (Wa</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Matching placebo for Warfarin arm (Rivar</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">JNJ-37822681</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Olanzapine</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Paliperidone ER</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Paliperidone Palmitate</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">topiramate</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            
+
+            <div class="card-notes">
+                <span><b>Focus:</b> TB (bedaquiline), HIV, COVID vaccine</span>
+                <span><b>Pricing:</b> Bedaquiline price reduced for LMICs after advocacy pressure; COVID vaccine at cost briefly</span>
+                <span><b>Manufacturing:</b> Aspen Pharmacare (South Africa) contract-manufactures J&J COVID vaccine and other products</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #f59e0b">
+            <div class="card-header">
+                <h3>Novartis</h3>
+                <div class="verdict" style="color:#f59e0b">&#9878; BALANCED <span class="ms-badge" style="background:#f59e0b">+0.9</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>154</b> / 3,131 global (4.9%)</span>
+                <span>Est. African participants: <b>12,916</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">27.4/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:54.79999999999999%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>3.9/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (71%)</span><span>7.1/10</span></div>
+                        <div class="sub-row"><span>Termination rate (14%)</span><span>4.5/10</span></div>
+                        <div class="sub-row"><span>Token sites (79%)</span><span>11.9/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">26.5/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:53.0%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (4)</span><span>10.0/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (4%)</span><span>1.5/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (yes)</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (4)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">LNP023</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Inclisiran</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Famciclovir</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Glycopyrronium bromide 25ug</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Glycopyrronium bromide 12.5ug</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">ensovibep</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Tobramycin inhalation powder</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Indacaterol acetate 75 μg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Indacaterol acetate 150 μg</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Nilotinib</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Valsartan 0.25 mg/kg</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04828161" target="_blank" style="color:#60a5fa">NCT04828161</a></td>
+                <td>A Randomized, Double-blind, Placebo-controlled, Multicenter ...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>407</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00549757" target="_blank" style="color:#60a5fa">NCT00549757</a></td>
+                <td>A Randomized, Double-blind, Placebo-controlled, Parallel Gro...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>8,606</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01528345" target="_blank" style="color:#60a5fa">NCT01528345</a></td>
+                <td>A Multicenter, Randomized, Double Blind, Placebo Controlled,...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>97</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01259297" target="_blank" style="color:#60a5fa">NCT01259297</a></td>
+                <td>A Randomized Controlled Trial of Aliskiren in the Prevention...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>2,336</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01035255" target="_blank" style="color:#60a5fa">NCT01035255</a></td>
+                <td>A Multicenter, Randomized, Double-blind, Parallel Group, Act...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>8,442</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Malaria (Coartem), sickle cell, oncology</span>
+                <span><b>Pricing:</b> Coartem at-cost for malaria; Access Principles programme for 37 LMICs</span>
+                <span><b>Manufacturing:</b> Divested Africa manufacturing; relies on partners</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #f59e0b">
+            <div class="card-header">
+                <h3>Gilead</h3>
+                <div class="verdict" style="color:#f59e0b">&#9878; BALANCED <span class="ms-badge" style="background:#f59e0b">-1.0</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>32</b> / 665 global (4.8%)</span>
+                <span>Est. African participants: <b>6,922</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">23.8/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:47.6%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>2.1/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (81%)</span><span>8.1/10</span></div>
+                        <div class="sub-row"><span>Termination rate (16%)</span><span>5.2/10</span></div>
+                        <div class="sub-row"><span>Token sites (56%)</span><span>8.4/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">24.8/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:49.6%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (4)</span><span>10.0/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (9%)</span><span>3.1/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (yes)</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>0.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (1)</span><span>1.7/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Lenacapavir<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">BIC/LEN FDC</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Sacituzumab Govitecan-hziy</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Pembrolizumab</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Paclitaxel</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">nab-Paclitaxel</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Gemcitabine</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Carboplatin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">B/F/TAF</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Filgotinib</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">PTM filgotinib</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Oral Lenacapavir<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01923311" target="_blank" style="color:#60a5fa">NCT01923311</a></td>
+                <td>A Phase 2/3 Multicenter, Open-Label, Multicohort, Two-Part S...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>31</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT05603143" target="_blank" style="color:#60a5fa">NCT05603143</a></td>
+                <td>A Phase 3, Randomized, Double-Blind, Placebo-Controlled Stud...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>468</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT02520284" target="_blank" style="color:#60a5fa">NCT02520284</a></td>
+                <td>A Combined Phase 2/3, Double-Blind, Randomized, Placebo-Cont...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>165</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT02405442" target="_blank" style="color:#60a5fa">NCT02405442</a></td>
+                <td>A Phase 2, Double-blind, Randomized, Placebo-Controlled, Mul...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>187</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04745351" target="_blank" style="color:#60a5fa">NCT04745351</a></td>
+                <td>A Phase 3 Randomized, Double-Blind, Placebo-Controlled, Para...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>249</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> HIV (lenacapavir, TAF), hepatitis C</span>
+                <span><b>Pricing:</b> Voluntary licences for HIV/HCV drugs to MPP; generic production for 112 countries</span>
+                <span><b>Manufacturing:</b> No owned manufacturing; voluntary licences to generic makers (e.g., Cipla, Mylan) in India for Africa supply</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #22c55e">
+            <div class="card-header">
+                <h3>Novo Nordisk</h3>
+                <div class="verdict" style="color:#22c55e">&#9878; NET CONTRIBUTOR <span class="ms-badge" style="background:#22c55e">-8.5</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>109</b> / 1,015 global (10.7%)</span>
+                <span>Est. African participants: <b>13,390</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">25.5/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:51.0%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>4.0/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (76%)</span><span>7.6/10</span></div>
+                        <div class="sub-row"><span>Termination rate (4%)</span><span>1.2/10</span></div>
+                        <div class="sub-row"><span>Token sites (84%)</span><span>12.7/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">34.0/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:68.0%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (3)</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (5%)</span><span>1.5/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (yes)</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (4)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">biphasic insulin aspart</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">insulin glargine</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">metformin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">glimepiride</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">nonacog beta pegol</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">EX1000</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">biphasic human insulin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">insulin degludec</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Cagrilintide</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Semaglutide<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">liraglutide</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00184548" target="_blank" style="color:#60a5fa">NCT00184548</a></td>
+                <td>A Multi-centre, Randomised, Double-blind, Parallel Group, Pl...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>554</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT02131272" target="_blank" style="color:#60a5fa">NCT02131272</a></td>
+                <td>A 26-week Open Label, Randomised, 2-armed, Parallel Group, M...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>42</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00503698" target="_blank" style="color:#60a5fa">NCT00503698</a></td>
+                <td>Efficacy and Safety of Somatropin in Adult Patients on Chron...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>712</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00154427" target="_blank" style="color:#60a5fa">NCT00154427</a></td>
+                <td>A Multi-centre, Randomised, Double-blind, Placebocontrolled,...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>172</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Diabetes (insulin), obesity, haemophilia</span>
+                <span><b>Pricing:</b> Insulin Access Commitment: human insulin capped at $3/vial for LMICs; NCD training</span>
+                <span><b>Manufacturing:</b> Insulin fill-finish in Algeria (partnership); planned capacity in South Africa</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #22c55e">
+            <div class="card-header">
+                <h3>Sanofi</h3>
+                <div class="verdict" style="color:#22c55e">&#9878; NET CONTRIBUTOR <span class="ms-badge" style="background:#22c55e">-14.2</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>147</b> / 2,106 global (7.0%)</span>
+                <span>Est. African participants: <b>14,844</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">24.7/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:49.4%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>4.5/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (72%)</span><span>7.2/10</span></div>
+                        <div class="sub-row"><span>Termination rate (9%)</span><span>2.9/10</span></div>
+                        <div class="sub-row"><span>Token sites (67%)</span><span>10.1/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">38.9/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:77.8%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (5)</span><span>12.5/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (4%)</span><span>1.4/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (yes)</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (5)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Fitusiran</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Clotting factor concentrates (CFC) or by</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Antithrombin concentrate (ATIIIC)</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Clopidogrel (SR25990)</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Lixisenatide (AVE0010)</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Pen auto-injector</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Metformin</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">LENOGRASTIM (GRANOGYTE 34)</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Insulin glargine (HOE901)<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Neutral Protamine Hagedorn (NPH) insulin<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Insulin lispro<span style="background:#22c55e;color:#000;padding:1px 6px;border-radius:8px;font-size:0.7em;margin-left:4px">EML</span></span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01151137" target="_blank" style="color:#60a5fa">NCT01151137</a></td>
+                <td>A Randomized, Double Blind, Placebo Controlled, Parallel Gro...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>3,236</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00766688" target="_blank" style="color:#60a5fa">NCT00766688</a></td>
+                <td>A Multicenter, Double-blind, Randomized, Placebo-controlled ...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>643</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00243178" target="_blank" style="color:#60a5fa">NCT00243178</a></td>
+                <td>A Parallel Randomized Controlled Evaluation of Clopidogrel P...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>6,706</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00359437" target="_blank" style="color:#60a5fa">NCT00359437</a></td>
+                <td>Satavaptan in the Prevention of Ascites Recurrence: a Double...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>501</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT04478266" target="_blank" style="color:#60a5fa">NCT04478266</a></td>
+                <td>A Randomized, Multicenter, Double-blind Phase 3 Study of Amc...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>1,068</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Malaria, NTDs, vaccines, diabetes</span>
+                <span><b>Pricing:</b> Insulin tiered pricing (LMIC Access programme); NTD drugs donated</span>
+                <span><b>Manufacturing:</b> Sanofi manufacturing in Morocco (Maphar) and Algeria; vaccine fill in South Africa</span>
+            </div>
+        </div>
+        
+        <div class="company-card" style="border-left:4px solid #22c55e">
+            <div class="card-header">
+                <h3>GlaxoSmithKline</h3>
+                <div class="verdict" style="color:#22c55e">&#9878; NET CONTRIBUTOR <span class="ms-badge" style="background:#22c55e">-18.3</span></div>
+            </div>
+            <div class="card-meta">
+                <span>Africa trials: <b>145</b> / 3,184 global (4.6%)</span>
+                <span>Est. African participants: <b>24,930</b></span>
+            </div>
+
+            <!-- The Scales Visualization -->
+            <div class="scales-viz">
+                <div class="scale-side taking-side">
+                    <div class="scale-label">TAKING <span class="score-num">26.8/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:53.6%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>Enrollment volume</span><span>7.5/15</span></div>
+                        <div class="sub-row"><span>Phase 3 dominance (46%)</span><span>4.6/10</span></div>
+                        <div class="sub-row"><span>Termination rate (10%)</span><span>3.4/10</span></div>
+                        <div class="sub-row"><span>Token sites (75%)</span><span>11.3/15</span></div>
+                    </div>
+                </div>
+                <div class="scale-fulcrum">&#9878;</div>
+                <div class="scale-side giving-side">
+                    <div class="scale-label">GIVING <span class="score-num">45.1/50</span></div>
+                    <div class="scale-bar-bg"><div class="scale-bar" style="width:90.2%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+                    <div class="sub-scores">
+                        <div class="sub-row"><span>EML drugs (6)</span><span>15.0/15</span></div>
+                        <div class="sub-row"><span>Africa-focused (15%)</span><span>5.1/10</span></div>
+                        <div class="sub-row"><span>Tiered pricing (yes)</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Local manufacturing</span><span>10.0/10</span></div>
+                        <div class="sub-row"><span>Phase 1 investment (11)</span><span>5.0/5</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drug tracking -->
+            <div class="drug-section">
+                <h4>Drugs Tested in Africa</h4>
+                <div class="drug-tags"><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Rotarix™</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">GSK3196165</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">MTX</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Folic acid</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">RSVPreF3 OA investigational vaccine</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Zanamivir</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo to match zanamivir</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Oseltamivir</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Placebo to match oseltamivir</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Pneumococcal vaccine GSK1024850A</span><span style="display:inline-block;margin:2px 4px;padding:3px 10px;background:rgba(255,255,255,0.06);border-radius:12px;font-size:0.82em">Tritanrix-HepB/Hib</span></div>
+            </div>
+
+            <!-- Terminated trials graveyard -->
+            <div class="terminated-section">
+                <h4>Terminated/Withdrawn Trials</h4>
+                <table class="mini-table">
+                    <thead><tr><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th></tr></thead>
+                    <tbody><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00611455" target="_blank" style="color:#60a5fa">NCT00611455</a></td>
+                <td>A Double-blind, Randomized, Placebo Controlled, Parallel Gro...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>265</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT05838755" target="_blank" style="color:#60a5fa">NCT05838755</a></td>
+                <td>A Multicenter Randomized, Double-blind, Placebo-controlled P...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>147</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT00548496" target="_blank" style="color:#60a5fa">NCT00548496</a></td>
+                <td>A Proof-of-Concept Study Of SB-751689 In Men And Post-menopa...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>86</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT01316939" target="_blank" style="color:#60a5fa">NCT01316939</a></td>
+                <td>A 52 Week Randomised, Double-blind, Placebo-controlled Study...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>229</td>
+            </tr><tr>
+                <td><a href="https://clinicaltrials.gov/study/NCT05838742" target="_blank" style="color:#60a5fa">NCT05838742</a></td>
+                <td>A Multicentre Randomized, Double-blind, Placebo Controlled, ...</td>
+                <td style="color:#ef4444">TERMINATED</td>
+                <td>314</td>
+            </tr></tbody>
+                </table>
+            </div>
+
+            <div class="card-notes">
+                <span><b>Focus:</b> Malaria vaccine (Mosquirix), rotavirus, HIV, TB</span>
+                <span><b>Pricing:</b> Tiered pricing across LMICs; voluntary licences for HIV drugs; Mosquirix at cost</span>
+                <span><b>Manufacturing:</b> Manufacturing facility in South Africa (Port Elizabeth); Aspen partnership for ARVs</span>
+            </div>
+        </div>
+        
+
+    <!-- The Terminated Trials Graveyard -->
+    <h2 class="section-title" style="color:var(--red)"><span>The Terminated</span> Trials Graveyard</h2>
+    <p style="color:var(--text-dim);margin-bottom:16px">Trials where data was taken, then the trial was stopped &mdash; participants enrolled, then abandoned.</p>
+    <div style="overflow-x:auto">
+    <table class="graveyard-table">
+        <thead><tr><th>Company</th><th>NCT ID</th><th>Title</th><th>Status</th><th>Enrollment</th><th>Condition</th></tr></thead>
+        <tbody><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01151215" target="_blank" style="color:#60a5fa">NCT01151215</a></td>
+            <td>A Phase II, Randomised, Double-blind, Placebo-controlle...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>482</td>
+            <td>Neoplasms, Breast Neoplasms</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT03961815" target="_blank" style="color:#60a5fa">NCT03961815</a></td>
+            <td>An Open-label, Long-term Extension Study of Brazikumab ...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>18</td>
+            <td>Crohn's Disease, IBD</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT03616821" target="_blank" style="color:#60a5fa">NCT03616821</a></td>
+            <td>A 54-Week, Multicenter, Randomized, Double-blind, Place...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>242</td>
+            <td>Ulcerative Colitis, IBD</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00206089" target="_blank" style="color:#60a5fa">NCT00206089</a></td>
+            <td>The "EXTEND" Study: A Randomized, Double-blind, Paralle...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>3,300</td>
+            <td>Thromboembolism</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01242514" target="_blank" style="color:#60a5fa">NCT01242514</a></td>
+            <td>(OSKIRA-X): A Long-term Extension Study to Assess the S...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>1,917</td>
+            <td>Rheumatoid Arthritis</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00261352" target="_blank" style="color:#60a5fa">NCT00261352</a></td>
+            <td>A 24-Week Randomised, Double-Blind, Parallel-Group, Mul...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>1,000</td>
+            <td>Type 2 Diabetes</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00252876" target="_blank" style="color:#60a5fa">NCT00252876</a></td>
+            <td>An Open-Label, Multi-Centre and Long-Term Extension Stu...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>2,000</td>
+            <td>Type 2 Diabetes</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT03759288" target="_blank" style="color:#60a5fa">NCT03759288</a></td>
+            <td>A 52-Week, Multicenter, Randomized, Double-blind, Place...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>89</td>
+            <td>Crohn's Disease, IBD</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00300105" target="_blank" style="color:#60a5fa">NCT00300105</a></td>
+            <td>A Parallel-Group, Multi-Centre, Active-Controlled (Glib...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>400</td>
+            <td>Type 2 Diabetes</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01384292" target="_blank" style="color:#60a5fa">NCT01384292</a></td>
+            <td>A Randomized, Double-Blind, Placebo-Controlled Study to...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>14</td>
+            <td>Opioid-Induced Constipation</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00626548" target="_blank" style="color:#60a5fa">NCT00626548</a></td>
+            <td>A Phase III, Randomised, Placebo-controlled, Double-bli...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>2,577</td>
+            <td>Prostate Cancer</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01264770" target="_blank" style="color:#60a5fa">NCT01264770</a></td>
+            <td>(OSKIRA-4): A Phase IIB, Multi-Centre, Randomised, Doub...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>644</td>
+            <td>Rheumatoid Arthritis</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT04277546" target="_blank" style="color:#60a5fa">NCT04277546</a></td>
+            <td>A Phase 2 Open-label, Long-term Extension Safety Study ...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>57</td>
+            <td>Ulcerative Colitis</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00239681" target="_blank" style="color:#60a5fa">NCT00239681</a></td>
+            <td>A Randomized, Double-Blind, Placebo Controlled, Multice...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>17,802</td>
+            <td>Elevated High-sensitivity C-Reactive Pro</td>
+        </tr><tr>
+            <td>AstraZeneca</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT03615924" target="_blank" style="color:#60a5fa">NCT03615924</a></td>
+            <td>A Randomised, Double-Blind, Parallel-Group, Multicentre...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>193</td>
+            <td>Sickle Cell Disease</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00823979" target="_blank" style="color:#60a5fa">NCT00823979</a></td>
+            <td>A Phase 2b Multicenter, Randomized, Comparative Trial O...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>105</td>
+            <td>HIV-1</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00809354" target="_blank" style="color:#60a5fa">NCT00809354</a></td>
+            <td>A PHASE 3, MULTI-CENTER, RANDOMIZED, DOUBLE-BLIND, CONT...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>2,720</td>
+            <td>Osteoarthritis, Arthritis</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT05011513" target="_blank" style="color:#60a5fa">NCT05011513</a></td>
+            <td>AN INTERVENTIONAL EFFICACY AND SAFETY, PHASE 2/3, DOUBL...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>1,440</td>
+            <td>COVID-19</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00676143" target="_blank" style="color:#60a5fa">NCT00676143</a></td>
+            <td>A Phase Iii, Multicenter, Randomized, Double-blind, Pla...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>1,100</td>
+            <td>Alzheimer Disease</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00793546" target="_blank" style="color:#60a5fa">NCT00793546</a></td>
+            <td>A Phase 2, Randomized, Open-Label Study Of Bosutinib Ad...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>42</td>
+            <td>Advanced Breast Cancer</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00895895" target="_blank" style="color:#60a5fa">NCT00895895</a></td>
+            <td>A 52-Week, Two-Period, Multicenter, Randomized, Double-...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>526</td>
+            <td>Alzheimer Disease</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00796666" target="_blank" style="color:#60a5fa">NCT00796666</a></td>
+            <td>A Phase 3, Multi-Center, Randomized, Double-Blind, Effi...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>131</td>
+            <td>Pulmonary Arterial Hypertension, Pulmona</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01603394" target="_blank" style="color:#60a5fa">NCT01603394</a></td>
+            <td>A Phase 4 Multicenter, Open-Label, Pilot Study Of Prega...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>9</td>
+            <td>Postherpetic Neuralgia</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00137345" target="_blank" style="color:#60a5fa">NCT00137345</a></td>
+            <td>A Randomized, Open-Label, Comparative Evaluation of the...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>500</td>
+            <td>Kidney Transplant</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00824369" target="_blank" style="color:#60a5fa">NCT00824369</a></td>
+            <td>A Phase 2b Open-Label Rollover Study For Subjects Disco...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>52</td>
+            <td>HIV-1</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00667810" target="_blank" style="color:#60a5fa">NCT00667810</a></td>
+            <td>A Phase 3, Multicenter, Randomized, Double-blind, Place...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>901</td>
+            <td>Alzheimer Disease</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00254891" target="_blank" style="color:#60a5fa">NCT00254891</a></td>
+            <td>International, Randomized, Open-Label, Phase 3 Trial of...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>828</td>
+            <td>Carcinoma, Non-Small-Cell Lung</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT00673049" target="_blank" style="color:#60a5fa">NCT00673049</a></td>
+            <td>Randomized, Open Label, Phase 3 Trial Of Erlotinib Alon...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>583</td>
+            <td>Carcinoma, Large Cell, Carcinoma, Non-Sm</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT01975376" target="_blank" style="color:#60a5fa">NCT01975376</a></td>
+            <td>Phase 3 Multi-center, Double-blind, Randomized, Placebo...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>16,784</td>
+            <td>Cardiovascular Disease</td>
+        </tr><tr>
+            <td>Pfizer</td>
+            <td><a href="https://clinicaltrials.gov/study/NCT02202135" target="_blank" style="color:#60a5fa">NCT02202135</a></td>
+            <td>A Phase III, Multicentre, Randomised, Double-Blind Comp...</td>
+            <td style="color:#ef4444">TERMINATED</td>
+            <td>4</td>
+            <td>Complicated Skin and Soft Tissue Infecti</td>
+        </tr></tbody>
+    </table>
+    </div>
+
+    <!-- Policy: What Would Fair Measure Look Like? -->
+    <div class="policy-section">
+        <h3>What Would "Fair Measure" Look Like?</h3>
+        <p style="color:var(--text-dim);margin-bottom:16px">The Quranic principle is clear: if you take in full, you must give in full. Applied to pharmaceutical research in Africa:</p>
+        <ul class="policy-list">
+            <li><b>Proportional reinvestment</b> &mdash; For every Phase 3 mega-trial using African sites, fund at least one Africa-focused Phase 1 or Phase 2 study building local research capacity.</li>
+            <li><b>Mandatory tiered access</b> &mdash; Any drug tested on African participants must be made available at income-adjusted prices within 2 years of approval, enforced by trial registration conditions.</li>
+            <li><b>Local manufacturing commitment</b> &mdash; Companies enrolling &gt;1,000 African participants should invest in technology transfer or local fill-finish capacity on the continent.</li>
+            <li><b>Terminated trial accountability</b> &mdash; Sponsors who terminate trials after enrollment must provide participants with continued access to investigational products and publish all collected data.</li>
+            <li><b>Africa-burden alignment</b> &mdash; At least 30% of a company's Africa portfolio should address conditions with disproportionate African burden (malaria, TB, sickle cell, NTDs) rather than global registration convenience.</li>
+            <li><b>Community benefit sharing</b> &mdash; Trial sites should receive infrastructure that persists after the trial ends: trained staff, diagnostic equipment, clinical capacity that serves the community.</li>
+            <li><b>Transparent reporting</b> &mdash; Annual public disclosure of the Mutaffifin Score components, independently audited, so extraction can be tracked over time.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>The Scales of Al-Mutaffifin &mdash; Project 61 of the AfricaRCT Series</p>
+        <p>Data: ClinicalTrials.gov API v2 (public registry) | Generated 2026-03-28</p>
+        <p style="margin-top:8px;font-size:0.8em;color:#64748b">
+            Mutaffifin Score methodology: Taking (enrollment volume + Phase 3 dominance + termination rate + token sites)
+            minus Giving (EML drugs + Africa-focused trials + tiered pricing + local manufacturing + Phase 1 investment).
+            Positive = net extraction. Negative = net contribution.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

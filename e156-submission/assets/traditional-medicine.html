@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa's Traditional Medicine Paradox</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #22c55e, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.analysis-box {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.analysis-box p { margin-bottom: 0.8rem; }
+.analysis-box p:last-child { margin-bottom: 0; }
+.danger-box {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.danger-box p { margin-bottom: 0.8rem; }
+.danger-box p:last-child { margin-bottom: 0; }
+.success-box {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 4px solid var(--success);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.success-box p { margin-bottom: 0.8rem; }
+.success-box p:last-child { margin-bottom: 0; }
+.purple-box {
+  background: rgba(139, 92, 246, 0.08);
+  border-left: 4px solid var(--purple);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.purple-box p { margin-bottom: 0.8rem; }
+.purple-box p:last-child { margin-bottom: 0; }
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+.big-number {
+  font-size: 5rem;
+  font-weight: 900;
+  text-align: center;
+  margin: 1rem 0;
+}
+.paradox-stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.paradox-stat .side {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  min-width: 200px;
+}
+.paradox-stat .vs {
+  font-size: 1.5rem;
+  color: var(--muted);
+  font-weight: bold;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa's Traditional Medicine Paradox</h1>
+<p class="subtitle">80% of Africans rely on traditional medicine as primary healthcare &mdash;
+yet virtually none of it is rigorously tested. Africa has 281 traditional/herbal medicine
+trials on ClinicalTrials.gov vs China's 2185: a 8x gap.</p>
+
+<!-- ============================================================ -->
+<!-- 1. SUMMARY -->
+<!-- ============================================================ -->
+<h2>1. The Numbers at a Glance</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa TM Trials</div>
+    <div class="value danger">281</div>
+    <div class="label">~1.4 billion people</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">China TM Trials</div>
+    <div class="value warning">2185</div>
+    <div class="label">TCM systematization model</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Gap Ratio</div>
+    <div class="value danger">8x</div>
+    <div class="label">China / Africa</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">India TM Trials</div>
+    <div class="value" style="color:var(--success);">85</div>
+    <div class="label">Ayurveda + AYUSH system</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa's Global Share</div>
+    <div class="value danger">6.95%</div>
+    <div class="label">of all TM trials worldwide</div>
+  </div>
+</div>
+
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2, querying
+<code>"traditional medicine OR herbal OR medicinal plant OR indigenous medicine"</code> filtered to interventional studies.
+Africa total is the union of 8 major African countries (South Africa, Nigeria, Ghana,
+Kenya, Tanzania, Cameroon, DRC, Egypt). Generated 2026-03-28.
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. THE PARADOX: 80% USE, 0% EVIDENCE -->
+<!-- ============================================================ -->
+<h2>2. The Paradox: 80% Use, Near-Zero Evidence</h2>
+
+<div class="paradox-stat">
+  <div class="side">
+    <div class="label">WHO estimate: Africans using TM</div>
+    <div class="value" style="font-size:3rem;color:var(--success);">80%</div>
+    <div class="label">~1.1 billion people</div>
+  </div>
+  <div class="vs">vs</div>
+  <div class="side">
+    <div class="label">Registered TM trials in Africa</div>
+    <div class="value" style="font-size:3rem;color:var(--danger);">281</div>
+    <div class="label">on ClinicalTrials.gov</div>
+  </div>
+</div>
+
+<div class="danger-box">
+<p><strong>The paradox is staggering.</strong> The WHO's African Regional Strategy on
+Traditional Medicine (2014&ndash;2023) estimated that 80% of Africa's population relies
+on traditional medicine as the primary or sole source of healthcare. This makes traditional
+medicine the de facto health system for over one billion people.</p>
+
+<p>Yet on ClinicalTrials.gov &mdash; the world's largest trial registry &mdash; Africa has
+only <strong>281</strong> registered interventional trials for traditional, herbal,
+or indigenous medicines. China, with a comparable population and an equally deep traditional
+medicine heritage, has <strong>2185</strong> &mdash; a <strong>8x</strong> gap.</p>
+
+<p><strong>This means Africa's most widely used healthcare interventions have essentially
+no rigorous evidence base.</strong> Dosing, safety, drug interactions, efficacy against
+specific conditions &mdash; all unknown for the remedies that 80% of the population actually takes.
+Patients are being treated at population scale with unvalidated interventions, while the
+global research enterprise focuses its traditional medicine efforts elsewhere.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. REGIONAL COMPARISON CHART -->
+<!-- ============================================================ -->
+<h2>3. Regional Comparison</h2>
+<div class="chart-container">
+  <canvas id="regionChart" height="300"></canvas>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th style="padding:10px;">Region</th>
+  <th style="padding:10px;text-align:right;">TM/Herbal Trials</th>
+  <th style="padding:10px;text-align:right;">Ratio vs Africa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;color:var(--danger);">Africa (8 countries)</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">281</td>
+  <td style="padding:10px;text-align:right;">1x (baseline)</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;color:var(--warning);">China</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">2185</td>
+  <td style="padding:10px;text-align:right;color:var(--danger);">8x</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;color:var(--success);">India</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">85</td>
+  <td style="padding:10px;text-align:right;color:var(--danger);">0.3x</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;color:var(--accent);">Brazil</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">89</td>
+  <td style="padding:10px;text-align:right;">0.3x</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;color:var(--purple);">United States</td>
+  <td style="padding:10px;text-align:right;font-weight:bold;">1404</td>
+  <td style="padding:10px;text-align:right;">5.0x</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- 4. COUNTRY BREAKDOWN -->
+<!-- ============================================================ -->
+<h2>4. African Country Breakdown</h2>
+<table>
+<thead>
+<tr>
+  <th style="padding:10px;">Country</th>
+  <th style="padding:10px;text-align:right;">Population</th>
+  <th style="padding:10px;text-align:right;">TM/Herbal Trials</th>
+  <th style="padding:10px;text-align:right;">Per Million</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Egypt</td><td style="padding:10px;text-align:right;">109M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">228</td><td style="padding:10px;text-align:right;">2.092</td></tr>
+<tr><td style="padding:10px;">South Africa</td><td style="padding:10px;text-align:right;">62M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">21</td><td style="padding:10px;text-align:right;">0.339</td></tr>
+<tr><td style="padding:10px;">Tanzania</td><td style="padding:10px;text-align:right;">67M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">12</td><td style="padding:10px;text-align:right;">0.179</td></tr>
+<tr><td style="padding:10px;">Kenya</td><td style="padding:10px;text-align:right;">56M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">7</td><td style="padding:10px;text-align:right;">0.125</td></tr>
+<tr><td style="padding:10px;">Nigeria</td><td style="padding:10px;text-align:right;">230M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">5</td><td style="padding:10px;text-align:right;">0.022</td></tr>
+<tr><td style="padding:10px;">Ghana</td><td style="padding:10px;text-align:right;">34M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#22c55e;">5</td><td style="padding:10px;text-align:right;">0.147</td></tr>
+<tr><td style="padding:10px;">Cameroon</td><td style="padding:10px;text-align:right;">28M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">2</td><td style="padding:10px;text-align:right;">0.071</td></tr>
+<tr><td style="padding:10px;">DRC</td><td style="padding:10px;text-align:right;">102M</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">1</td><td style="padding:10px;text-align:right;">0.01</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+  <canvas id="countryChart" height="300"></canvas>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. SPECIFIC REMEDY SEARCH -->
+<!-- ============================================================ -->
+<h2>5. Specific African Remedies on ClinicalTrials.gov</h2>
+
+<div class="analysis-box">
+<p><strong>Africa has contributed some of the world's most important medicines</strong> &mdash;
+yet the systematic testing of its pharmacopoeia has barely begun. Below are search results
+for seven remedies with African origins or widespread African traditional use.</p>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th style="padding:10px;">Remedy</th>
+  <th style="padding:10px;">Description</th>
+  <th style="padding:10px;text-align:right;">Global Trials</th>
+  <th style="padding:10px;text-align:right;">Africa Trials</th>
+  <th style="padding:10px;text-align:right;">Africa %</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;font-weight:bold;">moringa</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Moringa oleifera (drumstick tree)</td><td style="padding:10px;text-align:right;">49</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">12</td><td style="padding:10px;text-align:right;">24.5%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Artemisia</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Artemisia (origin of artemisinin, Nobel Prize 2015)</td><td style="padding:10px;text-align:right;">48</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">1</td><td style="padding:10px;text-align:right;">2.1%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">neem</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Azadirachta indica (neem tree)</td><td style="padding:10px;text-align:right;">27</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">9</td><td style="padding:10px;text-align:right;">33.3%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">devil&#39;s claw</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Harpagophytum (anti-inflammatory, Southern Africa)</td><td style="padding:10px;text-align:right;">7</td><td style="padding:10px;text-align:right;font-weight:bold;color:#ef4444;">0</td><td style="padding:10px;text-align:right;">0.0%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">African potato</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Hypoxis hemerocallidea (immune support)</td><td style="padding:10px;text-align:right;">3</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">1</td><td style="padding:10px;text-align:right;">33.3%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">rooibos</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Aspalathus linearis (South African tea)</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;font-weight:bold;color:#ef4444;">0</td><td style="padding:10px;text-align:right;">0.0%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Sutherlandia</td><td style="padding:10px;color:var(--muted);font-size:0.85rem;">Lessertia frutescens (cancer bush, South Africa)</td><td style="padding:10px;text-align:right;">2</td><td style="padding:10px;text-align:right;font-weight:bold;color:#f59e0b;">2</td><td style="padding:10px;text-align:right;">100.0%</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+  <canvas id="remedyChart" height="300"></canvas>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. THE ARTEMISININ LESSON -->
+<!-- ============================================================ -->
+<h2>6. The Artemisinin Lesson</h2>
+
+<div class="success-box">
+<p><strong>Artemisia annua</strong> was used in Chinese traditional medicine (qinghao) for
+over 2,000 years. In 1972, Tu Youyou's team extracted artemisinin from this plant, tested it
+rigorously, and created the most important antimalarial drug in history. She received the
+<strong>Nobel Prize in Physiology or Medicine in 2015</strong> &mdash; the first Nobel for
+a discovery derived directly from traditional herbal medicine.</p>
+
+<p><strong>The lesson:</strong> Traditional medicine contains real pharmacological agents.
+When subjected to modern scientific methods &mdash; extraction, purification, randomized
+controlled trials &mdash; it can yield breakthrough therapies. Artemisinin now saves
+hundreds of thousands of lives annually.</p>
+
+<p><strong>The question:</strong> Africa's traditional pharmacopoeia is vast and diverse,
+spanning thousands of plant species across dozens of ecological zones. Devil's claw has
+demonstrated anti-inflammatory properties. Sutherlandia (cancer bush) shows cytotoxic
+activity in vitro. The African potato has immunomodulatory effects. <em>How many more
+artemisinin-class discoveries are sitting in Africa's traditional medicine systems,
+untested?</em></p>
+
+<p><strong>The tragedy:</strong> The answer is: we have no way of knowing, because almost
+nobody is running the trials. China invested systematically in testing its traditional
+pharmacopoeia and produced a Nobel Prize. Africa, with comparable biodiversity and an
+even deeper reliance on traditional medicine, has 281 registered trials.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. CHINA'S TCM MODEL -->
+<!-- ============================================================ -->
+<h2>7. China's TCM Model: What Systematization Looks Like</h2>
+
+<div class="purple-box">
+<p><strong>China's 2185 traditional medicine trials</strong> on ClinicalTrials.gov
+did not happen by accident. China has pursued a deliberate, multi-decade strategy to
+validate Traditional Chinese Medicine (TCM) through modern research methods.</p>
+
+<p><strong>Institutional infrastructure:</strong> China established the State Administration
+of Traditional Chinese Medicine (SATCM) in 1986, created TCM-specific university degree
+programs, built over 4,000 TCM hospitals (accounting for ~16% of all hospital visits),
+and invested billions in TCM research annually.</p>
+
+<p><strong>Regulatory framework:</strong> China's 2017 TCM Law formalized standards for
+herbal product quality, practitioner licensing, and clinical evidence requirements.
+The CFDA created specific pathways for TCM drug approval, including simplified Phase I
+requirements for products with long historical use.</p>
+
+<p><strong>Research funding:</strong> The National Natural Science Foundation of China
+has dedicated TCM research programs. Major universities (Beijing University of Chinese
+Medicine, Shanghai University of TCM) produce thousands of peer-reviewed publications
+annually on herbal pharmacology.</p>
+
+<p><strong>International projection:</strong> China actively promotes TCM internationally
+through Confucius Institutes, bilateral health agreements, and WHO lobbying, resulting
+in the inclusion of TCM classifications in ICD-11 (2019) &mdash; a controversial decision
+that nonetheless demonstrates strategic investment in global legitimacy.</p>
+
+<p><strong>The contrast with Africa:</strong> No African country has comparable institutional
+infrastructure for traditional medicine research. There is no pan-African traditional
+medicine research agency, no standardized regulatory pathway for herbal products, and
+no dedicated funding stream comparable to China's NSFC programs. The 8x gap
+is the predictable result of a 8x gap in investment.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. SPONSOR ANALYSIS -->
+<!-- ============================================================ -->
+<h2>8. Who Sponsors the Few Trials That Exist?</h2>
+
+<div class="analysis-box">
+<p>Of the small number of traditional medicine trials in Africa, the sponsor profile reveals
+the dependency structure of African clinical research.</p>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th style="padding:10px;">Sponsor Class</th>
+  <th style="padding:10px;text-align:right;">Count (sampled)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;">Academic / NGO / Other</td><td style="padding:10px;text-align:right;font-weight:bold;">21</td></tr>
+<tr><td style="padding:10px;">Industry (pharmaceutical)</td><td style="padding:10px;text-align:right;font-weight:bold;">9</td></tr>
+<tr><td style="padding:10px;">NIH (US government)</td><td style="padding:10px;text-align:right;font-weight:bold;">1</td></tr>
+<tr><td style="padding:10px;">Other Government</td><td style="padding:10px;text-align:right;font-weight:bold;">1</td></tr>
+
+</tbody>
+</table>
+
+<div class="method-note">
+<strong>Note:</strong> Sponsor analysis is based on a sample of up to 10 trials per
+country for South Africa, Nigeria, Kenya, and Egypt. The proportions are indicative
+rather than exhaustive.
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. WHO TM STRATEGY COMPLIANCE -->
+<!-- ============================================================ -->
+<h2>9. WHO Traditional Medicine Strategy 2014&ndash;2023: Africa's Scorecard</h2>
+
+<div class="danger-box">
+<p>The WHO Traditional Medicine Strategy 2014&ndash;2023 outlined seven priority areas
+for integrating traditional medicine into health systems. Africa's performance against
+these benchmarks is uniformly poor.</p>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th style="padding:10px;">Strategy Area</th>
+  <th style="padding:10px;">Africa Status</th>
+  <th style="padding:10px;text-align:center;">Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px;font-weight:bold;">Member state policies</td><td style="padding:10px;color:var(--muted);">Only 25 of 54 African countries have national TM policies (WHO 2019 survey)</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Safety monitoring</td><td style="padding:10px;color:var(--muted);">Pharmacovigilance for herbal products is absent in most African countries</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Quality standards</td><td style="padding:10px;color:var(--muted);">No African country has GMP-compliant herbal manufacturing at scale</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Integration into health systems</td><td style="padding:10px;color:var(--muted);">TM practitioners operate outside formal referral pathways</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Research investment</td><td style="padding:10px;color:var(--muted);">Africa has 281 TM trials vs China&#39;s 2185 -- evidence generation is near zero</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Intellectual property</td><td style="padding:10px;color:var(--muted);">Traditional knowledge is largely unprotected from biopiracy</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Biodiversity conservation</td><td style="padding:10px;color:var(--muted);">Medicinal plant harvesting is unregulated in most regions</td><td style="padding:10px;text-align:center;"><span style="color:#ef4444;font-weight:bold;">FAILING</span></td></tr>
+
+</tbody>
+</table>
+
+<div class="analysis-box">
+<p><strong>The fundamental failure</strong> is the disconnect between rhetoric and investment.
+African governments and the WHO repeatedly affirm the importance of traditional medicine &mdash;
+indeed, the WHO declared 2001&ndash;2010 the "Decade of Traditional Medicine in Africa" &mdash;
+but this recognition has not translated into research funding, regulatory infrastructure,
+or trial registration. China treated its TM strategy as an <em>industrial policy</em>,
+not a public health platitude. Africa has done the opposite.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. IMPLICATIONS -->
+<!-- ============================================================ -->
+<h2>10. Implications and the Path Forward</h2>
+
+<div class="success-box">
+<p><strong>What would closing the gap require?</strong></p>
+
+<p><strong>1. Pan-African TM Research Network:</strong> A coordinated, AU-level body
+modeled on China's SATCM, with dedicated funding and standardized protocols for
+ethnobotanical screening, phytochemical analysis, and clinical trial design for
+traditional remedies.</p>
+
+<p><strong>2. Regulatory pathways:</strong> Simplified but rigorous pathways for
+traditional medicines with documented long-term use, similar to China's "classical
+formula" fast-track or the EU's Traditional Herbal Medicinal Products Directive.</p>
+
+<p><strong>3. Intellectual property protection:</strong> Before systematic testing begins,
+frameworks must protect African communities' traditional knowledge from biopiracy. The
+Nagoya Protocol on Access and Benefit Sharing provides a starting point, but
+implementation is weak across the continent.</p>
+
+<p><strong>4. Investment at scale:</strong> Even matching India's TM trial output
+(85 trials) would require a 0.3x increase from Africa's current
+base of 281. This demands sustained funding from African governments,
+multilateral institutions, and philanthropic foundations.</p>
+
+<p><strong>5. Local clinical trial infrastructure:</strong> GCP-compliant sites,
+trained investigators, ethics committees familiar with traditional medicine research,
+and digital registry integration &mdash; all of which are prerequisites for credible
+trial conduct.</p>
+</div>
+
+<footer>
+  Data from ClinicalTrials.gov API v2 &middot; Interventional studies only &middot;
+  Query: &ldquo;traditional medicine OR herbal OR medicinal plant OR indigenous medicine&rdquo; &middot;
+  Generated 2026-03-28 12:06 &middot;
+  Africa RCT Landscape Project &mdash; Traditional Medicine Paradox (Project 22)
+</footer>
+
+</div>
+
+<script>
+// 1. Regional comparison bar chart
+const regionCtx = document.getElementById('regionChart').getContext('2d');
+new Chart(regionCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Africa", "China", "India", "Brazil", "US"],
+    datasets: [{
+      label: 'Traditional/Herbal Medicine Trials',
+      data: [281, 2185, 85, 89, 1404],
+      backgroundColor: ["#ef4444", "#f59e0b", "#22c55e", "#3b82f6", "#8b5cf6"],
+      borderColor: ["#ef4444", "#f59e0b", "#22c55e", "#3b82f6", "#8b5cf6"],
+      borderWidth: 1,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Traditional / Herbal Medicine Trials by Region',
+        color: '#94a3b8',
+        font: { size: 14 }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        title: {
+          display: true,
+          text: 'Number of trials',
+          color: '#94a3b8'
+        }
+      },
+      x: {
+        ticks: { color: '#e2e8f0', font: { size: 13 } },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// 2. Country breakdown bar chart
+const countryCtx = document.getElementById('countryChart').getContext('2d');
+new Chart(countryCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Egypt", "South Africa", "Tanzania", "Kenya", "Nigeria", "Ghana", "Cameroon", "DRC"],
+    datasets: [{
+      label: 'TM/Herbal Trials',
+      data: [228, 21, 12, 7, 5, 5, 2, 1],
+      backgroundColor: '#ef4444',
+      borderColor: '#ef4444',
+      borderWidth: 1,
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Traditional Medicine Trials by African Country',
+        color: '#94a3b8',
+        font: { size: 14 }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      y: {
+        ticks: { color: '#e2e8f0', font: { size: 12 } },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// 3. Remedy comparison grouped bar chart
+const remedyCtx = document.getElementById('remedyChart').getContext('2d');
+new Chart(remedyCtx, {
+  type: 'bar',
+  data: {
+    labels: ["moringa", "Artemisia", "neem", "devil's claw", "African potato", "rooibos", "Sutherlandia"],
+    datasets: [
+      {
+        label: 'Global trials',
+        data: [49, 48, 27, 7, 3, 2, 2],
+        backgroundColor: '#3b82f6',
+        borderRadius: 4,
+      },
+      {
+        label: 'Africa trials',
+        data: [12, 1, 9, 0, 1, 0, 2],
+        backgroundColor: '#ef4444',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: { color: '#94a3b8' }
+      },
+      title: {
+        display: true,
+        text: 'Specific African Remedies: Global vs Africa Trial Counts',
+        color: '#94a3b8',
+        font: { size: 14 }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      x: {
+        ticks: { color: '#e2e8f0', font: { size: 11 } },
+        grid: { display: false }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

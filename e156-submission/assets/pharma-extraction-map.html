@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Extraction Map: Big Pharma in Africa</title>
+<style>
+  :root { --bg: #0a0e17; --surface: #111827; --border: #1e293b; --text: #e2e8f0;
+           --muted: #94a3b8; --accent: #3b82f6; --danger: #ef4444; --success: #22c55e;
+           --warn: #f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter','Segoe UI',system-ui,sans-serif;
+          line-height:1.6; }
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px; }
+  h1 { font-size:1.8em; margin-bottom:4px; background:linear-gradient(135deg,#60a5fa,#a78bfa);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  h2 { font-size:1.3em; margin:32px 0 16px 0; color:#f1f5f9;
+        border-bottom:2px solid var(--border); padding-bottom:8px; }
+  h3 { font-size:1.1em; color:#f1f5f9; }
+  .subtitle { color:var(--muted); font-size:0.95em; margin-bottom:24px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+               gap:12px; margin:20px 0; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+          padding:16px; text-align:center; }
+  .kpi-value { font-size:1.8em; font-weight:800; }
+  .kpi-label { font-size:0.82em; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88em; }
+  th { background:#1e293b; color:#cbd5e1; padding:10px 12px; text-align:left;
+        font-weight:600; position:sticky; top:0; }
+  td { padding:8px 12px; border-bottom:1px solid #1e293b; }
+  tr:hover { background:rgba(59,130,246,0.05); }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border);
+                 margin:12px 0; }
+  .chart-container { background:var(--surface); border-radius:12px; padding:20px;
+                      border:1px solid var(--border); margin:12px 0; }
+  .condition-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+                     gap:16px; margin:12px 0; }
+  .method { background:var(--surface); border-radius:12px; padding:20px;
+             border:1px solid var(--border); margin:16px 0; font-size:0.9em;
+             color:var(--muted); line-height:1.8; }
+  .method strong { color:var(--text); }
+  canvas { max-width:100%; }
+  @media(max-width:768px) {
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    .condition-grid { grid-template-columns:1fr; }
+    h1 { font-size:1.4em; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<h1>Pharma Extraction Map: Big Pharma in Africa</h1>
+<p class="subtitle">10 pharmaceutical companies | 1,152 Africa trials |
+  20,284 global trials | Data: ClinicalTrials.gov API v2 | 2026-03-28</p>
+
+<!-- KPI Cards -->
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--accent)">10</div>
+    <div class="kpi-label">Companies Analysed</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">1,152</div>
+    <div class="kpi-label">Total Africa Trials</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">5.7%</div>
+    <div class="kpi-label">Avg Extraction Ratio</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">3</div>
+    <div class="kpi-label">Classified "Extraction"</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">6</div>
+    <div class="kpi-label">Classified "Partnership"</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">1</div>
+    <div class="kpi-label">Classified "Mixed"</div>
+  </div>
+</div>
+
+<!-- Severity Findings -->
+<div style="background:#78350f;padding:12px 16px;
+  border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+  <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+  <span style="color:#e2e8f0">3 of 10 companies classified as 'Extraction'</span>
+</div><div style="background:#7f1d1d;padding:12px 16px;
+  border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+  <span style="font-weight:700;color:#fbbf24;min-width:80px">CRITICAL</span>
+  <span style="color:#e2e8f0">J&J extraction ratio (0.8%) is lowest among all companies</span>
+</div><div style="background:#78350f;padding:12px 16px;
+  border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px">
+  <span style="font-weight:700;color:#fbbf24;min-width:80px">HIGH</span>
+  <span style="color:#e2e8f0">Revenue exceeds research investment for: Novo Nordisk, AstraZeneca, Roche, Sanofi</span>
+</div>
+
+<!-- Section 1: Extraction Ratio Ranking -->
+<h2>1. Extraction Ratio Ranking</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Sorted by Africa trial proportion (descending). Higher ratio = more Africa engagement.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th style="width:40px">#</th>
+  <th>Company</th>
+  <th style="text-align:right">Global Trials</th>
+  <th style="text-align:right">Africa Trials</th>
+  <th style="text-align:right;min-width:180px">Extraction Ratio</th>
+  <th style="text-align:center">Classification</th>
+  <th>Africa Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">1</td>
+<td style="font-weight:600">Novo Nordisk</td>
+<td style="text-align:right">1,015</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">109</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:100%;height:100%;background:#22c55e;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#22c55e">10.7%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Diabetes (insulin), obesity, haemophilia</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">2</td>
+<td style="font-weight:600">AstraZeneca</td>
+<td style="text-align:right">2,462</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">183</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:74.0%;height:100%;background:#22c55e;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#22c55e">7.4%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">COVID-19 vaccine, oncology, respiratory</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">3</td>
+<td style="font-weight:600">Roche</td>
+<td style="text-align:right">1,701</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">121</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:71.0%;height:100%;background:#22c55e;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#22c55e">7.1%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Oncology, diagnostics, hepatitis</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">4</td>
+<td style="font-weight:600">Sanofi</td>
+<td style="text-align:right">2,106</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">147</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:70.0%;height:100%;background:#22c55e;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#22c55e">7.0%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Malaria, NTDs, vaccines, diabetes</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">5</td>
+<td style="font-weight:600">Pfizer</td>
+<td style="text-align:right">3,170</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">169</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:53.0%;height:100%;background:#22c55e;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#22c55e">5.3%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#f59e0b">&#x25CF; Mixed</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Oncology, vaccines, cardiology mega-trials</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">6</td>
+<td style="font-weight:600">Novartis</td>
+<td style="text-align:right">3,131</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">154</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:49.0%;height:100%;background:#f59e0b;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#f59e0b">4.9%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Malaria (Coartem), sickle cell, oncology</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">7</td>
+<td style="font-weight:600">Gilead</td>
+<td style="text-align:right">665</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">32</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:48.0%;height:100%;background:#f59e0b;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#f59e0b">4.8%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#ef4444">&#x26A0; Extraction</span></td>
+<td style="font-size:0.85em;color:#94a3b8">HIV (lenacapavir, TAF), hepatitis C</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">8</td>
+<td style="font-weight:600">GlaxoSmithKline</td>
+<td style="text-align:right">3,184</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">145</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:46.0%;height:100%;background:#f59e0b;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#f59e0b">4.6%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#22c55e">&#x2714; Partnership</span></td>
+<td style="font-size:0.85em;color:#94a3b8">Malaria vaccine (Mosquirix), rotavirus, HIV, TB</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">9</td>
+<td style="font-weight:600">Merck Sharp & Dohme</td>
+<td style="text-align:right">2,002</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">85</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:42.0%;height:100%;background:#f59e0b;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#f59e0b">4.2%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#ef4444">&#x26A0; Extraction</span></td>
+<td style="font-size:0.85em;color:#94a3b8">HPV vaccine, oncology, HIV (efavirenz legacy)</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight:700;color:#94a3b8">10</td>
+<td style="font-weight:600">Johnson & Johnson</td>
+<td style="text-align:right">848</td>
+<td style="text-align:right;font-weight:600;color:#60a5fa">7</td>
+<td style="text-align:right">
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+    <div style="width:80px;height:14px;background:#1e293b;border-radius:7px;overflow:hidden">
+      <div style="width:8.0%;height:100%;background:#ef4444;border-radius:7px"></div>
+    </div>
+    <span style="font-weight:700;color:#ef4444">0.8%</span>
+  </div>
+</td>
+<td style="text-align:center"><span style="color:#ef4444">&#x26A0; Extraction</span></td>
+<td style="font-size:0.85em;color:#94a3b8">TB (bedaquiline), HIV, COVID vaccine</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Section 2: Bar Chart Comparison -->
+<h2>2. Company Comparison</h2>
+<div class="chart-container">
+  <canvas id="ratioChart" height="300"></canvas>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+  <div class="chart-container">
+    <canvas id="africaCountChart" height="280"></canvas>
+  </div>
+  <div class="chart-container">
+    <canvas id="globalCountChart" height="280"></canvas>
+  </div>
+</div>
+
+<!-- Section 3: The J&J Problem -->
+<h2>3. The J&amp;J Problem</h2>
+<div style="background:#1a0000;border:2px solid #7f1d1d;
+  border-radius:12px;padding:24px;margin:20px 0">
+  <h3 style="color:#ef4444;margin:0 0 12px 0">&#x26A0; The J&amp;J Problem</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0 0 12px 0">
+    Johnson &amp; Johnson has only <strong style="color:#ef4444">7</strong>
+    Africa trials out of <strong>~848</strong> global trials &mdash;
+    an extraction ratio of just <strong style="color:#ef4444">0.8%</strong>,
+    the worst among all 10 companies analysed.</p>
+  <p style="color:#cbd5e1;line-height:1.7;margin:0 0 12px 0">
+    Despite generating an estimated <strong>1.9%</strong> of revenue from African markets
+    and operating through its Janssen subsidiary across the continent, J&amp;J invests
+    almost nothing in clinical research in Africa. The sole bright spot is bedaquiline
+    (Sirturo) for drug-resistant TB, developed through a public-private partnership
+    with USAID and the TB Alliance.</p>
+  <p style="color:#94a3b8;font-size:0.9em;margin:0">
+    Conditions: Other, Cardiovascular, Oncology
+    | Avg sites/trial: 204.6
+    | Mega-trials: 6</p>
+</div>
+
+<!-- Section 4: The GSK Bright Spot -->
+<h2>4. The GSK Bright Spot</h2>
+<div style="background:#001a00;border:2px solid #14532d;
+  border-radius:12px;padding:24px;margin:20px 0">
+  <h3 style="color:#22c55e;margin:0 0 12px 0">&#x2714; The GSK Bright Spot</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0 0 12px 0">
+    GlaxoSmithKline stands out with genuine Africa-focused research, particularly
+    in <strong style="color:#22c55e">vaccine development</strong>. The RTS,S/AS01
+    malaria vaccine (Mosquirix) and rotavirus vaccine programmes represent
+    substantial, Africa-relevant investments.</p>
+  <p style="color:#cbd5e1;line-height:1.7;margin:0 0 12px 0">
+    With <strong style="color:#22c55e">145</strong> Africa trials
+    (4.6% ratio) and significant work in malaria, HIV, and TB,
+    GSK demonstrates that pharmaceutical companies can conduct meaningful research
+    that addresses African disease priorities rather than simply using African sites
+    for global registration trials.</p>
+  <p style="color:#94a3b8;font-size:0.9em;margin:0">
+    Conditions: Other, Respiratory, Diabetes, Oncology, Hepatitis, TB
+    | Avg sites/trial: 158.9
+    | Classification: Partnership</p>
+</div>
+
+<!-- Section 5: Per-Company Condition Breakdown -->
+<h2>5. Per-Company Condition Breakdown</h2>
+<p style="color:var(--muted);margin-bottom:16px">
+  Disease areas tested by each company in Africa. Bars show relative frequency within that company.
+</p>
+<div class="condition-grid">
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Novo Nordisk</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">10.7%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>150.9</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>79</strong> (72.5%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">68</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:53%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">36</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">3</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Hepatitis</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Sickle Cell</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">AstraZeneca</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">7.4%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>188.0</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>148</strong> (80.9%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">53</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:96%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">51</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:58%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">31</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:51%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">27</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:28%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">15</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">HIV/AIDS</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Sickle Cell</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Roche</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">7.1%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>163.5</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>96</strong> (79.3%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">55</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:93%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">51</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:11%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">6</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:9%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Sickle Cell</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Sanofi</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">7.0%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>112.3</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>68</strong> (46.3%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">70</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:33%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">23</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:27%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">19</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:23%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">16</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:19%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">13</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Vaccines</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">4</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Hepatitis</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">HIV/AIDS</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Pfizer</h4>
+    <span style="background:#78350f;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Mixed</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">5.3%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>146.4</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>129</strong> (76.3%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">100</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:37%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">37</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">7</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">7</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">HIV/AIDS</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">6</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">6</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:5%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Vaccines</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Novartis</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">4.9%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>165.5</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>104</strong> (67.5%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">74</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:36%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">27</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:36%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">27</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:26%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">19</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Sickle Cell</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Hepatitis</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Gilead</h4>
+    <span style="background:#7f1d1d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Extraction</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">4.8%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>102.3</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>18</strong> (56.2%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">HIV/AIDS</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">19</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:26%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:16%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">3</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:16%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">3</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:11%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">GlaxoSmithKline</h4>
+    <span style="background:#14532d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Partnership</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">4.6%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>158.9</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>93</strong> (64.1%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">83</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:33%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">27</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Diabetes</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:14%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">12</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:10%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">8</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Hepatitis</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">6</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">TB</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:6%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:5%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">4</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Vaccines</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">2</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Merck Sharp & Dohme</h4>
+    <span style="background:#7f1d1d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Extraction</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">4.2%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>140.1</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>60</strong> (70.6%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">43</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:37%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">16</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">HIV/AIDS</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:37%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">16</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:9%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">4</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">COVID-19</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">3</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Respiratory</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:7%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">3</span>
+</div>
+</div>
+<div style="background:#111827;border-radius:12px;
+  padding:20px;border:1px solid #1e293b">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h4 style="margin:0;color:#f1f5f9;font-size:1.05em">Johnson & Johnson</h4>
+    <span style="background:#7f1d1d;padding:3px 10px;border-radius:12px;font-size:0.78em;
+      color:#fbbf24;font-weight:600">Extraction</span>
+  </div>
+  <div style="display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap">
+    <span style="font-size:0.82em;color:#94a3b8">Ratio: <strong style="color:#60a5fa">0.8%</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Avg sites: <strong>204.6</strong></span>
+    <span style="font-size:0.82em;color:#94a3b8">Mega-trials: <strong>6</strong> (85.7%)</span>
+  </div>
+  <div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Other</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">5</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Cardiovascular</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:20%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div><div style="margin:4px 0;display:flex;align-items:center;gap:8px">
+  <span style="min-width:100px;font-size:0.82em;color:#cbd5e1;text-align:right">Oncology</span>
+  <div style="flex:1;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:20%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+  <span style="font-size:0.82em;color:#94a3b8;min-width:30px">1</span>
+</div>
+</div>
+</div>
+
+<!-- Section 6: Phase Distribution -->
+<h2>6. Phase Distribution in Africa</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Trial phase breakdown per company. Phase 3 dominance suggests registration-focused strategy.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Company</th>
+  <th style='padding:8px 12px;text-align:center'>Phase 1</th><th style='padding:8px 12px;text-align:center'>Phase 2</th><th style='padding:8px 12px;text-align:center'>Phase 3</th><th style='padding:8px 12px;text-align:center'>Phase 4</th><th style='padding:8px 12px;text-align:center'>Not specified</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='font-weight:600;padding:8px 12px'>Novo Nordisk</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.13333333333333333)'>4</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.5)'>15</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>83</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.2)'>6</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>AstraZeneca</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.06666666666666667)'>2</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>39</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>141</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.16666666666666666)'>5</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Roche</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.23333333333333334)'>7</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.5666666666666667)'>17</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>92</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.2)'>6</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Sanofi</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.16666666666666666)'>5</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>34</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>106</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.23333333333333334)'>7</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Pfizer</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.16666666666666666)'>5</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>46</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>102</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.7)'>21</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Novartis</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.13333333333333333)'>4</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>31</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>109</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.5)'>15</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Gilead</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.03333333333333333)'>1</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.5333333333333333)'>16</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>26</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.03333333333333333)'>1</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>GlaxoSmithKline</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.36666666666666664)'>11</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>60</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>67</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.23333333333333334)'>7</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Merck Sharp & Dohme</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.3333333333333333)'>10</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>25</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.8)'>60</td><td style='text-align:center;padding:8px;background:transparent'>-</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+<tr><td style='font-weight:600;padding:8px 12px'>Johnson & Johnson</td><td style='text-align:center;padding:8px;background:transparent'>-</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.03333333333333333)'>1</td><td style='text-align:center;padding:8px;background:rgba(59,130,246,0.2)'>6</td><td style='text-align:center;padding:8px;background:transparent'>-</td><td style='text-align:center;padding:8px;background:transparent'>-</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- Section 7: Africa Revenue Extraction -->
+<h2>7. Revenue vs Research Investment</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Estimated Africa revenue share vs clinical research investment (extraction ratio).
+  Negative gap = company extracts more revenue than it invests in research.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Company</th>
+  <th style="text-align:center">Est. Africa Revenue %</th>
+  <th style="text-align:center">Research Ratio %</th>
+  <th style="text-align:center">Gap (Rev - Research)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Novo Nordisk</td>
+<td style="text-align:center;padding:8px">3.8%</td>
+<td style="text-align:center;padding:8px">10.7%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-6.9%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">AstraZeneca</td>
+<td style="text-align:center;padding:8px">1.8%</td>
+<td style="text-align:center;padding:8px">7.4%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-5.6%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Roche</td>
+<td style="text-align:center;padding:8px">2.3%</td>
+<td style="text-align:center;padding:8px">7.1%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-4.8%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Sanofi</td>
+<td style="text-align:center;padding:8px">5.6%</td>
+<td style="text-align:center;padding:8px">7.0%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-1.4%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Pfizer</td>
+<td style="text-align:center;padding:8px">2.1%</td>
+<td style="text-align:center;padding:8px">5.3%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-3.2%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Novartis</td>
+<td style="text-align:center;padding:8px">3.4%</td>
+<td style="text-align:center;padding:8px">4.9%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-1.5%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Gilead</td>
+<td style="text-align:center;padding:8px">1.2%</td>
+<td style="text-align:center;padding:8px">4.8%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-3.6%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">GlaxoSmithKline</td>
+<td style="text-align:center;padding:8px">4.2%</td>
+<td style="text-align:center;padding:8px">4.6%</td>
+<td style="text-align:center;padding:8px;color:#f59e0b;font-weight:700">-0.4%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Merck Sharp & Dohme</td>
+<td style="text-align:center;padding:8px">1.5%</td>
+<td style="text-align:center;padding:8px">4.2%</td>
+<td style="text-align:center;padding:8px;color:#ef4444;font-weight:700">-2.7%</td>
+</tr>
+<tr>
+<td style="font-weight:600;padding:8px 12px">Johnson & Johnson</td>
+<td style="text-align:center;padding:8px">1.9%</td>
+<td style="text-align:center;padding:8px">0.8%</td>
+<td style="text-align:center;padding:8px;color:#22c55e;font-weight:700">+1.1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container" style="margin-top:16px">
+  <canvas id="revenueChart" height="300"></canvas>
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method">
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (public, accessed 2026-03-28).</p>
+  <p><strong>Search strategy:</strong> For each of 10 major pharmaceutical companies, we queried
+    interventional trials using <code>AREA[LeadSponsorName]</code> filter. Africa trials were
+    identified by adding <code>query.locn=Africa</code>. Trial-level data (conditions, phases,
+    countries, enrollment) was retrieved for Africa subsets (page_size=50, up to 250 per company).</p>
+  <p><strong>Classification:</strong> Companies were classified as "Extraction" (mostly mega-trials
+    with &gt;50 sites, &lt;3% ratio), "Partnership" (substantial Africa-focused work in malaria/TB/NTDs,
+    &gt;4% ratio), or "Mixed" (intermediate pattern).</p>
+  <p><strong>Revenue estimates:</strong> Africa revenue percentages are approximate, derived from
+    company annual reports and IQVIA regional data. They are illustrative, not precise.</p>
+  <p><strong>Limitations:</strong> ClinicalTrials.gov may undercount trials registered only on
+    national or WHO platforms. Sponsor name matching may miss subsidiary sponsors. Revenue estimates
+    are approximate.</p>
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:0.8em;margin-top:40px;padding:20px">
+  Pharma Extraction Map | AfricaRCT Project | Generated 2026-03-28
+</p>
+
+</div>
+
+<script>
+// ── Charts ─────────────────────────────────────────────────────────
+const labels = ["Novo Nordisk", "AstraZeneca", "Roche", "Sanofi", "Pfizer", "Novartis", "Gilead", "GlaxoSmithKline", "Merck Sharp & Dohme", "Johnson & Johnson"];
+const ratios = [10.7, 7.4, 7.1, 7.0, 5.3, 4.9, 4.8, 4.6, 4.2, 0.8];
+const africaCounts = [109, 183, 121, 147, 169, 154, 32, 145, 85, 7];
+const globalCounts = [1015, 2462, 1701, 2106, 3170, 3131, 665, 3184, 2002, 848];
+const barColors = ["#22c55e", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#ef4444"];
+
+// Chart 1: Extraction Ratio
+new Chart(document.getElementById('ratioChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Extraction Ratio (%)',
+      data: ratios,
+      backgroundColor: barColors,
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Africa Extraction Ratio by Company', color: '#e2e8f0',
+                font: { size: 14, weight: 'bold' } },
+      legend: { display: false },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: { ticks: { color: '#94a3b8', callback: v => v + '%' },
+            grid: { color: 'rgba(148,163,184,0.1)' },
+            title: { display: true, text: 'Africa / Global (%)', color: '#94a3b8' } },
+    }
+  }
+});
+
+// Chart 2: Africa Trial Counts
+new Chart(document.getElementById('africaCountChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Africa Trials',
+      data: africaCounts,
+      backgroundColor: '#3b82f6',
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Africa Trial Count', color: '#e2e8f0',
+                font: { size: 13 } },
+      legend: { display: false },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+    }
+  }
+});
+
+// Chart 3: Global Trial Counts
+new Chart(document.getElementById('globalCountChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Global Trials',
+      data: globalCounts,
+      backgroundColor: '#6366f1',
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Global Trial Count', color: '#e2e8f0',
+                font: { size: 13 } },
+      legend: { display: false },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+      y: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+    }
+  }
+});
+
+// Chart 4: Revenue vs Research
+const revenueData = [3.8, 1.8, 2.3, 5.6, 2.1, 3.4, 1.2, 4.2, 1.5, 1.9];
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Est. Africa Revenue %',
+        data: revenueData,
+        backgroundColor: 'rgba(239,68,68,0.7)',
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: 'Research Ratio %',
+        data: ratios,
+        backgroundColor: 'rgba(34,197,94,0.7)',
+        borderRadius: 6,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: 'Revenue Extraction vs Research Investment',
+                color: '#e2e8f0', font: { size: 14, weight: 'bold' } },
+      legend: { labels: { color: '#94a3b8' } },
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: { ticks: { color: '#94a3b8', callback: v => v + '%' },
+            grid: { color: 'rgba(148,163,184,0.1)' } },
+    }
+  }
+});
+</script>
+</body>
+</html>

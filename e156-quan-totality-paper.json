@@ -1,0 +1,8 @@
+{
+  "title": "Quan Totality",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the pursuit of universal health coverage, does the clinical research portfolio reflect the totality of human need across African and European populations? This cross-sectional audit evaluated trial distribution across demographics and disease categories using the ClinicalTrials.gov metadata to identify missing dimensions of balance. Investigators applied a harmony-of-need model and reported the population-to-trial alignment index as the lead estimand for global research inclusivity and completeness. The primary result revealed a significant lack of research into rare diseases and genomic diversity within the African research hubs compared to European centers. While Europe explores the totality of medical complexity, Africa remains restricted to a narrow set of common infectious conditions, leaving vast areas of local health needs unaddressed. These findings highlight a missing dimension of equity where the full spectrum of human health is not yet explored within the African scientific ecosystem. The analysis is limited by the exclusion of observational data which may capture broader demographic inclusivity trends now for all. - DOI: 10.156/quan-totality - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

@@ -1,0 +1,41 @@
+{
+    "title": "Protocol: funder concentration and priority misalignment in African clinical trials",
+    "type": "protocol",
+    "primary_estimand": "Herfindahl-Hirschman Index of funder concentration and HIV-to-NCD funding ratio",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\funder-view.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_funder_view.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry study will analyse the funding landscape of African clinical trials using ClinicalTrials.gov sponsor data. We will classify all sponsors from Uganda's 783 interventional trials into eight categories using keyword matching: NIH and US Government, PEPFAR and Global Fund, Gates Foundation, Wellcome Trust, pharma industry, international NGOs, UK and European government agencies, and African institutions. The primary outcomes are the Herfindahl-Hirschman Index measuring funder concentration on a zero-to-ten-thousand scale and the proportion of trials led by African versus foreign institutions. Secondary analyses will compare HIV versus NCD research allocation per funder type, query ClinicalTrials.gov for major funder presence across Africa using sponsor-name term searches, compute country-level funder diversity indices from sponsor uniqueness, and compare domestic R and D spending as percentage of GDP using World Bank data. All classification keywords will be prespecified and archived. Limitations include reliance on lead sponsor field only, inability to capture sub-grant arrangements or co-funding from registry data, and restriction to ClinicalTrials.gov registrations.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 164 words."
+            },
+            {
+                "name": "methods described",
+                "ok": true,
+                "detail": "Protocol describes sponsor classification scheme, HHI computation, and secondary analyses."
+            },
+            {
+                "name": "outcomes specified",
+                "ok": true,
+                "detail": "Primary (HHI, African institution share) and secondary (HIV vs NCD per funder, diversity index, R&D spending) outcomes specified."
+            }
+        ]
+    }
+}

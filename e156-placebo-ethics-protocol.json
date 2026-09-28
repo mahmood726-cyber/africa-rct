@@ -1,0 +1,8 @@
+{
+  "title": "Placebo Ethics",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "Determine Helsinki Declaration compliance for placebo-controlled trials in Africa by classifying each against globally recognized standards of care. ClinicalTrials.gov API v2. Interventional studies with \"placebo\" intervention located in Africa (n = 1,125) and United States (n = 16,820). Helsinki Compliance Score: proportion of Africa placebo trials where placebo is ethically justified under Article 33. Three categories: (1) Justified -- no proven treatment exists; (2) Questionable -- treatment exists but access uncertain; (3) Problematic -- proven treatment globally available. Keyword matching against 18 therapeutic categories. Sponsor type comparison, phase distribution, country breakdown, temporal trend, double standard analysis. Keyword-based classification, cannot verify local availability, ClinicalTrials.gov registration bias, cannot distinguish add-on from pure placebo without manual review. Protocol drafted with Claude AI assistance. Pipeline reproducible via fetch_placebo_ethics.py.",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

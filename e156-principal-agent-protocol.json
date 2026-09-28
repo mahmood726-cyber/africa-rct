@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of principal-agent misalignment in African clinical trial portfolios",
+    "body": "This cross-sectional registry study will quantify the principal-agent problem in African clinical trials using organizational economics. We will query ClinicalTrials.gov API v2 for interventional studies in Uganda, South Africa, and Nigeria, extracting condition, phase, sponsor class, results status, and community engagement indicators. The primary outcome is the Agenda Alignment Score, a Spearman correlation between GBD 2019 burden ranking and trial condition ranking across 15 conditions. Secondary outcomes include Information Rent (completed trials posting results), Incentive Gap (Phase 3 to implementation research ratio), and Voice Score (community engagement proportion). Uganda was selected for PEPFAR dependency; South Africa provides a comparator with stronger local research infrastructure; Nigeria represents high burden with weak trial capacity. Sponsor origin will be classified as local or foreign using institutional name keywords. All queries will be scripted in Python with cached results archived alongside the HTML dashboard. No patient-level data will be accessed. Limitations include restriction to one registry and approximate burden rankings.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the principal-agent problem in African clinical trials by measuring misalignment between foreign sponsor priorities and local disease burden."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for all interventional studies in Uganda, South Africa, and Nigeria, extracting condition, phase, sponsor class, results posting status, and community engagement indicators."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the Agenda Alignment Score, computed as Spearman rank correlation between GBD 2019 disease burden ranking and trial condition count ranking across 15 conditions per country."
+        },
+        {
+            "role": "Secondary outcomes",
+            "text": "Secondary outcomes include Information Rent, Incentive Gap between Phase 3 and implementation research, and Voice Score measuring community engagement presence in the trial portfolio."
+        },
+        {
+            "role": "Country selection",
+            "text": "Uganda was selected for PEPFAR dependency, South Africa for stronger local research voice, and Nigeria for high burden with weak infrastructure, enabling three contrasting principal-agent dynamics."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single clinical trial registry, approximate burden rankings from GBD summary data, and sponsor classification by keyword matching which may misclassify multinational partnerships."
+        }
+    ],
+    "wordCount": 155,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Principal-Agent Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, Uganda + South Africa + Nigeria, GBD 2019",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

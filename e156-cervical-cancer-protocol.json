@@ -1,0 +1,58 @@
+{
+    "title": "Protocol: cervical cancer trial activity in Africa",
+    "type": "protocol",
+    "primary_estimand": "Condition Colonialism Index (CCI) for cervical cancer trials in Africa",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\cervical-cancer.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_cervical_cancer.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry analysis will quantify the gap between Africa cervical cancer burden and clinical trial activity using ClinicalTrials.gov. We will query the API for all interventional cervical cancer studies across nine African countries, the United States, India, and Brazil, classifying each trial by intervention type as screening, vaccination, or treatment, by sponsor origin, and by development phase. The primary outcome is the Condition Colonialism Index computed as Africa burden share divided by trial share relative to the United States. Secondary outcomes include distribution of screening versus vaccination versus treatment trials, proportion of African-led studies, country-level trial concentration relative to incidence, and identification of crisis countries with highest cervical cancer incidence but fewest registered trials. Sponsor classification rules and intervention keyword lists will be pre-specified and archived alongside all analysis code, and no patient-level data will be accessed. The study is limited by completeness of a single public registry and by indirect burden estimates from GLOBOCAN.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "check": "word_count",
+                "expected": 156,
+                "result": 156,
+                "pass": true
+            },
+            {
+                "check": "sentence_count",
+                "expected": 7,
+                "result": 7,
+                "pass": true
+            },
+            {
+                "check": "primary_outcome_defined",
+                "value": "CCI = burden share / trial share",
+                "pass": true
+            },
+            {
+                "check": "secondary_outcomes_defined",
+                "value": "screening/vaccination/treatment distribution, African-led proportion, crisis countries",
+                "pass": true
+            },
+            {
+                "check": "classification_scheme",
+                "value": "intervention type (screening/vaccination/treatment), sponsor origin, phase",
+                "pass": true
+            },
+            {
+                "check": "countries_specified",
+                "value": "South Africa, Kenya, Uganda, Nigeria, Tanzania, Mozambique, Zimbabwe, Malawi, Zambia + US, India, Brazil",
+                "pass": true
+            },
+            {
+                "check": "data_ethics",
+                "value": "no patient-level data, public registry only",
+                "pass": true
+            }
+        ]
+    }
+}

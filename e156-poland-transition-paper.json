@@ -1,0 +1,8 @@
+{
+  "title": "Poland Transition",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the evolution of Eastern European research, does Poland's role as an industry-led hub influence the overall innovation pipeline for the region? This study evaluated nearly 10,000 trial records using the ClinicalTrials.gov API v2 database to identify sponsorship and phase patterns in Eastern European nations. Reviewers applied a sponsorship sovereignty model and reported the industry-led research ratio as the lead estimand for research ecosystem maturity and international integration. The primary result was a high industry-led ratio of eighty percent, indicating that Poland is a primary validation ground for Global North pharmaceutical sponsors. Unlike China, the Polish research landscape is heavily focused on Phase 3 late-stage testing rather than early-discovery innovation phases for the local market. These findings reveal a mature but dependent research ecosystem that provides high-quality data for global sponsors without developing a sovereign discovery pipeline. Interpretation is limited by the exclusion of locally-funded academic trials which may capture emerging discovery efforts for the future",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

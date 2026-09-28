@@ -1,0 +1,8 @@
+{
+  "title": "Placebo Ethics",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In placebo-controlled trials across Africa, does the use of placebo comparators comply with the Helsinki Declaration requirement to test against best proven interventions? This audit classified 1,125 placebo-controlled African trials registered on ClinicalTrials.gov against known global standards of care for each indicated condition. Investigators applied a Helsinki Article 33 ethics framework and reported the Helsinki Compliance Score as the primary estimand for ethical justifiability. Africa uses placebo in 32.1 percent of trials compared to 10.6 percent in the United States, a three-fold disparity concentrating in conditions where proven treatments exist including HIV, malaria, tuberculosis, and hypertension. Industry-funded trials showed higher rates of ethically problematic placebo use than academic-sponsored studies across all therapeutic areas examined. These findings expose a systematic double standard where placebo arms unacceptable in American trials are routinely deployed across African research sites. Interpretation is limited by keyword-based condition classification, inability to distinguish add-on designs from pure placebo, and exclusion of locally registered trials.",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

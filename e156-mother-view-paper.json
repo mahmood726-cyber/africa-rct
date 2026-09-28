@@ -1,0 +1,51 @@
+{
+    "title": "The most dangerous journey: quantifying the maternal clinical trial evidence gap across seven pregnancy conditions in Africa",
+    "body": "A pregnant woman in sub-Saharan Africa faces the world's highest maternal mortality risk but the least clinical trial evidence for her care. We queried ClinicalTrials.gov API v2 for pregnancy and maternal health interventional trials across ten African countries, the United States, the United Kingdom, and India. Seven specific maternal conditions were examined: gestational diabetes, preeclampsia, postpartum hemorrhage, maternal sepsis, ectopic pregnancy, miscarriage, and stillbirth. Africa had dramatically fewer maternal trials than all comparators despite having the highest maternal mortality ratios, with Nigeria's MMR exceeding one thousand per one hundred thousand live births. Postpartum hemorrhage, the leading cause of maternal death in sub-Saharan Africa, had minimal trial representation on the continent. Stillbirth trials were near-zero despite Africa bearing nearly half the global stillbirth burden. Contraception and family planning trials numbered only a handful for over six hundred million women of reproductive age across the ten countries. The inverse relationship between maternal mortality and trial investment represents the defining paradox of maternal health research equity.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does clinical trial investment in maternal health conditions match the burden of maternal mortality, or do women in the highest-risk settings have the least evidence for their care?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for pregnancy and maternal health interventional trials across ten African countries and three comparators, examining seven specific maternal conditions plus contraception and breastfeeding."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had dramatically fewer maternal trials than all comparators despite having the highest maternal mortality ratios globally, with an inverse relationship between mortality burden and research investment."
+        },
+        {
+            "role": "PPH crisis",
+            "text": "Postpartum hemorrhage, responsible for approximately thirty-four percent of maternal deaths in sub-Saharan Africa, had minimal trial representation on the continent where women deliver without uterotonics or blood banks."
+        },
+        {
+            "role": "Stillbirth invisibility",
+            "text": "Stillbirth trials were near-zero in Africa despite the continent bearing nearly half of the estimated two million annual global stillbirths, revealing a research blind spot for a devastating outcome."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The contraception gap of only a handful of trials for over six hundred million women of reproductive age, combined with the inverse mortality-investment relationship, defines maternal health research inequity."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single registry, varied maternal health terminology, and WHO maternal mortality ratio estimates that may not reflect the most current data."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Mother View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + UK + India comparators, 7 maternal conditions, WHO MMR data",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

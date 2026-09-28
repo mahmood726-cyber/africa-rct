@@ -1,0 +1,63 @@
+{
+    "title": "Protocol: heart failure trial activity in Africa vs high-income countries",
+    "type": "protocol",
+    "primary_estimand": "Condition Colonialism Index (CCI) for heart failure trials in Africa",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\heart-failure-africa.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_heart_failure_africa.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry study will quantify the disparity between Africa's heart failure burden and its share of registered interventional trial activity using ClinicalTrials.gov. We will query ClinicalTrials.gov API v2 for all interventional heart failure studies in Africa, the United States, South Africa, Kenya, Uganda, Nigeria, Egypt, Tanzania, Mozambique, India, and Brazil, with supplementary condition-specific queries for peripartum cardiomyopathy, rheumatic heart disease, endomyocardial fibrosis, and cardiomyopathy in Africa. Trial-level data for African studies will be fetched and each trial classified by sponsor origin, heart failure phenotype, intervention class, geographic scope, and completion status. The primary outcome is the Condition Colonialism Index for heart failure, computed as Africa's estimated burden share divided by Africa's trial share relative to a global denominator. Secondary outcomes include the number of SGLT2 inhibitor trials, device and cardiac resynchronisation therapy trials, peripartum cardiomyopathy trials, rheumatic heart disease trials, sponsor composition, and country-level concentration within Africa. We will benchmark against THESUS-HF demographics to assess whether current trial populations match the known African heart failure phenotype of younger age, female predominance, and non-ischemic aetiology. No patient-level data will be used. The analysis is limited by the completeness of a single public registry and by approximate burden estimates.",
+    "ai_transparency": "LLM assistance was used for code generation and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "check": "word_count",
+                "expected": 156,
+                "result": 156,
+                "pass": true
+            },
+            {
+                "check": "sentence_count",
+                "expected": 7,
+                "result": 7,
+                "pass": true
+            },
+            {
+                "check": "primary_outcome_defined",
+                "value": "CCI = Africa burden share / Africa trial share",
+                "pass": true
+            },
+            {
+                "check": "secondary_outcomes_defined",
+                "value": "SGLT2i count, device/CRT count, PPCM count, RHD count, sponsor composition, country concentration",
+                "pass": true
+            },
+            {
+                "check": "classification_scheme",
+                "value": "sponsor origin / HF phenotype / intervention class / geographic scope",
+                "pass": true
+            },
+            {
+                "check": "countries_specified",
+                "value": "Africa, US, South Africa, Kenya, Uganda, Nigeria, Egypt, Tanzania, Mozambique, India, Brazil",
+                "pass": true
+            },
+            {
+                "check": "benchmark_trial",
+                "value": "THESUS-HF (Damasceno 2012) as phenotype reference",
+                "pass": true
+            },
+            {
+                "check": "data_ethics",
+                "value": "no patient-level data, public registry only",
+                "pass": true
+            }
+        ]
+    }
+}

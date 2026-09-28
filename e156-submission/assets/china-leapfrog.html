@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The China Leapfrog: Can Africa Follow?</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --china: #ef4444;
+    --africa: #f97316;
+    --accent: #22c55e;
+    --accent2: #60a5fa;
+    --accent3: #a78bfa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--china);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--accent2);
+    margin: 24px 0 12px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    background: rgba(255,255,255,0.04);
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:hover {
+    background: rgba(255,255,255,0.03);
+  }
+  .highlight {
+    background: rgba(239,68,68,0.08);
+    border-left: 4px solid #ef4444;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .africa-box {
+    background: rgba(249,115,22,0.06);
+    border-left: 4px solid #f97316;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .analysis-box {
+    background: rgba(96,165,250,0.06);
+    border-left: 4px solid #60a5fa;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .lesson-box {
+    background: rgba(34,197,94,0.06);
+    border-left: 4px solid #22c55e;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .policy-box {
+    background: rgba(168,85,247,0.06);
+    border-left: 4px solid #a78bfa;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  ul { margin: 8px 0 8px 24px; }
+  li { margin: 6px 0; color: var(--text); }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .overflow-x { overflow-x: auto; }
+  @media (max-width: 768px) {
+    h1 { font-size: 1.4rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-value { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- HEADER                                                        -->
+<!-- ============================================================ -->
+<h1>The China Leapfrog: Can Africa Follow?</h1>
+<p class="subtitle">
+  China went from ~5,000 clinical trials to 38,933 in roughly a decade.
+  Africa's top 5 countries combined have 17,725.
+  What did China do that Africa hasn't -- and what can Africa learn?
+  <br><span style="font-size:0.8rem;">Data: ClinicalTrials.gov API v2 | Generated 28 March 2026</span>
+</p>
+
+<!-- ============================================================ -->
+<!-- 1. SUMMARY STATS                                              -->
+<!-- ============================================================ -->
+<h2>1. The Numbers at a Glance</h2>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="stat-value" style="color:#ef4444;">38,933</div>
+    <div class="stat-label">China Total Trials</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#f97316;">17,725</div>
+    <div class="stat-label">Africa Top 5 Combined</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#ef4444;">27.6/M</div>
+    <div class="stat-label">China Per Capita</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#f97316;">35.5/M</div>
+    <div class="stat-label">Africa Top 5 Aggregate Per Capita</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#a78bfa;">0.7x</div>
+    <div class="stat-label">China / Africa Top 5 Avg Per Capita</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#ef4444;">26.6%</div>
+    <div class="stat-label">China Phase 1 Share</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-value" style="color:#f97316;">12.3%</div>
+    <div class="stat-label">Africa Top 5 Avg Phase 1 Share</div>
+  </div>
+</div>
+
+<div class="highlight">
+  <p><strong>Key insight:</strong> China's per-capita trial density (27.6/M) means it has built
+  a domestic clinical trial ecosystem comparable to upper-middle-income nations. Africa's top 5 countries
+  average 41.0/M -- roughly <strong>0.7x lower</strong> than China.
+  China's higher Phase 1 share (26.6% vs 12.3%) signals domestic drug development,
+  while Africa's trials are more often Phase 3 (externally sponsored).</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. HEAD-TO-HEAD TABLE                                         -->
+<!-- ============================================================ -->
+<h2>2. Head-to-Head Comparison</h2>
+<div class="card">
+<div class="overflow-x">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;">#</th>
+      <th>Country</th>
+      <th style="text-align:center;">Group</th>
+      <th style="text-align:right;">Pop</th>
+      <th style="text-align:right;">Trials</th>
+      <th style="text-align:right;">Per M</th>
+      <th style="text-align:right;">P1 %</th>
+      <th>Density</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#a78bfa;">1</td>
+  <td style="padding:10px;">United States</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#a78bfa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Reference</span></td>
+  <td style="padding:10px;text-align:right;">335M</td>
+  <td style="padding:10px;text-align:right;">159,196</td>
+  <td style="padding:10px;text-align:right;color:#a78bfa;font-weight:bold;">475.2</td>
+  <td style="padding:10px;text-align:right;">31.0%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#a78bfa;height:100%;width:100.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">2</td>
+  <td style="padding:10px;">Egypt</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Africa Top 5</span></td>
+  <td style="padding:10px;text-align:right;">105M</td>
+  <td style="padding:10px;text-align:right;">12,395</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">118.0</td>
+  <td style="padding:10px;text-align:right;">12.3%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:24.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">3</td>
+  <td style="padding:10px;">South Africa</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Africa Top 5</span></td>
+  <td style="padding:10px;text-align:right;">62M</td>
+  <td style="padding:10px;text-align:right;">3,473</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">56.0</td>
+  <td style="padding:10px;text-align:right;">7.9%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:11.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#a78bfa;">4</td>
+  <td style="padding:10px;">Brazil</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#a78bfa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Reference</span></td>
+  <td style="padding:10px;text-align:right;">216M</td>
+  <td style="padding:10px;text-align:right;">9,890</td>
+  <td style="padding:10px;text-align:right;color:#a78bfa;font-weight:bold;">45.8</td>
+  <td style="padding:10px;text-align:right;">8.3%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#a78bfa;height:100%;width:9.6%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:rgba(239,68,68,0.08);">
+  <td style="padding:10px;text-align:center;font-weight:bold;color:#ef4444;">5</td>
+  <td style="padding:10px;font-weight:bold;">China</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#ef4444;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      China</span></td>
+  <td style="padding:10px;text-align:right;">1,410M</td>
+  <td style="padding:10px;text-align:right;">38,933</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">27.6</td>
+  <td style="padding:10px;text-align:right;">26.6%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#ef4444;height:100%;width:5.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">6</td>
+  <td style="padding:10px;">Uganda</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Africa Top 5</span></td>
+  <td style="padding:10px;text-align:right;">48M</td>
+  <td style="padding:10px;text-align:right;">783</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">16.3</td>
+  <td style="padding:10px;text-align:right;">11.1%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:3.4%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">7</td>
+  <td style="padding:10px;">Kenya</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Africa Top 5</span></td>
+  <td style="padding:10px;text-align:right;">55M</td>
+  <td style="padding:10px;text-align:right;">720</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">13.1</td>
+  <td style="padding:10px;text-align:right;">17.0%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:2.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#a78bfa;">8</td>
+  <td style="padding:10px;">India</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#a78bfa;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Reference</span></td>
+  <td style="padding:10px;text-align:right;">1,440M</td>
+  <td style="padding:10px;text-align:right;">5,388</td>
+  <td style="padding:10px;text-align:right;color:#a78bfa;font-weight:bold;">3.7</td>
+  <td style="padding:10px;text-align:right;">12.9%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#a78bfa;height:100%;width:0.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:10px;text-align:center;color:#f97316;">9</td>
+  <td style="padding:10px;">Nigeria</td>
+  <td style="padding:10px;text-align:center;">
+    <span style="display:inline-block;background:#f97316;color:#000;
+      padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:bold;">
+      Africa Top 5</span></td>
+  <td style="padding:10px;text-align:right;">230M</td>
+  <td style="padding:10px;text-align:right;">354</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">1.5</td>
+  <td style="padding:10px;text-align:right;">13.3%</td>
+  <td style="padding:10px;width:18%;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:18px;width:100%;position:relative;">
+      <div style="background:#f97316;height:100%;width:0.3%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. PER-CAPITA BAR CHART                                       -->
+<!-- ============================================================ -->
+<h2>3. Per-Capita Trial Density</h2>
+<div class="card">
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    United States</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#a78bfa;height:100%;width:100.0%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        475.2/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Egypt</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:24.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        118.0/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    South Africa</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:11.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        56.0/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Brazil</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#a78bfa;height:100%;width:9.6%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        45.8/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;color:#ef4444;font-weight:bold;font-size:0.85rem;">
+    China</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#ef4444;height:100%;width:5.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        27.6/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Uganda</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:3.4%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        16.3/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Kenya</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:2.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        13.1/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    India</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#a78bfa;height:100%;width:0.8%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        3.7/M</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;margin:4px 0;gap:10px;">
+  <div style="width:120px;text-align:right;font-size:0.85rem;">
+    Nigeria</div>
+  <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:24px;">
+    <div style="background:#f97316;height:100%;width:0.3%;border-radius:4px;
+      display:flex;align-items:center;padding-left:8px;">
+      <span style="color:#000;font-size:0.75rem;font-weight:bold;">
+        1.5/M</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. WHAT CHINA DID                                             -->
+<!-- ============================================================ -->
+<h2>4. What China Did: The Reform Playbook</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:16px;">
+  China's clinical trial boom was not accidental. It resulted from deliberate, sequenced
+  policy reforms spanning regulation, industry, academia, and global integration.
+</p>
+
+<div class="card">
+  <h3>Timeline of China's Clinical Trial Acceleration</h3>
+  <div style="margin-top:12px;">
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2010</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">~5,000 cumulative trials; pre-reform baseline</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2015</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">NMPA (then CFDA) drug review reform begins; massive backlog cleared</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2016</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">Two-invoice policy; domestic pharma begins global-standard trials</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2017</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">China joins ICH (International Council for Harmonisation)</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2018</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">Domestic innovation incentives: tax breaks for pharma R&amp;D</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2019</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">New Drug Administration Law: accelerated approvals, conditional marketing</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2020</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">CRO industry revenue exceeds $8B; China becomes top-5 global trial site</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2022</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">PD-1/PD-L1 trials alone exceed 1,000; biotech IPO boom funds trial capacity</div>
+</div>
+<div style="display:flex;gap:16px;margin:8px 0;">
+  <div style="min-width:60px;font-weight:bold;color:#ef4444;font-size:1.1rem;">2024</div>
+  <div style="border-left:2px solid #ef4444;padding-left:16px;">38,933 interventional trials; 27.6 per million population</div>
+</div>
+
+  </div>
+</div>
+
+<div class="highlight">
+  <h3>4a. NMPA Regulatory Reform (2015-2019)</h3>
+  <p>The former CFDA (now NMPA) cleared a backlog of over 21,000 pending drug applications in 2015-2016.
+  New rules allowed simultaneous domestic-international trial conduct, accepted foreign clinical data for
+  marketed drugs, and created expedited pathways for innovative drugs. Approval timelines dropped from
+  8-10 years to 2-3 years for priority drugs. This single reform was the catalyst for everything that followed.</p>
+</div>
+
+<div class="highlight">
+  <h3>4b. Domestic Pharma Boom</h3>
+  <p>Chinese pharmaceutical companies grew from generic copycats to innovation leaders. By 2024, over 70
+  Chinese biotech firms were publicly listed, collectively running thousands of clinical trials. Companies like
+  BeiGene, Hengrui, and Innovent invested billions in domestic Phase 1-3 trials. This created a self-sustaining
+  cycle: more trials led to more CRO capacity, which attracted more trials.</p>
+</div>
+
+<div class="highlight">
+  <h3>4c. ICH Membership (2017)</h3>
+  <p>China joined the International Council for Harmonisation in 2017, aligning its regulatory standards
+  with the US, EU, and Japan. This meant Chinese trial data could be used in global regulatory submissions,
+  making China attractive as a trial site for multinational pharma and enabling Chinese companies to compete
+  globally with domestically generated data.</p>
+</div>
+
+<div class="highlight">
+  <h3>4d. Academic Incentives</h3>
+  <p>Chinese universities and hospitals made clinical trial leadership a criterion for academic promotion.
+  Principal investigators could advance their careers through trial conduct. The number of GCP-certified
+  institutions grew from ~200 in 2010 to >1,000 by 2023. This created a deep bench of trained investigators
+  and research coordinators.</p>
+</div>
+
+<div class="highlight">
+  <h3>4e. CRO Industry Growth</h3>
+  <p>China's Contract Research Organization industry grew from near-zero to $8+ billion by 2020. Companies
+  like WuXi AppTec, Pharmaron, and Tigermed built global-standard capabilities at lower cost than Western CROs.
+  This infrastructure enabled both domestic and international sponsors to run trials efficiently in China.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. WHAT AFRICA HASN'T                                         -->
+<!-- ============================================================ -->
+<h2>5. What Africa Hasn't Done (Yet)</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:16px;">
+  Africa has five structural barriers that China overcame or never faced.
+</p>
+
+<div class="africa-box">
+  <h3>5a. Fragmented Regulation (54 Countries, 54 Agencies)</h3>
+  <p>Africa has no equivalent of NMPA reform. Each of 54 countries has its own regulatory agency, many
+  understaffed and underfunded. A clinical trial in three African countries requires three separate
+  regulatory submissions, three ethics reviews, and three import permits. The African Medicines Agency (AMA),
+  established by treaty in 2023, is Africa's best hope -- but is not yet operational. China's centralized
+  NMPA could reform overnight; Africa must negotiate across 54 jurisdictions.</p>
+</div>
+
+<div class="africa-box">
+  <h3>5b. No Continental Pharmaceutical Industry</h3>
+  <p>Africa imports over 70% of its medicines. Without domestic pharmaceutical companies running their own
+  trials, Africa remains a recipient of externally designed studies. China's boom was driven by domestic
+  companies running trials for their own products. Africa lacks the BeiGenes and Hengruis that would
+  generate organic trial demand independent of donor priorities.</p>
+</div>
+
+<div class="africa-box">
+  <h3>5c. Brain Drain and Investigator Shortage</h3>
+  <p>Africa trains physicians who emigrate to the UK, US, and Gulf states. China retained its trained
+  workforce by creating domestic career paths tied to research. Africa's brain drain means that even where
+  infrastructure exists, the investigator workforce is thin. Nigeria has 230 million people but only 354
+  registered trials -- a workforce problem as much as a funding one.</p>
+</div>
+
+<div class="africa-box">
+  <h3>5d. Donor Dependency and Disease Skew</h3>
+  <p>Much of Africa's clinical trial portfolio is donor-funded, particularly through PEPFAR, GAVI, and the
+  Global Fund. This creates a disease portfolio dominated by HIV, malaria, and TB -- important diseases,
+  but leaving cancer, cardiovascular disease, diabetes, and stroke severely under-researched despite being
+  the fastest-growing causes of death on the continent.</p>
+</div>
+
+<div class="africa-box">
+  <h3>5e. Digital and Logistics Infrastructure</h3>
+  <p>Clinical trials require cold chains, electronic data capture, reliable internet, and specimen transport.
+  China invested massively in logistics infrastructure through the Belt and Road era. Africa's infrastructure
+  gaps make trial conduct more expensive and slower, deterring sponsors who can run trials in China or India
+  at lower cost with better infrastructure.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. DISEASE PORTFOLIO COMPARISON                               -->
+<!-- ============================================================ -->
+<h2>6. Disease Portfolio: Cancer vs HIV</h2>
+<div class="card">
+<table>
+  <thead>
+    <tr>
+      <th>Condition</th>
+      <th style="text-align:right;">China (n)</th>
+      <th style="text-align:right;">China (%)</th>
+      <th style="text-align:right;">Africa Avg (n)</th>
+      <th style="text-align:right;">Africa Avg (%)</th>
+      <th style="text-align:right;">Diff</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">HIV</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">143</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">0.4%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">254</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">22.4%</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">-22.0pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Cancer</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">16,033</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">41.2%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">359</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">9.2%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+32.0pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Diabetes</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">1,221</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">3.1%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">117</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">2.9%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+0.2pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Cardiovascular</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">4,283</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">11.0%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">236</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">7.1%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+3.9pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Stroke</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">1,238</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">3.2%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">41</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">1.7%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+1.5pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Traditional medicine</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">513</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">1.3%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">4</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">0.1%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+1.2pp</td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="analysis-box">
+  <p><strong>Interpretation:</strong> China's portfolio is heavily weighted toward cancer and cardiovascular
+  disease, reflecting both domestic burden and pharmaceutical industry focus. Africa's portfolio is
+  HIV-heavy, reflecting donor priorities. The "traditional medicine" category is a marker of domestic
+  research autonomy -- China runs substantial traditional medicine trials; Africa does not.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. PHASE DISTRIBUTION                                         -->
+<!-- ============================================================ -->
+<h2>7. Phase Distribution: Who Does Early-Phase?</h2>
+<div class="card">
+<table>
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th style="text-align:right;">China (n)</th>
+      <th style="text-align:right;">China (%)</th>
+      <th style="text-align:right;">Africa Top 5 (n)</th>
+      <th style="text-align:right;">Africa Avg (%)</th>
+      <th style="text-align:right;">Diff</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Phase 1</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">7,411</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">26.6%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">932</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">12.3%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+14.3pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Phase 2</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">10,963</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">39.3%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">2,610</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">31.1%</td>
+  <td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">+8.2pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Phase 3</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">6,342</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">22.7%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">3,629</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">40.0%</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">-17.3pp</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Phase 4</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">3,189</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;">11.4%</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">1,448</td>
+  <td style="padding:10px;text-align:right;color:#f97316;">16.6%</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">-5.2pp</td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="analysis-box">
+  <p><strong>Why Phase 1 share matters:</strong> A higher Phase 1 share indicates domestic drug development.
+  Phase 1 trials are the earliest stage where a new drug is first tested in humans -- they require
+  sophisticated facilities and regulatory capacity. When a country does mostly Phase 3 trials, it is
+  typically hosting the final stage of someone else's drug. China's Phase 1 share reflects a country that
+  develops its own medicines.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. GROWTH TRAJECTORY                                          -->
+<!-- ============================================================ -->
+<h2>8. Growth Trajectory: 2010-2025</h2>
+<p style="color:var(--muted);font-size:0.85rem;margin-bottom:12px;">
+  Cumulative interventional trials started in each year, showing China's exponential acceleration
+  after the 2015 reforms vs Africa's linear growth.
+</p>
+<div class="card">
+<div class="overflow-x">
+<table style="font-size:0.8rem;">
+  <thead>
+    <tr>
+      <th style="padding:8px;text-align:left;">Country</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2010</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2011</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2012</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2013</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2014</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2015</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2016</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2017</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2018</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2019</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2020</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2021</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2022</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2023</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2024</th><th style="padding:4px;text-align:right;font-size:0.7rem;">2025</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;font-weight:bold;white-space:nowrap;">China</td>
+  <td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">518</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">1,167</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">1,928</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">2,777</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">3,803</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">5,011</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">6,493</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">8,221</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">10,183</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">12,558</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">15,208</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">18,716</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">22,321</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">26,583</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">31,294</td><td style="padding:4px;text-align:right;color:#ef4444;font-size:0.75rem;">35,951</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;white-space:nowrap;">Egypt</td>
+  <td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">68</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">136</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">256</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">400</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">590</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">888</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,234</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,869</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">2,699</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">3,634</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">4,626</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">5,804</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">7,328</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">8,945</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">10,541</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">11,865</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;white-space:nowrap;">South Africa</td>
+  <td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">145</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">330</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">478</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">642</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">807</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">966</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,085</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,217</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,353</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,485</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,615</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,795</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">1,970</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">2,139</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">2,266</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">2,362</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;white-space:nowrap;">Uganda</td>
+  <td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">23</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">51</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">77</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">112</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">140</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">174</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">211</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">251</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">297</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">350</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">399</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">466</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">519</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">570</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">617</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">647</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;white-space:nowrap;">Kenya</td>
+  <td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">20</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">50</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">80</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">115</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">150</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">186</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">224</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">256</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">290</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">324</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">357</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">411</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">462</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">519</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">571</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">613</td>
+</tr>
+<tr style="background:transparent;">
+  <td style="padding:8px;white-space:nowrap;">Nigeria</td>
+  <td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">4</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">12</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">20</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">27</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">32</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">40</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">54</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">81</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">107</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">132</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">160</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">196</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">231</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">265</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">288</td><td style="padding:4px;text-align:right;color:#f97316;font-size:0.75rem;">324</td>
+</tr>
+
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="highlight">
+  <p><strong>The inflection point:</strong> China's growth visibly accelerates after 2015 (NMPA reform year).
+  Before 2015, China added ~2,000 trials/year. After 2015, it added ~4,000-5,000/year. Africa's top 5
+  countries show steady but unaccelerated growth -- no comparable reform has created an inflection point.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. FIVE LESSONS FOR AFRICA                                    -->
+<!-- ============================================================ -->
+<h2>9. Five Lessons Africa Can Learn from China</h2>
+
+<div class="lesson-box">
+  <h3>Lesson 1: Regulatory Harmonization via the African Medicines Agency</h3>
+  <p>The AMA Treaty (entered into force 2023) is Africa's equivalent of NMPA reform. If the AMA
+  achieves a single continental regulatory pathway -- even initially for a subset of countries -- it
+  could replicate China's backlog-clearing moment. <strong>Priority:</strong> Make the AMA operational
+  with mutual recognition agreements among the African Union's 55 member states. A joint review process
+  for clinical trials, modeled on the EU's Clinical Trials Regulation, would cut approval times from
+  months to weeks.</p>
+</div>
+
+<div class="lesson-box">
+  <h3>Lesson 2: Domestic Manufacturing Creates Trial Demand</h3>
+  <p>Africa's Pharma Manufacturing Plan of Action and the Partnership for African Vaccine Manufacturing
+  (PAVM) aim to build continental pharmaceutical capacity. Every domestic manufacturer needs clinical
+  trials for its products. <strong>Priority:</strong> Link manufacturing incentives to clinical trial
+  requirements. If African manufacturers must demonstrate efficacy through local Phase 1-3 trials,
+  trial volume will grow organically.</p>
+</div>
+
+<div class="lesson-box">
+  <h3>Lesson 3: Academic Incentives for Investigators</h3>
+  <p>China made clinical trial leadership a path to academic promotion. Africa's medical schools rarely
+  reward research equally with clinical service. <strong>Priority:</strong> African university promotion
+  criteria should include PI-led trial conduct. Dedicated clinical research career tracks, with protected
+  time and competitive salaries, would retain investigators who currently emigrate.</p>
+</div>
+
+<div class="lesson-box">
+  <h3>Lesson 4: Digital Infrastructure and Data Systems</h3>
+  <p>China built a national clinical trial registry, electronic data capture infrastructure, and
+  specimen logistics networks. Africa's digital health investments (e.g., DHIS2) could be extended to
+  clinical trial data management. <strong>Priority:</strong> Build on existing African digital health
+  platforms to create trial-ready infrastructure: electronic consent, cloud-based data capture, and
+  cold-chain tracking.</p>
+</div>
+
+<div class="lesson-box">
+  <h3>Lesson 5: CRO Capacity as an Economic Strategy</h3>
+  <p>China's CRO industry became a $8+ billion sector employing hundreds of thousands. Africa has
+  minimal CRO capacity. <strong>Priority:</strong> Establish African CRO training programs and
+  incentivize international CROs to open African offices. South Africa's existing capacity (3,473 trials)
+  could serve as a regional CRO hub, with satellite sites across East and West Africa.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. THE PATH FORWARD                                          -->
+<!-- ============================================================ -->
+<h2>10. The Path Forward: Africa 2030</h2>
+
+<div class="policy-box">
+  <h3>Can Africa realistically follow China's path?</h3>
+  <p>China's advantages -- centralized government, massive domestic market, existing manufacturing base --
+  are structural. Africa cannot replicate them directly. But Africa has its own advantages:</p>
+  <ul>
+    <li><strong>Young, growing population</strong> -- the world's largest patient pool for clinical trials
+    by 2030, particularly for diseases poorly studied elsewhere</li>
+    <li><strong>Genetic diversity</strong> -- Africa has the greatest human genetic diversity, making it
+    scientifically essential for pharmacogenomics and precision medicine trials</li>
+    <li><strong>Under-researched diseases</strong> -- sickle cell disease, rheumatic heart disease,
+    endomyocardial fibrosis, and tropical infections need African-led trials</li>
+    <li><strong>Continental unity</strong> -- the AMA and African Union provide a framework for
+    harmonization that China achieved through centralized authority</li>
+    <li><strong>Digital leapfrogging</strong> -- mobile money (M-Pesa) showed Africa can skip
+    infrastructure stages; mobile-first trial platforms could do the same</li>
+  </ul>
+</div>
+
+<div class="analysis-box">
+  <h3>Realistic targets for Africa by 2030</h3>
+  <ul>
+    <li><strong>AMA fully operational</strong> with mutual recognition in 20+ countries</li>
+    <li><strong>Double Africa's per-capita trial density</strong> from ~35.5/M to ~71.0/M</li>
+    <li><strong>Phase 1 share above 15%</strong> (indicating domestic drug development)</li>
+    <li><strong>At least 5 African-owned CROs</strong> with GCP certification</li>
+    <li><strong>NCD trial share above 30%</strong> to match disease burden</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<div class="footer">
+  <p>Project 24: The China Leapfrog -- Can Africa Follow?</p>
+  <p>Data source: ClinicalTrials.gov API v2 (public, accessed 28 March 2026)</p>
+  <p>Verified counts: China 38,933 | Egypt 12,395 | South Africa 3,473 | Uganda 783 | Kenya 720 | Nigeria 354</p>
+  <p>Generated by fetch_china_leapfrog.py | Part of the AfricaRCT analysis series</p>
+</div>
+
+</div>
+</body>
+</html>

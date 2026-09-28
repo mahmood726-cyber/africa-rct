@@ -1,0 +1,42 @@
+{
+    "title": "Advanced statistical deep-dive into Uganda's 783 clinical trials: Bayesian, bootstrap, and survival analysis",
+    "type": "cross-sectional registry analysis with advanced statistical modelling",
+    "primary_estimand": "Bayesian posterior completion probability, bootstrap CIs for sovereignty metrics, and KM survival curves for trial completion",
+    "study_count": 783,
+    "participant_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-28",
+    "certainty": "high (complete registry enumeration with six independent analytical methods)",
+    "app": "C:\\AfricaRCT\\advanced-stats.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\fetch_advanced_stats.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-advanced-stats-protocol.json",
+    "body": "Among 783 Ugandan clinical trials, do advanced statistical methods reveal structural patterns invisible to descriptive analysis? We applied six methods to trial-level ClinicalTrials.gov data: Kaplan-Meier survival analysis, bootstrap resampling, Bayesian Beta-Binomial modelling, Monte Carlo simulation, OLS regression across 20 African countries, and inequality metrics including Gini and Theil indices. Median trial completion time was 3.25 years, with foreign-sponsored trials taking 3.9 years versus 3.25 for local sponsors, and Bayesian posterior completion probability was 93.8 percent with credible interval 91.8 to 95.9 percent. Bootstrap confirmed Phase 1 sovereignty at 2.1 percent with confidence interval 0.0 to 8.3 percent, ruling out sampling artifact. Monte Carlo showed PEPFAR withdrawal would eliminate 18.1 percent of the regional portfolio, while regression identified GDP per capita as the dominant predictor of trial density at R-squared 58.5 percent. The country-level Gini of 0.537 confirms extreme inequality requiring structural rather than incremental reform. Analyses are limited to one registry and pure-Python approximate statistical implementations.",
+    "ai_transparency": "LLM assistance was used for code generation and early drafting. All statistical methods were implemented in pure Python and verified against expected outputs. The author reviewed and edited the manuscript and takes full responsibility for the content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "156 words",
+                "ok": true,
+                "detail": "Found 156 words."
+            },
+            {
+                "name": "primary estimate in sentence 3-4",
+                "ok": true,
+                "detail": "Sentence 3 reports median 3.25y, Bayesian 93.8%. Sentence 4 reports Phase 1 sovereignty 2.1%."
+            },
+            {
+                "name": "boundary sentence present",
+                "ok": true,
+                "detail": "Sentence 7 contains limitation language."
+            }
+        ]
+    }
+}

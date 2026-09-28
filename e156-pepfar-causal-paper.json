@@ -1,0 +1,74 @@
+{
+    "title": "Did PEPFAR crowd out non-HIV clinical research? Quasi-experimental evidence from 15 African countries",
+    "body": "Did PEPFAR displace non-HIV clinical research in recipient African countries? We applied three quasi-experimental methods to ClinicalTrials.gov data from 2000 to 2025 across ten PEPFAR-focus countries and five non-PEPFAR comparators. Interrupted time series estimated the level change and slope change in non-HIV trial starts at the 2004 PEPFAR implementation point. Difference-in-differences compared annual trial growth between PEPFAR and control countries with sensitivity analyses across four post-period windows. A synthetic control constructed a counterfactual Uganda from weighted non-PEPFAR donors. The ITS showed a measurable shift in non-HIV trial trajectory at PEPFAR onset, while DiD estimates varied by post-period window and trial category. The synthetic control gap for Uganda provided complementary country-level evidence. These findings extend the Bendavid and Bhatt 2009 health service crowding-out analysis to the research domain but carry ecological and registration-bias limitations that preclude definitive causal claims.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Did PEPFAR funding measurably displace non-HIV clinical trial activity in recipient African countries relative to non-PEPFAR comparators?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for annual interventional trial starts from 2000 to 2025 across ten PEPFAR-focus countries and five non-PEPFAR African comparators."
+        },
+        {
+            "role": "Method",
+            "text": "Three quasi-experimental designs were applied: interrupted time series with segmented regression, difference-in-differences with sensitivity windows, and synthetic control for Uganda."
+        },
+        {
+            "role": "Primary result",
+            "text": "The ITS detected a shift in non-HIV trial trajectory at the PEPFAR onset, while DiD estimates varied by post-period window and trial classification."
+        },
+        {
+            "role": "Robustness",
+            "text": "Sensitivity analyses across four post-period windows and the synthetic control approach provided complementary evidence on the direction and magnitude of the effect."
+        },
+        {
+            "role": "Interpretation",
+            "text": "These findings extend the Bendavid and Bhatt health service crowding-out evidence to the clinical research domain in Africa."
+        },
+        {
+            "role": "Boundary",
+            "text": "Ecological design, ClinicalTrials.gov registration bias, short pre-period, and unmeasured confounders including GDP growth and concurrent aid programs preclude definitive causal claims."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "PEPFAR Causal Inference v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 PEPFAR-focus + 5 non-PEPFAR countries, 2000-2025",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for code generation and early drafting. All quasi-experimental methods, parameter choices, and interpretations were specified and reviewed by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "id": "bendavid2009",
+            "doi": "10.1001/jama.2009.1385",
+            "desc": "Bendavid & Bhatt (2009). Does PEPFAR crowd out other health aid?"
+        },
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "id": "abadie2010",
+            "doi": "10.1198/jasa.2009.ap08746",
+            "desc": "Abadie, Diamond & Hainmueller (2010). Synthetic Control Methods."
+        },
+        {
+            "id": "bernal2017",
+            "doi": "10.1093/ije/dyw098",
+            "desc": "Bernal, Cummins & Gasparrini (2017). ITS design for policy evaluation."
+        }
+    ]
+}

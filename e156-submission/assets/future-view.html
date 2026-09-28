@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Futures for Africa | Trial Landscape Projections to 2035</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0e17;
+    color: #cbd5e1;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  h1 {
+    font-size: 2.4rem; color: #f1f5f9; text-align: center; margin: 32px 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; color: #64748b; font-size: 15px; margin-bottom: 32px;
+  }
+  .section {
+    background: #111827; border: 1px solid #1e293b; border-radius: 12px;
+    padding: 28px; margin-bottom: 24px;
+  }
+  .section h2 {
+    color: #f1f5f9; font-size: 1.4rem; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 2px solid #1e293b;
+  }
+  .section h3 {
+    color: #e2e8f0; font-size: 1.1rem; margin: 16px 0 10px;
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .kpi {
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px; text-align: center;
+  }
+  .kpi .value {
+    font-size: 2.2rem; font-weight: 800; margin: 4px 0;
+  }
+  .kpi .label {
+    font-size: 13px; color: #64748b; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout {
+    background: #1a0a0a; border-left: 4px solid #ef4444; padding: 16px 20px;
+    margin: 16px 0; border-radius: 0 8px 8px 0; color: #fca5a5;
+  }
+  .callout-green {
+    background: #0a1a0a; border-left: 4px solid #22c55e; color: #86efac;
+  }
+  .callout-amber {
+    background: #1a150a; border-left: 4px solid #f59e0b; color: #fde68a;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  thead th {
+    text-align: left; padding: 10px 12px; color: #94a3b8;
+    border-bottom: 2px solid #1e293b; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  tbody td {
+    padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1;
+  }
+  tbody tr:hover { background: #1e293b44; }
+  .source {
+    text-align: center; color: #475569; font-size: 12px; margin-top: 40px;
+    padding: 20px; border-top: 1px solid #1e293b;
+  }
+  .source a { color: #3b82f6; text-decoration: none; }
+  .big-number {
+    font-size: 5rem; font-weight: 900; text-align: center;
+    margin: 20px 0 10px; line-height: 1;
+  }
+  .big-sub {
+    text-align: center; color: #94a3b8; font-size: 16px; margin-bottom: 16px;
+  }
+  .trio {
+    display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .trio-item {
+    flex: 1; min-width: 200px; text-align: center;
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 24px;
+  }
+  .trio-item .num {
+    font-size: 2.8rem; font-weight: 900; line-height: 1;
+  }
+  .trio-item .desc {
+    font-size: 13px; color: #94a3b8; margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Three Futures for Africa</h1>
+<p class="subtitle">
+  Clinical Trial Landscape Projections to 2035 |
+  ClinicalTrials.gov API v2 | Data: 2026-03-28
+</p>
+
+<!-- ============ SECTION 1: WHERE WE ARE ============ -->
+<div class="section">
+  <h2>1. Where We Are: The Historical Trajectory</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Uganda Trials (Total)</div>
+      <div class="value" style="color:#60a5fa">783</div>
+      <div class="label">1998-2026</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Uganda Rate</div>
+      <div class="value" style="color:#f59e0b">16.2</div>
+      <div class="label">per million population</div>
+    </div>
+    <div class="kpi">
+      <div class="label">NCD Share Trend</div>
+      <div class="value" style="color:#8b5cf6">10.1%</div>
+      <div class="label">up from 1.7% (2010-15)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Local Sponsor Trend</div>
+      <div class="value" style="color:#22c55e">19.2%</div>
+      <div class="label">up from 16.7% (2010-15)</div>
+    </div>
+  </div>
+  <h3>Annual Trial Starts in Uganda (2002-2026)</h3>
+  <div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2002</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:6%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">4</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2003</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:12%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">8</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2004</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:18%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">12</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2005</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:24%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">16</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2006</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:19%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">13</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2007</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:22%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">15</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2008</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:25%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">17</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2009</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:21%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">14</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2010</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:34%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">23</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2011</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:42%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">28</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2012</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:39%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">26</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2013</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:52%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">35</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2014</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:42%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">28</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2015</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:51%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">34</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2016</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:55%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">37</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2017</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:60%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">40</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2018</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:69%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">46</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2019</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:79%;height:100%;background:#3b82f6;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">53</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2020</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:73%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">49</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2021</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:100%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">67</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2022</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:79%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">53</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2023</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:76%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">51</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2024</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:70%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">47</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2025</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:45%;height:100%;background:#22c55e;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">30</span></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><div style="width:40px;text-align:right;font-weight:600;color:#94a3b8;font-size:12px">2026</div><div style="flex:1;background:#1e293b;border-radius:3px;height:20px;position:relative"><div style="width:42%;height:100%;background:#f59e0b;border-radius:3px"></div><span style="position:absolute;right:6px;top:2px;font-size:11px;color:#64748b;font-weight:600">28</span></div></div>
+  <div class="callout-amber callout" style="margin-top:16px">
+    <strong>The growth story:</strong> Uganda's trial activity grew steadily
+    from 2 trials in 1998 to a peak of 67 in 2021. However, post-COVID
+    momentum has plateaued around 45-50 per year. The question is whether
+    this plateau is a temporary pause or the new normal.
+  </div>
+</div>
+
+<!-- ============ SECTION 2: THREE SCENARIOS ============ -->
+<div class="section">
+  <h2>2. Three Scenarios for 2035</h2>
+  <div class="trio">
+    <div class="trio-item" style="border-color:#22c55e">
+      <div class="num" style="color:#22c55e">121</div>
+      <div class="desc">Optimistic (2035 annual)<br>
+        <span style="font-size:11px">India-matching 15% growth</span></div>
+    </div>
+    <div class="trio-item" style="border-color:#f59e0b">
+      <div class="num" style="color:#f59e0b">9</div>
+      <div class="desc">Status Quo (2035 annual)<br>
+        <span style="font-size:11px">Linear trend continues</span></div>
+    </div>
+    <div class="trio-item" style="border-color:#ef4444">
+      <div class="num" style="color:#ef4444">19</div>
+      <div class="desc">Pessimistic (2035 annual)<br>
+        <span style="font-size:11px">PEPFAR cuts, -5%/year</span></div>
+    </div>
+  </div>
+
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Assumptions</th>
+        <th style="text-align:right">2035 Annual</th>
+        <th style="text-align:right">Cumulative by 2035</th>
+        <th style="text-align:right">Years to LatAm Parity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:10px 12px;font-weight:700;color:#f59e0b">Status Quo</td><td style="padding:10px 12px;font-size:13px;color:#94a3b8">Linear extrapolation of 2019-2025 trend</td><td style="text-align:right;padding:10px 12px;font-weight:700;color:#f59e0b;font-size:1.2rem">9</td><td style="text-align:right;padding:10px 12px;font-weight:600">1,013</td><td style="text-align:right;padding:10px 12px;color:#f59e0b;font-weight:600">19.7 years</td></tr>
+<tr><td style="padding:10px 12px;font-weight:700;color:#22c55e">Optimistic</td><td style="padding:10px 12px;font-size:13px;color:#94a3b8">India-matching 15% annual growth</td><td style="text-align:right;padding:10px 12px;font-weight:700;color:#22c55e;font-size:1.2rem">121</td><td style="text-align:right;padding:10px 12px;font-weight:600">1,478</td><td style="text-align:right;padding:10px 12px;color:#22c55e;font-weight:600">6.9 years</td></tr>
+<tr><td style="padding:10px 12px;font-weight:700;color:#ef4444">Pessimistic</td><td style="padding:10px 12px;font-size:13px;color:#94a3b8">PEPFAR cuts + post-COVID stagnation</td><td style="text-align:right;padding:10px 12px;font-weight:700;color:#ef4444;font-size:1.2rem">19</td><td style="text-align:right;padding:10px 12px;font-weight:600">1,018</td><td style="text-align:right;padding:10px 12px;color:#ef4444;font-weight:600">Never</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:24px">Year-by-Year Projections (2026-2035)</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
+    <div style="flex:1;min-width:280px"><h3 style="color:#22c55e;margin-bottom:8px;font-size:14px">Optimistic</h3><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2026</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:28%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">34</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2027</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:32%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">39</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2028</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:37%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">45</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2029</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:43%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">52</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2030</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:50%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">60</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2031</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:57%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">69</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2032</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:65%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">79</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2033</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:75%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">91</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2034</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:87%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">105</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2035</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:100%;height:100%;background:#22c55e;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">121</span></div></div></div><div style="flex:1;min-width:280px"><h3 style="color:#f59e0b;margin-bottom:8px;font-size:14px">Status Quo</h3><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2026</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:100%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">37</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2027</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:92%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">34</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2028</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:84%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">31</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2029</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:76%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">28</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2030</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:68%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">25</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2031</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:57%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">21</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2032</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:49%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">18</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2033</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:41%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">15</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2034</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:32%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">12</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2035</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:24%;height:100%;background:#f59e0b;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">9</span></div></div></div><div style="flex:1;min-width:280px"><h3 style="color:#ef4444;margin-bottom:8px;font-size:14px">Pessimistic</h3><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2026</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:100%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">28</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2027</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:96%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">27</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2028</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:93%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">26</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2029</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:89%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">25</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2030</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:86%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">24</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2031</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:82%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">23</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2032</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:79%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">22</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2033</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:75%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">21</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2034</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:71%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">20</span></div></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><div style="width:36px;text-align:right;font-size:11px;color:#64748b">2035</div><div style="flex:1;background:#1e293b;border-radius:3px;height:18px;position:relative"><div style="width:68%;height:100%;background:#ef4444;border-radius:3px;opacity:0.7"></div><span style="position:absolute;right:6px;top:1px;font-size:10px;color:#94a3b8">19</span></div></div></div>
+  </div>
+</div>
+
+<!-- ============ SECTION 3: YEARS TO PARITY ============ -->
+<div class="section">
+  <h2>3. The Parity Clock: How Long Until Africa Catches Up?</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Years until Uganda matches current Latin American per-capita trial rate
+    (42.4 trials per million people)
+  </p>
+  <div class="trio">
+    <div class="trio-item">
+      <div class="num" style="color:#22c55e">6.9</div>
+      <div class="desc">Years (Optimistic)<br>15% annual growth</div>
+    </div>
+    <div class="trio-item">
+      <div class="num" style="color:#f59e0b">19.7</div>
+      <div class="desc">Years (Status Quo)<br>5% annual growth</div>
+    </div>
+    <div class="trio-item">
+      <div class="num" style="color:#ef4444">Never</div>
+      <div class="desc">Pessimistic<br>Declining trial activity</div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>The parity gap:</strong> Even under the most optimistic scenario
+    (India-matching growth), Uganda would need approximately
+    <strong>6.9 years</strong> to match
+    Latin America's current per-capita trial rate. Under status quo conditions,
+    parity is approximately <strong>19.7 years</strong>
+    away. Under pessimistic assumptions with PEPFAR funding cuts and continued
+    stagnation, the gap widens indefinitely.
+  </div>
+</div>
+
+<!-- ============ SECTION 4: PER-CAPITA RATES ============ -->
+<div class="section">
+  <h2>4. Current Per-Capita Trial Rates (Trials per Million)</h2>
+  <div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">United States</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">475.2</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">South Africa</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:12%;height:100%;background:#22c55e;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">56.0</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Brazil</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:8%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">38.0</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Uganda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:3%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">16.2</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Kenya</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:3%;height:100%;background:#f59e0b;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">12.9</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Rwanda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:2%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">8.6</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">India</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:2%;height:100%;background:#3b82f6;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">8.0</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Tanzania</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:1%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">6.4</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Ethiopia</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:0%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">1.8</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:140px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Nigeria</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:0%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">1.5</span></div></div>
+  <div class="callout-amber callout" style="margin-top:16px">
+    <strong>The scale of disparity:</strong> The United States has
+    <strong>475.2</strong> trials per million people.
+    Uganda has <strong>16.2</strong>. Even India, another
+    low-middle income country, vastly outperforms African nations in per-capita
+    trial activity. The gap is not closing -- it is structural.
+  </div>
+</div>
+
+<!-- ============ SECTION 5: LIVES AT STAKE ============ -->
+<div class="section">
+  <h2>5. Lives at Stake: The Evidence Gap's Human Cost</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Current Africa Rate</div>
+      <div class="value" style="color:#ef4444">5.1</div>
+      <div class="label">trials per million</div>
+    </div>
+    <div class="kpi">
+      <div class="label">LatAm Rate (Target)</div>
+      <div class="value" style="color:#22c55e">42.4</div>
+      <div class="label">trials per million</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Trial Gap / Year</div>
+      <div class="value" style="color:#f59e0b">44,760</div>
+      <div class="label">missing trials annually</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Evidence Gap (Lives)</div>
+      <div class="value" style="color:#ef4444">223,800,000</div>
+      <div class="label">person-years affected / yr</div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>The human cost of the evidence gap:</strong> Each trial that does
+    not happen in Africa is evidence that does not exist for African
+    populations. Drugs are prescribed based on studies conducted on different
+    populations, with different genetics, different diets, different
+    co-morbidities, different healthcare systems. The evidence gap is not
+    abstract -- it translates directly into suboptimal treatment decisions,
+    inappropriate drug doses, and preventable deaths.
+  </div>
+</div>
+
+<!-- ============ SECTION 6: WHAT IT WOULD TAKE ============ -->
+<div class="section">
+  <h2>6. What Would It Take? The 2035 Vision</h2>
+  <div class="callout-green callout">
+    <strong>Investment needed to reach LatAm parity by 2035:</strong>
+  </div>
+  <ul style="margin:16px 0 16px 24px;color:#94a3b8;line-height:2.2">
+    <li><strong style="color:#e2e8f0">Domestic R&amp;D investment:</strong>
+      African governments must reach the AU target of 1% GDP in R&amp;D
+      spending. Current Sub-Saharan average: 0.42%. This alone would more
+      than double the research base.</li>
+    <li><strong style="color:#e2e8f0">Regulatory harmonization:</strong>
+      The African Medicines Agency (AMA) must become operational and achieve
+      mutual recognition agreements. Currently, each country's regulatory
+      approval process adds 12-24 months to trial timelines.</li>
+    <li><strong style="color:#e2e8f0">NCD research pivot:</strong>
+      NCDs are now the fastest-growing cause of death in Africa. Research
+      portfolios must shift from 80% infectious disease to at least 40%
+      NCD by 2035.</li>
+    <li><strong style="color:#e2e8f0">Phase 1 infrastructure:</strong>
+      Build at least 5 GCP-compliant Phase 1 units across the continent.
+      Without first-in-human capability, Africa will remain a testing
+      ground, never a development site.</li>
+    <li><strong style="color:#e2e8f0">Local manufacturing:</strong>
+      Africa currently produces less than 1% of vaccines it consumes.
+      BioNTech's Rwanda plant and Aspen's South Africa facility are
+      promising starts but insufficient.</li>
+    <li><strong style="color:#e2e8f0">Training pipeline:</strong>
+      10,000 new clinical researchers by 2035 (from current ~2,000),
+      with career pathways that do not require emigration. Structured
+      mentorship, competitive salaries, protected research time.</li>
+  </ul>
+  <div class="callout-amber callout">
+    <strong>Policy recommendations:</strong> (1) PEPFAR reauthorization with
+    mandatory NCD research allocation; (2) African Union research sovereignty
+    fund; (3) WHO-brokered technology transfer agreements; (4) Tax incentives
+    for pharma companies conducting Phase 1 trials in Africa; (5) Open-access
+    requirements for all trials conducted on African populations.
+  </div>
+</div>
+
+<div class="source">
+  Data source: <a href="https://clinicaltrials.gov">ClinicalTrials.gov</a>
+  API v2 (accessed 2026-03-28)<br>
+  Analysis: fetch_future_view.py | The Future View<br>
+  Projections: Linear regression (status quo), exponential growth (optimistic),
+  exponential decline (pessimistic). All projections are illustrative and
+  depend on assumptions stated in each scenario.
+</div>
+
+</div>
+</body>
+</html>

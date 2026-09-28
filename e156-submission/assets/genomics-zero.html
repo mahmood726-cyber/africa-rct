@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa's Genomics Paradox: Zero Precision Medicine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f172a;color:#e2e8f0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  line-height:1.6;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:24px 20px}
+h1{font-size:2.2rem;font-weight:800;margin-bottom:4px}
+h2{font-size:1.5rem;font-weight:700;color:#f8fafc;margin:36px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid #334155}
+h3{font-size:1.15rem;font-weight:600;color:#cbd5e1;margin:24px 0 10px}
+h4{font-size:1rem;font-weight:600}
+p{margin:8px 0;color:#cbd5e1}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Hero */
+.hero{text-align:center;padding:48px 20px 36px;background:linear-gradient(135deg,#1e1b4b 0%,#0f172a 60%,#7f1d1d 100%);
+  border-radius:16px;margin-bottom:32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-zero{font-size:8rem;font-weight:900;color:#ef4444;line-height:1;margin:12px 0;
+  text-shadow:0 0 60px rgba(239,68,68,0.4)}
+.zero-pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.hero-subtitle{font-size:1.3rem;color:#94a3b8;max-width:700px;margin:0 auto;font-weight:400}
+.hero-contrast{margin-top:20px;font-size:1.05rem;color:#fbbf24;font-weight:600}
+
+/* Cards */
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;margin:16px 0}
+.card-red{border-left:4px solid #ef4444}
+.card-amber{border-left:4px solid #f59e0b}
+.card-blue{border-left:4px solid #3b82f6}
+.card-green{border-left:4px solid #22c55e}
+
+/* Stat grid */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
+.stat-box{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:20px;text-align:center}
+.stat-num{font-size:2.4rem;font-weight:800;line-height:1.1}
+.stat-label{font-size:0.85rem;color:#94a3b8;margin-top:4px}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th{text-align:left;padding:10px 12px;background:#334155;color:#f8fafc;font-weight:600;
+  font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em}
+td{padding:8px 12px;border-bottom:1px solid #1e293b;font-size:0.88rem}
+tr:hover{background:#1e293b88}
+
+/* Chart containers */
+.chart-container{position:relative;height:320px;margin:16px 0}
+.chart-container-sm{position:relative;height:260px;margin:16px 0}
+
+/* DNA helix decoration */
+.dna-strand{color:#ef4444;font-family:monospace;font-size:0.7rem;opacity:0.2;
+  position:absolute;right:20px;top:60px;line-height:1.4;pointer-events:none;
+  white-space:pre}
+
+/* Quote */
+.quote{border-left:4px solid #f59e0b;padding:12px 20px;margin:16px 0;
+  background:#1e293b;border-radius:0 8px 8px 0;font-style:italic;color:#cbd5e1}
+.quote-author{display:block;margin-top:6px;font-style:normal;color:#94a3b8;font-size:0.85rem}
+
+/* Severity */
+.severity{padding:12px 16px;border-radius:8px;margin:6px 0;display:flex;align-items:center;gap:12px}
+.sev-critical{background:#7f1d1d}
+.sev-high{background:#78350f}
+.sev-moderate{background:#1e3a5f}
+.sev-label{font-weight:700;color:#fbbf24;min-width:80px}
+
+/* Footer */
+.footer{margin-top:48px;padding:24px 0;border-top:1px solid #334155;
+  text-align:center;color:#64748b;font-size:0.82rem}
+
+/* Responsive */
+@media(max-width:640px){
+  .hero-zero{font-size:5rem}
+  h1{font-size:1.6rem}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .stat-num{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+<div class="dna-strand">
+ATCGATCGATCG
+ TAGCTAGCTAGC
+GCTAGCTAGCTA
+ CGATCGATCGAT
+ATCGATCGATCG
+ TAGCTAGCTAGC
+</div>
+<h1>Africa's Genomics Paradox</h1>
+<div class="hero-zero zero-pulse">Zero</div>
+<div class="hero-subtitle">Pharmacogenomics trials in Africa -- zero across all 6 key drug-metabolism genes</div>
+<div class="hero-contrast">
+Africa has the MOST genetic diversity of any continent.<br>
+Zero pharmacogenomics dose-finding trials. Zero H3Africa interventional trials.<br>
+124 broad genomics-related studies vs 5,117 in the US (ratio: 1:41).
+</div>
+<p style="color:#64748b;margin-top:16px;font-size:0.85rem">
+Data from ClinicalTrials.gov API v2 | Fetched 2026-03-28 |
+Query: <code style="color:#94a3b8">genomics OR precision medicine OR pharmacogenomics OR whole genome OR exome OR genetic testing</code>
+</p>
+</div>
+
+<!-- ============ SEVERITY SUMMARY ============ -->
+<div class="card card-red">
+<h3 style="color:#ef4444;margin-top:0">Findings Severity</h3>
+<div class="severity sev-critical">
+<span class="sev-label">CRITICAL</span>
+<span>Africa has 124 broad genomics-related trials vs 5,117 in the US -- a 1:41 ratio for 4x the population</span>
+</div>
+<div class="severity sev-critical">
+<span class="sev-label">CRITICAL</span>
+<span>Zero pharmacogenomics dose-finding trials across all 6 key drug-metabolism genes (CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, HLA-B) -- vs 55 in the US</span>
+</div>
+<div class="severity sev-high">
+<span class="sev-label">HIGH</span>
+<span>H3Africa sequencing consortium has produced 0 registered interventional trial(s) -- sequencing without clinical translation</span>
+</div>
+<div class="severity sev-high">
+<span class="sev-label">HIGH</span>
+<span>BRCA/HER2/biomarker-driven: Africa 81 vs US 2,021 -- triple-negative breast cancer burden unmatched by targeted trials</span>
+</div>
+<div class="severity sev-moderate">
+<span class="sev-label">MODERATE</span>
+<span>CYP2D6/CYP2B6 variants at 2-3x higher frequency in African populations -- drugs dosed on European pharmacogenomics</span>
+</div>
+</div>
+
+<!-- ============ SECTION 1: THE PARADOX ============ -->
+<h2>1. The Paradox: Most Diverse Genome, Zero Precision Medicine</h2>
+<div class="card card-red">
+<p>Africa is the cradle of <em>Homo sapiens</em>. Because all non-African populations descend
+from a small number of migrants who left the continent ~70,000 years ago, African genomes
+contain <strong>more genetic variation than the rest of the world combined</strong>.
+A study from a single African village can contain more SNP diversity than the entire continent of Europe.</p>
+
+<p>This diversity has enormous implications for drug response. Pharmacogenomics -- the science of
+matching drug doses to genetic profiles -- is critical for drugs with narrow therapeutic windows
+(warfarin, efavirenz, tamoxifen, tacrolimus). Yet the clinical trials that translate genomic
+knowledge into dosing guidelines are conducted almost exclusively in European and North American
+populations.</p>
+
+<p style="font-weight:700;color:#ef4444">The result: Africa's genome is sequenced by others, catalogued in
+databases hosted elsewhere, published in journals Africans cannot afford, and translated into
+precision medicine products tested and sold in high-income countries only.</p>
+</div>
+
+<!-- ============ SECTION 2: THE NUMBERS ============ -->
+<h2>2. The Numbers: Global Comparison</h2>
+<div class="stat-grid">
+<div class="stat-box">
+  <div class="stat-num" style="color:#ef4444">124</div>
+  <div class="stat-label">Africa<br>(1.4 billion people)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#3b82f6">5,117</div>
+  <div class="stat-label">United States<br>(334 million people)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#f59e0b">833</div>
+  <div class="stat-label">China<br>(1.4 billion people)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#10b981">137</div>
+  <div class="stat-label">India<br>(1.4 billion people)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#8b5cf6">304</div>
+  <div class="stat-label">Brazil<br>(216 million people)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#ec4899">946</div>
+  <div class="stat-label">United Kingdom<br>(68 million people)</div>
+</div>
+</div>
+
+<div class="card card-amber">
+<div class="chart-container">
+<canvas id="regionChart"></canvas>
+</div>
+</div>
+
+<!-- Africa country breakdown -->
+<h3>Africa Country Breakdown</h3>
+<div class="card">
+<table>
+<thead><tr><th>Country</th><th style="text-align:center">Genomics Trials</th><th style="text-align:right">Population</th></tr></thead>
+<tbody>
+<tr>
+<td>South Africa</td>
+<td style="text-align:center;font-weight:700;color:#fbbf24">124</td>
+<td style="text-align:right;color:#64748b">62M</td>
+</tr><tr>
+<td>Egypt</td>
+<td style="text-align:center;font-weight:700;color:#fbbf24">106</td>
+<td style="text-align:right;color:#64748b">109M</td>
+</tr><tr>
+<td>Nigeria</td>
+<td style="text-align:center;font-weight:700;color:#fbbf24">21</td>
+<td style="text-align:right;color:#64748b">230M</td>
+</tr><tr>
+<td>Kenya</td>
+<td style="text-align:center;font-weight:700;color:#fbbf24">20</td>
+<td style="text-align:right;color:#64748b">56M</td>
+</tr><tr>
+<td>Uganda</td>
+<td style="text-align:center;font-weight:700;color:#fbbf24">14</td>
+<td style="text-align:right;color:#64748b">49M</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECTION 3: H3Africa ============ -->
+<h2>3. H3Africa: Sequencing Without Clinical Trials</h2>
+<div class="card card-amber">
+<p>The <strong>Human Heredity and Health in Africa (H3Africa)</strong> consortium, funded by NIH and
+Wellcome Trust, has been the flagship African genomics initiative since 2012. It has genotyped and
+sequenced tens of thousands of African participants, built biobanks, and trained a generation of
+African genomicists.</p>
+
+<p>Yet when we search ClinicalTrials.gov for "H3Africa", we find:</p>
+
+<div class="stat-grid" style="max-width:400px">
+<div class="stat-box">
+  <div class="stat-num" style="color:#f59e0b">0</div>
+  <div class="stat-label">H3Africa interventional trial(s)</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#94a3b8">0</div>
+  <div class="stat-label">of those in Africa</div>
+</div>
+</div>
+
+<p>This is the pipeline failure: genomic discovery is not being translated into interventional trials
+that could improve clinical care for African patients. The sequence data flows to international
+databases; the clinical applications flow to Boston, London, and Shanghai.</p>
+
+<h4 style="color:#e2e8f0;margin:16px 0 8px">H3Africa-Tagged Trials on ClinicalTrials.gov</h4>
+<table>
+<thead><tr><th>NCT ID</th><th>Title</th><th>Sponsor</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="text-align:center;color:#64748b">No H3Africa trials found on ClinicalTrials.gov</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECTION 4: PHARMACOGENOMICS GAP ============ -->
+<h2>4. The Pharmacogenomics Gap: Wrong Doses for Africa</h2>
+<div class="card card-red">
+<p>African populations metabolize drugs differently due to high-frequency variants in key
+cytochrome P450 enzymes. The clinical consequences are serious:</p>
+
+<div class="quote">
+"A patient in Kampala receiving the same dose of efavirenz as a patient in Copenhagen may have
+plasma drug levels two to three times higher, because CYP2B6 516G&gt;T -- which slows efavirenz
+metabolism -- occurs at 40-50% frequency in East Africa versus 15-20% in Europe."
+<span class="quote-author">-- Pharmacogenomics literature, multiple sources</span>
+</div>
+
+<p>Yet pharmacogenomics-guided dose-finding trials are conducted almost exclusively in high-income countries:</p>
+
+<h4 style="color:#e2e8f0;margin:16px 0 8px">Pharmacogenomics Trials by Gene: Africa vs US</h4>
+<table>
+<thead><tr>
+<th>Gene</th><th>Clinical Significance in Africa</th>
+<th style="text-align:center">Africa</th><th style="text-align:center">US</th>
+<th style="text-align:center">Ratio</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="font-weight:700;color:#f59e0b">CYP2D6</td>
+<td style="max-width:340px">Tamoxifen/codeine metabolism -- ultra-rapid alleles 3x more common in East Africa</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">18</td>
+<td style="text-align:center;color:#94a3b8">18:0</td>
+</tr><tr>
+<td style="font-weight:700;color:#f59e0b">CYP2B6</td>
+<td style="max-width:340px">Efavirenz metabolism -- 516G&gt;T at 40-50% in sub-Saharan Africa vs 15-20% European</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">13</td>
+<td style="text-align:center;color:#94a3b8">13:0</td>
+</tr><tr>
+<td style="font-weight:700;color:#f59e0b">CYP3A5</td>
+<td style="max-width:340px">Tacrolimus dosing -- expresser allele (*1) at 70-80% in Africa vs 10-20% in Europe</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">11</td>
+<td style="text-align:center;color:#94a3b8">11:0</td>
+</tr><tr>
+<td style="font-weight:700;color:#f59e0b">UGT1A1</td>
+<td style="max-width:340px">Irinotecan toxicity -- *6 and *28 variant frequencies differ markedly</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">6</td>
+<td style="text-align:center;color:#94a3b8">6:0</td>
+</tr><tr>
+<td style="font-weight:700;color:#f59e0b">VKORC1</td>
+<td style="max-width:340px">Warfarin dosing -- African populations have distinct haplotype patterns</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">7</td>
+<td style="text-align:center;color:#94a3b8">7:0</td>
+</tr><tr>
+<td style="font-weight:700;color:#f59e0b">HLA-B*5701</td>
+<td style="max-width:340px">Abacavir hypersensitivity -- frequency varies across African sub-populations</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">0</td>
+<td style="text-align:center;color:#3b82f6;font-weight:700">0</td>
+<td style="text-align:center;color:#94a3b8">0:0</td>
+</tr>
+</tbody>
+<tfoot>
+<tr style="font-weight:700;border-top:2px solid #475569">
+<td colspan="2">TOTAL</td>
+<td style="text-align:center;color:#ef4444">0</td>
+<td style="text-align:center;color:#3b82f6">55</td>
+<td style="text-align:center;color:#94a3b8">55:0</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<!-- ============ SECTION 5: BRCA IN AFRICA ============ -->
+<h2>5. BRCA in Africa: Triple-Negative Breast Cancer Without Targeted Therapy</h2>
+<div class="card card-red">
+<p>African women have a disproportionately high rate of <strong>triple-negative breast cancer (TNBC)</strong>,
+which is more aggressive and has fewer treatment options. BRCA1/2 mutations, which guide treatment
+with PARP inhibitors (olaparib, talazoparib), are found at significant frequency in African
+populations -- but population-specific variant catalogues remain incomplete.</p>
+
+<p>HER2-targeted therapies (trastuzumab, pertuzumab) require HER2 testing infrastructure that most
+African oncology centres lack. The result: biomarker-driven oncology trials in Africa are essentially absent.</p>
+
+<div class="stat-grid" style="max-width:500px">
+<div class="stat-box">
+  <div class="stat-num" style="color:#ef4444">81</div>
+  <div class="stat-label">BRCA/HER2/biomarker-driven<br>trials in Africa</div>
+</div>
+<div class="stat-box">
+  <div class="stat-num" style="color:#3b82f6">2,021</div>
+  <div class="stat-label">BRCA/HER2/biomarker-driven<br>trials in the US</div>
+</div>
+</div>
+
+<div class="chart-container-sm">
+<canvas id="brcaChart"></canvas>
+</div>
+</div>
+
+<!-- ============ SECTION 6: COMPARISON ============ -->
+<h2>6. How Africa Compares: The Global Genomics Divide</h2>
+<div class="card card-blue">
+<p>The gap is not just about funding. China and India, despite having comparable GDP-per-capita
+challenges, have built domestic genomics trial ecosystems:</p>
+
+<table>
+<thead><tr>
+<th>Region</th><th style="text-align:center">Population</th>
+<th style="text-align:center">Genomics Trials</th>
+<th style="text-align:center">Trials per 100M</th>
+<th>Key Factor</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="color:#ef4444;font-weight:700">Africa</td>
+<td style="text-align:center">1,400M</td>
+<td style="text-align:center;font-weight:700;color:#ef4444">124</td>
+<td style="text-align:center">8.9</td>
+<td>No genomic medicine centres, no regulatory framework for precision medicine</td>
+</tr>
+<tr>
+<td style="color:#3b82f6;font-weight:700">US</td>
+<td style="text-align:center">334M</td>
+<td style="text-align:center;font-weight:700;color:#3b82f6">5,117</td>
+<td style="text-align:center">1532.0</td>
+<td>NIH Precision Medicine Initiative, All of Us, commercial genomics labs</td>
+</tr>
+<tr>
+<td style="color:#f59e0b;font-weight:700">China</td>
+<td style="text-align:center">1,400M</td>
+<td style="text-align:center;font-weight:700;color:#f59e0b">833</td>
+<td style="text-align:center">59.5</td>
+<td>National Genomics Strategy, BGI, state-funded precision medicine centres</td>
+</tr>
+<tr>
+<td style="color:#10b981;font-weight:700">India</td>
+<td style="text-align:center">1,400M</td>
+<td style="text-align:center;font-weight:700;color:#10b981">137</td>
+<td style="text-align:center">9.8</td>
+<td>Genome India Project, CSIR, growing domestic biotech sector</td>
+</tr>
+<tr>
+<td style="color:#8b5cf6;font-weight:700">Brazil</td>
+<td style="text-align:center">216M</td>
+<td style="text-align:center;font-weight:700;color:#8b5cf6">304</td>
+<td style="text-align:center">140.7</td>
+<td>Fiocruz, FAPESP, admixed population genomics research</td>
+</tr>
+<tr>
+<td style="color:#ec4899;font-weight:700">UK</td>
+<td style="text-align:center">68M</td>
+<td style="text-align:center;font-weight:700;color:#ec4899">946</td>
+<td style="text-align:center">1391.2</td>
+<td>Genomics England 100K Genomes, NHS integration, Wellcome Trust</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ============ SECTION 7: WHAT IT WOULD TAKE ============ -->
+<h2>7. What It Would Take</h2>
+<div class="card card-green">
+<p>Closing the genomics trial gap in Africa requires simultaneous investment across five domains:</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0">
+
+<div style="background:#1e3a5f;padding:16px;border-radius:10px">
+<h4 style="color:#60a5fa;margin-bottom:6px">1. Genomic Medicine Centres</h4>
+<p style="font-size:0.88rem">Establish 10-15 centres across Africa with CLIA-equivalent sequencing,
+variant interpretation, and bioinformatics capacity. Co-locate with existing academic medical centres
+(Cape Town, Lagos, Nairobi, Kampala, Cairo).</p>
+</div>
+
+<div style="background:#3b1f0b;padding:16px;border-radius:10px">
+<h4 style="color:#f59e0b;margin-bottom:6px">2. Population-Specific Biobanks</h4>
+<p style="font-size:0.88rem">Build African biobanks with linked clinical phenotype data. H3Africa has
+started this, but biobanks must be sustained beyond grant cycles and governed by African institutions,
+not external funders.</p>
+</div>
+
+<div style="background:#1a2e1a;padding:16px;border-radius:10px">
+<h4 style="color:#22c55e;margin-bottom:6px">3. Regulatory Framework</h4>
+<p style="font-size:0.88rem">Develop African regulatory pathways for companion diagnostics and
+pharmacogenomics-guided prescribing. Currently, no African medicines regulatory authority has a
+precision medicine framework. The African Medicines Agency (AMA) could lead this.</p>
+</div>
+
+<div style="background:#2d1b4e;padding:16px;border-radius:10px">
+<h4 style="color:#a78bfa;margin-bottom:6px">4. Pharmacogenomics Dose-Finding</h4>
+<p style="font-size:0.88rem">Priority trials: CYP2B6-guided efavirenz/dolutegravir dosing,
+CYP2D6-guided tamoxifen for breast cancer, CYP3A5-guided tacrolimus for transplant. These affect
+millions of African patients today and require relatively simple genotype-stratified RCTs.</p>
+</div>
+
+<div style="background:#1e293b;padding:16px;border-radius:10px;border:1px solid #475569">
+<h4 style="color:#e2e8f0;margin-bottom:6px">5. African-Led BRCA/TNBC Trials</h4>
+<p style="font-size:0.88rem">Africa's high TNBC burden demands African-led trials of PARP inhibitors
+with African-specific BRCA variant panels. Current panels (BRACAnalysis, myChoice) were developed
+on European populations and miss African pathogenic variants.</p>
+</div>
+
+</div>
+
+<div class="quote">
+"You cannot build precision medicine on someone else's genome. Africa must own its genomic future
+-- from sequencing to clinical trials to regulatory approval -- or remain a data source for
+other people's medicines."
+<span class="quote-author">-- Implication of the genomics zero finding</span>
+</div>
+</div>
+
+<!-- ============ SPONSOR SAMPLES ============ -->
+<h2>8. Sample Trials</h2>
+<div class="card">
+<h4 style="color:#e2e8f0;margin:18px 0 8px">South Africa</h4><table style="width:100%;border-collapse:collapse;font-size:0.82rem"><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT01027364" target="_blank"
+    style="color:#60a5fa">NCT01027364</a></td>
+<td style="padding:4px">Study of Recombinant Factor IX Fc Fusion Protein (rFIXFc) in...</td>
+<td style="padding:4px;color:#94a3b8">Bioverativ Therapeutics Inc.</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT05148845" target="_blank"
+    style="color:#60a5fa">NCT05148845</a></td>
+<td style="padding:4px">Sisonke 2 - A COVID-19 Vaccine Boost Open Label Study.</td>
+<td style="padding:4px;color:#94a3b8">Wits Health Consortium (Pty) L</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT05662319" target="_blank"
+    style="color:#60a5fa">NCT05662319</a></td>
+<td style="padding:4px">A Study to Test a Medicine (Fitusiran) Injected Under the Sk...</td>
+<td style="padding:4px;color:#94a3b8">Sanofi</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT00585312" target="_blank"
+    style="color:#60a5fa">NCT00585312</a></td>
+<td style="padding:4px">Trial In Pediatric Patients With Familial Adenomatous Polypo...</td>
+<td style="padding:4px;color:#94a3b8">Pfizer&#39;s Upjohn has merged wit</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT05608291" target="_blank"
+    style="color:#60a5fa">NCT05608291</a></td>
+<td style="padding:4px">A Trial to See if the Combination of Fianlimab With Cemiplim...</td>
+<td style="padding:4px;color:#94a3b8">Regeneron Pharmaceuticals</td>
+</tr></table><h4 style="color:#e2e8f0;margin:18px 0 8px">Nigeria</h4><table style="width:100%;border-collapse:collapse;font-size:0.82rem"><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT04459286" target="_blank"
+    style="color:#60a5fa">NCT04459286</a></td>
+<td style="padding:4px">The Nitazoxanide Plus Atazanavir for COVID-19 Study</td>
+<td style="padding:4px;color:#94a3b8">Obafemi Awolowo University</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT05834933" target="_blank"
+    style="color:#60a5fa">NCT05834933</a></td>
+<td style="padding:4px">Nigerian Breast Cancer Risk-Reduction Study</td>
+<td style="padding:4px;color:#94a3b8">University of Ibadan</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT03058939" target="_blank"
+    style="color:#60a5fa">NCT03058939</a></td>
+<td style="padding:4px">Assessing the Response Rate of Neo-adjuvant Paclitaxel (Taxo...</td>
+<td style="padding:4px;color:#94a3b8">University of Chicago</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT03533868" target="_blank"
+    style="color:#60a5fa">NCT03533868</a></td>
+<td style="padding:4px">Reaching 90% HIV Suppression: The Role of POC Viral Load Mon...</td>
+<td style="padding:4px;color:#94a3b8">Harvard School of Public Healt</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT04624659" target="_blank"
+    style="color:#60a5fa">NCT04624659</a></td>
+<td style="padding:4px">A Study of Etavopivat in Adults and Adolescents With Sickle ...</td>
+<td style="padding:4px;color:#94a3b8">Forma Therapeutics, Inc.</td>
+</tr></table><h4 style="color:#e2e8f0;margin:18px 0 8px">US</h4><table style="width:100%;border-collapse:collapse;font-size:0.82rem"><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT02508116" target="_blank"
+    style="color:#60a5fa">NCT02508116</a></td>
+<td style="padding:4px">Assessment of Prospective CYP2C19 Genotype Guided Dosing of ...</td>
+<td style="padding:4px;color:#94a3b8">University of Pennsylvania</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT07282821" target="_blank"
+    style="color:#60a5fa">NCT07282821</a></td>
+<td style="padding:4px">Bempedoic Acid Therapy for Polycystic Kidney Disease</td>
+<td style="padding:4px;color:#94a3b8">Kenneth Hallows</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT04708314" target="_blank"
+    style="color:#60a5fa">NCT04708314</a></td>
+<td style="padding:4px">An Open-Label Study of Golodirsen in Non-Ambulant Patients W...</td>
+<td style="padding:4px;color:#94a3b8">Rare Disease Research, LLC</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT03454893" target="_blank"
+    style="color:#60a5fa">NCT03454893</a></td>
+<td style="padding:4px">Open Label, Study Of Efficacy and Safety Of AVR-RD-01 for Tr...</td>
+<td style="padding:4px;color:#94a3b8">AVROBIO</td>
+</tr><tr style="border-bottom:1px solid #334155">
+<td style="padding:4px"><a href="https://clinicaltrials.gov/study/NCT01293604" target="_blank"
+    style="color:#60a5fa">NCT01293604</a></td>
+<td style="padding:4px">The Influence of Daily Intake of Whole Grain Barley or Oats ...</td>
+<td style="padding:4px;color:#94a3b8">United States Department of Ag</td>
+</tr></table>
+</div>
+
+<!-- ============ METHODOLOGY ============ -->
+<h2>Methodology</h2>
+<div class="card">
+<p><strong>Data source:</strong> ClinicalTrials.gov API v2 (public, no API key required)</p>
+<p><strong>Inclusion:</strong> Interventional studies only (filter: <code>AREA[StudyType]INTERVENTIONAL</code>)</p>
+<p><strong>Primary query:</strong> <code>genomics OR precision medicine OR pharmacogenomics OR whole genome OR exome OR genetic testing</code></p>
+<p><strong>Secondary queries:</strong> <code>BRCA OR HER2 OR biomarker-driven</code>, <code>H3Africa</code></p>
+<p><strong>Locations:</strong> Africa (continent keyword + 18 individual countries),
+US, China, India, Brazil, UK</p>
+<p><strong>Pharmacogenomics:</strong> Gene-specific queries for CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, HLA-B*5701 crossed with Africa/US location</p>
+<p><strong>Limitations:</strong> Single registry (ClinicalTrials.gov). Trials registered only on
+WHO ICTRP, Pan African Clinical Trials Registry (PACTR), or national registries are not captured.
+Count-based queries may slightly over- or under-count due to multi-location trials.</p>
+<p><strong>Fetch date:</strong> 2026-03-28</p>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer">
+<p>Africa's Genomics Paradox | Project 31 of the Africa RCT Equity Series</p>
+<p>Data: ClinicalTrials.gov API v2 | Analysis: Python | Visualization: Chart.js</p>
+<p style="margin-top:8px">Query: genomics OR precision medicine OR pharmacogenomics OR whole genome OR exome OR genetic testing</p>
+</div>
+
+</div><!-- end container -->
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+// Region comparison chart
+const regionCtx = document.getElementById('regionChart').getContext('2d');
+new Chart(regionCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Africa", "US", "China", "India", "Brazil", "UK"],
+    datasets: [{
+      label: 'Genomics / Precision Medicine Trials',
+      data: [124, 5117, 833, 137, 304, 946],
+      backgroundColor: ["#ef4444", "#3b82f6", "#f59e0b", "#10b981", "#8b5cf6", "#ec4899"],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Genomics / Precision Medicine Trials by Region',
+        color: '#e2e8f0',
+        font: { size: 15, weight: '600' }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            return ctx.parsed.y.toLocaleString() + ' trials';
+          }
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: '#1e293b' },
+        title: { display: true, text: 'Number of Interventional Trials', color: '#94a3b8' }
+      }
+    }
+  }
+});
+
+// BRCA comparison chart
+const brcaCtx = document.getElementById('brcaChart').getContext('2d');
+new Chart(brcaCtx, {
+  type: 'bar',
+  data: {
+    labels: ["Africa", "US", "China", "India"],
+    datasets: [{
+      label: 'BRCA / HER2 / Biomarker-Driven Trials',
+      data: [81, 2021, 1200, 112],
+      backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#10b981'],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'BRCA / HER2 / Biomarker-Driven Trials by Region',
+        color: '#e2e8f0',
+        font: { size: 14, weight: '600' }
+      }
+    },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: '#1e293b' },
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

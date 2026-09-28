@@ -1,0 +1,51 @@
+{
+  "title": "The Palliative Care Desert: quantifying the Condition Colonialism Index for palliative and end-of-life trials across Africa",
+  "body": "Is palliative care research in Africa proportional to the continent's burden of serious health-related suffering? We searched ClinicalTrials.gov for all interventional trials involving palliative care, hospice, end-of-life care, pain management, or symptom management across African countries and compared these with US totals. Africa had approximately 57 registered palliative-related interventional trials compared with 1,286 in the United States, giving a Condition Colonialism Index of approximately seven when adjusted for estimated burden share. Most African palliative trials focused on HIV-related symptoms rather than cancer pain, despite cancer deaths rising rapidly across the continent. Opioid access remains severely restricted in the majority of African countries, limiting both clinical practice and the feasibility of pain management research. Uganda was a relative bright spot, having established national palliative care policy and training programmes earlier than most peers. The analysis is restricted to ClinicalTrials.gov and may undercount community-based or unregistered hospice studies.",
+  "sentences": [
+    {
+      "role": "Question",
+      "text": "Does the distribution of registered interventional palliative care trials reflect Africa's disproportionate share of global serious health-related suffering?"
+    },
+    {
+      "role": "Dataset",
+      "text": "We queried ClinicalTrials.gov for interventional trials matching palliative, hospice, end of life, pain management, or symptom management across all African countries, four individual nations, and four global comparators including the United States."
+    },
+    {
+      "role": "Method",
+      "text": "We computed per-capita trial density and the Condition Colonialism Index, defined as Africa's palliative care burden share divided by its proportional share of registered palliative trials, with subtype analyses for HIV, cancer, and pediatric palliative care and a separate opioid access query."
+    },
+    {
+      "role": "Primary result",
+      "text": "Africa hosted approximately 57 palliative trials versus 1,286 in the United States, yielding a CCI of 7.1, meaning Africa bears seven times more palliative care need than its share of end-of-life research."
+    },
+    {
+      "role": "Robustness",
+      "text": "Subtype analysis revealed critical gaps in HIV palliative, cancer palliative, and pediatric palliative trials, while opioid and morphine research was nearly absent across the continent due to severe regulatory restrictions."
+    },
+    {
+      "role": "Interpretation",
+      "text": "The CCI provides a reproducible metric exposing the structural mismatch between where people die in pain and where palliative care evidence is generated, with Uganda's national palliative care policy demonstrating that deliberate investment can begin to close the gap."
+    },
+    {
+      "role": "Boundary",
+      "text": "Limitations include restriction to a single registry, possible undercounting of locally registered studies, and reliance on aggregate burden estimates from the Lancet Commission on Palliative Care."
+    }
+  ],
+  "wordCount": 146,
+  "sentenceCount": 7,
+  "outsideNote": {
+    "app": "Africa Palliative Care Desert v1.0",
+    "data": "ClinicalTrials.gov API v2, 4 African countries + continent-wide, 3 condition subtypes + opioid access, 4 global comparators",
+    "code": "C:\\AfricaRCT\\",
+    "doi": "",
+    "version": "1.0",
+    "date": "2026-03-27",
+    "validationStatus": "DRAFT"
+  },
+  "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+  "meta": {
+    "created": "2026-03-27",
+    "valid": true,
+    "schemaVersion": "0.1"
+  }
+}

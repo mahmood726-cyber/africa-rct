@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: country-condition zero-trial gaps in Africa",
+    "body": "This registry mapping study will identify country-condition pairs in Africa with no registered interventional trials using ClinicalTrials.gov as the data source. We will query ClinicalTrials.gov API v2 for 20 prespecified African countries across 12 infectious, non-communicable, and maternal-neonatal conditions, constructing a 240-cell count matrix. The primary output is the set of zero-trial cells flagged as evidence deserts, with secondary outputs including sparse cells defined by prespecified thresholds, per-capita comparisons against the United States, and desert severity scores ranking countries by the proportion of conditions with no registered activity. Sensitivity analyses will test alternative condition search terms and restriction to trials registered after 2010. All searches will use scripted, deterministic, reproducible query logic with cached outputs archived at the project repository for verification. No individual participant data will be accessed. Limitations include incomplete capture of studies registered only on WHO primary registries or national databases, ambiguity in location metadata, and restriction to registered rather than completed trials.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This registry mapping study will identify country-condition pairs in Africa with no registered interventional trials."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for 20 prespecified countries across 12 infectious, non-communicable, and maternal-neonatal conditions and build a 240-cell count matrix."
+        },
+        {
+            "role": "Search strategy",
+            "text": "The primary output is the set of zero-trial cells, with secondary outputs including sparse cells, per-capita comparisons, and sensitivity analyses using alternative condition terms."
+        },
+        {
+            "role": "Primary analysis",
+            "text": "All searches will use scripted, reproducible query logic with cached outputs."
+        },
+        {
+            "role": "Sensitivity",
+            "text": "Results will be summarised as tables and maps rather than patient-level analyses."
+        },
+        {
+            "role": "Reporting",
+            "text": "No individual participant data will be accessed."
+        },
+        {
+            "role": "Limitations",
+            "text": "Limitations include incomplete capture of studies registered only on WHO primary registries or national databases and potential ambiguity in location metadata."
+        }
+    ],
+    "wordCount": 111,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Africa Research Desert Map v1.0",
+        "data": "ClinicalTrials.gov API v2 -- 20 countries x 12 conditions planned query matrix",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft",
+        "type": "protocol"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of household air pollution trial activity in Africa versus global comparators",
+    "body": "This cross-sectional registry study will quantify the gap between Africa household air pollution mortality and registered trial activity for cookstove interventions. We will query ClinicalTrials.gov API v2 for interventional studies matching air pollution, household pollution, indoor pollution, cookstove, or biomass fuel across eight African countries, the United States, India, and China. The primary outcome is the number of registered HAP trials in Africa compared with countries that have launched national clean cooking programmes. Secondary analyses will examine trial counts for six intervention subtypes including improved cookstoves, LPG transition, and ventilation, plus six health outcomes including COPD, childhood pneumonia, and cardiovascular disease. We will compare per-country solid fuel use from WHO Household Energy Database estimates with trial availability. All queries will be scripted in Python with 24-hour cache validity and archived alongside the HTML dashboard. No patient-level data will be accessed. Limitations include restriction to one registry where HAP studies may be underrepresented relative to environmental databases.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the gap between Africa's household air pollution mortality burden and registered clinical trial activity addressing cookstove interventions and HAP-related health outcomes."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for all interventional studies matching air pollution, household pollution, indoor pollution, cookstove, or biomass fuel across eight African countries, the United States, India, and China."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the number of registered HAP intervention trials in Africa compared with India and China, both of which have launched national clean cooking programmes."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses will examine trial counts for six intervention subtypes and six HAP-related health outcomes, plus per-country solid fuel use from WHO Household Energy Database 2022 estimates compared with trial availability."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Ethics",
+            "text": "No patient-level data will be accessed and no ethics approval is required for aggregate registry queries."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include restriction to a single clinical trial registry where household air pollution studies may be systematically underrepresented relative to environmental health or engineering research databases."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Household Air Pollution Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 African countries, US + India + China comparators",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

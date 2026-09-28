@@ -1,0 +1,33 @@
+{
+    "title": "Protocol: phase transition in African research ecosystems -- critical density for self-sustaining trial capacity",
+    "type": "protocol",
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "body": "This cross-sectional registry analysis will determine whether a critical per-capita trial density exists at which African research ecosystems transition from dependent to self-sustaining states, inspired by phase-transition models from statistical physics. We will query ClinicalTrials.gov API v2 for 20 African countries spanning the full density spectrum, collecting four dimensions per country: total interventional trials, condition-specific counts across 12 disease categories using query.cond, local sponsor proxy using query.spons matching country name, and Phase 1 trial counts using AREA[Phase] filtering. Shannon entropy across condition categories will quantify portfolio diversity, normalised as Pielou evenness. A composite sovereignty score will weight local sponsorship at 40 percent, condition evenness at 30 percent, Phase 1 presence at 20 percent, and density at 10 percent. Countries will be classified into four phase states: self-sustaining, transitional, dependent, and pre-critical, based on density and sovereignty thresholds. Limitations include proxy-based sovereignty measurement, single-registry dependence, and the ecological analogy requiring validation through longitudinal data.",
+    "ai_transparency": "LLM used for drafting; author reviewed and takes responsibility for final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "sentence count",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 157 words."
+            },
+            {
+                "name": "methods before outcomes",
+                "ok": true,
+                "detail": "API query and multi-dimensional methods precede classification scheme."
+            },
+            {
+                "name": "limitations stated",
+                "ok": true,
+                "detail": "Final sentence addresses proxy measurement, single registry, and analogy limitations."
+            }
+        ]
+    }
+}

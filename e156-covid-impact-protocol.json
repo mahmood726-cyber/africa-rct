@@ -1,0 +1,33 @@
+{
+    "title":  "Protocol: COVID-19\u0027s lasting impact on Africa\u0027s clinical trial capacity",
+    "type":  "protocol",
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "body":  "This longitudinal registry study will evaluate how the COVID-19 pandemic disrupted clinical trial activity across the African continent between 2015 and 2026. We will query ClinicalTrials.gov API v2 for annual counts of interventional trial starts in 20 African countries and in the United States, performing condition-specific analyses for HIV, malaria, tuberculosis, cancer, and cardiovascular disease. The primary outcome is the deviation of observed post-COVID African trial starts from a counterfactual linear trajectory estimated from the 2015 to 2019 baseline period. Secondary outcomes include condition-specific displacement ratios, comparative recovery trajectories between Africa and the United States, estimation of time needed to return to the pre-pandemic trend, and assessment of disproportionately affected disease areas. API calls will be rate limited, cached, and reproduced from version-controlled code archived for replication. All data are public registry records and no participant-level information will be used. The design is ecological and cannot by itself establish that pandemic disruption caused the observed changes.",
+    "ai_transparency":  "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "word count 140-170",
+                                          "ok":  true,
+                                          "detail":  "Found 157 words."
+                                      },
+                                      {
+                                          "name":  "methods before outcomes",
+                                          "ok":  true,
+                                          "detail":  "Data source and queries precede outcome definitions."
+                                      },
+                                      {
+                                          "name":  "limitations stated",
+                                          "ok":  true,
+                                          "detail":  "Final sentence addresses limitations."
+                                      }
+                                  ]
+                   }
+}
