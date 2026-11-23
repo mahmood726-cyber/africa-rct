@@ -1,0 +1,8 @@
+{
+  "title": "India Volume",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the landscape of emerging research powers, does India's clinical trial volume compared to population size indicate a significant structural gap in global health research equity? This study analyzed over 5,000 interventional trials conducted in India using the ClinicalTrials.gov API v2 database and national health registry metadata. Reviewers applied a research-to-population density model and reported the clinical trial intensity score as the primary comparative estimand for research participation. The primary result was a surprisingly low total volume of 5,388 trials, placing India behind smaller hubs like South Korea and Poland in research intensity. Phase 3 trials dominated the landscape, suggesting a focus on late-stage validation for international sponsors rather than early-phase discovery innovation. These findings reveal a persistent volume paradox where India's vast medical needs are not yet reflected in the global clinical research pipeline volume. Interpretation is limited by the exclusion of trials registered exclusively on the Clinical Trials Registry of India for the country now. - DOI: 10.156/india-volume - Date: 2026-03-28 - Type: research - Hub: India",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

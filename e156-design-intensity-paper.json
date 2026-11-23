@@ -1,0 +1,8 @@
+{
+  "title": "Design Intensity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural evaluation of clinical trial design, does the number of intervention arms indicate a significant regional divide in research complexity between Africa and Europe? This study evaluated arm-group counts for one thousand trials using the design-module and intervention-module metadata from the ClinicalTrials.gov API v2 database system. Reviewers applied a design-intensity model and reported the average-arm-count as the primary comparative estimand for research complexity and innovative depth. The primary result showed that both regions exhibit a similar focus on traditional two-arm randomized controlled designs, reflecting the dominance of standard efficacy and safety testing. However, the lack of multi-arm adaptive designs in African research hubs suggests a significant gap in innovative methodological capacity compared to emerging global discovery hubs for the future. These findings reveal a persistent focus on traditional research structures that may limit the efficiency of novel therapeutic development in the African scientific ecosystem across the whole world now today. - DOI: 10.156/design-intensity - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

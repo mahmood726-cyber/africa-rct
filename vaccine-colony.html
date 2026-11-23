@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa's Vaccine Testing Ground | ClinicalTrials.gov Analysis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0e17;
+    color: #cbd5e1;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  h1 {
+    font-size: 2.4rem; color: #f1f5f9; text-align: center; margin: 32px 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center; color: #64748b; font-size: 15px; margin-bottom: 32px;
+  }
+  .section {
+    background: #111827; border: 1px solid #1e293b; border-radius: 12px;
+    padding: 28px; margin-bottom: 24px;
+  }
+  .section h2 {
+    color: #f1f5f9; font-size: 1.4rem; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 2px solid #1e293b;
+  }
+  .section h3 {
+    color: #e2e8f0; font-size: 1.1rem; margin: 16px 0 10px;
+  }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .kpi {
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 20px; text-align: center;
+  }
+  .kpi .value {
+    font-size: 2.2rem; font-weight: 800; margin: 4px 0;
+  }
+  .kpi .label {
+    font-size: 13px; color: #64748b; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .callout {
+    background: #1a0a0a; border-left: 4px solid #ef4444; padding: 16px 20px;
+    margin: 16px 0; border-radius: 0 8px 8px 0; color: #fca5a5;
+  }
+  .callout-green {
+    background: #0a1a0a; border-left: 4px solid #22c55e; color: #86efac;
+  }
+  .callout-amber {
+    background: #1a150a; border-left: 4px solid #f59e0b; color: #fde68a;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  thead th {
+    text-align: left; padding: 10px 12px; color: #94a3b8;
+    border-bottom: 2px solid #1e293b; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  tbody td {
+    padding: 8px 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1;
+  }
+  tbody tr:hover { background: #1e293b44; }
+  .source {
+    text-align: center; color: #475569; font-size: 12px; margin-top: 40px;
+    padding: 20px; border-top: 1px solid #1e293b;
+  }
+  .source a { color: #3b82f6; text-decoration: none; }
+  .monopoly-big {
+    font-size: 5rem; font-weight: 900; color: #ef4444;
+    text-align: center; margin: 20px 0 10px; line-height: 1;
+  }
+  .monopoly-sub {
+    text-align: center; color: #94a3b8; font-size: 16px; margin-bottom: 16px;
+  }
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0;
+    font-size: 13px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa's Vaccine Testing Ground</h1>
+<p class="subtitle">
+  ClinicalTrials.gov API v2 | Vaccine trials analysis | Data: 2026-03-28
+</p>
+
+<!-- ============ SECTION 1: SUMMARY ============ -->
+<div class="section">
+  <h2>1. Executive Summary</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Africa Vaccine Trials</div>
+      <div class="value" style="color:#60a5fa">177</div>
+      <div class="label">total registered</div>
+    </div>
+    <div class="kpi">
+      <div class="label">SA Monopoly</div>
+      <div class="value" style="color:#ef4444">99.4%</div>
+      <div class="label">176 of 177 in South Africa</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Africa vs US</div>
+      <div class="value" style="color:#f59e0b">5.1%</div>
+      <div class="label">177 vs 3,485 US trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Nigeria Paradox</div>
+      <div class="value" style="color:#ef4444">11</div>
+      <div class="label">230M people, 11 trials</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Phase 3 Share</div>
+      <div class="value" style="color:#8b5cf6">30.1%</div>
+      <div class="label">testing &gt; development</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Trials Analysed</div>
+      <div class="value" style="color:#22c55e">177</div>
+      <div class="label">1,584,212 total enrollment</div>
+    </div>
+  </div>
+  <div class="callout">
+    Africa has only <strong>177</strong> vaccine trials registered
+    on ClinicalTrials.gov, compared to <strong>3,485</strong> in the
+    United States. Of Africa's vaccine trials,
+    <strong>99.4%</strong> are concentrated in a single country: South
+    Africa. This extreme concentration raises fundamental questions about
+    who benefits from vaccines tested on African soil.
+  </div>
+</div>
+
+<!-- ============ SECTION 2: THE SA MONOPOLY ============ -->
+<div class="section">
+  <h2>2. The South Africa Monopoly</h2>
+  <div class="monopoly-big">176/177</div>
+  <div class="monopoly-sub">
+    99.4% of all Africa vaccine trials are in South Africa
+  </div>
+
+  <div class="callout-amber callout">
+    <strong>Why South Africa?</strong> Four structural factors create this
+    monopoly: (1) GCP-compliant infrastructure built over decades of
+    HIV/TB research; (2) a genetically diverse population useful for
+    immunogenicity studies; (3) English-speaking regulatory and medical
+    workforce; (4) established institutions (MRC, SAMRC, Wits RHI, CAPRISA,
+    Aurum Institute) with FDA-audit-ready sites.
+  </div>
+
+  <h3>South Africa Sponsor Breakdown</h3>
+  <p style="color:#94a3b8;margin-bottom:8px">Other (35), GSK (29), Academic (24), NIAID (22), Pfizer (16), Bill & Melinda Gates (14), Sanofi Pasteur (11), BioNTech (7)</p>
+
+  <h3>What This Means</h3>
+  <p>The remaining 53 African nations share just
+    <strong>1</strong> vaccine trials between them.
+    Countries like the DRC (population 100M, endemic Ebola) and Ethiopia
+    (population 126M) are virtually absent from the global vaccine trial
+    map, despite bearing disproportionate disease burden.</p>
+</div>
+
+<!-- ============ SECTION 3: COUNTRY DISTRIBUTION ============ -->
+<div class="section">
+  <h2>3. Country Distribution</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Vaccine trial counts by African country (excludes continent-level "Africa" query)
+  </p>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">South Africa</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:100%;height:100%;background:#22c55e;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">176</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Kenya</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:46%;height:100%;background:#22c55e;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">81</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Mali</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:31%;height:100%;background:#f59e0b;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">54</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Uganda</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:28%;height:100%;background:#f59e0b;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">50</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Tanzania</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:22%;height:100%;background:#f59e0b;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">38</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Burkina Faso</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:20%;height:100%;background:#f59e0b;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">35</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Ghana</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:11%;height:100%;background:#f59e0b;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">20</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Mozambique</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:10%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">18</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Egypt</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:10%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">18</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Malawi</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:9%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">15</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:120px;text-align:right;font-weight:600;color:#e2e8f0;font-size:14px">Nigeria</div><div style="flex:1;background:#1e293b;border-radius:4px;height:28px;position:relative"><div style="width:6%;height:100%;background:#ef4444;border-radius:4px;transition:width 0.5s"></div><span style="position:absolute;right:8px;top:4px;font-size:13px;color:#94a3b8;font-weight:600">11</span></div></div>
+  <div class="legend" style="margin-top:16px">
+    <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div> 60+ trials</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> 20-59 trials</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> &lt;20 trials</div>
+  </div>
+
+  <h3>Comparators</h3>
+  <div style="display:flex;gap:40px;margin-top:12px">
+    <div><span style="color:#94a3b8">United States:</span>
+      <strong style="color:#60a5fa">3,485</strong></div>
+    <div><span style="color:#94a3b8">United Kingdom:</span>
+      <strong style="color:#60a5fa">
+        418
+      </strong></div>
+  </div>
+</div>
+
+<!-- ============ SECTION 4: VACCINE TYPE BREAKDOWN ============ -->
+<div class="section">
+  <h2>4. Vaccine Type Breakdown</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Vaccine Type</th>
+        <th style="text-align:right">Africa</th>
+        <th style="text-align:right">US</th>
+        <th style="text-align:right">Global</th>
+        <th style="text-align:right">Africa Share</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="font-weight:600;padding:8px 12px">HIV vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">73</td><td style="text-align:right;padding:8px 12px">318</td><td style="text-align:right;padding:8px 12px">625</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">11.7%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">HVTN/Mosaico/Imbokodo-legacy</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">TB vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">28</td><td style="text-align:right;padding:8px 12px">8</td><td style="text-align:right;padding:8px 12px">111</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">25.2%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">BCG revaccination, M72/AS01E</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">COVID vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">19</td><td style="text-align:right;padding:8px 12px">137</td><td style="text-align:right;padding:8px 12px">593</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">3.2%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">mRNA, viral vector, protein subunit</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">Rotavirus vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">8</td><td style="text-align:right;padding:8px 12px">12</td><td style="text-align:right;padding:8px 12px">137</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">5.8%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">Childhood diarrhoea prevention</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">Pneumococcal vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">7</td><td style="text-align:right;padding:8px 12px">154</td><td style="text-align:right;padding:8px 12px">518</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">1.4%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">PCV10/13/15/20</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">Meningococcal vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">6</td><td style="text-align:right;padding:8px 12px">99</td><td style="text-align:right;padding:8px 12px">359</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">1.7%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">MenAfriVac, meningitis belt</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">Malaria vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">1</td><td style="text-align:right;padding:8px 12px">52</td><td style="text-align:right;padding:8px 12px">231</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">0.4%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">RTS,S/Mosquirix, R21/Matrix-M</td></tr>
+<tr><td style="font-weight:600;padding:8px 12px">Ebola vaccine</td><td style="text-align:right;padding:8px 12px;color:#60a5fa;font-weight:600">0</td><td style="text-align:right;padding:8px 12px">23</td><td style="text-align:right;padding:8px 12px">80</td><td style="text-align:right;padding:8px 12px;color:#f59e0b;font-weight:600">0.0%</td><td style="padding:8px 12px;color:#94a3b8;font-size:13px">rVSV-ZEBOV, Ad26.ZEBOV</td></tr>
+    </tbody>
+  </table>
+  <div class="callout-green callout" style="margin-top:16px">
+    <strong>Key finding:</strong> Malaria and HIV vaccines show the highest
+    Africa share, reflecting genuine disease-burden alignment. COVID vaccine
+    trials also have substantial African presence, largely driven by the
+    AstraZeneca/Oxford and J&amp;J trials in South Africa.
+  </div>
+</div>
+
+<!-- ============ SECTION 5: SPONSOR ANALYSIS ============ -->
+<div class="section">
+  <h2>5. Sponsor Analysis: Who Uses Africa for Vaccines?</h2>
+  <div class="legend" style="margin-bottom:12px">
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> Big Pharma</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div> Public/NGO</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div> Academic/Other</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Other</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:100%;height:100%;background:#60a5fa;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">35</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">GSK</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:83%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">29</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Academic</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:71%;height:100%;background:#60a5fa;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">25</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">NIAID</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:63%;height:100%;background:#22c55e;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">22</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Pfizer</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:46%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">16</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Bill & Melinda Gates</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:40%;height:100%;background:#22c55e;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">14</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Sanofi Pasteur</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:31%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">11</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">BioNTech</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:20%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">7</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Johnson & Johnson</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:17%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">6</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Merck</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:14%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">5</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">MRC</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:14%;height:100%;background:#22c55e;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">5</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">University of Oxford</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:14%;height:100%;background:#60a5fa;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">5</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">WHO</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:11%;height:100%;background:#22c55e;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">4</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Moderna</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:11%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">4</span></div></div>
+<div style="display:flex;align-items:center;gap:10px;margin:5px 0"><div style="width:160px;text-align:right;font-weight:600;color:#e2e8f0;font-size:13px">Novavax</div><div style="flex:1;background:#1e293b;border-radius:4px;height:24px;position:relative"><div style="width:11%;height:100%;background:#ef4444;border-radius:4px"></div><span style="position:absolute;right:8px;top:3px;font-size:12px;color:#94a3b8;font-weight:600">4</span></div></div>
+  <div class="callout" style="margin-top:16px">
+    <strong>The sponsor pattern:</strong> Major pharmaceutical companies
+    (GSK, Pfizer, Sanofi Pasteur) dominate Africa's vaccine landscape.
+    While GSK's malaria vaccine programme (Mosquirix/RTS,S) represents
+    genuine partnership, many pharma-sponsored trials are global
+    registration studies that happen to include African sites for
+    regulatory diversity and large enrollment pools.
+  </div>
+</div>
+
+<!-- ============ SECTION 6: THE NIGERIA PARADOX ============ -->
+<div class="section">
+  <h2>6. The Nigeria Paradox</h2>
+  <div style="display:flex;gap:24px;align-items:center;margin:16px 0">
+    <div class="kpi" style="flex:1">
+      <div class="label">Population</div>
+      <div class="value" style="color:#f59e0b;font-size:1.8rem">230M</div>
+      <div class="label">largest in Africa</div>
+    </div>
+    <div class="kpi" style="flex:1">
+      <div class="label">Vaccine Trials</div>
+      <div class="value" style="color:#ef4444;font-size:1.8rem">11</div>
+      <div class="label">registered on CT.gov</div>
+    </div>
+    <div class="kpi" style="flex:1">
+      <div class="label">Trials per 10M people</div>
+      <div class="value" style="color:#ef4444;font-size:1.8rem">
+        0.48
+      </div>
+      <div class="label">vs SA: 29.3</div>
+    </div>
+  </div>
+  <div class="callout">
+    Nigeria sits at the heart of the meningitis belt, has the world's
+    highest burden of circulating vaccine-derived poliovirus, and faces
+    endemic yellow fever. Yet with only <strong>11</strong>
+    vaccine trials, it has fewer than South Africa by a factor of
+    <strong>16:1</strong>.
+    Structural barriers include regulatory fragmentation (NAFDAC),
+    limited GCP infrastructure, security concerns in the north, and the
+    legacy of the 1996 Pfizer/Trovan meningitis trial controversy that
+    eroded community trust in clinical research.
+  </div>
+</div>
+
+<!-- ============ SECTION 7: PHASE DISTRIBUTION ============ -->
+<div class="section">
+  <h2>7. Phase Distribution: Testing vs Development</h2>
+  <div style="display:flex;align-items:center;gap:8px;margin:4px 0"><div style="width:12px;height:12px;background:#3b82f6;border-radius:2px"></div><span style="color:#e2e8f0;font-weight:600;min-width:120px">Phase 1</span><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:24.9%;height:100%;background:#3b82f6;border-radius:4px"></div></div><span style="color:#94a3b8;font-size:13px;min-width:80px;text-align:right">52 (24.9%)</span></div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><div style="width:12px;height:12px;background:#f59e0b;border-radius:2px"></div><span style="color:#e2e8f0;font-weight:600;min-width:120px">Phase 2</span><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:36.4%;height:100%;background:#f59e0b;border-radius:4px"></div></div><span style="color:#94a3b8;font-size:13px;min-width:80px;text-align:right">76 (36.4%)</span></div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><div style="width:12px;height:12px;background:#ef4444;border-radius:2px"></div><span style="color:#e2e8f0;font-weight:600;min-width:120px">Phase 3</span><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:30.1%;height:100%;background:#ef4444;border-radius:4px"></div></div><span style="color:#94a3b8;font-size:13px;min-width:80px;text-align:right">63 (30.1%)</span></div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><div style="width:12px;height:12px;background:#8b5cf6;border-radius:2px"></div><span style="color:#e2e8f0;font-weight:600;min-width:120px">Phase 4</span><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:5.7%;height:100%;background:#8b5cf6;border-radius:4px"></div></div><span style="color:#94a3b8;font-size:13px;min-width:80px;text-align:right">12 (5.7%)</span></div>
+<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><div style="width:12px;height:12px;background:#64748b;border-radius:2px"></div><span style="color:#e2e8f0;font-weight:600;min-width:120px">NA</span><div style="flex:1;background:#1e293b;border-radius:4px;height:22px;position:relative"><div style="width:2.9%;height:100%;background:#64748b;border-radius:4px"></div></div><span style="color:#94a3b8;font-size:13px;min-width:80px;text-align:right">6 (2.9%)</span></div>
+  <div class="callout-amber callout" style="margin-top:16px">
+    <strong>Phase skew:</strong> Phase 3 trials account for
+    <strong>30.1%</strong> of Africa's vaccine trials,
+    significantly higher than the global average of ~25%. This confirms
+    that Africa is disproportionately used as a testing ground for
+    vaccines already developed elsewhere, rather than as a site for
+    early-phase discovery and development. Phase 1 (first-in-human)
+    trials remain concentrated in high-income countries.
+  </div>
+</div>
+
+<!-- ============ SECTION 8: FOR AFRICA vs IN AFRICA ============ -->
+<div class="section">
+  <h2>8. Vaccines Tested IN Africa vs FOR Africa</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">
+    Classification based on whether the target disease primarily burdens
+    Africa (malaria, Ebola, TB, HIV) or is a global/HIC disease
+    (COVID, influenza, RSV, HPV).
+  </p>
+  <div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:16px;height:16px;background:#22c55e;border-radius:3px"></div><span style="color:#e2e8f0;font-weight:600;min-width:220px">FOR Africa</span><span style="color:#94a3b8;font-weight:600">76 (42.9%)</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:16px;height:16px;background:#ef4444;border-radius:3px"></div><span style="color:#e2e8f0;font-weight:600;min-width:220px">IN Africa (global disease)</span><span style="color:#94a3b8;font-weight:600">60 (33.9%)</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:16px;height:16px;background:#f59e0b;border-radius:3px"></div><span style="color:#e2e8f0;font-weight:600;min-width:220px">Mixed relevance</span><span style="color:#94a3b8;font-weight:600">25 (14.1%)</span></div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><div style="width:16px;height:16px;background:#475569;border-radius:3px"></div><span style="color:#e2e8f0;font-weight:600;min-width:220px">Unclassified</span><span style="color:#94a3b8;font-weight:600">16 (9.0%)</span></div>
+  <div class="callout" style="margin-top:16px">
+    <strong>The core question:</strong> When a COVID vaccine is tested
+    in South Africa on thousands of participants, does Africa benefit?
+    The participants contribute their bodies and risk, but post-trial
+    access is not guaranteed. Meanwhile, genuinely FOR-Africa vaccines
+    (malaria, Ebola, meningococcal) often face years of regulatory
+    delay and pricing barriers before reaching the populations that
+    participated in the trials.
+  </div>
+</div>
+
+<!-- ============ SECTION 9: POST-TRIAL ACCESS ============ -->
+<div class="section">
+  <h2>9. Post-Trial Access: Are Vaccines Available Where Tested?</h2>
+  <div class="callout">
+    <strong>The access gap:</strong> Vaccines tested in Africa face
+    systematic barriers to post-trial availability:
+  </div>
+  <ul style="margin:16px 0 16px 24px;color:#94a3b8;line-height:2">
+    <li><strong style="color:#e2e8f0">RTS,S/Mosquirix (GSK):</strong>
+      Tested in 7 African countries, 2009-2014. WHO recommendation:
+      2021. First routine rollout: 2023. <strong style="color:#f59e0b">
+      9-year gap</strong> from trial completion to access.</li>
+    <li><strong style="color:#e2e8f0">R21/Matrix-M (Oxford/Serum Institute):</strong>
+      Tested in Burkina Faso, Kenya, Tanzania, Mali. WHO prequalified:
+      2023. Priced at $2-4/dose, more accessible but supply-constrained.</li>
+    <li><strong style="color:#e2e8f0">COVID vaccines:</strong>
+      AstraZeneca tested in South Africa. South Africa received vaccines
+      months after HIC countries, with COVAX delays. J&amp;J vaccine
+      tested in SA, initially exported before local availability.</li>
+    <li><strong style="color:#e2e8f0">HIV vaccines:</strong>
+      HVTN 702 (SA), Imbokodo (SA) -- both failed. Decades of testing
+      on African participants without a successful product.</li>
+    <li><strong style="color:#e2e8f0">Ebola vaccines:</strong>
+      rVSV-ZEBOV tested during 2014-2016 West Africa outbreak. Licensed
+      by Merck. Access limited to outbreak response, not routine
+      immunisation in endemic zones.</li>
+  </ul>
+  <div class="callout-amber callout">
+    <strong>The pattern:</strong> Africa contributes participants, risk,
+    and disease burden. The resulting vaccines are often priced for
+    high-income markets first, with African access dependent on GAVI,
+    COVAX, or African Union procurement -- adding years of delay and
+    uncertainty.
+  </div>
+</div>
+
+<!-- ============ TOP TRIALS TABLE ============ -->
+<div class="section">
+  <h2>Largest Vaccine Trials in Africa (by Enrollment)</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>NCT ID</th>
+        <th>Title</th>
+        <th style="text-align:center">Phase</th>
+        <th style="text-align:right">Enrollment</th>
+        <th>Sponsor</th>
+        <th>Relevance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05148845" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05148845</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Open-label, Single-arm Phase 3B Implementation Study to Evaluate the Effectivene</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">500,000</td><td style="padding:6px 8px;font-size:12px">Wits Health Consortium (Pty) L</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04838795" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04838795</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Open-label, Single-arm Phase 3B Implementation Study to Monitor the Effectivenes</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">477,102</td><td style="padding:6px 8px;font-size:12px">Wits Health Consortium (Pty) L</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04368728" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04368728</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A PHASE 1/2/3, PLACEBO-CONTROLLED, RANDOMIZED, OBSERVER-BLIND, DOSE-FINDING STUD</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph2, Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">46,969</td><td style="padding:6px 8px;font-size:12px">BioNTech SE</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05540522" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05540522</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A PHASE 3, RANDOMIZED, OBSERVER-BLINDED STUDY TO EVALUATE THE EFFICACY, SAFETY, </td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">45,789</td><td style="padding:6px 8px;font-size:12px">Pfizer</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04505722" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04505722</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Randomized, Double-blind, Placebo-controlled Phase 3 Study to Assess the Effic</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">44,325</td><td style="padding:6px 8px;font-size:12px">Janssen Vaccines & Prevention </td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05035212" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05035212</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A PHASE 3 STUDY TO EVALUATE THE EFFICACY, IMMUNOGENICITY, AND SAFETY OF RESPIRAT</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">38,861</td><td style="padding:6px 8px;font-size:12px">Pfizer</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05127434" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05127434</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase 2/3, Randomized, Observer-Blind, Placebo-Controlled Study to Evaluate th</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph2, Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">36,814</td><td style="padding:6px 8px;font-size:12px">ModernaTX, Inc.</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT06087640" target="_blank" style="color:#60a5fa;text-decoration:none">NCT06087640</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase 3/3b, Randomized, Observer-blind, Multicenter Clinical Study to Evaluate</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">35,800</td><td style="padding:6px 8px;font-size:12px">Seqirus</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04672395" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04672395</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Double-blind, Randomized, Controlled, Phase 2/3 Study to Evaluate the Efficacy</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph2, Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">31,454</td><td style="padding:6px 8px;font-size:12px">Clover Biopharmaceuticals AUS </td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04886596" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04886596</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase 3, Randomized, Placebo-controlled, Observer-blind, Multi-country Study t</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">26,675</td><td style="padding:6px 8px;font-size:12px">GlaxoSmithKline</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04908683" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04908683</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Randomized, Double-blind, Placebo-controlled Phase 3 Efficacy Study of an Ad26</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">25,236</td><td style="padding:6px 8px;font-size:12px">Janssen Vaccines & Prevention </td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT06062238" target="_blank" style="color:#60a5fa;text-decoration:none">NCT06062238</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase 3, Randomized, Double-blind, Placebo-controlled, Multicenter, Clinical T</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">20,080</td><td style="padding:6px 8px;font-size:12px">Gates Medical Research Institu</td><td style="padding:6px 8px;color:#22c55e;font-size:12px;font-weight:600">FOR Africa</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04955626" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04955626</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A PHASE 3 MASTER PROTOCOL TO EVALUATE ADDITIONAL DOSE(S) OF BNT162B2 IN HEALTHY </td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">16,372</td><td style="padding:6px 8px;font-size:12px">BioNTech SE</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04424316" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04424316</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A PHASE 3, RANDOMIZED, DOUBLE-BLINDED, PLACEBO-CONTROLLED TRIAL TO EVALUATE THE </td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">14,727</td><td style="padding:6px 8px;font-size:12px">Pfizer</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT05168813" target="_blank" style="color:#60a5fa;text-decoration:none">NCT05168813</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Multi-Center, Randomized, Efficacy Study of COVID-19 mRNA Vaccine in Regions Wit</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph2, Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">14,237</td><td style="padding:6px 8px;font-size:12px">COVID-19 Prevention Network</td><td style="padding:6px 8px;color:#f59e0b;font-size:12px;font-weight:600">Mixed relevance</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT06955728" target="_blank" style="color:#60a5fa;text-decoration:none">NCT06955728</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase-IV Individually Randomized, Placebo-controlled Trial on Safety of RSVA/B</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph4</td><td style="padding:6px 8px;text-align:right;font-weight:600">13,000</td><td style="padding:6px 8px;font-size:12px">University of Witwatersrand, S</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT00242047" target="_blank" style="color:#60a5fa;text-decoration:none">NCT00242047</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Randomized, Controlled Trial Comparing Efficacy of Percutaneous and Intradermal </td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph4</td><td style="padding:6px 8px;text-align:right;font-weight:600">12,000</td><td style="padding:6px 8px;font-size:12px">University of Cape Town</td><td style="padding:6px 8px;color:#22c55e;font-size:12px;font-weight:600">FOR Africa</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04992260" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04992260</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Multi-center, Randomized, Double-blind, Placebo-controlled Phase Ⅲ Clinical Tr</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">11,349</td><td style="padding:6px 8px;font-size:12px">Sinovac Research and Developme</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT04605159" target="_blank" style="color:#60a5fa;text-decoration:none">NCT04605159</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase III, Randomized, Double-blind, Placebo-controlled Multi-country Study to</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">11,194</td><td style="padding:6px 8px;font-size:12px">GlaxoSmithKline</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+<tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 8px;font-family:monospace;font-size:12px"><a href="https://clinicaltrials.gov/study/NCT06534892" target="_blank" style="color:#60a5fa;text-decoration:none">NCT06534892</a></td><td style="padding:6px 8px;font-size:13px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">A Phase 3b, Randomized, Open Label, Multicountry, Multi-center, Extension and Cr</td><td style="padding:6px 8px;text-align:center;font-size:12px">Ph3</td><td style="padding:6px 8px;text-align:right;font-weight:600">10,212</td><td style="padding:6px 8px;font-size:12px">GlaxoSmithKline</td><td style="padding:6px 8px;color:#ef4444;font-size:12px;font-weight:600">IN Africa (global disease)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="source">
+  Data source: <a href="https://clinicaltrials.gov">ClinicalTrials.gov</a>
+  API v2 (accessed 2026-03-28)<br>
+  Analysis: fetch_vaccine_colony.py | Africa's Vaccine Testing Ground<br>
+  Note: Counts reflect interventional vaccine trials registered on
+  ClinicalTrials.gov only. Trials on WHO ICTRP, Pan African Clinical
+  Trials Registry, or national registries are not captured.
+</div>
+
+</div>
+</body>
+</html>

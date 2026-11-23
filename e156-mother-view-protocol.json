@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Cross-sectional registry analysis of maternal clinical trial equity across seven pregnancy conditions in Africa",
+    "body": "This cross-sectional registry study will quantify the maternal clinical trial evidence gap for pregnant women in Africa. We will query ClinicalTrials.gov API v2 for interventional studies matching pregnancy and maternal health terms across ten African countries, the United States, the United Kingdom, and India. Seven specific conditions will be examined: gestational diabetes, preeclampsia, postpartum hemorrhage, maternal sepsis, ectopic pregnancy, miscarriage, and stillbirth. Additional queries will capture contraception and family planning trials and breastfeeding trials. The primary outcome is the condition-specific gap ratio between Africa and comparators. Secondary analyses include condition-country heatmaps, per-country maternal trial counts alongside WHO maternal mortality ratios to assess the inverse relationship hypothesis, and the contraception gap relative to the women of reproductive age population. Broad maternal queries will provide overall landscape counts. All queries will be scripted in Python with twenty-four-hour cached results. Limitations include restriction to a single registry, varied maternal health terminology in trial registrations, WHO mortality estimates reflecting 2020 data, and inability to distinguish between prevention and treatment trials within condition categories.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify the maternal clinical trial evidence gap for pregnant women in Africa across seven life-threatening conditions and reproductive health domains."
+        },
+        {
+            "role": "Search",
+            "text": "We will query ClinicalTrials.gov API v2 for interventional studies matching pregnancy and maternal health terms across ten African countries and three comparator regions."
+        },
+        {
+            "role": "Primary outcome",
+            "text": "The primary outcome is the condition-specific gap ratio between Africa and each comparator, computed for seven maternal conditions plus contraception and breastfeeding domains."
+        },
+        {
+            "role": "Secondary analyses",
+            "text": "Secondary analyses include condition-country heatmaps, per-country trial counts alongside WHO maternal mortality ratios, and the contraception gap relative to the women of reproductive age population."
+        },
+        {
+            "role": "Mortality context",
+            "text": "WHO 2020 maternal mortality ratio estimates will be used to test the inverse relationship hypothesis between maternal mortality burden and research investment per country."
+        },
+        {
+            "role": "Reproducibility",
+            "text": "All queries will be scripted in Python with 24-hour cache validity and results archived alongside the generated HTML dashboard for full reproducibility."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include single-registry restriction, varied maternal health terminology, WHO mortality data from 2020, and inability to distinguish prevention from treatment trials within condition categories."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Mother View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, US + UK + India, 7 conditions, WHO MMR",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

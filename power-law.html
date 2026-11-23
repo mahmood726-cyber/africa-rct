@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Power Law of Research -- Why the Rich Get Richer</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --orange: #f97316;
+    --red: #ef4444;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin: 20px 0 10px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-card .number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .stat-card .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  .insight {
+    background: rgba(167,139,250,0.08);
+    border-left: 4px solid var(--purple);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .insight strong { color: var(--purple); }
+  .warning {
+    background: rgba(239,68,68,0.08);
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .warning strong { color: var(--red); }
+  .policy {
+    background: rgba(34,197,94,0.08);
+    border-left: 4px solid var(--green);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .policy strong { color: var(--green); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    text-align: left;
+    padding: 12px 8px;
+    border-bottom: 2px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  td {
+    padding: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  tr:hover { background: rgba(255,255,255,0.02); }
+  .method {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    line-height: 1.7;
+  }
+  .formula {
+    background: rgba(96,165,250,0.1);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: var(--accent);
+    line-height: 1.8;
+  }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 48px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Power Law of Research</h1>
+<p class="subtitle">
+  Why the Rich Get Richer: Zipf/Pareto Distribution of Clinical Trials Across Africa
+  -- Data from ClinicalTrials.gov API v2, 2026-03-28
+</p>
+
+<!-- ============================================================ -->
+<!-- SUMMARY CARDS -->
+<!-- ============================================================ -->
+<div class="summary-grid">
+  <div class="stat-card">
+    <div class="number" style="color:var(--purple);">0.835</div>
+    <div class="label">Trial Gini Coefficient<br>(0=equal, 1=monopoly)</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--accent);">0.3923</div>
+    <div class="label">HHI Concentration<br>(Highly concentrated)</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--orange);">2.0324</div>
+    <div class="label">Power-Law Exponent<br>(Zipf slope magnitude)</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--red);">7/30</div>
+    <div class="label">Countries Below<br>1 Trial/Million</div>
+  </div>
+  <div class="stat-card">
+    <div class="number" style="color:var(--green);">20,668</div>
+    <div class="label">Total African<br>Interventional Trials</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- THE MATTHEW EFFECT -->
+<!-- ============================================================ -->
+<h2>The Matthew Effect in African Research</h2>
+<div class="card">
+  <p style="font-size:1.05rem;line-height:1.7;margin-bottom:16px;">
+    <em>"For to everyone who has, more will be given, and he will have abundance;
+    but from him who does not have, even what he has will be taken away."</em>
+    -- Matthew 25:29
+  </p>
+  <p style="line-height:1.7;margin-bottom:16px;">
+    Sociologist Robert K. Merton (1968) coined the <strong>Matthew Effect</strong> to describe
+    how eminent scientists get disproportionately more credit for their contributions, while
+    unknown scientists get disproportionately less. The same mechanism operates in research
+    geography: countries with existing infrastructure attract more trials, which builds more
+    infrastructure, which attracts more trials -- a self-reinforcing feedback loop.
+  </p>
+  <div class="insight">
+    <strong>The African Matthew Effect:</strong> Egypt and South Africa together account for 76.8% of all African trials (15,868 trials). Meanwhile, the bottom half of countries contribute just 3.6%.
+  </div>
+  <p style="line-height:1.7;margin-top:12px;">
+    This is the signature of a <strong>power-law distribution</strong> (also called Zipf's law
+    or Pareto distribution). In physics and complexity science, power laws emerge from
+    <strong>preferential attachment</strong>: new connections (trials) are more likely to attach
+    to already well-connected nodes (hubs). The rich get richer not through conspiracy but
+    through the natural dynamics of networked systems.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- POWER LAW FIT -->
+<!-- ============================================================ -->
+<h2>Power-Law Fit: Log-Log Analysis</h2>
+<div class="card">
+  <p style="line-height:1.7;margin-bottom:16px;">
+    A true power law appears as a straight line on a log-log plot. We fit
+    <code>log(trials) = alpha + beta x log(rank)</code> via ordinary least squares
+    on the rank-frequency distribution of trial counts.
+  </p>
+  <div class="formula">
+    Power-law fit: log(trials) = 9.7043 + (-2.0324) x log(rank), R-squared = 0.8615. Exponent magnitude = 2.03. This steep exponent indicates extreme concentration -- a classic Zipf-like distribution.
+  </div>
+  <p style="line-height:1.7;margin-top:12px;">
+    An R-squared close to 1 confirms the power-law hypothesis. For comparison,
+    city populations (Zipf's law) typically have exponents near 1.0; scientific
+    citation distributions have exponents of 1.5-2.0.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- RANK-FREQUENCY TABLE -->
+<!-- ============================================================ -->
+<h2>Rank-Frequency Table: 30 African Countries</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th><th>Country</th><th>Trials</th>
+        <th>Population</th><th>Per Million</th><th>Bar</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">1</td>
+  <td style="padding:8px;font-weight:bold;">Egypt</td>
+  <td style="padding:8px;text-align:right;">12,395</td>
+  <td style="padding:8px;text-align:right;">110M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">112.68</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:100.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">2</td>
+  <td style="padding:8px;font-weight:bold;">South Africa</td>
+  <td style="padding:8px;text-align:right;">3,473</td>
+  <td style="padding:8px;text-align:right;">62M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">56.02</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:28.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">3</td>
+  <td style="padding:8px;font-weight:bold;">Uganda</td>
+  <td style="padding:8px;text-align:right;">783</td>
+  <td style="padding:8px;text-align:right;">48M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">16.31</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:6.3%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">4</td>
+  <td style="padding:8px;font-weight:bold;">Kenya</td>
+  <td style="padding:8px;text-align:right;">720</td>
+  <td style="padding:8px;text-align:right;">56M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">12.86</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:5.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">5</td>
+  <td style="padding:8px;font-weight:bold;">Tanzania</td>
+  <td style="padding:8px;text-align:right;">431</td>
+  <td style="padding:8px;text-align:right;">67M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">6.43</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:3.5%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">6</td>
+  <td style="padding:8px;font-weight:bold;">Nigeria</td>
+  <td style="padding:8px;text-align:right;">354</td>
+  <td style="padding:8px;text-align:right;">230M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.54</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:2.9%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">7</td>
+  <td style="padding:8px;font-weight:bold;">Malawi</td>
+  <td style="padding:8px;text-align:right;">288</td>
+  <td style="padding:8px;text-align:right;">21M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">13.71</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:2.3%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">8</td>
+  <td style="padding:8px;font-weight:bold;">Zambia</td>
+  <td style="padding:8px;text-align:right;">245</td>
+  <td style="padding:8px;text-align:right;">21M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">11.67</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:2.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">9</td>
+  <td style="padding:8px;font-weight:bold;">Ethiopia</td>
+  <td style="padding:8px;text-align:right;">240</td>
+  <td style="padding:8px;text-align:right;">130M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.85</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.9%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">10</td>
+  <td style="padding:8px;font-weight:bold;">Ghana</td>
+  <td style="padding:8px;text-align:right;">230</td>
+  <td style="padding:8px;text-align:right;">34M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">6.76</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.9%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">11</td>
+  <td style="padding:8px;font-weight:bold;">Burkina Faso</td>
+  <td style="padding:8px;text-align:right;">196</td>
+  <td style="padding:8px;text-align:right;">23M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">8.52</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.6%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">12</td>
+  <td style="padding:8px;font-weight:bold;">Zimbabwe</td>
+  <td style="padding:8px;text-align:right;">166</td>
+  <td style="padding:8px;text-align:right;">15M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">11.07</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.3%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">13</td>
+  <td style="padding:8px;font-weight:bold;">Mali</td>
+  <td style="padding:8px;text-align:right;">144</td>
+  <td style="padding:8px;text-align:right;">23M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">6.26</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.2%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">14</td>
+  <td style="padding:8px;font-weight:bold;">Guinea</td>
+  <td style="padding:8px;text-align:right;">133</td>
+  <td style="padding:8px;text-align:right;">14M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">9.5</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.1%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">15</td>
+  <td style="padding:8px;font-weight:bold;">Mozambique</td>
+  <td style="padding:8px;text-align:right;">123</td>
+  <td style="padding:8px;text-align:right;">33M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">3.73</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">16</td>
+  <td style="padding:8px;font-weight:bold;">Rwanda</td>
+  <td style="padding:8px;text-align:right;">121</td>
+  <td style="padding:8px;text-align:right;">14M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">8.64</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:1.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">17</td>
+  <td style="padding:8px;font-weight:bold;">Cameroon</td>
+  <td style="padding:8px;text-align:right;">111</td>
+  <td style="padding:8px;text-align:right;">27M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">4.11</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.9%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">18</td>
+  <td style="padding:8px;font-weight:bold;">Botswana</td>
+  <td style="padding:8px;text-align:right;">107</td>
+  <td style="padding:8px;text-align:right;">2.5M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">42.8</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.9%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">19</td>
+  <td style="padding:8px;font-weight:bold;">DRC</td>
+  <td style="padding:8px;text-align:right;">105</td>
+  <td style="padding:8px;text-align:right;">102M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.03</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">20</td>
+  <td style="padding:8px;font-weight:bold;">Senegal</td>
+  <td style="padding:8px;text-align:right;">97</td>
+  <td style="padding:8px;text-align:right;">17M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">5.71</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.8%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">21</td>
+  <td style="padding:8px;font-weight:bold;">Benin</td>
+  <td style="padding:8px;text-align:right;">51</td>
+  <td style="padding:8px;text-align:right;">13M</td>
+  <td style="padding:8px;text-align:right;color:#22c55e;font-weight:bold;">3.92</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.4%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">22</td>
+  <td style="padding:8px;font-weight:bold;">Sudan</td>
+  <td style="padding:8px;text-align:right;">50</td>
+  <td style="padding:8px;text-align:right;">48M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.04</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.4%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">23</td>
+  <td style="padding:8px;font-weight:bold;">Niger</td>
+  <td style="padding:8px;text-align:right;">37</td>
+  <td style="padding:8px;text-align:right;">27M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.37</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.3%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">24</td>
+  <td style="padding:8px;font-weight:bold;">Madagascar</td>
+  <td style="padding:8px;text-align:right;">24</td>
+  <td style="padding:8px;text-align:right;">30M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.8</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.2%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">25</td>
+  <td style="padding:8px;font-weight:bold;">Chad</td>
+  <td style="padding:8px;text-align:right;">14</td>
+  <td style="padding:8px;text-align:right;">18M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.78</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.1%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">26</td>
+  <td style="padding:8px;font-weight:bold;">Somalia</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;">18M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.44</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.1%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">27</td>
+  <td style="padding:8px;font-weight:bold;">Togo</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">9M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.78</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.1%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">28</td>
+  <td style="padding:8px;font-weight:bold;">South Sudan</td>
+  <td style="padding:8px;text-align:right;">6</td>
+  <td style="padding:8px;text-align:right;">11M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.55</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">29</td>
+  <td style="padding:8px;font-weight:bold;">CAR</td>
+  <td style="padding:8px;text-align:right;">5</td>
+  <td style="padding:8px;text-align:right;">5.5M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.91</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;font-weight:bold;">30</td>
+  <td style="padding:8px;font-weight:bold;">Namibia</td>
+  <td style="padding:8px;text-align:right;">4</td>
+  <td style="padding:8px;text-align:right;">2.7M</td>
+  <td style="padding:8px;text-align:right;color:#eab308;font-weight:bold;">1.48</td>
+  <td style="padding:8px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:4px;height:16px;width:100%;position:relative;">
+      <div style="background:var(--accent);height:100%;width:0.0%;border-radius:4px;"></div>
+    </div></td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- GINI COEFFICIENT -->
+<!-- ============================================================ -->
+<h2>Gini Coefficient: Research vs Income Inequality</h2>
+<div class="card">
+  <p style="line-height:1.7;margin-bottom:16px;">
+    The Gini coefficient measures inequality on a 0-1 scale. A Gini of 0 means perfect
+    equality (every country has identical trial counts); 1 means total monopoly (one country
+    has all trials). We compare Africa's <strong>trial Gini</strong> with the continent's
+    <strong>income Gini</strong> and with trial Ginis of Latin America and Asia.
+  </p>
+  <div class="insight">
+    <strong>Key finding:</strong> Africa&#39;s trial Gini = 0.835, which exceeds even Africa&#39;s notoriously high income Gini (0.44). Research is distributed more unequally than wealth itself.
+  </div>
+  <table style="margin-top:20px;">
+    <thead>
+      <tr>
+        <th>Region</th><th style="text-align:right;">Trial Gini</th>
+        <th style="text-align:right;">Income Gini</th>
+        <th style="text-align:right;">HHI</th>
+        <th style="text-align:right;">Power-Law Exponent</th>
+        <th style="text-align:right;">Evenness</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Africa</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.835</td>
+  <td style="padding:10px;text-align:right;color:#eab308;font-weight:bold;">0.44</td>
+  <td style="padding:10px;text-align:right;">0.3923</td>
+  <td style="padding:10px;text-align:right;">2.03</td>
+  <td style="padding:10px;text-align:right;">0.469</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Latin America</td>
+  <td style="padding:10px;text-align:right;color:#f97316;font-weight:bold;">0.691</td>
+  <td style="padding:10px;text-align:right;color:#eab308;font-weight:bold;">0.46</td>
+  <td style="padding:10px;text-align:right;">0.2142</td>
+  <td style="padding:10px;text-align:right;">2.26</td>
+  <td style="padding:10px;text-align:right;">0.673</td>
+</tr>
+<tr>
+  <td style="padding:10px;font-weight:bold;">Asia</td>
+  <td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.713</td>
+  <td style="padding:10px;text-align:right;color:#eab308;font-weight:bold;">0.38</td>
+  <td style="padding:10px;text-align:right;">0.2790</td>
+  <td style="padding:10px;text-align:right;">2.50</td>
+  <td style="padding:10px;text-align:right;">0.633</td>
+</tr>
+
+    </tbody>
+  </table>
+  <p class="method" style="margin-top:16px;">
+    <strong>Evenness</strong> = Shannon entropy / max entropy. Values near 1 indicate equal distribution;
+    near 0 indicates extreme concentration. HHI (Herfindahl-Hirschman Index) is the sum of squared
+    market shares -- values above 0.25 indicate high concentration in antitrust economics.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- LORENZ CURVE -->
+<!-- ============================================================ -->
+<h2>Lorenz Curve: Visualizing Concentration</h2>
+<div class="card">
+  <p style="line-height:1.7;margin-bottom:16px;">
+    The Lorenz curve plots the cumulative share of trials (y-axis) against the cumulative
+    share of countries ranked from fewest to most trials (x-axis). Perfect equality is
+    the 45-degree diagonal. The further the curve bows below the diagonal, the greater
+    the inequality. The Gini coefficient equals twice the area between the curve and the diagonal.
+  </p>
+  <div class="warning">
+    <strong>Concentration:</strong> The bottom 50% of African countries by trial count contribute only 4.2% of all trials.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TIPPING POINT -->
+<!-- ============================================================ -->
+<h2>The Tipping Point: Below 1 Trial per Million</h2>
+<div class="card">
+  <div class="warning">
+    <strong>Threshold breach:</strong> The tipping point occurs at rank 24: countries ranked 24 and below have fewer than 1 trial per million population. That leaves 7 of 30 countries in the sub-threshold zone.
+  </div>
+  <table style="margin-top:20px;">
+    <thead>
+      <tr>
+        <th>Country</th><th style="text-align:right;">Trials</th>
+        <th style="text-align:right;">Population</th>
+        <th style="text-align:right;">Per Million</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">Madagascar</td>
+  <td style="padding:8px;text-align:right;">24</td>
+  <td style="padding:8px;text-align:right;">30M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.8</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">Chad</td>
+  <td style="padding:8px;text-align:right;">14</td>
+  <td style="padding:8px;text-align:right;">18M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.78</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">Somalia</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;">18M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.44</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">Togo</td>
+  <td style="padding:8px;text-align:right;">7</td>
+  <td style="padding:8px;text-align:right;">9M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.78</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">South Sudan</td>
+  <td style="padding:8px;text-align:right;">6</td>
+  <td style="padding:8px;text-align:right;">11M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.55</td>
+</tr>
+<tr style="background:rgba(239,68,68,0.06);">
+  <td style="padding:8px;color:#ef4444;font-weight:bold;">CAR</td>
+  <td style="padding:8px;text-align:right;">5</td>
+  <td style="padding:8px;text-align:right;">5.5M</td>
+  <td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0.91</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- COMPARATOR REGIONS -->
+<!-- ============================================================ -->
+<h2>Regional Comparators: Latin America</h2>
+<div class="card">
+  <p style="margin-bottom:12px;color:var(--muted);">
+    Gini: 0.691 | HHI: 0.2142 | Total: 28,495 trials across 15 countries
+  </p>
+  <table>
+    <thead>
+      <tr><th>Rank</th><th>Country</th><th style="text-align:right;">Trials</th><th style="text-align:right;">Per Million</th></tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;text-align:center;">1</td>
+  <td style="padding:8px;font-weight:bold;">Brazil</td>
+  <td style="padding:8px;text-align:right;">9,890</td>
+  <td style="padding:8px;text-align:right;">45.79</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">2</td>
+  <td style="padding:8px;font-weight:bold;">Mexico</td>
+  <td style="padding:8px;text-align:right;">6,847</td>
+  <td style="padding:8px;text-align:right;">52.67</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">3</td>
+  <td style="padding:8px;font-weight:bold;">Argentina</td>
+  <td style="padding:8px;text-align:right;">4,019</td>
+  <td style="padding:8px;text-align:right;">87.37</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">4</td>
+  <td style="padding:8px;font-weight:bold;">Chile</td>
+  <td style="padding:8px;text-align:right;">2,447</td>
+  <td style="padding:8px;text-align:right;">125.49</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">5</td>
+  <td style="padding:8px;font-weight:bold;">Colombia</td>
+  <td style="padding:8px;text-align:right;">1,872</td>
+  <td style="padding:8px;text-align:right;">36.0</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">6</td>
+  <td style="padding:8px;font-weight:bold;">Peru</td>
+  <td style="padding:8px;text-align:right;">1,726</td>
+  <td style="padding:8px;text-align:right;">50.76</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">7</td>
+  <td style="padding:8px;font-weight:bold;">Panama</td>
+  <td style="padding:8px;text-align:right;">628</td>
+  <td style="padding:8px;text-align:right;">139.56</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">8</td>
+  <td style="padding:8px;font-weight:bold;">Guatemala</td>
+  <td style="padding:8px;text-align:right;">356</td>
+  <td style="padding:8px;text-align:right;">19.78</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">9</td>
+  <td style="padding:8px;font-weight:bold;">Costa Rica</td>
+  <td style="padding:8px;text-align:right;">202</td>
+  <td style="padding:8px;text-align:right;">38.85</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">10</td>
+  <td style="padding:8px;font-weight:bold;">Ecuador</td>
+  <td style="padding:8px;text-align:right;">142</td>
+  <td style="padding:8px;text-align:right;">7.89</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">11</td>
+  <td style="padding:8px;font-weight:bold;">Honduras</td>
+  <td style="padding:8px;text-align:right;">111</td>
+  <td style="padding:8px;text-align:right;">10.57</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">12</td>
+  <td style="padding:8px;font-weight:bold;">Paraguay</td>
+  <td style="padding:8px;text-align:right;">86</td>
+  <td style="padding:8px;text-align:right;">11.47</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">13</td>
+  <td style="padding:8px;font-weight:bold;">Cuba</td>
+  <td style="padding:8px;text-align:right;">63</td>
+  <td style="padding:8px;text-align:right;">5.73</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">14</td>
+  <td style="padding:8px;font-weight:bold;">Uruguay</td>
+  <td style="padding:8px;text-align:right;">60</td>
+  <td style="padding:8px;text-align:right;">17.14</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">15</td>
+  <td style="padding:8px;font-weight:bold;">Bolivia</td>
+  <td style="padding:8px;text-align:right;">46</td>
+  <td style="padding:8px;text-align:right;">3.83</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>Regional Comparators: Asia</h2>
+<div class="card">
+  <p style="margin-bottom:12px;color:var(--muted);">
+    Gini: 0.713 | HHI: 0.2790 | Total: 81,563 trials across 15 countries
+  </p>
+  <table>
+    <thead>
+      <tr><th>Rank</th><th>Country</th><th style="text-align:right;">Trials</th><th style="text-align:right;">Per Million</th></tr>
+    </thead>
+    <tbody>
+<tr>
+  <td style="padding:8px;text-align:center;">1</td>
+  <td style="padding:8px;font-weight:bold;">China</td>
+  <td style="padding:8px;text-align:right;">38,933</td>
+  <td style="padding:8px;text-align:right;">27.61</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">2</td>
+  <td style="padding:8px;font-weight:bold;">South Korea</td>
+  <td style="padding:8px;text-align:right;">14,153</td>
+  <td style="padding:8px;text-align:right;">272.17</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">3</td>
+  <td style="padding:8px;font-weight:bold;">Japan</td>
+  <td style="padding:8px;text-align:right;">8,222</td>
+  <td style="padding:8px;text-align:right;">66.31</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">4</td>
+  <td style="padding:8px;font-weight:bold;">India</td>
+  <td style="padding:8px;text-align:right;">5,388</td>
+  <td style="padding:8px;text-align:right;">3.77</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">5</td>
+  <td style="padding:8px;font-weight:bold;">Pakistan</td>
+  <td style="padding:8px;text-align:right;">4,641</td>
+  <td style="padding:8px;text-align:right;">19.34</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">6</td>
+  <td style="padding:8px;font-weight:bold;">Thailand</td>
+  <td style="padding:8px;text-align:right;">3,483</td>
+  <td style="padding:8px;text-align:right;">48.38</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">7</td>
+  <td style="padding:8px;font-weight:bold;">Malaysia</td>
+  <td style="padding:8px;text-align:right;">2,207</td>
+  <td style="padding:8px;text-align:right;">64.91</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">8</td>
+  <td style="padding:8px;font-weight:bold;">Indonesia</td>
+  <td style="padding:8px;text-align:right;">1,299</td>
+  <td style="padding:8px;text-align:right;">4.64</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">9</td>
+  <td style="padding:8px;font-weight:bold;">Philippines</td>
+  <td style="padding:8px;text-align:right;">1,192</td>
+  <td style="padding:8px;text-align:right;">10.19</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">10</td>
+  <td style="padding:8px;font-weight:bold;">Vietnam</td>
+  <td style="padding:8px;text-align:right;">932</td>
+  <td style="padding:8px;text-align:right;">9.32</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">11</td>
+  <td style="padding:8px;font-weight:bold;">Bangladesh</td>
+  <td style="padding:8px;text-align:right;">649</td>
+  <td style="padding:8px;text-align:right;">3.71</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">12</td>
+  <td style="padding:8px;font-weight:bold;">Nepal</td>
+  <td style="padding:8px;text-align:right;">292</td>
+  <td style="padding:8px;text-align:right;">9.73</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">13</td>
+  <td style="padding:8px;font-weight:bold;">Cambodia</td>
+  <td style="padding:8px;text-align:right;">90</td>
+  <td style="padding:8px;text-align:right;">5.29</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">14</td>
+  <td style="padding:8px;font-weight:bold;">Sri Lanka</td>
+  <td style="padding:8px;text-align:right;">74</td>
+  <td style="padding:8px;text-align:right;">3.36</td>
+</tr>
+<tr>
+  <td style="padding:8px;text-align:center;">15</td>
+  <td style="padding:8px;font-weight:bold;">Myanmar</td>
+  <td style="padding:8px;text-align:right;">8</td>
+  <td style="padding:8px;text-align:right;">0.15</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<!-- POLICY IMPLICATIONS -->
+<!-- ============================================================ -->
+<h2>Policy Implications: Invest at the Elbow</h2>
+<div class="card">
+  <div class="policy">
+    <strong>The strategic insight:</strong> Power-law distributions have a characteristic "elbow" --
+    the inflection point where the curve transitions from the steep head to the long tail.
+    Countries at this elbow (ranks 21--26)
+    represent the highest return on investment: small funding increases can push them above critical
+    thresholds and trigger self-sustaining growth.
+  </div>
+  <p style="line-height:1.7;margin-top:16px;">
+    <strong>Three policy recommendations from the power-law analysis:</strong>
+  </p>
+  <ol style="margin:12px 0 0 24px;line-height:2;">
+    <li><strong>Redistribute, don't just add:</strong> Simply adding more global trial funding
+    will flow to existing hubs via preferential attachment. Active redistribution policies
+    (site selection quotas, capacity-building mandates) are needed to break the cycle.</li>
+    <li><strong>Target the elbow countries:</strong> Mid-ranked countries (e.g., Senegal, Ghana,
+    Cameroon) are closest to self-sustaining thresholds. Investment here produces
+    disproportionate returns compared to either the hubs (diminishing returns) or the
+    void states (insufficient absorptive capacity).</li>
+    <li><strong>Build south-south networks:</strong> Hubs like South Africa and Egypt should
+    serve as regional mentors, not just competitors. Co-PI arrangements and shared
+    regulatory pathways can transfer the network effects that drive preferential attachment.</li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- METHOD -->
+<!-- ============================================================ -->
+<div class="method">
+  <strong>Method:</strong> ClinicalTrials.gov API v2 queried for all interventional studies
+  (AREA[StudyType]INTERVENTIONAL) by country location across 30 African, 15 Latin American,
+  and 15 Asian countries. Power-law exponent fitted via OLS on log-log rank-frequency.
+  Gini coefficient computed from trial count distribution. HHI computed as sum of squared
+  shares. Shannon entropy and evenness (H/H_max) computed for diversity comparison.
+  Population denominators from UN 2025 estimates. Income Gini values from World Bank 2023 estimates.
+  All data cached locally with 24-hour TTL.
+</div>
+
+<div class="footer">
+  Project 39 of the Africa RCT Audit Series |
+  Data: ClinicalTrials.gov | Analysis: Python |
+  Theoretical framework: Merton (1968), Barabasi & Albert (1999), Zipf (1949)
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+    "title":  "Francophone-Anglophone gap in African interventional trial density",
+    "body":  "Does the language of colonisation predict access to clinical research in sub-Saharan Africa? We queried ClinicalTrials.gov for all interventional trials across ten Francophone and nine Anglophone African countries, computing per-capita trial density and condition-level counts for HIV, malaria, tuberculosis, cancer, and diabetes. Francophone Africa registered approximately 808 interventional trials compared with 6,690 in Anglophone Africa, yielding a per-capita density ratio of 5.5 to 1 after adjustment for population size. The gap persisted across all five disease categories and was most extreme in Chad, Togo, and Niger, which collectively registered fewer trials than a single US academic medical centre. Burkina Faso and Guinea partially escaped the desert through established malaria research hubs, demonstrating that targeted disease-specific infrastructure investment can overcome language barriers. These findings quantify a systematic exclusion of Francophone African populations from the evidence base informing treatment guidelines. The analysis is limited to a single English-language registry and may undercount trials on French-language or regional platforms.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Do Francophone and Anglophone African countries differ in registered interventional trial density after adjustment for population?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for all interventional trials across ten Francophone and nine Anglophone countries in sub-Saharan Africa and calculated trials per million population together with condition-level counts for HIV, malaria, tuberculosis, cancer, and diabetes."
+                      },
+                      {
+                          "role":  "Method",
+                          "text":  "Francophone Africa had about 808 registered interventional trials versus 6,690 in Anglophone Africa, corresponding to a 5.5-fold per-capita gap."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "The deficit was present across all five disease groups and was most pronounced in the lowest-density countries, including Chad, Togo, and Niger."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "Burkina Faso and Guinea were partial exceptions because malaria-focused research hubs raised their local counts."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "The results indicate that trial activity is unevenly distributed across language groups within the same continent."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "The comparison is limited to a single registry and may undercount studies captured in French-language or regional platforms."
+                      }
+                  ],
+    "wordCount":  140,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Francophone Gap Analysis v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 10 Francophone + 9 Anglophone African countries, 5 conditions",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             }
+}

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mizan Index: Measuring Research Justice Through the Lens of Balance</title>
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --gold: #d4af37;
+    --gold-light: #f0d060;
+    --gold-dim: rgba(212, 175, 55, 0.15);
+    --amber: #f59e0b;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --accent-green: #27ae60;
+    --accent-red: #e74c3c;
+    --accent-blue: #3498db;
+    --accent-orange: #e67e22;
+    --border: rgba(212, 175, 55, 0.2);
+    --font-body: 'Georgia', 'Times New Roman', serif;
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+    --font-mono: 'Consolas', 'Monaco', monospace;
+    --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ===== HEADER ===== */
+.hero {
+    text-align: center;
+    padding: 60px 0 40px;
+    border-bottom: 2px solid var(--gold-dim);
+    background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, transparent 100%);
+}
+
+.hero-arabic {
+    font-family: var(--font-arabic);
+    font-size: 2.2em;
+    color: var(--gold);
+    direction: rtl;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.hero-verse {
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 2.6em;
+    color: var(--gold);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 40px rgba(212,175,55,0.2);
+}
+
+.hero-subtitle {
+    font-size: 1.15em;
+    color: var(--text-dim);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-meta {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--text-dim);
+}
+
+/* ===== SECTION ===== */
+section {
+    padding: 48px 0;
+    border-bottom: 1px solid rgba(212,175,55,0.1);
+}
+
+section:last-child { border-bottom: none; }
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.7em;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title .arabic-inline {
+    font-family: var(--font-arabic);
+    font-size: 0.8em;
+    color: var(--gold-light);
+    direction: rtl;
+}
+
+.section-desc {
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    font-size: 1.05em;
+    max-width: 800px;
+}
+
+/* ===== KEY STATS ===== */
+.key-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: var(--text-dim);
+    margin-top: 4px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.dim-card {
+    border-left: 4px solid var(--gold);
+}
+
+.dim-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.dim-arabic {
+    font-family: var(--font-arabic);
+    font-size: 1.3em;
+    color: var(--gold-light);
+    direction: rtl;
+}
+
+.dim-title {
+    font-size: 1.2em;
+    color: var(--gold);
+    margin: 0;
+}
+
+.dim-quran {
+    font-style: italic;
+    color: var(--amber);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(212,175,55,0.3);
+}
+
+.dim-desc {
+    color: var(--text-dim);
+    font-size: 0.95em;
+    margin-bottom: 12px;
+}
+
+.dim-avg {
+    color: var(--text);
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+
+.dim-leaders {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dim-top, .dim-bottom {
+    font-size: 0.9em;
+    color: var(--text-dim);
+}
+
+.badge-good {
+    display: inline-block;
+    background: rgba(39,174,96,0.2);
+    color: #27ae60;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.badge-bad {
+    display: inline-block;
+    background: rgba(231,76,60,0.2);
+    color: #e74c3c;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+thead th {
+    background: var(--surface2);
+    color: var(--gold);
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid var(--gold-dim);
+    white-space: nowrap;
+    font-size: 0.85em;
+}
+
+thead th:nth-child(2) { text-align: left; }
+
+tbody td {
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+}
+
+tbody tr:hover { background: rgba(212,175,55,0.05); }
+
+.dim-cell {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* ===== RADAR CHARTS ===== */
+.radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 20px 0;
+}
+
+.radar-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.radar-box h3 {
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+/* ===== GRADE DISTRIBUTION ===== */
+.grade-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.grade-label {
+    width: 100px;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-align: right;
+}
+
+.grade-bar-track {
+    flex: 1;
+    height: 24px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.grade-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+.grade-count {
+    width: 100px;
+    font-size: 0.85em;
+    color: var(--text-dim);
+}
+
+/* ===== IMBALANCE BARS ===== */
+.imbalance-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.imbalance-label {
+    width: 280px;
+    font-size: 0.9em;
+    color: var(--text);
+    text-align: right;
+}
+
+.imbalance-bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.imbalance-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.imbalance-value {
+    width: 120px;
+    font-size: 0.85em;
+    font-family: var(--font-mono);
+}
+
+/* ===== COUNTRY BARS ===== */
+.country-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.country-bar-name {
+    width: 200px;
+    font-size: 0.9em;
+    color: var(--text);
+    text-align: right;
+}
+
+.country-bar-track {
+    flex: 1;
+    height: 22px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.country-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.country-bar-score {
+    width: 50px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+}
+
+/* ===== POLICY ===== */
+.policy-list {
+    list-style: none;
+    padding: 0;
+}
+
+.policy-item {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--surface);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* ===== METHODOLOGY ===== */
+.method-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88em;
+    margin: 16px 0;
+}
+
+.method-table th {
+    background: var(--surface2);
+    color: var(--gold);
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--gold-dim);
+}
+
+.method-table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+}
+
+.method-table tr:hover { background: rgba(212,175,55,0.05); }
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--gold-dim);
+}
+
+footer .bismillah {
+    font-family: var(--font-arabic);
+    font-size: 1.4em;
+    color: var(--gold);
+    margin-bottom: 12px;
+    direction: rtl;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero-title { font-size: 1.8em; }
+    .hero-arabic { font-size: 1.6em; }
+    .radar-grid { grid-template-columns: 1fr; }
+    .key-stats { grid-template-columns: 1fr 1fr; }
+    .imbalance-label { width: 180px; }
+    .country-bar-name { width: 120px; }
+    thead th { font-size: 0.75em; padding: 8px 4px; }
+    tbody td { padding: 8px 4px; font-size: 0.8em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════════════════════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <div class="hero-arabic">
+    وَالسَّمَاءَ رَفَعَهَا وَوَضَعَ الْمِيزَانَ &#x200F;* أَلَّا تَطْغَوْا فِي الْمِيزَانِ
+  </div>
+  <p class="hero-verse">
+    "And the sky He raised, and He set up the Balance &mdash;
+    that you may not transgress the Balance."<br>
+    <span style="color:var(--text-dim);font-size:0.9em;">— Quran 55:7-8 (Surah al-Rahman, "The Most Merciful")</span>
+  </p>
+  <h1 class="hero-title">The Mizan Index</h1>
+  <p class="hero-subtitle">
+    Measuring Research Justice Through the Lens of Balance &mdash;
+    a 7-dimension composite score for 20 African nations, inspired by
+    the Quranic imperative that justice requires measurement.
+  </p>
+  <div class="hero-meta">
+    ClinicalTrials.gov API v2 &middot; 20 countries &middot; 28 March 2026
+  </div>
+</header>
+
+<!-- ═════════════════════════════════ CONCEPT ═════════════════════════ -->
+<section>
+  <h2 class="section-title">
+    The Concept
+    <span class="arabic-inline">المفهوم</span>
+  </h2>
+  <p class="section-desc">
+    The Quran repeatedly emphasizes that justice requires measurement &mdash;
+    scales must be fair, weights must be honest. "Woe to those who give
+    short measure, who exact full measure when they receive from others but
+    give less when they measure or weigh for them" (83:1-3). This project
+    applies that principle to clinical research: <strong>you cannot fix
+    injustice you have not measured</strong>.
+  </p>
+  <p class="section-desc">
+    The Mizan Index operationalizes 7 dimensions of research justice
+    drawn from the Maqasid al-Shariah (objectives of Islamic law) and
+    maps them to measurable indicators from ClinicalTrials.gov data.
+    Each dimension scores 0 to 14.3, yielding a composite 0-100
+    index. Higher scores indicate a more <em>balanced</em> &mdash; more
+    <em>just</em> &mdash; research ecosystem.
+  </p>
+  <p class="section-desc" style="color:var(--amber);">
+    "Whoever saves a life, it is as if they saved all of mankind" (5:32)
+    &mdash; every missing trial represents lives that could have been saved.
+  </p>
+</section>
+
+<!-- ═════════════════════════════ KEY STATS ═══════════════════════════ -->
+<section>
+  <h2 class="section-title">Continental Overview</h2>
+  <div class="key-stats">
+    <div class="stat-box">
+      <div class="stat-value">72.8</div>
+      <div class="stat-label">Average Mizan Index (of 100)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" style="color:#27ae60;">94.7</div>
+      <div class="stat-label">Highest: Egypt</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" style="color:#e74c3c;">54.0</div>
+      <div class="stat-label">Lowest: Morocco</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" style="font-size:1.6em;">Istikhlaf</div>
+      <div class="stat-label">Weakest Dimension (avg 4.8)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 7 DIMENSIONS ═══════════════════════════ -->
+<section>
+  <h2 class="section-title">
+    The 7 Dimensions of Research Justice
+    <span class="arabic-inline">سبعة أبعاد</span>
+  </h2>
+  <p class="section-desc">
+    Each dimension is inspired by a foundational principle of justice in Islamic
+    ethics and mapped to a measurable indicator from clinical trial registry data.
+    Each scores 0 to 14.3, totalling 0-100.
+  </p>
+  
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">حفظ النفس</span>
+            <h3 class="dim-title">Hifz al-Nafs (Protection of Life)</h3>
+          </div>
+          <p class="dim-quran">"Whoever saves a life, it is as if they saved all of mankind" (5:32)</p>
+          <p class="dim-desc">Do trials target the top killers? Measures alignment between a country's trial portfolio and its WHO top-3 causes of death. A nation that studies what kills its people honors the sanctity of life.</p>
+          <div class="dim-avg">Continental average: <strong>11.9</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Zimbabwe (14.3), Burkina Faso (14.2), Zambia (14.1)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Senegal (10.8), Nigeria (10.1), South Africa (9.3)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">العدل</span>
+            <h3 class="dim-title">Adl (Justice/Equity)</h3>
+          </div>
+          <p class="dim-quran">"O you who believe, be persistently standing firm in justice" (4:135)</p>
+          <p class="dim-desc">Is trial access per-capita fair? Compares each country's trials-per-million to the global median. Justice demands proportional access to the benefits of research.</p>
+          <div class="dim-avg">Continental average: <strong>5.7</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (14.3), South Africa (11.4), Tunisia (11.4)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Ethiopia (0.7), Democratic Republic of Congo (0.7), Morocco (0.7)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">الاستخلاف</span>
+            <h3 class="dim-title">Istikhlaf (Stewardship/Sovereignty)</h3>
+          </div>
+          <p class="dim-quran">"It is He who made you stewards of the earth" (6:165)</p>
+          <p class="dim-desc">Who controls the research agenda? Measures % of trials led by local institutions. True stewardship means communities direct their own knowledge production.</p>
+          <div class="dim-avg">Continental average: <strong>4.8</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (14.3), Tunisia (11.4), Ethiopia (8.6)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> South Africa (0.7), Kenya (0.7), Malawi (0.7)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">الشورى</span>
+            <h3 class="dim-title">Shura (Consultation/Community Voice)</h3>
+          </div>
+          <p class="dim-quran">"And those who conduct their affairs by mutual consultation" (42:38)</p>
+          <p class="dim-desc">Are communities represented? Uses implementation/behavioral trial share as a proxy for community-engaged research. Shura requires the voices of those affected.</p>
+          <div class="dim-avg">Continental average: <strong>12.7</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (14.3), Kenya (14.3), Uganda (14.3)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Morocco (8.6), Mali (8.6), South Africa (5.7)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">لا ضرر</span>
+            <h3 class="dim-title">La Darar (No Harm)</h3>
+          </div>
+          <p class="dim-quran">"There should be neither harm nor reciprocal harm" (Hadith, Ibn Majah)</p>
+          <p class="dim-desc">Are participants protected from exploitation? Inverse of ghost enrollment rate (mega-trials using African sites as body farms). The Prophetic principle: no harm, no reciprocal harm.</p>
+          <div class="dim-avg">Continental average: <strong>12.9</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (14.3), Kenya (14.3), Uganda (14.3)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Tunisia (8.6), Morocco (5.7), South Africa (2.9)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">العلم</span>
+            <h3 class="dim-title">Ilm (Knowledge/Capacity)</h3>
+          </div>
+          <p class="dim-quran">"Say: Are those who know equal to those who do not know?" (39:9)</p>
+          <p class="dim-desc">Is research building local knowledge? Combines Phase 1 trial sovereignty (capacity for first-in-human studies) with institutional diversity. Knowledge is a trust.</p>
+          <div class="dim-avg">Continental average: <strong>11.4</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Egypt (14.3), Nigeria (14.3), Tunisia (14.3)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Democratic Republic of Congo (8.6), Morocco (8.6), Senegal (7.9)</div>
+          </div>
+        </div>
+        <div class="card dim-card">
+          <div class="dim-header">
+            <span class="dim-arabic">الأمانة</span>
+            <h3 class="dim-title">Amanah (Trust/Accountability)</h3>
+          </div>
+          <p class="dim-quran">"Indeed, Allah commands you to render trusts to whom they are due" (4:58)</p>
+          <p class="dim-desc">Are results reported transparently? Inverse of UNKNOWN status rate. Trust requires that what was promised is delivered and disclosed.</p>
+          <div class="dim-avg">Continental average: <strong>13.3</strong> / 14.3</div>
+          <div class="dim-leaders">
+            <div class="dim-top"><span class="badge-good">Highest</span> Zimbabwe (13.8), South Africa (13.8), Mozambique (13.7)</div>
+            <div class="dim-bottom"><span class="badge-bad">Lowest</span> Ethiopia (13.1), Uganda (12.9), Egypt (11.8)</div>
+          </div>
+        </div>
+</section>
+
+<!-- ═════════════════════════ SCORECARD TABLE ═════════════════════════ -->
+<section>
+  <h2 class="section-title">
+    The Scorecard
+    <span class="arabic-inline">بطاقة الأداء</span>
+  </h2>
+  <p class="section-desc">
+    20 African countries ranked by their Mizan Index, with 7-dimension breakdown.
+    Each dimension scored 0-14.3; total 0-100.
+  </p>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:left;">Country</th>
+          <th title="Hifz al-Nafs: Protection of Life">D1<br>Life</th>
+          <th title="Adl: Justice/Equity">D2<br>Justice</th>
+          <th title="Istikhlaf: Stewardship">D3<br>Steward</th>
+          <th title="Shura: Consultation">D4<br>Voice</th>
+          <th title="La Darar: No Harm">D5<br>No Harm</th>
+          <th title="Ilm: Knowledge">D6<br>Knowledge</th>
+          <th title="Amanah: Trust">D7<br>Trust</th>
+          <th>Mizan<br>Index</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">1</td>
+          <td style="font-weight:600;">Egypt</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">94.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">2</td>
+          <td style="font-weight:600;">Tunisia</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">13.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">84.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">3</td>
+          <td style="font-weight:600;">Ghana</td>
+          <td class="dim-cell">13.9</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">12.9</td>
+          <td class="dim-cell">13.3</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">80.1</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">4</td>
+          <td style="font-weight:600;">Uganda</td>
+          <td class="dim-cell">11.1</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">12.9</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">78.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">5</td>
+          <td style="font-weight:600;">Zambia</td>
+          <td class="dim-cell">14.1</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">12.9</td>
+          <td class="dim-cell">13.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">77.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">6</td>
+          <td style="font-weight:600;">Rwanda</td>
+          <td class="dim-cell">10.9</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">12.9</td>
+          <td class="dim-cell">13.4</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">77.1</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">7</td>
+          <td style="font-weight:600;">Cameroon</td>
+          <td class="dim-cell">13.5</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">10.0</td>
+          <td class="dim-cell">13.3</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">76.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">8</td>
+          <td style="font-weight:600;">Ethiopia</td>
+          <td class="dim-cell">13.5</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.1</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">75.9</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">9</td>
+          <td style="font-weight:600;">Tanzania</td>
+          <td class="dim-cell">11.0</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">12.9</td>
+          <td class="dim-cell">13.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">74.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">10</td>
+          <td style="font-weight:600;">Zimbabwe</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">73.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">11</td>
+          <td style="font-weight:600;">Kenya</td>
+          <td class="dim-cell">10.8</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">73.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">12</td>
+          <td style="font-weight:600;">Burkina Faso</td>
+          <td class="dim-cell">14.2</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.4</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">73.3</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">13</td>
+          <td style="font-weight:600;">Mozambique</td>
+          <td class="dim-cell">13.9</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">10.0</td>
+          <td class="dim-cell">13.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">71.9</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">14</td>
+          <td style="font-weight:600;">Malawi</td>
+          <td class="dim-cell">11.0</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">9.3</td>
+          <td class="dim-cell">13.5</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(212, 175, 55, 0.12);color:#d4af37;">71.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#d4af37;">A</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">15</td>
+          <td style="font-weight:600;">Nigeria</td>
+          <td class="dim-cell">10.1</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">13.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39, 174, 96, 0.12);color:#27ae60;">69.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">16</td>
+          <td style="font-weight:600;">Mali</td>
+          <td class="dim-cell">11.2</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39, 174, 96, 0.12);color:#27ae60;">67.3</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">17</td>
+          <td style="font-weight:600;">Senegal</td>
+          <td class="dim-cell">10.8</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">7.9</td>
+          <td class="dim-cell">13.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39, 174, 96, 0.12);color:#27ae60;">63.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">18</td>
+          <td style="font-weight:600;">Democratic Republic of Congo</td>
+          <td class="dim-cell">11.1</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">14.3</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">13.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39, 174, 96, 0.12);color:#27ae60;">62.6</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">19</td>
+          <td style="font-weight:600;">South Africa</td>
+          <td class="dim-cell">9.3</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">2.9</td>
+          <td class="dim-cell">11.4</td>
+          <td class="dim-cell">13.8</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(39, 174, 96, 0.12);color:#27ae60;">55.2</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#27ae60;">B</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:600;color:#d4af37;">20</td>
+          <td style="font-weight:600;">Morocco</td>
+          <td class="dim-cell">11.0</td>
+          <td class="dim-cell">0.7</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">5.7</td>
+          <td class="dim-cell">8.6</td>
+          <td class="dim-cell">13.7</td>
+          <td style="text-align:center;font-weight:700;font-size:1.15em;
+              background:rgba(52, 152, 219, 0.12);color:#3498db;">54.0</td>
+          <td style="text-align:center;font-weight:700;font-size:1.2em;
+              color:#3498db;">C</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════ VISUAL RANKING ════════════════════════════ -->
+<section>
+  <h2 class="section-title">Visual Ranking</h2>
+  
+        <div class="country-bar-row">
+          <span class="country-bar-name">Egypt</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:95%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">94.7</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Tunisia</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:85%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">84.7</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Ghana</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:80%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">80.1</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Uganda</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:78%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">78.2</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Zambia</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:78%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">77.8</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Rwanda</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:77%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">77.1</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Cameroon</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:77%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">76.8</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Ethiopia</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:76%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">75.9</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Tanzania</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:75%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">74.6</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Zimbabwe</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:74%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">73.8</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Kenya</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:74%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">73.7</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Burkina Faso</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:73%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">73.3</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Mozambique</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:72%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">71.9</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Malawi</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:72%;background:linear-gradient(90deg, #d4af37, rgba(212, 175, 55,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#d4af37;">71.6</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Nigeria</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:70%;background:linear-gradient(90deg, #27ae60, rgba(39, 174, 96,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#27ae60;">69.7</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Mali</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:67%;background:linear-gradient(90deg, #27ae60, rgba(39, 174, 96,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#27ae60;">67.3</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Senegal</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:63%;background:linear-gradient(90deg, #27ae60, rgba(39, 174, 96,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#27ae60;">63.2</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Democratic Republic of Congo</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:63%;background:linear-gradient(90deg, #27ae60, rgba(39, 174, 96,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#27ae60;">62.6</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">South Africa</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:55%;background:linear-gradient(90deg, #27ae60, rgba(39, 174, 96,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#27ae60;">55.2</span>
+        </div>
+        <div class="country-bar-row">
+          <span class="country-bar-name">Morocco</span>
+          <div class="country-bar-track">
+            <div class="country-bar-fill" style="width:54%;background:linear-gradient(90deg, #3498db, rgba(52, 152, 219,0.4));"></div>
+          </div>
+          <span class="country-bar-score" style="color:#3498db;">54.0</span>
+        </div>
+</section>
+
+<!-- ═══════════════════════ RADAR CHARTS ══════════════════════════════ -->
+<section>
+  <h2 class="section-title">
+    Balance Profiles
+    <span class="arabic-inline">ملامح التوازن</span>
+  </h2>
+  <p class="section-desc">
+    Radar charts reveal where each country's research ecosystem is
+    balanced and where it tilts. A perfectly just system would fill
+    the entire heptagon.
+  </p>
+  <div class="radar-grid">
+    <div class="radar-box">
+      <h3>Top 3 Countries</h3>
+      <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;width:100%;">
+<circle cx="200" cy="200" r="37.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="75.0" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="112.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="150.0" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<line x1="200" y1="200" x2="200.0" y2="50.0" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="200.0" y="25.0" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="middle" dominant-baseline="central">Life</text>
+<line x1="200" y1="200" x2="317.3" y2="106.5" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="336.8" y="90.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Justice</text>
+<line x1="200" y1="200" x2="346.2" y2="233.4" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="370.6" y="238.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Steward</text>
+<line x1="200" y1="200" x2="265.1" y2="335.1" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="275.9" y="357.7" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Voice</text>
+<line x1="200" y1="200" x2="134.9" y2="335.1" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="124.1" y="357.7" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">No Harm</text>
+<line x1="200" y1="200" x2="53.8" y2="233.4" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="29.4" y="238.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">Knowledge</text>
+<line x1="200" y1="200" x2="82.7" y2="106.5" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="63.2" y="90.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">Trust</text>
+<polygon points="200.0,80.1 317.3,106.4 346.3,233.4 265.1,335.2 134.9,335.2 53.7,233.4 102.8,122.5" fill="rgba(212, 175, 55, 0.15)" stroke="#d4af37" stroke-width="2"/>
+<!-- Egypt: #d4af37 -->
+<polygon points="200.0,80.0 293.8,125.2 317.0,226.7 265.1,335.2 161.0,281.1 53.7,233.4 91.3,113.3" fill="rgba(39, 174, 96, 0.15)" stroke="#27ae60" stroke-width="2"/>
+<!-- Tunisia: #27ae60 -->
+<polygon points="200.0,54.3 246.9,162.6 258.5,213.3 265.1,335.2 134.9,335.2 68.4,230.0 90.5,112.7" fill="rgba(52, 152, 219, 0.15)" stroke="#3498db" stroke-width="2"/>
+<!-- Ghana: #3498db -->
+<rect x="20" y="400" width="10" height="10" fill="#d4af37"/>
+<text x="34" y="409" fill="rgba(255,255,255,0.8)" font-size="10">Egypt (94.7)</text>
+<rect x="140" y="400" width="10" height="10" fill="#27ae60"/>
+<text x="154" y="409" fill="rgba(255,255,255,0.8)" font-size="10">Tunisia (84.7)</text>
+<rect x="260" y="400" width="10" height="10" fill="#3498db"/>
+<text x="274" y="409" fill="rgba(255,255,255,0.8)" font-size="10">Ghana (80.1)</text>
+</svg>
+    </div>
+    <div class="radar-box">
+      <h3>Bottom 3 Countries</h3>
+      <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;width:100%;">
+<circle cx="200" cy="200" r="37.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="75.0" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="112.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<circle cx="200" cy="200" r="150.0" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<line x1="200" y1="200" x2="200.0" y2="50.0" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="200.0" y="25.0" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="middle" dominant-baseline="central">Life</text>
+<line x1="200" y1="200" x2="317.3" y2="106.5" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="336.8" y="90.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Justice</text>
+<line x1="200" y1="200" x2="346.2" y2="233.4" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="370.6" y="238.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Steward</text>
+<line x1="200" y1="200" x2="265.1" y2="335.1" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="275.9" y="357.7" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="start" dominant-baseline="central">Voice</text>
+<line x1="200" y1="200" x2="134.9" y2="335.1" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="124.1" y="357.7" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">No Harm</text>
+<line x1="200" y1="200" x2="53.8" y2="233.4" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="29.4" y="238.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">Knowledge</text>
+<line x1="200" y1="200" x2="82.7" y2="106.5" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+<text x="63.2" y="90.9" fill="rgba(255,255,255,0.7)" font-size="11" text-anchor="end" dominant-baseline="central">Trust</text>
+<polygon points="200.0,83.5 205.8,195.4 229.3,206.7 252.1,308.1 134.9,335.2 112.3,220.0 88.2,110.8" fill="rgba(212, 175, 55, 0.15)" stroke="#d4af37" stroke-width="2"/>
+<!-- Democratic Republic of Congo: #d4af37 -->
+<polygon points="200.0,102.6 293.8,125.2 207.3,201.7 226.0,254.0 187.0,227.1 83.0,226.7 86.8,109.7" fill="rgba(39, 174, 96, 0.15)" stroke="#27ae60" stroke-width="2"/>
+<!-- South Africa: #27ae60 -->
+<polygon points="200.0,84.3 205.8,195.4 258.5,213.3 239.0,281.1 174.0,254.0 112.3,220.0 87.5,110.3" fill="rgba(52, 152, 219, 0.15)" stroke="#3498db" stroke-width="2"/>
+<!-- Morocco: #3498db -->
+<rect x="20" y="400" width="10" height="10" fill="#d4af37"/>
+<text x="34" y="409" fill="rgba(255,255,255,0.8)" font-size="10">Democratic R.. (62.6)</text>
+<rect x="140" y="400" width="10" height="10" fill="#27ae60"/>
+<text x="154" y="409" fill="rgba(255,255,255,0.8)" font-size="10">South Africa (55.2)</text>
+<rect x="260" y="400" width="10" height="10" fill="#3498db"/>
+<text x="274" y="409" fill="rgba(255,255,255,0.8)" font-size="10">Morocco (54.0)</text>
+</svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MOST UNJUST IMBALANCES ═══════════════════════ -->
+<section>
+  <h2 class="section-title">
+    The Most Unjust Imbalances
+    <span class="arabic-inline">أشد الاختلالات</span>
+  </h2>
+  <p class="section-desc">
+    Which dimension of research justice scores lowest across Africa?
+    The bars below rank all 7 dimensions by their continental average,
+    revealing where the scales of justice are most tilted.
+  </p>
+  
+        <div class="imbalance-row">
+          <span class="imbalance-label">Istikhlaf (Stewardship/Sovereignty)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:34%;background:#e67e22;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#e67e22;">4.8 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">Adl (Justice/Equity)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:40%;background:#e67e22;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#e67e22;">5.7 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">Ilm (Knowledge/Capacity)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:80%;background:#d4af37;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#d4af37;">11.4 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">Hifz al-Nafs (Protection of Life)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:84%;background:#d4af37;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#d4af37;">11.9 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">Shura (Consultation/Community Voice)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:89%;background:#d4af37;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#d4af37;">12.7 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">La Darar (No Harm)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:90%;background:#d4af37;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#d4af37;">12.9 / 14.3</span>
+        </div>
+        <div class="imbalance-row">
+          <span class="imbalance-label">Amanah (Trust/Accountability)</span>
+          <div class="imbalance-bar-track">
+            <div class="imbalance-bar-fill" style="width:93%;background:#d4af37;"></div>
+          </div>
+          <span class="imbalance-value" style="color:#d4af37;">13.3 / 14.3</span>
+        </div>
+  <div class="card" style="margin-top:20px;border-left:4px solid var(--accent-red);">
+    <p style="color:var(--text);font-size:1.05em;">
+      <strong style="color:var(--accent-red);">The deepest imbalance:</strong>
+      Istikhlaf (Stewardship/Sovereignty) averages just 4.8 out of 14.3
+      &mdash; meaning the continental research ecosystem is most deficient in
+      <em>Stewardship/Sovereignty</em>.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════ GRADE DISTRIBUTION ════════════════════════ -->
+<section>
+  <h2 class="section-title">Grade Distribution</h2>
+  
+        <div class="grade-row">
+          <span class="grade-label" style="color:#d4af37;">A (70-100)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:70.0%;background:#d4af37;"></div>
+          </div>
+          <span class="grade-count">14 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#27ae60;">B (55-69)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:25.0%;background:#27ae60;"></div>
+          </div>
+          <span class="grade-count">5 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#3498db;">C (40-54)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:5.0%;background:#3498db;"></div>
+          </div>
+          <span class="grade-count">1 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#e67e22;">D (25-39)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:0.0%;background:#e67e22;"></div>
+          </div>
+          <span class="grade-count">0 countries</span>
+        </div>
+        <div class="grade-row">
+          <span class="grade-label" style="color:#e74c3c;">F (0-24)</span>
+          <div class="grade-bar-track">
+            <div class="grade-bar-fill" style="width:0.0%;background:#e74c3c;"></div>
+          </div>
+          <span class="grade-count">0 countries</span>
+        </div>
+</section>
+
+<!-- ══════════════════════ POLICY IMPLICATIONS ═══════════════════════ -->
+<section>
+  <h2 class="section-title">
+    Policy Implications
+    <span class="arabic-inline">التداعيات</span>
+  </h2>
+  <p class="section-desc">
+    "O you who believe, be persistently standing firm in justice,
+    witnesses for Allah, even if it be against yourselves" (4:135).
+    The Mizan Index does not merely describe injustice &mdash; it demands response.
+  </p>
+  <ul class="policy-list">
+    <li class="policy-item"><strong>11 countries</strong> score below 30% on Stewardship/Sovereignty. In these nations, the research agenda is controlled predominantly by external institutions.</li>
+<li class="policy-item"><strong>3 countries</strong> show ghost enrollment rates above 15%, suggesting participants may be enrolled in mega-trials designed elsewhere with minimal local benefit.</li>
+    <li class="policy-item">
+      <strong>The Balance Imperative:</strong> The Quran warns against short
+      measure (83:1-3). When Africa bears 25% of the global disease burden but
+      receives a fraction of clinical trials, the scales are broken. The Mizan
+      Index provides a framework for measuring progress toward repair.
+    </li>
+    <li class="policy-item">
+      <strong>From measurement to action:</strong> Each dimension suggests
+      a specific intervention &mdash; local funding for Istikhlaf, Phase 1 unit
+      investment for Ilm, community advisory boards for Shura, results-reporting
+      mandates for Amanah, and burden-aligned funding for Hifz al-Nafs.
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════════════════ METHODOLOGY ════════════════════════════════ -->
+<section>
+  <h2 class="section-title">
+    Methodology
+    <span class="arabic-inline">المنهجية</span>
+  </h2>
+  <p class="section-desc">
+    Data sourced from ClinicalTrials.gov API v2 on 28 March 2026.
+    Up to 200 sample trials per country were retrieved for sponsor and
+    status classification. Population data from UN World Population
+    Prospects 2024. WHO burden rankings from Global Health Estimates 2024.
+  </p>
+  <div class="table-wrapper">
+    <table class="method-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Islamic Principle</th>
+          <th>Indicator</th>
+          <th>Scoring Logic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>D1: Hifz al-Nafs</td>
+          <td>Protection of Life</td>
+          <td>Alignment between trial portfolio and top-3 causes of death</td>
+          <td>60% match count (0-3 of top-3) + 40% trial concentration on burden diseases</td>
+        </tr>
+        <tr>
+          <td>D2: Adl</td>
+          <td>Justice / Equity</td>
+          <td>Per-capita trial rate vs global median</td>
+          <td>Logarithmic scale: ratio of country density to global median (62.5/million)</td>
+        </tr>
+        <tr>
+          <td>D3: Istikhlaf</td>
+          <td>Stewardship / Sovereignty</td>
+          <td>% of trials led by local institutions</td>
+          <td>Keyword-based sponsor classification; tiered scoring up to 50%+</td>
+        </tr>
+        <tr>
+          <td>D4: Shura</td>
+          <td>Consultation / Community Voice</td>
+          <td>% of Phase NA (implementation/behavioral) trials</td>
+          <td>Higher non-drug trial share indicates community-engaged research</td>
+        </tr>
+        <tr>
+          <td>D5: La Darar</td>
+          <td>No Harm</td>
+          <td>Inverse of ghost enrollment rate (trials with 50+ global sites)</td>
+          <td>Fewer mega-trial enrollments = higher protection from exploitation</td>
+        </tr>
+        <tr>
+          <td>D6: Ilm</td>
+          <td>Knowledge / Capacity</td>
+          <td>Phase 1 trial count + unique local sponsor count</td>
+          <td>50% Phase 1 sovereignty + 50% institutional diversity</td>
+        </tr>
+        <tr>
+          <td>D7: Amanah</td>
+          <td>Trust / Accountability</td>
+          <td>Inverse of UNKNOWN status rate + completion rate</td>
+          <td>70% transparency (non-unknown) + 30% completion bonus</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3 style="color:var(--gold);margin-bottom:8px;">Limitations</h3>
+    <p style="color:var(--text-dim);font-size:0.9em;">
+      1) ClinicalTrials.gov captures primarily US-regulated trials; African-initiated
+      studies on national registries (e.g., PACTR) may be undercounted.
+      2) Sponsor classification relies on keyword matching of the lead sponsor name
+      and may misclassify some institutions.
+      3) Phase NA as a proxy for community engagement is imperfect; some NA-phase
+      trials are device or diagnostic studies.
+      4) Ghost enrollment thresholds (50+ sites) are heuristic.
+      5) Sample of up to 200 trials per country may not represent the full portfolio.
+      6) The 7-dimension framework is normative; alternative weightings would yield
+      different rankings.
+    </p>
+  </div>
+</section>
+
+</div><!-- /.container -->
+
+<!-- ═══════════════════════ FOOTER ════════════════════════════════════ -->
+<footer>
+  <div class="bismillah">بسم الله الرحمن الرحيم</div>
+  <p>
+    The Mizan Index &middot; Measuring Research Justice Through the Lens of Balance<br>
+    Data: ClinicalTrials.gov API v2 &middot; 28 March 2026<br>
+    "And weigh with an even balance" (Quran 55:9)
+  </p>
+</footer>
+
+</body>
+</html>

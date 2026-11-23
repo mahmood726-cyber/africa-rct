@@ -1,0 +1,51 @@
+{
+    "title": "Africa's digital health bright spot: mobile penetration versus clinical trial activity for mHealth interventions",
+    "body": "Can Africa leverage its high mobile phone penetration to leapfrog traditional clinical trial infrastructure through digital health? We queried ClinicalTrials.gov for interventional trials matching mHealth, mobile health, telemedicine, digital health, or SMS intervention across six African countries, the United States, and India, with subgroup analyses by technology type and disease focus. Africa had approximately 14 registered digital health trials compared with 2,321 in the United States, but mobile penetration across our six target countries averaged over 80 percent, matching India. HIV-focused mHealth dominated African digital health activity, while NCD digital interventions remained near zero despite NCDs accounting for 37 percent of sub-Saharan deaths. SMS adherence reminders comprised most African digital health trials, whereas AI diagnostics, wearables, and EHR integrations remained almost exclusively in high-income settings. Rwanda and Kenya emerged as bright spots, with national digital health strategies translating into modest trial registration. The analysis is limited to one English-language registry and evolving terminology may cause undercounting.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Can Africa leverage its high mobile phone penetration to leapfrog traditional clinical trial infrastructure through digital health interventions?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for all interventional trials matching mHealth, mobile health, telemedicine, digital health, or SMS intervention across six African countries, the United States, and India, with subgroup analyses by technology type and disease focus."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had approximately 14 registered digital health trials compared with 2,321 in the United States, but mobile phone penetration across our six target countries averaged over 80 percent, matching or exceeding India."
+        },
+        {
+            "role": "HIV dominance",
+            "text": "HIV-focused mHealth studies dominated African digital health activity, while non-communicable disease digital interventions remained near zero despite NCDs accounting for 37 percent of sub-Saharan African deaths."
+        },
+        {
+            "role": "Technology gap",
+            "text": "SMS-based adherence reminders comprised the majority of African digital health trials, whereas AI diagnostics, wearables, and electronic health record integrations were confined almost exclusively to high-income settings."
+        },
+        {
+            "role": "Bright spots",
+            "text": "Rwanda and Kenya emerged as relative bright spots, with national digital health strategies and M-Pesa-style infrastructure translating into modest but measurable trial registration activity."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to a single English-language registry, and rapidly evolving digital health terminology may cause undercounting of earlier interventions listed under different keywords."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Digital Health Bright Spot Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 6 African countries, US + India comparators, 6 technology subtypes, 6 disease foci",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

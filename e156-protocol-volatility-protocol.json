@@ -1,0 +1,8 @@
+{
+  "title": "Protocol Volatility",
+  "type": "protocol",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural governance of global health research, does the frequency of protocol updates indicate a significant regional divide in scientific flexibility and regulatory drag? This study evaluated five-year protocol lifespans for one thousand trials across four global regions using the update-date metadata from the ClinicalTrials.gov API v2 database system. Investigators applied a protocol-mutation model and reported the volatility index as the lead estimand for research adaptability and administrative overhead across the global hubs. The primary result showed that African trials exhibit the highest protocol volatility at five point five updates per lifespan, exceeding the European average of three point four. This high mutation rate suggests that African trials operate in a more dynamic and potentially unstable regulatory environment requiring frequent protocol adjustments to ensure survival. These findings highlight a hidden administrative burden that may influence the overall cost and duration of clinical research in African hubs. The results are limited by the self-reported nature of updates. - DOI: 10.156/protocol-volatility - Date: 2026-03-28 - Type: research - Mode: evolutionary",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

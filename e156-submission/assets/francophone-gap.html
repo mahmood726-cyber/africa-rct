@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Francophone Research Desert</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.analysis-box {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.analysis-box p { margin-bottom: 0.8rem; }
+.analysis-box p:last-child { margin-bottom: 0; }
+.danger-box {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Francophone Research Desert</h1>
+<p class="subtitle">Comparing interventional trial density in Francophone vs Anglophone Africa
+&mdash; a 4.1x per-capita gap that maps the language barrier in global clinical research</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Francophone Africa Trials</div>
+    <div class="value warning">808</div>
+    <div class="label">276M people &middot; 2.93 per million</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Anglophone Africa Trials</div>
+    <div class="value" style="color:var(--accent);">6,690</div>
+    <div class="label">554M people &middot; 12.08 per million</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Per-Capita Gap Ratio</div>
+    <div class="value danger">4.1x</div>
+    <div class="label">Anglophone rate / Francophone rate</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Francophone Penalty</div>
+    <div class="value danger">~209M</div>
+    <div class="label">People in the research desert</div>
+  </div>
+</div>
+
+<div class="method-note">
+<strong>The Francophone Penalty</strong> is the ratio of Anglophone per-capita trial density to
+Francophone per-capita trial density. A value of 4.1x means that an Anglophone African has
+4.1 times the chance of living near an active interventional trial compared to their
+Francophone counterpart. Data source: ClinicalTrials.gov API v2.
+</div>
+
+<!-- 2. Country-Level Bar Chart -->
+<h2>2. Trials Per Million by Country</h2>
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:#3b82f6;"></span> Anglophone</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#f59e0b;"></span> Francophone</div>
+</div>
+<div class="chart-container">
+  <canvas id="barChart" height="400"></canvas>
+</div>
+
+<!-- 3. Heatmap: Countries x Conditions -->
+<h2>3. Condition Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Rows = conditions. Columns = countries (
+<span style="color:#f59e0b;">Francophone</span> |
+<span style="color:#3b82f6;">Anglophone</span>). Cell color:
+<span style="color:#ff4444;">0-10 trials (red)</span>,
+<span style="color:#cccc44;">11-50 (amber)</span>,
+<span style="color:#44cc88;">51-200 (teal)</span>,
+<span style="background:#111;padding:2px 6px;">0 = black</span>.
+</p>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th style="padding:8px;">Condition</th>
+  <th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Burkina Faso</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Mali</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Guinea</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">DRC</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Senegal</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Benin</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Niger</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Madagascar</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Chad</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#f59e0b;">Togo</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Tanzania</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Malawi</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Zambia</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Ghana</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;color:#3b82f6;">Zimbabwe</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>HIV</td><td style="background:rgb(247, 150, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">15</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">8</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(247, 150, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">15</td><td style="background:rgb(167, 41, 41);color:#fff;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">608</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">329</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">283</td><td style="background:rgb(48, 203, 129);color:#000;text-align:center;padding:8px;font-weight:bold;">137</td><td style="background:rgb(199, 214, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">47</td><td style="background:rgb(48, 202, 128);color:#000;text-align:center;padding:8px;font-weight:bold;">135</td><td style="background:rgb(52, 194, 118);color:#000;text-align:center;padding:8px;font-weight:bold;">106</td><td style="background:rgb(241, 158, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">19</td><td style="background:rgb(50, 198, 122);color:#000;text-align:center;padding:8px;font-weight:bold;">118</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Malaria</td><td style="background:rgb(52, 194, 118);color:#000;text-align:center;padding:8px;font-weight:bold;">105</td><td style="background:rgb(56, 188, 110);color:#000;text-align:center;padding:8px;font-weight:bold;">80</td><td style="background:rgb(222, 184, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">32</td><td style="background:rgb(228, 176, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">28</td><td style="background:rgb(237, 164, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">22</td><td style="background:rgb(240, 160, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">20</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">8</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(202, 50, 50);color:#fff;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(54, 191, 114);color:#000;text-align:center;padding:8px;font-weight:bold;">94</td><td style="background:rgb(52, 194, 118);color:#000;text-align:center;padding:8px;font-weight:bold;">106</td><td style="background:rgb(54, 191, 114);color:#000;text-align:center;padding:8px;font-weight:bold;">94</td><td style="background:rgb(235, 166, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">23</td><td style="background:rgb(210, 200, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">40</td><td style="background:rgb(226, 178, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">29</td><td style="background:rgb(59, 181, 101);color:#000;text-align:center;padding:8px;font-weight:bold;">55</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>TB</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(253, 142, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">11</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">237</td><td style="background:rgb(54, 190, 112);color:#000;text-align:center;padding:8px;font-weight:bold;">88</td><td style="background:rgb(228, 176, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">28</td><td style="background:rgb(199, 214, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">47</td><td style="background:rgb(237, 59, 59);color:#fff;text-align:center;padding:8px;font-weight:bold;">9</td><td style="background:rgb(225, 180, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">30</td><td style="background:rgb(228, 176, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">28</td><td style="background:rgb(167, 41, 41);color:#fff;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(235, 166, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">23</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Cancer</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(132, 33, 33);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(167, 41, 41);color:#fff;text-align:center;padding:8px;font-weight:bold;">5</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">557</td><td style="background:rgb(222, 184, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">32</td><td style="background:rgb(59, 180, 100);color:#000;text-align:center;padding:8px;font-weight:bold;">51</td><td style="background:rgb(240, 160, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">20</td><td style="background:rgb(217, 190, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">35</td><td style="background:rgb(249, 148, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">14</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(202, 50, 50);color:#fff;text-align:center;padding:8px;font-weight:bold;">7</td><td style="background:rgb(255, 63, 63);color:#fff;text-align:center;padding:8px;font-weight:bold;">10</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Diabetes</td><td style="background:rgb(132, 33, 33);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(132, 33, 33);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(97, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(30, 220, 160);color:#000;text-align:center;padding:8px;font-weight:bold;">248</td><td style="background:rgb(132, 33, 33);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(220, 55, 55);color:#fff;text-align:center;padding:8px;font-weight:bold;">8</td><td style="background:rgb(150, 37, 37);color:#fff;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(252, 144, 50);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(115, 30, 30);color:#fff;text-align:center;padding:8px;font-weight:bold;">2</td><td style="background:rgb(185, 46, 46);color:#fff;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 4. The Language Barrier -->
+<h2>4. The Language Barrier</h2>
+<div class="analysis-box">
+<p><strong>Why do Francophone African countries receive dramatically fewer clinical trials?</strong>
+The answer is structural, not biological.</p>
+
+<p><strong>Registry dominance:</strong> ClinicalTrials.gov &mdash; the world's largest trial registry
+and the de facto standard for trial registration &mdash; operates exclusively in English. French-speaking
+investigators face higher barriers to registration, protocol submission, and international visibility.</p>
+
+<p><strong>Funder geography:</strong> The largest funders of global health trials (NIH, Wellcome Trust,
+Gates Foundation, PEPFAR) are Anglophone institutions with established networks in English-speaking Africa.
+Francophone countries compete for a much smaller pool from AFD, Institut Pasteur, and European Commission
+frameworks.</p>
+
+<p><strong>Investigator networks:</strong> Principal investigators trained in French-language medical
+schools have fewer direct connections to US/UK sponsor networks, fewer publications in high-impact
+English-language journals, and less access to GCP-certified trial infrastructure. The result: sponsors
+default to the same Anglophone hub sites (South Africa, Kenya, Uganda) repeatedly.</p>
+
+<p><strong>Pharmaceutical strategy:</strong> Multinational pharma sponsors optimize for regulatory
+efficiency, choosing countries with English-speaking ethics committees, ICH-harmonized regulations,
+and existing CRO infrastructure &mdash; all of which cluster in Anglophone Africa.</p>
+</div>
+
+<!-- 5. Per-Capita Comparison Table -->
+<h2>5. Per-Capita Comparison Table</h2>
+<table>
+<thead>
+<tr>
+  <th style="padding:8px;">Country</th>
+  <th style="padding:8px;text-align:center;">Language</th>
+  <th style="padding:8px;text-align:right;">Total Trials</th>
+  <th style="padding:8px;text-align:right;">Population</th>
+  <th style="padding:8px;text-align:right;">Trials / Million</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">South Africa</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">3,473</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">56.02</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Uganda</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">783</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">16.31</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Malawi</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">288</td><td style="padding:8px;text-align:right;">21M</td><td style="padding:8px;text-align:right;font-weight:bold;">13.71</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Kenya</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">720</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">12.86</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Zambia</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">245</td><td style="padding:8px;text-align:right;">21M</td><td style="padding:8px;text-align:right;font-weight:bold;">11.67</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Zimbabwe</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">166</td><td style="padding:8px;text-align:right;">15M</td><td style="padding:8px;text-align:right;font-weight:bold;">11.07</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Guinea</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">133</td><td style="padding:8px;text-align:right;">14M</td><td style="padding:8px;text-align:right;font-weight:bold;">9.5</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Burkina Faso</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">196</td><td style="padding:8px;text-align:right;">23M</td><td style="padding:8px;text-align:right;font-weight:bold;">8.52</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Ghana</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">230</td><td style="padding:8px;text-align:right;">34M</td><td style="padding:8px;text-align:right;font-weight:bold;">6.76</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Tanzania</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">431</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;font-weight:bold;">6.43</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Mali</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">144</td><td style="padding:8px;text-align:right;">23M</td><td style="padding:8px;text-align:right;font-weight:bold;">6.26</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Senegal</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">97</td><td style="padding:8px;text-align:right;">17M</td><td style="padding:8px;text-align:right;font-weight:bold;">5.71</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Benin</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">51</td><td style="padding:8px;text-align:right;">13M</td><td style="padding:8px;text-align:right;font-weight:bold;">3.92</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #3b82f6;">Nigeria</td><td style="padding:8px;text-align:center;color:var(--muted);">EN</td><td style="padding:8px;text-align:right;">354</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.54</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Niger</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">37</td><td style="padding:8px;text-align:right;">27M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.37</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">DRC</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">105</td><td style="padding:8px;text-align:right;">102M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.03</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Madagascar</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">24</td><td style="padding:8px;text-align:right;">30M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.8</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Chad</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">14</td><td style="padding:8px;text-align:right;">18M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.78</td></tr>
+<tr><td style="padding:8px;border-left:3px solid #f59e0b;">Togo</td><td style="padding:8px;text-align:center;color:var(--muted);">FR</td><td style="padding:8px;text-align:right;">7</td><td style="padding:8px;text-align:right;">9M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.78</td></tr>
+
+</tbody>
+</table>
+
+<!-- Condition comparison -->
+<h3>Condition-Level Comparison</h3>
+<table>
+<thead>
+<tr>
+  <th style="padding:8px;">Condition</th>
+  <th style="padding:8px;text-align:right;">Francophone</th>
+  <th style="padding:8px;text-align:right;">Anglophone</th>
+  <th style="padding:8px;text-align:right;">Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">HIV</td><td style="padding:8px;text-align:right;">58</td><td style="padding:8px;text-align:right;">1,782</td><td style="padding:8px;text-align:right;font-weight:bold;">30.7x</td></tr>
+<tr><td style="padding:8px;">Malaria</td><td style="padding:8px;text-align:right;">301</td><td style="padding:8px;text-align:right;">448</td><td style="padding:8px;text-align:right;font-weight:bold;">1.5x</td></tr>
+<tr><td style="padding:8px;">TB</td><td style="padding:8px;text-align:right;">28</td><td style="padding:8px;text-align:right;">495</td><td style="padding:8px;text-align:right;font-weight:bold;">17.7x</td></tr>
+<tr><td style="padding:8px;">Cancer</td><td style="padding:8px;text-align:right;">15</td><td style="padding:8px;text-align:right;">730</td><td style="padding:8px;text-align:right;font-weight:bold;">48.7x</td></tr>
+<tr><td style="padding:8px;">Diabetes</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">285</td><td style="padding:8px;text-align:right;font-weight:bold;">23.8x</td></tr>
+
+</tbody>
+</table>
+
+<!-- 6. The Outliers -->
+<h2>6. The Outliers: Malaria Research Hubs</h2>
+<div class="analysis-box">
+<p><strong>Guinea (133 trials,
+9.5 per million)</strong> and
+<strong>Burkina Faso (196 trials,
+8.52 per million)</strong> dramatically outperform their
+Francophone peers.</p>
+
+<p>Both countries host major malaria research centers that attract international funding:
+Burkina Faso's Centre National de Recherche et de Formation sur le Paludisme (CNRFP) in
+Ouagadougou is a WHO-recognized site for malaria vaccine trials, while Guinea's
+Maferinyah Training Center and Conakry's ties to Institut Pasteur created infrastructure
+that persisted beyond the Ebola response.</p>
+
+<p>These outliers prove that language alone does not determine trial density &mdash; established
+research infrastructure and disease-specific funding streams can overcome the Francophone penalty.
+However, this investment is narrowly concentrated in malaria, leaving NCDs, surgical conditions,
+and mental health essentially unresearched.</p>
+</div>
+
+<!-- 7. Bottom Tier -->
+<h2>7. Near-Invisible Countries</h2>
+<div class="danger-box">
+<p><strong>Madagascar</strong>
+(24 trials, 30M people,
+0.8 per million),
+<strong>Chad</strong>
+(14 trials, 18M people,
+0.78 per million), and
+<strong>Togo</strong>
+(7 trials, 9M people,
+0.78 per million)
+represent the deepest troughs of the Francophone research desert.</p>
+
+<p>Combined, these three countries have a population exceeding 50 million people, yet their
+total interventional trial count is lower than a single medium-sized US academic medical center
+produces in one year. Chad and Togo have fewer registered interventional trials than many
+individual US hospitals. Niger, despite being one of the world's fastest-growing populations,
+has a per-capita trial density that is essentially zero.</p>
+
+<p>These countries face compounding disadvantages: Francophone language barriers, political
+instability (Chad, Niger), weak health infrastructure, low GDP per capita, and minimal
+international research network connections. Without targeted investment in local research
+capacity, these populations will remain invisible to evidence-based medicine.</p>
+</div>
+
+<footer>
+  Data from ClinicalTrials.gov API v2 &middot; Interventional studies only &middot;
+  Generated 2026-03-28 11:16 &middot;
+  Africa RCT Landscape Project
+</footer>
+
+</div>
+
+<script>
+// Bar chart: Trials per million by country
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, {
+  type: 'bar',
+  data: {
+    labels: ["South Africa", "Uganda", "Malawi", "Kenya", "Zambia", "Zimbabwe", "Guinea", "Burkina Faso", "Ghana", "Tanzania", "Mali", "Senegal", "Benin", "Nigeria", "Niger", "DRC", "Madagascar", "Chad", "Togo"],
+    datasets: [{
+      label: 'Trials per million',
+      data: [56.02, 16.31, 13.71, 12.86, 11.67, 11.07, 9.5, 8.52, 6.76, 6.43, 6.26, 5.71, 3.92, 1.54, 1.37, 1.03, 0.8, 0.78, 0.78],
+      backgroundColor: ["#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#f59e0b", "#f59e0b", "#3b82f6", "#3b82f6", "#f59e0b", "#f59e0b", "#f59e0b", "#3b82f6", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b"],
+      borderColor: ["#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6", "#f59e0b", "#f59e0b", "#3b82f6", "#3b82f6", "#f59e0b", "#f59e0b", "#f59e0b", "#3b82f6", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b"],
+      borderWidth: 1,
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Interventional Trials per Million Population',
+        color: '#94a3b8',
+        font: { size: 14 }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#94a3b8' },
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        title: {
+          display: true,
+          text: 'Trials per million',
+          color: '#94a3b8'
+        }
+      },
+      y: {
+        ticks: { color: '#e2e8f0', font: { size: 12 } },
+        grid: { display: false }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

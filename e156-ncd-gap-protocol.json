@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Condition Colonialism Index for NCD trials across ten African nations",
+    "body": "This cross-sectional registry study will quantify the gap between non-communicable disease burden and interventional trial activity across ten African countries using ClinicalTrials.gov. Eligible records are all interventional studies with at least one site in South Africa, Egypt, Kenya, Uganda, Nigeria, Tanzania, Ethiopia, Ghana, Malawi, or Zambia across ten NCD conditions including cardiovascular disease, cancer, diabetes, chronic respiratory disease, and mental disorders. The primary metric is the Condition Colonialism Index, defined as Africa WHO-estimated burden share divided by its proportional share of registered trials for each condition. Secondary analyses will examine country-level per-capita trial density, phase distribution, sponsor origin classified as local or foreign, and temporal trends in NCD registration. The United States will serve as the main comparator for per-capita benchmarking. Results will be generated from version-controlled code and presented with underlying query logic for replication. Limitations include incomplete registry coverage of African-led NCD research, reliance on aggregate burden estimates, and restriction to a single comparator.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This protocol describes a cross-sectional registry analysis quantifying the gap between NCD burden and interventional trial investment across ten African countries."
+        },
+        {
+            "role": "Eligibility",
+            "text": "Eligible records include all interventional studies on ClinicalTrials.gov with at least one site in South Africa, Egypt, Kenya, Uganda, Nigeria, Tanzania, Ethiopia, Ghana, Malawi, or Zambia, across ten NCD conditions."
+        },
+        {
+            "role": "Search",
+            "text": "The search uses the ClinicalTrials.gov API version two, filtering by study type, location, and condition, with the United States as comparator."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "The primary metric, the Condition Colonialism Index, equals Africa's WHO-estimated disease burden share divided by its proportional share of registered trials for each condition."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Heterogeneity across countries will be assessed via per-capita trial density, phase distribution, and sponsor classification to distinguish locally driven from outsourced research."
+        },
+        {
+            "role": "Dissemination",
+            "text": "Results will be reported as an interactive HTML dashboard with analysis code archived for independent replication."
+        },
+        {
+            "role": "Limitation",
+            "text": "Anticipated limitations include incomplete registry coverage of African-led trials, reliance on aggregate WHO burden estimates, and restriction to a single comparator nation."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Africa NCD Trial Gap v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 African countries, 10 NCD conditions, US comparator",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "DRAFT"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

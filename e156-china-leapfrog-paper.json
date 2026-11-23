@@ -1,0 +1,103 @@
+{
+    "title": "China's clinical trial leapfrog and lessons for Africa's top five trial-producing countries",
+    "type": "cross-sectional registry analysis",
+    "primary_estimand": "Per-capita interventional trial density (trials per million population) and Phase 1 share comparing China with Egypt, South Africa, Uganda, Kenya, and Nigeria",
+    "study_count": null,
+    "participant_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "high (registry data, complete enumeration of ClinicalTrials.gov)",
+    "app": "C:\\AfricaRCT\\china-leapfrog.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\fetch_china_leapfrog.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-china-leapfrog-protocol.json",
+    "body": "Can Africa replicate China's acceleration from roughly five thousand to thirty-nine thousand registered interventional clinical trials in one decade? We queried ClinicalTrials.gov for interventional trials in China and Africa's five highest-output countries, stratified by disease, phase, and start-year from 2010 to 2025. China reached 38,933 trials at 27.6 per million, while the five African countries combined totalled 17,725 at far lower density, with Phase 1 shares indicating domestic drug development in China versus externally sponsored late-phase hosting in Africa. China's portfolio was cancer- and cardiovascular-heavy, reflecting pharmaceutical industry priorities, while Africa's was HIV-dominant, reflecting donor agendas. Growth trajectories showed a sharp Chinese inflection after the 2015 NMPA regulatory reform with no comparable acceleration in any African country. Five transferable levers emerged: regulatory harmonization via the African Medicines Agency, domestic manufacturing, academic investigator incentives, digital infrastructure, and CRO capacity. The analysis uses one registry and cannot causally attribute growth to specific policies.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Can Africa replicate China's decade-long acceleration from roughly five thousand to nearly thirty-nine thousand registered interventional clinical trials?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for interventional trials in China and Africa's five highest-output countries, stratified by disease area, trial phase, and start-year from 2010 to 2025."
+        },
+        {
+            "role": "Primary result",
+            "text": "China registered 38,933 trials at 27.6 per million population, while the five African countries combined reached 17,725 at markedly lower per-capita density, with Phase 1 shares indicating that China develops drugs domestically whereas African sites predominantly host externally sponsored late-phase studies."
+        },
+        {
+            "role": "Secondary result",
+            "text": "China's portfolio was concentrated in cancer and cardiovascular disease, reflecting domestic pharmaceutical priorities, while Africa's was dominated by HIV, reflecting donor-driven research agendas."
+        },
+        {
+            "role": "Robustness",
+            "text": "Growth trajectories revealed a sharp Chinese inflection after the 2015 NMPA regulatory reform, with no comparable acceleration observed in any African country."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Five transferable levers were identified: continental regulatory harmonization through the African Medicines Agency, domestic pharmaceutical manufacturing, academic investigator incentives, digital trial infrastructure, and African CRO capacity building."
+        },
+        {
+            "role": "Boundary",
+            "text": "The analysis is limited to one registry and cannot attribute China's growth to any single policy, and African trial counts likely underrepresent locally registered studies."
+        }
+    ],
+    "wordCount": 151,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "China Leapfrog v1.0",
+        "data": "ClinicalTrials.gov API v2, China + 5 African countries + 3 references",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "citation": "National Medical Products Administration. Drug Registration Regulation (2020 revision). NMPA Order No. 27.",
+            "note": "China's landmark regulatory reform"
+        },
+        {
+            "citation": "African Union. Treaty for the Establishment of the African Medicines Agency. Addis Ababa, 2019. Entered into force 2023.",
+            "note": "Africa's continental regulatory harmonization framework"
+        },
+        {
+            "pmid": "39972388",
+            "citation": "Hedt-Gauthier BL, et al. Building research capacity through a hospital-based research partnership. BMC Glob Public Health. 2025;3:12.",
+            "doi": "10.1186/s44263-025-00138-8"
+        }
+    ],
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 151 words."
+            },
+            {
+                "name": "primary estimate in sentence 3",
+                "ok": true,
+                "detail": "Sentence 3 reports China 38,933 trials at 27.6/M vs Africa top 5 combined."
+            },
+            {
+                "name": "boundary sentence present",
+                "ok": true,
+                "detail": "Sentence 7 states single-registry limitation and African undercount."
+            }
+        ]
+    }
+}

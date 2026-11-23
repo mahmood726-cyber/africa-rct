@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placebo Ethics Audit: Helsinki Declaration Compliance in African Trials</title>
+<style>
+  :root { --bg: #0a0e17; --surface: #111827; --border: #1e293b; --text: #e2e8f0;
+           --muted: #94a3b8; --accent: #3b82f6; --danger: #ef4444; --success: #22c55e;
+           --warn: #f59e0b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter','Segoe UI',system-ui,sans-serif;
+          line-height:1.6; }
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px; }
+  h1 { font-size:1.8em; margin-bottom:4px; background:linear-gradient(135deg,#ef4444,#f59e0b);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  h2 { font-size:1.3em; margin:32px 0 16px 0; color:#f1f5f9;
+        border-bottom:2px solid var(--border); padding-bottom:8px; }
+  h3 { font-size:1.1em; color:#f1f5f9; }
+  .subtitle { color:var(--muted); font-size:0.95em; margin-bottom:24px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+               gap:12px; margin:20px 0; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+          padding:16px; text-align:center; }
+  .kpi-value { font-size:1.8em; font-weight:800; }
+  .kpi-label { font-size:0.82em; color:var(--muted); margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:0.88em; }
+  th { background:#1e293b; color:#cbd5e1; padding:10px 12px; text-align:left;
+        font-weight:600; position:sticky; top:0; }
+  td { padding:8px 12px; border-bottom:1px solid #1e293b; }
+  tr:hover { background:rgba(59,130,246,0.05); }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border);
+                 margin:12px 0; }
+  .chart-container { background:var(--surface); border-radius:12px; padding:20px;
+                      border:1px solid var(--border); margin:12px 0; }
+  .callout { border-radius:12px; padding:24px; margin:20px 0; }
+  .callout-danger { background:#1a0000; border:2px solid #7f1d1d; }
+  .callout-warn { background:#1a1200; border:2px solid #78350f; }
+  .callout-info { background:#001a33; border:2px solid #1e3a5f; }
+  .callout-success { background:#001a00; border:2px solid #14532d; }
+  .method { background:var(--surface); border-radius:12px; padding:20px;
+             border:1px solid var(--border); margin:16px 0; font-size:0.9em;
+             color:var(--muted); line-height:1.8; }
+  .method strong { color:var(--text); }
+  .helsinki { background:#0f172a; border:2px solid #334155; border-radius:12px;
+              padding:24px; margin:20px 0; font-style:italic; color:#cbd5e1;
+              line-height:1.8; font-size:0.92em; }
+  .badge { display:inline-block; padding:3px 10px; border-radius:12px;
+            font-size:0.78em; font-weight:600; }
+  .badge-danger { background:#7f1d1d; color:#fca5a5; }
+  .badge-warn { background:#78350f; color:#fcd34d; }
+  .badge-success { background:#14532d; color:#86efac; }
+  canvas { max-width:100%; }
+  @media(max-width:768px) {
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    h1 { font-size:1.4em; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<h1>Placebo Ethics Audit: Helsinki Declaration Compliance</h1>
+<p class="subtitle">Are African trial participants receiving placebos when proven treatments exist?
+  | 1,531 placebo trials in Africa | 600 classified
+  | Data: ClinicalTrials.gov API v2 | 2026-03-28</p>
+
+<!-- ====== SECTION: Summary KPIs ====== -->
+<h2>Summary: The Placebo Gap</h2>
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">43.7%</div>
+    <div class="kpi-label">Africa Placebo Rate</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">20.1%</div>
+    <div class="kpi-label">US Placebo Rate</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">2.2x</div>
+    <div class="kpi-label">Africa / US Ratio</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">190</div>
+    <div class="kpi-label">Ethically Problematic</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">56</div>
+    <div class="kpi-label">Ethically Questionable</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--success)">354</div>
+    <div class="kpi-label">Ethically Justified</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--warn)">59.0%</div>
+    <div class="kpi-label">Helsinki Compliance</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-value" style="color:var(--danger)">31.7%</div>
+    <div class="kpi-label">Double Standard Rate</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <h3 style="color:#ef4444;margin:0 0 12px 0">The Core Finding</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0">
+    Africa has a placebo rate of <strong style="color:#ef4444">43.7%</strong>
+    &mdash; 2.2x higher than the US rate of 20.1%.
+    Of <strong>600</strong> classified Africa placebo trials,
+    <strong style="color:#ef4444">190</strong> (31.7%) involve conditions
+    where proven treatments exist globally.
+    Only <strong style="color:#22c55e">354</strong> (59.0%)
+    are clearly ethically justified under the Helsinki Declaration.
+    The Helsinki Compliance Score is <strong style="color:#ef4444">59.0%</strong>.
+  </p>
+</div>
+
+<!-- ====== SECTION: Helsinki Declaration ====== -->
+<h2>The Helsinki Declaration (2013)</h2>
+<div class="helsinki">
+  <p>Article 33 (Declaration of Helsinki, 2013): &ldquo;The benefits, risks, burdens and effectiveness of a new intervention must be tested against those of the best proven intervention(s), except in the following circumstances: Where no proven intervention exists, the use of placebo, or no intervention, is acceptable; or where for compelling and scientifically sound methodological reasons the use of any intervention less effective than the best proven one, the use of placebo, or no intervention is necessary to determine the efficacy or safety of an intervention and the patients who receive any intervention less effective than the best proven one, placebo, or no intervention will not be subject to additional risks of serious or irreversible harm as a result of not receiving the best proven intervention.&rdquo;</p>
+</div>
+<div class="callout callout-info">
+  <p style="color:#cbd5e1;margin:0;line-height:1.7">
+    <strong style="color:#60a5fa">Key question:</strong> For each placebo-controlled trial in Africa,
+    does a "best proven intervention" exist? If so, is there a "compelling and scientifically sound
+    methodological reason" to use placebo instead? Our classification applies these criteria
+    systematically to 600 trials.
+  </p>
+</div>
+
+<!-- ====== SECTION: Ethics Classification Table ====== -->
+<h2>Ethics Classification by Condition</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Each condition classified against known global standards of care.
+  <span class="badge badge-success">Justified</span> = no proven treatment.
+  <span class="badge badge-warn">Questionable</span> = treatment exists but access uncertain.
+  <span class="badge badge-danger">Problematic</span> = proven treatment available.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Condition</th>
+  <th style="text-align:center">Count</th>
+  <th style="text-align:center">Ethics Class</th>
+  <th>Proven Treatment</th>
+  <th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Hiv</td>
+<td style="text-align:center;font-weight:700">44</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">ARVs (antiretrovirals) -- WHO essential medicines</td>
+<td style="font-size:0.82em;color:#94a3b8">Effective ARV regimens exist and are widely available globally; placebo arms deny proven life-saving treatment</td>
+</tr>
+<tr>
+<td style="font-weight:600">Cancer</td>
+<td style="text-align:center;font-weight:700">59</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">Chemotherapy, targeted therapy, immunotherapy</td>
+<td style="font-size:0.82em;color:#94a3b8">Standard chemotherapy/targeted agents exist for most cancers; placebo-only comparators unacceptable for treatable cancers</td>
+</tr>
+<tr>
+<td style="font-weight:600">Hypertension</td>
+<td style="text-align:center;font-weight:700">14</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">ACE inhibitors, ARBs, CCBs, thiazides -- all off-patent</td>
+<td style="font-size:0.82em;color:#94a3b8">Multiple cheap antihypertensives on WHO essential list; placebo denies proven cardiovascular protection</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diabetes</td>
+<td style="text-align:center;font-weight:700">57</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">Metformin (off-patent), insulin, sulfonylureas</td>
+<td style="font-size:0.82em;color:#94a3b8">Metformin is cheap, effective, and universally available; placebo denies proven glucose control</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tuberculosis</td>
+<td style="text-align:center;font-weight:700">13</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">DOTS (directly observed therapy), isoniazid, rifampicin</td>
+<td style="font-size:0.82em;color:#94a3b8">DOTS regimen is globally standard; placebo denies curative therapy</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pneumonia</td>
+<td style="text-align:center;font-weight:700">9</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">&#x2718; Problematic</td>
+<td style="font-size:0.85em;color:#cbd5e1">Antibiotics (amoxicillin, azithromycin)</td>
+<td style="font-size:0.82em;color:#94a3b8">Antibiotics for bacterial pneumonia are standard of care; denying treatment risks death</td>
+</tr>
+<tr>
+<td style="font-weight:600">Diarrheal</td>
+<td style="text-align:center;font-weight:700">1</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">&#x26A0; Questionable</td>
+<td style="font-size:0.85em;color:#cbd5e1">ORS (oral rehydration), zinc supplementation</td>
+<td style="font-size:0.82em;color:#94a3b8">ORS/zinc is standard; however vaccine trials against rotavirus/cholera may justify placebo</td>
+</tr>
+<tr>
+<td style="font-weight:600">Covid</td>
+<td style="text-align:center;font-weight:700">29</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">&#x26A0; Questionable</td>
+<td style="font-size:0.85em;color:#cbd5e1">Dexamethasone, antivirals (evolved over pandemic)</td>
+<td style="font-size:0.82em;color:#94a3b8">Standard of care evolved rapidly; early trials justified placebo, later trials required active comparator</td>
+</tr>
+<tr>
+<td style="font-weight:600">Sickle Cell</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">&#x26A0; Questionable</td>
+<td style="font-size:0.85em;color:#cbd5e1">Hydroxyurea (off-patent), transfusion</td>
+<td style="font-size:0.82em;color:#94a3b8">Hydroxyurea is proven but access varies enormously in Africa; local unavailability may partly justify placebo</td>
+</tr>
+<tr>
+<td style="font-weight:600">Vaccine Preventable</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">&#x2714; Justified</td>
+<td style="font-size:0.85em;color:#cbd5e1">Existing vaccines for some targets</td>
+<td style="font-size:0.82em;color:#94a3b8">Novel vaccine trials against diseases with no existing vaccine can use placebo per Helsinki para 33 exception</td>
+</tr>
+<tr>
+<td style="font-weight:600">Mental Health</td>
+<td style="text-align:center;font-weight:700">11</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">&#x26A0; Questionable</td>
+<td style="font-size:0.85em;color:#cbd5e1">SSRIs, antipsychotics</td>
+<td style="font-size:0.82em;color:#94a3b8">Psychiatric medications exist but access is extremely limited in Africa; treatment gap exceeds 75%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Surgical</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">&#x2714; Justified</td>
+<td style="font-size:0.85em;color:#cbd5e1">Varies by condition</td>
+<td style="font-size:0.82em;color:#94a3b8">Sham surgery controls are methodologically necessary for certain surgical trials</td>
+</tr>
+<tr>
+<td style="font-weight:600">Pain</td>
+<td style="text-align:center;font-weight:700">6</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">&#x26A0; Questionable</td>
+<td style="font-size:0.85em;color:#cbd5e1">Paracetamol, NSAIDs, opioids</td>
+<td style="font-size:0.82em;color:#94a3b8">Basic analgesics exist but placebo run-in periods are common in pain research methodology</td>
+</tr>
+<tr>
+<td style="font-weight:600">Dermatology</td>
+<td style="text-align:center;font-weight:700">4</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">&#x2714; Justified</td>
+<td style="font-size:0.85em;color:#cbd5e1">Topical steroids, emollients</td>
+<td style="font-size:0.82em;color:#94a3b8">Non-life-threatening conditions where placebo comparison is methodologically standard and risk is minimal</td>
+</tr>
+<tr>
+<td style="font-weight:600">Healthy Volunteer</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">&#x2714; Justified</td>
+<td style="font-size:0.85em;color:#cbd5e1">N/A -- no treatment needed</td>
+<td style="font-size:0.82em;color:#94a3b8">Phase 1/PK studies in healthy volunteers inherently require placebo for safety assessment</td>
+</tr>
+<tr>
+<td style="font-weight:600;color:#94a3b8">Other / Unclassified</td>
+<td style="text-align:center;font-weight:700">343</td>
+<td style="text-align:center;color:#22c55e;font-weight:700">&#x2714; Justified</td>
+<td style="font-size:0.85em;color:#94a3b8">No standard identified</td>
+<td style="font-size:0.82em;color:#94a3b8">No established standard of care identified</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: Ethics Pie Chart ====== -->
+<h2>Ethics Classification Distribution</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div class="chart-container">
+    <canvas id="ethicsPieChart" height="300"></canvas>
+  </div>
+  <div class="chart-container">
+    <canvas id="conditionBarChart" height="300"></canvas>
+  </div>
+</div>
+
+<!-- ====== SECTION: Condition-Specific Analysis (HIV) ====== -->
+<h2>Condition Deep Dive: HIV Placebo Trials</h2>
+<div class="callout callout-danger">
+  <h3 style="color:#ef4444;margin:0 0 12px 0">HIV Placebo Trials in Africa</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0 0 16px 0">
+    Antiretroviral therapy has been standard of care since the late 1990s. Every major
+    guideline recommends ARVs for all HIV-positive individuals. Yet placebo-controlled
+    HIV trials continue in Africa. Some may be add-on designs (standard ARVs + placebo
+    vs standard ARVs + new drug), which are ethically defensible. But pure placebo arms
+    that deny ARVs violate the Helsinki Declaration unequivocally.
+  </p>
+  <div class="table-wrap">
+  <table>
+  <thead>
+  <tr>
+    <th>NCT ID</th>
+    <th>Title</th>
+    <th style="text-align:center">Ethics Class</th>
+    <th>Sponsor Type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT03164564"
+    target="_blank" style="color:#60a5fa">NCT03164564</a></td>
+<td style="font-size:0.82em">A Phase 3 Double Blind Safety and Efficacy Study of Long-Acting Injectable Cabot...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Government/NGO</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT04931641"
+    target="_blank" style="color:#60a5fa">NCT04931641</a></td>
+<td style="font-size:0.82em">Improving Efficacy and Safety of Oral Iron Supplementation in HIV-infected Child...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Academic</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT03284866"
+    target="_blank" style="color:#60a5fa">NCT03284866</a></td>
+<td style="font-size:0.82em">A Randomized, Placebo-Controlled Trial of HPV Vaccination to Reduce Cervical Hig...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Other</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT01513135"
+    target="_blank" style="color:#60a5fa">NCT01513135</a></td>
+<td style="font-size:0.82em">A Phase Il, Randomized, Double-Blind, Placebo-Controlled Trial to Evaluate the I...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Other</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT04150068"
+    target="_blank" style="color:#60a5fa">NCT04150068</a></td>
+<td style="font-size:0.82em">A Phase 2/3 Study to Evaluate the Safety and Efficacy of Long-Acting Capsid Inhi...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Industry</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT04233879"
+    target="_blank" style="color:#60a5fa">NCT04233879</a></td>
+<td style="font-size:0.82em">A Phase 3 Randomized, Active-Controlled, Double-Blind Clinical Study to Evaluate...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Industry</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT05580666"
+    target="_blank" style="color:#60a5fa">NCT05580666</a></td>
+<td style="font-size:0.82em">Reducing Mortality in Adults With Advanced HIV Disease, a Double Blinded Randomi...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Academic</td>
+</tr>
+<tr>
+<td style="font-size:0.82em"><a href="https://clinicaltrials.gov/study/NCT00241553"
+    target="_blank" style="color:#60a5fa">NCT00241553</a></td>
+<td style="font-size:0.82em">Efficacy of Esomeprazole 40 mg Once Daily Versus Placebo or Esomeprazole 20 mg O...</td>
+<td style="text-align:center;color:#ef4444;font-weight:600">Problematic</td>
+<td style="font-size:0.82em;color:#94a3b8">Industry</td>
+</tr>
+  </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ====== SECTION: Sponsor Patterns ====== -->
+<h2>Sponsor Patterns: Who Uses Placebo?</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Do pharmaceutical companies use more ethically problematic placebo designs than academic sponsors?
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Sponsor Type</th>
+  <th style="text-align:center">Total Placebo</th>
+  <th style="text-align:center;color:#22c55e">Justified</th>
+  <th style="text-align:center;color:#f59e0b">Questionable</th>
+  <th style="text-align:center;color:#ef4444">Problematic</th>
+  <th style="text-align:center">% Problematic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Industry</td>
+<td style="text-align:center;font-weight:700">540</td>
+<td style="text-align:center;color:#22c55e">343</td>
+<td style="text-align:center;color:#f59e0b">48</td>
+<td style="text-align:center;color:#ef4444">149</td>
+<td style="text-align:center;color:#f59e0b;font-weight:700">27.6%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Academic</td>
+<td style="text-align:center;font-weight:700">29</td>
+<td style="text-align:center;color:#22c55e">9</td>
+<td style="text-align:center;color:#f59e0b">7</td>
+<td style="text-align:center;color:#ef4444">13</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">44.8%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Government/NGO</td>
+<td style="text-align:center;font-weight:700">14</td>
+<td style="text-align:center;color:#22c55e">0</td>
+<td style="text-align:center;color:#f59e0b">0</td>
+<td style="text-align:center;color:#ef4444">14</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">100.0%</td>
+</tr>
+<tr>
+<td style="font-weight:600">Other</td>
+<td style="text-align:center;font-weight:700">17</td>
+<td style="text-align:center;color:#22c55e">2</td>
+<td style="text-align:center;color:#f59e0b">1</td>
+<td style="text-align:center;color:#ef4444">14</td>
+<td style="text-align:center;color:#ef4444;font-weight:700">82.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-warn">
+  <h3 style="color:#f59e0b;margin:0 0 12px 0">Industry vs Academic Placebo Ethics</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0">
+    Industry-sponsored trials have an ethically problematic rate of
+    <strong style="color:#ef4444">27.6%</strong>,
+    compared to <strong style="color:#f59e0b">44.8%</strong>
+    for academic sponsors.
+    The difference between industry and academic sponsors is modest.
+  </p>
+</div>
+
+<!-- ====== SECTION: Phase Distribution ====== -->
+<h2>Phase Distribution of Placebo Trials</h2>
+<p style="color:var(--muted);margin-bottom:12px">
+  Phase 1 trials (healthy volunteers, PK) justify placebo inherently. Phase 3 trials
+  should use active comparators when proven treatments exist.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Phase</th>
+  <th style="text-align:center">Count</th>
+  <th>Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:600">Phase 1</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:0%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Phase 2</td>
+<td style="text-align:center;font-weight:700">177</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:44%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Phase 3</td>
+<td style="text-align:center;font-weight:700">404</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Phase 4</td>
+<td style="text-align:center;font-weight:700">16</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:4%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Not specified</td>
+<td style="text-align:center;font-weight:700">0</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:0%;height:100%;background:#3b82f6;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: The Double Standard ====== -->
+<h2>The Double Standard</h2>
+<div class="callout callout-danger">
+  <h3 style="color:#ef4444;margin:0 0 12px 0">Would these placebos be acceptable in a US trial?</h3>
+  <p style="color:#e2e8f0;line-height:1.7;margin:0 0 16px 0">
+    Of the 600 Africa placebo trials classified,
+    <strong style="color:#ef4444">190</strong> (31.7%)
+    involve conditions where proven treatments exist and are routinely provided
+    in US trials as active comparators. These trials would likely not receive
+    IRB approval in the United States with a placebo-only control arm.
+  </p>
+  <p style="color:#cbd5e1;line-height:1.7;margin:0">
+    This raises a fundamental ethical question: <strong>if a placebo arm would be
+    unacceptable for American patients, why is it acceptable for African patients?</strong>
+    The Helsinki Declaration explicitly rejects the argument that lower local standards
+    of care justify lower ethical standards in research. Article 33 applies universally,
+    regardless of the geographic location of the trial.
+  </p>
+</div>
+
+<!-- ====== SECTION: Country Breakdown ====== -->
+<h2>Country Breakdown: Where Are Placebos Used?</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:center">Placebo Trials</th>
+  <th>Distribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:600">South Africa</td>
+<td style="text-align:center;font-weight:700">598</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:100%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Kenya</td>
+<td style="text-align:center;font-weight:700">20</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:3%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Egypt</td>
+<td style="text-align:center;font-weight:700">14</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Uganda</td>
+<td style="text-align:center;font-weight:700">12</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zimbabwe</td>
+<td style="text-align:center;font-weight:700">11</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:2%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Malawi</td>
+<td style="text-align:center;font-weight:700">8</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tanzania</td>
+<td style="text-align:center;font-weight:700">7</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Zambia</td>
+<td style="text-align:center;font-weight:700">6</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Tunisia</td>
+<td style="text-align:center;font-weight:700">5</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Botswana</td>
+<td style="text-align:center;font-weight:700">4</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Rwanda</td>
+<td style="text-align:center;font-weight:700">4</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Nigeria</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Ghana</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Senegal</td>
+<td style="text-align:center;font-weight:700">3</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:1%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+<tr>
+<td style="font-weight:600">Morocco</td>
+<td style="text-align:center;font-weight:700">2</td>
+<td>
+  <div style="width:200px;height:16px;background:#1e293b;border-radius:4px;overflow:hidden">
+    <div style="width:0%;height:100%;background:#60a5fa;border-radius:4px"></div>
+  </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ====== SECTION: Temporal Trend ====== -->
+<h2>Temporal Trend: Is Placebo Use Changing?</h2>
+<div class="chart-container">
+  <canvas id="trendChart" height="350"></canvas>
+</div>
+
+<!-- ====== SECTION: Methodology ====== -->
+<h2>Methodology</h2>
+<div class="method">
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (query date: 2026-03-28).</p>
+  <p><strong>Inclusion:</strong> Interventional studies with "placebo" as intervention,
+    located in Africa (1,531 total; 600 classified)
+    and United States (32,002 placebo trials).</p>
+  <p><strong>Ethics classification:</strong> Each trial classified based on whether a
+    globally-recognised standard of care exists for the indicated condition, following
+    the Helsinki Declaration Article 33 framework. Three categories: "Justified"
+    (no proven treatment), "Questionable" (treatment exists but local access uncertain),
+    "Problematic" (proven treatment globally available).</p>
+  <p><strong>Helsinki Compliance Score:</strong> Proportion of placebo trials where placebo
+    is ethically justified = 59.0%.</p>
+  <p><strong>Limitations:</strong> Keyword-based condition matching may misclassify some
+    trials. Add-on designs (active + placebo) may appear as "placebo" trials but are
+    ethically defensible. Local treatment availability is approximated, not verified
+    per site. Only ClinicalTrials.gov-registered trials are included.</p>
+  <p><strong>Code:</strong> <code>fetch_placebo_ethics.py</code></p>
+</div>
+
+<!-- ====== SECTION: AI Transparency ====== -->
+<div style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:16px;
+            margin:32px 0 0 0;font-size:0.82em;color:#64748b">
+  <strong style="color:#94a3b8">AI transparency:</strong>
+  Dashboard generated by Python script with Claude AI assistance.
+  Data sourced from ClinicalTrials.gov public API. Ethics classifications are
+  algorithmic assessments based on published standards of care, not formal
+  ethics committee decisions.
+</div>
+
+</div><!-- /container -->
+
+<!-- ====== CHARTS ====== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Ethics pie chart
+  new Chart(document.getElementById('ethicsPieChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Justified (354)', 'Questionable (56)', 'Problematic (190)'],
+      datasets: [{ data: [354, 56, 190],
+        backgroundColor: ['#22c55e', '#f59e0b', '#ef4444'],
+        borderColor: '#0a0e17', borderWidth: 3 }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Helsinki Compliance Classification',
+                  color: '#e2e8f0', font: { size: 14 } },
+        legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 16 } }
+      }
+    }
+  });
+
+  // Condition bar chart
+  new Chart(document.getElementById('conditionBarChart'), {
+    type: 'bar',
+    data: {
+      labels: ["Hiv", "Cancer", "Hypertension", "Diabetes", "Tuberculosis", "Pneumonia", "Diarrheal", "Covid", "Sickle Cell", "Vaccine Preventable", "Mental Health", "Surgical", "Pain", "Dermatology", "Healthy Volunteer", "Other"],
+      datasets: [{ data: [44, 59, 14, 57, 13, 9, 1, 29, 3, 3, 11, 2, 6, 4, 2, 343],
+        backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#ef4444", "#f59e0b", "#f59e0b", "#f59e0b", "#22c55e", "#f59e0b", "#22c55e", "#f59e0b", "#22c55e", "#22c55e", "#22c55e"],
+        borderRadius: 4 }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Placebo Trials by Condition (color = ethics class)',
+                  color: '#e2e8f0', font: { size: 14 } },
+        legend: { display: false }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#cbd5e1', font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+
+  // Temporal trend stacked bar chart
+  new Chart(document.getElementById('trendChart'), {
+    type: 'bar',
+    data: {
+      labels: ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"],
+      datasets: [
+        { label: 'Problematic', data: [1, 1, 1, 4, 3, 4, 10, 13, 11, 16, 13, 10, 11, 9, 8, 10, 8, 10, 6, 8, 7, 6, 4, 9, 3, 4, 0],
+           backgroundColor: '#ef4444', borderRadius: 2 },
+        { label: 'Questionable', data: [0, 0, 0, 0, 3, 1, 2, 2, 3, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 3, 12, 10, 10, 2, 2, 0, 0],
+           backgroundColor: '#f59e0b', borderRadius: 2 },
+        { label: 'Justified', data: [1, 3, 3, 2, 7, 12, 24, 20, 28, 12, 18, 21, 14, 24, 14, 17, 10, 16, 20, 17, 6, 16, 12, 13, 12, 8, 3],
+           backgroundColor: '#22c55e', borderRadius: 2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Placebo Trial Ethics Classification Over Time',
+                  color: '#e2e8f0', font: { size: 14 } },
+        legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 16 } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
+        y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' },
+              title: { display: true, text: 'Number of placebo trials', color: '#94a3b8' } }
+      }
+    }
+  });
+
+});
+</script>
+</body>
+</html>

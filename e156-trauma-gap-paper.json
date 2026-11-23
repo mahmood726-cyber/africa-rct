@@ -1,0 +1,51 @@
+{
+    "title": "Condition Colonialism Index for the trauma and emergency care trial gap in Africa",
+    "body": "Does the global allocation of trauma trials reflect Africa's disproportionate injury burden? We queried ClinicalTrials.gov for interventional trials matching emergency, trauma, injury, or accident across six African countries and the United States, computing subtype counts for road traffic injuries, burns, snakebite, violence, drowning, and falls. Africa hosted approximately 76 trauma trials versus 8,881 in the United States, yielding a Condition Colonialism Index of 29.4 against Africa's estimated 25 percent share of global trauma burden. Africa's road traffic fatality rate of 26.6 per 100,000 is nearly triple Europe's, yet road traffic injury trials remain in single digits. Snakebite envenomation, responsible for 138,000 African deaths annually, had negligible trial representation. The CCI of 29.4 ranks among the highest in the series, exposing a structural disconnect between where trauma kills and where trauma research occurs. Limitations include restriction to a single registry, possible undercounting of African studies, and reliance on aggregate burden estimates.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does the global allocation of trauma and emergency care trials reflect Africa's disproportionate injury burden?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov for interventional trials matching emergency, trauma, injury, or accident across six African countries and the United States, computing per-capita density and subtype counts for road traffic injuries, burns, snakebite, violence, drowning, and falls."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa hosted approximately 76 trauma trials versus 8,881 in the United States, yielding a Condition Colonialism Index of 29.4 against Africa's estimated 25 percent share of global trauma burden."
+        },
+        {
+            "role": "Road traffic spotlight",
+            "text": "Africa's road traffic fatality rate of 26.6 per 100,000 is nearly triple Europe's rate, yet road traffic injury trials on the continent remain in single digits."
+        },
+        {
+            "role": "Snakebite spotlight",
+            "text": "Snakebite envenomation, responsible for an estimated 138,000 African deaths annually, had similarly negligible trial representation on ClinicalTrials.gov."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The CCI of 29.4 ranks among the highest in the Africa RCT Gap series, exposing a structural disconnect between where trauma kills most and where trauma research is conducted."
+        },
+        {
+            "role": "Boundary",
+            "text": "Limitations include restriction to a single registry, possible undercounting of locally registered African studies, and reliance on aggregate WHO burden estimates."
+        }
+    ],
+    "wordCount": 150,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Africa Trauma Gap v1.0",
+        "data": "ClinicalTrials.gov API v2, 6 African countries, US comparator, 6 trauma subtypes, WHO RTI rates",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "DRAFT"
+    },
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

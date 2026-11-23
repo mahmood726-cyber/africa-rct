@@ -1,0 +1,51 @@
+{
+    "title": "Africa's traditional medicine paradox: 80% population reliance versus near-zero registered trial evidence",
+    "body": "Does Africa's reliance on traditional medicine correspond to proportionate investment in rigorous clinical testing? We queried ClinicalTrials.gov for interventional trials matching traditional medicine, herbal, medicinal plant, or indigenous medicine across Africa, China, India, Brazil, and the United States, plus seven African-origin remedies and eight-country African breakdowns. Africa had approximately 2 registered traditional medicine trials compared with China's 334, a 167-fold gap despite the WHO estimate that 80% of Africans use traditional medicine as primary healthcare. Remedy-specific searches for Artemisia, moringa, neem, rooibos, devil's claw, Sutherlandia, and African potato returned near-zero African trials even where global counts existed. China's systematic investment in TCM infrastructure including dedicated hospitals and national research funding demonstrates that this gap reflects policy choices not inherent limitations. Africa's most widely used healthcare interventions remain unvalidated by modern evidence standards, representing a population-scale patient safety blind spot. The analysis is limited to one English-language registry and may undercount trials on African or WHO platforms.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Does Africa's reliance on traditional medicine correspond to a proportionate investment in rigorous clinical testing of herbal and indigenous remedies?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for all interventional trials matching traditional medicine, herbal, medicinal plant, or indigenous medicine across Africa, China, India, Brazil, and the United States, with subgroup searches for seven African-origin remedies and per-country breakdowns across eight African nations."
+        },
+        {
+            "role": "Primary result",
+            "text": "Africa had approximately 2 registered traditional medicine trials compared with 334 in China, yielding a 167-fold gap despite the WHO estimate that 80% of Africans use traditional medicine as primary healthcare."
+        },
+        {
+            "role": "Robustness",
+            "text": "Searches for Artemisia, moringa, neem, rooibos, devil's claw, Sutherlandia, and African potato returned near-zero African-site trials even where global counts existed, and no African country exceeded single-digit totals."
+        },
+        {
+            "role": "Comparator",
+            "text": "China's systematic investment in Traditional Chinese Medicine infrastructure, including 4,000 dedicated hospitals and national research funding, demonstrates that the gap reflects policy choices rather than inherent limitations."
+        },
+        {
+            "role": "Interpretation",
+            "text": "Africa's most widely used healthcare interventions remain essentially unvalidated by modern evidence standards, representing a population-scale patient safety blind spot."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to a single English-language registry and cannot capture trials registered on African or WHO platforms."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Traditional Medicine Paradox Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 8 African countries, 5 comparison regions, 7 specific remedies",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Condition Colonialism Index for trauma and emergency care trials in Africa",
+    "body": "This cross-sectional registry study will quantify the gap between trauma burden and trial activity across six African countries using ClinicalTrials.gov. Eligible records are all interventional studies matching emergency, trauma, injury, or accident with at least one site in South Africa, Egypt, Kenya, Uganda, Nigeria, or Tanzania, with the United States as comparator. The primary metric is the Condition Colonialism Index, defined as Africa's estimated trauma burden share divided by its proportional share of registered trials. Secondary analyses will examine six subtypes including road traffic injuries, burns, snakebite, violence, drowning, and falls, with per-capita trial density and sponsor classification. Contextual data from the WHO Global Status Report on Road Safety and the Lancet Commission on Global Surgery will frame the emergency care desert. Results will be presented as an interactive HTML dashboard with version-controlled analysis code. Limitations include reliance on a single registry, potential undercounting of locally registered research, and restriction to six nations rather than all fifty-four.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This protocol describes a cross-sectional registry analysis quantifying the gap between trauma burden and emergency care trial investment across six African countries."
+        },
+        {
+            "role": "Eligibility",
+            "text": "Eligible records include all interventional studies on ClinicalTrials.gov matching emergency, trauma, injury, or accident with at least one site in South Africa, Egypt, Kenya, Uganda, Nigeria, or Tanzania."
+        },
+        {
+            "role": "Search",
+            "text": "The search uses the ClinicalTrials.gov API version two, filtering by study type and location, with the United States as comparator and additional queries for six trauma subtypes including road traffic injuries, burns, snakebite, violence, drowning, and falls."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "The primary metric, the Condition Colonialism Index, equals Africa's estimated share of global trauma burden divided by its proportional share of registered trials."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "Heterogeneity will be assessed via country-level per-capita trial density, subtype-specific ratios, phase distribution, and sponsor classification to distinguish locally driven from externally imposed research."
+        },
+        {
+            "role": "Dissemination",
+            "text": "Results will be reported as an interactive HTML dashboard with analysis code archived for independent replication, contextualized by WHO road safety and Lancet Commission global surgery data."
+        },
+        {
+            "role": "Limitation",
+            "text": "Anticipated limitations include reliance on a single registry, potential undercounting of locally registered trials, and restriction to six African nations rather than the full continent."
+        }
+    ],
+    "wordCount": 157,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Africa Trauma Gap v1.0",
+        "data": "ClinicalTrials.gov API v2, 6 African countries, US comparator, 6 trauma subtypes, WHO RTI data, Lancet Commission",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "DRAFT"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

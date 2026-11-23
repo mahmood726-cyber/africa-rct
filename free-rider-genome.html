@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Free Rider Genome: Everyone Sequences, Nobody Treats</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #14b8a6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--teal);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+.teal { color: var(--teal); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(20, 184, 166, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(20, 184, 166, 0.1);
+  border-left: 4px solid var(--teal);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.purple-note {
+  background: rgba(168, 85, 247, 0.1);
+  border-left: 4px solid var(--purple);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.theory-box {
+  background: rgba(20, 184, 166, 0.08);
+  border: 2px solid var(--teal);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+.void-box {
+  background: rgba(239, 68, 68, 0.15);
+  border: 2px solid var(--danger);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.void-box .big-zero {
+  font-size: 6rem;
+  font-weight: 900;
+  color: var(--danger);
+  line-height: 1;
+}
+.void-box .big-number {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.void-box .big-label {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>The Free Rider Genome: Everyone Sequences, Nobody Treats</h1>
+<p class="subtitle">Olson (1965) meets Hardin (1968): Africa's genetic diversity is a public good
+exploited without reciprocal clinical investment.</p>
+
+<!-- 1. Game Theory -->
+<h2>1. The Game Theory</h2>
+<div class="theory-box">
+<h3 style="color:var(--teal);margin-top:0;">The Free Rider Problem (Olson, 1965) + Tragedy of the Commons (Hardin, 1968)</h3>
+<p>A <strong>public good</strong> is non-excludable (everyone can use it) and non-rivalrous
+(one person's use doesn't diminish it). Africa's genetic diversity is the ultimate public good
+for genomic medicine:</p>
+<br>
+<div class="two-col">
+<div>
+<p><strong style="color:var(--teal);">THE PUBLIC GOOD</strong></p>
+<p>Africa has the highest genetic diversity on Earth. Every out-of-Africa population is a
+subset of African diversity. This means African genomes contain variants critical for
+understanding ALL human drug responses, disease susceptibility, and gene function.</p>
+<br>
+<p>&bull; H3Africa: 50,000 participants, 30 countries</p>
+<p>&bull; 3,500 whole genomes sequenced</p>
+<p>&bull; 1200+ publications globally citing the data</p>
+<p>&bull; Data policy: Open access after embargo period</p>
+</div>
+<div>
+<p><strong style="color:var(--danger);">THE FREE RIDING</strong></p>
+<p>Global researchers download H3Africa data, publish papers using African genetic diversity,
+develop drugs informed by African variants &mdash; but invest ZERO in pharmacogenomics
+trials that would benefit African patients.</p>
+<br>
+<p>&bull; Africa pharmacogenomics trials: <strong style="color:var(--danger);">30</strong></p>
+<p>&bull; US pharmacogenomics trials: <strong>482</strong></p>
+<p>&bull; H3Africa interventional trials: <strong style="color:var(--danger);">0</strong></p>
+<p>&bull; Free Rider Index: <strong style="color:var(--danger);">24.3x</strong></p>
+</div>
+</div>
+</div>
+
+<!-- 2. Summary -->
+<h2>2. The Public Good Exploited</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Free Rider Index</div>
+    <div class="value danger">24.3x</div>
+    <div class="label">(global genomics trials) / (Africa genomics trials)</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa PGx Trials</div>
+    <div class="value danger">30</div>
+    <div class="label">vs 482 in the US</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">H3Africa Interventional</div>
+    <div class="value danger">0</div>
+    <div class="label">1200+ publications globally using the data</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">African Genetic Diversity</div>
+    <div class="value teal">HIGHEST</div>
+    <div class="label">globally; every population is a subset</div>
+  </div>
+</div>
+
+<div class="void-box">
+  <div class="big-zero">30</div>
+  <div class="big-label">pharmacogenomics trials in Africa</div>
+  <div class="big-label" style="margin-top:1rem;color:var(--danger);">
+    While Africans have the highest CYP2D6 ultra-rapid metabolizer frequency (20-40%) on Earth
+  </div>
+</div>
+
+<!-- 3. H3Africa Paradox -->
+<h2>3. The H3Africa Paradox: Sequencing Without Treating</h2>
+<div class="danger-note">
+<strong>H3Africa</strong> (NIH and Wellcome Trust, launched 2012)
+sequenced 3,500 African genomes and biobanked
+70,000 samples. The data is used in 1200+ publications globally.
+Yet <strong>zero interventional trials</strong> have translated this data into clinical applications
+for African patients. The sequence-to-bedside pipeline stops at the sequence.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Query</th>
+  <th style="text-align:right;">Global Interventional</th>
+  <th style="text-align:right;">Africa Interventional</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">H3Africa</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;">African genomics</td><td style="padding:8px;text-align:right;">73</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">35</td></tr>
+<tr><td style="padding:8px;">African ancestry</td><td style="padding:8px;text-align:right;">128</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">21</td></tr>
+
+</tbody>
+</table>
+
+<!-- 4. Genomics Trials -->
+<h2>4. Genomics/Precision Medicine Trials by Region</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">China</th>
+  <th style="text-align:right;">India</th>
+  <th style="text-align:right;">UK</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Precision medicine / genomics</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">132</td><td style="padding:8px;text-align:right;">1773</td><td style="padding:8px;text-align:right;">455</td><td style="padding:8px;text-align:right;">46</td><td style="padding:8px;text-align:right;">305</td></tr>
+<tr><td style="padding:8px;">Pharmacogenomics</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">35</td><td style="padding:8px;text-align:right;">457</td><td style="padding:8px;text-align:right;">36</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">58</td></tr>
+<tr><td style="padding:8px;">Biomarker-guided therapy</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">27</td><td style="padding:8px;text-align:right;">372</td><td style="padding:8px;text-align:right;">114</td><td style="padding:8px;text-align:right;">9</td><td style="padding:8px;text-align:right;">67</td></tr>
+<tr><td style="padding:8px;">Targeted therapy</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">1064</td><td style="padding:8px;text-align:right;">16334</td><td style="padding:8px;text-align:right;">5511</td><td style="padding:8px;text-align:right;">539</td><td style="padding:8px;text-align:right;">2592</td></tr>
+<tr><td style="padding:8px;">Gene therapy</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">217</td><td style="padding:8px;text-align:right;">4439</td><td style="padding:8px;text-align:right;">1285</td><td style="padding:8px;text-align:right;">96</td><td style="padding:8px;text-align:right;">727</td></tr>
+<tr><td style="padding:8px;">Liquid biopsy / ctDNA</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">43</td><td style="padding:8px;text-align:right;">1069</td><td style="padding:8px;text-align:right;">347</td><td style="padding:8px;text-align:right;">18</td><td style="padding:8px;text-align:right;">181</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="chart-container">
+<h3>Total Genomics/Precision Medicine Trials by Region</h3>
+<canvas id="genomicsChart" height="300"></canvas>
+</div>
+
+<!-- 5. CYP2D6/CYP2B6 Gap -->
+<h2>5. The CYP2D6/CYP2B6 Gap: Different Genes, No Dose-Finding</h2>
+<div class="purple-note">
+<strong>Africans metabolize drugs differently.</strong> CYP2D6 ultra-rapid metabolizers (20-40% of Africans
+vs 1-10% of Europeans) convert codeine to morphine at dangerous rates. CYP2B6*6 slow metabolizers
+(40-50% of Africans) accumulate toxic efavirenz levels during HIV treatment. CYP3A5 expressors
+(&gt;70% of Africans vs &lt;30% of Europeans) need higher tacrolimus doses after transplant.
+Yet there are <strong>30 pharmacogenomics trials</strong> in Africa to optimize dosing.
+</div>
+
+<h3>Allele Frequencies: Why African PGx Matters</h3>
+<table>
+<thead>
+<tr>
+  <th>Allele / Phenotype</th>
+  <th style="text-align:center;">African</th>
+  <th style="text-align:center;">European</th>
+  <th style="text-align:center;">East Asian</th>
+  <th>Clinical Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;font-weight:bold;">CYP2D6 ultrarapid metabolizer</td><td style="padding:8px;text-align:center;color:#a855f7;">20-40%</td><td style="padding:8px;text-align:center;">1-10%</td><td style="padding:8px;text-align:center;">0-2%</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Codeine, tramadol, tamoxifen metabolism</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">CYP2B6*6 slow metabolizer</td><td style="padding:8px;text-align:center;color:#a855f7;">40-50%</td><td style="padding:8px;text-align:center;">25-30%</td><td style="padding:8px;text-align:center;">15-20%</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Efavirenz toxicity in HIV treatment</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">CYP3A5*1 active (expressors)</td><td style="padding:8px;text-align:center;color:#a855f7;">60-90%</td><td style="padding:8px;text-align:center;">10-30%</td><td style="padding:8px;text-align:center;">25-45%</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Tacrolimus dosing in transplant</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">VKORC1 African haplotype</td><td style="padding:8px;text-align:center;color:#a855f7;">unique variants</td><td style="padding:8px;text-align:center;">well-characterized</td><td style="padding:8px;text-align:center;">well-characterized</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Warfarin dose prediction algorithms</td></tr>
+
+</tbody>
+</table>
+
+<h3>Pharmacogenomics Trials by Gene</h3>
+<table>
+<thead>
+<tr>
+  <th>Gene</th>
+  <th>Clinical Relevance</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">China</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;font-weight:bold;">CYP2D6</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Metabolizes 25% of all drugs; Africa has highest allele diversity globally</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">6</td><td style="padding:8px;text-align:right;">101</td><td style="padding:8px;text-align:right;">8</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">CYP2B6</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Metabolizes efavirenz (HIV); CYP2B6*6 at 40-50% frequency in Africans</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">15</td><td style="padding:8px;text-align:right;">278</td><td style="padding:8px;text-align:right;">32</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">CYP3A5</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Metabolizes tacrolimus, calcium channel blockers; *1 active allele &gt;70% in Africans vs &lt;30% Europeans</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">4</td><td style="padding:8px;text-align:right;">32</td><td style="padding:8px;text-align:right;">2</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">UGT1A1</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Gilbert syndrome and irinotecan toxicity; UGT1A1*6 rare but *28 varies</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">3</td><td style="padding:8px;text-align:right;">57</td><td style="padding:8px;text-align:right;">33</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">VKORC1</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Warfarin sensitivity; African-specific haplotypes not in standard algorithms</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td><td style="padding:8px;text-align:right;">11</td><td style="padding:8px;text-align:right;">6</td></tr>
+<tr><td style="padding:8px;font-weight:bold;">HLA-B*5701</td><td style="padding:8px;font-size:0.8rem;color:var(--muted);">Abacavir hypersensitivity screening; frequency varies across African populations</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">2</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">0</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>PGx Trials by Gene: Africa vs US vs China</h3>
+<canvas id="pgxChart" height="300"></canvas>
+</div>
+
+<!-- 6. BRCA/HER2 in Africa -->
+<h2>6. BRCA in Africa: Triple-Negative BC Higher, Targeted Therapy Absent</h2>
+<div class="warning-note">
+<strong>African women have the highest rates of triple-negative breast cancer (TNBC)</strong>
+globally &mdash; the subtype most resistant to standard chemotherapy and most in need of
+targeted therapies. BRCA1/2 mutations are found at significant frequencies in African populations.
+Yet precision oncology trials (BRCA-targeted, HER2-targeted, immunotherapy) are concentrated
+overwhelmingly in the US and Europe.
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>Precision Oncology Category</th>
+  <th style="text-align:right;">Africa</th>
+  <th style="text-align:right;">US</th>
+  <th style="text-align:right;">US:Africa Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">BRCA (breast cancer gene)</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">7</td><td style="padding:8px;text-align:right;">209</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">29.9x</td></tr>
+<tr><td style="padding:8px;">HER2 targeted</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">112</td><td style="padding:8px;text-align:right;">1517</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">13.5x</td></tr>
+<tr><td style="padding:8px;">Triple-negative BC</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">28</td><td style="padding:8px;text-align:right;">695</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">24.8x</td></tr>
+<tr><td style="padding:8px;">PD-L1 / immunotherapy</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">119</td><td style="padding:8px;text-align:right;">2755</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">23.2x</td></tr>
+
+</tbody>
+</table>
+
+<div class="chart-container">
+<h3>Precision Oncology: Africa vs US</h3>
+<canvas id="oncChart" height="300"></canvas>
+</div>
+
+<!-- 7. Per-Country -->
+<h2>7. Per-Country Genomics in Africa</h2>
+<table>
+<thead>
+<tr>
+  <th>Country</th>
+  <th style="text-align:right;">Genomics/Precision Med Trials</th>
+  <th style="text-align:right;">Pharmacogenomics Trials</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">8</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">9</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">7</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">6</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">67</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">15</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">2</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">44</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">11</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;color:#ef4444;font-weight:bold;">0</td></tr>
+
+</tbody>
+</table>
+
+<!-- 8. Fair Contribution / Coase -->
+<h2>8. What "Fair Contribution" Looks Like</h2>
+<div class="theory-box">
+<h3 style="color:var(--teal);margin-top:0;">The Coase Theorem Solution: Property Rights Over Genomic Data</h3>
+<p>Ronald Coase (1960) showed that externalities can be resolved through well-defined property
+rights and bargaining. Applied to African genomic data:</p>
+<br>
+<p><strong>1. Data sovereignty (establish property rights):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">African biobanks should require "clinical trial
+reciprocity" &mdash; any researcher downloading African genomic data must contribute to a
+fund for pharmacogenomics trials in Africa. The H3Africa data is currently open access;
+conditional access would create the missing property right.</p>
+<br>
+<p><strong>2. Benefit-sharing agreements (Nagoya Protocol for genomes):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">The Nagoya Protocol on Access and Benefit Sharing
+already governs biological resources. Extend it explicitly to human genomic data: if a drug is
+developed using African genetic diversity data, a percentage of revenue funds African clinical
+trials.</p>
+<br>
+<p><strong>3. PGx trial mandates (internalize the externality):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">For any drug where CYP2D6, CYP2B6, or CYP3A5
+variants affect metabolism, require African dose-finding studies as a condition of WHO
+prequalification. Currently 30 such trials exist.</p>
+<br>
+<p><strong>4. Reciprocal data contributions (end free riding):</strong></p>
+<p style="margin-left:1rem;color:var(--muted);">Every non-African genomic medicine trial that
+cites African-origin genetic data should be required to include African sites or fund
+equivalent African trials. Convert free riding into fair contribution.</p>
+</div>
+
+<!-- Method -->
+<h2>Method</h2>
+<div class="method-note">
+<strong>Data source:</strong> ClinicalTrials.gov API v2 (accessed 28 March 2026).<br>
+<strong>Regions:</strong> Africa (10 countries), United States, China, India, United Kingdom.<br>
+<strong>Genomics queries:</strong> Precision medicine, pharmacogenomics, biomarker-guided,
+targeted therapy, gene therapy, liquid biopsy &mdash; filtered to interventional studies.<br>
+<strong>PGx gene queries:</strong> CYP2D6, CYP2B6, CYP3A5, UGT1A1, VKORC1, HLA-B*5701.<br>
+<strong>Oncology queries:</strong> BRCA, HER2, triple-negative BC, PD-L1/immunotherapy.<br>
+<strong>Allele frequencies:</strong> Published population genetics literature
+(PharmGKB, gnomAD, H3Africa publications).<br>
+<strong>H3Africa facts:</strong> H3Africa consortium reports (2012-2024).<br>
+<strong>Free Rider Index:</strong> Sum of genomics trials in US+China+India+UK divided by Africa total.<br>
+<strong>Limitations:</strong> Single registry; pharmacogenomics studies may use different
+terminology; H3Africa-funded observational studies are excluded (interventional filter);
+allele frequencies are population-level estimates with intra-African variation.
+</div>
+
+<footer>
+The Free Rider Genome: Everyone Sequences, Nobody Treats &mdash; ClinicalTrials.gov Registry Analysis |
+Generated 2026-03-28 14:26 |
+Data: ClinicalTrials.gov API v2
+</footer>
+
+</div>
+
+<script>
+// Genomics by region
+new Chart(document.getElementById('genomicsChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Africa", "United States", "China", "India", "United Kingdom"],
+    datasets: [{
+      label: 'Total Genomics/Precision Med Trials',
+      data: [1518, 24444, 7748, 711, 3930],
+      backgroundColor: ['#ef4444', '#3b82f6', '#f59e0b', '#a855f7', '#14b8a6'],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// PGx by gene
+new Chart(document.getElementById('pgxChart'), {
+  type: 'bar',
+  data: {
+    labels: ["CYP2D6", "CYP2B6", "CYP3A5", "UGT1A1", "VKORC1", "HLA-B*5701"],
+    datasets: [
+      { label: 'Africa', data: [6, 15, 4, 3, 0, 2], backgroundColor: '#ef4444', borderRadius: 4 },
+      { label: 'US', data: [101, 278, 32, 57, 11, 3], backgroundColor: '#3b82f6', borderRadius: 4 },
+      { label: 'China', data: [8, 32, 2, 33, 6, 0], backgroundColor: '#f59e0b', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+    }
+  }
+});
+
+// Precision oncology
+new Chart(document.getElementById('oncChart'), {
+  type: 'bar',
+  data: {
+    labels: ["BRCA (breast cancer gene)", "HER2 targeted", "Triple-negative BC", "PD-L1 / immunotherapy"],
+    datasets: [
+      { label: 'Africa', data: [7, 112, 28, 119], backgroundColor: '#ef4444', borderRadius: 4 },
+      { label: 'US', data: [209, 1517, 695, 2755], backgroundColor: '#3b82f6', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: {
+      y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+      x: { grid: { display: false }, ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

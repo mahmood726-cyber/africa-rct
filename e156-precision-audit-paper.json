@@ -1,0 +1,51 @@
+{
+    "title": "The Ar-Rahman Precision Audit: sensitivity analysis of clinical complexity indices and per-capita trial metrics across Africa",
+    "body": "Are the numbers measuring Africa's research inequity precise enough to publish, or do measurement choices change conclusions? We audited 10 disease-specific Clinical Complexity Indices under six sensitivity conditions: two Africa trial counting methods (keyword search vs sum of 10 country queries, 100 API calls) crossed with three WHO burden estimates (baseline plus-or-minus 20 percent). Each CCI was classified as robust (direction stable, range below 0.2), uncertain (stable but wide range), or fragile (crosses the parity threshold of 1.0). We also audited per-capita density for 10 countries using three population sources (UN, World Bank, CIA Factbook), flagging ranges exceeding 10 percent. Several conditions produced robust CCIs whose direction survived all sensitivity tests, confirming publishability without caveats, while others proved fragile when counting method changed. Per-capita figures were generally stable. The principle that divine creation follows exact computation demands equal rigour in research measurement: every published number should report its sensitivity range, and fragile metrics should carry caveats rather than false precision.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "Are the Clinical Complexity Indices and per-capita trial metrics used to measure Africa's research inequity precise enough to publish, or do reasonable measurement choices change the conclusions?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We audited 10 disease-specific CCIs by computing each under six sensitivity conditions: two Africa trial counting methods (keyword search vs sum of 10 country queries, 100 API calls) crossed with three WHO burden estimates (baseline plus-or-minus 20 percent), using ClinicalTrials.gov API v2."
+        },
+        {
+            "role": "Robustness classification",
+            "text": "Each CCI was classified as robust (direction stable, range below 0.2), uncertain (stable direction but wide range), or fragile (crosses the parity threshold under different assumptions), identifying which findings survive all sensitivity tests."
+        },
+        {
+            "role": "CCI results",
+            "text": "Several conditions produced robust CCIs whose under-researched or over-researched direction survived all six sensitivity variants, while others proved fragile when switching from keyword to country-sum counting methods."
+        },
+        {
+            "role": "Per-capita audit",
+            "text": "Per-capita trial density computed using three independent population sources (UN 2024, World Bank 2024, CIA Factbook 2024) showed generally narrow ranges, though a few countries exceeded the 10 percent discrepancy threshold."
+        },
+        {
+            "role": "Interpretation",
+            "text": "The Quranic principle that the sun and moon follow courses exactly computed demands equal rigour in research metrics: every published number should report its sensitivity range, and fragile findings should carry explicit caveats rather than false precision."
+        },
+        {
+            "role": "Boundary",
+            "text": "This audit covers only ClinicalTrials.gov and uses WHO burden estimates that themselves carry uncertainty; national registries and primary burden data would strengthen precision further."
+        }
+    ],
+    "wordCount": 157,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Precision Audit Dashboard v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 conditions, 10 countries, WHO GBD 2024, UN/WB/CIA population data",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assisted with drafting and language editing. The author reviewed and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

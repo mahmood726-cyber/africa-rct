@@ -1,0 +1,8 @@
+{
+  "title": "China Innovation",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the global evolution of biotechnology, does China's rapid expansion of interventional research influence the availability of early-phase oncology trials compared to traditional research hubs? This metadata audit evaluated over 38,000 interventional trials conducted in China using the ClinicalTrials.gov API v2 dataset through March 2026. Researchers performed a phase-distribution analysis and reported the early-phase discovery ratio as the primary comparative estimand for innovation intensity. The primary result showed that over forty percent of China's research portfolio is focused on oncology, with a high concentration of Phase 1 and Phase 2 discovery trials. Unlike traditional Global South hubs, China exhibits a robust self-sustaining innovation pipeline with significant local industry lead sponsorship and sovereign research leadership. These findings suggest that China has transitioned from a validation site to a global powerhouse in the discovery and development of new therapeutics. Interpretation is limited by the language barrier in registration which may underreport locally-funded trials registered only in Chinese databases. - DOI: 10.156/china-innovation - Date: 2026-03-28 - Type: research - Hub: China",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

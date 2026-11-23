@@ -1,0 +1,66 @@
+{
+    "title": "Protocol: The terms of trade in African clinical research - raw data exported, finished drugs imported",
+    "body": "This cross-sectional registry study will quantify whether Africa functions as a raw material exporter in the global clinical trial economy, applying the Prebisch-Singer hypothesis from development economics to health research. We will query ClinicalTrials.gov API v2 for interventional trial counts by phase across fifteen African countries and seven comparator nations including the United States, United Kingdom, France, Germany, India, China, and Brazil. The primary metric is the Terms of Trade ratio defined as Phase 3 trials divided by Phase 1 trials, where higher values indicate a country primarily tests foreign drugs rather than innovating. Secondary metrics include an Innovation Index defined as Phase 1 share of total trials, an Export Intensity measure defined as Phase 3 share of total trials, and per-capita trial density by phase. For Uganda we will retrieve detailed Phase 3 trial data including enrollment counts and intervention names, matched against the WHO Essential Medicines List to estimate what proportion of tested drugs will be accessible post-trial. All query parameters and drug lists will be prespecified and version controlled. Limitations include registry dependence, ecological design, and the inability to value participant contributions in monetary terms.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will quantify whether Africa functions as a raw material exporter in the global clinical trial economy using the Prebisch-Singer hypothesis."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for interventional trial counts by phase across fifteen African countries and seven comparator nations."
+        },
+        {
+            "role": "Search",
+            "text": "The primary metric is the Terms of Trade ratio defined as Phase 3 trials divided by Phase 1 trials."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Secondary metrics include an Innovation Index, Export Intensity measure, per-capita trial density by phase, and WHO Essential Medicines List overlap for Uganda Phase 3 trials."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "All query parameters and drug lists will be prespecified and version controlled."
+        },
+        {
+            "role": "Dissemination",
+            "text": "No patient-level data will be used and all analyses are reproducible from the cached data file."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include registry dependence, ecological design, and the inability to value participant contributions in monetary terms."
+        }
+    ],
+    "wordCount": 163,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Terms of Trade v1.0",
+        "data": "ClinicalTrials.gov API v2, 15 African + 7 comparator countries",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    },
+    "references": [
+        {
+            "pmid": "39972388"
+        },
+        {
+            "pmid": "37643290"
+        },
+        {
+            "pmid": "36332653"
+        },
+        {
+            "pmid": "34843674"
+        }
+    ]
+}

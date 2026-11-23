@@ -1,0 +1,41 @@
+{
+    "title": "Community engagement deficit in African clinical trials: cross-sectional registry analysis",
+    "type": "cross-sectional registry analysis",
+    "primary_estimand": "Community Voice Score (proportion of trials classified as community-engaged) in Uganda and comparison countries",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "high (registry data, complete enumeration within ClinicalTrials.gov)",
+    "app": "C:\\AfricaRCT\\community-view.html",
+    "data": "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code": "C:\\AfricaRCT\\fetch_community_view.py",
+    "doi": "Pending",
+    "protocol": "C:\\AfricaRCT\\e156-community-view-protocol.json",
+    "body": "How much African clinical research genuinely engages the communities that host it? We queried ClinicalTrials.gov API v2 on 27 March 2026 for all interventional trials in Uganda, South Africa, Nigeria, and Kenya, classifying each as community-engaged, extractive, or ambiguous based on title keywords, phase, and intervention type. Of 783 Uganda trials, a minority showed community engagement markers such as participatory design, behavioral focus, or community health worker involvement, while the majority were extractive drug-testing studies designed and controlled by foreign institutions. The Community Voice Score varied across countries, with nations having strong community health worker systems showing higher engagement rates. Condition-specific analysis revealed that behavioral conditions attracted more participatory research, while HIV and malaria trials were predominantly extractive despite disproportionately burdening host communities. Cluster-randomized trials posed additional consent challenges, as community-level randomization may not constitute individual informed consent. These findings quantify the gap between research done TO African communities versus research done WITH them.",
+    "ai_transparency": "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "word count",
+                "ok": true,
+                "detail": "Found 157 words."
+            },
+            {
+                "name": "primary estimate in sentences 3-4",
+                "ok": true,
+                "detail": "Sentence 3 reports the Uganda classification results and sentence 4 reports cross-country variation."
+            },
+            {
+                "name": "boundary sentence present",
+                "ok": true,
+                "detail": "Sentence 7 states the main finding on engagement deficit."
+            }
+        ]
+    }
+}

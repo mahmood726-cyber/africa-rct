@@ -1,0 +1,43 @@
+{
+    "title":  "Uganda\u0027s clinical trial landscape: 783 registered trials for 48 million people",
+    "type":  "cross-sectional registry analysis",
+    "primary_estimand":  "Condition-specific trial counts and sponsor classification for Uganda interventional trials",
+    "study_count":  783,
+    "participant_count":  null,
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "certainty":  "high (complete registry enumeration with trial-level data)",
+    "app":  "C:\\AfricaRCT\\uganda-rct-analysis.html",
+    "data":  "ClinicalTrials.gov API v2 (public, accessed 27 March 2026)",
+    "code":  "C:\\AfricaRCT\\fetch_uganda_rcts.py",
+    "doi":  "Pending",
+    "protocol":  "C:\\AfricaRCT\\e156-uganda-rct-protocol.json",
+    "body":  "In Uganda, does the registered clinical trial portfolio align with the country's disease burden and population health needs? We retrieved all 783 interventional trials listing a Ugandan site on ClinicalTrials.gov and extracted sponsor, phase, condition, enrollment, site count, and current status for each record, classifying sponsors as Uganda-local or foreign. HIV accounted for 329 trials, or 42% of the total portfolio, while diabetes had only 3 trials, stroke had 6, and hypertension had 10, revealing extreme disease concentration. Foreign institutions sponsored 79.5% of all trials, and Makerere University alone accounted for 71% of all locally sponsored research output. Phase 1 local sovereignty was only 2.1%, with a single locally led phase 1 study identified among 48 total phase 1 trials. The portfolio therefore appears structurally dependent on foreign sponsors and concentrated in donor-driven infectious-disease priorities rather than reflecting local burden. The analysis is limited to ClinicalTrials.gov and cannot capture trials registered elsewhere or unregistered community-based studies.",
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "primary estimate in sentence 4",
+                                          "ok":  true,
+                                          "detail":  "Sentence 4 reports HIV 329/42%, diabetes 3, stroke 6, HTN 10."
+                                      },
+                                      {
+                                          "name":  "boundary sentence present",
+                                          "ok":  true,
+                                          "detail":  "Sentence 7 contains limitation language."
+                                      }
+                                  ]
+                   }
+}
+

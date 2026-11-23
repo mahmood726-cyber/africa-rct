@@ -1,0 +1,52 @@
+{
+    "title": "Protocol: Francophone-Anglophone comparison of African interventional trial density",
+    "body": "This cross-sectional registry study will compare interventional trial density between Francophone and Anglophone countries in sub-Saharan Africa using ClinicalTrials.gov as the data source. We will query ClinicalTrials.gov API v2 for all interventional studies with at least one site in ten Francophone countries (Senegal, DRC, Burkina Faso, Mali, Niger, Chad, Guinea, Madagascar, Benin, Togo) or nine Anglophone countries (South Africa, Kenya, Uganda, Nigeria, Tanzania, Ghana, Malawi, Zambia, Zimbabwe) and calculate trials per million population. The primary outcome is the Francophone Penalty ratio, computed as Anglophone per-capita trial density divided by Francophone per-capita trial density. Secondary analyses will examine condition-specific trial volumes for HIV, malaria, tuberculosis, cancer, and diabetes and identify outlier research hubs within each language group by ranking countries on density. All queries will be scripted, cached, and archived for reproducibility. No patient-level data will be accessed. Limitations include dependence on a single English-language registry and possible undercounting of studies listed on Francophone or WHO platforms.",
+    "sentences": [
+        {
+            "role": "Objective",
+            "text": "This cross-sectional registry study will compare interventional trial density between Francophone and Anglophone countries in sub-Saharan Africa."
+        },
+        {
+            "role": "Eligibility",
+            "text": "We will query ClinicalTrials.gov for all interventional studies with sites in ten Francophone countries and nine Anglophone countries and calculate trials per million population."
+        },
+        {
+            "role": "Search",
+            "text": "The primary outcome is the ratio of Anglophone to Francophone per-capita trial density."
+        },
+        {
+            "role": "Analysis plan",
+            "text": "Secondary analyses will examine HIV, malaria, tuberculosis, cancer, and diabetes counts and will identify outlier research hubs within each language group."
+        },
+        {
+            "role": "Heterogeneity plan",
+            "text": "All queries will be scripted and cached for reproducibility."
+        },
+        {
+            "role": "Dissemination",
+            "text": "No patient-level data will be accessed."
+        },
+        {
+            "role": "Limitation",
+            "text": "Limitations include dependence on a single English-language registry and possible undercounting of studies listed elsewhere."
+        }
+    ],
+    "wordCount": 105,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "type": "protocol",
+        "app": "Francophone Gap Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 Francophone + 9 Anglophone African countries, 5 conditions",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-27",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-27",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}

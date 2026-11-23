@@ -1,0 +1,51 @@
+{
+    "title":  "Clinical trial access in conflict-affected African states: cross-sectional registry analysis",
+    "body":  "Are populations in conflict-affected African states substantially underrepresented in registered clinical trials? We queried ClinicalTrials.gov for interventional trials across nine conflict-affected African states and five more stable comparators and calculated per-capita trial density together with a Conflict Exclusion Score defined as the ratio of stable to conflict per-capita rates. Trial density was several-fold higher in the stable comparator group, and some conflict-affected states had fewer than ten registered interventional trials despite populations above ten million. Condition-specific analyses showed almost no PTSD or mental health trials in the conflict-affected group despite large trauma burdens. In the Democratic Republic of the Congo, national totals were concentrated in more stable urban settings, masking sparse registration in conflict-affected eastern provinces. Rwanda showed that post-conflict recovery can be accompanied by substantially higher trial density than seen in many fragile states. The analysis is limited to one registry, cannot geolocate all activity within countries, and will miss humanitarian or locally registered studies.",
+    "sentences":  [
+                      {
+                          "role":  "Question",
+                          "text":  "Are populations in conflict-affected African states substantially underrepresented in registered clinical trials?"
+                      },
+                      {
+                          "role":  "Dataset",
+                          "text":  "We queried ClinicalTrials.gov for interventional trials across nine conflict-affected African states and five more stable comparators and calculated per-capita trial density together with a Conflict Exclusion Score defined as the ratio of stable to conflict per-capita rates."
+                      },
+                      {
+                          "role":  "Primary result",
+                          "text":  "Trial density was several-fold higher in the stable comparator group, and some conflict-affected states had fewer than ten registered interventional trials despite populations above ten million."
+                      },
+                      {
+                          "role":  "Robustness",
+                          "text":  "Condition-specific analyses showed almost no PTSD or mental health trials in the conflict-affected group despite large trauma burdens."
+                      },
+                      {
+                          "role":  "Secondary result",
+                          "text":  "In the Democratic Republic of the Congo, national totals were concentrated in more stable urban settings, masking sparse registration in conflict-affected eastern provinces."
+                      },
+                      {
+                          "role":  "Interpretation",
+                          "text":  "Rwanda showed that post-conflict recovery can be accompanied by substantially higher trial density than seen in many fragile states."
+                      },
+                      {
+                          "role":  "Boundary",
+                          "text":  "The analysis is limited to one registry, cannot geolocate all activity within countries, and will miss humanitarian or locally registered studies."
+                      }
+                  ],
+    "wordCount":  156,
+    "sentenceCount":  7,
+    "outsideNote":  {
+                        "app":  "Conflict Zone Exclusion v1.0",
+                        "data":  "ClinicalTrials.gov API v2, 9 conflict states, 5 stable comparators, 6 conditions",
+                        "code":  "C:\\AfricaRCT\\",
+                        "doi":  "",
+                        "version":  "1.0",
+                        "date":  "2026-03-27",
+                        "validationStatus":  "Author reviewed draft"
+                    },
+    "ai_transparency":  "LLM assistance was used in early drafting. The final text was rewritten by the author, who takes full responsibility for the content.",
+    "meta":  {
+                 "created":  "2026-03-27",
+                 "valid":  true,
+                 "schemaVersion":  "0.1"
+             }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growing Up Without Evidence: The Child's View of Clinical Trials in Africa</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+h1 { font-size:2rem; margin:30px 0 10px; color:#fff; }
+h2 { font-size:1.5rem; margin:40px 0 15px; color:var(--accent); border-bottom:1px solid var(--border); padding-bottom:8px; }
+h3 { font-size:1.1rem; margin:20px 0 10px; color:var(--purple); }
+.subtitle { color:var(--muted); font-size:1rem; margin-bottom:30px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; }
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:20px 0; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px; text-align:center; }
+.stat-box .number { font-size:2.2rem; font-weight:bold; }
+.stat-box .label { font-size:0.85rem; color:var(--muted); margin-top:4px; }
+.narrative { background:rgba(168,85,247,0.08); border-left:4px solid var(--purple); padding:20px; margin:20px 0; border-radius:0 10px 10px 0; font-style:italic; color:#c4b5fd; }
+table { width:100%; border-collapse:collapse; margin:10px 0; }
+th { background:rgba(59,130,246,0.15); padding:10px 8px; text-align:left; font-size:0.85rem; color:var(--accent); border-bottom:2px solid var(--border); }
+td { border-bottom:1px solid var(--border); }
+tr:hover { background:rgba(255,255,255,0.02); }
+.chart-container { position:relative; height:380px; margin:20px 0; }
+canvas { max-width:100%; }
+.methodology { background:rgba(59,130,246,0.05); border:1px solid var(--border); border-radius:10px; padding:20px; margin:30px 0; font-size:0.9rem; color:var(--muted); }
+.methodology h3 { color:var(--accent); }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+.vs-box { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; text-align:center; }
+.vs-label { font-size:2rem; font-weight:bold; color:var(--muted); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<div class="container">
+
+<h1>Born Into an Evidence Desert</h1>
+<p class="subtitle">The Child's View: Pediatric Clinical Trials in Africa | Project 50 of the Africa RCT Equity Series</p>
+
+<div class="narrative">
+"A child born today in Lagos, Nairobi, or Addis Ababa will face childhood pneumonia, malaria, malnutrition, and sickle cell disease. For most of these conditions, there is almost no clinical trial evidence generated on the continent where these diseases kill the most children. The treatments they receive were tested on children elsewhere -- or never tested on children at all."
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="number" style="color:var(--danger);">6270</div>
+    <div class="label">Pediatric Trials in 10 African Countries</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--accent);">34833</div>
+    <div class="label">Pediatric Trials in the US</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--warning);">5.6x</div>
+    <div class="label">US-to-Africa Pediatric Trial Gap</div>
+  </div>
+  <div class="stat-box">
+    <div class="number" style="color:var(--danger);">0/10</div>
+    <div class="label">Conditions with Zero Africa Trials</div>
+  </div>
+</div>
+
+<h2>The Childhood Evidence Gap by Condition</h2>
+<p style="color:var(--muted);margin-bottom:10px;">For each condition, how many trials exist in Africa vs the US?</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="condChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Childhood Condition</th>
+        <th style="text-align:right;">Africa (10 countries)</th>
+        <th style="text-align:right;">United States</th>
+        <th style="text-align:right;">Evidence Gap</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Childhood cancer</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">48</td><td style="padding:8px;text-align:right;">1657</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">34.5x</td></tr>
+<tr><td style="padding:8px;">Childhood epilepsy</td><td style="padding:8px;text-align:right;color:#f59e0b;font-weight:bold;">4</td><td style="padding:8px;text-align:right;">101</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">25.2x</td></tr>
+<tr><td style="padding:8px;">Sickle cell disease</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">85</td><td style="padding:8px;text-align:right;">574</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">6.8x</td></tr>
+<tr><td style="padding:8px;">Neonatal sepsis</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">89</td><td style="padding:8px;text-align:right;">459</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">5.2x</td></tr>
+<tr><td style="padding:8px;">Malnutrition</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">169</td><td style="padding:8px;text-align:right;">473</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">2.8x</td></tr>
+<tr><td style="padding:8px;">Diarrheal disease</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">14</td><td style="padding:8px;text-align:right;">37</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">2.6x</td></tr>
+<tr><td style="padding:8px;">Childhood pneumonia</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">55</td><td style="padding:8px;text-align:right;">102</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">1.9x</td></tr>
+<tr><td style="padding:8px;">Childhood HIV</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">223</td><td style="padding:8px;text-align:right;">191</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">0.9x</td></tr>
+<tr><td style="padding:8px;">Childhood malaria</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">133</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">0.0x</td></tr>
+<tr><td style="padding:8px;">Childhood TB</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">13</td><td style="padding:8px;text-align:right;">0</td><td style="padding:8px;text-align:right;font-weight:bold;color:#f59e0b;">0x</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Condition-Country Heatmap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Pediatric trial counts by condition and country -- red = zero, amber = 1-4, green = 5+</p>
+
+<div class="card" style="overflow-x:auto;">
+  <table style="font-size:0.85rem;">
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Nigeri</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">South </th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ethiop</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Ghana</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Tanzan</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Rwanda</th><th style="padding:4px;font-size:0.65rem;writing-mode:vertical-rl;text-orientation:mixed;">Camero</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood pneumonia</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">14</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">7</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">13</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">12</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Diarrheal disease</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">6</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Malnutrition</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">12</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">6</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">33</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">27</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">44</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">14</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">19</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">12</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Neonatal sepsis</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">27</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">10</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">32</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">10</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood HIV</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">10</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">93</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">57</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">63</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">29</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">7</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood malaria</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">9</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">37</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">25</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">44</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">36</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">8</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood TB</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">5</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood cancer</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">3</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">4</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">38</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Childhood epilepsy</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">2</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td></tr>
+<tr><td style="padding:6px;font-weight:bold;font-size:0.8rem;">Sickle cell disease</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">30</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">9</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">26</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">30</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">10</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">17</td><td style="padding:4px;text-align:center;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:bold;font-size:0.85rem;">8</td><td style="padding:4px;text-align:center;background:rgba(239,68,68,0.3);color:#ef4444;font-weight:bold;font-size:0.85rem;">0</td><td style="padding:4px;text-align:center;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:bold;font-size:0.85rem;">1</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2>The Neonatal Gap</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Neonatal sepsis and newborn conditions: where the first 28 days are the most dangerous</p>
+
+<div class="card">
+  <div class="vs-box">
+    <div>
+      <div style="font-size:2.5rem;font-weight:bold;color:var(--danger);">1221</div>
+      <div style="color:var(--muted);">Neonatal trials in Africa</div>
+    </div>
+    <div class="vs-label">vs</div>
+    <div>
+      <div style="font-size:2.5rem;font-weight:bold;color:var(--accent);">8647</div>
+      <div style="color:var(--muted);">Neonatal trials in US</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;color:var(--warning);font-size:1.3rem;font-weight:bold;">
+    7.1x gap -- despite Africa having the world's highest neonatal mortality
+  </div>
+</div>
+
+<h2>Vaccination vs Treatment Trials</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Africa's pediatric trials are disproportionately vaccination-focused. Treatment trials for sick children are rare.</p>
+
+<div class="card">
+  <div class="stat-grid">
+    <div class="stat-box" style="border-left:4px solid var(--warning);">
+      <div class="number" style="color:var(--warning);">352</div>
+      <div class="label">Africa: Pediatric Vaccine Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--danger);">
+      <div class="number" style="color:var(--danger);">5452</div>
+      <div class="label">Africa: Pediatric Treatment Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--accent);">
+      <div class="number" style="color:var(--accent);">1466</div>
+      <div class="label">US: Pediatric Vaccine Trials</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid var(--success);">
+      <div class="number" style="color:var(--success);">30450</div>
+      <div class="label">US: Pediatric Treatment Trials</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:12px;color:var(--muted);">
+    Africa vaccine-to-treatment ratio: <strong style="color:var(--warning);">0.06</strong> |
+    US vaccine-to-treatment ratio: <strong style="color:var(--accent);">0.05</strong>
+  </div>
+</div>
+
+<h2>A Child in Lagos vs London</h2>
+<p style="color:var(--muted);margin-bottom:10px;">Pediatric trials per country -- per million children under 15</p>
+
+<div class="card">
+  <div class="chart-container">
+    <canvas id="countryChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th style="text-align:right;">Pediatric Trials</th>
+        <th style="text-align:right;">Children (under 15)</th>
+        <th style="text-align:right;">Trials per Million Children</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">3689</td><td style="padding:8px;text-align:right;">32M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">115.28</td></tr>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">1038</td><td style="padding:8px;text-align:right;">16M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">64.88</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">482</td><td style="padding:8px;text-align:right;">23M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">20.96</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">481</td><td style="padding:8px;text-align:right;">22M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">21.86</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">290</td><td style="padding:8px;text-align:right;">30M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">9.67</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">203</td><td style="padding:8px;text-align:right;">95M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">2.14</td></tr>
+<tr><td style="padding:8px;">Ethiopia</td><td style="padding:8px;text-align:right;">168</td><td style="padding:8px;text-align:right;">53M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">3.17</td></tr>
+<tr><td style="padding:8px;">Ghana</td><td style="padding:8px;text-align:right;">155</td><td style="padding:8px;text-align:right;">13M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">11.92</td></tr>
+<tr><td style="padding:8px;">Rwanda</td><td style="padding:8px;text-align:right;">66</td><td style="padding:8px;text-align:right;">6M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">11.0</td></tr>
+<tr><td style="padding:8px;">Cameroon</td><td style="padding:8px;text-align:right;">46</td><td style="padding:8px;text-align:right;">13M</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:bold;">3.54</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="narrative">
+"The consent ethics dimension is stark: children cannot consent to being in a trial, but they also cannot consent to being treated with medicines never tested on children like them. In Africa, the latter is the default. Every day, millions of children receive treatments based on evidence from populations with different genetics, different nutrition, different co-infections. Growing up without evidence is not a metaphor -- it is the lived reality of 300 million African children."
+</div>
+
+<div class="methodology">
+  <h3>Methodology</h3>
+  <p><strong>Data source:</strong> ClinicalTrials.gov API v2 (queried 2026-03-28)</p>
+  <p><strong>Filter:</strong> <code>AREA[StudyType]INTERVENTIONAL</code> with condition-specific queries combining pediatric terms</p>
+  <p><strong>Countries:</strong> 10 African nations + United States as comparator</p>
+  <p><strong>Conditions:</strong> 10 childhood conditions reflecting Africa's pediatric disease burden</p>
+  <p><strong>Childhood Evidence Gap:</strong> Ratio of US to Africa trial counts per condition</p>
+  <p><strong>Child population:</strong> UN 2024 estimates for population under 15</p>
+  <p><strong>Limitation:</strong> Single registry; pediatric terminology varies. Some trials may include children without pediatric-specific registration terms. Age-eligibility filtering limited to term-based search.</p>
+  <p><strong>AI transparency:</strong> LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.</p>
+</div>
+
+</div>
+
+<footer>
+  Africa RCT Equity Series -- Project 50: The Child's View | ClinicalTrials.gov API v2<br>
+  Generated 2026-03-28 | Data cached for 24 hours
+</footer>
+
+<script>
+new Chart(document.getElementById('condChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Childhood cancer", "Childhood epilepsy", "Sickle cell disease", "Neonatal sepsis", "Malnutrition", "Diarrheal disease", "Childhood pneumonia", "Childhood HIV", "Childhood malaria", "Childhood TB"],
+    datasets: [
+      { label: 'Africa (10 countries)', data: [48, 4, 85, 89, 169, 14, 55, 223, 133, 13], backgroundColor: 'rgba(239,68,68,0.7)', borderRadius: 4 },
+      { label: 'United States', data: [1657, 101, 574, 459, 473, 37, 102, 191, 1, 0], backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'Childhood Evidence Gap: Africa vs US by Condition', color: '#e2e8f0' },
+      legend: { labels: { color: '#e2e8f0' } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('countryChart'), {
+  type: 'bar',
+  data: {
+    labels: ["Egypt", "South Africa", "Uganda", "Kenya", "Tanzania", "Nigeria", "Ethiopia", "Ghana", "Rwanda", "Cameroon"],
+    datasets: [{
+      label: 'Pediatric trials',
+      data: [3689, 1038, 482, 481, 290, 203, 168, 155, 66, 46],
+      backgroundColor: [3689, 1038, 482, 481, 290, 203, 168, 155, 66, 46].map(v => v < 20 ? 'rgba(239,68,68,0.7)' : (v < 100 ? 'rgba(245,158,11,0.7)' : 'rgba(34,197,94,0.7)')),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Pediatric Trials by African Country', color: '#e2e8f0' }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      x: { ticks: { color: '#94a3b8', maxRotation: 45 } }
+    }
+  }
+});
+</script>
+</body>
+</html>

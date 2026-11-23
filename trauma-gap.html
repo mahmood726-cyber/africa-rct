@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Africa Trauma &amp; Emergency Care Trial Gap</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.method-note {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.danger-note {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--danger);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.warning-note {
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+.scroll-x { overflow-x: auto; }
+.stat-highlight {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  padding: 0.2rem 0.6rem;
+  font-weight: bold;
+  color: var(--danger);
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Africa's Trauma &amp; Emergency Care Trial Gap</h1>
+<p class="subtitle">The world's highest injury burden, the fewest trials &mdash;
+Condition Colonialism Index for trauma across Africa</p>
+
+<!-- 1. Summary -->
+<h2>1. Summary</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Trauma Trials</div>
+    <div class="value danger">907</div>
+    <div class="label">vs 9,139 in the United States</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Condition Colonialism Index</div>
+    <div class="value danger">2.8</div>
+    <div class="label">25% burden / 9.03% trial share</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Road Traffic Fatality Rate</div>
+    <div class="value danger">26.6</div>
+    <div class="label">per 100K (Africa) vs 9.3 (Europe)</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US-to-Africa Trial Ratio</div>
+    <div class="value warning">10.0x</div>
+    <div class="label">9,139 vs 907 trauma trials</div>
+  </div>
+</div>
+
+<div class="method-note">
+<strong>Condition Colonialism Index (CCI)</strong> = Africa's share of global trauma/injury
+burden (%) divided by Africa's share of registered trials (%). Africa carries ~25% of the
+global trauma burden but hosts only ~9.03% of trauma/emergency trials
+relative to the US, yielding a CCI of <span class="stat-highlight">2.8x</span>.
+A CCI of 1.0 would mean proportional investment. Values above 5.0 represent severe
+structural under-investment.
+</div>
+
+<!-- 2. CCI Computation -->
+<h2>2. CCI Computation</h2>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Trauma Burden</div>
+    <div class="value warning">25%</div>
+    <div class="label">of global injury deaths + DALYs</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Trial Share</div>
+    <div class="value danger">9.03%</div>
+    <div class="label">907 / (907 + 9139) trials</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">CCI = Burden / Share</div>
+    <div class="value danger">2.8</div>
+    <div class="label">25% / 9.03%</div>
+  </div>
+</div>
+
+<div class="danger-note">
+<strong>Interpretation:</strong> For every unit of trauma research Africa should receive
+based on its burden, it gets only 1/2.8th. This is among the highest CCI values
+in the Africa RCT Gap series, reflecting that trauma &mdash; despite being a leading cause
+of death in young Africans &mdash; remains profoundly under-researched on the continent.
+</div>
+
+<!-- 3. Road Traffic Spotlight -->
+<h2>3. Road Traffic Injury Spotlight</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Africa has the world's highest road traffic fatality rate: <span class="stat-highlight">26.6
+deaths per 100,000 population</span> (WHO Global Status Report on Road Safety 2023),
+nearly triple Europe's rate of 9.3/100K. Yet road traffic injury trials in Africa are
+vanishingly rare.
+</p>
+
+<div class="two-col">
+<div>
+<h3>RTI Fatality Rate by WHO Region (per 100K)</h3>
+<table>
+<thead><tr><th>Region</th><th style="text-align:right;">Rate / 100K</th></tr></thead>
+<tbody><tr><td style="padding:8px;color:#ff4444;font-weight:bold;">Africa</td><td style="padding:8px;text-align:right;color:#ff4444;font-weight:bold;">26.6</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">South-East Asia</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">18.1</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">Eastern Mediterranean</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">17.7</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">Global</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">16.7</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">Americas</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">15.6</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">Western Pacific</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">14.1</td></tr>
+<tr><td style="padding:8px;color:#e2e8f0;font-weight:normal;">Europe</td><td style="padding:8px;text-align:right;color:#e2e8f0;font-weight:normal;">9.3</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="rtiChart" height="280"></canvas>
+</div>
+</div>
+
+<div class="warning-note">
+<strong>The paradox:</strong> Africa has the highest road traffic death rate of any WHO
+region (26.6/100K), accounting for the fastest-growing cause of death in young adults
+aged 5&ndash;29 across the continent. Yet the number of interventional trials addressing
+road traffic injuries in Africa remains in the single digits or low double digits. This
+disparity reflects not only under-funding but also the absence of pre-hospital care
+systems, trauma registries, and research infrastructure needed to conduct such trials.
+</div>
+
+<!-- 4. Snakebite -->
+<h2>4. Snakebite: The Forgotten Emergency</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Snakebite envenomation kills an estimated 138,000 people in Africa annually
+(WHO Neglected Tropical Diseases). Africa accounts for ~25.6% of global snakebite deaths.
+The WHO added snakebite to its NTD priority list in 2017.
+</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Annual African Snakebite Deaths</div>
+    <div class="value danger">138,000</div>
+    <div class="label">~25.6% of global total</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Snakebite Trials</div>
+    <div class="value danger">1</div>
+    <div class="label">On ClinicalTrials.gov</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Snakebite Trials</div>
+    <div class="value">13</div>
+    <div class="label">For comparison</div>
+  </div>
+</div>
+
+<div class="danger-note">
+<strong>138,000 deaths per year, 1 trials.</strong> Africa's snakebite
+crisis represents one of the starkest examples of the global research equity gap. The
+continent lacks locally manufactured antivenoms, and most existing antivenoms are
+imported at costs exceeding monthly wages. The absence of clinical trials means treatment
+protocols rely on evidence generated elsewhere, often for different snake species entirely.
+</div>
+
+<!-- 5. Burns Gap -->
+<h2>5. Burns: The Hidden Epidemic</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Burns are the leading cause of injury-related disability in many African settings, driven
+by open cooking fires, kerosene stoves, and limited access to running water. Children under
+5 are disproportionately affected.
+</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Burns Trials</div>
+    <div class="value danger">83</div>
+    <div class="label">Across 6 queried countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Burns Trials</div>
+    <div class="value">358</div>
+    <div class="label">For comparison</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US/Africa Ratio</div>
+    <div class="value warning">4.3x</div>
+    <div class="label">Gap magnitude</div>
+  </div>
+</div>
+
+<!-- 6. Violence & Conflict Trauma -->
+<h2>6. Violence &amp; Conflict Trauma</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Africa hosts 35% of the world's active armed conflicts (Uppsala Conflict Data Program).
+Interpersonal violence rates in southern and eastern Africa are among the highest globally.
+Yet trials addressing violence and assault injuries are almost non-existent.
+</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Violence/Assault Trials</div>
+    <div class="value danger">59</div>
+    <div class="label">Across 6 queried countries</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Violence/Assault Trials</div>
+    <div class="value">385</div>
+    <div class="label">For comparison</div>
+  </div>
+</div>
+
+<div class="warning-note">
+<strong>The Lancet Commission on Global Surgery (2015)</strong> found that 5 billion people
+lack access to safe, affordable surgical and anaesthesia care. In sub-Saharan Africa,
+an estimated 93% of the population lacks access to essential surgical services. Trauma
+is the condition most dependent on timely surgical intervention, making this gap
+life-threatening in the most literal sense.
+</div>
+
+<!-- 7. Country Breakdown -->
+<h2>7. African Country Breakdown</h2>
+<h3>Overall Trauma Trial Counts</h3>
+<table>
+<thead>
+<tr><th>Country</th><th style="text-align:right;">Trauma Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials / Million</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">73</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.18</td></tr>
+<tr><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">778</td><td style="padding:8px;text-align:right;">110M</td><td style="padding:8px;text-align:right;font-weight:bold;">7.07</td></tr>
+<tr><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.3</td></tr>
+<tr><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">27</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.56</td></tr>
+<tr><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.06</td></tr>
+<tr><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">10</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.15</td></tr>
+
+</tbody>
+</table>
+
+<h3>Subtype Heatmap by Country</h3>
+<p style="color:var(--muted);margin-bottom:0.5rem;">
+Rows = trauma subtypes. Columns = African countries.
+<span style="color:#ff4444;">0-3 trials (red)</span>,
+<span style="color:#cccc44;">4-10 (yellow)</span>,
+<span style="color:#44cc66;">10+ (green)</span>,
+<span style="background:#111;padding:2px 6px;">0 = black</span>.
+</p>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Subtype</th>
+<th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">South Africa</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Egypt</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Kenya</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Uganda</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Nigeria</th><th style="padding:8px;writing-mode:vertical-rl;text-orientation:mixed;">Tanzania</th>
+<th style="padding:8px;writing-mode:vertical-rl;">US/Africa Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style='padding:8px;font-weight:bold;'>Road traffic / motor vehicle</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#44cc66;color:#000;text-align:center;padding:8px;font-weight:bold;">9.7x</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Burns</td><td style="background:rgb(240, 139, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">4</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">78</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#44cc66;color:#000;text-align:center;padding:8px;font-weight:bold;">4.3x</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Violence / assault</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">25</td><td style="background:rgb(255, 63, 63);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">12</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">11</td><td style="background:rgb(255, 63, 63);color:#fff;text-align:center;padding:8px;font-weight:bold;">3</td><td style="background:rgb(212, 177, 40);color:#000;text-align:center;padding:8px;font-weight:bold;">6</td><td style="background:#44cc66;color:#000;text-align:center;padding:8px;font-weight:bold;">6.5x</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Snakebite / envenomation</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">13.0x</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Drowning</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#44cc66;color:#000;text-align:center;padding:8px;font-weight:bold;">3.0x</td></tr>
+<tr><td style='padding:8px;font-weight:bold;'>Falls</td><td style="background:rgb(138, 34, 34);color:#fff;text-align:center;padding:8px;font-weight:bold;">1</td><td style="background:rgb(50, 200, 80);color:#000;text-align:center;padding:8px;font-weight:bold;">18</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#111;color:#fff;text-align:center;padding:8px;font-weight:bold;">0</td><td style="background:#ffaa33;color:#000;text-align:center;padding:8px;font-weight:bold;">17.7x</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- 8. International Comparison -->
+<h2>8. International Comparison</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+Trauma trial counts across comparator countries: US, India, Brazil, UK, and 6 African nations.
+</p>
+<div class="chart-container">
+<canvas id="compChart" height="300"></canvas>
+</div>
+
+<h3>Per-Capita Trauma Trial Density</h3>
+<table>
+<thead>
+<tr><th>Country</th><th style="text-align:right;">Total Trials</th>
+<th style="text-align:right;">Population</th>
+<th style="text-align:right;">Trials / Million</th></tr>
+</thead>
+<tbody>
+<tr style="background:#1a1a2e;"><td style="padding:8px;">United States  (comparator)</td><td style="padding:8px;text-align:right;">9,139</td><td style="padding:8px;text-align:right;">335M</td><td style="padding:8px;text-align:right;font-weight:bold;">27.28</td></tr>
+<tr style=""><td style="padding:8px;">United Kingdom</td><td style="padding:8px;text-align:right;">729</td><td style="padding:8px;text-align:right;">68M</td><td style="padding:8px;text-align:right;font-weight:bold;">10.72</td></tr>
+<tr style=""><td style="padding:8px;">Egypt</td><td style="padding:8px;text-align:right;">778</td><td style="padding:8px;text-align:right;">110M</td><td style="padding:8px;text-align:right;font-weight:bold;">7.07</td></tr>
+<tr style=""><td style="padding:8px;">Brazil</td><td style="padding:8px;text-align:right;">410</td><td style="padding:8px;text-align:right;">217M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.89</td></tr>
+<tr style=""><td style="padding:8px;">South Africa</td><td style="padding:8px;text-align:right;">73</td><td style="padding:8px;text-align:right;">62M</td><td style="padding:8px;text-align:right;font-weight:bold;">1.18</td></tr>
+<tr style=""><td style="padding:8px;">Uganda</td><td style="padding:8px;text-align:right;">27</td><td style="padding:8px;text-align:right;">48M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.56</td></tr>
+<tr style=""><td style="padding:8px;">Kenya</td><td style="padding:8px;text-align:right;">17</td><td style="padding:8px;text-align:right;">56M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.3</td></tr>
+<tr style=""><td style="padding:8px;">Tanzania</td><td style="padding:8px;text-align:right;">10</td><td style="padding:8px;text-align:right;">67M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.15</td></tr>
+<tr style=""><td style="padding:8px;">India</td><td style="padding:8px;text-align:right;">157</td><td style="padding:8px;text-align:right;">1440M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.11</td></tr>
+<tr style=""><td style="padding:8px;">Nigeria</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;">230M</td><td style="padding:8px;text-align:right;font-weight:bold;">0.06</td></tr>
+
+</tbody>
+</table>
+
+<!-- 9. Subtype Deep-Dive -->
+<h2>9. Trauma Subtype: Africa vs United States</h2>
+<div class="scroll-x">
+<table>
+<thead>
+<tr><th>Subtype</th><th style="text-align:right;">Africa</th>
+<th style="text-align:right;">US</th>
+<th style="text-align:right;">US/Africa Ratio</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:8px;">Road traffic / motor vehicle</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">29</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">9.7x</td></tr>
+<tr><td style="padding:8px;">Burns</td><td style="padding:8px;text-align:right;">83</td><td style="padding:8px;text-align:right;">358</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">4.3x</td></tr>
+<tr><td style="padding:8px;">Violence / assault</td><td style="padding:8px;text-align:right;">59</td><td style="padding:8px;text-align:right;">385</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">6.5x</td></tr>
+<tr><td style="padding:8px;">Snakebite / envenomation</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">13</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">13.0x</td></tr>
+<tr><td style="padding:8px;">Drowning</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">3.0x</td></tr>
+<tr><td style="padding:8px;">Falls</td><td style="padding:8px;text-align:right;">19</td><td style="padding:8px;text-align:right;">337</td><td style="padding:8px;text-align:right;font-weight:bold;color:#ffaa33;">17.7x</td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="subtypeChart" height="300"></canvas>
+</div>
+
+<!-- 10. Sponsor Analysis -->
+<h2>10. Sponsor Analysis</h2>
+<div class="two-col">
+<div>
+<h3>By Sponsor Class</h3>
+<table>
+<thead><tr><th>Class</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">OTHER</td><td style="padding:8px;text-align:right;">89</td></tr>
+<tr><td style="padding:8px;">OTHER_GOV</td><td style="padding:8px;text-align:right;">6</td></tr>
+<tr><td style="padding:8px;">INDUSTRY</td><td style="padding:8px;text-align:right;">5</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Top Sponsors</h3>
+<table>
+<thead><tr><th>Sponsor</th><th style="text-align:right;">Count</th></tr></thead>
+<tbody><tr><td style="padding:8px;">Cairo University</td><td style="padding:8px;text-align:right;">19</td></tr>
+<tr><td style="padding:8px;">Ain Shams University</td><td style="padding:8px;text-align:right;">14</td></tr>
+<tr><td style="padding:8px;">Sohag University</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">Mansoura University</td><td style="padding:8px;text-align:right;">5</td></tr>
+<tr><td style="padding:8px;">Alexandria University</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">Assiut University</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">Minia University</td><td style="padding:8px;text-align:right;">4</td></tr>
+<tr><td style="padding:8px;">October 6 University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Zagazig University</td><td style="padding:8px;text-align:right;">3</td></tr>
+<tr><td style="padding:8px;">Al-Azhar University</td><td style="padding:8px;text-align:right;">2</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>Phase Distribution</h3>
+<div class="two-col">
+<div>
+<table>
+<thead><tr><th>Phase</th><th style="text-align:right;">Count</th>
+<th style="text-align:right;">%</th></tr></thead>
+<tbody><tr><td style="padding:8px;">EARLY_PHASE1</td><td style="padding:8px;text-align:right;">5</td><td style="padding:8px;text-align:right;">5.0%</td></tr>
+<tr><td style="padding:8px;">NA</td><td style="padding:8px;text-align:right;">64</td><td style="padding:8px;text-align:right;">64.0%</td></tr>
+<tr><td style="padding:8px;">PHASE1</td><td style="padding:8px;text-align:right;">3</td><td style="padding:8px;text-align:right;">3.0%</td></tr>
+<tr><td style="padding:8px;">PHASE1, PHASE2</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">1.0%</td></tr>
+<tr><td style="padding:8px;">PHASE2</td><td style="padding:8px;text-align:right;">2</td><td style="padding:8px;text-align:right;">2.0%</td></tr>
+<tr><td style="padding:8px;color:#ff6644;font-weight:bold;">PHASE2, PHASE3</td><td style="padding:8px;text-align:right;">1</td><td style="padding:8px;text-align:right;">1.0%</td></tr>
+<tr><td style="padding:8px;color:#ff6644;font-weight:bold;">PHASE3</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">12.0%</td></tr>
+<tr><td style="padding:8px;">PHASE4</td><td style="padding:8px;text-align:right;">12</td><td style="padding:8px;text-align:right;">12.0%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="chart-container">
+<canvas id="phaseChart" height="250"></canvas>
+</div>
+</div>
+
+<!-- 11. The Emergency Care Desert -->
+<h2>11. The Emergency Care Desert</h2>
+<p style="color:var(--muted);margin-bottom:1rem;">
+The trial gap is a symptom of a deeper structural absence. Africa's trauma care system
+is not just under-researched &mdash; it is, for most of the continent, non-existent.
+</p>
+
+<div class="danger-note">
+<strong>The Lancet Commission on Global Surgery (2015)</strong> estimated that 143 million
+additional surgical procedures are needed annually in low- and middle-income countries.
+Sub-Saharan Africa has the greatest unmet need, with fewer than 200 operations per
+100,000 population compared to over 11,000 per 100,000 in the US.
+</div>
+
+<div class="warning-note" style="margin-top:1rem;">
+<strong>Key findings from the emergency care evidence base:</strong>
+<ul style="margin-top:0.5rem;padding-left:1.5rem;">
+<li>Most African countries have no formal pre-hospital emergency system (no 911/999 equivalent)</li>
+<li>Average time from injury to hospital exceeds 60 minutes in rural sub-Saharan Africa</li>
+<li>Fewer than 1 in 10 trauma patients in Africa reach a facility with surgical capacity within the golden hour</li>
+<li>Africa has 0.5 surgeons per 100,000 population vs 67 per 100,000 in the US (Lancet Commission)</li>
+<li>Blood supply covers &lt;50% of national needs in most African countries (WHO Global Blood Safety)</li>
+<li>Trauma registries &mdash; essential for research &mdash; exist in fewer than 10 African countries</li>
+</ul>
+</div>
+
+<div class="method-note" style="margin-top:1rem;">
+<strong>What this means for trials:</strong> The absence of emergency care infrastructure
+creates a vicious cycle. Without pre-hospital systems, patients die before reaching
+facilities. Without facilities, there are no sites for trials. Without trials, there is
+no evidence to advocate for investment. Without investment, the infrastructure gap persists.
+The CCI of 2.8x captures the magnitude of this cycle in a single number.
+</div>
+
+<!-- 12. Temporal Trend -->
+<h2>12. Temporal Trend</h2>
+<div class="chart-container">
+<canvas id="trendChart" height="250"></canvas>
+</div>
+
+<footer>
+<p>Data source: ClinicalTrials.gov API v2 | WHO Global Status Report on Road Safety 2023 |
+WHO Global Health Estimates | Lancet Commission on Global Surgery 2015 |
+Generated 2026-03-28 12:11</p>
+<p>Condition Colonialism Index (CCI) methodology: Africa burden % / Africa trial share %</p>
+<p>Query: "emergency OR trauma OR injury OR accident" | Interventional studies only</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // RTI rate bar chart
+  var rtiCtx = document.getElementById('rtiChart');
+  if (rtiCtx) {
+    new Chart(rtiCtx, {
+      type: 'bar',
+      data: {
+        labels: ["Africa", "South-East Asia", "Eastern Mediterranean", "Americas", "Western Pacific", "Europe", "Global"],
+        datasets: [{
+          label: 'RTI Deaths per 100K',
+          data: [26.6, 18.1, 17.7, 15.6, 14.1, 9.3, 16.7],
+          backgroundColor: ["#ef4444", "#64748b", "#64748b", "#64748b", "#64748b", "#64748b", "#64748b"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Road Traffic Fatality Rate by WHO Region',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Deaths per 100K', color: '#94a3b8' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          }
+        }
+      }
+    });
+  }
+
+  // International comparison bar chart
+  var compCtx = document.getElementById('compChart');
+  if (compCtx) {
+    new Chart(compCtx, {
+      type: 'bar',
+      data: {
+        labels: ["South Africa", "Egypt", "Kenya", "Nigeria", "India", "Brazil", "United Kingdom", "United States"],
+        datasets: [{
+          label: 'Trauma/Emergency Trials',
+          data: [73, 778, 17, 13, 157, 410, 729, 9139],
+          backgroundColor: ["#ef4444", "#ef4444", "#ef4444", "#ef4444", "#3b82f6", "#3b82f6", "#3b82f6", "#3b82f6"],
+          borderWidth: 0,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Trauma/Emergency Trial Counts by Country',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0' }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+
+  // Subtype grouped bar chart
+  var subtypeCtx = document.getElementById('subtypeChart');
+  if (subtypeCtx) {
+    new Chart(subtypeCtx, {
+      type: 'bar',
+      data: {
+        labels: ["Road traffic / motor vehicle", "Burns", "Violence / assault", "Snakebite / envenomation", "Drowning", "Falls"],
+        datasets: [
+          {
+            label: 'Africa',
+            data: [3, 83, 59, 1, 1, 19],
+            backgroundColor: '#ef4444',
+            borderWidth: 0,
+            borderRadius: 4,
+          },
+          {
+            label: 'United States',
+            data: [29, 358, 385, 13, 3, 337],
+            backgroundColor: '#3b82f6',
+            borderWidth: 0,
+            borderRadius: 4,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Trauma Subtype: Africa vs US',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#e2e8f0', maxRotation: 45 }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+
+  // Phase doughnut chart
+  var phaseCtx = document.getElementById('phaseChart');
+  if (phaseCtx) {
+    var phaseData = {"NA": 64, "PHASE3": 12, "PHASE4": 12, "PHASE2": 2, "EARLY_PHASE1": 5, "PHASE2, PHASE3": 1, "PHASE1, PHASE2": 1, "PHASE1": 3};
+    var phaseLabels = Object.keys(phaseData);
+    var phaseValues = Object.values(phaseData);
+    var phaseColors = phaseLabels.map(function(l) {
+      if (l.toUpperCase().indexOf('PHASE3') >= 0 || l === 'PHASE3')
+        return '#ef4444';
+      if (l.toUpperCase().indexOf('PHASE2') >= 0) return '#f59e0b';
+      if (l.toUpperCase().indexOf('PHASE1') >= 0) return '#3b82f6';
+      if (l.toUpperCase().indexOf('PHASE4') >= 0) return '#22c55e';
+      return '#6b7280';
+    });
+    new Chart(phaseCtx, {
+      type: 'doughnut',
+      data: {
+        labels: phaseLabels,
+        datasets: [{ data: phaseValues, backgroundColor: phaseColors, borderWidth: 0 }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Phase Distribution',
+                    color: '#e2e8f0', font: { size: 14 } }
+        }
+      }
+    });
+  }
+
+  // Temporal trend line chart
+  var trendCtx = document.getElementById('trendChart');
+  if (trendCtx) {
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: [2006, 2009, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+        datasets: [{
+          label: 'Trauma Trials Started (Africa)',
+          data: [2, 1, 1, 2, 2, 3, 2, 4, 7, 8, 11, 13, 16, 7, 16, 3, 2],
+          borderColor: '#ef4444',
+          backgroundColor: 'rgba(239,68,68,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#ef4444',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#e2e8f0' } },
+          title: { display: true, text: 'Trauma Trial Starts by Year (Africa)',
+                    color: '#e2e8f0', font: { size: 14 } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' }
+          },
+          y: {
+            grid: { color: '#1e293b' },
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: 'Trial count', color: '#94a3b8' }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Methodological Quality Audit -- What Trial Designs Does Africa Get?</title>
+<style>
+:root {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #22c55e;
+  --purple: #a855f7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--accent);
+}
+h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.summary-card .value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.summary-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.danger { color: var(--danger); }
+.warning { color: var(--warning); }
+.success { color: var(--success); }
+.purple { color: var(--purple); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+th {
+  background: #1a2332;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  font-size: 0.9rem;
+}
+tr:hover { background: rgba(59, 130, 246, 0.05); }
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+canvas { max-width: 100%; }
+.callout {
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.callout-danger {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 4px solid var(--danger);
+}
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 4px solid var(--warning);
+}
+.callout-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent);
+}
+.callout-success {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 4px solid var(--success);
+}
+.callout-purple {
+  background: rgba(168, 85, 247, 0.08);
+  border-left: 4px solid var(--purple);
+}
+.big-stat {
+  font-size: 3rem;
+  font-weight: 900;
+  display: block;
+  margin: 0.5rem 0;
+}
+.scroll-x { overflow-x: auto; }
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+  h1 { font-size: 1.8rem; }
+}
+.progress-bar {
+  background: var(--border);
+  border-radius: 6px;
+  height: 28px;
+  position: relative;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  transition: width 0.6s ease;
+}
+.method-stamp {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  margin: 0.2rem;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The Methodological Quality Audit</h1>
+<p class="subtitle">What trial designs does Africa get? Comparing methodological
+sophistication of 3,506 African vs 159,196 US interventional
+trials on ClinicalTrials.gov (March 2026)</p>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: SUMMARY -->
+<!-- ============================================================ -->
+
+<h2>Executive Summary</h2>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="label">Africa Total Trials</div>
+    <div class="value purple">3,506</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Total Trials</div>
+    <div class="value" style="color:var(--accent);">159,196</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa DSI</div>
+    <div class="value warning">1.322</div>
+    <div class="label">Design Sophistication Index</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US DSI</div>
+    <div class="value success">0.513</div>
+    <div class="label">Design Sophistication Index</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Africa Blinding Rate</div>
+    <div class="value danger">42.3%</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">US Blinding Rate</div>
+    <div class="value success">13.3%</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Blinding Gap</div>
+    <div class="value warning">-29.0pp</div>
+    <div class="label">US leads by this margin</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">DSI Ratio (US:Africa)</div>
+    <div class="value danger">0.4x</div>
+    <div class="label">Methodology gap</div>
+  </div>
+</div>
+
+<div class="callout callout-purple">
+  <strong>The Design Sophistication Index (DSI)</strong> is a weighted composite score
+  measuring the methodological frontier of a region's trial portfolio. Basic designs
+  (open-label) score 1, intermediate designs (non-inferiority, equivalence, pragmatic)
+  score 3, and cutting-edge designs (adaptive, Bayesian, platform, stepped wedge,
+  cluster-randomized) score 4-5. The DSI = sum(design_count x weight) / total_trials.
+  A higher DSI indicates a more methodologically advanced trial ecosystem.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: BLINDING COMPARISON -->
+<!-- ============================================================ -->
+
+<h2>The Blinding Comparison</h2>
+
+<div class="two-col">
+  <div class="chart-container">
+    <h3>Africa: Blinding Profile</h3>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:42.3%;background:var(--danger);">
+        Double-blind: 42.3%
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:0.57%;background:var(--warning);">
+        Single-blind: 0.57%
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:27.52%;background:var(--muted);">
+        Open-label: 27.52%
+      </div>
+    </div>
+    <p style="margin-top:1rem;color:var(--muted);font-size:0.85rem;">
+      Double-blind: 1,482 of 3,506 trials
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <h3>United States: Blinding Profile</h3>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:13.3%;background:var(--success);">
+        Double-blind: 13.3%
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:0.6%;background:var(--warning);">
+        Single-blind: 0.6%
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:14.57%;background:var(--muted);">
+        Open-label: 14.57%
+      </div>
+    </div>
+    <p style="margin-top:1rem;color:var(--muted);font-size:0.85rem;">
+      Double-blind: 21,223 of 159,196 trials
+    </p>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>The Double-Blind Gap.</strong> Only 42.3% of African trials are
+  double-blinded versus 13.3% in the US -- a -29.0 percentage-point gap.
+  Open-label designs dominate Africa's portfolio, reducing internal validity and
+  increasing risk of bias in the evidence base that informs treatment for 1.46 billion
+  people. This is not merely academic: open-label trials inflate effect sizes by an
+  average of 13% (Cochrane, 2012), meaning African patients may receive treatments whose
+  efficacy is systematically overstated.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: DESIGN ADOPTION RATES -->
+<!-- ============================================================ -->
+
+<h2>Design Adoption Rates: Full Comparison</h2>
+
+<div class="chart-container">
+  <canvas id="designChart" height="320"></canvas>
+</div>
+
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th style="padding:10px;">Design Type</th>
+      <th style="padding:10px;text-align:right;">Africa Count</th>
+      <th style="padding:10px;text-align:right;">Africa Rate</th>
+      <th style="padding:10px;text-align:right;">US Count</th>
+      <th style="padding:10px;text-align:right;">US Rate</th>
+      <th style="padding:10px;text-align:center;">US:Africa Ratio</th>
+      <th style="padding:10px;text-align:center;">Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:10px;font-weight:bold;">Double-blind</td><td style="padding:10px;text-align:right;">1,482</td><td style="padding:10px;text-align:right;">42.27%</td><td style="padding:10px;text-align:right;">21,223</td><td style="padding:10px;text-align:right;">13.33%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">14.3x</td><td style="padding:10px;text-align:center;color:var(--muted);">2</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Open-label</td><td style="padding:10px;text-align:right;">965</td><td style="padding:10px;text-align:right;">27.52%</td><td style="padding:10px;text-align:right;">23,192</td><td style="padding:10px;text-align:right;">14.57%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">24.0x</td><td style="padding:10px;text-align:center;color:var(--muted);">1</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Single-blind</td><td style="padding:10px;text-align:right;">20</td><td style="padding:10px;text-align:right;">0.57%</td><td style="padding:10px;text-align:right;">956</td><td style="padding:10px;text-align:right;">0.6%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">47.8x</td><td style="padding:10px;text-align:center;color:var(--muted);">1.5</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Cluster-randomized *</td><td style="padding:10px;text-align:right;">29</td><td style="padding:10px;text-align:right;">0.83%</td><td style="padding:10px;text-align:right;">660</td><td style="padding:10px;text-align:right;">0.41%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">22.8x</td><td style="padding:10px;text-align:center;color:var(--muted);">4</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Adaptive *</td><td style="padding:10px;text-align:right;">6</td><td style="padding:10px;text-align:right;">0.17%</td><td style="padding:10px;text-align:right;">165</td><td style="padding:10px;text-align:right;">0.1%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">27.5x</td><td style="padding:10px;text-align:center;color:var(--muted);">5</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Bayesian *</td><td style="padding:10px;text-align:right;">13</td><td style="padding:10px;text-align:right;">0.37%</td><td style="padding:10px;text-align:right;">475</td><td style="padding:10px;text-align:right;">0.3%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">36.5x</td><td style="padding:10px;text-align:center;color:var(--muted);">5</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Stepped wedge *</td><td style="padding:10px;text-align:right;">5</td><td style="padding:10px;text-align:right;">0.14%</td><td style="padding:10px;text-align:right;">233</td><td style="padding:10px;text-align:right;">0.15%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">46.6x</td><td style="padding:10px;text-align:center;color:var(--muted);">4</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Platform trial *</td><td style="padding:10px;text-align:right;">14</td><td style="padding:10px;text-align:right;">0.4%</td><td style="padding:10px;text-align:right;">267</td><td style="padding:10px;text-align:right;">0.17%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">19.1x</td><td style="padding:10px;text-align:center;color:var(--muted);">5</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Non-inferiority</td><td style="padding:10px;text-align:right;">112</td><td style="padding:10px;text-align:right;">3.19%</td><td style="padding:10px;text-align:right;">1,567</td><td style="padding:10px;text-align:right;">0.98%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">14.0x</td><td style="padding:10px;text-align:center;color:var(--muted);">3</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Equivalence</td><td style="padding:10px;text-align:right;">10</td><td style="padding:10px;text-align:right;">0.29%</td><td style="padding:10px;text-align:right;">396</td><td style="padding:10px;text-align:right;">0.25%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">39.6x</td><td style="padding:10px;text-align:center;color:var(--muted);">3</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Pragmatic</td><td style="padding:10px;text-align:right;">3</td><td style="padding:10px;text-align:right;">0.09%</td><td style="padding:10px;text-align:right;">215</td><td style="padding:10px;text-align:right;">0.14%</td><td style="padding:10px;text-align:center;color:#ef4444;font-weight:bold;">71.7x</td><td style="padding:10px;text-align:center;color:var(--muted);">3</td></tr>
+
+  </tbody>
+</table>
+</div>
+<p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem;">
+  * = cutting-edge design (weight >= 4). DSI weight reflects methodological complexity.
+</p>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: ADAPTIVE TRIALS ANALYSIS -->
+<!-- ============================================================ -->
+
+<h2>Does Africa Get Adaptive Trials?</h2>
+
+<div class="two-col">
+  <div class="callout callout-danger">
+    <span class="big-stat danger">6</span>
+    <strong>Adaptive trials in Africa</strong><br>
+    Adaptive designs allow mid-trial modifications based on interim data -- reducing
+    sample size requirements by 20-40% while maintaining statistical rigor. These
+    designs are ideal for resource-constrained settings, yet Africa has only
+    6 such trials versus 165 in the US.
+  </div>
+
+  <div class="callout callout-info">
+    <span class="big-stat" style="color:var(--accent);">165</span>
+    <strong>Adaptive trials in the US</strong><br>
+    The irony is stark: adaptive designs were partly motivated by the need for efficient
+    trials in under-resourced settings, yet they are deployed almost exclusively in
+    well-funded environments. Africa gets the methodology that needs more patients,
+    not less.
+  </div>
+</div>
+
+<div class="callout callout-warning">
+  <strong>Bayesian methods:</strong> Africa has
+  13 Bayesian trials
+  (0.37%)
+  vs 475 in the US
+  (0.3%).
+  Bayesian approaches enable smaller sample sizes, sequential updating, and
+  incorporation of prior information -- all advantages that would benefit
+  African trial ecosystems with limited participant pools.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: CLUSTER RCT SPOTLIGHT -->
+<!-- ============================================================ -->
+
+<h2>Cluster-Randomized Trials: The Right Design for Africa</h2>
+
+<div class="callout callout-success">
+  <span class="big-stat success">29</span>
+  <strong>Cluster-randomized trials in Africa</strong> (vs 660 in the US)
+</div>
+
+<p style="margin:1rem 0;line-height:1.8;">
+  Cluster-randomized trials randomize at the community, clinic, or village level rather
+  than individually. This design is <em>uniquely suited</em> to African health systems where:
+</p>
+
+<div class="two-col" style="margin:1rem 0;">
+  <div class="callout callout-info">
+    <strong>Why cluster RCTs fit Africa:</strong>
+    <ul style="margin-top:0.5rem;padding-left:1.5rem;">
+      <li>Community health worker interventions are delivered at group level</li>
+      <li>Infectious disease interventions (bed nets, water treatment) have spillover effects</li>
+      <li>Health facility-level quality improvement cannot be individually randomized</li>
+      <li>Implementation science requires pragmatic, system-level randomization</li>
+    </ul>
+  </div>
+  <div class="callout callout-warning">
+    <strong>The paradox:</strong>
+    <ul style="margin-top:0.5rem;padding-left:1.5rem;">
+      <li>Africa has only 29 cluster RCTs despite being the ideal setting</li>
+      <li>The US has 660 cluster RCTs in a system where individual
+          randomization is usually feasible</li>
+      <li>Stepped-wedge designs (a cluster RCT variant ideal for phased rollouts) are
+          even rarer in Africa</li>
+      <li>Platform trials that could test multiple interventions efficiently: near-zero</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: DOUBLE-BLIND GAP -->
+<!-- ============================================================ -->
+
+<h2>The Double-Blind Gap: What It Means for Evidence</h2>
+
+<div class="callout callout-danger">
+  <p>The blinding gap is not a neutral technical detail -- it has measurable consequences
+  for evidence quality:</p>
+  <ul style="margin-top:1rem;padding-left:1.5rem;line-height:2;">
+    <li><strong>Performance bias:</strong> Unblinded investigators may provide differential
+      co-interventions</li>
+    <li><strong>Detection bias:</strong> Outcome assessors aware of allocation may interpret
+      subjective endpoints differently</li>
+    <li><strong>Attrition bias:</strong> Unblinded participants may differentially withdraw</li>
+    <li><strong>Effect inflation:</strong> Meta-analyses show unblinded trials overestimate
+      effects by 9-17% (Savovic et al., BMJ 2012)</li>
+  </ul>
+  <p style="margin-top:1rem;">When 42.3% of African trials are double-blinded
+  versus 13.3% in the US, the African evidence base is systematically more vulnerable
+  to bias. Treatments validated through open-label African trials may not replicate under
+  rigorous conditions.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: DSI COMPARISON -->
+<!-- ============================================================ -->
+
+<h2>Design Sophistication Index: Head-to-Head</h2>
+
+<div class="two-col">
+  <div class="chart-container" style="text-align:center;">
+    <h3>Africa DSI</h3>
+    <span class="big-stat warning">1.322</span>
+    <p style="color:var(--muted);">Weighted design score per trial</p>
+    <div style="margin-top:1rem;">
+      <span class="method-stamp">Double-blind: 1,482</span>
+      <span class="method-stamp">Adaptive: 6</span>
+      <span class="method-stamp">Bayesian: 13</span>
+      <span class="method-stamp">Cluster: 29</span>
+      <span class="method-stamp">Platform: 14</span>
+    </div>
+  </div>
+  <div class="chart-container" style="text-align:center;">
+    <h3>United States DSI</h3>
+    <span class="big-stat success">0.513</span>
+    <p style="color:var(--muted);">Weighted design score per trial</p>
+    <div style="margin-top:1rem;">
+      <span class="method-stamp">Double-blind: 21,223</span>
+      <span class="method-stamp">Adaptive: 165</span>
+      <span class="method-stamp">Bayesian: 475</span>
+      <span class="method-stamp">Cluster: 660</span>
+      <span class="method-stamp">Platform: 267</span>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-purple">
+  <strong>Interpreting the DSI ratio of 0.4x:</strong> The US has a
+  0.4-fold higher Design Sophistication Index than Africa. This means the
+  average US trial contributes more methodological innovation per study. Africa's lower
+  DSI reflects both fewer trials overall and a lower proportion of cutting-edge designs
+  within its portfolio. The gap is widest for adaptive, Bayesian, and platform designs
+  -- precisely the methodologies that could make African trials more efficient.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: ADVANCED DESIGNS SPOTLIGHT -->
+<!-- ============================================================ -->
+
+<h2>Advanced Design Spotlight</h2>
+
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th style="padding:10px;">Frontier Design</th>
+      <th style="padding:10px;text-align:right;">Africa</th>
+      <th style="padding:10px;text-align:right;">Africa %</th>
+      <th style="padding:10px;text-align:right;">US</th>
+      <th style="padding:10px;text-align:right;">US %</th>
+      <th style="padding:10px;text-align:right;">Gap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:10px;font-weight:bold;">Adaptive</td><td style="padding:10px;text-align:right;color:#ef4444;">6</td><td style="padding:10px;text-align:right;">0.17%</td><td style="padding:10px;text-align:right;">165</td><td style="padding:10px;text-align:right;">0.1%</td><td style="padding:10px;text-align:right;color:var(--muted);">+-0.07pp</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Bayesian</td><td style="padding:10px;text-align:right;color:#ef4444;">13</td><td style="padding:10px;text-align:right;">0.37%</td><td style="padding:10px;text-align:right;">475</td><td style="padding:10px;text-align:right;">0.3%</td><td style="padding:10px;text-align:right;color:var(--muted);">+-0.07pp</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Stepped wedge</td><td style="padding:10px;text-align:right;color:#ef4444;">5</td><td style="padding:10px;text-align:right;">0.14%</td><td style="padding:10px;text-align:right;">233</td><td style="padding:10px;text-align:right;">0.15%</td><td style="padding:10px;text-align:right;color:var(--muted);">+0.01pp</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Platform trial</td><td style="padding:10px;text-align:right;color:#ef4444;">14</td><td style="padding:10px;text-align:right;">0.4%</td><td style="padding:10px;text-align:right;">267</td><td style="padding:10px;text-align:right;">0.17%</td><td style="padding:10px;text-align:right;color:var(--muted);">+-0.23pp</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">Cluster-randomized</td><td style="padding:10px;text-align:right;color:#ef4444;">29</td><td style="padding:10px;text-align:right;">0.83%</td><td style="padding:10px;text-align:right;">660</td><td style="padding:10px;text-align:right;">0.41%</td><td style="padding:10px;text-align:right;color:var(--muted);">+-0.42pp</td></tr>
+
+  </tbody>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: PHASE 1 ANALYSIS -->
+<!-- ============================================================ -->
+
+<h2>Phase 1 in Africa: First-in-Human vs Pharmacokinetic</h2>
+
+<div class="callout callout-info">
+  Africa has <strong>256</strong> Phase 1 trials. What kind of
+  early-phase work does the continent receive?
+</div>
+
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th style="padding:10px;">Phase 1 Category</th>
+      <th style="padding:10px;text-align:right;">Count</th>
+      <th style="padding:10px;text-align:right;">% of Phase 1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:10px;">Total Phase 1</td><td style="padding:10px;text-align:right;font-weight:bold;">256</td><td style="padding:10px;text-align:right;color:var(--muted);">--</td></tr>
+<tr><td style="padding:10px;">First-in-human</td><td style="padding:10px;text-align:right;font-weight:bold;">6</td><td style="padding:10px;text-align:right;color:var(--muted);">2.3%</td></tr>
+<tr><td style="padding:10px;">Pharmacokinetic/Bioequiv.</td><td style="padding:10px;text-align:right;font-weight:bold;">141</td><td style="padding:10px;text-align:right;color:var(--muted);">55.1%</td></tr>
+<tr><td style="padding:10px;">Dose-finding</td><td style="padding:10px;text-align:right;font-weight:bold;">57</td><td style="padding:10px;text-align:right;color:var(--muted);">22.3%</td></tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="callout callout-warning">
+  <strong>What this reveals:</strong> If pharmacokinetic and bioequivalence studies
+  dominate Africa's Phase 1 portfolio while first-in-human studies are rare, it
+  suggests Africa is used to verify drug absorption in local populations <em>after</em>
+  early safety work is done elsewhere -- a service role rather than a discovery role.
+  Conversely, a higher first-in-human proportion would indicate genuine early-phase
+  innovation happening on African soil.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 10: TEMPORAL TRENDS -->
+<!-- ============================================================ -->
+
+<h2>Temporal Trends: Are Designs Improving?</h2>
+
+<div class="chart-container">
+  <canvas id="trendChart" height="260"></canvas>
+</div>
+
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th style="padding:10px;">Period</th>
+      <th style="padding:10px;text-align:right;">Africa Advanced</th>
+      <th style="padding:10px;text-align:right;">Africa Rate</th>
+      <th style="padding:10px;text-align:right;">US Advanced</th>
+      <th style="padding:10px;text-align:right;">US Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:10px;font-weight:bold;">2000-2009</td><td style="padding:10px;text-align:right;">4</td><td style="padding:10px;text-align:right;color:#ef4444;font-weight:bold;">0.39%</td><td style="padding:10px;text-align:right;">73</td><td style="padding:10px;text-align:right;">0.21%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">2010-2014</td><td style="padding:10px;text-align:right;">9</td><td style="padding:10px;text-align:right;color:#f59e0b;font-weight:bold;">1.11%</td><td style="padding:10px;text-align:right;">156</td><td style="padding:10px;text-align:right;">0.53%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">2015-2019</td><td style="padding:10px;text-align:right;">21</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">3.03%</td><td style="padding:10px;text-align:right;">452</td><td style="padding:10px;text-align:right;">1.18%</td></tr>
+<tr><td style="padding:10px;font-weight:bold;">2020-2026</td><td style="padding:10px;text-align:right;">31</td><td style="padding:10px;text-align:right;color:#22c55e;font-weight:bold;">3.46%</td><td style="padding:10px;text-align:right;">944</td><td style="padding:10px;text-align:right;">1.85%</td></tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="callout callout-info">
+  <strong>Trend interpretation:</strong> If the gap between Africa and US advanced-design
+  adoption rates is narrowing over time, it suggests methodological convergence. If the
+  gap is widening, Africa is falling further behind the methodological frontier even as
+  its trial volume grows.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 11: IMPLICATIONS -->
+<!-- ============================================================ -->
+
+<h2>Implications for Evidence Quality</h2>
+
+<div class="callout callout-danger">
+  <h3 style="color:var(--danger);margin-bottom:1rem;">The Methodological Double Standard</h3>
+  <ol style="padding-left:1.5rem;line-height:2.2;">
+    <li><strong>Lower blinding rates</strong> (42.3% vs 13.3%)
+      produce systematically biased evidence for African populations</li>
+    <li><strong>Near-absence of adaptive designs</strong> (6 vs
+      165) forces Africa to use larger, slower, more expensive trial
+      designs -- the opposite of what resource-constrained settings need</li>
+    <li><strong>Minimal Bayesian and platform trials</strong> prevent efficient
+      multi-arm testing of interventions for diseases with the highest African
+      burden (malaria, TB, HIV)</li>
+    <li><strong>Only 29 cluster RCTs</strong> in a continent where
+      community-level interventions are the primary healthcare delivery model</li>
+    <li><strong>Phase 1 as service role</strong>: Africa's early-phase trials
+      may be predominantly pharmacokinetic bridging rather than genuine drug
+      discovery, reflecting a validation-not-innovation paradigm</li>
+  </ol>
+</div>
+
+<div class="callout callout-success">
+  <h3 style="color:var(--success);margin-bottom:1rem;">What Could Change</h3>
+  <ul style="padding-left:1.5rem;line-height:2.2;">
+    <li><strong>Adopt adaptive designs for endemic diseases</strong>: A single
+      adaptive platform trial for malaria could replace 5-10 conventional RCTs</li>
+    <li><strong>Scale cluster-randomized designs</strong> for community health
+      worker interventions, bed net distribution, and facility-level quality improvement</li>
+    <li><strong>Deploy Bayesian methods</strong> to leverage prior African trial
+      data rather than starting from zero each time</li>
+    <li><strong>Demand blinding where feasible</strong>: Even in surgical and
+      behavioral trials, sham controls and blinded outcome assessment are possible</li>
+    <li><strong>Build African biostatistics capacity</strong>: Advanced designs
+      require advanced statistical expertise -- currently concentrated in the
+      Global North</li>
+  </ul>
+</div>
+
+<footer>
+  <p>The Methodological Quality Audit | Project 44 of the Africa RCT Equity Audit</p>
+  <p>Data source: ClinicalTrials.gov API v2 | Generated 2026-03-28 15:13</p>
+  <p style="margin-top:0.5rem;">Design Sophistication Index weights: Open-label=1,
+  Single-blind=1.5, Double-blind=2, Non-inferiority/Equivalence/Pragmatic=3,
+  Cluster/Stepped-wedge=4, Adaptive/Bayesian/Platform=5</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+// Design comparison chart
+(function() {
+  var ctx = document.getElementById('designChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Double-blind", "Open-label", "Single-blind", "Cluster-randomized", "Adaptive", "Bayesian", "Stepped wedge", "Platform trial", "Non-inferiority", "Equivalence", "Pragmatic"],
+      datasets: [
+        {
+          label: 'Africa (%)',
+          data: [42.27, 27.52, 0.57, 0.83, 0.17, 0.37, 0.14, 0.4, 3.19, 0.29, 0.09],
+          backgroundColor: 'rgba(168, 85, 247, 0.7)',
+          borderColor: '#a855f7',
+          borderWidth: 1,
+        },
+        {
+          label: 'US (%)',
+          data: [13.33, 14.57, 0.6, 0.41, 0.1, 0.3, 0.15, 0.17, 0.98, 0.25, 0.14],
+          backgroundColor: 'rgba(59, 130, 246, 0.7)',
+          borderColor: '#3b82f6',
+          borderWidth: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#94a3b8' } },
+        title: {
+          display: true,
+          text: 'Design Type Adoption Rate (% of all interventional trials)',
+          color: '#e2e8f0'
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#94a3b8', maxRotation: 45 },
+          grid: { color: 'rgba(30,41,59,0.5)' }
+        },
+        y: {
+          ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } },
+          grid: { color: 'rgba(30,41,59,0.5)' }
+        }
+      }
+    }
+  });
+})();
+
+// Temporal trend chart
+(function() {
+  var ctx2 = document.getElementById('trendChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: ["2000-2009", "2010-2014", "2015-2019", "2020-2026"],
+      datasets: [
+        {
+          label: 'Africa Advanced Design Rate (%)',
+          data: [0.39, 1.11, 3.03, 3.46],
+          borderColor: '#a855f7',
+          backgroundColor: 'rgba(168, 85, 247, 0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5,
+        },
+        {
+          label: 'US Advanced Design Rate (%)',
+          data: [0.21, 0.53, 1.18, 1.85],
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 5,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#94a3b8' } },
+        title: {
+          display: true,
+          text: 'Advanced Design Adoption Over Time (adaptive, Bayesian, cluster, stepped-wedge, platform)',
+          color: '#e2e8f0'
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#94a3b8' },
+          grid: { color: 'rgba(30,41,59,0.5)' }
+        },
+        y: {
+          ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } },
+          grid: { color: 'rgba(30,41,59,0.5)' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

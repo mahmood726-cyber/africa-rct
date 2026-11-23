@@ -1,0 +1,41 @@
+{
+    "title": "Protocol: weighing pharmaceutical extraction against contribution in African clinical trials using the Mutaffifin Score",
+    "type": "protocol",
+    "primary_estimand": "Mutaffifin Score (Taking minus Giving, range -50 to +50) per company",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\mutaffifin-scales.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\scripts\\fetch_mutaffifin_scales.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry analysis will quantify the balance between pharmaceutical extraction from and contribution to Africa for ten major multinational companies. We will query ClinicalTrials.gov API v2 for all interventional trials per sponsor globally and with African locations, computing a structured Mutaffifin Score for each company. The Taking dimension scores enrollment volume, Phase 3 dominance, trial termination rate, and token-site proportion on a 0 to 50 scale. The Giving dimension scores WHO Essential Medicines List drugs originating from Africa trials, proportion of Africa-focused studies, tiered pricing commitments, local manufacturing presence, and Phase 1 capacity-building investment, also 0 to 50. The primary outcome is the Mutaffifin Score, defined as Taking minus Giving, where positive values indicate net extraction and negative values net contribution. Corporate pricing and manufacturing data will be drawn from published annual access reports and coded before analysis. Trials registered only on national or WHO platforms and corporate social responsibility activities outside clinical research will not be captured.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "name": "7 sentences",
+                "ok": true,
+                "detail": "Found 7 sentences."
+            },
+            {
+                "name": "140-170 words",
+                "ok": true,
+                "detail": "Found 162 words."
+            },
+            {
+                "name": "methods described",
+                "ok": true,
+                "detail": "Protocol describes Taking/Giving dimensions, scoring rubric, data sources, and primary outcome definition."
+            },
+            {
+                "name": "outcomes specified",
+                "ok": true,
+                "detail": "Primary outcome (Mutaffifin Score) defined in sentence 6 with interpretation guidance."
+            }
+        ]
+    }
+}

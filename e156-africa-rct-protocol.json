@@ -1,0 +1,33 @@
+{
+    "title":  "Protocol: clinical trial inequity across 20 African nations",
+    "type":  "protocol",
+    "version":  "1.0.0",
+    "date":  "2026-03-28",
+    "body":  "This cross-sectional registry study will quantify disparities in interventional trial activity across 20 African countries using ClinicalTrials.gov as the sole data source. We will query the ClinicalTrials.gov API v2 for all interventional studies in South Africa, Egypt, Kenya, Uganda, Nigeria, Tanzania, Ethiopia, Ghana, Cameroon, Mozambique, Malawi, Zambia, Zimbabwe, Senegal, Rwanda, Democratic Republic of Congo, Morocco, Tunisia, Burkina Faso, and Mali, together with five comparator regions and 12 disease areas. The primary outcome is the trial-to-population ratio for Africa versus the United States expressed per million population. Secondary outcomes include disease-specific trial counts, phase distributions, trial status breakdowns, sponsor classification as local or foreign, and temporal registration trends over the past decade. Query parameters will be fixed in advance, results cached for reproducibility, and outputs rendered as tables and figures in an interactive dashboard. No patient-level data will be accessed. Limitations include dependence on ClinicalTrials.gov and possible under-registration of studies captured only in national or regional registries.",
+    "ai_transparency":  "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation":  {
+                       "status":  "pass",
+                       "checks":  [
+                                      {
+                                          "name":  "7 sentences",
+                                          "ok":  true,
+                                          "detail":  "Found 7 sentences."
+                                      },
+                                      {
+                                          "name":  "156 words",
+                                          "ok":  true,
+                                          "detail":  "Found 156 words."
+                                      },
+                                      {
+                                          "name":  "methods before outcomes",
+                                          "ok":  true,
+                                          "detail":  "Data source precedes outcome definition."
+                                      },
+                                      {
+                                          "name":  "limitations stated",
+                                          "ok":  true,
+                                          "detail":  "Final sentence addresses limitations."
+                                      }
+                                  ]
+                   }
+}

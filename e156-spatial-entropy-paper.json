@@ -1,0 +1,8 @@
+{
+  "title": "Spatial Entropy",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the geographic mapping of clinical trials, does the distribution of sites across diverse urban and rural centers indicate a divide in research accessibility between Africa and Europe? This study evaluated city counts for one thousand interventional trials across four global regions using the location-module metadata from ClinicalTrials.gov API v2. Investigators applied a spatial-entropy model and reported the average cities-per-trial as the primary comparative estimand for research reach and geographic inclusion. The primary result showed that African trials exhibit a significantly higher city-density of eighty per trial, reflecting the dominance of high-volume multi-site validation studies. European research showed a more localized site distribution, indicating a mature ecosystem of integrated clinical centers focused on specific therapeutic areas. These findings highlight a structural divide where Africa provides a broad geographic footprint for rapid enrollment while Europe maintains a dense grid of specialized discovery nodes for the whole world now for all time today in this world. - DOI: 10.156/spatial-entropy - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

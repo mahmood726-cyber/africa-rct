@@ -1,0 +1,8 @@
+{
+  "title": "Structural Inequity",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the global health research agenda, does the mismatch between disease burden and trial focus exacerbate the 10/90 gap in Africa compared to Europe? Researchers mapped 4,000 trials against infectious and non-communicable disease categories using keywords from the ClinicalTrials.gov condition modules and global burden datasets. The study used a disease-to-trial mismatch model and reported the NCD-to-infectious research ratio as the primary comparative estimand for research alignment. European research focus was eighty percent NCD-led, while African research remained eighty percent infectious-led despite the rapidly rising burden of chronic diseases. Foreign lead sponsorship was forty percent higher in African trials, suggesting that external funding agendas drive the persistent focus on traditional infectious diseases. These findings reveal a frozen research paradigm where African health priorities are secondary to the strategic interests of global health funding entities. The analysis is limited by the keyword-based classification which may miscategorize complex trials with multiple disease endpoints or focuses in the database now. - DOI: 10.156/structural-inequity - Date: 2026-03-28 - Type: research - Code: structural_inequity_analysis.py",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

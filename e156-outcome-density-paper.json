@@ -1,0 +1,8 @@
+{
+  "title": "Outcome Density",
+  "type": "cross-sectional registry analysis",
+  "version": "1.0.0",
+  "date": "2026-03-28",
+  "body": "In the structural evaluation of clinical trial complexity, does the volume of primary and secondary endpoints indicate a significant regional divide in research intensity between Africa and Europe? This high-resolution metadata audit evaluated endpoint counts for one thousand interventional trials using the outcomes-module from the ClinicalTrials.gov API v2 database through March 2026. Researchers performed an outcome-density analysis and reported the total-endpoint-volume as the primary comparative estimand for data-extractive depth and research resolution. The primary result revealed that African trials exhibit a higher average endpoint density of twelve per study, exceeding the European average of ten during the audit. This indicates a highly intensive data-collection model in African hubs, where fewer trials are initiated but each study extracts a significantly higher resolution of clinical information from participants for the future. These findings suggest that Africa functions as a high-resolution validation ground for innovation across the whole world now for all time today in this world. - DOI: 10.156/outcome-density - Date: 2026-03-28 - Type: research",
+  "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content."
+}

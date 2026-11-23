@@ -1,0 +1,58 @@
+{
+    "title": "Protocol: childhood cancer trial activity in Africa versus high-income countries",
+    "type": "protocol",
+    "primary_estimand": "Condition Colonialism Index (CCI) for childhood cancer trials in Africa",
+    "study_count": null,
+    "version": "1.0.0",
+    "date": "2026-03-27",
+    "certainty": "N/A (protocol)",
+    "app": "C:\\AfricaRCT\\childhood-cancer.html",
+    "data": "ClinicalTrials.gov API v2 (public)",
+    "code": "C:\\AfricaRCT\\fetch_childhood_cancer.py",
+    "doi": "Pending",
+    "protocol": null,
+    "body": "This cross-sectional registry analysis will quantify the gap between childhood cancer burden in Africa and clinical trial activity using ClinicalTrials.gov. We will query the API for all interventional studies matching childhood cancer, pediatric oncology, childhood leukemia, Wilms tumor, neuroblastoma, and retinoblastoma across six African countries, the United States, India, and Brazil. Separate queries will capture Africa-endemic malignancies including Burkitt lymphoma and HIV-associated Kaposi sarcoma. The primary outcome is the Condition Colonialism Index computed as the ratio of United States to Africa trial counts. Secondary outcomes include cancer-type distribution across African trials, proportion of African-led studies, country-level trial concentration, and trial activity for treatable cancers whose survival exceeds ninety percent in high-income countries. Sponsor classification rules and cancer-type keyword lists will be pre-specified and archived with analysis code, and no patient-level data will be accessed. The study is limited by completeness of one public registry and by reliance on published survival estimates from SIOP and Lancet Oncology.",
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "validation": {
+        "status": "pass",
+        "checks": [
+            {
+                "check": "word_count",
+                "expected": 156,
+                "result": 156,
+                "pass": true
+            },
+            {
+                "check": "sentence_count",
+                "expected": 8,
+                "result": 8,
+                "pass": true
+            },
+            {
+                "check": "primary_outcome_defined",
+                "value": "CCI = US trials / Africa trials",
+                "pass": true
+            },
+            {
+                "check": "secondary_outcomes_defined",
+                "value": "cancer-type distribution, African-led proportion, country-level concentration, treatable-cancer comparison",
+                "pass": true
+            },
+            {
+                "check": "endemic_cancers_specified",
+                "value": "Burkitt lymphoma (Africa-endemic), Kaposi sarcoma (HIV-associated)",
+                "pass": true
+            },
+            {
+                "check": "countries_specified",
+                "value": "South Africa, Kenya, Uganda, Nigeria, Ghana, Tanzania + US, India, Brazil",
+                "pass": true
+            },
+            {
+                "check": "data_ethics",
+                "value": "no patient-level data, public registry only",
+                "pass": true
+            }
+        ]
+    }
+}

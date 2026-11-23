@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Fragmentation and the Token Site Metric Dashboard</title>
+  <style>
+    :root {
+      --bg: #f5f2ea;
+      --paper: #fffdf8;
+      --ink: #1d2430;
+      --muted: #5f6b7a;
+      --line: #d8cfbf;
+      --accent: #0d6b57;
+      --accent-soft: #dcefe8;
+      --shadow: 0 18px 40px rgba(42, 47, 54, 0.08);
+      --radius: 18px;
+      --mono: "Consolas", "SFMono-Regular", "Menlo", monospace;
+      --sans: "Georgia", "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(13, 107, 87, 0.08), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(141, 79, 45, 0.08), transparent 28%),
+        var(--bg);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1200px, calc(100vw - 32px));
+      margin: 32px auto 48px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .hero,
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero { padding: 28px; }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      font-weight: 700;
+    }
+
+    .lede {
+      color: var(--muted);
+      max-width: 72ch;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .card { padding: 22px; }
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 17px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .body-text {
+      font-size: 20px;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .stats {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff, #faf6ee);
+      border: 1px solid var(--line);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .note-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .note-item strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .note-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .validation-list,
+    .study-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .validation-list td,
+    .study-table th,
+    .study-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .study-table th {
+      text-align: left;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .plot-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .plot-caption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .json-box {
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #151b24;
+      color: #d9f5ea;
+      padding: 16px;
+      border-radius: 16px;
+      overflow: auto;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .body-text { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Site Fragmentation and the Token Site Metric Dashboard</div>
+      <h1 id="title"></h1>
+      <p class="lede" id="lede"></p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2 class="section-title">Frozen Body</h2>
+        <p class="body-text" id="body"></p>
+      </article>
+
+      <aside class="card">
+        <h2 class="section-title">Core Record</h2>
+        <div class="stats" id="core-stats"></div>
+      </aside>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Note Block</h2>
+      <div class="note-grid" id="note-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Validation</h2>
+      <table class="validation-list" id="validation-table"></table>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Primary Plot</h2>
+      <div class="plot-wrap">
+        <svg id="forest-plot" width="980" height="360" aria-label="forest plot"></svg>
+      </div>
+      <div class="plot-caption" id="plot-caption"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Study Table</h2>
+      <table class="study-table" id="study-table"></table>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Embedded JSON</h2>
+      <div class="json-box" id="json-box"></div>
+    </section>
+  </main>
+
+  <script>
+    const E156_ARTICLE = __E156_JSON__;
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function appendStat(container, label, value) {
+      const card = el("div", "stat");
+      card.append(el("div", "stat-label", label));
+      card.append(el("div", "stat-value", value ?? "—"));
+      container.append(card);
+    }
+
+    function renderCore(article) {
+      document.getElementById("title").textContent = article.title || "Untitled E156 record";
+      document.getElementById("lede").textContent =
+        article.summary ||
+        "A frozen 156-word body paired with a richer interactive evidence layer.";
+      document.getElementById("body").textContent = article.body || "";
+
+      const core = document.getElementById("core-stats");
+      appendStat(core, "Type", article.type);
+      appendStat(core, "Primary Estimand", article.primary_estimand);
+      appendStat(core, "Studies", article.study_count);
+      appendStat(core, "Participants", article.participant_count);
+      appendStat(core, "Version", article.version);
+      appendStat(core, "Certainty", article.certainty);
+    }
+
+    function renderNotes(article) {
+      const fields = [
+        ["App", article.app],
+        ["Data", article.data],
+        ["Code", article.code],
+        ["DOI", article.doi],
+        ["Version", article.version],
+        ["Date", article.date],
+        ["Validation", article.validation?.status],
+        ["Protocol", article.protocol],
+        ["Source article", article.source_article]
+      ];
+
+      const grid = document.getElementById("note-grid");
+      fields.forEach(([label, value]) => {
+        const item = el("div", "note-item");
+        item.append(el("strong", "", label));
+        if (!value) {
+          item.append(el("div", "", "—"));
+        } else if (typeof value === "string" && /^https?:/i.test(value)) {
+          const link = el("a", "", value);
+          link.href = value;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          item.append(link);
+        } else {
+          item.append(el("div", "", String(value)));
+        }
+        grid.append(item);
+      });
+    }
+
+    function renderValidation(article) {
+      const table = document.getElementById("validation-table");
+      const checks = article.validation?.checks || [];
+      checks.forEach((check) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td><span class="chip">${check.ok ? "PASS" : "FAIL"}</span></td><td>${check.name}</td><td>${check.detail || ""}</td>`;
+        table.append(row);
+      });
+    }
+
+    function renderStudyTable(article) {
+      const table = document.getElementById("study-table");
+      const studies = article.studies || [];
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Study</th>
+            <th>Effect</th>
+            <th>Lower</th>
+            <th>Upper</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+      const tbody = table.querySelector("tbody");
+
+      if (!studies.length) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="5">No study-level rows embedded in this bundle.</td>`;
+        tbody.append(row);
+        return;
+      }
+
+      studies.forEach((study) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${study.label ?? ""}</td>
+          <td>${study.effect ?? ""}</td>
+          <td>${study.lower ?? ""}</td>
+          <td>${study.upper ?? ""}</td>
+          <td>${study.weight ?? ""}</td>
+        `;
+        tbody.append(row);
+      });
+    }
+
+    function drawForest(article) {
+      const svg = document.getElementById("forest-plot");
+      const width = Number(svg.getAttribute("width"));
+      const height = Number(svg.getAttribute("height"));
+      const margin = { top: 36, right: 36, bottom: 48, left: 240 };
+      const studies = article.studies || [];
+      const pooled = article.primary_plot?.pooled || null;
+      const reference = article.primary_plot?.reference ?? 1;
+
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+      const points = [];
+      studies.forEach((s) => {
+        if ([s.effect, s.lower, s.upper].every((v) => Number.isFinite(Number(v)))) {
+          points.push({
+            label: s.label,
+            effect: Number(s.effect),
+            lower: Number(s.lower),
+            upper: Number(s.upper),
+            pooled: false
+          });
+        }
+      });
+      if (pooled && [pooled.effect, pooled.lower, pooled.upper].every((v) => Number.isFinite(Number(v)))) {
+        points.push({
+          label: pooled.label || "Pooled",
+          effect: Number(pooled.effect),
+          lower: Number(pooled.lower),
+          upper: Number(pooled.upper),
+          pooled: true
+        });
+      }
+
+      if (!points.length) {
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", "24");
+        text.setAttribute("y", "48");
+        text.textContent = "No numeric plot data embedded.";
+        svg.append(text);
+        return;
+      }
+
+      const minX = Math.min(...points.map((p) => p.lower), reference);
+      const maxX = Math.max(...points.map((p) => p.upper), reference);
+      const plotWidth = width - margin.left - margin.right;
+      const plotHeight = height - margin.top - margin.bottom;
+      const rowGap = plotHeight / Math.max(points.length, 1);
+
+      const scale = (value) => {
+        if (maxX === minX) return margin.left + plotWidth / 2;
+        return margin.left + ((value - minX) / (maxX - minX)) * plotWidth;
+      };
+
+      const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      axis.setAttribute("x1", margin.left);
+      axis.setAttribute("x2", width - margin.right);
+      axis.setAttribute("y1", height - margin.bottom);
+      axis.setAttribute("y2", height - margin.bottom);
+      axis.setAttribute("stroke", "#46505c");
+      svg.append(axis);
+
+      const ref = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      ref.setAttribute("x1", scale(reference));
+      ref.setAttribute("x2", scale(reference));
+      ref.setAttribute("y1", margin.top / 2);
+      ref.setAttribute("y2", height - margin.bottom);
+      ref.setAttribute("stroke", "#9a6a4d");
+      ref.setAttribute("stroke-dasharray", "5 5");
+      svg.append(ref);
+
+      points.forEach((point, index) => {
+        const y = margin.top + index * rowGap + rowGap / 2;
+
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", "16");
+        label.setAttribute("y", String(y + 4));
+        label.setAttribute("font-size", "13");
+        label.textContent = point.label;
+        svg.append(label);
+
+        const ci = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        ci.setAttribute("x1", scale(point.lower));
+        ci.setAttribute("x2", scale(point.upper));
+        ci.setAttribute("y1", y);
+        ci.setAttribute("y2", y);
+        ci.setAttribute("stroke", point.pooled ? "#0d6b57" : "#4c5b6a");
+        ci.setAttribute("stroke-width", point.pooled ? "3" : "2");
+        svg.append(ci);
+
+        const marker = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        marker.setAttribute("x", String(scale(point.effect) - (point.pooled ? 7 : 5)));
+        marker.setAttribute("y", String(y - (point.pooled ? 7 : 5)));
+        marker.setAttribute("width", String(point.pooled ? 14 : 10));
+        marker.setAttribute("height", String(point.pooled ? 14 : 10));
+        marker.setAttribute("fill", point.pooled ? "#0d6b57" : "#223144");
+        marker.setAttribute("rx", "2");
+        svg.append(marker);
+
+        const val = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        val.setAttribute("x", String(width - margin.right + 6));
+        val.setAttribute("y", String(y + 4));
+        val.setAttribute("font-size", "12");
+        val.textContent = `${point.effect} (${point.lower}, ${point.upper})`;
+        svg.append(val);
+      });
+
+      const ticks = [minX, reference, maxX].filter((value, idx, arr) => arr.indexOf(value) === idx);
+      ticks.forEach((tick) => {
+        const tickX = scale(tick);
+        const tickLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tickLine.setAttribute("x1", tickX);
+        tickLine.setAttribute("x2", tickX);
+        tickLine.setAttribute("y1", String(height - margin.bottom));
+        tickLine.setAttribute("y2", String(height - margin.bottom + 8));
+        tickLine.setAttribute("stroke", "#46505c");
+        svg.append(tickLine);
+
+        const tickText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        tickText.setAttribute("x", String(tickX));
+        tickText.setAttribute("y", String(height - margin.bottom + 24));
+        tickText.setAttribute("text-anchor", "middle");
+        tickText.setAttribute("font-size", "12");
+        tickText.textContent = Number(tick).toFixed(2);
+        svg.append(tickText);
+      });
+
+      document.getElementById("plot-caption").textContent =
+        article.primary_plot?.caption ||
+        "Primary effect plot generated from embedded numeric values.";
+    }
+
+    function renderJson(article) {
+      document.getElementById("json-box").textContent = JSON.stringify(article, null, 2);
+    }
+
+    renderCore(E156_ARTICLE);
+    renderNotes(E156_ARTICLE);
+    renderValidation(E156_ARTICLE);
+    renderStudyTable(E156_ARTICLE);
+    drawForest(E156_ARTICLE);
+    renderJson(E156_ARTICLE);
+  </script>
+</body>
+</html>

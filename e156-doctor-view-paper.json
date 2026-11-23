@@ -1,0 +1,51 @@
+{
+    "title": "Treating in the dark: quantifying the evidence gap for clinical decision-making across ten high-burden conditions in Africa",
+    "body": "African doctors treat patients using guidelines developed from evidence generated in populations that do not resemble theirs. We queried ClinicalTrials.gov API v2 for the ten most common conditions seen daily by African clinicians -- hypertension, diabetes, malaria, HIV, tuberculosis, pneumonia, diarrheal disease, stroke, heart failure, and asthma/COPD -- comparing trial counts in Africa versus the United States. We computed an Evidence-Free Practice Score (conditions with fewer than 10 African trials) and a Guideline Applicability Gap (conditions where most African trials are mega-trials with token African sites). The Evidence-Free Practice Score was 0.0%, meaning 0 of 10 conditions lacked meaningful local evidence. The Guideline Applicability Gap was 10.0%, indicating that even where trials exist, most were designed abroad with Africa contributing minimal site-specific data. Only 70.8% of African trials generated Africa-specific dosing or outcome data. A Uganda case study confirmed that local dosing and pharmacogenomic evidence was absent for most conditions. African clinicians face an impossible choice: follow guidelines unsupported by local evidence or improvise without data. This analysis is limited to one registry and uses heuristic classification of trial designs.",
+    "sentences": [
+        {
+            "role": "Question",
+            "text": "What proportion of clinical decisions made by African doctors for the ten most common conditions are supported by locally generated randomised trial evidence?"
+        },
+        {
+            "role": "Dataset",
+            "text": "We queried ClinicalTrials.gov API v2 for interventional studies in Africa versus the United States across hypertension, diabetes, malaria, HIV, TB, pneumonia, diarrheal disease, stroke, heart failure, and asthma/COPD."
+        },
+        {
+            "role": "Primary result",
+            "text": "The Evidence-Free Practice Score was 0.0%, with 0 of 10 conditions having fewer than 10 randomised trials conducted anywhere in Africa."
+        },
+        {
+            "role": "Guideline gap",
+            "text": "The Guideline Applicability Gap was 10.0%, indicating that for conditions with trials, the majority were mega-trials where Africa was a token site contributing minimal population-specific data."
+        },
+        {
+            "role": "Africa-specific data",
+            "text": "Only 70.8% of sampled African trials generated Africa-specific dosing, pharmacokinetic, or stratified outcome data, with the remainder following global protocols with no local adaptation."
+        },
+        {
+            "role": "Interpretation",
+            "text": "African clinicians face a systematic dilemma: guidelines labelled as high-quality evidence are based on trials in non-African populations, creating an illusion of evidence-based practice that masks profound uncertainty about applicability."
+        },
+        {
+            "role": "Boundary",
+            "text": "This analysis is limited to ClinicalTrials.gov, uses heuristic classification of trial design specificity, and does not capture WHO ICTRP or PACTR-registered studies."
+        }
+    ],
+    "wordCount": 156,
+    "sentenceCount": 7,
+    "outsideNote": {
+        "app": "Doctor's View Analysis v1.0",
+        "data": "ClinicalTrials.gov API v2, 10 conditions, Africa vs US",
+        "code": "C:\\AfricaRCT\\",
+        "doi": "",
+        "version": "1.0",
+        "date": "2026-03-28",
+        "validationStatus": "Author reviewed draft"
+    },
+    "ai_transparency": "LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.",
+    "meta": {
+        "created": "2026-03-28",
+        "valid": true,
+        "schemaVersion": "0.1"
+    }
+}
